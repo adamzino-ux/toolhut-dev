@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Rate Zone Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your 5 heart rate training zones instantly. Enter your age or max heart rate to find your cardio, fat burn, and VO2 max zones. Free & accurate.">
+<link rel="canonical" href="https://toolhut.dev/heart-rate-zone-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Heart Rate Zone Calculator",
+  "url": "https://toolhut.dev/heart-rate-zone-calculator/",
+  "description": "Calculate your 5 heart rate training zones based on your age or maximum heart rate.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.5}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:0.75rem 1.5rem}
+nav .site-name{font-weight:700;color:#1a1a2e;font-size:1.05rem}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;margin-bottom:0.4rem;color:#1a1a2e}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+input[type="number"],select{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px 16px;font-size:1rem;color:#1a1a2e;outline:none;transition:border-color 0.2s,box-shadow 0.2s;background:#fff;min-height:44px}
+input[type="number"]:focus,select:focus{border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.12)}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.35rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.slider-group{margin-bottom:1.25rem}
+.slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem}
+.slider-label span:first-child{font-size:0.85rem;font-weight:500;color:#444}
+.slider-val{font-size:0.9rem;font-weight:700;color:#0077b6;background:#e8f4fd;padding:2px 10px;border-radius:12px}
+input[type="range"]{width:100%;accent-color:#0077b6;height:6px;min-height:auto;border:none;padding:0;cursor:pointer}
+.toggle-row{display:flex;gap:0.5rem;margin-bottom:1.25rem}
+.toggle-btn{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:0.875rem;font-weight:500;color:#555;transition:all 0.2s;min-height:44px}
+.toggle-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
+.btn{width:100%;background:#0077b6;color:#fff;border:none;border-radius:6px;padding:13px 24px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px}
+.btn:hover{background:#006299}
+.results{opacity:0;transition:opacity 0.3s ease;display:none}
+.results.visible{display:block;opacity:1}
+.big-stat{text-align:center;background:#f8f9fa;border-radius:8px;padding:1.25rem;margin-bottom:1.5rem}
+.big-stat .label{font-size:0.85rem;color:#555;margin-bottom:0.25rem}
+.big-stat .value{font-size:2.2rem;font-weight:700;color:#0077b6;line-height:1.1}
+.big-stat .sub{font-size:0.8rem;color:#888;margin-top:0.2rem}
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-box{background:#f8f9fa;border-radius:8px;padding:1rem;text-align:center}
+.stat-box .s-label{font-size:0.78rem;color:#666}
+.stat-box .s-val{font-size:1.1rem;font-weight:700;color:#1a1a2e}
+.zones-header{font-size:1rem;font-weight:600;margin-bottom:0.75rem;color:#1a1a2e}
+.table-wrap{overflow-x:auto;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:0.88rem;min-width:420px}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.8rem;color:#444}
+th:last-child,td:last-child{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+.zone-badge{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle;flex-shrink:0}
+.zone-bar-wrap{margin-bottom:1.5rem}
+.zone-row{margin-bottom:0.6rem}
+.zone-bar-label{display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:3px;color:#444}
+.zone-bar-track{background:#f0f0f0;border-radius:4px;height:14px;overflow:hidden}
+.zone-bar-fill{height:100%;border-radius:4px;transition:width 0.6s ease}
+.copy-btn{background:none;border:1px solid #ccc;border-radius:6px;padding:7px 14px;font-size:0.8rem;color:#555;cursor:pointer;transition:all 0.2s;min-height:36px}
+.copy-btn:hover{border-color:#0077b6;color:#0077b6}
+.copy-row{text-align:right;margin-bottom:1rem}
+.note{font-size:0.8rem;color:#888;background:#f8f9fa;border-radius:6px;padding:0.75rem 1rem;margin-top:1rem}
+.how-to{background:#f8f9fa;border-radius:8px;padding:1.5rem;margin-bottom:2rem}
+.how-to h2{font-size:1.05rem;font-weight:600;margin-bottom:0.6rem}
+.how-to p{font-size:0.9rem;color:#555;margin-bottom:0.4rem}
+.related{margin-bottom:2rem}
+.related h2{font-size:1.05rem;font-weight:600;margin-bottom:0.75rem}
+.related-links{display:flex;flex-direction:column;gap:0.5rem}
+.related-links a{font-size:0.9rem;color:#0077b6;padding:0.5rem 0;border-bottom:1px solid #f0f0f0}
+.ad-slot{background:#f8f9fa;border:1px dashed #ddd;border-radius:6px;padding:1.5rem;text-align:center;color:#bbb;font-size:0.8rem;margin-bottom:2rem;min-height:60px}
+footer{border-top:1px solid #e0e0e0;padding:1.25rem 1.5rem;text-align:center;font-size:0.82rem;color:#888}
+footer a{color:#888;margin:0 0.5rem}
+footer a:hover{color:#0077b6}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  h1{font-size:1.35rem}
+  .card{padding:1.25rem}
+  .big-stat .value{font-size:1.8rem}
+}
+@media(max-width:400px){
+  .stats-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="site-name">toolhut.dev</a>
+</nav>
+
+<div class="container">
+  <h1>Heart Rate Zone Calculator</h1>
+  <p class="subtitle">Find your 5 training zones based on age or your measured max heart rate.</p>
+
+  <div class="card">
+    <div class="form-group">
+      <label>Max HR Method</label>
+      <div class="toggle-row">
+        <button class="toggle-btn active" id="btn-age" onclick="setMethod('age')">Calculate from Age</button>
+        <button class="toggle-btn" id="btn-manual" onclick="setMethod('manual')">Enter Max HR Manually</button>
+      </div>
+    </div>
+
+    <div id="age-inputs">
+      <div class="slider-group">
+        <div class="slider-label">
+          <span>Age</span>
+          <span class="slider-val" id="age-display">30</span>
+        </div>
+        <input type="range" id="age-slider" min="10" max="90" value="30" oninput="syncSlider('age')">
+      </div>
+      <div class="form-group">
+        <label for="age-input">Or type your age</label>
+        <input type="number" id="age-input" placeholder="e.g. 30" min="10" max="90" value="30" oninput="syncInput('age')">
+        <div class="error-msg" id="age-err">Please enter an age between 10 and 90.</div>
+      </div>
+    </div>
+
+    <div id="manual-inputs" style="display:none">
+      <div class="form-group">
+        <label for="maxhr-input">Maximum Heart Rate (bpm)</label>
+        <input type="number" id="maxhr-input" placeholder="e.g. 185">
+        <div class="error-msg" id="maxhr-err">Please enter a max HR between 100 and 250 bpm.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="rhr-input">Resting Heart Rate (bpm) <span style="color:#999;font-weight:400">— optional, for Karvonen zones</span></label>
+      <input type="number" id="rhr-input" placeholder="e.g. 60">
+      <div class="error-msg" id="rhr-err">Please enter a resting HR between 30 and 100 bpm.</div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="formula-select">Max HR Formula</label>
+        <select id="formula-select" onchange="updateFormulaNote()">
+          <option value="standard">220 − Age (Standard)</option>
+          <option value="tanaka">208 − 0.7 × Age (Tanaka)</option>
+          <option value="fox">210 − 0.5 × Age (Fox)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="method-select">Zone Method</label>
+        <select id="method-select">
+          <option value="percentage">% of Max HR</option>
+          <option value="karvonen">Karvonen (HRR)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate My Zones</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="card">
+      <div class="copy-row">
+        <button class="copy-btn" id="copy-btn" onclick="copyResults()">Copy Results</button>
+      </div>
+
+      <div class="big-stat">
+        <div class="label">Your Maximum Heart Rate</div>
+        <div class="value" id="res-maxhr">—</div>
+        <div class="sub" id="res-formula-note">bpm</div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="s-label">Resting HR</div>
+          <div class="s-val" id="res-rhr">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="s-label">Heart Rate Reserve</div>
+          <div class="s-val" id="res-hrr">—</div>
+        </div>
+      </div>
+
+      <div class="zones-header">Your 5 Training Zones</div>
+
+      <div class="zone-bar-wrap" id="zone-bars"></div>
+
+      <div class="table-wrap">
+        <table id="zone-table">
+          <thead>
+            <tr>
+              <th>Zone</th>
+              <th>Name</th>
+              <th>Purpose</th>
+              <th>Range (bpm)</th>
+            </tr>
+          </thead>
+          <tbody id="zone-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="note" id="res-note"></div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid">Advertisement</div>
+
+  <div class="how-to">
+    <h2>How to Use This Calculator</h2>
+    <p>Enter your age (or your measured max heart rate) and optionally your resting heart rate. Choose a max HR formula and zone method, then click <strong>Calculate My Zones</strong>.</p>
+    <p>The <strong>Karvonen method</strong> uses your heart rate reserve (max HR minus resting HR) for more personalized zones — it requires a resting HR input.</p>
+    <p>For the most accurate max HR, use a measured value from a field test rather than an age-based estimate.</p>
+  </div>
+
+  <div class="related">
+    <h2>Related Tools</h2>
+    <div class="related-links">
+      <a href="/body-fat-percentage-calculator/">Body Fat Percentage Estimator</a>
+      <a href="/running-pace-calculator/">Running Pace &amp; Race Time Predictor</a>
+      <a href="/tdee-macro-calculator/">TDEE &amp; Macro Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom">Advertisement</div>
+
+  <footer>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+    <span>© <span id="yr"></span> toolhut.dev</span>
+  </footer>
+</div>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+var method = 'age';
+
+function setMethod(m) {
+  method = m;
+  document.getElementById('age-inputs').style.display = m === 'age' ? 'block' : 'none';
+  document.getElementById('manual-inputs').style.display = m === 'manual' ? 'block' : 'none';
+  document.getElementById('btn-age').classList.toggle('active', m === 'age');
+  document.getElementById('btn-manual').classList.toggle('active', m === 'manual');
+}
+
+function syncSlider(type) {
+  var slider = document.getElementById(type + '-slider');
+  var input = document.getElementById(type + '-input');
+  var display = document.getElementById(type + '-display');
+  input.value = slider.value;
+  display.textContent = slider.value;
+}
+
+function syncInput(type) {
+  var input = document.getElementById(type + '-input');
+  var slider = document.getElementById(type + '-slider');
+  var display = document.getElementById(type + '-display');
+  var v = parseInt(input.value);
+  if (!isNaN(v) && v >= 10 && v <= 90) {
+    slider.value = v;
+    display.textContent = v;
+  }
+}
+
+function updateFormulaNote() {}
+
+function clearErrors() {
+  ['age-input','maxhr-input','rhr-input'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('error');
+  });
+  ['age-err','maxhr-err','rhr-err'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('show');
+  });
+}
+
+function showError(inputId, errId) {
+  document.getElementById(inputId).classList.add('error');
+  document.getElementById(errId).classList.add('show');
+}
+
+var zoneColors = ['#3a86ff','#06d6a0','#ffd166','#ef476f','#7209b7'];
+var zoneNames = ['Zone 1','Zone 2','Zone 3','Zone 4','Zone 5'];
+var zoneLabels = ['Active Recovery','Aerobic / Fat Burn','Aerobic Endurance','Lactate Threshold','VO₂ Max / Anaerobic'];
+var zonePurposes = ['Warm-up, recovery','Fat burning, base fitness','Improve aerobic capacity','Race pace, improve speed','Max performance, sprint'];
+var zonePcts = [[50,60],[60,70],[70,80],[80,90],[90,100]];
+
+function calculate() {
+  clearErrors();
+  var age, maxHR, rhr = null, hasRhr = false;
+  var formula = document.getElementById('formula-select').value;
+  var zoneMethod = document.getElementById('method-select').value;
+
+  if (method === 'age') {
+    var ageVal = parseInt(document.getElementById('age-input').value);
+    if (isNaN(ageVal) || ageVal < 10 || ageVal > 90) {
+      showError('age-input','age-err');
+      return;
+    }
+    age = ageVal;
+    if (formula === 'standard') maxHR = 220 - age;
+    else if (formula === 'tanaka') maxHR = Math.round(208 - 0.7 * age);
+    else maxHR = Math.round(210 - 0.5 * age);
+  } else {
+    var mhrVal = parseInt(document.getElementById('maxhr-input').value);
+    if (isNaN(mhrVal) || mhrVal < 100 || mhrVal > 250) {
+      showError('maxhr-input','maxhr-err');
+      return;
+    }
+    maxHR = mhrVal;
+  }
+
+  var rhrRaw = document.getElementById('rhr-input').value;
+  if (rhrRaw !== '' && rhrRaw !== null) {
+    var rhrVal = parseInt(rhrRaw);
+    if (isNaN(rhrVal) || rhrVal < 30 || rhrVal > 100) {
+      showError('rhr-input','rhr-err');
+      return;
+    }
+    rhr = rhrVal;
+    hasRhr = true;
+  }
+
+  if (zoneMethod === 'karvonen' && !hasRhr) {
+    document.getElementById('rhr-input').classList.add('error');
+    document.getElementById('rhr-err').textContent = 'Resting HR is required for Karvonen zones.';
+    document.getElementById('rhr-err').classList.add('show');
+    return;
+  }
+
+  var hrr = hasRhr ? maxHR - rhr : null;
+
+  document.getElementById('res-maxhr').textContent = maxHR + ' bpm';
+
+  var formulaText = '';
+  if (method === 'age') {
+    if (formula === 'standard') formulaText = 'Using 220 − age formula';
+    else if (formula === 'tanaka') formulaText = 'Using Tanaka formula (208 − 0.7×age)';
+    else formulaText = 'Using Fox formula (210 − 0.5×age)';
+  } else {
+    formulaText = 'Manually entered max HR';
+  }
+  document.getElementById('res-formula-note').textContent = formulaText;
+
+  document.getElementById('res-rhr').textContent = hasRhr ? rhr + ' bpm' : 'Not entered';
+  document.getElementById('res-hrr').textContent = hrr !== null ? hrr + ' bpm' : 'N/A';
+
+  var zones = zonePcts.map(function(pct, i) {
+    var lo, hi;
+    if (zoneMethod === 'karvonen' && hrr !== null) {
+      lo = Math.round(rhr + (pct[0] / 100) * hrr);
+      hi = Math.round(rhr + (pct[1] / 100) * hrr);
+    } else {
+      lo = Math.round((pct[0] / 100) * maxHR);
+      hi = Math.round((pct[1] / 100) * maxHR);
+    }
+    return { lo: lo, hi: hi, pct: pct };
+  });
+
+  var barsHtml = '';
+  zones.forEach(function(z, i) {
+    var barWidth = z.pct[1] - z.pct[0];
+    var barOffset = z.pct[0];
+    barsHtml += '<div class="zone-row">' +
+      '<div class="zone-bar-label">' +
+        '<span><span class="zone-badge" style="background:' + zoneColors[i] + '"></span>' + zoneNames[i] + ' — ' + zoneLabels[i] + '</span>' +
+        '<span>' + z.lo + '–' + z.hi + ' bpm</span>' +
+      '</div>' +
+      '<div class="zone-bar-track">' +
+        '<div class="zone-bar-fill" style="width:' + (barWidth * 2.5) + '%;margin-left:' + (barOffset * 2.5 * 0.28) + '%;background:' + zoneColors[i] + '"></div>' +
+      '</div>' +
+    '</div>';
+  });
+  document.getElementById('zone-bars').innerHTML = barsHtml;
+
+  var tbodyHtml = '';
+  zones.forEach(function(z, i) {
+    tbodyHtml += '<tr>' +
+      '<td><span class="zone-badge" style="background:' + zoneColors[i] + '"></span>' + zoneNames[i] + '</td>' +
+      '<td>' + zoneLabels[i] + '</td>' +
+      '<td>' + zonePurposes[i] + '</td>' +
+      '<td>' + z.lo + '–' + z.hi + '</td>' +
+    '</tr>';
+  });
+  document.getElementById('zone-tbody').innerHTML = tbodyHtml;
+
+  var methodLabel = zoneMethod === 'karvonen' ? 'Karvonen (Heart Rate Reserve)' : '% of Maximum Heart Rate';
+  document.getElementById('res-note').textContent =
+    'Zones calculated using: ' + methodLabel + '. ' +
+    'These are estimates — individual physiology varies. ' +
+    'Consult a fitness professional for a precise assessment.';
+
+  var r = document.getElementById('results');
+  r.style.display = 'block';
+  setTimeout(function(){ r.classList.add('visible'); }, 10);
+  r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  window._copyData = buildCopyText(maxHR, rhr, hrr, zones, zoneMethod);
+}
+
+function buildCopyText(maxHR, rhr, hrr, zones, zoneMethod) {
+  var lines = ['Heart Rate Zones — toolhut.dev', ''];
+  lines.push('Max HR: ' + maxHR + ' bpm');
+  if (rhr) lines.push('Resting HR: ' + rhr + ' bpm');
+  if (hrr) lines.push('HR Reserve: ' + hrr + ' bpm');
+  lines.push('Method: ' + (zoneMethod === 'karvonen' ? 'Karvonen' : '% of Max HR'));
+  lines.push('');
+  zones.forEach(function(z, i) {
+    lines.push(zoneNames[i] + ' (' + zoneLabels[i] + '): ' + z.lo + '–' + z.hi + ' bpm');
+  });
+  return lines.join('\n');
+}
+
+function copyResults() {
+  if (!window._copyData) return;
+  navigator.clipboard.writeText(window._copyData).then(function() {
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(function(){ btn.textContent = 'Copy Results'; }, 2000);
+  }).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = window._copyData;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(function(){ btn.textContent = 'Copy Results'; }, 2000);
+  });
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') calculate();
+});
+
+document.getElementById('age-slider').addEventListener('input', function() {
+  syncSlider('age');
+});
+</script>
+</body>
+</html>
