@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Rep Max Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your one rep max (1RM) instantly using multiple proven formulas. Enter your weight and reps to find your true strength potential.">
+<link rel="canonical" href="https://toolhut.dev/one-rep-max-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "One Rep Max Calculator",
+  "url": "https://toolhut.dev/one-rep-max-calculator/",
+  "description": "Calculate your one rep max (1RM) using multiple proven formulas including Epley, Brzycki, Lander, and more.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #1a1a2e;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+nav {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.75rem 1.5rem;
+  background: #fff;
+}
+nav a {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1a1a2e;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: #1a1a2e;
+}
+.subtitle {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 0.4rem;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+input[type="number"], select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #1a1a2e;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -moz-appearance: textfield;
+  height: 44px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+input[type="number"]:focus, select:focus {
+  outline: none;
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
+}
+input.error { border-color: #e74c3c; }
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: none;
+}
+.error-msg.show { display: block; }
+
+.slider-group { margin-bottom: 1.25rem; }
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.slider-value {
+  font-weight: 700;
+  color: #0077b6;
+  font-size: 0.95rem;
+}
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  accent-color: #0077b6;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+input[type="range"]:focus { outline: none; box-shadow: none; }
+
+.unit-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+.unit-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+}
+.unit-btn.active {
+  background: #0077b6;
+  color: #fff;
+  border-color: #0077b6;
+}
+
+button.calc-btn {
+  width: 100%;
+  background: #0077b6;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-height: 44px;
+}
+button.calc-btn:hover { background: #006299; }
+
+.results {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-bottom: 2rem;
+}
+.results.visible { opacity: 1; }
+
+.big-result {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f0f8ff;
+  border-radius: 8px;
+  border: 1px solid #cce7f5;
+  margin-bottom: 1.5rem;
+}
+.big-result .label { font-size: 0.85rem; color: #555; font-weight: 500; margin-bottom: 0.3rem; }
+.big-result .value {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0077b6;
+  line-height: 1;
+}
+.big-result .unit-label { font-size: 1rem; color: #0077b6; font-weight: 600; margin-top: 0.2rem; }
+.big-result .formula-note { font-size: 0.78rem; color: #777; margin-top: 0.4rem; }
+
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.75rem;
+}
+.copy-btn:hover { background: #e0e0e0; }
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+}
+
+.table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+thead th {
+  background: #f0f0f0;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #444;
+  white-space: nowrap;
+}
+thead th:not(:first-child) { text-align: right; }
+tbody tr:nth-child(odd) { background: #fafafa; }
+tbody tr:nth-child(even) { background: #fff; }
+tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.88rem;
+}
+tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+tbody tr.highlight td { font-weight: 700; color: #0077b6; background: #f0f8ff; }
+
+.percentage-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+}
+.bar-pct { width: 38px; text-align: right; color: #555; flex-shrink: 0; }
+.bar-reps { width: 45px; color: #555; flex-shrink: 0; font-size: 0.8rem; }
+.bar-weight { min-width: 70px; text-align: right; color: #1a1a2e; font-weight: 600; flex-shrink: 0; }
+.bar-track {
+  flex: 1;
+  height: 10px;
+  background: #e8e8e8;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: #0077b6;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+.how-to {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+.how-to h2 { font-size: 1.1rem; margin-bottom: 0.6rem; }
+.how-to p { font-size: 0.9rem; color: #444; margin-bottom: 0.5rem; }
+.how-to p:last-child { margin-bottom: 0; }
+
+.related-tools { margin-bottom: 2rem; }
+.related-tools h2 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+.related-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.related-list a {
+  display: block;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #0077b6;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.related-list a:hover { background: #e8f4fd; text-decoration: none; }
+
+.ad-slot {
+  background: #f8f9fa;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+footer {
+  border-top: 1px solid #e0e0e0;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #888;
+}
+footer a { color: #888; margin: 0 0.4rem; }
+footer a:hover { color: #0077b6; }
+
+@media (max-width: 480px) {
+  .input-row { grid-template-columns: 1fr; }
+  .related-list { grid-template-columns: 1fr; }
+  .big-result .value { font-size: 2.4rem; }
+  .card { padding: 1.25rem; }
+  h1 { font-size: 1.35rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/">toolhut.dev</a>
+</nav>
+
+<div class="container">
+
+  <h1>One Rep Max Calculator</h1>
+  <p class="subtitle">Estimate your 1RM strength using proven formulas. Enter the weight you lifted and how many reps you completed.</p>
+
+  <div class="card">
+
+    <div class="unit-toggle" role="group" aria-label="Weight unit">
+      <button class="unit-btn active" id="btn-lbs" onclick="setUnit('lbs')">Pounds (lbs)</button>
+      <button class="unit-btn" id="btn-kg" onclick="setUnit('kg')">Kilograms (kg)</button>
+    </div>
+
+    <div class="input-row">
+      <div class="form-group">
+        <label for="weight">Weight Lifted</label>
+        <input type="number" id="weight" placeholder="e.g. 225" min="1" max="2000" step="0.5">
+        <div class="error-msg" id="weight-error">Please enter a valid weight (1–2000).</div>
+      </div>
+      <div class="form-group">
+        <label for="reps">Reps Completed</label>
+        <input type="number" id="reps" placeholder="e.g. 5" min="1" max="36" step="1">
+        <div class="error-msg" id="reps-error">Please enter reps between 1 and 36.</div>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label-row">
+        <label for="reps-slider" style="margin-bottom:0;">Reps (drag to adjust)</label>
+        <span class="slider-value" id="slider-display">—</span>
+      </div>
+      <input type="range" id="reps-slider" min="1" max="20" value="5">
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate 1RM</button>
+  </div>
+
+  <div class="results" id="results">
+
+    <div class="card">
+      <div class="big-result" id="main-result">
+        <div class="label">Estimated One Rep Max</div>
+        <div class="value" id="result-value">—</div>
+        <div class="unit-label" id="result-unit">lbs</div>
+        <div class="formula-note" id="result-formula">Average of all formulas</div>
+      </div>
+      <div style="text-align:center;">
+        <button class="copy-btn" onclick="copyResult()" id="copy-btn">&#128203; Copy Result</button>
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <div class="section-title">Formula Comparison</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Formula</th>
+                <th>1RM</th>
+                <th>Equation</th>
+              </tr>
+            </thead>
+            <tbody id="formula-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Training Percentage Chart</div>
+      <p style="font-size:0.82rem;color:#666;margin-bottom:1rem;">Based on your estimated 1RM — use these weights for your training zones.</p>
+      <div id="pct-bars"></div>
+
+      <div style="margin-top:1rem;">
+        <div class="section-title">Full Percentage Table</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>% of 1RM</th>
+                <th>Weight</th>
+                <th>Approx. Reps</th>
+                <th>Training Zone</th>
+              </tr>
+            </thead>
+            <tbody id="pct-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ad-slot" id="ad-mid">Advertisement</div>
+
+  <div class="how-to card">
+    <h2>How to Use This Calculator</h2>
+    <p>Enter the weight you successfully lifted and the number of reps you completed in a single set. For best accuracy, use a weight you can lift for 2–10 reps — results become less reliable above 10 reps.</p>
+    <p>The calculator uses six peer-reviewed formulas (Epley, Brzycki, Lander, Lombardi, Mayhew, and O'Conner) and displays both the average and individual formula estimates. Use these numbers to program training percentages, not as a substitute for an actual 1RM attempt.</p>
+    <p>Drag the reps slider for quick adjustments without typing. Switch between pounds and kilograms using the unit toggle — your inputs convert automatically.</p>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-list">
+      <a href="/heart-rate-zone-calculator/">Heart Rate Zone Calculator</a>
+      <a href="/body-fat-percentage-calculator/">Body Fat Percentage Estimator</a>
+      <a href="/running-pace-calculator/">Running Pace &amp; Race Time Predictor</a>
+      <a href="/tdee-macro-calculator/">TDEE &amp; Macro Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom">Advertisement</div>
+
+</div>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:0.4rem;">© <span id="yr"></span> toolhut.dev</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let currentUnit = 'lbs';
+let lastResult = null;
+
+function setUnit(unit) {
+  if (unit === currentUnit) return;
+  const wInput = document.getElementById('weight');
+  const val = parseFloat(wInput.value);
+  if (!isNaN(val) && val > 0) {
+    if (unit === 'kg') {
+      wInput.value = roundTo(val / 2.20462, 1);
+    } else {
+      wInput.value = roundTo(val * 2.20462, 1);
+    }
+  }
+  currentUnit = unit;
+  document.getElementById('btn-lbs').classList.toggle('active', unit === 'lbs');
+  document.getElementById('btn-kg').classList.toggle('active', unit === 'kg');
+  document.getElementById('result-unit').textContent = unit;
+  if (lastResult !== null) calculate();
+}
+
+function roundTo(val, decimals) {
+  return Math.round(val * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
+
+function fmt(n, dec = 1) {
+  if (isNaN(n) || n === null) return '—';
+  return Number(n.toFixed(dec)).toLocaleString('en-US', {
+    minimumFractionDigits: dec,
+    maximumFractionDigits: dec
+  });
+}
+
+function fmtInt(n) {
+  return Math.round(n).toLocaleString('en-US');
+}
+
+// Sync slider ↔ input
+const repsInput = document.getElementById('reps');
+const repsSlider = document.getElementById('reps-slider');
+const sliderDisplay = document.getElementById('slider-display');
+
+repsInput.addEventListener('input', () => {
+  const v = parseInt(repsInput.value);
+  if (!isNaN(v) && v >= 1 && v <= 20) {
+    repsSlider.value = v;
+    sliderDisplay.textContent = v + ' reps';
+  } else if (!isNaN(v)) {
+    sliderDisplay.textContent = v + ' reps';
+  }
+});
+
+repsSlider.addEventListener('input', () => {
+  repsInput.value = repsSlider.value;
+  sliderDisplay.textContent = repsSlider.value + ' reps';
+  clearError('reps');
+});
+
+// Enter key
+document.querySelectorAll('input[type="number"]').forEach(inp => {
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+});
+
+function showError(field, msg) {
+  document.getElementById(field).classList.add('error');
+  const el = document.getElementById(field + '-error');
+  if (msg) el.textContent = msg;
+  el.classList.add('show');
+}
+
+function clearError(field) {
+  document.getElementById(field).classList.remove('error');
+  document.getElementById(field + '-error').classList.remove('show');
+}
+
+// Formula definitions
+const formulas = [
+  {
+    name: 'Epley',
+    eq: 'w × (1 + r/30)',
+    fn: (w, r) => r === 1 ? w : w * (1 + r / 30)
+  },
+  {
+    name: 'Brzycki',
+    eq: 'w × 36 / (37 − r)',
+    fn: (w, r) => r === 1 ? w : w * 36 / (37 - r)
+  },
+  {
+    name: 'Lander',
+    eq: '100w / (101.3 − 2.67r)',
+    fn: (w, r) => r === 1 ? w : (100 * w) / (101.3 - 2.67123 * r)
+  },
+  {
+    name: 'Lombardi',
+    eq: 'w × r^0.10',
+    fn: (w, r) => r === 1 ? w : w * Math.pow(r, 0.10)
+  },
+  {
+    name: 'Mayhew',
+    eq: '100w / (52.2 + 41.9e^(−0.055r))',
+    fn: (w, r) => r === 1 ? w : (100 * w) / (52.2 + 41.9 * Math.exp(-0.055 * r))
+  },
+  {
+    name: "O'Conner",
+    eq: 'w × (1 + r/40)',
+    fn: (w, r) => r === 1 ? w : w * (1 + r / 40)
+  }
+];
+
+const pctData = [
+  { pct: 100, reps: 1,  zone: 'Max Strength' },
+  { pct: 95,  reps: 2,  zone: 'Max Strength' },
+  { pct: 90,  reps: 3,  zone: 'Max Strength' },
+  { pct: 85,  reps: 5,  zone: 'Strength' },
+  { pct: 80,  reps: 6,  zone: 'Strength' },
+  { pct: 75,  reps: 8,  zone: 'Strength/Hypertrophy' },
+  { pct: 70,  reps: 10, zone: 'Hypertrophy' },
+  { pct: 65,  reps: 12, zone: 'Hypertrophy' },
+  { pct: 60,  reps: 15, zone: 'Hypertrophy/Endurance' },
+  { pct: 55,  reps: 18, zone: 'Muscular Endurance' },
+  { pct: 50,  reps: 20, zone: 'Muscular Endurance' },
+  { pct: 40,  reps: '30+', zone: 'Endurance' }
+];
+
+function calculate() {
+  clearError('weight');
+  clearError('reps');
+
+  const wVal = parseFloat(document.getElementById('weight').value);
+  const rVal = parseInt(document.getElementById('reps').value);
+
+  let valid = true;
+  if (isNaN(wVal) || wVal < 1 || wVal > 9999) {
+    showError('weight', 'Please enter a valid weight (1–9999).');
+    valid = false;
+  }
+  if (isNaN(rVal) || rVal < 1 || rVal > 36) {
+    showError('reps', 'Please enter reps between 1 and 36.');
+    valid = false;
+  }
+  if (!valid) return;
+
+  // Update slider display
+  if (rVal >= 1 && rVal <= 20) {
+    repsSlider.value = rVal;
+    sliderDisplay.textContent = rVal + ' reps';
+  } else {
+    sliderDisplay.textContent = rVal + ' reps';
+  }
+
+  // Calculate all formulas
+  const results = formulas.map(f => ({
+    name: f.name,
+    eq: f.eq,
+    val: f.fn(wVal, rVal)
+  }));
+
+  // Filter out invalid (negative/Inf for Brzycki when reps >= 37)
+  const validResults = results.filter(r => isFinite(r.val) && r.val > 0);
+
+  const avg = validResults.reduce((s, r) => s + r.val, 0) / validResults.length;
+  lastResult = avg;
+
+  // Main result
+  document.getElementById('result-value').textContent = fmtInt(avg);
+  document.getElementById('result-unit').textContent = currentUnit;
+  document.getElementById('result-formula').textContent = 'Average of ' + validResults.length + ' formulas';
+
+  // Formula table
+  const tbody = document.getElementById('formula-table');
+  tbody.innerHTML = '';
+  results.forEach(r => {
+    const tr = document.createElement('tr');
+    const isAvg = false;
+    const diff = isFinite(r.val) && r.val > 0 ? r.val - avg : null;
+    const diffStr = diff !== null ? (diff >= 0 ? '+' : '') + fmt(diff, 1) : '—';
+    tr.innerHTML = `
+      <td>${r.name}</td>
+      <td>${isFinite(r.val) && r.val > 0 ? fmtInt(r.val) + ' ' + currentUnit : '—'}</td>
+      <td style="font-size:0.78rem;color:#777;">${r.eq}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Add average row
+  const avgRow = document.createElement('tr');
+  avgRow.classList.add('highlight');
+  avgRow.innerHTML = `<td>Average</td><td>${fmtInt(avg)} ${currentUnit}</td><td style="font-size:0.78rem;color:#0077b6;">Mean of all formulas</td>`;
+  tbody.appendChild(avgRow);
+
+  // Percentage bars
+  const barsDiv = document.getElementById('pct-bars');
+  barsDiv.innerHTML = '';
+  const barData = pctData.slice(0, 8);
+  barData.forEach(p => {
+    const w = avg * p.pct / 100;
+    const div = document.createElement('div');
+    div.className = 'percentage-bar-row';
+    div.innerHTML = `
+      <span class="bar-pct">${p.pct}%</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${p.pct}%"></div></div>
+      <span class="bar-weight">${fmtInt(w)} ${currentUnit}</span>
+      <span class="bar-reps">${p.reps} rep${typeof p.reps === 'number' && p.reps !== 1 ? 's' : ''}</span>
+    `;
+    barsDiv.appendChild(div);
+  });
+
+  // Full percentage table
+  const pctBody = document.getElementById('pct-table');
+  pctBody.innerHTML = '';
+  pctData.forEach(p => {
+    const w = avg * p.pct / 100;
+    const tr = document.createElement('tr');
+    if (p.pct === 100) tr.classList.add('highlight');
+    tr.innerHTML = `
+      <td>${p.pct}%</td>
+      <td>${fmtInt(w)} ${currentUnit}</td>
+      <td>${p.reps}${typeof p.reps === 'string' ? '' : ''}</td>
+      <td style="font-size:0.82rem;color:#555;">${p.zone}</td>
+    `;
+    pctBody.appendChild(tr);
+  });
+
+  // Show results
+  const resultsEl = document.getElementById('results');
+  resultsEl.classList.add('visible');
+  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function copyResult() {
+  if (lastResult === null) return;
+  const w = document.getElementById('weight').value;
+  const r = document.getElementById('reps').value;
+  const text = `One Rep Max: ${fmtInt(lastResult)} ${currentUnit} (based on ${w} ${currentUnit} × ${r} reps)`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.innerHTML = '&#128203; Copy Result'; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.innerHTML = '&#128203; Copy Result'; }, 2000);
+  });
+}
+
+// Init slider display
+sliderDisplay.textContent = repsSlider.value + ' reps';
+repsInput.value = repsSlider.value;
+</script>
+
+</body>
+</html>
