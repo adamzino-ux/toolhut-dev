@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Fat Percentage Estimator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Estimate your body fat percentage using the Navy Method or BMI Method. Free online body fat calculator for men and women with fitness category ratings.">
+<link rel="canonical" href="https://toolhut.dev/body-fat-percentage-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Body Fat Percentage Estimator",
+  "url": "https://toolhut.dev/body-fat-percentage-calculator/",
+  "description": "Estimate your body fat percentage using the Navy Method or BMI Method. Free online body fat calculator for men and women.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0" }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a2e; font-size: 16px; line-height: 1.6; }
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+nav { border-bottom: 1px solid #e0e0e0; padding: 0.75rem 1.5rem; }
+nav .site-name { font-weight: 700; font-size: 1.1rem; color: #1a1a2e; }
+nav .site-name span { color: #0077b6; }
+.container { max-width: 640px; margin: 0 auto; padding: 1.5rem; }
+h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.5rem; }
+.card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+.section-title { font-size: 1rem; font-weight: 600; color: #1a1a2e; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e0e0e0; }
+.method-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+.method-tab { flex: 1; padding: 10px 12px; background: #f8f9fa; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: #555; transition: all 0.2s; text-align: center; min-height: 44px; }
+.method-tab.active { background: #0077b6; color: #fff; }
+.method-tab:first-child { border-right: 1px solid #ddd; }
+.gender-toggle { display: flex; gap: 0; margin-bottom: 1.5rem; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+.gender-btn { flex: 1; padding: 10px 12px; background: #f8f9fa; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: #555; transition: all 0.2s; min-height: 44px; }
+.gender-btn.active { background: #0077b6; color: #fff; }
+.gender-btn:first-child { border-right: 1px solid #ddd; }
+.form-group { margin-bottom: 1.2rem; }
+label { display: block; font-size: 0.85rem; font-weight: 500; color: #444; margin-bottom: 0.4rem; }
+.input-row { display: flex; gap: 0.75rem; }
+.input-row .form-group { flex: 1; }
+input[type="number"], select { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; background: #fff; color: #1a1a2e; transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none; min-height: 44px; }
+input[type="number"]:focus, select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.15); }
+input.error { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.12); }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 0.3rem; display: none; }
+.error-msg.show { display: block; }
+.unit-hint { font-size: 0.78rem; color: #888; margin-top: 0.3rem; }
+input[type="range"] { width: 100%; accent-color: #0077b6; cursor: pointer; height: 6px; margin-top: 0.5rem; }
+.slider-value { font-size: 0.9rem; font-weight: 600; color: #0077b6; }
+.slider-row { display: flex; align-items: center; gap: 1rem; }
+.slider-row input[type="range"] { flex: 1; }
+.btn { display: inline-block; background: #0077b6; color: #fff; border: none; border-radius: 6px; padding: 12px 24px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; min-height: 44px; transition: background 0.2s; margin-top: 0.5rem; }
+.btn:hover { background: #006299; }
+.results { opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.results.visible { opacity: 1; pointer-events: auto; }
+.result-hero { text-align: center; background: #f8f9fa; border-radius: 8px; padding: 1.5rem 1rem; margin-bottom: 1.5rem; }
+.result-hero .big-num { font-size: 3.5rem; font-weight: 800; color: #0077b6; line-height: 1; }
+.result-hero .big-label { font-size: 1rem; color: #555; margin-top: 0.4rem; }
+.category-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-top: 0.75rem; }
+.cat-essential { background: #ffeeba; color: #856404; }
+.cat-athlete { background: #d4edda; color: #155724; }
+.cat-fitness { background: #cce5ff; color: #004085; }
+.cat-average { background: #fff3cd; color: #856404; }
+.cat-obese { background: #f8d7da; color: #721c24; }
+.breakdown-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.breakdown-table th { background: #f0f0f0; padding: 8px 12px; text-align: left; font-weight: 600; font-size: 0.82rem; color: #444; }
+.breakdown-table td { padding: 8px 12px; border-bottom: 1px solid #f0f0f0; }
+.breakdown-table tr:nth-child(even) td { background: #fafafa; }
+.breakdown-table td:last-child { text-align: right; font-weight: 500; }
+.table-scroll { overflow-x: auto; }
+.bar-container { margin: 1rem 0; }
+.bar-label { font-size: 0.8rem; color: #555; margin-bottom: 0.4rem; display: flex; justify-content: space-between; }
+.bar-track { background: #e0e0e0; border-radius: 4px; height: 10px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.copy-btn { background: #f8f9fa; color: #0077b6; border: 1px solid #ddd; border-radius: 5px; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; display: inline-block; margin-top: 0.75rem; }
+.copy-btn:hover { background: #e9ecef; }
+.how-to { background: #f8f9fa; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; }
+.how-to h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+.how-to p { font-size: 0.9rem; color: #555; }
+.related { margin-bottom: 2rem; }
+.related h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; }
+.related-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.related-link { display: inline-block; background: #f0f7ff; border: 1px solid #cce3f5; color: #0077b6; border-radius: 6px; padding: 8px 14px; font-size: 0.85rem; font-weight: 500; min-height: 44px; display: flex; align-items: center; }
+.related-link:hover { background: #ddeeff; text-decoration: none; }
+.ad-slot { background: #f8f9fa; border: 1px dashed #ccc; border-radius: 6px; padding: 2rem 1rem; text-align: center; color: #aaa; font-size: 0.8rem; margin: 1.5rem 0; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+footer { border-top: 1px solid #e0e0e0; padding: 1.5rem; text-align: center; font-size: 0.82rem; color: #888; }
+footer a { color: #888; margin: 0 0.5rem; }
+.hidden { display: none !important; }
+@media (max-width: 640px) {
+  .container { padding: 1rem; }
+  h1 { font-size: 1.3rem; }
+  .card { padding: 1.25rem; }
+  .result-hero .big-num { font-size: 2.8rem; }
+  .input-row { flex-direction: column; gap: 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="site-name">tool<span>hut</span>.dev</a>
+</nav>
+
+<div class="container">
+  <h1>Body Fat Percentage Estimator</h1>
+  <p class="subtitle">Estimate your body fat % using the U.S. Navy Method or BMI-based method.</p>
+
+  <div class="card">
+    <div class="section-title">Method</div>
+    <div class="method-tabs">
+      <button class="method-tab active" id="tab-navy" onclick="switchMethod('navy')">U.S. Navy Method</button>
+      <button class="method-tab" id="tab-bmi" onclick="switchMethod('bmi')">BMI Method</button>
+    </div>
+
+    <div class="section-title">Gender</div>
+    <div class="gender-toggle">
+      <button class="gender-btn active" id="gender-male" onclick="switchGender('male')">♂ Male</button>
+      <button class="gender-btn" id="gender-female" onclick="switchGender('female')">♀ Female</button>
+    </div>
+
+    <div id="unit-toggle-group" class="form-group">
+      <label>Units</label>
+      <select id="units" onchange="switchUnits()">
+        <option value="imperial">Imperial (in, lbs)</option>
+        <option value="metric">Metric (cm, kg)</option>
+      </select>
+    </div>
+
+    <!-- Shared fields -->
+    <div class="form-group">
+      <label id="label-age">Age (years)</label>
+      <div class="slider-row">
+        <input type="range" id="age-slider" min="18" max="80" value="30" oninput="syncSlider('age')">
+        <span class="slider-value" id="age-display">30</span>
+      </div>
+      <input type="number" id="age" value="30" min="18" max="80" placeholder="e.g. 30" oninput="syncInput('age')">
+      <div class="error-msg" id="err-age">Please enter an age between 18 and 80.</div>
+    </div>
+
+    <div class="form-group">
+      <label id="label-height">Height</label>
+      <input type="number" id="height" placeholder="e.g. 70" min="1">
+      <div class="unit-hint" id="hint-height">Enter in inches (e.g. 70 for 5'10")</div>
+      <div class="error-msg" id="err-height">Please enter a valid height.</div>
+    </div>
+
+    <!-- BMI weight field -->
+    <div class="form-group" id="weight-group">
+      <label id="label-weight">Weight</label>
+      <input type="number" id="weight" placeholder="e.g. 180" min="1">
+      <div class="unit-hint" id="hint-weight">Enter in lbs</div>
+      <div class="error-msg" id="err-weight">Please enter a valid weight.</div>
+    </div>
+
+    <!-- Navy method fields -->
+    <div id="navy-fields">
+      <div class="form-group">
+        <label id="label-neck">Neck Circumference</label>
+        <input type="number" id="neck" placeholder="e.g. 15" min="1">
+        <div class="unit-hint" id="hint-neck">Measure just below larynx, in inches</div>
+        <div class="error-msg" id="err-neck">Please enter a valid neck measurement.</div>
+      </div>
+      <div class="form-group">
+        <label id="label-waist">Waist Circumference</label>
+        <input type="number" id="waist" placeholder="e.g. 34" min="1">
+        <div class="unit-hint" id="hint-waist">Measure at navel level, in inches</div>
+        <div class="error-msg" id="err-waist">Please enter a valid waist measurement.</div>
+      </div>
+      <div class="form-group hidden" id="hip-group">
+        <label id="label-hip">Hip Circumference</label>
+        <input type="number" id="hip" placeholder="e.g. 38" min="1">
+        <div class="unit-hint" id="hint-hip">Measure at widest point, in inches</div>
+        <div class="error-msg" id="err-hip">Please enter a valid hip measurement.</div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Body Fat %</button>
+  </div>
+
+  <!-- Results -->
+  <div class="card results" id="results">
+    <div class="section-title">Your Results</div>
+    <div class="result-hero">
+      <div class="big-num" id="res-bf">—</div>
+      <div class="big-label">Body Fat Percentage</div>
+      <div><span class="category-badge" id="res-category">—</span></div>
+    </div>
+
+    <div class="bar-container">
+      <div class="bar-label"><span>0%</span><span id="bar-pointer-label">Your: <strong id="bar-pct-label">—</strong></span><span>50%</span></div>
+      <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:0%;background:#0077b6;"></div></div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="breakdown-table" style="margin-top:1rem;">
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody id="res-table"></tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:1.25rem;">
+      <div class="section-title">Body Fat Categories</div>
+      <div class="table-scroll">
+        <table class="breakdown-table" id="cat-table">
+          <thead><tr><th>Category</th><th>Men</th><th>Women</th></tr></thead>
+          <tbody>
+            <tr><td>Essential Fat</td><td>2–5%</td><td>10–13%</td></tr>
+            <tr><td>Athlete</td><td>6–13%</td><td>14–20%</td></tr>
+            <tr><td>Fitness</td><td>14–17%</td><td>21–24%</td></tr>
+            <tr><td>Average</td><td>18–24%</td><td>25–31%</td></tr>
+            <tr><td>Obese</td><td>25%+</td><td>32%+</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <button class="copy-btn" onclick="copyResults()" id="copy-btn">📋 Copy Results</button>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid">Advertisement</div>
+
+  <div class="how-to">
+    <h2>How to Use This Tool</h2>
+    <p>Select your preferred method and gender, then enter your measurements. The <strong>U.S. Navy Method</strong> uses body circumference measurements and is more accurate — use a flexible tape measure. The <strong>BMI Method</strong> estimates body fat from height, weight, and age alone. All calculations are done locally in your browser.</p>
+  </div>
+
+  <div class="related">
+    <h2>Related Tools</h2>
+    <div class="related-links">
+      <a class="related-link" href="/running-pace-calculator/">🏃 Running Pace &amp; Race Time Predictor</a>
+      <a class="related-link" href="/tdee-macro-calculator/">🥗 TDEE &amp; Macro Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom">Advertisement</div>
+
+  <footer>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+    <br><br>© 2025 toolhut.dev
+  </footer>
+</div>
+
+<script>
+let currentMethod = 'navy';
+let currentGender = 'male';
+let currentUnits = 'imperial';
+
+function switchMethod(m) {
+  currentMethod = m;
+  document.getElementById('tab-navy').classList.toggle('active', m === 'navy');
+  document.getElementById('tab-bmi').classList.toggle('active', m === 'bmi');
+  document.getElementById('navy-fields').classList.toggle('hidden', m === 'bmi');
+  document.getElementById('weight-group').classList.toggle('hidden', m === 'navy');
+  clearErrors();
+  hideResults();
+}
+
+function switchGender(g) {
+  currentGender = g;
+  document.getElementById('gender-male').classList.toggle('active', g === 'male');
+  document.getElementById('gender-female').classList.toggle('active', g === 'female');
+  document.getElementById('hip-group').classList.toggle('hidden', g === 'male');
+  clearErrors();
+  hideResults();
+}
+
+function switchUnits() {
+  currentUnits = document.getElementById('units').value;
+  updateLabels();
+  clearErrors();
+  hideResults();
+}
+
+function updateLabels() {
+  const imp = currentUnits === 'imperial';
+  document.getElementById('hint-height').textContent = imp ? 'Enter in inches (e.g. 70 for 5\'10")' : 'Enter in cm (e.g. 178)';
+  document.getElementById('hint-neck').textContent = imp ? 'Measure just below larynx, in inches' : 'Measure just below larynx, in cm';
+  document.getElementById('hint-waist').textContent = imp ? 'Measure at navel level, in inches' : 'Measure at navel level, in cm';
+  document.getElementById('hint-hip').textContent = imp ? 'Measure at widest point, in inches' : 'Measure at widest point, in cm';
+  document.getElementById('hint-weight').textContent = imp ? 'Enter in lbs' : 'Enter in kg';
+  document.getElementById('label-height').textContent = imp ? 'Height (inches)' : 'Height (cm)';
+  document.getElementById('label-neck').textContent = imp ? 'Neck Circumference (inches)' : 'Neck Circumference (cm)';
+  document.getElementById('label-waist').textContent = imp ? 'Waist Circumference (inches)' : 'Waist Circumference (cm)';
+  document.getElementById('label-hip').textContent = imp ? 'Hip Circumference (inches)' : 'Hip Circumference (cm)';
+  document.getElementById('label-weight').textContent = imp ? 'Weight (lbs)' : 'Weight (kg)';
+  document.getElementById('height').placeholder = imp ? 'e.g. 70' : 'e.g. 178';
+  document.getElementById('neck').placeholder = imp ? 'e.g. 15' : 'e.g. 38';
+  document.getElementById('waist').placeholder = imp ? 'e.g. 34' : 'e.g. 86';
+  document.getElementById('hip').placeholder = imp ? 'e.g. 38' : 'e.g. 97';
+  document.getElementById('weight').placeholder = imp ? 'e.g. 180' : 'e.g. 82';
+}
+
+function syncSlider(field) {
+  const v = document.getElementById(field + '-slider').value;
+  document.getElementById(field + '-display').textContent = v;
+  document.getElementById(field).value = v;
+}
+function syncInput(field) {
+  const v = document.getElementById(field).value;
+  const slider = document.getElementById(field + '-slider');
+  if (slider) {
+    slider.value = v;
+    document.getElementById(field + '-display').textContent = v || slider.min;
+  }
+}
+
+function getVal(id) {
+  return parseFloat(document.getElementById(id).value);
+}
+
+function setError(id, show) {
+  const inp = document.getElementById(id);
+  const err = document.getElementById('err-' + id);
+  if (inp) inp.classList.toggle('error', show);
+  if (err) err.classList.toggle('show', show);
+}
+
+function clearErrors() {
+  ['age','height','weight','neck','waist','hip'].forEach(f => setError(f, false));
+}
+
+function hideResults() {
+  document.getElementById('results').classList.remove('visible');
+}
+
+function toInches(val) {
+  return currentUnits === 'metric' ? val / 2.54 : val;
+}
+
+function toLbs(val) {
+  return currentUnits === 'metric' ? val * 2.20462 : val;
+}
+
+function bfCategory(bf, gender) {
+  if (gender === 'male') {
+    if (bf < 6) return { label: 'Essential Fat', cls: 'cat-essential' };
+    if (bf < 14) return { label: 'Athlete', cls: 'cat-athlete' };
+    if (bf < 18) return { label: 'Fitness', cls: 'cat-fitness' };
+    if (bf < 25) return { label: 'Average', cls: 'cat-average' };
+    return { label: 'Obese', cls: 'cat-obese' };
+  } else {
+    if (bf < 14) return { label: 'Essential Fat', cls: 'cat-essential' };
+    if (bf < 21) return { label: 'Athlete', cls: 'cat-athlete' };
+    if (bf < 25) return { label: 'Fitness', cls: 'cat-fitness' };
+    if (bf < 32) return { label: 'Average', cls: 'cat-average' };
+    return { label: 'Obese', cls: 'cat-obese' };
+  }
+}
+
+function fmt(n, d = 1) {
+  return Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+}
+
+function calculate() {
+  clearErrors();
+  let valid = true;
+
+  const age = getVal('age');
+  if (isNaN(age) || age < 18 || age > 80) { setError('age', true); valid = false; }
+
+  const heightRaw = getVal('height');
+  if (isNaN(heightRaw) || heightRaw <= 0) { setError('height', true); valid = false; }
+
+  let bf = null;
+  let rows = [];
+  let method = '';
+
+  if (currentMethod === 'navy') {
+    const neckRaw = getVal('neck');
+    const waistRaw = getVal('waist');
+    if (isNaN(neckRaw) || neckRaw <= 0) { setError('neck', true); valid = false; }
+    if (isNaN(waistRaw) || waistRaw <= 0) { setError('waist', true); valid = false; }
+
+    let hipRaw = null;
+    if (currentGender === 'female') {
+      hipRaw = getVal('hip');
+      if (isNaN(hipRaw) || hipRaw <= 0) { setError('hip', true); valid = false; }
+    }
+
+    if (!valid) return;
+
+    const h = toInches(heightRaw);
+    const neck = toInches(neckRaw);
+    const waist = toInches(waistRaw);
+    method = 'U.S. Navy Method';
+
+    if (currentGender === 'male') {
+      bf = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(h) + 36.76;
+    } else {
+      const hip = toInches(hipRaw);
+      bf = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(h) - 78.387;
+    }
+
+    const leanMass = null; // will calc below
+
+    rows.push(['Method', method]);
+    rows.push(['Gender', currentGender === 'male' ? 'Male' : 'Female']);
+    rows.push(['Age', age + ' yrs']);
+    rows.push(['Height', currentUnits === 'imperial' ? fmt(heightRaw, 1) + ' in' : fmt(heightRaw, 1) + ' cm']);
+    rows.push(['Neck', currentUnits === 'imperial' ? fmt(neckRaw, 1) + ' in' : fmt(neckRaw, 1) + ' cm']);
+    rows.push(['Waist', currentUnits === 'imperial' ? fmt(waistRaw, 1) + ' in' : fmt(waistRaw, 1) + ' cm']);
+    if (currentGender === 'female') rows.push(['Hip', currentUnits === 'imperial' ? fmt(hipRaw, 1) + ' in' : fmt(hipRaw, 1) + ' cm']);
+
+  } else {
+    // BMI method
+    const weightRaw = getVal('weight');
+    if (isNaN(weightRaw) || weightRaw <= 0) { setError('weight', true); valid = false; }
+    if (!valid) return;
+
+    const heightM = currentUnits === 'imperial' ? heightRaw * 0.0254 : heightRaw / 100;
+    const weightKg = currentUnits === 'imperial' ? weightRaw / 2.20462 : weightRaw;
+    const bmi = weightKg / (heightM * heightM);
+    // Deurenberg formula
+    const sexFactor = currentGender === 'male' ? 1 : 0;
+    bf = 1.20 * bmi + 0.23 * age - 10.8 * sexFactor - 5.4;
+    method = 'BMI Method (Deurenberg)';
+
+    rows.push(['Method', method]);
+    rows.push(['Gender', currentGender === 'male' ? 'Male' : 'Female']);
+    rows.push(['Age', age + ' yrs']);
+    rows.push(['Height', currentUnits === 'imperial' ? fmt(heightRaw, 1) + ' in' : fmt(heightRaw, 1) + ' cm']);
+    rows.push(['Weight', currentUnits === 'imperial' ? fmt(weightRaw, 1) + ' lbs' : fmt(weightRaw, 1) + ' kg']);
+    rows.push(['BMI', fmt(bmi, 2)]);
+  }
+
+  if (bf < 2) bf = 2;
+  if (bf > 70) bf = 70;
+
+  const cat = bfCategory(bf, currentGender);
+
+  // Lean / fat mass (need weight for navy — estimate if not provided)
+  let weightKg2 = null;
+  if (currentMethod === 'bmi') {
+    weightKg2 = currentUnits === 'imperial' ? getVal('weight') / 2.20462 : getVal('weight');
+  }
+  // For navy, skip lean/fat breakdown (no weight input)
+
+  rows.push(['Body Fat %', fmt(bf, 1) + '%']);
+
+  if (weightKg2 !== null && !isNaN(weightKg2)) {
+    const fatMassKg = (bf / 100) * weightKg2;
+    const leanMassKg = weightKg2 - fatMassKg;
+    const fatMassLbs = fatMassKg * 2.20462;
+    const leanMassLbs = leanMassKg * 2.20462;
+    if (currentUnits === 'imperial') {
+      rows.push(['Fat Mass', fmt(fatMassLbs, 1) + ' lbs']);
+      rows.push(['Lean Mass', fmt(leanMassLbs, 1) + ' lbs']);
+    } else {
+      rows.push(['Fat Mass', fmt(fatMassKg, 1) + ' kg']);
+      rows.push(['Lean Mass', fmt(leanMassKg, 1) + ' kg']);
+    }
+  }
+
+  rows.push(['Category', cat.label]);
+
+  // Render
+  document.getElementById('res-bf').textContent = fmt(bf, 1) + '%';
+  const catBadge = document.getElementById('res-category');
+  catBadge.textContent = cat.label;
+  catBadge.className = 'category-badge ' + cat.cls;
+
+  const barPct = Math.min(bf / 50 * 100, 100);
+  document.getElementById('bar-fill').style.width = barPct + '%';
+  const barColor = bf < 14 ? '#17a2b8' : bf < 18 ? '#28a745' : bf < 25 ? '#ffc107' : '#dc3545';
+  document.getElementById('bar-fill').style.background = barColor;
+  document.getElementById('bar-pct-label').textContent = fmt(bf, 1) + '%';
+
+  const tbody = document.getElementById('res-table');
+  tbody.innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+
+  document.getElementById('results').classList.add('visible');
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function copyResults() {
+  const rows = document.querySelectorAll('#res-table tr');
+  let text = 'Body Fat Percentage Results\n';
+  text += '============================\n';
+  rows.forEach(r => {
+    const cells = r.querySelectorAll('td');
+    if (cells.length === 2) text += cells[0].textContent + ': ' + cells[1].textContent + '\n';
+  });
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Results', 2000);
+  }).catch(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '❌ Failed';
+    setTimeout(() => btn.textContent = '📋 Copy Results', 2000);
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') calculate();
+});
+
+// Init
+updateLabels();
+document.getElementById('weight-group').classList.add('hidden');
+</script>
+</body>
+</html>
