@@ -55,6 +55,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://toolhut.dev/running-pace-calculator/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://toolhut.dev/tdee-macro-calculator/</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
