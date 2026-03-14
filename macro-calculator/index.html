@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Macro Calculator for Weight Loss & Muscle Gain — Free Online Tool | toolhut.dev</title>
-<meta name="description" content="Calculate your exact daily macros (protein, carbs, fat) for weight loss or muscle gain. Free macro calculator based on TDEE, activity level, and goals.">
+<meta name="description" content="Calculate your daily macros (protein, carbs, fat) for weight loss, muscle gain, or maintenance. Free macro calculator with TDEE and calorie breakdown.">
 <link rel="canonical" href="https://toolhut.dev/macro-calculator/">
 <script type="application/ld+json">
 {
@@ -12,415 +12,315 @@
   "@type": "WebApplication",
   "name": "Macro Calculator for Weight Loss & Muscle Gain",
   "url": "https://toolhut.dev/macro-calculator/",
-  "description": "Calculate your daily macronutrient targets (protein, carbs, fat) based on your body stats, activity level, and fitness goal.",
+  "description": "Calculate your daily macronutrients (protein, carbs, fat) for weight loss, muscle gain, or maintenance based on your body stats and activity level.",
   "applicationCategory": "HealthApplication",
   "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "toolhut.dev",
+    "url": "https://toolhut.dev"
   }
 }
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.6}
 a{color:#0077b6;text-decoration:none}
-a:hover{text-decoration:underline;color:#006299}
-nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
-.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
-.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
-.nav-brand span{color:#0077b6}
-.page-wrap{max-width:640px;margin:0 auto;padding:1.5rem 1rem 2rem}
-h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.3}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:0.75rem 1.5rem;background:#fff}
+nav .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center}
+nav .brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+nav .brand:hover{text-decoration:none;color:#0077b6}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.5rem}
 .subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
-.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:1.5rem}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-@media(max-width:480px){.form-grid{grid-template-columns:1fr}}
-.field{display:flex;flex-direction:column;gap:0.35rem}
-.field.full{grid-column:1/-1}
-label{font-size:0.85rem;font-weight:500;color:#444}
-input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
-input[type=number]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
-input.error{border-color:#e74c3c}
-.error-msg{color:#e74c3c;font-size:0.78rem;display:none}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+input[type="number"],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input[type="number"]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error,select.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.1)}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
 .error-msg.show{display:block}
-.radio-group{display:flex;flex-wrap:wrap;gap:0.5rem}
-.radio-option{display:flex;align-items:center;gap:0.4rem;cursor:pointer;padding:8px 14px;border:1px solid #ddd;border-radius:6px;font-size:0.9rem;transition:all 0.15s;min-height:44px;background:#fff}
-.radio-option:hover{border-color:#0077b6;background:#f0f8ff}
-.radio-option input[type=radio]{accent-color:#0077b6;width:16px;height:16px}
-.radio-option.selected{border-color:#0077b6;background:#e8f4fd;font-weight:500}
-.btn{background:#0077b6;color:#fff;border:none;padding:14px 28px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:48px;transition:background 0.2s;margin-top:0.5rem}
-.btn:hover{background:#006299}
-.btn:active{background:#005580}
-.unit-toggle{display:flex;gap:0;margin-bottom:0.5rem;border:1px solid #ddd;border-radius:6px;overflow:hidden;width:fit-content}
-.unit-btn{padding:8px 18px;background:#fff;border:none;cursor:pointer;font-size:0.88rem;font-weight:500;color:#555;transition:all 0.15s;min-height:36px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.radio-group{display:flex;gap:0.75rem;flex-wrap:wrap}
+.radio-group label{font-size:0.9rem;font-weight:400;color:#1a1a2e;display:flex;align-items:center;gap:0.4rem;cursor:pointer;min-height:44px;padding:0.25rem 0}
+.radio-group input[type="radio"]{width:16px;height:16px;accent-color:#0077b6;cursor:pointer}
+.goal-tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.goal-tab{flex:1;min-width:120px;padding:10px 12px;border:2px solid #ddd;border-radius:6px;background:#fff;color:#555;font-size:0.85rem;font-weight:500;cursor:pointer;text-align:center;transition:all 0.2s;min-height:44px}
+.goal-tab:hover{border-color:#0077b6;color:#0077b6}
+.goal-tab.active{border-color:#0077b6;background:#0077b6;color:#fff}
+.unit-toggle{display:flex;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1.25rem;width:fit-content}
+.unit-btn{padding:8px 20px;border:none;background:#fff;color:#555;font-size:0.9rem;cursor:pointer;transition:all 0.2s;min-height:40px}
 .unit-btn.active{background:#0077b6;color:#fff}
-.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
-.results.visible{opacity:1;pointer-events:auto}
-.result-headline{font-size:1rem;color:#555;margin-bottom:0.25rem}
-.result-calories{font-size:2.8rem;font-weight:700;color:#0077b6;line-height:1}
-.result-unit{font-size:1rem;color:#777;margin-left:4px}
-.macro-bars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:1.5rem 0}
-@media(max-width:420px){.macro-bars{grid-template-columns:1fr}}
-.macro-card{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:8px;padding:1rem;text-align:center}
-.macro-label{font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.4rem}
-.macro-label.protein{color:#e85d04}
-.macro-label.carbs{color:#2d9d4e}
-.macro-label.fat{color:#7b2d8b}
-.macro-grams{font-size:1.8rem;font-weight:700;color:#1a1a2e}
-.macro-cal{font-size:0.8rem;color:#777;margin-top:0.1rem}
-.macro-pct{font-size:0.85rem;color:#555;margin-top:0.2rem}
-.stacked-bar{width:100%;height:18px;border-radius:9px;overflow:hidden;display:flex;margin:1rem 0 0.4rem;background:#eee}
-.bar-protein{background:#e85d04;transition:width 0.4s ease}
-.bar-carbs{background:#2d9d4e;transition:width 0.4s ease}
-.bar-fat{background:#7b2d8b;transition:width 0.4s ease}
-.bar-legend{display:flex;gap:1rem;font-size:0.78rem;flex-wrap:wrap}
-.bar-legend span{display:flex;align-items:center;gap:0.3rem}
-.bar-legend span::before{content:'';width:10px;height:10px;border-radius:2px;display:inline-block}
-.bar-legend .l-protein::before{background:#e85d04}
-.bar-legend .l-carbs::before{background:#2d9d4e}
-.bar-legend .l-fat::before{background:#7b2d8b}
-.zone-bar-wrap{margin:1.2rem 0}
-.zone-label{font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.5rem}
-.zone-track{position:relative;width:100%;height:24px;border-radius:12px;overflow:visible;background:linear-gradient(to right,#e74c3c 0%,#f39c12 33%,#27ae60 66%,#0077b6 100%);margin-bottom:8px}
-.zone-marker{position:absolute;top:-6px;width:4px;height:36px;background:#1a1a2e;border-radius:2px;transition:left 0.5s ease}
+button.calc-btn{width:100%;background:#0077b6;color:#fff;border:none;padding:14px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;margin-top:0.5rem}
+button.calc-btn:hover{background:#006299}
+.results{opacity:0;transition:opacity 0.3s ease;display:none}
+.results.visible{opacity:1;display:block}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:0.75rem 1rem;font-size:0.82rem;color:#7a6200;margin-bottom:1.5rem}
+.key-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.metric-card{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:8px;padding:1rem;text-align:center}
+.metric-label{font-size:0.75rem;color:#666;margin-bottom:0.3rem;font-weight:500;text-transform:uppercase;letter-spacing:0.03em}
+.metric-value{font-size:1.4rem;font-weight:700;color:#0077b6}
+.metric-unit{font-size:0.75rem;color:#888;margin-top:0.1rem}
+.macro-bars{margin-bottom:1.5rem}
+.macro-bar-row{margin-bottom:1rem}
+.macro-bar-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.35rem}
+.macro-name{font-size:0.9rem;font-weight:600}
+.macro-detail{font-size:0.8rem;color:#666}
+.bar-track{height:14px;background:#f0f0f0;border-radius:7px;overflow:hidden}
+.bar-fill{height:100%;border-radius:7px;transition:width 0.5s ease}
+.bar-protein{background:linear-gradient(90deg,#0077b6,#00b4d8)}
+.bar-carbs{background:linear-gradient(90deg,#f4a261,#e76f51)}
+.bar-fat{background:linear-gradient(90deg,#2dc653,#38b000)}
+.goal-indicator{margin-bottom:1.5rem}
+.goal-indicator h3{font-size:0.9rem;font-weight:600;color:#444;margin-bottom:0.5rem}
+.zone-bar{display:flex;height:28px;border-radius:6px;overflow:hidden;margin-bottom:0.5rem}
+.zone-segment{display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:#fff;transition:flex 0.3s}
+.zone-cut{background:#3b82f6}
+.zone-maintain{background:#22c55e}
+.zone-bulk{background:#f59e0b}
+.zone-marker{width:3px;background:#1a1a2e;border-radius:2px;position:relative}
 .zone-labels{display:flex;justify-content:space-between;font-size:0.72rem;color:#666}
-.goal-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.82rem;font-weight:600;margin-left:0.5rem}
-.badge-cut{background:#fde8e8;color:#c0392b}
-.badge-maintain{background:#e8f5e9;color:#1b7a3b}
-.badge-bulk{background:#e3f0ff;color:#0057a6}
-.section-title{font-size:1rem;font-weight:600;color:#1a1a2e;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:2px solid #e0e0e0}
-table{width:100%;border-collapse:collapse;font-size:0.9rem}
-th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#555;border-bottom:1px solid #ddd}
-td{padding:9px 12px;border-bottom:1px solid #f0f0f0;color:#1a1a2e}
+.calorie-badge{display:inline-block;background:#0077b6;color:#fff;border-radius:20px;padding:0.35rem 1rem;font-size:0.9rem;font-weight:700;margin-bottom:1.5rem}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:2px solid #f0f0f0}
+table{width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444}
+th:last-child,td:last-child{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
 tr:nth-child(even) td{background:#fafafa}
-.num{text-align:right}
-.copy-btn{background:transparent;border:1px solid #ddd;color:#555;padding:6px 14px;border-radius:5px;font-size:0.82rem;cursor:pointer;transition:all 0.15s;float:right;margin-top:-2px}
+.table-wrapper{overflow-x:auto}
+.copy-btn{background:none;border:1px solid #ddd;color:#555;padding:6px 14px;border-radius:5px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.3rem}
 .copy-btn:hover{border-color:#0077b6;color:#0077b6}
-.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:0.9rem 1rem;font-size:0.82rem;color:#6b5900;margin-top:1rem;line-height:1.5}
-.disclaimer strong{color:#5a4500}
+.copy-btn.copied{border-color:#22c55e;color:#22c55e}
+.copy-row{display:flex;justify-content:flex-end;margin-bottom:0.75rem}
+.info-badge{display:inline-block;background:#e0f2fe;color:#0077b6;border-radius:4px;padding:2px 8px;font-size:0.75rem;font-weight:600;margin-left:0.4rem}
 .ad-slot{min-height:0;margin:0}
-.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin:1.8rem 0 0.6rem}
-.content-section p{margin-bottom:0.85rem;color:#333;font-size:0.95rem}
-.content-section ul{padding-left:1.2rem;margin-bottom:0.85rem}
-.content-section li{margin-bottom:0.4rem;color:#333;font-size:0.95rem}
-details{margin-bottom:0.6rem;border:1px solid #e8e8e8;border-radius:6px;overflow:hidden}
-summary{padding:0.75rem 1rem;font-weight:600;font-size:0.92rem;cursor:pointer;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
-summary::after{content:'＋';color:#0077b6;font-size:1rem}
-details[open] summary::after{content:'－'}
-details p{padding:0.75rem 1rem;font-size:0.9rem;color:#333;background:#fff}
-.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
-@media(max-width:420px){.related-grid{grid-template-columns:1fr}}
-.related-link{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:0.7rem 1rem;font-size:0.88rem;color:#0077b6;display:block;transition:all 0.15s}
-.related-link:hover{background:#e8f4fd;border-color:#0077b6;text-decoration:none}
-footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;margin-top:2rem;text-align:center;font-size:0.82rem;color:#666}
-footer a{color:#555;margin:0 0.6rem}
+.content-section{margin-bottom:2rem}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;margin-top:1.5rem}
+.content-section p{color:#444;margin-bottom:0.75rem;font-size:0.95rem}
+.content-section ul{padding-left:1.4rem;color:#444;font-size:0.95rem}
+.content-section ul li{margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.75rem;overflow:hidden}
+summary{padding:0.75rem 1rem;cursor:pointer;font-weight:500;font-size:0.92rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"▼";font-size:0.7rem;color:#888}
+details[open] summary::after{content:"▲"}
+details p{padding:0.75rem 1rem;font-size:0.9rem;color:#444;background:#fff}
+.related-tools{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem}
+.related-tool-link{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1rem;font-size:0.88rem;color:#0077b6;display:block;transition:all 0.2s}
+.related-tool-link:hover{background:#e0f2fe;border-color:#0077b6;text-decoration:none}
+footer{border-top:1px solid #e0e0e0;padding:1.5rem;text-align:center;font-size:0.83rem;color:#888;margin-top:2rem}
+footer a{color:#666;margin:0 0.5rem}
 footer a:hover{color:#0077b6}
-.result-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem}
-.divider{border:none;border-top:1px solid #eee;margin:1rem 0}
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}
+  .key-metrics{grid-template-columns:1fr 1fr}
+  .key-metrics .metric-card:last-child{grid-column:1/-1}
+  .related-tools{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .card{padding:1.25rem}
+  .goal-tab{font-size:0.8rem;padding:8px 8px}
+}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+    <a href="/" class="brand">🧰 toolhut.dev</a>
   </div>
 </nav>
 
-<div class="page-wrap">
+<div class="container">
   <h1>Macro Calculator</h1>
-  <p class="subtitle">Calculate your daily protein, carbs &amp; fat targets for weight loss, maintenance, or muscle gain.</p>
+  <p class="subtitle">Calculate your daily protein, carbs, and fat for weight loss, muscle gain, or maintenance.</p>
 
   <div class="card">
-    <!-- Unit Toggle -->
+    <!-- Goal Tabs -->
     <div style="margin-bottom:1rem">
-      <label style="font-size:0.85rem;font-weight:500;color:#444;display:block;margin-bottom:0.4rem">Units</label>
+      <label style="font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.5rem;display:block">Your Goal</label>
+      <div class="goal-tabs">
+        <button class="goal-tab active" data-goal="cut" onclick="setGoal('cut')">🔥 Cut (Lose Fat)</button>
+        <button class="goal-tab" data-goal="maintain" onclick="setGoal('maintain')">⚖️ Maintain</button>
+        <button class="goal-tab" data-goal="bulk" onclick="setGoal('bulk')">💪 Bulk (Build Muscle)</button>
+      </div>
+    </div>
+
+    <!-- Unit Toggle -->
+    <div>
+      <label style="font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem;display:block">Units</label>
       <div class="unit-toggle">
-        <button class="unit-btn active" id="btn-imperial" onclick="setUnit('imperial')">Imperial (lbs/ft)</button>
-        <button class="unit-btn" id="btn-metric" onclick="setUnit('metric')">Metric (kg/cm)</button>
+        <button class="unit-btn active" id="btnImperial" onclick="setUnit('imperial')">Imperial (lbs/ft)</button>
+        <button class="unit-btn" id="btnMetric" onclick="setUnit('metric')">Metric (kg/cm)</button>
       </div>
     </div>
 
-    <div class="form-grid">
-      <!-- Age -->
-      <div class="field">
+    <!-- Inputs -->
+    <div class="form-row">
+      <div class="form-group">
         <label for="age">Age (years)</label>
-        <input type="number" id="age" min="10" max="100" placeholder="e.g. 28" inputmode="numeric">
-        <span class="error-msg" id="err-age">Enter a valid age (10–100).</span>
+        <input type="number" id="age" placeholder="e.g. 28" min="10" max="100">
+        <div class="error-msg" id="err-age">Please enter a valid age (10–100).</div>
       </div>
-
-      <!-- Sex -->
-      <div class="field">
-        <label for="sex">Biological Sex</label>
-        <select id="sex">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-
-      <!-- Height -->
-      <div class="field" id="height-imperial">
-        <label>Height</label>
-        <div style="display:flex;gap:0.5rem">
-          <input type="number" id="height-ft" min="3" max="8" placeholder="ft" style="width:50%" inputmode="numeric">
-          <input type="number" id="height-in" min="0" max="11" placeholder="in" style="width:50%" inputmode="numeric">
-        </div>
-        <span class="error-msg" id="err-height">Enter a valid height.</span>
-      </div>
-      <div class="field" id="height-metric" style="display:none">
-        <label for="height-cm">Height (cm)</label>
-        <input type="number" id="height-cm" min="100" max="250" placeholder="e.g. 175" inputmode="numeric">
-        <span class="error-msg" id="err-height-cm">Enter a valid height (100–250 cm).</span>
-      </div>
-
-      <!-- Weight -->
-      <div class="field" id="weight-imperial">
-        <label for="weight-lbs">Weight (lbs)</label>
-        <input type="number" id="weight-lbs" min="50" max="700" placeholder="e.g. 165" inputmode="numeric">
-        <span class="error-msg" id="err-weight">Enter a valid weight (50–700 lbs).</span>
-      </div>
-      <div class="field" id="weight-metric" style="display:none">
-        <label for="weight-kg">Weight (kg)</label>
-        <input type="number" id="weight-kg" min="20" max="300" placeholder="e.g. 75" inputmode="numeric">
-        <span class="error-msg" id="err-weight-kg">Enter a valid weight (20–300 kg).</span>
-      </div>
-
-      <!-- Activity -->
-      <div class="field full">
-        <label for="activity">Activity Level</label>
-        <select id="activity">
-          <option value="1.2">Sedentary (desk job, little/no exercise)</option>
-          <option value="1.375">Lightly Active (1–3 days/week exercise)</option>
-          <option value="1.55" selected>Moderately Active (3–5 days/week)</option>
-          <option value="1.725">Very Active (hard exercise 6–7 days/week)</option>
-          <option value="1.9">Extremely Active (athlete / physical job)</option>
-        </select>
-      </div>
-
-      <!-- Goal -->
-      <div class="field full">
-        <label>Goal</label>
-        <div class="radio-group" id="goal-group">
-          <label class="radio-option" onclick="selectGoal(this)">
-            <input type="radio" name="goal" value="cut"> Lose Weight (Cut)
-          </label>
-          <label class="radio-option selected" onclick="selectGoal(this)">
-            <input type="radio" name="goal" value="maintain" checked> Maintain Weight
-          </label>
-          <label class="radio-option" onclick="selectGoal(this)">
-            <input type="radio" name="goal" value="bulk"> Build Muscle (Bulk)
-          </label>
-        </div>
-      </div>
-
-      <!-- Macro Split -->
-      <div class="field full">
-        <label for="split">Macro Split Preference</label>
-        <select id="split" onchange="updateSliders()">
-          <option value="balanced">Balanced (30P / 40C / 30F)</option>
-          <option value="highprotein">High Protein (40P / 30C / 30F)</option>
-          <option value="lowcarb">Low Carb (30P / 20C / 50F)</option>
-          <option value="keto">Ketogenic (25P / 5C / 70F)</option>
-          <option value="custom">Custom</option>
-        </select>
-      </div>
-
-      <!-- Custom Sliders -->
-      <div class="field full" id="custom-sliders" style="display:none">
-        <div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:1rem">
-          <p style="font-size:0.82rem;color:#555;margin-bottom:0.8rem">Adjust percentages (must total 100%)</p>
-          <div style="margin-bottom:0.7rem">
-            <div style="display:flex;justify-content:space-between;font-size:0.83rem;margin-bottom:4px"><span style="color:#e85d04;font-weight:600">Protein</span><span id="p-pct-label">30%</span></div>
-            <input type="range" id="slider-p" min="15" max="50" value="30" oninput="onSlider()" style="width:100%;accent-color:#e85d04">
-          </div>
-          <div style="margin-bottom:0.7rem">
-            <div style="display:flex;justify-content:space-between;font-size:0.83rem;margin-bottom:4px"><span style="color:#2d9d4e;font-weight:600">Carbohydrates</span><span id="c-pct-label">40%</span></div>
-            <input type="range" id="slider-c" min="5" max="65" value="40" oninput="onSlider()" style="width:100%;accent-color:#2d9d4e">
-          </div>
-          <div>
-            <div style="display:flex;justify-content:space-between;font-size:0.83rem;margin-bottom:4px"><span style="color:#7b2d8b;font-weight:600">Fat</span><span id="f-pct-label">30%</span></div>
-            <input type="range" id="slider-f" min="10" max="70" value="30" oninput="onSlider()" style="width:100%;accent-color:#7b2d8b">
-          </div>
-          <div id="total-check" style="font-size:0.8rem;margin-top:0.6rem;color:#2d9d4e;font-weight:500">Total: 100%</div>
+      <div class="form-group">
+        <label>Sex</label>
+        <div class="radio-group">
+          <label><input type="radio" name="sex" value="male" checked> Male</label>
+          <label><input type="radio" name="sex" value="female"> Female</label>
         </div>
       </div>
     </div>
 
-    <button class="btn" id="calc-btn" onclick="calculate()">Calculate My Macros</button>
+    <div class="form-row" id="heightRow">
+      <div class="form-group">
+        <label for="heightFt" id="labelHt1">Height (ft)</label>
+        <input type="number" id="heightFt" placeholder="e.g. 5" min="1" max="8">
+        <div class="error-msg" id="err-ht1">Enter feet (1–8).</div>
+      </div>
+      <div class="form-group">
+        <label for="heightIn" id="labelHt2">Height (in)</label>
+        <input type="number" id="heightIn" placeholder="e.g. 10" min="0" max="11">
+        <div class="error-msg" id="err-ht2">Enter inches (0–11).</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="weight" id="labelWeight">Weight (lbs)</label>
+      <input type="number" id="weight" placeholder="e.g. 180" min="50" max="1000">
+      <div class="error-msg" id="err-weight">Please enter a valid weight.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="bodyfat">Body Fat % <span style="font-size:0.78rem;color:#888;font-weight:400">(optional — leave blank to estimate)</span></label>
+      <input type="number" id="bodyfat" placeholder="e.g. 18" min="3" max="60">
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Activity Level</label>
+      <select id="activity">
+        <option value="1.2">Sedentary — little or no exercise</option>
+        <option value="1.375">Lightly Active — 1–3 days/week</option>
+        <option value="1.55" selected>Moderately Active — 3–5 days/week</option>
+        <option value="1.725">Very Active — 6–7 days/week</option>
+        <option value="1.9">Extra Active — physical job or 2x/day training</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="proteinPrefGroup">
+      <label for="proteinPref">Protein Preference</label>
+      <select id="proteinPref">
+        <option value="standard">Standard (0.8g/lb lean mass)</option>
+        <option value="high" selected>High Protein (1.0g/lb lean mass)</option>
+        <option value="vhigh">Very High (1.2g/lb lean mass)</option>
+      </select>
+    </div>
+
+    <button class="calc-btn" id="calcBtn">Calculate My Macros</button>
   </div>
 
-  <!-- RESULTS -->
-  <div class="card results" id="results">
-    <div class="result-row">
-      <div>
-        <div class="result-headline">Daily Calorie Target</div>
-        <div style="line-height:1">
-          <span class="result-calories" id="r-calories">0</span>
-          <span class="result-unit">kcal/day</span>
-          <span class="goal-badge" id="r-badge"></span>
+  <!-- Results -->
+  <div class="results card" id="resultsSection">
+    <div class="disclaimer">⚠️ This tool is for informational purposes only. Consult a healthcare professional or registered dietitian for personalized medical or nutrition advice.</div>
+
+    <div class="copy-row">
+      <button class="copy-btn" id="copyBtn" onclick="copyResults()">📋 Copy Results</button>
+    </div>
+
+    <div class="section-title">Daily Calorie Target</div>
+    <div id="calorieBadgeArea" style="margin-bottom:1.25rem;text-align:center"></div>
+    <div class="key-metrics" id="keyMetrics"></div>
+
+    <div class="goal-indicator">
+      <h3>Calorie Range Indicator</h3>
+      <div style="position:relative">
+        <div class="zone-bar" id="zoneBar">
+          <div class="zone-segment zone-cut" style="flex:3">Cut</div>
+          <div class="zone-segment zone-maintain" style="flex:2">Maintain</div>
+          <div class="zone-segment zone-bulk" style="flex:3">Bulk</div>
         </div>
+        <div id="zonePointer" style="position:absolute;top:-8px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid #1a1a2e;display:none"></div>
       </div>
-      <button class="copy-btn" onclick="copyResults()">Copy Results</button>
+      <div class="zone-labels" id="zoneLabels"></div>
     </div>
 
-    <!-- Macro Visual Bars -->
-    <div class="macro-bars">
-      <div class="macro-card">
-        <div class="macro-label protein">Protein</div>
-        <div class="macro-grams" id="r-protein">0g</div>
-        <div class="macro-cal" id="r-protein-cal">0 kcal</div>
-        <div class="macro-pct" id="r-protein-pct">0%</div>
-      </div>
-      <div class="macro-card">
-        <div class="macro-label carbs">Carbs</div>
-        <div class="macro-grams" id="r-carbs">0g</div>
-        <div class="macro-cal" id="r-carbs-cal">0 kcal</div>
-        <div class="macro-pct" id="r-carbs-pct">0%</div>
-      </div>
-      <div class="macro-card">
-        <div class="macro-label fat">Fat</div>
-        <div class="macro-grams" id="r-fat">0g</div>
-        <div class="macro-cal" id="r-fat-cal">0 kcal</div>
-        <div class="macro-pct" id="r-fat-pct">0%</div>
-      </div>
+    <div class="section-title">Your Macros</div>
+    <div class="macro-bars" id="macroBars"></div>
+
+    <div class="section-title">Full Breakdown</div>
+    <div class="table-wrapper">
+      <table id="breakdownTable"></table>
     </div>
 
-    <!-- Stacked Bar -->
-    <div class="stacked-bar" id="stacked-bar">
-      <div class="bar-protein" id="bar-p" style="width:30%"></div>
-      <div class="bar-carbs" id="bar-c" style="width:40%"></div>
-      <div class="bar-fat" id="bar-f" style="width:30%"></div>
-    </div>
-    <div class="bar-legend">
-      <span class="l-protein">Protein</span>
-      <span class="l-carbs">Carbs</span>
-      <span class="l-fat">Fat</span>
+    <div class="section-title" style="margin-top:1.5rem">Meal Distribution (3 meals/day)</div>
+    <div class="table-wrapper">
+      <table id="mealTable"></table>
     </div>
 
-    <hr class="divider">
-
-    <!-- Calorie Zone Indicator -->
-    <div class="zone-bar-wrap">
-      <div class="zone-label">Calorie Deficit / Surplus Indicator</div>
-      <div class="zone-track" id="zone-track">
-        <div class="zone-marker" id="zone-marker" style="left:50%"></div>
-      </div>
-      <div class="zone-labels">
-        <span>Large Deficit</span>
-        <span>Mild Deficit</span>
-        <span>Maintenance</span>
-        <span>Surplus</span>
-      </div>
-      <div id="zone-status" style="font-size:0.85rem;font-weight:600;margin-top:0.5rem;color:#27ae60"></div>
-    </div>
-
-    <hr class="divider">
-
-    <!-- Breakdown Table -->
-    <div class="section-title">Full Daily Breakdown</div>
-    <div style="overflow-x:auto">
-      <table>
-        <thead>
-          <tr>
-            <th>Metric</th>
-            <th class="num">Value</th>
-          </tr>
-        </thead>
-        <tbody id="breakdown-tbody"></tbody>
-      </table>
-    </div>
-
-    <hr class="divider">
-
-    <!-- Per Meal Table -->
-    <div class="section-title" style="margin-top:0.8rem">Per Meal Targets <span style="font-size:0.78rem;font-weight:400;color:#777">(3 / 4 / 5 / 6 meals)</span></div>
-    <div style="overflow-x:auto">
-      <table>
-        <thead>
-          <tr>
-            <th>Meals/Day</th>
-            <th class="num">Calories</th>
-            <th class="num">Protein</th>
-            <th class="num">Carbs</th>
-            <th class="num">Fat</th>
-          </tr>
-        </thead>
-        <tbody id="meal-tbody"></tbody>
-      </table>
-    </div>
-
-    <div class="disclaimer">
-      <strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional or registered dietitian for personalized medical or nutritional advice.
-    </div>
+    <div id="macroRatioNote" style="background:#f8f9fa;border-radius:6px;padding:0.75rem 1rem;font-size:0.85rem;color:#555;margin-top:1rem"></div>
   </div>
 
   <div class="ad-slot" id="ad-mid"></div>
 
-  <!-- CONTENT SECTION -->
-  <div class="content-section card">
+  <!-- Content Section -->
+  <div class="content-section">
     <h2>How to Use This Macro Calculator</h2>
-    <p>Enter your age, sex, height, weight, and activity level. Select your goal — cutting (weight loss), maintaining, or bulking (muscle gain) — then choose a macro split or customize your own percentages. Hit <strong>Calculate My Macros</strong> to see your personalized daily calorie target and exact grams of protein, carbohydrates, and fat.</p>
+    <p>Enter your age, sex, height, weight, and activity level, then select your goal (cut, maintain, or bulk). Optionally enter your body fat percentage for more accurate lean mass calculations. Hit <strong>Calculate My Macros</strong> to get your personalized daily calorie target and exact protein, carbohydrate, and fat targets in grams.</p>
 
     <h2>Why This Matters</h2>
-    <p>Hitting a calorie target alone won't get you the results you want — the <em>source</em> of those calories matters enormously. Someone eating 2,400 calories worth of pizza will have a very different body composition outcome than someone hitting the same calories with optimized macros.</p>
-    <p>Consider: a 175 lb man trying to build muscle needs roughly 175–200g of protein per day — yet most people eat less than half that. Protein is uniquely satiating, protects lean mass during a cut, and triggers muscle protein synthesis. Getting it wrong is the #1 reason people lose muscle instead of fat when dieting.</p>
-    <p>Carbohydrates fuel high-intensity training — if you're doing weightlifting or HIIT 4+ days a week, cutting carbs too low will tank your performance. Conversely, someone sedentary doing light cardio can thrive on a low-carb approach. Fat is essential for hormonal health, vitamin absorption, and joint lubrication — never drop below ~20% of total calories.</p>
-    <p>This calculator uses the Mifflin-St Jeor equation — the most validated formula for estimating resting metabolic rate — combined with an activity multiplier to give you your Total Daily Energy Expenditure (TDEE).</p>
+    <p>Tracking macros — not just calories — is one of the most effective strategies for changing body composition. A 200-lb man trying to lose fat and preserve muscle needs vastly different macros than someone of the same weight trying to add 20 lbs of lean mass. The difference isn't just calories; it's how those calories are distributed.</p>
+    <p>For example: a 175-lb person at moderate activity trying to cut might target 2,100 calories with 175g protein, 210g carbs, and 58g fat. That same person bulking could eat 2,800 calories with similar protein but significantly more carbs to fuel workouts and support recovery. Without hitting protein targets, calorie restriction leads to muscle loss — the opposite of what most people want.</p>
+    <p>Athletes, bodybuilders, busy professionals trying to lose weight, and anyone who's struggled with yo-yo dieting all benefit from macro tracking. Research consistently shows that higher protein intake (0.8–1.2g per lb of lean body mass) dramatically improves fat loss results while preserving or building muscle.</p>
 
     <h2>How It's Calculated</h2>
-    <p><strong>Step 1: Basal Metabolic Rate (Mifflin-St Jeor)</strong></p>
+    <p>This calculator uses the <strong>Mifflin-St Jeor equation</strong> to estimate Basal Metabolic Rate (BMR), widely considered the most accurate formula for the general population:</p>
     <ul>
-      <li>Men: BMR = (10 × kg) + (6.25 × cm) − (5 × age) + 5</li>
-      <li>Women: BMR = (10 × kg) + (6.25 × cm) − (5 × age) − 161</li>
+      <li><strong>Men:</strong> BMR = (10 × kg) + (6.25 × cm) − (5 × age) + 5</li>
+      <li><strong>Women:</strong> BMR = (10 × kg) + (6.25 × cm) − (5 × age) − 161</li>
     </ul>
-    <p><strong>Step 2: TDEE</strong> = BMR × Activity Multiplier (1.2 to 1.9)</p>
-    <p><strong>Step 3: Goal Adjustment</strong> — Cut: TDEE − 500 kcal (~1 lb/week loss) | Bulk: TDEE + 300 kcal (~0.5 lb/week gain) | Maintain: TDEE</p>
-    <p><strong>Step 4: Macro Grams</strong> — Each macro percentage × target calories ÷ calories per gram (protein: 4 kcal/g, carbs: 4 kcal/g, fat: 9 kcal/g)</p>
+    <p>BMR is multiplied by an <strong>activity multiplier</strong> (1.2–1.9) to get TDEE (Total Daily Energy Expenditure). Then a calorie adjustment is applied: −500 kcal for cutting, 0 for maintenance, +300 kcal for lean bulking. Protein is set first (based on lean body mass), fat at ~25% of calories, and the remaining calories are filled with carbohydrates.</p>
 
-    <h2>Tips &amp; Common Mistakes</h2>
+    <h2>Tips & Common Mistakes</h2>
     <ul>
-      <li><strong>Don't crash diet:</strong> A 500 kcal deficit is the sweet spot. Bigger deficits cause muscle loss and metabolic adaptation.</li>
-      <li><strong>Track protein first:</strong> Hit your protein target before worrying about carbs and fat — protein is the most important lever for body composition.</li>
-      <li><strong>Adjust every 2–4 weeks:</strong> As you lose or gain weight, your TDEE changes. Recalculate monthly.</li>
-      <li><strong>Don't fear carbs on training days:</strong> Carb timing around workouts (pre/post) significantly impacts performance and recovery.</li>
-      <li><strong>Activity multipliers are estimates:</strong> Most people overestimate their activity level — when in doubt, go one tier lower and adjust based on progress.</li>
+      <li><strong>Don't underestimate protein.</strong> Most people eat far too little. Aim for at least 0.8g per lb of lean mass — more if you're in a caloric deficit.</li>
+      <li><strong>Don't slash calories too aggressively.</strong> A 500 kcal/day deficit is the standard guideline for ~1 lb/week fat loss. Going much lower risks muscle loss and metabolic adaptation.</li>
+      <li><strong>Re-calculate every 10–15 lbs.</strong> As your weight changes, so do your calorie and macro needs. Don't set and forget.</li>
+      <li><strong>Track consistently for 2 weeks before judging results.</strong> Hormonal fluctuations, water retention, and food logging errors can mask real progress.</li>
+      <li><strong>Adjust if progress stalls.</strong> If weight hasn't moved in 2+ weeks while cutting, reduce calories by 100–150 kcal/day, preferably from carbs.</li>
     </ul>
 
     <h2>Frequently Asked Questions</h2>
-
     <details>
-      <summary>What's the difference between TDEE and BMR?</summary>
-      <p>Your BMR (Basal Metabolic Rate) is the calories your body burns at complete rest — just to keep organs functioning. TDEE (Total Daily Energy Expenditure) multiplies your BMR by your activity level to account for movement, exercise, and daily tasks. Your macro targets are based on TDEE, not BMR.</p>
+      <summary>What are macros and why do they matter?</summary>
+      <p>Macros (macronutrients) are the three main categories of nutrients that provide calories: protein (4 kcal/g), carbohydrates (4 kcal/g), and fat (9 kcal/g). Tracking macros matters because each plays a different role — protein builds and repairs muscle, carbs fuel energy and workouts, and fat supports hormones and nutrient absorption. Hitting the right ratio helps you achieve specific body composition goals, not just weight changes.</p>
     </details>
-
     <details>
-      <summary>How much protein do I actually need to build muscle?</summary>
-      <p>Research consistently shows 0.7–1.0g per pound of body weight (1.6–2.2g per kg) is optimal for muscle protein synthesis in people who resistance train. Beginners can build muscle at the lower end; advanced lifters in a caloric deficit benefit from the higher end. This calculator uses approximately 1g/lb as a strong default for bulking.</p>
+      <summary>How accurate is this calculator?</summary>
+      <p>The Mifflin-St Jeor equation is accurate within ±10% for most people, making it the gold standard in clinical settings. Results are estimates — genetics, hormones, sleep quality, and stress all affect real-world metabolism. Use these numbers as a starting point, track your actual results for 2–3 weeks, and adjust accordingly.</p>
     </details>
-
     <details>
-      <summary>Should my macros change on rest days vs. training days?</summary>
-      <p>Carb cycling — eating more carbs on training days and fewer on rest days — can be effective, but it adds complexity. For most people, consistent daily macros produce excellent results. Once you've mastered hitting daily targets, carb cycling is a useful next step. Keep protein consistent every day regardless.</p>
+      <summary>Should I eat more on workout days?</summary>
+      <p>For most people, using a weekly average calorie target is simpler and equally effective. If you train intensely 4+ days per week, carb cycling (eating more carbs on training days, fewer on rest days) can optimize performance and recovery. A good starting point: add 100–200 extra grams of carbs on heavy training days and reduce by the same on rest days, keeping weekly totals consistent.</p>
     </details>
-
     <details>
-      <summary>Is the ketogenic macro split effective for weight loss?</summary>
-      <p>Keto (very low carb, high fat) works for weight loss primarily because it often reduces appetite and total calorie intake. It is not metabolically superior to other diets when calories are matched. If you enjoy high-fat foods and find keto sustainable, it can be a great tool — but it's not necessary for fat loss. The "best" diet is the one you can stick to.</p>
+      <summary>What if I don't know my body fat percentage?</summary>
+      <p>Leave the field blank — the calculator will estimate it using established population averages based on your BMI and sex. For more accuracy, you can measure body fat using a DEXA scan, hydrostatic weighing, or a reliable body fat caliper measurement using the Navy or Jackson-Pollock methods. Even a rough estimate significantly improves protein target accuracy compared to using total bodyweight.</p>
     </details>
   </div>
 
-  <!-- Related Tools -->
-  <div class="card">
-    <div class="section-title">Related Tools</div>
-    <div class="related-grid">
-      <a href="/ideal-weight-calculator/" class="related-link">⚖️ Ideal Weight Calculator</a>
-      <a href="/water-intake-calculator/" class="related-link">💧 Water Intake Calculator</a>
-      <a href="/calorie-deficit-calculator/" class="related-link">🔥 Calorie Deficit Calculator</a>
-      <a href="/bmi-calculator/" class="related-link">📊 BMI Calculator</a>
-      <a href="/one-rep-max-calculator/" class="related-link">🏋️ One Rep Max Calculator</a>
-      <a href="/heart-rate-zone-calculator/" class="related-link">❤️ Heart Rate Zone Calculator</a>
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-tools">
+      <a href="/ideal-weight-calculator/" class="related-tool-link">⚖️ Ideal Weight Calculator</a>
+      <a href="/water-intake-calculator/" class="related-tool-link">💧 Water Intake Calculator</a>
+      <a href="/calorie-deficit-calculator/" class="related-tool-link">🔥 Calorie Deficit Calculator</a>
+      <a href="/bmi-calculator/" class="related-tool-link">📊 BMI Calculator with Weight Range Chart</a>
+      <a href="/one-rep-max-calculator/" class="related-tool-link">🏋️ One Rep Max Calculator</a>
+      <a href="/heart-rate-zone-calculator/" class="related-tool-link">❤️ Heart Rate Zone Calculator</a>
     </div>
   </div>
 
@@ -428,107 +328,57 @@ footer a:hover{color:#0077b6}
 </div>
 
 <footer>
-  <div style="margin-bottom:0.4rem">
-    <a href="/about/">About</a>
-    <a href="/privacy/">Privacy</a>
-    <a href="/contact/">Contact</a>
-  </div>
-  <div>© <span id="yr"></span> toolhut.dev — Free Online Tools</div>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <br style="margin-bottom:0.4rem">
+  <span>© 2025 toolhut.dev</span>
 </footer>
 
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-
 let currentUnit = 'imperial';
+let currentGoal = 'cut';
 let lastResults = null;
 
-function setUnit(u) {
-  currentUnit = u;
-  document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
-  document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
-  document.getElementById('height-imperial').style.display = u === 'imperial' ? '' : 'none';
-  document.getElementById('height-metric').style.display = u === 'metric' ? '' : 'none';
-  document.getElementById('weight-imperial').style.display = u === 'imperial' ? '' : 'none';
-  document.getElementById('weight-metric').style.display = u === 'metric' ? '' : 'none';
+function setUnit(unit) {
+  currentUnit = unit;
+  document.getElementById('btnImperial').classList.toggle('active', unit === 'imperial');
+  document.getElementById('btnMetric').classList.toggle('active', unit === 'metric');
+  const isMetric = unit === 'metric';
+  document.getElementById('labelWeight').textContent = isMetric ? 'Weight (kg)' : 'Weight (lbs)';
+  document.getElementById('labelHt1').textContent = isMetric ? 'Height (cm)' : 'Height (ft)';
+  document.getElementById('labelHt2').textContent = isMetric ? '' : 'Height (in)';
+  document.getElementById('heightIn').closest('.form-group').style.display = isMetric ? 'none' : '';
+  document.getElementById('heightFt').placeholder = isMetric ? 'e.g. 178' : 'e.g. 5';
+  document.getElementById('weight').placeholder = isMetric ? 'e.g. 82' : 'e.g. 180';
 }
 
-function selectGoal(el) {
-  document.querySelectorAll('.radio-option').forEach(r => r.classList.remove('selected'));
-  el.classList.add('selected');
+function setGoal(goal) {
+  currentGoal = goal;
+  document.querySelectorAll('.goal-tab').forEach(t => t.classList.toggle('active', t.dataset.goal === goal));
 }
 
-function updateSliders() {
-  const split = document.getElementById('split').value;
-  const customDiv = document.getElementById('custom-sliders');
-  if (split === 'custom') {
-    customDiv.style.display = '';
-    onSlider();
-    return;
-  }
-  customDiv.style.display = 'none';
-  const splits = {
-    balanced: [30, 40, 30],
-    highprotein: [40, 30, 30],
-    lowcarb: [30, 20, 50],
-    keto: [25, 5, 70]
-  };
-  const [p, c, f] = splits[split];
-  document.getElementById('slider-p').value = p;
-  document.getElementById('slider-c').value = c;
-  document.getElementById('slider-f').value = f;
-  document.getElementById('p-pct-label').textContent = p + '%';
-  document.getElementById('c-pct-label').textContent = c + '%';
-  document.getElementById('f-pct-label').textContent = f + '%';
-}
-
-function onSlider() {
-  let p = parseInt(document.getElementById('slider-p').value);
-  let c = parseInt(document.getElementById('slider-c').value);
-  let f = parseInt(document.getElementById('slider-f').value);
-  let total = p + c + f;
-  document.getElementById('p-pct-label').textContent = p + '%';
-  document.getElementById('c-pct-label').textContent = c + '%';
-  document.getElementById('f-pct-label').textContent = f + '%';
-  const tc = document.getElementById('total-check');
-  if (total === 100) {
-    tc.textContent = 'Total: 100% ✓';
-    tc.style.color = '#2d9d4e';
-  } else {
-    tc.textContent = 'Total: ' + total + '% (must equal 100%)';
-    tc.style.color = '#e74c3c';
-  }
-}
-
-function fmt(n, d = 0) {
-  return Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+function fmt(n, dec=0) {
+  if (isNaN(n)) return '—';
+  return Number(n.toFixed(dec)).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
 }
 
 function clearErrors() {
   document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
-  document.querySelectorAll('input.error').forEach(e => e.classList.remove('error'));
+  document.querySelectorAll('input.error, select.error').forEach(e => e.classList.remove('error'));
 }
 
-function showError(id, inputId) {
-  document.getElementById(id).classList.add('show');
-  if (inputId) document.getElementById(inputId).classList.add('error');
+function showError(fieldId, errId) {
+  document.getElementById(fieldId).classList.add('error');
+  document.getElementById(errId).classList.add('show');
 }
 
-function getMacroSplit() {
-  const split = document.getElementById('split').value;
-  if (split === 'custom') {
-    const p = parseInt(document.getElementById('slider-p').value);
-    const c = parseInt(document.getElementById('slider-c').value);
-    const f = parseInt(document.getElementById('slider-f').value);
-    if (p + c + f !== 100) return null;
-    return [p / 100, c / 100, f / 100];
-  }
-  const splits = {
-    balanced: [0.30, 0.40, 0.30],
-    highprotein: [0.40, 0.30, 0.30],
-    lowcarb: [0.30, 0.20, 0.50],
-    keto: [0.25, 0.05, 0.70]
-  };
-  return splits[split];
+function estimateBodyFat(bmi, sex) {
+  // Deurenberg formula estimate
+  const age = parseInt(document.getElementById('age').value) || 30;
+  const sexVal = sex === 'male' ? 1 : 0;
+  let bf = (1.20 * bmi) + (0.23 * age) - (10.8 * sexVal) - 5.4;
+  return Math.max(5, Math.min(55, bf));
 }
 
 function calculate() {
@@ -536,42 +386,35 @@ function calculate() {
   let valid = true;
 
   const age = parseFloat(document.getElementById('age').value);
-  if (!age || age < 10 || age > 100) { showError('err-age', 'age'); valid = false; }
+  if (!age || age < 10 || age > 100) { showError('age','err-age'); valid = false; }
 
-  const sex = document.getElementById('sex').value;
-  const activity = parseFloat(document.getElementById('activity').value);
+  const sex = document.querySelector('input[name="sex"]:checked').value;
+  const activityMult = parseFloat(document.getElementById('activity').value);
+  const proteinPref = document.getElementById('proteinPref').value;
 
   let weightKg, heightCm;
 
   if (currentUnit === 'imperial') {
-    const ft = parseFloat(document.getElementById('height-ft').value);
-    const inch = parseFloat(document.getElementById('height-in').value) || 0;
-    const lbs = parseFloat(document.getElementById('weight-lbs').value);
-    if (!ft || ft < 3 || ft > 8) { showError('err-height', 'height-ft'); valid = false; }
-    if (!lbs || lbs < 50 || lbs > 700) { showError('err-weight', 'weight-lbs'); valid = false; }
-    if (valid) {
-      heightCm = ((ft * 12) + inch) * 2.54;
-      weightKg = lbs * 0.453592;
-    }
+    const wLbs = parseFloat(document.getElementById('weight').value);
+    const ft = parseFloat(document.getElementById('heightFt').value);
+    const inch = parseFloat(document.getElementById('heightIn').value) || 0;
+    if (!wLbs || wLbs < 50 || wLbs > 1000) { showError('weight','err-weight'); valid = false; }
+    if (!ft || ft < 1 || ft > 8) { showError('heightFt','err-ht1'); valid = false; }
+    if (inch < 0 || inch > 11) { showError('heightIn','err-ht2'); valid = false; }
+    if (!valid) return;
+    weightKg = wLbs * 0.453592;
+    heightCm = ((ft * 12) + inch) * 2.54;
   } else {
-    const cm = parseFloat(document.getElementById('height-cm').value);
-    const kg = parseFloat(document.getElementById('weight-kg').value);
-    if (!cm || cm < 100 || cm > 250) { showError('err-height-cm', 'height-cm'); valid = false; }
-    if (!kg || kg < 20 || kg > 300) { showError('err-weight-kg', 'weight-kg'); valid = false; }
-    if (valid) { heightCm = cm; weightKg = kg; }
-  }
-
-  const split = getMacroSplit();
-  if (!split) {
-    alert('Custom macro percentages must total exactly 100%.');
-    valid = false;
+    weightKg = parseFloat(document.getElementById('weight').value);
+    heightCm = parseFloat(document.getElementById('heightFt').value);
+    if (!weightKg || weightKg < 20 || weightKg > 500) { showError('weight','err-weight'); valid = false; }
+    if (!heightCm || heightCm < 50 || heightCm > 300) { showError('heightFt','err-ht1'); valid = false; }
+    if (!valid) return;
   }
 
   if (!valid) return;
 
-  const goal = document.querySelector('input[name="goal"]:checked').value;
-
-  // Mifflin-St Jeor BMR
+  // BMR - Mifflin-St Jeor
   let bmr;
   if (sex === 'male') {
     bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
@@ -579,147 +422,214 @@ function calculate() {
     bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
   }
 
-  const tdee = bmr * activity;
+  const tdee = bmr * activityMult;
 
-  let targetCals;
-  const goalAdj = { cut: -500, maintain: 0, bulk: 300 };
-  targetCals = tdee + goalAdj[goal];
-  if (targetCals < 1000) targetCals = 1000; // floor
+  // Calorie target by goal
+  let calTarget, goalLabel, goalColor;
+  if (currentGoal === 'cut') {
+    calTarget = tdee - 500;
+    goalLabel = 'Cutting (−500 kcal/day)';
+    goalColor = '#3b82f6';
+  } else if (currentGoal === 'maintain') {
+    calTarget = tdee;
+    goalLabel = 'Maintenance';
+    goalColor = '#22c55e';
+  } else {
+    calTarget = tdee + 300;
+    goalLabel = 'Lean Bulking (+300 kcal/day)';
+    goalColor = '#f59e0b';
+  }
+  calTarget = Math.max(1200, calTarget);
 
-  const [pPct, cPct, fPct] = split;
-  const proteinKcal = targetCals * pPct;
-  const carbsKcal = targetCals * cPct;
-  const fatKcal = targetCals * fPct;
+  // Body fat & lean mass
+  const bmi = weightKg / ((heightCm / 100) ** 2);
+  let bfPct = parseFloat(document.getElementById('bodyfat').value);
+  const bfProvided = !isNaN(bfPct) && bfPct > 3 && bfPct < 60;
+  if (!bfProvided) bfPct = estimateBodyFat(bmi, sex);
+  const leanMassKg = weightKg * (1 - bfPct / 100);
+  const leanMassLbs = leanMassKg * 2.20462;
+  const weightLbs = weightKg * 2.20462;
 
-  const proteinG = Math.round(proteinKcal / 4);
-  const carbsG = Math.round(carbsKcal / 4);
-  const fatG = Math.round(fatKcal / 9);
+  // Protein target
+  let proteinMultiplier;
+  if (proteinPref === 'standard') proteinMultiplier = 0.8;
+  else if (proteinPref === 'high') proteinMultiplier = 1.0;
+  else proteinMultiplier = 1.2;
+  const proteinG = Math.round(leanMassLbs * proteinMultiplier);
+  const proteinCal = proteinG * 4;
 
-  const weightLbs = weightKg / 0.453592;
+  // Fat: 25% of target calories
+  const fatCal = calTarget * 0.25;
+  const fatG = Math.round(fatCal / 9);
 
-  // Store results for copy
-  lastResults = { targetCals, proteinG, carbsG, fatG, tdee, bmr, goal, pPct, cPct, fPct, weightKg, weightLbs };
+  // Carbs: remaining
+  const carbCal = calTarget - proteinCal - (fatG * 9);
+  const carbG = Math.max(0, Math.round(carbCal / 4));
 
-  // Update UI
-  document.getElementById('r-calories').textContent = fmt(Math.round(targetCals));
+  // Recalc actual total
+  const actualCal = (proteinG * 4) + (carbG * 4) + (fatG * 9);
+  const proteinPct = Math.round((proteinG * 4 / actualCal) * 100);
+  const carbPct = Math.round((carbG * 4 / actualCal) * 100);
+  const fatPct = Math.round((fatG * 9 / actualCal) * 100);
 
-  const badges = { cut: ['Cut', 'badge-cut'], maintain: ['Maintain', 'badge-maintain'], bulk: ['Bulk', 'badge-bulk'] };
-  const badge = document.getElementById('r-badge');
-  badge.textContent = badges[goal][0];
-  badge.className = 'goal-badge ' + badges[goal][1];
+  lastResults = {
+    calories: Math.round(actualCal), tdee: Math.round(tdee), bmr: Math.round(bmr),
+    protein: proteinG, carbs: carbG, fat: fatG,
+    proteinPct, carbPct, fatPct,
+    bfPct: Math.round(bfPct * 10) / 10, leanMassKg, weightKg, heightCm, bmi,
+    goalLabel, calTarget: Math.round(actualCal), bfProvided
+  };
 
-  document.getElementById('r-protein').textContent = fmt(proteinG) + 'g';
-  document.getElementById('r-protein-cal').textContent = fmt(Math.round(proteinKcal)) + ' kcal';
-  document.getElementById('r-protein-pct').textContent = Math.round(pPct * 100) + '% of calories';
+  requestAnimationFrame(() => renderResults(lastResults, goalColor));
+}
 
-  document.getElementById('r-carbs').textContent = fmt(carbsG) + 'g';
-  document.getElementById('r-carbs-cal').textContent = fmt(Math.round(carbsKcal)) + ' kcal';
-  document.getElementById('r-carbs-pct').textContent = Math.round(cPct * 100) + '% of calories';
+function renderResults(r, goalColor) {
+  // Calorie badge
+  const badgeHTML = `<div style="display:inline-block;background:${goalColor};color:#fff;border-radius:24px;padding:0.5rem 1.5rem;font-size:1.6rem;font-weight:800;letter-spacing:-0.02em">${fmt(r.calories)} kcal/day</div><div style="margin-top:0.4rem;font-size:0.82rem;color:#666">${r.goalLabel}</div>`;
 
-  document.getElementById('r-fat').textContent = fmt(fatG) + 'g';
-  document.getElementById('r-fat-cal').textContent = fmt(Math.round(fatKcal)) + ' kcal';
-  document.getElementById('r-fat-pct').textContent = Math.round(fPct * 100) + '% of calories';
+  // Key metrics
+  const metricsHTML = `
+    <div class="metric-card">
+      <div class="metric-label">BMR</div>
+      <div class="metric-value">${fmt(r.bmr)}</div>
+      <div class="metric-unit">kcal/day</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">TDEE</div>
+      <div class="metric-value">${fmt(r.tdee)}</div>
+      <div class="metric-unit">kcal/day</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Body Fat${r.bfProvided ? '' : '*'}</div>
+      <div class="metric-value">${fmt(r.bfPct, 1)}%</div>
+      <div class="metric-unit">${r.bfProvided ? 'provided' : 'estimated'}</div>
+    </div>`;
 
-  // Stacked bar
-  document.getElementById('bar-p').style.width = (pPct * 100) + '%';
-  document.getElementById('bar-c').style.width = (cPct * 100) + '%';
-  document.getElementById('bar-f').style.width = (fPct * 100) + '%';
-
-  // Zone indicator
-  // Map: large deficit (tdee-1000) → 0%, mild deficit (tdee-200) → 33%, maintenance → 50%, surplus → 75%+
-  const diff = targetCals - tdee; // negative = deficit, positive = surplus
-  let zonePos;
-  if (diff <= -500) zonePos = Math.max(2, 20 + (diff + 1000) / 1000 * 20);
-  else if (diff < 0) zonePos = 40 + (diff / -500) * (-8); // 32–40%
-  else if (diff === 0) zonePos = 50;
-  else zonePos = 50 + Math.min(diff / 600 * 40, 45);
-
-  zonePos = Math.min(96, Math.max(2, zonePos));
-  document.getElementById('zone-marker').style.left = zonePos + '%';
-
-  let zoneText, zoneColor;
-  if (diff <= -400) { zoneText = '🔴 Calorie Deficit — Fat Loss Phase'; zoneColor = '#e74c3c'; }
-  else if (diff < 0) { zoneText = '🟡 Mild Deficit — Lean Recomposition'; zoneColor = '#f39c12'; }
-  else if (diff === 0) { zoneText = '🟢 Maintenance — Body Recomposition'; zoneColor = '#27ae60'; }
-  else { zoneText = '🔵 Caloric Surplus — Muscle Building Phase'; zoneColor = '#0077b6'; }
-
-  const zoneEl = document.getElementById('zone-status');
-  zoneEl.textContent = zoneText;
-  zoneEl.style.color = zoneColor;
+  // Macro bars
+  const barsHTML = `
+    <div class="macro-bar-row">
+      <div class="macro-bar-header">
+        <span class="macro-name" style="color:#0077b6">🥩 Protein</span>
+        <span class="macro-detail">${fmt(r.protein)}g &nbsp;·&nbsp; ${fmt(r.protein * 4)} kcal &nbsp;·&nbsp; ${r.proteinPct}%</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill bar-protein" style="width:${r.proteinPct}%"></div></div>
+    </div>
+    <div class="macro-bar-row">
+      <div class="macro-bar-header">
+        <span class="macro-name" style="color:#e76f51">🍞 Carbohydrates</span>
+        <span class="macro-detail">${fmt(r.carbs)}g &nbsp;·&nbsp; ${fmt(r.carbs * 4)} kcal &nbsp;·&nbsp; ${r.carbPct}%</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill bar-carbs" style="width:${r.carbPct}%"></div></div>
+    </div>
+    <div class="macro-bar-row">
+      <div class="macro-bar-header">
+        <span class="macro-name" style="color:#2dc653">🥑 Fat</span>
+        <span class="macro-detail">${fmt(r.fat)}g &nbsp;·&nbsp; ${fmt(r.fat * 9)} kcal &nbsp;·&nbsp; ${r.fatPct}%</span>
+      </div>
+      <div class="bar-track"><div class="bar-fill bar-fat" style="width:${r.fatPct}%"></div></div>
+    </div>`;
 
   // Breakdown table
-  const breakRows = [
-    ['BMR (Basal Metabolic Rate)', fmt(Math.round(bmr)) + ' kcal'],
-    ['TDEE (Total Daily Expenditure)', fmt(Math.round(tdee)) + ' kcal'],
-    ['Goal Adjustment', (goal === 'maintain' ? '±0' : (goal === 'cut' ? '−500' : '+300')) + ' kcal'],
-    ['Daily Calorie Target', fmt(Math.round(targetCals)) + ' kcal'],
-    ['Protein Target', fmt(proteinG) + 'g (' + Math.round(pPct*100) + '%)'],
-    ['Carbohydrate Target', fmt(carbsG) + 'g (' + Math.round(cPct*100) + '%)'],
-    ['Fat Target', fmt(fatG) + 'g (' + Math.round(fPct*100) + '%)'],
-    ['Protein per lb bodyweight', fmt(proteinG / weightLbs, 2) + 'g/lb'],
-    ['Protein per kg bodyweight', fmt(proteinG / weightKg, 2) + 'g/kg'],
-    ['Weekly calorie total', fmt(Math.round(targetCals * 7)) + ' kcal'],
+  const bmiStatus = r.bmi < 18.5 ? 'Underweight' : r.bmi < 25 ? 'Normal' : r.bmi < 30 ? 'Overweight' : 'Obese';
+  const breakdownRows = [
+    ['Body Weight', fmt(r.weightKg, 1) + ' kg', fmt(r.weightKg * 2.20462, 1) + ' lbs'],
+    ['Height', fmt(r.heightCm, 0) + ' cm', fmt(r.heightCm / 2.54 / 12, 0) + 'ft ' + fmt((r.heightCm / 2.54) % 12, 0) + 'in'],
+    ['BMI', fmt(r.bmi, 1), bmiStatus],
+    ['Body Fat', fmt(r.bfPct, 1) + '%', r.bfProvided ? 'User provided' : 'Estimated'],
+    ['Lean Body Mass', fmt(r.leanMassKg, 1) + ' kg', fmt(r.leanMassKg * 2.20462, 1) + ' lbs'],
+    ['BMR (at rest)', fmt(r.bmr) + ' kcal', 'Mifflin-St Jeor'],
+    ['TDEE (with activity)', fmt(r.tdee) + ' kcal', 'BMR × activity'],
+    ['Target Calories', fmt(r.calories) + ' kcal', r.goalLabel],
+    ['Protein', fmt(r.protein) + 'g', fmt(r.protein * 4) + ' kcal (' + r.proteinPct + '%)'],
+    ['Carbohydrates', fmt(r.carbs) + 'g', fmt(r.carbs * 4) + ' kcal (' + r.carbPct + '%)'],
+    ['Fat', fmt(r.fat) + 'g', fmt(r.fat * 9) + ' kcal (' + r.fatPct + '%)'],
   ];
+  let tableHTML = '<thead><tr><th>Metric</th><th>Value</th><th style="text-align:right">Notes</th></tr></thead><tbody>';
+  breakdownRows.forEach(row => {
+    tableHTML += `<tr><td>${row[0]}</td><td>${row[1]}</td><td style="text-align:right">${row[2]}</td></tr>`;
+  });
+  tableHTML += '</tbody>';
 
-  const tbody = document.getElementById('breakdown-tbody');
-  tbody.innerHTML = breakRows.map(([k, v]) =>
-    `<tr><td>${k}</td><td class="num">${v}</td></tr>`
-  ).join('');
+  // Meal distribution (3 meals)
+  const mProtein = Math.round(r.protein / 3);
+  const mCarbs = Math.round(r.carbs / 3);
+  const mFat = Math.round(r.fat / 3);
+  const mCal = Math.round(r.calories / 3);
+  let mealHTML = '<thead><tr><th>Meal</th><th style="text-align:right">Calories</th><th style="text-align:right">Protein</th><th style="text-align:right">Carbs</th><th style="text-align:right">Fat</th></tr></thead><tbody>';
+  const meals = ['Breakfast', 'Lunch', 'Dinner'];
+  meals.forEach(m => {
+    mealHTML += `<tr><td>${m}</td><td style="text-align:right">${fmt(mCal)}</td><td style="text-align:right">${mProtein}g</td><td style="text-align:right">${mCarbs}g</td><td style="text-align:right">${mFat}g</td></tr>`;
+  });
+  mealHTML += `<tr style="font-weight:600;background:#f0f0f0"><td>Total</td><td style="text-align:right">${fmt(r.calories)}</td><td style="text-align:right">${r.protein}g</td><td style="text-align:right">${r.carbs}g</td><td style="text-align:right">${r.fat}g</td></tr>`;
+  mealHTML += '</tbody>';
 
-  // Per-meal table
-  const mealTbody = document.getElementById('meal-tbody');
-  mealTbody.innerHTML = [3, 4, 5, 6].map(m => {
-    const c = Math.round(targetCals / m);
-    const p = Math.round(proteinG / m);
-    const ca = Math.round(carbsG / m);
-    const f = Math.round(fatG / m);
-    return `<tr><td>${m} meals</td><td class="num">${fmt(c)}</td><td class="num">${fmt(p)}g</td><td class="num">${fmt(ca)}g</td><td class="num">${fmt(f)}g</td></tr>`;
-  }).join('');
+  // Ratio note
+  const ratioNote = `Current macro split: <strong>${r.proteinPct}% protein / ${r.carbPct}% carbs / ${r.fatPct}% fat</strong>. ${currentGoal === 'cut' ? 'Higher protein during a cut helps preserve lean muscle mass while in a caloric deficit.' : currentGoal === 'bulk' ? 'Higher carbs during a bulk fuels workouts and supports muscle glycogen replenishment.' : 'Balanced macro split for maintaining current weight and body composition.'}`;
 
-  // Show results
-  const resultsEl = document.getElementById('results');
-  resultsEl.classList.add('visible');
-  setTimeout(() => { resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+  // Zone indicator
+  const cutCal = r.tdee - 500;
+  const maintainCal = r.tdee;
+  const bulkCal = r.tdee + 300;
+  const zoneLabels = `<span>~${fmt(Math.round(cutCal))} kcal (Cut)</span><span>~${fmt(Math.round(maintainCal))} kcal (Maintain)</span><span>~${fmt(Math.round(bulkCal))} kcal (Bulk)</span>`;
+
+  // Set all DOM at once
+  document.getElementById('calorieBadgeArea').innerHTML = badgeHTML;
+  document.getElementById('keyMetrics').innerHTML = metricsHTML;
+  document.getElementById('macroBars').innerHTML = barsHTML;
+  document.getElementById('breakdownTable').innerHTML = tableHTML;
+  document.getElementById('mealTable').innerHTML = mealHTML;
+  document.getElementById('macroRatioNote').innerHTML = ratioNote;
+  document.getElementById('zoneLabels').innerHTML = zoneLabels;
+
+  // Zone pointer position
+  const minCal = cutCal - 300;
+  const maxCal = bulkCal + 300;
+  const totalRange = maxCal - minCal;
+  const posPct = Math.max(2, Math.min(98, ((r.calories - minCal) / totalRange) * 100));
+  const ptr = document.getElementById('zonePointer');
+  ptr.style.left = `calc(${posPct}% - 7px)`;
+  ptr.style.display = 'block';
+
+  const section = document.getElementById('resultsSection');
+  section.style.display = 'block';
+  requestAnimationFrame(() => section.classList.add('visible'));
+  section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function copyResults() {
   if (!lastResults) return;
-  const { targetCals, proteinG, carbsG, fatG, tdee, bmr, goal } = lastResults;
-  const text = [
-    'MACRO CALCULATOR RESULTS — toolhut.dev',
-    '═══════════════════════════════',
-    `Daily Calorie Target: ${fmt(Math.round(targetCals))} kcal (${goal})`,
-    `BMR: ${fmt(Math.round(bmr))} kcal`,
-    `TDEE: ${fmt(Math.round(tdee))} kcal`,
-    '',
-    `Protein: ${fmt(proteinG)}g`,
-    `Carbohydrates: ${fmt(carbsG)}g`,
-    `Fat: ${fmt(fatG)}g`,
-    '',
-    'Generated at https://toolhut.dev/macro-calculator/'
-  ].join('\n');
-
+  const r = lastResults;
+  const text = `Macro Calculator Results — toolhut.dev
+Goal: ${r.goalLabel}
+Target Calories: ${fmt(r.calories)} kcal/day
+───────────────────────
+Protein:       ${r.protein}g  (${r.proteinPct}% · ${fmt(r.protein * 4)} kcal)
+Carbohydrates: ${r.carbs}g  (${r.carbPct}% · ${fmt(r.carbs * 4)} kcal)
+Fat:           ${r.fat}g  (${r.fatPct}% · ${fmt(r.fat * 9)} kcal)
+───────────────────────
+BMR:  ${fmt(r.bmr)} kcal
+TDEE: ${fmt(r.tdee)} kcal
+Body Fat: ${fmt(r.bfPct, 1)}%
+Lean Mass: ${fmt(r.leanMassKg, 1)} kg`;
   navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = 'Copied!';
-    btn.style.color = '#27ae60';
-    setTimeout(() => { btn.textContent = 'Copy Results'; btn.style.color = ''; }, 2000);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Results'; btn.classList.remove('copied'); }, 2000);
   }).catch(() => {
-    prompt('Copy this text:', text);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '❌ Failed';
+    setTimeout(() => { btn.textContent = '📋 Copy Results'; }, 2000);
   });
 }
 
-// Enter key support
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    const active = document.activeElement;
-    if (active && (active.tagName === 'INPUT' || active.tagName === 'SELECT')) {
-      calculate();
-    }
-  }
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => calculate());
 });
 
-// Init
-updateSliders();
+document.querySelectorAll('input[type="number"]').forEach(inp => {
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { requestAnimationFrame(() => calculate()); } });
+});
 </script>
+</body>
 </html>
