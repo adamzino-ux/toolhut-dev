@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Water Intake Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="How much water should I drink? Use our free water intake calculator to get a personalized daily hydration recommendation based on weight, activity, and climate.">
+<link rel="canonical" href="https://toolhut.dev/water-intake-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Water Intake Calculator",
+  "url": "https://toolhut.dev/water-intake-calculator/",
+  "description": "Calculate how much water you should drink per day based on your weight, activity level, and climate.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #1a1a2e;
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+nav {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 1.5rem;
+  background: #fff;
+}
+.nav-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  height: 52px;
+  display: flex;
+  align-items: center;
+}
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #0077b6;
+  text-decoration: none;
+}
+.nav-brand:hover { text-decoration: none; opacity: 0.85; }
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+.subtitle {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.tool-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+@media (max-width: 500px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+}
+
+input[type="number"], select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #1a1a2e;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
+}
+input.error { border-color: #e74c3c; }
+.error-msg {
+  font-size: 0.78rem;
+  color: #e74c3c;
+  display: none;
+}
+.error-msg.visible { display: block; }
+
+.slider-wrap { display: flex; flex-direction: column; gap: 0.35rem; }
+.slider-row { display: flex; align-items: center; gap: 0.75rem; }
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #ddd;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  min-height: auto;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0077b6;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0077b6;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.slider-val {
+  min-width: 80px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0077b6;
+  text-align: right;
+}
+
+.btn {
+  background: #0077b6;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-height: 44px;
+  width: 100%;
+  margin-top: 1.25rem;
+}
+.btn:hover { background: #006299; }
+.btn:active { background: #005580; }
+
+/* Results */
+.results-section {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: none;
+}
+.results-section.visible {
+  display: block;
+  opacity: 1;
+}
+
+.result-hero {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: #f0f8ff;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #cce5f5;
+}
+.result-label { font-size: 0.9rem; color: #555; margin-bottom: 0.3rem; font-weight: 500; }
+.result-big {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0077b6;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.result-unit { font-size: 1rem; color: #555; margin-bottom: 0.75rem; }
+.result-alt { font-size: 0.95rem; color: #444; }
+
+/* Hydration gauge */
+.gauge-wrap {
+  margin-bottom: 1.5rem;
+}
+.gauge-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 0.6rem;
+}
+.gauge-bar-track {
+  height: 28px;
+  border-radius: 14px;
+  background: linear-gradient(to right, #e74c3c 0%, #f39c12 25%, #2ecc71 50%, #27ae60 75%, #2980b9 100%);
+  position: relative;
+  overflow: visible;
+  margin-bottom: 0.5rem;
+}
+.gauge-marker {
+  position: absolute;
+  top: -6px;
+  width: 4px;
+  height: 40px;
+  background: #1a1a2e;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: left 0.5s ease;
+}
+.gauge-marker::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #1a1a2e;
+}
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #666;
+}
+.hydration-status {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.status-low { background: #fdecea; color: #c0392b; }
+.status-moderate { background: #fef9e7; color: #d35400; }
+.status-optimal { background: #eafaf1; color: #1e8449; }
+.status-high { background: #e8f4fd; color: #1a5276; }
+
+/* Breakdown table */
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+}
+.table-scroll { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+thead th {
+  background: #f0f0f0;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+}
+thead th:last-child { text-align: right; }
+tbody tr:nth-child(even) { background: #fafafa; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+tbody td:last-child { text-align: right; font-weight: 600; color: #0077b6; }
+
+/* Water glass visual */
+.glasses-wrap {
+  margin-bottom: 1.5rem;
+}
+.glasses-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.5rem;
+}
+.glass {
+  width: 32px;
+  height: 40px;
+  border: 2px solid #0077b6;
+  border-radius: 0 0 6px 6px;
+  border-top: none;
+  position: relative;
+  overflow: hidden;
+}
+.glass.filled::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 85%;
+  background: rgba(0,119,182,0.35);
+}
+.glass-label { font-size: 0.78rem; color: #555; margin-top: 4px; }
+
+/* Copy btn */
+.copy-btn {
+  background: transparent;
+  border: 1px solid #0077b6;
+  color: #0077b6;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 32px;
+}
+.copy-btn:hover { background: #0077b6; color: #fff; }
+
+.result-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Disclaimer */
+.disclaimer {
+  background: #fff8e1;
+  border-left: 4px solid #f39c12;
+  border-radius: 0 6px 6px 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  color: #555;
+  margin-top: 1.5rem;
+}
+
+/* Ad slot */
+.ad-slot { min-height: 0; margin: 0; }
+
+/* Content sections */
+.content-section { margin-bottom: 2rem; }
+.content-section h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+.content-section p { color: #444; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.content-section ul { padding-left: 1.4rem; color: #444; font-size: 0.95rem; }
+.content-section ul li { margin-bottom: 0.4rem; }
+
+details {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+}
+summary {
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: #1a1a2e;
+  background: #f8f9fa;
+  list-style: none;
+  user-select: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: '+';
+  float: right;
+  font-size: 1.1rem;
+  color: #0077b6;
+  font-weight: 700;
+}
+details[open] summary::after { content: '−'; }
+details p {
+  padding: 0.85rem 1rem;
+  font-size: 0.92rem;
+  color: #444;
+  background: #fff;
+  margin: 0;
+}
+
+/* Related tools */
+.related-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+@media (max-width: 480px) { .related-grid { grid-template-columns: 1fr; } }
+.related-card {
+  display: block;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #0077b6;
+  transition: border-color 0.2s, background 0.2s;
+}
+.related-card:hover { border-color: #0077b6; background: #f0f8ff; text-decoration: none; }
+
+footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.footer-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+.footer-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+.footer-links a { color: #555; }
+.footer-links a:hover { color: #0077b6; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h1>💧 Water Intake Calculator</h1>
+  <p class="subtitle">Find out exactly how much water you should drink per day based on your body, activity, and lifestyle.</p>
+
+  <div class="tool-card">
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label for="weight">Body Weight</label>
+        <input type="number" id="weight" placeholder="e.g. 70" min="20" max="500" step="0.1">
+        <span class="error-msg" id="weight-err">Please enter a valid weight (20–500).</span>
+      </div>
+
+      <div class="form-group">
+        <label for="unit">Weight Unit</label>
+        <select id="unit">
+          <option value="kg">Kilograms (kg)</option>
+          <option value="lbs">Pounds (lbs)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" placeholder="e.g. 30" min="1" max="120" step="1">
+        <span class="error-msg" id="age-err">Please enter a valid age (1–120).</span>
+      </div>
+
+      <div class="form-group">
+        <label for="sex">Biological Sex</label>
+        <select id="sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label for="activity">Activity Level</label>
+        <select id="activity">
+          <option value="sedentary">Sedentary (little or no exercise)</option>
+          <option value="light">Lightly active (1–3 days/week)</option>
+          <option value="moderate" selected>Moderately active (3–5 days/week)</option>
+          <option value="active">Very active (6–7 days/week)</option>
+          <option value="athlete">Athlete / intense daily training</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <div class="slider-wrap">
+          <label for="temp">Climate / Temperature</label>
+          <div class="slider-row">
+            <input type="range" id="temp" min="0" max="4" step="1" value="1">
+            <span class="slider-val" id="temp-val">Mild (15–22°C)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label for="pregnant">Special Conditions</label>
+        <select id="pregnant">
+          <option value="none">None</option>
+          <option value="pregnant">Pregnant</option>
+          <option value="breastfeeding">Breastfeeding</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate My Water Intake</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results-section" id="results">
+
+    <div class="result-hero">
+      <div class="result-label">Your Recommended Daily Water Intake</div>
+      <div class="result-big" id="res-liters">—</div>
+      <div class="result-unit">liters per day</div>
+      <div class="result-alt" id="res-alt">— oz &nbsp;|&nbsp; — cups</div>
+    </div>
+
+    <!-- Hydration gauge -->
+    <div class="gauge-wrap">
+      <div class="gauge-title">Hydration Needs Scale</div>
+      <div class="gauge-bar-track">
+        <div class="gauge-marker" id="gauge-marker" style="left:50%"></div>
+      </div>
+      <div class="gauge-labels">
+        <span>Low Need<br>&lt;1.5 L</span>
+        <span style="text-align:center">Moderate<br>1.5–2 L</span>
+        <span style="text-align:center">Optimal<br>2–3 L</span>
+        <span style="text-align:right">High Need<br>&gt;3 L</span>
+      </div>
+      <div style="margin-top:0.6rem;">
+        <span class="hydration-status" id="hydration-badge">—</span>
+      </div>
+    </div>
+
+    <!-- Glasses visual -->
+    <div class="glasses-wrap">
+      <div class="section-title">Glasses Per Day (250 mL each)</div>
+      <div class="glasses-grid" id="glasses-grid"></div>
+      <div class="glass-label" id="glasses-label"></div>
+    </div>
+
+    <!-- Breakdown table -->
+    <div class="section-title">How We Got Here — Breakdown</div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Detail</th>
+            <th>Water Added</th>
+          </tr>
+        </thead>
+        <tbody id="breakdown-body"></tbody>
+      </table>
+    </div>
+
+    <div class="result-footer">
+      <div style="font-size:0.82rem;color:#555;" id="summary-note"></div>
+      <button class="copy-btn" id="copyBtn">📋 Copy Results</button>
+    </div>
+
+    <div class="disclaimer">
+      ⚠️ <strong>Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional for personalized medical advice. Individual hydration needs vary based on health conditions, medications, and other factors not captured here.
+    </div>
+
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content -->
+  <div class="content-section">
+    <h2>How to Use This Water Intake Calculator</h2>
+    <p>Enter your body weight, age, biological sex, activity level, typical climate, and any special conditions (pregnancy or breastfeeding). Click <strong>Calculate</strong> and you'll instantly see a personalized daily water recommendation in liters, ounces, and cups — along with a visual breakdown of what's driving your number.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Why This Matters</h2>
+    <p>Water is the most essential nutrient your body needs, and most people are mildly dehydrated without realizing it. A 2% drop in body water can impair cognitive performance, reduce physical endurance by up to 10%, and cause headaches, fatigue, and poor concentration.</p>
+    <p>The old "8 glasses a day" rule is an oversimplification. A 55 kg woman who works at a desk in a cool office needs far less water than a 95 kg male construction worker in summer heat. A breastfeeding mother needs an extra ~700 mL/day just to produce milk. A marathoner training twice daily may need over 5 liters total.</p>
+    <p>Getting hydration right has tangible effects: better skin appearance, improved kidney function, healthier digestion, and regulated body temperature. Athletes who track hydration carefully can see measurable improvements in performance and recovery. Even for non-athletes, optimal hydration reduces kidney stone risk and helps maintain a healthy metabolism.</p>
+    <p>This calculator gives you a science-backed starting point — adjust based on how you feel, how much you sweat, and what your doctor advises.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>How It's Calculated</h2>
+    <p>Our formula uses a weight-based baseline modified by activity, climate, age, sex, and special conditions:</p>
+    <ul>
+      <li><strong>Base:</strong> 35 mL × body weight in kg (the widely used clinical starting point)</li>
+      <li><strong>Activity multiplier:</strong> Sedentary +0%, Light +10%, Moderate +20%, Very Active +35%, Athlete +50%</li>
+      <li><strong>Climate adjustment:</strong> Cold –100 mL, Cool –0 mL, Mild +0 mL, Warm +300 mL, Hot/Humid +600 mL</li>
+      <li><strong>Sex adjustment:</strong> Males +200 mL (higher average muscle mass = more metabolic water need)</li>
+      <li><strong>Age adjustment:</strong> Under 18 or over 60 receive a slight downward modifier</li>
+      <li><strong>Pregnancy:</strong> +300 mL/day (as recommended by major health organizations)</li>
+      <li><strong>Breastfeeding:</strong> +700 mL/day</li>
+    </ul>
+    <p><strong>Formula:</strong> Daily Water (mL) = (35 × weight_kg × activity_factor) + climate_adj + sex_adj + age_adj + condition_adj</p>
+    <p>This aligns with guidance from the EFSA (European Food Safety Authority) and the U.S. National Academies of Medicine adequate intake values.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't chug it all at once.</strong> Spread your intake evenly through the day. Your kidneys can only process about 1 liter per hour.</li>
+      <li><strong>Coffee and tea count.</strong> Contrary to popular belief, caffeinated drinks contribute to your hydration — though alcohol does not (it's a diuretic).</li>
+      <li><strong>Food provides ~20% of your water.</strong> Fruits, vegetables, soups, and yogurt all contribute. Our calculator focuses on drinking water needed.</li>
+      <li><strong>Urine color is your best real-time gauge.</strong> Pale yellow = well hydrated. Dark yellow = drink more. Clear = possibly over-hydrating.</li>
+      <li><strong>Thirst is a late signal.</strong> By the time you feel thirsty, you may already be 1–2% dehydrated. Drink proactively, especially before exercise.</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is 8 glasses a day the right amount for everyone?</summary>
+      <p>No — the "8×8" rule (eight 8-oz glasses) is a rough average that doesn't account for body size, activity, climate, or health conditions. A small sedentary person in a cool climate may only need 1.5–2 liters, while an active athlete in summer heat may need 4+ liters. Use a personalized calculator like this one for a more accurate estimate.</p>
+    </details>
+    <details>
+      <summary>Does drinking more water help with weight loss?</summary>
+      <p>Research shows that drinking water before meals can reduce calorie intake, and staying hydrated supports metabolic function. However, water alone is not a weight-loss solution. It works best as part of a calorie-controlled diet and active lifestyle. Our <a href="/calorie-deficit-calculator/">Calorie Deficit Calculator</a> can help you pair hydration with a solid nutrition strategy.</p>
+    </details>
+    <details>
+      <summary>Can you drink too much water?</summary>
+      <p>Yes — hyponatremia (water intoxication) occurs when you drink so much water that sodium levels in your blood drop dangerously low. This is rare for average people but can happen to endurance athletes who drink excessively during long races. The upper range shown in this calculator (~4 liters for most) is well within safe limits for healthy adults.</p>
+    </details>
+    <details>
+      <summary>Should I drink more water when sick?</summary>
+      <p>Generally yes — illness involving fever, vomiting, or diarrhea increases fluid loss significantly. Fever raises your metabolic rate and causes sweating, which demands extra fluid replacement. When sick, aim to drink more than your baseline and consider electrolyte-containing drinks if you're losing fluids rapidly. Always follow your doctor's guidance.</p>
+    </details>
+  </div>
+
+  <!-- Related tools -->
+  <div class="content-section">
+    <h2>Related Health Tools</h2>
+    <div class="related-grid">
+      <a class="related-card" href="/calorie-deficit-calculator/">🔥 Calorie Deficit Calculator</a>
+      <a class="related-card" href="/bmi-calculator/">⚖️ BMI Calculator with Weight Range Chart</a>
+      <a class="related-card" href="/one-rep-max-calculator/">🏋️ One Rep Max Calculator</a>
+      <a class="related-card" href="/heart-rate-zone-calculator/">❤️ Heart Rate Zone Calculator</a>
+      <a class="related-card" href="/body-fat-percentage-calculator/">📏 Body Fat Percentage Estimator</a>
+      <a class="related-card" href="/tdee-macro-calculator/">🥗 TDEE &amp; Macro Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="footer-inner">
+    <span>© <span id="yr"></span> toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const tempLabels = [
+  'Cold (< 5°C)',
+  'Cool (5–15°C)',
+  'Mild (15–22°C)',
+  'Warm (22–30°C)',
+  'Hot / Humid (> 30°C)'
+];
+const tempSlider = document.getElementById('temp');
+const tempVal = document.getElementById('temp-val');
+tempSlider.addEventListener('input', () => {
+  tempVal.textContent = tempLabels[parseInt(tempSlider.value)];
+});
+tempVal.textContent = tempLabels[parseInt(tempSlider.value)];
+
+function fmtL(n) { return n.toFixed(2); }
+function fmtNum(n) { return n.toLocaleString('en-US'); }
+
+function validate() {
+  let ok = true;
+  const w = parseFloat(document.getElementById('weight').value);
+  const a = parseInt(document.getElementById('age').value);
+  const wErr = document.getElementById('weight-err');
+  const aErr = document.getElementById('age-err');
+  const wIn = document.getElementById('weight');
+  const aIn = document.getElementById('age');
+
+  wIn.classList.remove('error'); wErr.classList.remove('visible');
+  aIn.classList.remove('error'); aErr.classList.remove('visible');
+
+  if (!w || w < 20 || w > 500) {
+    wIn.classList.add('error'); wErr.classList.add('visible'); ok = false;
+  }
+  if (!a || a < 1 || a > 120) {
+    aIn.classList.add('error'); aErr.classList.add('visible'); ok = false;
+  }
+  return ok;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const weightInput = parseFloat(document.getElementById('weight').value);
+  const unit = document.getElementById('unit').value;
+  const age = parseInt(document.getElementById('age').value);
+  const sex = document.getElementById('sex').value;
+  const activity = document.getElementById('activity').value;
+  const tempIdx = parseInt(document.getElementById('temp').value);
+  const pregnant = document.getElementById('pregnant').value;
+
+  // Convert to kg
+  const weightKg = unit === 'lbs' ? weightInput * 0.453592 : weightInput;
+
+  // Base: 35 mL per kg
+  const baseML = 35 * weightKg;
+
+  // Activity multiplier
+  const activityMap = {
+    sedentary: { mult: 1.0, label: 'Sedentary', pct: '+0%' },
+    light: { mult: 1.10, label: 'Lightly active', pct: '+10%' },
+    moderate: { mult: 1.20, label: 'Moderately active', pct: '+20%' },
+    active: { mult: 1.35, label: 'Very active', pct: '+35%' },
+    athlete: { mult: 1.50, label: 'Athlete', pct: '+50%' }
+  };
+  const actInfo = activityMap[activity];
+  const actML = baseML * actInfo.mult;
+  const actAdj = actML - baseML;
+
+  // Climate
+  const climateAdj = [-100, 0, 0, 300, 600][tempIdx];
+  const climateLabel = tempLabels[tempIdx];
+
+  // Sex adjustment
+  const sexAdj = sex === 'male' ? 200 : 0;
+
+  // Age adjustment
+  let ageAdj = 0;
+  let ageNote = 'Standard';
+  if (age < 18) { ageAdj = -200; ageNote = 'Youth (–200 mL)'; }
+  else if (age > 60) { ageAdj = -150; ageNote = 'Senior (–150 mL)'; }
+
+  // Special conditions
+  let condAdj = 0;
+  let condLabel = 'None';
+  if (pregnant === 'pregnant') { condAdj = 300; condLabel = 'Pregnant (+300 mL)'; }
+  else if (pregnant === 'breastfeeding') { condAdj = 700; condLabel = 'Breastfeeding (+700 mL)'; }
+
+  const totalML = baseML + actAdj + climateAdj + sexAdj + ageAdj + condAdj;
+  const totalL = totalML / 1000;
+  const totalOz = totalML / 29.5735;
+  const totalCups = totalML / 240;
+  const totalGlasses250 = Math.round(totalML / 250);
+
+  // Show results
+  document.getElementById('res-liters').textContent = fmtL(totalL);
+  document.getElementById('res-alt').textContent =
+    fmtNum(Math.round(totalOz)) + ' oz  |  ' + fmtL(totalCups) + ' cups';
+
+  // Gauge: 0–100% mapped from 0.8 L to 5 L
+  const gMin = 800, gMax = 5000;
+  let pct = ((totalML - gMin) / (gMax - gMin)) * 100;
+  pct = Math.max(2, Math.min(98, pct));
+  document.getElementById('gauge-marker').style.left = pct + '%';
+
+  // Badge
+  const badge = document.getElementById('hydration-badge');
+  if (totalL < 1.5) {
+    badge.textContent = '⚠️ Low Hydration Need';
+    badge.className = 'hydration-status status-low';
+  } else if (totalL < 2.0) {
+    badge.textContent = '🟡 Moderate Hydration Need';
+    badge.className = 'hydration-status status-moderate';
+  } else if (totalL <= 3.0) {
+    badge.textContent = '✅ Optimal Hydration Range';
+    badge.className = 'hydration-status status-optimal';
+  } else {
+    badge.textContent = '💧 High Hydration Need';
+    badge.className = 'hydration-status status-high';
+  }
+
+  // Glasses grid
+  const gg = document.getElementById('glasses-grid');
+  gg.innerHTML = '';
+  const maxGlasses = Math.min(totalGlasses250, 24);
+  for (let i = 0; i < maxGlasses; i++) {
+    const g = document.createElement('div');
+    g.className = 'glass filled';
+    gg.appendChild(g);
+  }
+  document.getElementById('glasses-label').textContent =
+    totalGlasses250 + ' glasses of 250 mL (8 oz) each';
+
+  // Breakdown table
+  const tbody = document.getElementById('breakdown-body');
+  const rows = [
+    ['Base intake', '35 mL × ' + fmtL(weightKg) + ' kg', '+' + fmtNum(Math.round(baseML)) + ' mL'],
+    ['Activity (' + actInfo.label + ')', actInfo.pct + ' of base', '+' + fmtNum(Math.round(actAdj)) + ' mL'],
+    ['Climate (' + climateLabel + ')', climateAdj >= 0 ? 'Heat load' : 'Cool conditions', (climateAdj >= 0 ? '+' : '') + fmtNum(climateAdj) + ' mL'],
+    ['Biological sex', sex === 'male' ? 'Male (+200 mL)' : 'Female (no adj.)', (sexAdj >= 0 ? '+' : '') + fmtNum(sexAdj) + ' mL'],
+    ['Age (' + age + ' yrs)', ageNote, (ageAdj >= 0 ? '+' : '') + fmtNum(ageAdj) + ' mL'],
+    ['Special condition', condLabel, (condAdj >= 0 ? '+' : '') + fmtNum(condAdj) + ' mL'],
+    ['<strong>Total</strong>', '<strong>' + fmtL(totalL) + ' L</strong>', '<strong>' + fmtNum(Math.round(totalML)) + ' mL</strong>']
+  ];
+  tbody.innerHTML = rows.map((r, i) =>
+    '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] + '</td></tr>'
+  ).join('');
+
+  document.getElementById('summary-note').textContent =
+    'Drink approx. ' + fmtNum(Math.round(totalML / 4 / 50) * 50) + ' mL every 4 hours while awake.';
+
+  // Show
+  const sec = document.getElementById('results');
+  sec.style.display = 'block';
+  requestAnimationFrame(() => { sec.classList.add('visible'); });
+  sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // Store for copy
+  window._lastResult = {
+    totalL, totalOz, totalCups, totalGlasses250,
+    weightKg, activity, tempIdx, age, sex, pregnant
+  };
+}
+
+document.getElementById('calcBtn').addEventListener('click', calculate);
+document.querySelectorAll('input[type="number"], select').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+});
+
+document.getElementById('copyBtn').addEventListener('click', function() {
+  const r = window._lastResult;
+  if (!r) return;
+  const txt = [
+    'Water Intake Calculator — toolhut.dev',
+    '────────────────────────',
+    'Daily Recommendation: ' + fmtL(r.totalL) + ' L',
+    'In ounces: ' + fmtNum(Math.round(r.totalOz)) + ' oz',
+    'In cups: ' + fmtL(r.totalCups) + ' cups',
+    'Glasses (250 mL): ' + r.totalGlasses250,
+    '────────────────────────',
+    'Calculated at https://toolhut.dev/water-intake-calculator/'
+  ].join('\n');
+  navigator.clipboard.writeText(txt).then(() => {
+    this.textContent = '✅ Copied!';
+    setTimeout(() => { this.textContent = '📋 Copy Results'; }, 2000);
+  }).catch(() => {
+    this.textContent = '❌ Failed';
+    setTimeout(() => { this.textContent = '📋 Copy Results'; }, 2000);
+  });
+});
+</script>
+</body>
+</html>
