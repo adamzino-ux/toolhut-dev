@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Running Pace & Race Time Predictor — Free Online Tool | toolhut.dev</title>
-<meta name="description" content="Calculate your running pace, predict race finish times for 5K, 10K, half marathon & marathon. Free online running pace calculator with splits table.">
+<meta name="description" content="Calculate your running pace, predict race finish times for 5K to marathon, and find your training zones. Free running pace calculator with split tables.">
 <link rel="canonical" href="https://toolhut.dev/running-pace-calculator/">
 <script type="application/ld+json">
 {
@@ -12,577 +12,643 @@
   "@type": "WebApplication",
   "name": "Running Pace & Race Time Predictor",
   "url": "https://toolhut.dev/running-pace-calculator/",
-  "description": "Calculate your running pace, predict race finish times for 5K, 10K, half marathon & marathon.",
-  "applicationCategory": "UtilitiesApplication",
+  "description": "Calculate your running pace, predict race finish times for 5K to marathon, and find your training zones.",
+  "applicationCategory": "HealthApplication",
   "operatingSystem": "Any",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
 }
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.5}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
 a{color:#0077b6;text-decoration:none}
 a:hover{text-decoration:underline}
-nav{border-bottom:1px solid #e0e0e0;padding:12px 20px;font-size:0.9rem}
-nav a{font-weight:600;color:#1a1a2e}
-.wrapper{max-width:640px;margin:0 auto;padding:1.5rem}
-h1{font-size:1.55rem;font-weight:700;margin-bottom:0.25rem;color:#1a1a2e}
-.subtitle{color:#555;font-size:0.92rem;margin-bottom:1.75rem}
-.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
-.tabs{display:flex;gap:0;margin-bottom:1.75rem;border-bottom:2px solid #e0e0e0}
-.tab-btn{background:none;border:none;padding:10px 18px;cursor:pointer;font-size:0.9rem;font-weight:500;color:#666;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;min-height:44px}
-.tab-btn.active{color:#0077b6;border-bottom-color:#0077b6}
-.tab-btn:hover{color:#0077b6}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab-btn{padding:8px 18px;border:1px solid #ddd;border-radius:6px;background:#f8f9fa;cursor:pointer;font-size:.9rem;font-weight:500;color:#444;transition:all .2s;min-height:44px}
+.tab-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
-label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:5px}
-input,select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:box-shadow 0.2s,border-color 0.2s;min-height:44px}
-input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
-input.error{border-color:#e74c3c}
-.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
-.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1rem}
-.row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
-.field{margin-bottom:1rem}
-.field:last-child{margin-bottom:0}
-.hint{font-size:0.78rem;color:#888;margin-top:4px}
-btn-row{display:block}
-.btn{display:block;width:100%;background:#0077b6;color:#fff;border:none;border-radius:6px;padding:13px 24px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;margin-top:1.25rem}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem}
+input,select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:box-shadow .2s,border-color .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;transition:background .2s;min-height:44px}
 .btn:hover{background:#006299}
-.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
-.results.visible{opacity:1;pointer-events:auto}
-.result-primary{text-align:center;padding:1.25rem;background:#f0f7ff;border-radius:8px;margin-bottom:1.25rem}
-.result-primary .big{font-size:2.2rem;font-weight:700;color:#0077b6;display:block}
-.result-primary .lbl{font-size:0.85rem;color:#555;margin-top:2px}
-.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem}
-.result-card{background:#f8f9fa;border-radius:6px;padding:1rem;text-align:center}
-.result-card .val{font-size:1.25rem;font-weight:700;color:#0077b6}
-.result-card .lbl{font-size:0.78rem;color:#555;margin-top:3px}
-.section-title{font-size:0.9rem;font-weight:600;color:#444;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.04em}
-.tbl-wrap{overflow-x:auto;margin-bottom:1rem}
-table{width:100%;border-collapse:collapse;font-size:0.88rem}
-th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444;white-space:nowrap}
-th:not(:first-child){text-align:right}
-td{padding:9px 12px;border-bottom:1px solid #f0f0f0;color:#1a1a2e}
-td:not(:first-child){text-align:right}
-tr:nth-child(even) td{background:#fafafa}
-.copy-btn{display:inline-flex;align-items:center;gap:5px;background:none;border:1px solid #ddd;border-radius:5px;padding:6px 12px;font-size:0.8rem;cursor:pointer;color:#555;transition:all 0.2s;float:right;margin-bottom:8px}
-.copy-btn:hover{border-color:#0077b6;color:#0077b6}
-.clearfix::after{content:'';display:table;clear:both}
-.show-all-btn{display:block;width:100%;background:none;border:1px solid #ddd;border-radius:6px;padding:8px;font-size:0.85rem;cursor:pointer;color:#555;margin-top:8px;transition:all 0.2s;min-height:44px}
-.show-all-btn:hover{border-color:#0077b6;color:#0077b6}
-.hidden-rows{display:none}
-.race-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem}
-.race-card{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:14px;text-align:center}
-.race-card .rname{font-size:0.78rem;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px}
-.race-card .rtime{font-size:1.15rem;font-weight:700;color:#0077b6}
-.race-card .rpace{font-size:0.78rem;color:#888;margin-top:3px}
-.slider-wrap{margin-bottom:1rem}
-.slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.slider-label label{margin-bottom:0}
-.slider-val{font-weight:700;color:#0077b6;font-size:0.9rem}
-input[type=range]{padding:0;height:6px;accent-color:#0077b6;cursor:pointer}
-.ad-slot{background:#f8f9fa;border:1px dashed #ddd;border-radius:6px;height:90px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:0.8rem;margin:1.5rem 0}
-.how-to{background:#f8f9fa;border-radius:8px;padding:1.5rem;margin-bottom:2rem}
-.how-to h2{font-size:1.05rem;margin-bottom:0.75rem;color:#1a1a2e}
-.how-to p{font-size:0.88rem;color:#444;margin-bottom:0.5rem}
-.how-to p:last-child{margin-bottom:0}
-.related{margin-bottom:2rem}
-.related h2{font-size:1.05rem;margin-bottom:0.75rem}
-.related ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
-.related ul li a{display:inline-block;background:#f0f7ff;border:1px solid #cce3f5;border-radius:20px;padding:6px 14px;font-size:0.84rem;color:#0077b6}
-.related ul li a:hover{background:#0077b6;color:#fff;text-decoration:none}
-footer{border-top:1px solid #e0e0e0;padding:1.25rem 20px;text-align:center;font-size:0.82rem;color:#888}
-footer a{color:#888}
-footer a:hover{color:#0077b6}
-@media(max-width:500px){
-  .row{grid-template-columns:1fr 1fr}
-  .result-grid{grid-template-columns:1fr 1fr}
-  .race-results{grid-template-columns:1fr 1fr}
-  .card{padding:1.25rem}
-  h1{font-size:1.3rem}
-  .tab-btn{padding:10px 12px;font-size:0.83rem}
-}
-@media(max-width:380px){
-  .race-results{grid-template-columns:1fr}
+.btn-secondary{background:#f8f9fa;color:#0077b6;border:1px solid #0077b6;padding:8px 16px;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .2s;min-height:40px}
+.btn-secondary:hover{background:#e8f4fb}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:all}
+.result-hero{text-align:center;padding:1.5rem;background:#f0f8ff;border-radius:8px;margin-bottom:1.5rem;border:1px solid #cce4f6}
+.result-hero .big-number{font-size:2.8rem;font-weight:900;color:#0077b6;line-height:1}
+.result-hero .label{font-size:.9rem;color:#555;margin-top:.4rem}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:.8rem;padding-bottom:.4rem;border-bottom:2px solid #e0e0e0}
+.table-wrap{overflow-x:auto;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+thead th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444;white-space:nowrap}
+thead th:last-child,thead th:nth-child(2){text-align:right}
+tbody tr:nth-child(even){background:#fafafa}
+tbody td{padding:9px 12px;border-bottom:1px solid #eee;white-space:nowrap}
+tbody td:last-child,tbody td:nth-child(2){text-align:right}
+.zone-bar-container{margin-bottom:1.5rem}
+.zone-bar-wrap{display:flex;border-radius:8px;overflow:hidden;height:28px;margin-bottom:.6rem}
+.zone-seg{display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;transition:opacity .3s}
+.zone-seg.inactive{opacity:.35}
+.zone-label-row{display:flex;justify-content:space-between;font-size:.75rem;color:#666;margin-top:.3rem}
+.pace-zone-indicator{display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;border-radius:6px;margin-bottom:1rem;font-size:.9rem;font-weight:600}
+.pace-zone-indicator.green{background:#e8f8e8;border:1px solid #4caf50;color:#2e7d32}
+.pace-zone-indicator.yellow{background:#fffde7;border:1px solid #ffc107;color:#856404}
+.pace-zone-indicator.red{background:#fdecea;border:1px solid #e74c3c;color:#c0392b}
+.pace-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.green .pace-dot{background:#4caf50}
+.yellow .pace-dot{background:#ffc107}
+.red .pace-dot{background:#e74c3c}
+.copy-row{display:flex;justify-content:flex-end;margin-bottom:.8rem}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:.9rem 1rem;font-size:.8rem;color:#5d4037;margin-top:1rem}
+.race-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.5rem}
+.race-card{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:.9rem;text-align:center}
+.race-card .rc-dist{font-size:.78rem;font-weight:600;color:#666;margin-bottom:.2rem}
+.race-card .rc-time{font-size:1.1rem;font-weight:800;color:#0077b6}
+.race-card .rc-pace{font-size:.78rem;color:#888}
+.ad-slot{min-height:0;margin:0}
+h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin:1.5rem 0 .6rem}
+.content-section p{margin-bottom:.8rem;color:#333;font-size:.95rem}
+.content-section ul{padding-left:1.4rem;margin-bottom:.8rem}
+.content-section ul li{margin-bottom:.4rem;color:#333;font-size:.95rem}
+details{border:1px solid #e0e0e0;border-radius:6px;padding:.8rem 1rem;margin-bottom:.6rem;background:#fafafa}
+summary{font-weight:600;cursor:pointer;color:#0077b6;font-size:.95rem;list-style:none;padding-left:.2rem}
+summary::before{content:"▶ ";font-size:.7rem}
+details[open] summary::before{content:"▼ "}
+details p{margin-top:.6rem;font-size:.9rem;color:#333;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:.75rem 1rem;font-size:.88rem;color:#0077b6;font-weight:500;transition:background .2s}
+.related-link:hover{background:#e8f4fb;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;margin-top:2rem;padding:1.2rem 1.5rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.8rem;font-size:.83rem;color:#666}
+.footer-links{display:flex;gap:1rem}
+.footer-links a{color:#555}
+.slider-wrap{margin-top:.5rem}
+input[type="range"]{padding:0;height:6px;border-radius:3px;-webkit-appearance:none;background:#ddd;cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#0077b6;cursor:pointer}
+.slider-labels{display:flex;justify-content:space-between;font-size:.75rem;color:#888;margin-top:.3rem}
+.split-toggle{margin-bottom:1rem;text-align:right}
+@media(max-width:640px){
+  .row{grid-template-columns:1fr}
+  .race-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .result-hero .big-number{font-size:2.2rem}
 }
 </style>
 </head>
 <body>
-<nav><a href="/">toolhut.dev</a></nav>
-<div class="wrapper">
-<h1>Running Pace & Race Time Predictor</h1>
-<p class="subtitle">Calculate your pace, predict finish times, and view mile-by-mile splits.</p>
 
-<div class="card">
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('pace')">Pace Calculator</button>
-    <button class="tab-btn" onclick="switchTab('predict')">Race Predictor</button>
-    <button class="tab-btn" onclick="switchTab('splits')">Splits Planner</button>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
   </div>
+</nav>
 
-  <!-- TAB 1: PACE CALCULATOR -->
-  <div class="tab-panel active" id="tab-pace">
-    <div class="row-2">
-      <div class="field">
-        <label for="pc-dist">Distance</label>
-        <input type="number" id="pc-dist" placeholder="e.g. 5" min="0.01" step="any">
-        <div class="error-msg" id="pc-dist-err">Enter a valid distance.</div>
-      </div>
-      <div class="field">
-        <label for="pc-unit">Unit</label>
-        <select id="pc-unit">
-          <option value="km">Kilometers (km)</option>
-          <option value="mi">Miles (mi)</option>
+<main>
+  <h1>Running Pace & Race Time Predictor</h1>
+  <p class="subtitle">Calculate your pace, predict race finish times, and find your training zones.</p>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('pace')">Pace Calculator</button>
+      <button class="tab-btn" onclick="switchTab('race')">Race Predictor</button>
+      <button class="tab-btn" onclick="switchTab('zones')">Training Zones</button>
+    </div>
+
+    <!-- TAB 1: Pace Calculator -->
+    <div id="tab-pace" class="tab-panel active">
+      <div class="form-group">
+        <label>Units</label>
+        <select id="p-units" onchange="updatePaceLabels()">
+          <option value="km">Kilometers (min/km)</option>
+          <option value="mi">Miles (min/mi)</option>
         </select>
       </div>
+      <div class="row">
+        <div class="form-group">
+          <label id="p-dist-label">Distance (km)</label>
+          <input type="number" id="p-dist" placeholder="e.g. 10" min="0.1" step="0.01">
+          <div class="error-msg" id="p-dist-err">Enter a valid distance.</div>
+        </div>
+        <div class="form-group">
+          <label>Time</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem">
+            <div>
+              <input type="number" id="p-hr" placeholder="hh" min="0" max="99" style="text-align:center">
+              <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">hours</div>
+            </div>
+            <div>
+              <input type="number" id="p-min" placeholder="mm" min="0" max="59" style="text-align:center">
+              <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">min</div>
+            </div>
+            <div>
+              <input type="number" id="p-sec" placeholder="ss" min="0" max="59" style="text-align:center">
+              <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">sec</div>
+            </div>
+          </div>
+          <div class="error-msg" id="p-time-err">Enter a valid time.</div>
+        </div>
+      </div>
+      <button class="btn" onclick="calcPace()">Calculate Pace</button>
+
+      <div class="results" id="pace-results">
+        <br>
+        <div class="result-hero">
+          <div class="big-number" id="pr-pace">—</div>
+          <div class="label" id="pr-pace-label">Your Pace (min/km)</div>
+        </div>
+        <div id="pr-zone-indicator"></div>
+        <div id="pr-zone-bar-section"></div>
+        <div class="section-title">Split Table</div>
+        <div class="split-toggle">
+          <button class="btn-secondary" onclick="toggleSplits()" id="split-toggle-btn">Show All Splits</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th id="split-col-label">km</th><th>Split Time</th><th>Elapsed</th></tr></thead>
+            <tbody id="pr-splits"></tbody>
+          </table>
+        </div>
+        <div class="copy-row">
+          <button class="btn-secondary" onclick="copyResults('pace')" id="copy-pace-btn">Copy Results</button>
+        </div>
+        <div class="disclaimer">⚠️ This tool is for informational purposes only. Consult a healthcare professional for medical advice.</div>
+      </div>
     </div>
-    <p class="section-title" style="margin-bottom:8px">Enter any TWO of the three fields</p>
-    <div class="row">
-      <div class="field">
-        <label for="pc-h">Hours</label>
-        <input type="number" id="pc-h" placeholder="0" min="0" step="1">
+
+    <!-- TAB 2: Race Predictor -->
+    <div id="tab-race" class="tab-panel">
+      <p style="font-size:.88rem;color:#555;margin-bottom:1rem">Enter a recent race result to predict finish times across all distances.</p>
+      <div class="form-group">
+        <label>Units</label>
+        <select id="r-units">
+          <option value="km">Kilometers</option>
+          <option value="mi">Miles</option>
+        </select>
       </div>
-      <div class="field">
-        <label for="pc-m">Minutes</label>
-        <input type="number" id="pc-m" placeholder="25" min="0" max="59" step="1">
+      <div class="row">
+        <div class="form-group">
+          <label id="r-dist-label">Your Race Distance</label>
+          <select id="r-dist-preset" onchange="toggleCustomDist()">
+            <option value="5">5K</option>
+            <option value="10">10K</option>
+            <option value="21.0975">Half Marathon</option>
+            <option value="42.195">Marathon</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="form-group" id="r-custom-wrap" style="display:none">
+          <label id="r-custom-label">Custom Distance (km)</label>
+          <input type="number" id="r-custom-dist" placeholder="km" min="0.1" step="0.01">
+        </div>
       </div>
-      <div class="field">
-        <label for="pc-s">Seconds</label>
-        <input type="number" id="pc-s" placeholder="00" min="0" max="59" step="1">
+      <div class="form-group">
+        <label>Your Finish Time</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem">
+          <div>
+            <input type="number" id="r-hr" placeholder="hh" min="0" max="99" style="text-align:center">
+            <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">hours</div>
+          </div>
+          <div>
+            <input type="number" id="r-min" placeholder="mm" min="0" max="59" style="text-align:center">
+            <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">min</div>
+          </div>
+          <div>
+            <input type="number" id="r-sec" placeholder="ss" min="0" max="59" style="text-align:center">
+            <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">sec</div>
+          </div>
+        </div>
+        <div class="error-msg" id="r-time-err">Enter a valid time.</div>
+      </div>
+      <button class="btn" onclick="calcRace()">Predict Race Times</button>
+
+      <div class="results" id="race-results">
+        <br>
+        <div class="section-title">Predicted Finish Times</div>
+        <div class="race-grid" id="rr-cards"></div>
+        <div class="section-title">Detailed Predictions</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Distance</th><th>Finish Time</th><th>Avg Pace</th></tr></thead>
+            <tbody id="rr-table"></tbody>
+          </table>
+        </div>
+        <div class="copy-row">
+          <button class="btn-secondary" onclick="copyResults('race')" id="copy-race-btn">Copy Results</button>
+        </div>
+        <div class="disclaimer">⚠️ This tool is for informational purposes only. Consult a healthcare professional for medical advice.</div>
       </div>
     </div>
-    <div class="field">
-      <label for="pc-pace-min">— OR — Pace (min per <span id="pc-pace-unit-lbl">km</span>)</label>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <input type="number" id="pc-pace-min" placeholder="5" min="0" step="1">
-        <input type="number" id="pc-pace-sec" placeholder="30" min="0" max="59" step="1">
+
+    <!-- TAB 3: Training Zones -->
+    <div id="tab-zones" class="tab-panel">
+      <p style="font-size:.88rem;color:#555;margin-bottom:1rem">Enter your 5K time or current pace to calculate your training zones.</p>
+      <div class="form-group">
+        <label>Units</label>
+        <select id="z-units" onchange="updateZoneLabels()">
+          <option value="km">min/km</option>
+          <option value="mi">min/mi</option>
+        </select>
       </div>
-      <div class="hint">min : sec per <span class="pc-unit-txt">km</span></div>
-    </div>
-    <button class="btn" onclick="calcPace()">Calculate</button>
-    <div class="results" id="pace-results">
-      <div style="height:1.5rem"></div>
-      <div class="result-primary">
-        <span class="big" id="pr-pace">—</span>
-        <div class="lbl" id="pr-pace-lbl">min/km pace</div>
+      <div class="form-group">
+        <label id="z-pace-label">Your Current Easy/Base Pace (min/km)</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+          <div>
+            <input type="number" id="z-pace-min" placeholder="min" min="1" max="30">
+            <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">minutes</div>
+          </div>
+          <div>
+            <input type="number" id="z-pace-sec" placeholder="sec" min="0" max="59">
+            <div style="font-size:.7rem;text-align:center;color:#888;margin-top:2px">seconds</div>
+          </div>
+        </div>
+        <div class="error-msg" id="z-pace-err">Enter a valid pace.</div>
       </div>
-      <div class="result-grid">
-        <div class="result-card">
-          <div class="val" id="pr-time">—</div>
-          <div class="lbl">Finish Time</div>
-        </div>
-        <div class="result-card">
-          <div class="val" id="pr-speed">—</div>
-          <div class="lbl" id="pr-speed-lbl">km/h speed</div>
+      <div class="form-group">
+        <label>Fitness Level (helps calibrate zones)</label>
+        <div class="slider-wrap">
+          <input type="range" id="z-level" min="1" max="5" value="3" style="width:100%;min-height:28px" oninput="updateLevelLabel(this.value)">
+          <div class="slider-labels">
+            <span>Beginner</span><span>Intermediate</span><span>Advanced</span>
+          </div>
+          <div style="text-align:center;font-size:.85rem;font-weight:600;color:#0077b6;margin-top:.3rem" id="z-level-label">Intermediate</div>
         </div>
       </div>
-      <div class="result-grid">
-        <div class="result-card">
-          <div class="val" id="pr-pace-alt">—</div>
-          <div class="lbl" id="pr-pace-alt-lbl">min/mi pace</div>
+      <button class="btn" onclick="calcZones()">Calculate Training Zones</button>
+
+      <div class="results" id="zones-results">
+        <br>
+        <div class="section-title">Your Training Zones</div>
+        <div id="zr-bar-section"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Zone</th><th>Name</th><th>Pace Range</th><th>Purpose</th></tr></thead>
+            <tbody id="zr-table"></tbody>
+          </table>
         </div>
-        <div class="result-card">
-          <div class="val" id="pr-speed-alt">—</div>
-          <div class="lbl">mph speed</div>
-        </div>
+        <div class="disclaimer">⚠️ This tool is for informational purposes only. Consult a healthcare professional for medical advice.</div>
       </div>
     </div>
   </div>
 
-  <!-- TAB 2: RACE PREDICTOR -->
-  <div class="tab-panel" id="tab-predict">
-    <p style="font-size:0.87rem;color:#555;margin-bottom:1.2rem">Enter a known race result to predict your finish times for other distances using the Riegel formula.</p>
-    <div class="row-2">
-      <div class="field">
-        <label for="rp-dist">Known Distance</label>
-        <select id="rp-dist">
-          <option value="5">5K</option>
-          <option value="10">10K</option>
-          <option value="21.0975">Half Marathon</option>
-          <option value="42.195">Marathon</option>
-          <option value="custom">Custom</option>
-        </select>
-      </div>
-      <div class="field" id="rp-custom-wrap" style="display:none">
-        <label for="rp-custom">Distance (km)</label>
-        <input type="number" id="rp-custom" placeholder="e.g. 15" min="0.1" step="any">
-      </div>
-    </div>
-    <label style="margin-bottom:8px">Finish Time</label>
-    <div class="row">
-      <div class="field">
-        <label for="rp-h">Hours</label>
-        <input type="number" id="rp-h" placeholder="0" min="0" step="1">
-      </div>
-      <div class="field">
-        <label for="rp-m">Minutes</label>
-        <input type="number" id="rp-m" placeholder="22" min="0" max="59" step="1">
-      </div>
-      <div class="field">
-        <label for="rp-s">Seconds</label>
-        <input type="number" id="rp-s" placeholder="00" min="0" max="59" step="1">
-      </div>
-    </div>
-    <div class="slider-wrap">
-      <div class="slider-label">
-        <label for="rp-fatigue">Fatigue Factor (Riegel)</label>
-        <span class="slider-val" id="rp-fatigue-val">1.06</span>
-      </div>
-      <input type="range" id="rp-fatigue" min="1.00" max="1.15" step="0.01" value="1.06" oninput="document.getElementById('rp-fatigue-val').textContent=parseFloat(this.value).toFixed(2)">
-      <div class="hint">Default 1.06 works well for most runners. Higher = more fatigue over longer distances.</div>
-    </div>
-    <button class="btn" onclick="calcPredict()">Predict Race Times</button>
-    <div class="results" id="predict-results">
-      <div style="height:1.5rem"></div>
-      <div class="section-title clearfix">
-        <button class="copy-btn" onclick="copyPredict()">📋 Copy</button>
-        Predicted Finish Times
-      </div>
-      <div class="race-results" id="rp-cards"></div>
-      <div class="section-title">Your Training Paces</div>
-      <div class="tbl-wrap">
-        <table id="rp-paces-table">
-          <thead><tr><th>Training Zone</th><th>Pace (min/km)</th><th>Pace (min/mi)</th></tr></thead>
-          <tbody id="rp-paces-body"></tbody>
-        </table>
-      </div>
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section card">
+    <h2>How to Use This Running Pace Calculator</h2>
+    <p>Choose from three tabs: <strong>Pace Calculator</strong> (enter distance + time to get your per-km or per-mile pace), <strong>Race Predictor</strong> (enter a recent race result to forecast finish times for other distances), and <strong>Training Zones</strong> (enter your base pace to get personalized zone guidance). Hit Calculate and your results appear instantly.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Knowing your running pace is the foundation of smart training. A 35-year-old aiming to break 4 hours in a marathon needs to sustain roughly 5:41/km — yet many runners "feel" their pace without ever measuring it accurately, leading to going out too fast and blowing up at mile 18.</p>
+    <p>The race predictor uses the Riegel formula, the same model elite coaches rely on. If you ran a 25-minute 5K, it predicts your 10K around 52 minutes — giving you a realistic goal before race day. Training zones help you avoid the most common error in amateur running: running every workout at medium effort instead of polarizing between easy and hard days, which is how endurance actually improves.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>Pace:</strong> <code>Pace (min/km) = Total Time (seconds) ÷ Distance (km) ÷ 60</code></p>
+    <p><strong>Race Prediction (Riegel Formula):</strong> <code>T₂ = T₁ × (D₂ / D₁) ^ 1.06</code> — where T₁ is your known time, D₁ your known distance, D₂ the target distance, and 1.06 is the fatigue exponent.</p>
+    <p><strong>Training Zones</strong> are derived from your base pace multiplied by zone-specific effort multipliers (Z1: 1.25–1.35×, Z2: 1.10–1.25×, Z3: 1.00–1.10×, Z4: 0.90–1.00×, Z5: 0.80–0.90×).</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't start too fast.</strong> Going 10–15 seconds/km faster than your target in the first mile is the most common race mistake. Trust negative splits.</li>
+      <li><strong>Easy runs should be truly easy.</strong> Zone 2 should feel almost embarrassingly slow — you should hold a full conversation.</li>
+      <li><strong>Use a recent race for prediction.</strong> A race from 3+ months ago won't reflect current fitness. A parkrun effort last Saturday is ideal input for the predictor.</li>
+      <li><strong>Account for course conditions.</strong> The Riegel formula assumes flat, road conditions. Add 30–90 seconds/km for significant elevation or trail.</li>
+      <li><strong>Consistency beats intensity.</strong> Running 5 days/week at moderate intensity outperforms 2 hard days a week for most recreational athletes.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is the Riegel race prediction formula?</summary>
+      <p>The Riegel formula is accurate to within 2–5% for well-trained runners racing between 5K and marathon. It tends to slightly overestimate performance at the marathon distance because fatigue compounds beyond 30km. For ultra-distances, use it only as a rough guide.</p>
+    </details>
+    <details>
+      <summary>What's a good running pace for a beginner?</summary>
+      <p>For most beginners, a comfortable conversational pace of 7:00–9:00 min/km (11:15–14:30 min/mi) is ideal for easy runs. The goal isn't to run fast early — it's to build the aerobic base without injury. After 8–12 weeks of consistent easy running, pace naturally improves without extra effort.</p>
+    </details>
+    <details>
+      <summary>Should I train by pace or heart rate?</summary>
+      <p>Both work well — ideally use heart rate as the primary effort guide and pace as a secondary reference. On hot or hilly days, the same effort produces a slower pace; heart rate keeps you honest. Once you know your pace zones, you can use either interchangeably on flat, temperate days.</p>
+    </details>
+    <details>
+      <summary>Why does my predicted marathon time seem slow compared to my 5K?</summary>
+      <p>The fatigue exponent (1.06) in the Riegel formula reflects that longer distances are disproportionately harder. If your marathon prediction feels slow, it likely means you haven't yet done enough long-run training to express your full aerobic potential at that distance. Specific marathon prep — particularly the long run and back-to-back weekend runs — closes this gap.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/ideal-weight-calculator/">Ideal Weight Calculator</a>
+      <a class="related-link" href="/water-intake-calculator/">Water Intake Calculator</a>
+      <a class="related-link" href="/macro-calculator/">Macro Calculator</a>
+      <a class="related-link" href="/calorie-deficit-calculator/">Calorie Deficit Calculator</a>
+      <a class="related-link" href="/bmi-calculator/">BMI Calculator</a>
+      <a class="related-link" href="/one-rep-max-calculator/">One Rep Max Calculator</a>
     </div>
   </div>
 
-  <!-- TAB 3: SPLITS PLANNER -->
-  <div class="tab-panel" id="tab-splits">
-    <div class="row-2">
-      <div class="field">
-        <label for="sp-race">Race Distance</label>
-        <select id="sp-race" onchange="updateSplitUnit()">
-          <option value="5">5K</option>
-          <option value="10">10K</option>
-          <option value="21.0975">Half Marathon</option>
-          <option value="42.195">Marathon</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="sp-unit">Split Every</label>
-        <select id="sp-unit">
-          <option value="km">1 km</option>
-          <option value="mi">1 mile</option>
-          <option value="5k">5 km</option>
-        </select>
-      </div>
-    </div>
-    <label style="margin-bottom:8px">Target Finish Time</label>
-    <div class="row">
-      <div class="field">
-        <label for="sp-h">Hours</label>
-        <input type="number" id="sp-h" placeholder="0" min="0" step="1">
-      </div>
-      <div class="field">
-        <label for="sp-m">Minutes</label>
-        <input type="number" id="sp-m" placeholder="25" min="0" max="59" step="1">
-      </div>
-      <div class="field">
-        <label for="sp-s">Seconds</label>
-        <input type="number" id="sp-s" placeholder="00" min="0" max="59" step="1">
-      </div>
-    </div>
-    <div class="slider-wrap">
-      <div class="slider-label">
-        <label for="sp-strategy">Pacing Strategy</label>
-        <span class="slider-val" id="sp-strat-val">Even</span>
-      </div>
-      <input type="range" id="sp-strategy" min="-10" max="10" step="1" value="0" oninput="updateStratLabel()">
-      <div class="hint">Negative split = start slower, finish faster. Positive = start faster (not recommended).</div>
-    </div>
-    <button class="btn" onclick="calcSplits()">Generate Splits</button>
-    <div class="results" id="splits-results">
-      <div style="height:1.5rem"></div>
-      <div class="clearfix">
-        <button class="copy-btn" onclick="copySplits()">📋 Copy</button>
-        <div class="section-title">Mile/Km Splits</div>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>Split</th><th>Distance</th><th>Pace</th><th>Split Time</th><th>Total Time</th></tr></thead>
-          <tbody id="sp-body"></tbody>
-        </table>
-      </div>
-      <button class="show-all-btn" id="sp-show-all" onclick="showAllSplits()" style="display:none">Show All Splits</button>
-    </div>
-  </div>
-</div>
-
-<div class="ad-slot" id="ad-mid">Advertisement</div>
-
-<div class="how-to">
-  <h2>How to Use This Tool</h2>
-  <p><strong>Pace Calculator:</strong> Enter your distance and any two of time/pace to calculate the third value. Results include speed in km/h and mph, plus your equivalent pace in both units.</p>
-  <p><strong>Race Predictor:</strong> Input a recent race result and the tool uses the Riegel formula (T2 = T1 × (D2/D1)^1.06) to estimate your finish time for 5K, 10K, half marathon, and marathon distances.</p>
-  <p><strong>Splits Planner:</strong> Set a target finish time and choose even, negative, or positive split strategy to generate a mile-by-mile or kilometer-by-kilometer pacing plan.</p>
-</div>
-
-<div class="related">
-  <h2>Related Tools</h2>
-  <ul>
-    <li><a href="/tdee-macro-calculator/">TDEE & Macro Calculator</a></li>
-  </ul>
-</div>
-
-<div class="ad-slot" id="ad-bottom">Advertisement</div>
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
 
 <footer>
-  <a href="/about/">About</a> &nbsp;|&nbsp; <a href="/privacy/">Privacy</a> &nbsp;|&nbsp; <a href="/contact/">Contact</a>
-  <br><br>© <span id="yr"></span> toolhut.dev
+  <div class="footer-inner">
+    <span>© 2025 toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
 </footer>
-</div>
 
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
+// ── Utility ──────────────────────────────────────────────────────────────
+function fmtTime(totalSec){
+  totalSec=Math.round(totalSec);
+  const h=Math.floor(totalSec/3600);
+  const m=Math.floor((totalSec%3600)/60);
+  const s=totalSec%60;
+  if(h>0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+function fmtPace(secPerUnit){
+  const m=Math.floor(secPerUnit/60);
+  const s=Math.round(secPerUnit%60);
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+function getTime(hrId,minId,secId){
+  const h=parseFloat(document.getElementById(hrId).value)||0;
+  const m=parseFloat(document.getElementById(minId).value)||0;
+  const s=parseFloat(document.getElementById(secId).value)||0;
+  return h*3600+m*60+s;
+}
+function showErr(id,msg){
+  const el=document.getElementById(id);
+  el.textContent=msg;el.classList.add('show');
+}
+function clearErr(id){document.getElementById(id).classList.remove('show');}
+function setInputErr(id,on){
+  const el=document.getElementById(id);
+  el?.(on?el.classList.add('error'):el.classList.remove('error'));
+}
 
-// ── Helpers ────────────────────────────────────────────────────────────────
-function fmt(n,d=2){return Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});}
-function secsToHMS(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.round(s%60);return (h?h+'h ':'')+m+'m '+String(sec).padStart(2,'0')+'s';}
-function secsToColon(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.round(s%60);return h?`${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`:`${m}:${String(sec).padStart(2,'0')}`;}
-function paceStr(secPerKm){const m=Math.floor(secPerKm/60),s=Math.round(secPerKm%60);return `${m}:${String(s).padStart(2,'0')}`;}
-function showErr(id,msg){const el=document.getElementById(id);if(el){el.textContent=msg;el.style.display='block';}const inp=id.replace('-err','');const i=document.getElementById(inp);if(i)i.classList.add('error');}
-function clearErr(id){const el=document.getElementById(id);if(el)el.style.display='none';const inp=id.replace('-err','');const i=document.getElementById(inp);if(i)i.classList.remove('error');}
-function showResults(id){const el=document.getElementById(id);if(el){el.classList.add('visible');}}
-
-// ── Tab Switch ─────────────────────────────────────────────────────────────
-function switchTab(t){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    const names=['pace','predict','splits'];
-    b.classList.toggle('active',names[i]===t);
-  });
+// ── Tab Switching ─────────────────────────────────────────────────────────
+function switchTab(name){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('tab-'+t).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.currentTarget.classList.add('active');
 }
 
-// ── Pace unit label sync ───────────────────────────────────────────────────
-document.getElementById('pc-unit').addEventListener('change',function(){
-  const u=this.value;
-  document.getElementById('pc-pace-unit-lbl').textContent=u;
-  document.querySelectorAll('.pc-unit-txt').forEach(el=>el.textContent=u);
-});
+// ── Tab 1: Pace Calculator ────────────────────────────────────────────────
+let splitsExpanded=false;
+let allSplitsHTML='';
+let shortSplitsHTML='';
 
-// ── Enter key support ──────────────────────────────────────────────────────
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter'){
-    const active=document.querySelector('.tab-panel.active');
-    if(!active)return;
-    if(active.id==='tab-pace')calcPace();
-    else if(active.id==='tab-predict')calcPredict();
-    else if(active.id==='tab-splits')calcSplits();
-  }
-});
+function updatePaceLabels(){
+  const u=document.getElementById('p-units').value;
+  document.getElementById('p-dist-label').textContent=u==='km'?'Distance (km)':'Distance (miles)';
+}
 
-// ── TAB 1: PACE CALCULATOR ─────────────────────────────────────────────────
 function calcPace(){
-  clearErr('pc-dist-err');
-  const dist=parseFloat(document.getElementById('pc-dist').value);
-  const unit=document.getElementById('pc-unit').value;
-  if(!dist||dist<=0){showErr('pc-dist-err','Enter a valid distance greater than 0.');return;}
-  const distKm=unit==='mi'?dist*1.60934:dist;
+  const u=document.getElementById('p-units').value;
+  const dist=parseFloat(document.getElementById('p-dist').value);
+  const totalSec=getTime('p-hr','p-min','p-sec');
+  let valid=true;
+  clearErr('p-dist-err');clearErr('p-time-err');
+  document.getElementById('p-dist').classList.remove('error');
+  if(!dist||dist<=0){showErr('p-dist-err','Enter a valid positive distance.');document.getElementById('p-dist').classList.add('error');valid=false;}
+  if(totalSec<=0){showErr('p-time-err','Enter a valid time greater than 0.');valid=false;}
+  if(!valid)return;
 
-  const h=parseFloat(document.getElementById('pc-h').value)||0;
-  const m=parseFloat(document.getElementById('pc-m').value)||0;
-  const s=parseFloat(document.getElementById('pc-s').value)||0;
-  const pmMin=parseFloat(document.getElementById('pc-pace-min').value);
-  const pmSec=parseFloat(document.getElementById('pc-pace-sec').value)||0;
-  const hasTime=(h||m||s)&&(h+m+s>0);
-  const hasPace=!isNaN(pmMin)&&pmMin>=0;
+  const secPerUnit=totalSec/dist;
+  const speedUnitPerHr=(dist/totalSec)*3600;
+  const paceStr=fmtPace(secPerUnit);
+  const unitLabel=u==='km'?'km':'mi';
 
-  let totalSec,paceSecPerKm;
-  if(hasTime){
-    totalSec=h*3600+m*60+s;
-    paceSecPerKm=totalSec/distKm;
-  }else if(hasPace){
-    const paceUnit=unit;
-    const paceSecPerUnit=pmMin*60+pmSec;
-    paceSecPerKm=paceUnit==='mi'?paceSecPerUnit/1.60934:paceSecPerUnit;
-    totalSec=paceSecPerKm*distKm;
-  }else{
-    showErr('pc-dist-err','Please enter either a finish time OR a pace.');return;
+  // Convert to km/h for zone detection
+  const speedKmh=u==='km'?speedUnitPerHr:speedUnitPerHr*1.60934;
+  const zone=getPaceZone(speedKmh);
+
+  // Build splits
+  const splitCount=Math.ceil(dist);
+  allSplitsHTML='';shortSplitsHTML='';
+  for(let i=1;i<=splitCount;i++){
+    const splitDist=Math.min(i,dist);
+    const elapsed=splitDist*secPerUnit;
+    const splitSec=i<=Math.floor(dist)?secPerUnit:(dist%1||1)*secPerUnit;
+    const row=`<tr><td>${splitDist<=Math.floor(dist)?i:dist.toFixed(2)} ${unitLabel}</td><td>${fmtTime(splitSec)}</td><td>${fmtTime(elapsed)}</td></tr>`;
+    allSplitsHTML+=row;
+    if(i<=5)shortSplitsHTML+=row;
   }
+  splitsExpanded=splitCount<=5;
 
-  if(totalSec<=0||!isFinite(totalSec)){showErr('pc-dist-err','Invalid time or pace values.');return;}
+  requestAnimationFrame(()=>{
+    document.getElementById('pr-pace').textContent=paceStr;
+    document.getElementById('pr-pace-label').textContent=`Your Pace (min/${unitLabel})`;
+    document.getElementById('split-col-label').textContent=unitLabel;
 
-  const paceSecPerMi=paceSecPerKm*1.60934;
-  const kmh=3600/paceSecPerKm;
-  const mph=kmh/1.60934;
-
-  document.getElementById('pr-pace').textContent=paceStr(paceSecPerKm)+' / km';
-  document.getElementById('pr-pace-lbl').textContent='per kilometer pace';
-  document.getElementById('pr-time').textContent=secsToColon(totalSec);
-  document.getElementById('pr-speed').textContent=fmt(kmh)+' km/h';
-  document.getElementById('pr-speed-lbl').textContent='km/h speed';
-  document.getElementById('pr-pace-alt').textContent=paceStr(paceSecPerMi)+' / mi';
-  document.getElementById('pr-pace-alt-lbl').textContent='min/mi pace';
-  document.getElementById('pr-speed-alt').textContent=fmt(mph)+' mph';
-  showResults('pace-results');
+    // Zone indicator
+    document.getElementById('pr-zone-indicator').innerHTML=`<div class="pace-zone-indicator ${zone.color}"><div class="pace-dot"></div>${zone.label} — ${zone.desc}</div>`;
+    // Zone bar
+    document.getElementById('pr-zone-bar-section').innerHTML=buildZoneBar(zone.idx);
+    // Splits
+    document.getElementById('pr-splits').innerHTML=splitCount<=5?allSplitsHTML:shortSplitsHTML;
+    document.getElementById('split-toggle-btn').style.display=splitCount<=5?'none':'inline-block';
+    document.getElementById('split-toggle-btn').textContent='Show All Splits';
+    splitsExpanded=false;
+    document.getElementById('pace-results').classList.add('show');
+  });
 }
 
-// ── TAB 2: RACE PREDICTOR ──────────────────────────────────────────────────
-document.getElementById('rp-dist').addEventListener('change',function(){
-  document.getElementById('rp-custom-wrap').style.display=this.value==='custom'?'block':'none';
-});
+function toggleSplits(){
+  splitsExpanded=!splitsExpanded;
+  document.getElementById('pr-splits').innerHTML=splitsExpanded?allSplitsHTML:shortSplitsHTML;
+  document.getElementById('split-toggle-btn').textContent=splitsExpanded?'Show Less':'Show All Splits';
+}
 
-let predictText='';
-function calcPredict(){
-  const distSel=document.getElementById('rp-dist').value;
-  let d1;
-  if(distSel==='custom'){
-    d1=parseFloat(document.getElementById('rp-custom').value);
-    if(!d1||d1<=0){alert('Enter a valid custom distance.');return;}
-  }else{
-    d1=parseFloat(distSel);
-  }
-  const h=parseFloat(document.getElementById('rp-h').value)||0;
-  const m=parseFloat(document.getElementById('rp-m').value)||0;
-  const s=parseFloat(document.getElementById('rp-s').value)||0;
-  const t1=h*3600+m*60+s;
-  if(t1<=0){alert('Enter a valid finish time.');return;}
-  const fatigue=parseFloat(document.getElementById('rp-fatigue').value)||1.06;
+function getPaceZone(speedKmh){
+  // Zones by speed km/h: elite>18, good 14-18, recreational 10-14, beginner 6-10, very slow <6
+  if(speedKmh>=16)return{idx:4,color:'green',label:'Elite / Competitive',desc:'Sub-elite race pace'};
+  if(speedKmh>=12)return{idx:3,color:'green',label:'Fast / Performance',desc:'Strong recreational runner'};
+  if(speedKmh>=9)return{idx:2,color:'yellow',label:'Moderate / Average',desc:'Typical recreational pace'};
+  if(speedKmh>=6)return{idx:1,color:'yellow',label:'Easy / Beginner',desc:'Good for long runs & beginners'};
+  return{idx:0,color:'red',label:'Very Slow / Walking',desc:'Check input or warm-up pace'};
+}
 
+function buildZoneBar(activeIdx){
+  const zones=[
+    {label:'Very Slow',color:'#e74c3c',w:15},
+    {label:'Easy',color:'#f39c12',w:20},
+    {label:'Moderate',color:'#f1c40f',w:20},
+    {label:'Fast',color:'#2ecc71',w:22},
+    {label:'Elite',color:'#0077b6',w:23}
+  ];
+  let html='<div class="zone-bar-container"><div style="font-size:.82rem;font-weight:600;color:#444;margin-bottom:.4rem">Pace Zone</div><div class="zone-bar-wrap">';
+  zones.forEach((z,i)=>{
+    html+=`<div class="zone-seg${i===activeIdx?'':' inactive'}" style="width:${z.w}%;background:${z.color}">${i===activeIdx?'●':''}</div>`;
+  });
+  html+='</div><div class="zone-label-row">';
+  zones.forEach(z=>html+=`<span>${z.label}</span>`);
+  html+='</div></div>';
+  return html;
+}
+
+// ── Tab 2: Race Predictor ─────────────────────────────────────────────────
+function toggleCustomDist(){
+  const v=document.getElementById('r-dist-preset').value;
+  document.getElementById('r-custom-wrap').style.display=v==='custom'?'block':'none';
+}
+
+function calcRace(){
+  const u=document.getElementById('r-units').value;
+  const preset=document.getElementById('r-dist-preset').value;
+  let d1=preset==='custom'?parseFloat(document.getElementById('r-custom-dist').value):parseFloat(preset);
+  if(u==='mi')d1=d1*1.60934;// convert to km internally
+  const totalSec=getTime('r-hr','r-min','r-sec');
+  clearErr('r-time-err');
+  let valid=true;
+  if(!d1||d1<=0){showErr('r-time-err','Invalid distance selected.');valid=false;}
+  if(totalSec<=0){showErr('r-time-err','Enter a valid finish time.');valid=false;}
+  if(!valid)return;
+
+  // Riegel: T2 = T1 * (D2/D1)^1.06
   const races=[
-    {name:'5K',dist:5},
-    {name:'10K',dist:10},
-    {name:'Half Marathon',dist:21.0975},
-    {name:'Marathon',dist:42.195}
+    {name:'1 Mile',kmDist:1.60934},
+    {name:'5K',kmDist:5},
+    {name:'8K',kmDist:8},
+    {name:'10K',kmDist:10},
+    {name:'15K',kmDist:15},
+    {name:'10 Miles',kmDist:16.0934},
+    {name:'Half Marathon',kmDist:21.0975},
+    {name:'25K',kmDist:25},
+    {name:'30K',kmDist:30},
+    {name:'Marathon',kmDist:42.195},
+    {name:'50K',kmDist:50},
+    {name:'100K',kmDist:100}
   ];
 
-  const cards=document.getElementById('rp-cards');
-  cards.innerHTML='';
-  let lines=['Predicted Race Times',''];
+  const unitFactor=u==='km'?1:0.621371;
+  const unitLabel=u==='km'?'km':'mi';
+
+  let cardsHTML='';let tableHTML='';
+  const highlight=['5K','10K','Half Marathon','Marathon'];
+  const cardRaces=['5K','10K','Half Marathon','Marathon'];
 
   races.forEach(r=>{
-    const t2=t1*Math.pow(r.dist/d1,fatigue);
-    const paceSecKm=t2/r.dist;
-    const paceSecMi=paceSecKm*1.60934;
-    const card=document.createElement('div');
-    card.className='race-card';
-    card.innerHTML=`<div class="rname">${r.name}</div><div class="rtime">${secsToColon(t2)}</div><div class="rpace">${paceStr(paceSecKm)}/km · ${paceStr(paceSecMi)}/mi</div>`;
-    cards.appendChild(card);
-    lines.push(`${r.name}: ${secsToColon(t2)} (${paceStr(paceSecKm)}/km)`);
+    const predSec=totalSec*Math.pow(r.kmDist/d1,1.06);
+    const distDisplay=u==='km'?r.kmDist:(r.kmDist*0.621371);
+    const paceSecPerUnit=predSec/(r.kmDist*unitFactor);
+    const paceStr=fmtPace(paceSecPerUnit);
+    if(cardRaces.includes(r.name)){
+      cardsHTML+=`<div class="race-card"><div class="rc-dist">${r.name}</div><div class="rc-time">${fmtTime(predSec)}</div><div class="rc-pace">${paceStr} /${unitLabel}</div></div>`;
+    }
+    const isHL=highlight.includes(r.name);
+    tableHTML+=`<tr style="${isHL?'font-weight:600;background:#f0f8ff':''}" ><td>${r.name}</td><td>${fmtTime(predSec)}</td><td>${paceStr} /${unitLabel}</td></tr>`;
   });
 
-  // Training paces based on marathon (or longest predicted)
-  const t5=t1*Math.pow(5/d1,fatigue);
-  const vdot5=(0.000104*5000/Math.pow(t5/60,1.06))*1000;
-  const pace5Sec=t5/5;
+  requestAnimationFrame(()=>{
+    document.getElementById('rr-cards').innerHTML=cardsHTML;
+    document.getElementById('rr-table').innerHTML=tableHTML;
+    document.getElementById('race-results').classList.add('show');
+  });
+}
+
+// ── Tab 3: Training Zones ─────────────────────────────────────────────────
+const levelLabels=['Beginner','Novice','Intermediate','Advanced','Elite'];
+function updateLevelLabel(v){document.getElementById('z-level-label').textContent=levelLabels[v-1];}
+function updateZoneLabels(){
+  const u=document.getElementById('z-units').value;
+  document.getElementById('z-pace-label').textContent=u==='km'?'Your Easy/Base Pace (min/km)':'Your Easy/Base Pace (min/mi)';
+}
+
+function calcZones(){
+  const u=document.getElementById('z-units').value;
+  const pm=parseFloat(document.getElementById('z-pace-min').value);
+  const ps=parseFloat(document.getElementById('z-pace-sec').value)||0;
+  clearErr('z-pace-err');
+  if(!pm||pm<1||pm>30){showErr('z-pace-err','Enter a valid base pace (1–30 minutes).');return;}
+
+  const baseSec=(pm*60+ps); // seconds per km or mi
+  const unitLabel=u==='km'?'km':'mi';
+
+  // Zone multipliers (pace multiplier > 1 = slower, < 1 = faster)
   const zones=[
-    {zone:'Easy / Recovery', lo:1.29,hi:1.43},
-    {zone:'Aerobic Base',lo:1.20,hi:1.29},
-    {zone:'Long Run',lo:1.15,hi:1.20},
-    {zone:'Marathon Pace',lo:1.00,hi:1.03},
-    {zone:'Lactate Threshold',lo:0.94,hi:0.98},
-    {zone:'VO2 Max (Hard)',lo:0.87,hi:0.93},
-    {zone:'Speed / Intervals',lo:0.80,hi:0.87}
+    {num:1,name:'Recovery',color:'#3498db',pMin:1.30,pMax:1.50,purpose:'Active recovery, blood flow'},
+    {num:2,name:'Aerobic Base',color:'#2ecc71',pMin:1.15,pMax:1.30,purpose:'Base building, fat burning'},
+    {num:3,name:'Aerobic Threshold',color:'#f1c40f',pMin:1.00,pMax:1.15,purpose:'Tempo, lactate threshold'},
+    {num:4,name:'Lactate Threshold',color:'#f39c12',pMin:0.88,pMax:1.00,purpose:'Hard tempo & race pace'},
+    {num:5,name:'VO2 Max',color:'#e74c3c',pMin:0.78,pMax:0.88,purpose:'Intervals, max effort'}
   ];
-  const tbody=document.getElementById('rp-paces-body');
-  tbody.innerHTML='';
-  lines.push('','Training Paces (based on 5K pace)','Zone | min/km | min/mi');
+
+  let tableHTML='';
+  let barHTML='<div class="zone-bar-container"><div style="font-size:.82rem;font-weight:600;color:#444;margin-bottom:.4rem">Zone Spectrum</div><div class="zone-bar-wrap">';
   zones.forEach(z=>{
-    const loSec=pace5Sec*z.lo;
-    const hiSec=pace5Sec*z.hi;
-    const loMi=loSec*1.60934,hiMi=hiSec*1.60934;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${z.zone}</td><td>${paceStr(loSec)} – ${paceStr(hiSec)}</td><td>${paceStr(loMi)} – ${paceStr(hiMi)}</td>`;
-    tbody.appendChild(tr);
-    lines.push(`${z.zone}: ${paceStr(loSec)}–${paceStr(hiSec)}/km`);
+    const paceSlowSec=baseSec*z.pMax;
+    const paceFastSec=baseSec*z.pMin;
+    barHTML+=`<div class="zone-seg" style="width:20%;background:${z.color};opacity:1">Z${z.num}</div>`;
+    tableHTML+=`<tr><td><strong style="color:${z.color}">Z${z.num}</strong></td><td>${z.name}</td><td>${fmtPace(paceFastSec)}–${fmtPace(paceSlowSec)} /${unitLabel}</td><td style="font-size:.8rem;color:#555">${z.purpose}</td></tr>`;
   });
-  predictText=lines.join('\n');
-  showResults('predict-results');
-}
+  barHTML+='</div><div class="zone-label-row">';
+  zones.forEach(z=>barHTML+=`<span style="color:${z.color};font-weight:600">Z${z.num}</span>`);
+  barHTML+='</div></div>';
 
-function copyPredict(){
-  navigator.clipboard.writeText(predictText).then(()=>{
-    const btn=document.querySelector('#predict-results .copy-btn');
-    btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);
+  requestAnimationFrame(()=>{
+    document.getElementById('zr-bar-section').innerHTML=barHTML;
+    document.getElementById('zr-table').innerHTML=tableHTML;
+    document.getElementById('zones-results').classList.add('show');
   });
 }
 
-// ── TAB 3: SPLITS PLANNER ─────────────────────────────────────────────────
-function updateStratLabel(){
-  const v=parseInt(document.getElementById('sp-strategy').value);
-  const lbl=document.getElementById('sp-strat-val');
-  if(v===0)lbl.textContent='Even';
-  else if(v<0)lbl.textContent=`Negative (${Math.abs(v)}% faster finish)`;
-  else lbl.textContent=`Positive (${v}% faster start)`;
-}
-
-let splitsText='';
-let allSplitRows=[];
-let splitsVisible=10;
-function showAllSplits(){
-  document.getElementById('sp-show-all').style.display='none';
-  const tbody=document.getElementById('sp-body');
-  allSplitRows.forEach((r,i)=>{if(i>=splitsVisible)tbody.appendChild(r);});
-}
-
-function calcSplits(){
-  const h=parseFloat(document.getElementById('sp-h').value)||0;
-  const m=parseFloat(document.getElementById('sp-m').value)||0;
-  const s=parseFloat(document.getElementById('sp-s').value)||0;
-  const totalSec=h*3600+m*60+s;
-  if(totalSec<=0){alert('Enter a valid target finish time.');return;}
-  const raceDist=parseFloat(document.getElementById('sp-race').value);
-  const splitUnit=document.getElementById('sp-unit').value;
-  const strategy=parseInt(document.getElementById('sp-strategy').value);
-
-  let splitDist,splitLabel;
-  if(splitUnit==='km'){splitDist=1;splitLabel='km';}
-  else if(splitUnit==='mi'){splitDist=1.60934;splitLabel='mi';}
-  else{splitDist=5;splitLabel='5 km';}
-
-  const avgPace=totalSec/raceDist; // sec/km
-  const n=Math.ceil(raceDist/splitDist);
-  const tbody=document.getElementById('sp-body');
-  tbody.innerHTML='';
-  allSplitRows=[];
-  const lines=['Splits Plan','Split | Pace | Split Time | Total Time'];
-
-  // strategy: slope adjustment
-  // pace at split i = avgPace * (1 + slope*(i/n - 0.5))
-  // slope = strategy% * 2 / 100
-  const slope=(strategy/100)*2;
-  let cumulSec=0;
-  let splitRowsFrag=document.createDocumentFragment();
-
-  for(let i=0;i<n;i++){
-    const factor=1+slope*(i/(n-1||1)-0.5);
-    const distThis=Math.min(splitDist,(raceDist-i*splitDist));
-    const paceThis=avgPace*factor;
-    const splitSec=paceThis*distThis;
-    cumulSec+=splitSec;
-    const distCumul=Math.min((i+1)*splitDist,raceDist);
-    const tr=document.createElement('tr');
-    const splitNo=i+1;
-    const distDisp=splitUnit==='km'?`${fmt(distCumul,1)} km`:splitUnit==='mi'?`${fmt(distCumul/1.60934,1)} mi`:`${fmt(distCumul,1)} km`;
-    tr.innerHTML=`<td>${splitNo}</td><td>${distDisp}</td><td>${paceStr(paceThis)}/${splitUnit==='mi'?'mi':'km'}</td><td>${secsToColon(splitSec)}</td><td>${secsToColon(cumulSec)}</td>`;
-    allSplitRows.push(tr);
-    lines.push(`${splitNo} | ${paceStr(paceThis)}/${splitUnit==='mi'?'mi':'km'} | ${secsToColon(splitSec)} | ${secsToColon(cumulSec)}`);
+// ── Copy Results ──────────────────────────────────────────────────────────
+function copyResults(tab){
+  let text='';
+  if(tab==='pace'){
+    const pace=document.getElementById('pr-pace').textContent;
+    const unit=document.getElementById('pr-pace-label').textContent;
+    text=`Running Pace: ${pace} ${unit}\n\nSplits:\n`;
+    document.querySelectorAll('#pr-splits tr').forEach(r=>{
+      const cells=[...r.querySelectorAll('td')].map(c=>c.textContent.trim());
+      text+=cells.join('\t')+'\n';
+    });
+  } else if(tab==='race'){
+    text='Race Predictions (Riegel Formula):\n\n';
+    document.querySelectorAll('#rr-table tr').forEach(r=>{
+      const cells=[...r.querySelectorAll('td')].map(c=>c.textContent.trim());
+      text+=cells.join('\t')+'\n';
+    });
   }
-
-  // show first 10
-  splitsVisible=Math.min(10,allSplitRows.length);
-  allSplitRows.slice(0,splitsVisible).forEach(r=>tbody.appendChild(r));
-  const showBtn=document.getElementById('sp-show-all');
-  if(allSplitRows.length>splitsVisible){
-    showBtn.style.display='block';
-    showBtn.textContent=`Show All ${allSplitRows.length} Splits`;
-  }else{
-    showBtn.style.display='none';
-  }
-  splitsText=lines.join('\n');
-  showResults('splits-results');
-}
-
-function copySplits(){
-  navigator.clipboard.writeText(splitsText).then(()=>{
-    const btn=document.querySelector('#splits-results .copy-btn');
-    btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById(`copy-${tab}-btn`);
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent='Copy Results',2000);
   });
 }
+
+// ── Enter key support ─────────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const active=document.querySelector('.tab-panel.active').id;
+  if(active==='tab-pace')requestAnimationFrame(()=>calcPace());
+  else if(active==='tab-race')requestAnimationFrame(()=>calcRace());
+  else if(active==='tab-zones')requestAnimationFrame(()=>calcZones());
+});
 </script>
 </body>
 </html>
