@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ideal Weight Calculator — Free Online Tool | toolhut.dev</title>
-<meta name="description" content="Calculate your ideal body weight using 5 proven formulas. Enter your height and gender to find your optimal weight range instantly — free & accurate.">
+<meta name="description" content="Calculate your ideal body weight using 5 proven formulas (Devine, Robinson, Miller, Hamwi, BMI-based). Get personalized results in seconds — free online tool.">
 <link rel="canonical" href="https://toolhut.dev/ideal-weight-calculator/">
 <script type="application/ld+json">
 {
@@ -12,7 +12,7 @@
   "@type": "WebApplication",
   "name": "Ideal Weight Calculator",
   "url": "https://toolhut.dev/ideal-weight-calculator/",
-  "description": "Calculate your ideal body weight using 5 proven formulas including Hamwi, Devine, Robinson, Miller, and BMI-based methods.",
+  "description": "Calculate your ideal body weight using 5 proven formulas including Devine, Robinson, Miller, Hamwi, and BMI-based methods.",
   "applicationCategory": "HealthApplication",
   "operatingSystem": "Any",
   "offers": {
@@ -24,295 +24,204 @@
 </script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f4f6f8;color:#1a1a2e;line-height:1.6;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
 a{color:#0077b6;text-decoration:none}
 a:hover{text-decoration:underline}
 nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
 .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
 .nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
 .nav-brand span{color:#0077b6}
-main{max-width:640px;margin:2rem auto;padding:0 1rem}
-h1{font-size:1.75rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem}
-.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
-.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:2rem}
-label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px;margin-top:1.1rem}
-label:first-of-type{margin-top:0}
-input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none}
-input[type=number]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
-input.error{border-color:#e74c3c}
-.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 2rem}
+h1{font-size:1.65rem;font-weight:800;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:2rem}
+.form-row{display:flex;gap:1rem;margin-bottom:1.25rem}
+.form-group{flex:1;display:flex;flex-direction:column;gap:.35rem}
+.form-group.full{flex:100%}
+label{font-size:.85rem;font-weight:500;color:#444}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;min-height:44px;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{font-size:.78rem;color:#e74c3c;margin-top:2px;display:none}
 .error-msg.show{display:block}
-.unit-toggle{display:flex;gap:8px;margin-top:1rem}
-.unit-btn{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:0.9rem;font-weight:500;color:#555;transition:all 0.2s;min-height:44px}
-.unit-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
-.input-group{display:flex;gap:8px}
-.input-group>div{flex:1}
-.gender-row{display:flex;gap:8px;margin-top:1rem}
-.gender-btn{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:0.9rem;font-weight:500;color:#555;transition:all 0.2s;min-height:44px}
-.gender-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
-.calc-btn{width:100%;background:#0077b6;color:#fff;border:none;border-radius:6px;padding:14px 24px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1.5rem;min-height:48px;transition:background 0.2s}
-.calc-btn:hover{background:#006299}
-.result-section{display:none;animation:fadeIn 0.3s ease}
-.result-section.show{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.result-hero{text-align:center;margin-bottom:1.5rem}
-.result-label{font-size:0.85rem;color:#666;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
-.result-range{font-size:2.2rem;font-weight:700;color:#0077b6;line-height:1.2}
-.result-sub{font-size:0.9rem;color:#666;margin-top:4px}
-.zone-bar-wrap{margin:1.5rem 0}
-.zone-bar-label{font-size:0.8rem;font-weight:500;color:#444;margin-bottom:6px}
-.zone-bar{display:flex;border-radius:6px;overflow:hidden;height:22px;position:relative}
-.zone-seg{flex:1;position:relative}
-.zone-seg.z1{background:#e74c3c}
-.zone-seg.z2{background:#f39c12}
-.zone-seg.z3{background:#27ae60}
-.zone-seg.z4{background:#f39c12}
-.zone-seg.z5{background:#e74c3c}
-.zone-marker{position:absolute;top:-8px;width:3px;height:38px;background:#1a1a2e;border-radius:2px;transform:translateX(-50%);z-index:10;transition:left 0.5s ease}
-.zone-labels{display:flex;font-size:0.7rem;color:#666;margin-top:4px}
-.zone-labels span{flex:1;text-align:center}
-.zone-status{text-align:center;font-size:0.95rem;font-weight:600;margin-top:8px;padding:8px 12px;border-radius:6px}
-.status-under{background:#fdecea;color:#c0392b}
-.status-healthy{background:#eafaf1;color:#1e8449}
-.status-over{background:#fef9e7;color:#b7770d}
-table{width:100%;border-collapse:collapse;font-size:0.9rem}
-th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444;border-bottom:2px solid #ddd}
-td{padding:10px 12px;border-bottom:1px solid #eee;vertical-align:middle}
-tr:nth-child(even) td{background:#fafafa}
-td:last-child,th:last-child{text-align:right}
-.formula-badge{font-size:0.75rem;background:#e8f4fd;color:#0077b6;padding:2px 8px;border-radius:10px;font-weight:500}
-.copy-btn{background:none;border:1px solid #ddd;border-radius:5px;padding:6px 12px;font-size:0.8rem;color:#555;cursor:pointer;transition:all 0.2s;min-height:36px}
-.copy-btn:hover{background:#f0f0f0}
-.copy-btn.copied{border-color:#27ae60;color:#27ae60}
-.copy-row{display:flex;justify-content:flex-end;margin-top:0.75rem}
-.disclaimer{background:#fff8e1;border-left:4px solid #f39c12;padding:12px 16px;border-radius:0 6px 6px 0;font-size:0.82rem;color:#7a5c00;margin-top:1rem;line-height:1.5}
-.content-section{margin-bottom:2rem}
-.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;margin-top:0}
-.content-section p{color:#333;font-size:0.95rem;margin-bottom:0.75rem;line-height:1.7}
-.content-section ul{padding-left:1.2rem;color:#333;font-size:0.95rem}
-.content-section ul li{margin-bottom:0.5rem;line-height:1.6}
-details{border:1px solid #e0e0e0;border-radius:6px;padding:0;margin-bottom:0.75rem;overflow:hidden}
-summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:0.95rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
-summary::-webkit-details-marker{display:none}
-summary::after{content:'▼';font-size:0.7rem;color:#0077b6;transition:transform 0.2s}
-details[open] summary::after{transform:rotate(180deg)}
-.faq-answer{padding:12px 16px;font-size:0.9rem;color:#333;line-height:1.7}
-.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.related-link{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:12px 14px;font-size:0.875rem;font-weight:500;color:#0077b6;transition:background 0.2s;display:block}
-.related-link:hover{background:#e8f4fd;text-decoration:none}
+.unit-toggle{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1.25rem}
+.unit-btn{flex:1;padding:10px;font-size:.9rem;font-weight:500;cursor:pointer;border:none;background:#f8f9fa;color:#555;transition:background .2s,color .2s;min-height:44px}
+.unit-btn.active{background:#0077b6;color:#fff}
+.btn{width:100%;background:#0077b6;color:#fff;border:none;padding:14px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;min-height:44px}
+.btn:hover{background:#006299}
+.results-section{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results-section.visible{opacity:1;pointer-events:all}
+.big-result{text-align:center;margin-bottom:1.5rem}
+.big-label{font-size:.9rem;color:#555;margin-bottom:.4rem}
+.big-number{font-size:2.8rem;font-weight:800;color:#0077b6;line-height:1}
+.big-unit{font-size:1rem;font-weight:500;color:#555;margin-top:.3rem}
+.range-label{font-size:.85rem;color:#555;margin-top:.5rem}
+.gauge-wrap{margin:1.25rem 0}
+.gauge-track{height:18px;border-radius:10px;background:linear-gradient(to right,#e74c3c 0%,#e74c3c 15%,#f39c12 15%,#f39c12 30%,#27ae60 30%,#27ae60 70%,#f39c12 70%,#f39c12 85%,#e74c3c 85%,#e74c3c 100%);position:relative;box-shadow:inset 0 1px 3px rgba(0,0,0,.12)}
+.gauge-pointer{position:absolute;top:-6px;width:4px;height:30px;background:#1a1a2e;border-radius:2px;transform:translateX(-50%);transition:left .5s cubic-bezier(.34,1.56,.64,1)}
+.gauge-labels{display:flex;justify-content:space-between;font-size:.72rem;color:#666;margin-top:.3rem}
+.zone-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.82rem;font-weight:600;margin-top:.5rem}
+.zone-healthy{background:#d4edda;color:#155724}
+.zone-caution{background:#fff3cd;color:#856404}
+.zone-concern{background:#f8d7da;color:#721c24}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+thead th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444}
+thead th:last-child{text-align:right}
+tbody tr:nth-child(odd){background:#fafafa}
+tbody tr:nth-child(even){background:#fff}
+tbody td{padding:10px 12px;border-bottom:1px solid #efefef}
+tbody td:last-child{text-align:right;font-weight:600;font-family:monospace}
+.highlight-row{background:#e8f4fb!important;font-weight:700}
+.highlight-row td{color:#0077b6}
+.table-scroll{overflow-x:auto}
+.copy-btn{display:inline-flex;align-items:center;gap:.35rem;background:#f0f0f0;border:1px solid #ddd;border-radius:5px;padding:6px 14px;font-size:.82rem;cursor:pointer;color:#444;transition:background .2s;margin-top:1rem}
+.copy-btn:hover{background:#e0e0e0}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:1rem 1.2rem;font-size:.82rem;color:#5d4037;line-height:1.5;margin-top:1.5rem}
+.disclaimer strong{color:#4e342e}
 .ad-slot{min-height:0;margin:0}
-footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.5rem 1rem;text-align:center;font-size:0.85rem;color:#666;margin-top:2rem}
-footer a{color:#0077b6;margin:0 8px}
-.slider-wrap{margin-top:1rem}
-.slider-row{display:flex;align-items:center;gap:10px;margin-top:6px}
-input[type=range]{flex:1;accent-color:#0077b6;height:6px;cursor:pointer}
-.slider-val{min-width:60px;text-align:right;font-weight:600;color:#0077b6;font-size:0.95rem}
-.current-badge{display:inline-block;background:#0077b6;color:#fff;border-radius:10px;font-size:0.75rem;padding:1px 8px;margin-left:8px;vertical-align:middle}
-@media(max-width:640px){
-  main{padding:0 0.75rem}
-  h1{font-size:1.4rem}
-  .card{padding:1.25rem}
-  .result-range{font-size:1.8rem}
+.content-section{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;margin-bottom:2rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:.75rem;margin-top:1.5rem}
+.content-section h2:first-child{margin-top:0}
+.content-section p{color:#444;margin-bottom:.75rem;font-size:.95rem}
+.content-section ul{color:#444;font-size:.95rem;padding-left:1.4rem;margin-bottom:.75rem}
+.content-section ul li{margin-bottom:.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:.75rem;overflow:hidden}
+summary{padding:12px 16px;font-weight:600;cursor:pointer;font-size:.92rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';font-size:1rem;color:#0077b6;transition:transform .2s}
+details[open] summary::after{content:'－'}
+details p{padding:12px 16px;font-size:.9rem;color:#444;margin:0}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+.related-link{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:12px;font-size:.88rem;color:#0077b6;font-weight:500;transition:background .2s;display:block}
+.related-link:hover{background:#e8f4fb;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.5rem 1rem;text-align:center;font-size:.82rem;color:#666}
+footer a{color:#0077b6;margin:0 .5rem}
+footer p{margin-bottom:.4rem}
+.formula-note{font-size:.78rem;color:#666;font-style:italic;text-align:center;margin-top:.5rem}
+@media(max-width:480px){
+  .form-row{flex-direction:column;gap:.75rem}
   .related-grid{grid-template-columns:1fr}
-  .input-group{flex-direction:column;gap:0}
-  table{font-size:0.82rem}
-  th,td{padding:8px 8px}
+  h1{font-size:1.35rem}
+  .big-number{font-size:2.2rem}
+  .card{padding:1.25rem}
+  .content-section{padding:1.25rem}
 }
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-inner">
     <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
   </div>
 </nav>
-
 <main>
   <h1>Ideal Weight Calculator</h1>
-  <p class="subtitle">Find your ideal body weight range using 5 clinically-used formulas.</p>
+  <p class="subtitle">Find your ideal body weight range using 5 scientifically validated formulas.</p>
 
   <div class="card">
-    <div>
-      <div style="margin-bottom:1rem">
-        <span style="font-size:0.85rem;font-weight:500;color:#444">Unit System</span>
-        <div class="unit-toggle">
-          <button class="unit-btn active" id="btn-metric" onclick="setUnit('metric')">Metric (cm/kg)</button>
-          <button class="unit-btn" id="btn-imperial" onclick="setUnit('imperial')">Imperial (ft/lbs)</button>
-        </div>
-      </div>
-
-      <div>
-        <span style="font-size:0.85rem;font-weight:500;color:#444">Biological Sex</span>
-        <div class="gender-row">
-          <button class="gender-btn active" id="btn-male" onclick="setGender('male')">♂ Male</button>
-          <button class="gender-btn" id="btn-female" onclick="setGender('female')">♀ Female</button>
-        </div>
-      </div>
-
-      <!-- METRIC -->
-      <div id="metric-inputs">
-        <label for="height-cm">Height (cm)</label>
-        <input type="number" id="height-cm" placeholder="e.g. 175" min="100" max="250" step="1">
-        <div class="error-msg" id="err-cm">Please enter a valid height between 100–250 cm.</div>
-        <div class="slider-wrap">
-          <div class="slider-row">
-            <input type="range" id="slider-cm" min="100" max="250" value="175" oninput="syncSlider('cm')">
-            <span class="slider-val" id="slider-cm-val">175 cm</span>
-          </div>
-        </div>
-
-        <label for="weight-kg">Your Current Weight (kg) <span style="font-weight:400;color:#888;font-size:0.8rem">— optional, to see where you stand</span></label>
-        <input type="number" id="weight-kg" placeholder="e.g. 75" min="20" max="300" step="0.1">
-      </div>
-
-      <!-- IMPERIAL -->
-      <div id="imperial-inputs" style="display:none">
-        <label>Height</label>
-        <div class="input-group">
-          <div>
-            <input type="number" id="height-ft" placeholder="ft" min="3" max="8" step="1">
-            <div class="error-msg" id="err-ft">Enter feet (3–8).</div>
-          </div>
-          <div>
-            <input type="number" id="height-in" placeholder="in" min="0" max="11" step="1">
-            <div class="error-msg" id="err-in">Enter inches (0–11).</div>
-          </div>
-        </div>
-        <div class="slider-wrap">
-          <div class="slider-row">
-            <input type="range" id="slider-imp" min="36" max="96" value="69" oninput="syncSlider('imp')">
-            <span class="slider-val" id="slider-imp-val">5 ft 9 in</span>
-          </div>
-        </div>
-
-        <label for="weight-lbs">Your Current Weight (lbs) <span style="font-weight:400;color:#888;font-size:0.8rem">— optional</span></label>
-        <input type="number" id="weight-lbs" placeholder="e.g. 160" min="44" max="660" step="0.1">
-      </div>
-
-      <button class="calc-btn" onclick="calculate()">Calculate Ideal Weight</button>
+    <div class="unit-toggle">
+      <button class="unit-btn active" id="btnImperial" onclick="setUnit('imperial')">Imperial (lbs / ft)</button>
+      <button class="unit-btn" id="btnMetric" onclick="setUnit('metric')">Metric (kg / cm)</button>
     </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="heightFt" id="heightLabel1">Height (feet)</label>
+        <input type="number" id="heightFt" placeholder="5" min="1" max="8">
+        <span class="error-msg" id="heightFtErr">Please enter a valid height.</span>
+      </div>
+      <div class="form-group" id="inchGroup">
+        <label for="heightIn">Height (inches)</label>
+        <input type="number" id="heightIn" placeholder="7" min="0" max="11">
+        <span class="error-msg" id="heightInErr">Must be 0–11.</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="sex">Biological Sex</label>
+        <select id="sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="currentWeight" id="weightLabel">Current Weight (lbs)</label>
+        <input type="number" id="currentWeight" placeholder="160" min="1" max="2000">
+        <span class="error-msg" id="weightErr">Please enter a valid weight.</span>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate Ideal Weight</button>
   </div>
 
-  <!-- RESULTS -->
-  <div class="card result-section" id="results">
-    <div class="result-hero">
-      <div class="result-label">Ideal Weight Range (Average of 5 Formulas)</div>
-      <div class="result-range" id="res-range">—</div>
-      <div class="result-sub" id="res-unit-label">kg</div>
-    </div>
-
-    <!-- Zone bar -->
-    <div class="zone-bar-wrap">
-      <div class="zone-bar-label">Your current weight vs. ideal range</div>
-      <div class="zone-bar" id="zone-bar">
-        <div class="zone-seg z1" style="flex:1"></div>
-        <div class="zone-seg z2" style="flex:0.5"></div>
-        <div class="zone-seg z3" style="flex:2"></div>
-        <div class="zone-seg z4" style="flex:0.5"></div>
-        <div class="zone-seg z5" style="flex:1"></div>
-        <div class="zone-marker" id="zone-marker" style="left:50%;display:none"></div>
-      </div>
-      <div class="zone-labels">
-        <span>Very Under</span>
-        <span>Under</span>
-        <span>Ideal</span>
-        <span>Over</span>
-        <span>Very Over</span>
-      </div>
-      <div class="zone-status" id="zone-status" style="display:none"></div>
-    </div>
-
-    <div id="formula-table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Formula</th>
-            <th>Ideal Weight</th>
-          </tr>
-        </thead>
-        <tbody id="formula-body"></tbody>
-      </table>
-    </div>
-
-    <div class="copy-row">
-      <button class="copy-btn" id="copy-btn" onclick="copyResults()">📋 Copy Results</button>
-    </div>
-
+  <div class="card results-section" id="resultsSection">
+    <div id="resultsContent"></div>
     <div class="disclaimer">
-      ⚕️ <strong>Disclaimer:</strong> This tool is for informational purposes only. Ideal weight formulas are general estimates and do not account for muscle mass, bone density, or individual health factors. Consult a healthcare professional for medical advice.
+      <strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Ideal weight formulas are statistical averages and may not apply to everyone. Consult a qualified healthcare professional for personalized medical advice.
     </div>
   </div>
 
   <div class="ad-slot" id="ad-mid"></div>
 
-  <!-- CONTENT -->
-  <div class="content-section card">
+  <div class="content-section">
     <h2>How to Use This Ideal Weight Calculator</h2>
-    <p>Select your unit system (metric or imperial) and your biological sex, then enter your height using the input field or the slider. Optionally, enter your current weight to see how you compare to the ideal range. Hit <strong>Calculate Ideal Weight</strong> and instantly see results from five different formulas, plus a visual indicator showing where you fall.</p>
-  </div>
+    <p>Enter your height (in feet and inches or centimeters), select your biological sex, and optionally enter your current weight to see how you compare. Click "Calculate Ideal Weight" to instantly see results from 5 different formulas, a visual gauge showing where you fall, and a breakdown table.</p>
 
-  <div class="content-section card">
     <h2>Why This Matters</h2>
-    <p>Knowing your ideal weight range is a useful starting point for health planning — but it's more nuanced than a single number. A 5'10" (178 cm) male, for example, has an ideal weight between roughly 155–175 lbs (70–79 kg) depending on the formula used. These ranges reflect what population studies have found to correlate with lower risks of cardiovascular disease, metabolic disorders, and all-cause mortality.</p>
-    <p>Athletes, bodybuilders, and pregnant women should treat these numbers as guidelines rather than targets — someone with high muscle mass may be "overweight" by formula but perfectly healthy. Similarly, older adults often carry slightly higher weight than ideal-weight formulas suggest, which can actually be protective in some cases.</p>
-    <p>These calculators are commonly used by clinicians for quick screening, by dietitians when setting realistic weight goals, and by individuals tracking their fitness journey. When combined with <strong>BMI, body fat percentage</strong>, and waist circumference measurements, ideal weight gives a more complete picture of where you are and where you want to be.</p>
-  </div>
+    <p>Understanding your ideal weight range helps you set realistic, evidence-based fitness goals rather than chasing arbitrary numbers. For example, a 5'10" male has an ideal weight range of roughly 148–183 lbs depending on the formula used — that's a 35-pound window, which shows why a single "perfect" number is a myth.</p>
+    <p>Athletes and bodybuilders often weigh more than "ideal" formulas suggest because muscle is denser than fat — their weight is healthy despite exceeding textbook targets. Conversely, someone who appears slim might still fall below their ideal if they carry little muscle mass.</p>
+    <p>Doctors, dietitians, and personal trainers use ideal weight as a starting reference when setting calorie goals, dosing medications, or designing training programs. If you're trying to lose weight, knowing the target range helps you avoid setting goals that are either too aggressive (risking muscle loss) or not ambitious enough.</p>
 
-  <div class="content-section card">
     <h2>How It's Calculated</h2>
-    <p>This calculator uses five widely-cited formulas, all based on height and sex. Heights below 60 inches (152 cm) use linear extrapolation from the base value.</p>
+    <p>This calculator uses five widely cited formulas, all expressed for height in inches (H) above 5 feet:</p>
     <ul>
-      <li><strong>Hamwi (1964):</strong> Men: 48 kg + 2.7 kg per inch over 5 ft. Women: 45.5 kg + 2.2 kg per inch over 5 ft.</li>
-      <li><strong>Devine (1974):</strong> Men: 50 kg + 2.3 kg per inch over 5 ft. Women: 45.5 kg + 2.3 kg per inch over 5 ft.</li>
-      <li><strong>Robinson (1983):</strong> Men: 52 kg + 1.9 kg per inch over 5 ft. Women: 49 kg + 1.7 kg per inch over 5 ft.</li>
-      <li><strong>Miller (1983):</strong> Men: 56.2 kg + 1.41 kg per inch over 5 ft. Women: 53.1 kg + 1.36 kg per inch over 5 ft.</li>
-      <li><strong>BMI-based (18.5–24.9):</strong> Uses the healthy BMI range to back-calculate weight: Weight = BMI × Height(m)²</li>
+      <li><strong>Devine (1974):</strong> Male = 50 kg + 2.3 kg × (H − 60in) | Female = 45.5 kg + 2.3 kg × (H − 60in)</li>
+      <li><strong>Robinson (1983):</strong> Male = 52 kg + 1.9 kg × (H − 60in) | Female = 49 kg + 1.7 kg × (H − 60in)</li>
+      <li><strong>Miller (1983):</strong> Male = 56.2 kg + 1.41 kg × (H − 60in) | Female = 53.1 kg + 1.36 kg × (H − 60in)</li>
+      <li><strong>Hamwi (1964):</strong> Male = 48 kg + 2.7 kg × (H − 60in) | Female = 45.4 kg + 2.27 kg × (H − 60in)</li>
+      <li><strong>BMI-based (18.5–24.9):</strong> Ideal = BMI × height² (m²) — gives a healthy BMI range</li>
     </ul>
-    <p>The displayed range is the minimum and maximum across all five formulas for the "healthy" band, giving you a practical window rather than a single number.</p>
-  </div>
+    <p>The average of the four formula results is shown as your primary ideal weight, with the BMI method providing the healthy range.</p>
 
-  <div class="content-section card">
-    <h2>Tips &amp; Common Mistakes</h2>
+    <h2>Tips & Common Mistakes</h2>
     <ul>
-      <li><strong>Don't chase a single number.</strong> The five formulas give a range on purpose — aim to be somewhere within it, not at one exact point.</li>
-      <li><strong>Muscle weighs more than fat.</strong> If you strength-train regularly, your ideal weight may be at or above the top of the range and still be healthy.</li>
-      <li><strong>Height accuracy matters.</strong> Even 2 cm difference in your reported height shifts the ideal weight by 1–2 kg. Measure barefoot in the morning for the most accurate result.</li>
-      <li><strong>Use it alongside BMI and body fat.</strong> No single metric tells the full story. Combine this with our BMI Calculator and Body Fat Estimator for better insight.</li>
-      <li><strong>Don't use ideal weight alone as a weight loss goal.</strong> Work with a dietitian or doctor to set safe, sustainable targets, especially if your current weight is far from the ideal range.</li>
+      <li><strong>Don't fixate on one number.</strong> The range across formulas is your realistic target zone, not a single point.</li>
+      <li><strong>Account for frame size.</strong> Larger-boned individuals naturally weigh more — these formulas assume medium frame size.</li>
+      <li><strong>Athletes should use body fat % too.</strong> Muscle weighs more than fat; ideal weight calculators don't distinguish between the two.</li>
+      <li><strong>Height matters a lot.</strong> A 1-inch error in height measurement can shift results by 2–3 kg across all formulas.</li>
+      <li><strong>Use this as a starting point.</strong> Pair this tool with a BMI check, body fat measurement, and professional consultation for a complete picture.</li>
     </ul>
-  </div>
 
-  <div class="content-section card">
     <h2>Frequently Asked Questions</h2>
     <details>
       <summary>Which ideal weight formula is most accurate?</summary>
-      <div class="faq-answer">No single formula is universally "best" — each was developed for different populations and clinical settings. The Devine formula is most commonly used in pharmacy for drug dosing. The BMI-based range (18.5–24.9) is the most widely recognized. Using the average across all five, as this tool does, gives the most balanced estimate for general health purposes.</div>
+      <p>No single formula is universally "best" — each was derived from different populations and contexts. The Devine formula is most commonly used in clinical settings for drug dosing, while BMI-based ranges are used in public health. Using the average of multiple formulas gives the most balanced estimate for general wellness goals.</p>
     </details>
     <details>
-      <summary>Is ideal weight the same as goal weight?</summary>
-      <div class="faq-answer">Not necessarily. Ideal weight is a statistical estimate based on population data, while your personal goal weight should factor in your lifestyle, fitness level, age, and health history. Some people function best at the higher end of the range, others at the lower end. Discuss realistic targets with your healthcare provider.</div>
+      <summary>Does ideal weight differ by age?</summary>
+      <p>The formulas above don't adjust for age, but research suggests that slightly higher weights are associated with better outcomes in older adults (65+). Children and teenagers should use age-specific growth charts from a pediatrician rather than adult ideal weight calculators.</p>
     </details>
     <details>
-      <summary>Why are there different formulas for men and women?</summary>
-      <div class="faq-answer">Men and women have different body compositions — on average, men have more lean muscle mass and denser bones at the same height. The formulas account for this by using different base weights and per-inch increments, reflecting what healthy weight looks like for each biological sex at a given height.</div>
+      <summary>I'm very muscular — will this calculator work for me?</summary>
+      <p>These formulas assume average muscle-to-fat ratios and were designed for the general population. If you carry significant muscle mass, your ideal weight may legitimately exceed the formula results. Body composition measurements (like DEXA scans or skinfold calipers) are more meaningful for athletes.</p>
     </details>
     <details>
-      <summary>What if I'm shorter than 5 feet (152 cm)?</summary>
-      <div class="faq-answer">Most classic formulas were designed for heights above 5 feet (152 cm). For heights below that, the formulas are extrapolated, which may make them less accurate. The BMI-based range remains valid at any height. If you're under 5 feet tall, the BMI healthy range (18.5–24.9) is generally the most reliable guideline to use.</div>
+      <summary>What if my current weight is already in the ideal range?</summary>
+      <p>That's great — it means your focus should shift to maintaining your weight through balanced nutrition and regular exercise rather than losing or gaining. Even within the "ideal" range, body composition (muscle vs. fat ratio) matters for long-term health.</p>
     </details>
   </div>
 
-  <!-- RELATED TOOLS -->
-  <div class="content-section card">
-    <h2>Related Tools</h2>
+  <div class="content-section">
+    <h2 style="margin-top:0">Related Tools</h2>
     <div class="related-grid">
-      <a class="related-link" href="/bmi-calculator/">⚖️ BMI Calculator with Weight Range Chart</a>
-      <a class="related-link" href="/body-fat-percentage-calculator/">📊 Body Fat Percentage Estimator</a>
-      <a class="related-link" href="/calorie-deficit-calculator/">🔥 Calorie Deficit Calculator</a>
-      <a class="related-link" href="/water-intake-calculator/">💧 Water Intake Calculator</a>
-      <a class="related-link" href="/heart-rate-zone-calculator/">❤️ Heart Rate Zone Calculator</a>
-      <a class="related-link" href="/one-rep-max-calculator/">🏋️ One Rep Max Calculator</a>
+      <a href="/bmi-calculator/" class="related-link">⚖️ BMI Calculator with Weight Range Chart</a>
+      <a href="/calorie-deficit-calculator/" class="related-link">🔥 Calorie Deficit Calculator</a>
+      <a href="/macro-calculator/" class="related-link">🥗 Macro Calculator for Weight Loss & Muscle Gain</a>
+      <a href="/water-intake-calculator/" class="related-link">💧 Water Intake Calculator</a>
+      <a href="/one-rep-max-calculator/" class="related-link">🏋️ One Rep Max Calculator</a>
+      <a href="/heart-rate-zone-calculator/" class="related-link">❤️ Heart Rate Zone Calculator</a>
     </div>
   </div>
 
@@ -320,258 +229,282 @@ input[type=range]{flex:1;accent-color:#0077b6;height:6px;cursor:pointer}
 </main>
 
 <footer>
-  <div>© <span id="yr"></span> toolhut.dev</div>
-  <div style="margin-top:8px">
+  <p>
     <a href="/about/">About</a>
     <a href="/privacy/">Privacy</a>
     <a href="/contact/">Contact</a>
-  </div>
+  </p>
+  <p>© 2025 toolhut.dev — Free online tools, no sign-up required.</p>
 </footer>
 
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-
-let unit = 'metric';
-let gender = 'male';
+let unit = 'imperial';
 
 function setUnit(u) {
   unit = u;
-  document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
-  document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
-  document.getElementById('metric-inputs').style.display = u === 'metric' ? '' : 'none';
-  document.getElementById('imperial-inputs').style.display = u === 'imperial' ? '' : 'none';
-  clearErrors();
-}
+  document.getElementById('btnImperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('btnMetric').classList.toggle('active', u === 'metric');
 
-function setGender(g) {
-  gender = g;
-  document.getElementById('btn-male').classList.toggle('active', g === 'male');
-  document.getElementById('btn-female').classList.toggle('active', g === 'female');
-}
+  const inchGroup = document.getElementById('inchGroup');
+  const heightLabel1 = document.getElementById('heightLabel1');
+  const weightLabel = document.getElementById('weightLabel');
+  const ftInput = document.getElementById('heightFt');
+  const inInput = document.getElementById('heightIn');
 
-function syncSlider(type) {
-  if (type === 'cm') {
-    const v = parseInt(document.getElementById('slider-cm').value);
-    document.getElementById('slider-cm-val').textContent = v + ' cm';
-    document.getElementById('height-cm').value = v;
+  if (u === 'imperial') {
+    heightLabel1.textContent = 'Height (feet)';
+    weightLabel.textContent = 'Current Weight (lbs)';
+    ftInput.placeholder = '5';
+    ftInput.max = 8;
+    inInput.placeholder = '7';
+    inchGroup.style.display = '';
   } else {
-    const totalIn = parseInt(document.getElementById('slider-imp').value);
-    const ft = Math.floor(totalIn / 12);
-    const inches = totalIn % 12;
-    document.getElementById('slider-imp-val').textContent = ft + ' ft ' + inches + ' in';
-    document.getElementById('height-ft').value = ft;
-    document.getElementById('height-in').value = inches;
+    heightLabel1.textContent = 'Height (cm)';
+    weightLabel.textContent = 'Current Weight (kg)';
+    ftInput.placeholder = '170';
+    ftInput.max = 300;
+    inInput.placeholder = '';
+    inchGroup.style.display = 'none';
   }
+
+  document.getElementById('resultsSection').classList.remove('visible');
 }
 
-// Sync sliders when inputs change
-document.getElementById('height-cm').addEventListener('input', function() {
-  const v = parseFloat(this.value);
-  if (v >= 100 && v <= 250) {
-    document.getElementById('slider-cm').value = v;
-    document.getElementById('slider-cm-val').textContent = v + ' cm';
+function fmt(n, dec) {
+  dec = dec === undefined ? 1 : dec;
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
+function kgToLbs(kg) { return kg * 2.20462; }
+function lbsToKg(lbs) { return lbs / 2.20462; }
+
+function calcIdealWeights(heightCm, sex) {
+  const heightIn = heightCm / 2.54;
+  const extra = Math.max(0, heightIn - 60);
+  const h_m = heightCm / 100;
+
+  let devine, robinson, miller, hamwi;
+  if (sex === 'male') {
+    devine   = 50    + 2.3   * extra;
+    robinson = 52    + 1.9   * extra;
+    miller   = 56.2  + 1.41  * extra;
+    hamwi    = 48    + 2.7   * extra;
+  } else {
+    devine   = 45.5  + 2.3   * extra;
+    robinson = 49    + 1.7   * extra;
+    miller   = 53.1  + 1.36  * extra;
+    hamwi    = 45.4  + 2.27  * extra;
   }
-});
-document.getElementById('height-ft').addEventListener('input', updateImperialSlider);
-document.getElementById('height-in').addEventListener('input', updateImperialSlider);
 
-function updateImperialSlider() {
-  const ft = parseInt(document.getElementById('height-ft').value) || 0;
-  const ins = parseInt(document.getElementById('height-in').value) || 0;
-  const total = ft * 12 + ins;
-  if (total >= 36 && total <= 96) {
-    document.getElementById('slider-imp').value = total;
-    document.getElementById('slider-imp-val').textContent = ft + ' ft ' + ins + ' in';
-  }
+  const bmiLow  = 18.5 * h_m * h_m;
+  const bmiHigh = 24.9 * h_m * h_m;
+  const avg = (devine + robinson + miller + hamwi) / 4;
+
+  return { devine, robinson, miller, hamwi, bmiLow, bmiHigh, avg };
 }
 
-function clearErrors() {
-  ['err-cm','err-ft','err-in'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('show');
-  });
-  ['height-cm','height-ft','height-in'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('error');
-  });
+function getZone(currentKg, low, high) {
+  if (currentKg < low * 0.85) return { label: 'Significantly Underweight', cls: 'zone-concern', pos: 5 };
+  if (currentKg < low)        return { label: 'Underweight', cls: 'zone-caution', pos: 20 };
+  if (currentKg <= high)      return { label: 'Ideal Weight Range ✓', cls: 'zone-healthy', pos: 50 };
+  if (currentKg <= high * 1.15) return { label: 'Slightly Overweight', cls: 'zone-caution', pos: 75 };
+  return { label: 'Significantly Overweight', cls: 'zone-concern', pos: 93 };
 }
 
-function showError(inputId, msgId) {
-  document.getElementById(inputId).classList.add('error');
-  document.getElementById(msgId).classList.add('show');
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.add('show');
 }
-
-// Ideal weight formulas — input: heightCm, gender ('male'/'female')
-// All return kg
-function hamwi(heightCm, sex) {
-  const inchesOver5ft = (heightCm / 2.54) - 60;
-  if (sex === 'male') return 48 + 2.7 * Math.max(0, inchesOver5ft);
-  return 45.5 + 2.2 * Math.max(0, inchesOver5ft);
+function clearError(id) {
+  document.getElementById(id).classList.remove('show');
 }
-function devine(heightCm, sex) {
-  const inchesOver5ft = (heightCm / 2.54) - 60;
-  if (sex === 'male') return 50 + 2.3 * Math.max(0, inchesOver5ft);
-  return 45.5 + 2.3 * Math.max(0, inchesOver5ft);
-}
-function robinson(heightCm, sex) {
-  const inchesOver5ft = (heightCm / 2.54) - 60;
-  if (sex === 'male') return 52 + 1.9 * Math.max(0, inchesOver5ft);
-  return 49 + 1.7 * Math.max(0, inchesOver5ft);
-}
-function miller(heightCm, sex) {
-  const inchesOver5ft = (heightCm / 2.54) - 60;
-  if (sex === 'male') return 56.2 + 1.41 * Math.max(0, inchesOver5ft);
-  return 53.1 + 1.36 * Math.max(0, inchesOver5ft);
-}
-function bmiBased(heightCm) {
-  const hm = heightCm / 100;
-  return { low: 18.5 * hm * hm, high: 24.9 * hm * hm };
-}
-
-function fmt(n, dp=1) {
-  return n.toLocaleString('en-US', {minimumFractionDigits: dp, maximumFractionDigits: dp});
-}
-function fmtW(kg, toImperial) {
-  if (toImperial) {
-    const lbs = kg * 2.20462;
-    return fmt(lbs, 1) + ' lbs';
-  }
-  return fmt(kg, 1) + ' kg';
+function setInputError(id, hasError) {
+  const el = document.getElementById(id);
+  if (hasError) el.classList.add('error');
+  else el.classList.remove('error');
 }
 
 function calculate() {
-  clearErrors();
-  let heightCm;
-  let currentWeightKg = null;
-  let isImperial = (unit === 'imperial');
+  let valid = true;
+  clearError('heightFtErr'); clearError('heightInErr'); clearError('weightErr');
+  setInputError('heightFt', false); setInputError('heightIn', false); setInputError('currentWeight', false);
 
-  if (unit === 'metric') {
-    const hv = parseFloat(document.getElementById('height-cm').value);
-    if (isNaN(hv) || hv < 100 || hv > 250) { showError('height-cm','err-cm'); return; }
-    heightCm = hv;
-    const wv = parseFloat(document.getElementById('weight-kg').value);
-    if (!isNaN(wv) && wv > 0) currentWeightKg = wv;
-  } else {
-    const ft = parseInt(document.getElementById('height-ft').value);
-    const ins = parseInt(document.getElementById('height-in').value);
-    let valid = true;
-    if (isNaN(ft) || ft < 3 || ft > 8) { showError('height-ft','err-ft'); valid = false; }
-    if (isNaN(ins) || ins < 0 || ins > 11) { showError('height-in','err-in'); valid = false; }
-    if (!valid) return;
-    heightCm = (ft * 12 + ins) * 2.54;
-    const wv = parseFloat(document.getElementById('weight-lbs').value);
-    if (!isNaN(wv) && wv > 0) currentWeightKg = wv / 2.20462;
-  }
+  let heightCm, currentKg = null;
+  const sex = document.getElementById('sex').value;
 
-  const results = {
-    'Hamwi (1964)': hamwi(heightCm, gender),
-    'Devine (1974)': devine(heightCm, gender),
-    'Robinson (1983)': robinson(heightCm, gender),
-    'Miller (1983)': miller(heightCm, gender),
-  };
-  const bmi = bmiBased(heightCm);
+  if (unit === 'imperial') {
+    const ft = parseFloat(document.getElementById('heightFt').value);
+    const inVal = document.getElementById('heightIn').value;
+    const inches = inVal === '' ? 0 : parseFloat(inVal);
 
-  const allVals = Object.values(results);
-  const rangeMin = Math.min(...allVals, bmi.low);
-  const rangeMax = Math.max(...allVals, bmi.high);
-  const avgIdeal = (allVals.reduce((a,b)=>a+b,0)/allVals.length);
+    if (isNaN(ft) || ft < 1 || ft > 8) {
+      showError('heightFtErr', 'Please enter a valid height in feet (1–8).');
+      setInputError('heightFt', true);
+      valid = false;
+    }
+    if (!isNaN(inches) && (inches < 0 || inches > 11)) {
+      showError('heightInErr', 'Inches must be between 0 and 11.');
+      setInputError('heightIn', true);
+      valid = false;
+    }
+    if (valid) {
+      heightCm = ((ft * 12) + (isNaN(inches) ? 0 : inches)) * 2.54;
+    }
 
-  // Build table
-  const tbody = document.getElementById('formula-body');
-  tbody.innerHTML = '';
-  for (const [name, val] of Object.entries(results)) {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td><span class="formula-badge">${name}</span></td><td>${fmtW(val, isImperial)}</td>`;
-    tbody.appendChild(tr);
-  }
-  // BMI row
-  const bmiTr = document.createElement('tr');
-  bmiTr.innerHTML = `<td><span class="formula-badge">BMI Range (18.5–24.9)</span></td><td>${fmtW(bmi.low, isImperial)} – ${fmtW(bmi.high, isImperial)}</td>`;
-  tbody.appendChild(bmiTr);
-
-  // Hero
-  document.getElementById('res-range').textContent = fmtW(rangeMin, isImperial) + ' – ' + fmtW(rangeMax, isImperial);
-  document.getElementById('res-unit-label').textContent = isImperial ? 'Based on 5 formulas' : 'Based on 5 formulas';
-
-  // Zone bar
-  const marker = document.getElementById('zone-marker');
-  const zoneStatus = document.getElementById('zone-status');
-  if (currentWeightKg !== null) {
-    marker.style.display = 'block';
-    // Map current weight to bar position
-    // Bar covers: very under (<rangeMin-15%), under (rangeMin-15% to rangeMin), ideal (rangeMin to rangeMax), over (rangeMax to rangeMax+15%), very over (>rangeMax+15%)
-    const idealSpan = rangeMax - rangeMin;
-    const buffer = Math.max(idealSpan * 0.5, 5);
-    const barMin = rangeMin - buffer * 2;
-    const barMax = rangeMax + buffer * 2;
-    let pct = (currentWeightKg - barMin) / (barMax - barMin);
-    pct = Math.max(0.01, Math.min(0.99, pct));
-    marker.style.left = (pct * 100).toFixed(1) + '%';
-    zoneStatus.style.display = 'block';
-
-    const diff = currentWeightKg - avgIdeal;
-    const diffDisplay = isImperial ? fmt(Math.abs(diff * 2.20462), 1) + ' lbs' : fmt(Math.abs(diff), 1) + ' kg';
-
-    if (currentWeightKg < rangeMin) {
-      zoneStatus.className = 'zone-status status-under';
-      zoneStatus.textContent = '⬇ ' + diffDisplay + ' below ideal range — consider gaining weight';
-    } else if (currentWeightKg <= rangeMax) {
-      zoneStatus.className = 'zone-status status-healthy';
-      zoneStatus.textContent = '✓ You are within your ideal weight range!';
-    } else {
-      zoneStatus.className = 'zone-status status-over';
-      zoneStatus.textContent = '⬆ ' + diffDisplay + ' above ideal range — consider losing weight';
+    const cw = parseFloat(document.getElementById('currentWeight').value);
+    if (!isNaN(cw) && document.getElementById('currentWeight').value !== '') {
+      if (cw < 1 || cw > 2000) {
+        showError('weightErr', 'Please enter a weight between 1 and 2,000 lbs.');
+        setInputError('currentWeight', true);
+        valid = false;
+      } else {
+        currentKg = lbsToKg(cw);
+      }
     }
   } else {
-    marker.style.display = 'none';
-    zoneStatus.style.display = 'none';
+    const cm = parseFloat(document.getElementById('heightFt').value);
+    if (isNaN(cm) || cm < 50 || cm > 280) {
+      showError('heightFtErr', 'Please enter a valid height in cm (50–280).');
+      setInputError('heightFt', true);
+      valid = false;
+    } else {
+      heightCm = cm;
+    }
+
+    const cw = parseFloat(document.getElementById('currentWeight').value);
+    if (!isNaN(cw) && document.getElementById('currentWeight').value !== '') {
+      if (cw < 1 || cw > 900) {
+        showError('weightErr', 'Please enter a weight between 1 and 900 kg.');
+        setInputError('currentWeight', true);
+        valid = false;
+      } else {
+        currentKg = cw;
+      }
+    }
   }
 
-  // Store for copy
-  window._lastResults = { results, bmi, rangeMin, rangeMax, isImperial };
+  if (!valid) return;
 
-  document.getElementById('results').classList.add('show');
-  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
+  const w = calcIdealWeights(heightCm, sex);
+  const isMetric = unit === 'metric';
+  const conv = isMetric ? 1 : kgToLbs;
+  const unitLabel = isMetric ? 'kg' : 'lbs';
 
-function copyResults() {
-  const r = window._lastResults;
-  if (!r) return;
-  let text = 'Ideal Weight Calculator Results\n';
-  text += '================================\n';
-  for (const [name, val] of Object.entries(r.results)) {
-    text += name + ': ' + fmtW(val, r.isImperial) + '\n';
+  const avgVal  = isMetric ? w.avg     : kgToLbs(w.avg);
+  const lowVal  = isMetric ? w.bmiLow  : kgToLbs(w.bmiLow);
+  const highVal = isMetric ? w.bmiHigh : kgToLbs(w.bmiHigh);
+
+  let gaugeHTML = '';
+  let zoneHTML = '';
+  let compareHTML = '';
+
+  if (currentKg !== null) {
+    const zone = getZone(currentKg, w.bmiLow, w.bmiHigh);
+    const currentDisp = isMetric ? currentKg : kgToLbs(currentKg);
+    const diff = currentKg - w.avg;
+    const diffDisp = isMetric ? diff : kgToLbs(diff);
+    const diffStr = diff > 0 ? `+${fmt(Math.abs(diffDisp))} ${unitLabel} above average ideal` : diff < 0 ? `${fmt(Math.abs(diffDisp))} ${unitLabel} below average ideal` : 'exactly at average ideal';
+
+    gaugeHTML = `
+      <div class="gauge-wrap">
+        <div class="gauge-track">
+          <div class="gauge-pointer" id="gaugePointer" style="left:${zone.pos}%"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>Underweight</span><span>Ideal</span><span>Overweight</span>
+        </div>
+      </div>
+      <div style="text-align:center">
+        <span class="zone-badge ${zone.cls}">${zone.label}</span>
+      </div>`;
+
+    compareHTML = `
+      <div style="margin-top:1.25rem;padding:.85rem 1rem;background:#f8f9fa;border-radius:6px;font-size:.9rem">
+        <strong>Your current weight:</strong> ${fmt(currentDisp)} ${unitLabel} &nbsp;|&nbsp; ${diffStr}
+      </div>`;
+  } else {
+    gaugeHTML = `
+      <div class="gauge-wrap">
+        <div class="gauge-track"></div>
+        <div class="gauge-labels">
+          <span>Underweight</span><span>Ideal</span><span>Overweight</span>
+        </div>
+      </div>
+      <p class="formula-note">Enter your current weight above to see where you fall on the scale.</p>`;
   }
-  text += 'BMI Range (18.5–24.9): ' + fmtW(r.bmi.low, r.isImperial) + ' – ' + fmtW(r.bmi.high, r.isImperial) + '\n';
-  text += '--------------------------------\n';
-  text += 'Overall Range: ' + fmtW(r.rangeMin, r.isImperial) + ' – ' + fmtW(r.rangeMax, r.isImperial) + '\n';
-  text += 'Generated by toolhut.dev/ideal-weight-calculator/\n';
 
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('copy-btn');
-    btn.textContent = '✓ Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = '📋 Copy Results'; btn.classList.remove('copied'); }, 2000);
-  }).catch(() => {
-    // fallback
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    const btn = document.getElementById('copy-btn');
-    btn.textContent = '✓ Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = '📋 Copy Results'; btn.classList.remove('copied'); }, 2000);
+  const rows = [
+    { name: 'Devine (1974)',   val: isMetric ? w.devine   : kgToLbs(w.devine),   note: 'Most used in clinical settings' },
+    { name: 'Robinson (1983)', val: isMetric ? w.robinson : kgToLbs(w.robinson), note: 'Refined from Devine' },
+    { name: 'Miller (1983)',   val: isMetric ? w.miller   : kgToLbs(w.miller),   note: 'Lower baseline, popular in research' },
+    { name: 'Hamwi (1964)',    val: isMetric ? w.hamwi    : kgToLbs(w.hamwi),    note: 'Traditional clinical formula' },
+  ];
+
+  let tableRows = rows.map(r =>
+    `<tr><td>${r.name}</td><td style="color:#555;font-size:.8rem">${r.note}</td><td>${fmt(r.val)} ${unitLabel}</td></tr>`
+  ).join('');
+
+  tableRows += `<tr class="highlight-row"><td><strong>Average of Formulas</strong></td><td style="font-size:.8rem;color:#0077b6">Recommended target</td><td>${fmt(avgVal)} ${unitLabel}</td></tr>`;
+  tableRows += `<tr style="background:#e8f4fb"><td>BMI Healthy Range (low)</td><td style="color:#555;font-size:.8rem">BMI = 18.5</td><td>${fmt(lowVal)} ${unitLabel}</td></tr>`;
+  tableRows += `<tr style="background:#e8f4fb"><td>BMI Healthy Range (high)</td><td style="color:#555;font-size:.8rem">BMI = 24.9</td><td>${fmt(highVal)} ${unitLabel}</td></tr>`;
+
+  const copyText = `Ideal Weight Results (${isMetric ? 'Metric' : 'Imperial'})\n` +
+    `Devine: ${fmt(rows[0].val)} ${unitLabel}\n` +
+    `Robinson: ${fmt(rows[1].val)} ${unitLabel}\n` +
+    `Miller: ${fmt(rows[2].val)} ${unitLabel}\n` +
+    `Hamwi: ${fmt(rows[3].val)} ${unitLabel}\n` +
+    `Average: ${fmt(avgVal)} ${unitLabel}\n` +
+    `BMI Healthy Range: ${fmt(lowVal)}–${fmt(highVal)} ${unitLabel}`;
+
+  const html = `
+    <div class="big-result">
+      <div class="big-label">Average Ideal Weight</div>
+      <div class="big-number">${fmt(avgVal)}</div>
+      <div class="big-unit">${unitLabel}</div>
+      <div class="range-label">Healthy range (BMI 18.5–24.9): <strong>${fmt(lowVal)}–${fmt(highVal)} ${unitLabel}</strong></div>
+    </div>
+    ${gaugeHTML}
+    ${compareHTML}
+    <div class="table-scroll" style="margin-top:1.25rem">
+      <table>
+        <thead><tr><th>Formula</th><th>Notes</th><th>Ideal Weight</th></tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+    </div>
+    <p class="formula-note">Results based on ${sex === 'male' ? 'male' : 'female'} body, height ${isMetric ? fmt(heightCm, 0) + ' cm' : (Math.floor(heightCm/2.54/12)) + "'" + (Math.round((heightCm/2.54) % 12)) + '"'}</p>
+    <button class="copy-btn" onclick="copyResult(this, ${JSON.stringify(copyText).replace(/'/g,'&#39;')})">
+      📋 Copy Results
+    </button>`;
+
+  requestAnimationFrame(() => {
+    document.getElementById('resultsContent').innerHTML = html;
+    document.getElementById('resultsSection').classList.add('visible');
+    document.getElementById('resultsSection').scrollIntoView({behavior:'smooth', block:'nearest'});
   });
 }
 
-// Enter key support
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') calculate();
+function copyResult(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.innerHTML = '📋 Copy Results'; }, 2000);
+  }).catch(() => {
+    btn.textContent = '❌ Failed';
+    setTimeout(() => { btn.innerHTML = '📋 Copy Results'; }, 2000);
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const active = document.activeElement;
+    if (['heightFt','heightIn','currentWeight'].includes(active.id)) {
+      requestAnimationFrame(() => { calculate(); });
+    }
+  }
 });
 </script>
 </body>
