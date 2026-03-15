@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pregnancy Due Date Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your pregnancy due date instantly. Enter your LMP, conception date, or ultrasound date. Get trimester timeline, key milestones & weekly breakdown.">
+<link rel="canonical" href="https://toolhut.dev/pregnancy-due-date-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Pregnancy Due Date Calculator",
+  "url": "https://toolhut.dev/pregnancy-due-date-calculator/",
+  "description": "Calculate your estimated due date based on last menstrual period, conception date, or IVF transfer date. Includes trimester timeline and key milestones.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #1a1a2e;
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+nav {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.875rem 1.5rem;
+  background: #fff;
+}
+.nav-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.site-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #0077b6;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+.subtitle {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.tool-card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 8px;
+  background: #f8f9fa;
+  border: none;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #555;
+  transition: background 0.2s, color 0.2s;
+  min-height: 44px;
+  border-right: 1px solid #ddd;
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn.active {
+  background: #0077b6;
+  color: #fff;
+}
+.tab-btn:hover:not(.active) { background: #e8f4fc; color: #0077b6; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 0.35rem;
+  margin-top: 1rem;
+}
+label:first-of-type { margin-top: 0; }
+
+input[type="date"], input[type="number"], select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #1a1a2e;
+  background: #fff;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  min-height: 44px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+input[type="date"]:focus, input[type="number"]:focus, select:focus {
+  outline: none;
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
+}
+input.error { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.12); }
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: none;
+}
+.error-msg.show { display: block; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 0.3rem;
+}
+
+.calc-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 13px 24px;
+  background: #0077b6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-height: 48px;
+}
+.calc-btn:hover { background: #006299; }
+.calc-btn:active { background: #005580; }
+
+/* Results */
+.results-section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.results-section.visible {
+  display: block;
+  opacity: 1;
+}
+
+.due-date-display {
+  text-align: center;
+  background: linear-gradient(135deg, #e8f4fc 0%, #f0f9ff 100%);
+  border: 1px solid #b3d9f0;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+.due-date-label { font-size: 0.85rem; color: #555; font-weight: 500; margin-bottom: 0.3rem; }
+.due-date-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0077b6;
+  line-height: 1.2;
+}
+.due-date-sub { font-size: 0.85rem; color: #666; margin-top: 0.4rem; }
+
+.copy-btn {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #444;
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.6rem;
+  transition: background 0.2s;
+  min-height: 32px;
+}
+.copy-btn:hover { background: #e0e0e0; }
+
+/* Pregnancy progress bar */
+.progress-section {
+  margin-bottom: 1.5rem;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #555;
+  margin-bottom: 0.4rem;
+}
+.progress-track {
+  width: 100%;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.8s ease;
+  position: relative;
+}
+.progress-fill.early { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+.progress-fill.mid { background: linear-gradient(90deg, #27ae60, #f39c12); }
+.progress-fill.late { background: linear-gradient(90deg, #f39c12, #e67e22); }
+.progress-fill.overdue { background: linear-gradient(90deg, #e67e22, #e74c3c); }
+
+.trimester-bar {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+.t1 { background: #a8d8ea; flex: 1; }
+.t2 { background: #68b5d8; flex: 1; }
+.t3 { background: #0077b6; flex: 1; }
+.trimester-labels {
+  display: flex;
+  font-size: 0.72rem;
+  color: #888;
+}
+.trimester-labels span { flex: 1; text-align: center; }
+
+/* Zone indicator */
+.zone-indicator {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.zone-indicator.green { background: #eafaf1; border: 1px solid #a9dfbf; color: #1e8449; }
+.zone-indicator.yellow { background: #fef9e7; border: 1px solid #f9e79f; color: #b7770d; }
+.zone-indicator.orange { background: #fef5e7; border: 1px solid #fad7a0; color: #ca6f1e; }
+.zone-indicator.red { background: #fdedec; border: 1px solid #f5b7b1; color: #c0392b; }
+.zone-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.zone-dot.green { background: #27ae60; }
+.zone-dot.yellow { background: #f1c40f; }
+.zone-dot.orange { background: #e67e22; }
+.zone-dot.red { background: #e74c3c; }
+
+/* Stats grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
+.stat-card {
+  background: #f8f9fa;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  text-align: center;
+}
+.stat-num { font-size: 1.3rem; font-weight: 700; color: #0077b6; line-height: 1.2; }
+.stat-lbl { font-size: 0.75rem; color: #666; margin-top: 0.15rem; }
+
+/* Milestones table */
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+}
+.table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 340px;
+}
+thead th {
+  background: #f0f0f0;
+  padding: 9px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  white-space: nowrap;
+}
+thead th.right { text-align: right; }
+tbody tr:nth-child(even) { background: #fafafa; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #efefef;
+  color: #333;
+}
+tbody td.right { text-align: right; }
+tbody tr.current-week {
+  background: #e8f4fc !important;
+  font-weight: 600;
+}
+tbody tr.past td { color: #aaa; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-t1 { background: #dbeef9; color: #1b6ca8; }
+.badge-t2 { background: #cce8f5; color: #0077b6; }
+.badge-t3 { background: #b3d9f0; color: #005580; }
+.badge-now { background: #0077b6; color: #fff; }
+
+.show-more-btn {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #0077b6;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  min-height: 40px;
+}
+.show-more-btn:hover { background: #e8f4fc; }
+
+.disclaimer {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: #6d4c00;
+  margin-bottom: 1.5rem;
+}
+.disclaimer strong { display: block; margin-bottom: 0.2rem; }
+
+/* Ad slot */
+.ad-slot { min-height: 0; margin: 0; }
+
+/* Content */
+.content-section { margin-bottom: 2rem; }
+.content-section h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+  padding-top: 0.25rem;
+}
+.content-section p { font-size: 0.92rem; color: #333; margin-bottom: 0.75rem; line-height: 1.65; }
+.content-section ul, .content-section ol {
+  padding-left: 1.3rem;
+  margin-bottom: 0.75rem;
+}
+.content-section li { font-size: 0.92rem; color: #333; margin-bottom: 0.4rem; line-height: 1.6; }
+
+details {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+}
+summary {
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  background: #f8f9fa;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-size: 1.1rem; color: #0077b6; }
+details[open] summary::after { content: "−"; }
+details p {
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.related-tools {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.related-tools h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1a1a2e;
+}
+.related-tools ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.related-tools li a {
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #dde;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 0.82rem;
+  color: #0077b6;
+  white-space: nowrap;
+}
+.related-tools li a:hover { background: #e8f4fc; text-decoration: none; }
+
+footer {
+  border-top: 1px solid #e0e0e0;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #888;
+}
+.footer-inner { max-width: 640px; margin: 0 auto; }
+footer a { color: #888; margin: 0 0.5rem; }
+footer a:hover { color: #0077b6; }
+.footer-links { margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🧰 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h1>Pregnancy Due Date Calculator</h1>
+  <p class="subtitle">Find your estimated due date, current trimester, and key milestones in seconds.</p>
+
+  <div class="tool-card">
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('lmp')" id="tab-lmp" role="tab" aria-selected="true">Last Period (LMP)</button>
+      <button class="tab-btn" onclick="switchTab('conception')" id="tab-conception" role="tab" aria-selected="false">Conception Date</button>
+      <button class="tab-btn" onclick="switchTab('ivf')" id="tab-ivf" role="tab" aria-selected="false">IVF Transfer</button>
+    </div>
+
+    <!-- LMP Panel -->
+    <div class="tab-panel active" id="panel-lmp">
+      <label for="lmp-date">First Day of Last Menstrual Period (LMP)</label>
+      <input type="date" id="lmp-date">
+      <div class="error-msg" id="lmp-error">Please enter a valid LMP date.</div>
+      <label for="cycle-length">Average Cycle Length (days)</label>
+      <div class="form-row">
+        <div>
+          <input type="number" id="cycle-length" value="28" min="20" max="45" placeholder="28">
+          <p class="hint">Typical range: 20–45 days</p>
+        </div>
+        <div>
+          <label for="lmp-today" style="margin-top:0;">Today's Date</label>
+          <input type="date" id="lmp-today">
+        </div>
+      </div>
+    </div>
+
+    <!-- Conception Panel -->
+    <div class="tab-panel" id="panel-conception">
+      <label for="conception-date">Estimated Conception Date</label>
+      <input type="date" id="conception-date">
+      <div class="error-msg" id="conception-error">Please enter a valid conception date.</div>
+      <label for="conception-today">Today's Date</label>
+      <input type="date" id="conception-today">
+    </div>
+
+    <!-- IVF Panel -->
+    <div class="tab-panel" id="panel-ivf">
+      <label for="transfer-date">Embryo Transfer Date</label>
+      <input type="date" id="transfer-date">
+      <div class="error-msg" id="ivf-error">Please enter a valid transfer date.</div>
+      <label for="embryo-age">Embryo Age at Transfer</label>
+      <select id="embryo-age">
+        <option value="3">Day 3 (cleavage)</option>
+        <option value="5" selected>Day 5 (blastocyst)</option>
+        <option value="6">Day 6 (blastocyst)</option>
+      </select>
+      <label for="ivf-today">Today's Date</label>
+      <input type="date" id="ivf-today">
+    </div>
+
+    <button class="calc-btn" id="calcBtn">Calculate Due Date</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results-section" id="results">
+
+    <div class="due-date-display">
+      <div class="due-date-label">Estimated Due Date (EDD)</div>
+      <div class="due-date-value" id="edd-display">—</div>
+      <div class="due-date-sub" id="edd-sub"></div>
+      <button class="copy-btn" onclick="copyDueDate()" id="copyBtn">📋 Copy Due Date</button>
+    </div>
+
+    <div class="zone-indicator" id="zone-indicator">
+      <div class="zone-dot" id="zone-dot"></div>
+      <span id="zone-text"></span>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-label">
+        <span id="prog-start">Week 0 · Conception</span>
+        <span id="prog-now"></span>
+        <span>Week 40 · Due Date</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="trimester-bar">
+        <div class="t1"></div>
+        <div class="t2"></div>
+        <div class="t3"></div>
+      </div>
+      <div class="trimester-labels">
+        <span>1st Trimester</span>
+        <span>2nd Trimester</span>
+        <span>3rd Trimester</span>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="stats-grid"></div>
+
+    <div class="section-title">Key Milestone Timeline</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>Date</th>
+            <th>Week</th>
+            <th class="right">Status</th>
+          </tr>
+        </thead>
+        <tbody id="milestones-body"></tbody>
+      </table>
+    </div>
+
+    <div class="section-title">Weekly Breakdown</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th>Starts</th>
+            <th>Trimester</th>
+            <th class="right">Days Left</th>
+          </tr>
+        </thead>
+        <tbody id="weekly-body"></tbody>
+      </table>
+    </div>
+    <button class="show-more-btn" id="showMoreBtn" onclick="toggleWeeks()">Show All 40 Weeks ▼</button>
+
+    <div class="disclaimer">
+      <strong>⚠️ Medical Disclaimer</strong>
+      This tool is for informational purposes only. Due dates are estimates — only about 5% of babies are born on their EDD. Consult a healthcare professional or OB-GYN for medical advice, diagnosis, or treatment.
+    </div>
+
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Pregnancy Due Date Calculator</h2>
+    <p>Choose your calculation method from the three tabs: <strong>Last Menstrual Period (LMP)</strong> — the most common method, enter the first day of your last period and your average cycle length; <strong>Conception Date</strong> — if you know when you conceived; or <strong>IVF Transfer</strong> — enter your embryo transfer date and the embryo's age. Hit "Calculate Due Date" to instantly see your EDD, current week, trimester, and a full milestone timeline.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Why This Matters</h2>
+    <p>Knowing your estimated due date (EDD) is one of the first and most important steps in prenatal care. Your OB-GYN uses it to schedule key screenings — the nuchal translucency scan between weeks 11–14, the anatomy scan around week 20, and glucose tolerance testing around week 24–28. Getting the date right ensures none of these windows are missed.</p>
+    <p>Consider a real-world example: a woman with a 35-day cycle who uses the standard 28-day formula might miscalculate her EDD by a full week. That seemingly small difference can affect whether a baby is considered premature, full-term, or post-dates — with real clinical consequences. This calculator adjusts for cycle length to give you a more personalized estimate.</p>
+    <p>Due dates also matter for maternity leave planning, deciding when to share the news (many people wait until after the first trimester ends around week 13), and understanding fetal development milestones. At week 24 the fetus reaches viability; at week 37 it's considered full-term. Knowing where you fall on that timeline helps you have informed conversations with your care team.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>How It's Calculated</h2>
+    <p>The most widely used method is <strong>Naegele's Rule</strong>, developed in the 19th century and still the clinical standard:</p>
+    <p><strong>EDD = LMP + 280 days (40 weeks)</strong></p>
+    <p>This assumes a 28-day cycle with ovulation on day 14. For cycles longer or shorter than 28 days, the formula adjusts:</p>
+    <p><strong>EDD = LMP + 280 days + (Cycle Length − 28) days</strong></p>
+    <p>For <strong>conception date</strong>: EDD = Conception Date + 266 days (38 weeks from fertilization, since pregnancy is measured from LMP which is ~2 weeks before conception).</p>
+    <p>For <strong>IVF</strong>: EDD = Transfer Date + (266 − Embryo Age) days. A Day 5 blastocyst transfer adds 261 days; a Day 3 transfer adds 263 days.</p>
+    <p>The <strong>gestational age</strong> (how far along you are) is calculated as the number of days elapsed since the LMP equivalent, expressed in weeks and days.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Use the first day of your last period, not the last day.</strong> This is the most common mistake. The LMP start date is what Naegele's Rule requires.</li>
+      <li><strong>Adjust for your cycle length.</strong> If your cycles are 35 days instead of 28, your ovulation is later, and your EDD shifts by ~7 days. This calculator handles that automatically.</li>
+      <li><strong>Early ultrasound is the gold standard.</strong> A first-trimester ultrasound (8–12 weeks) is the most accurate way to confirm gestational age. If the ultrasound date differs by more than 5–7 days, your OB will typically adjust your EDD.</li>
+      <li><strong>Only 5% of babies arrive on their exact due date.</strong> About 80% of babies are born within 2 weeks either side of the EDD, so think of it as a due "window" from 38–42 weeks.</li>
+      <li><strong>For IVF pregnancies, use the transfer date method.</strong> Your reproductive endocrinologist will give you a precise EDD based on egg retrieval or transfer date, which is more reliable than LMP for IVF cycles.</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is an estimated due date?</summary>
+      <p>EDDs are estimates, not guarantees. Studies show only about 4–5% of babies are born on their exact due date. However, roughly 80% arrive within 2 weeks of the EDD (between 38–42 weeks). First-trimester ultrasounds are the most accurate method, typically within ±3–5 days.</p>
+    </details>
+    <details>
+      <summary>What if I don't know my last period date?</summary>
+      <p>Use the Conception Date tab if you have a better idea of when you conceived, or the IVF tab if you underwent fertility treatment. Otherwise, your OB-GYN can estimate gestational age via ultrasound measurements — the crown-rump length (CRL) in the first trimester is highly accurate for dating.</p>
+    </details>
+    <details>
+      <summary>What's the difference between gestational age and fetal age?</summary>
+      <p>Gestational age is counted from the first day of the LMP and is what doctors use — it's about 2 weeks more than the actual fetal age (time since conception). So when your doctor says you're "10 weeks pregnant," your embryo is actually about 8 weeks old. This calculator uses gestational age, which is the standard.</p>
+    </details>
+    <details>
+      <summary>When does each trimester start and end?</summary>
+      <p>The first trimester runs from week 1 through week 13 (conception through 13 weeks). The second trimester spans weeks 14–26. The third trimester covers weeks 27–40 (or until delivery). Full-term is defined as 39–40 weeks; "early term" is 37–38 weeks and "late term" is 41–42 weeks.</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Health Tools</h2>
+    <ul>
+      <li><a href="/ideal-weight-calculator/">Ideal Weight Calculator</a></li>
+      <li><a href="/water-intake-calculator/">Water Intake Calculator</a></li>
+      <li><a href="/macro-calculator/">Macro Calculator for Weight Loss & Muscle Gain</a></li>
+      <li><a href="/calorie-deficit-calculator/">Calorie Deficit Calculator</a></li>
+      <li><a href="/bmi-calculator/">BMI Calculator with Weight Range Chart</a></li>
+      <li><a href="/one-rep-max-calculator/">One Rep Max Calculator</a></li>
+    </ul>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div>© 2025 toolhut.dev — Free Online Tools</div>
+  </div>
+</footer>
+
+<script>
+// ── Utilities ──────────────────────────────────────────────────────────────
+function fmt(n) { return n.toLocaleString(); }
+function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+function diffDays(a, b) { return Math.round((b - a) / 86400000); }
+function fmtDate(d) {
+  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
+}
+function fmtShort(d) {
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// ── Tab Switching (CSS class only — fast) ──────────────────────────────────
+let activeTab = 'lmp';
+function switchTab(tab) {
+  activeTab = tab;
+  ['lmp','conception','ivf'].forEach(t => {
+    document.getElementById('panel-' + t).classList.toggle('active', t === tab);
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+}
+
+// ── Set default dates ──────────────────────────────────────────────────────
+(function setDefaults() {
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
+  ['lmp-today','conception-today','ivf-today'].forEach(id => {
+    document.getElementById(id).value = todayStr;
+  });
+})();
+
+// ── Weekly breakdown state ─────────────────────────────────────────────────
+let allWeeksHTML = '';
+let collapsedHTML = '';
+let showingAll = false;
+
+function toggleWeeks() {
+  showingAll = !showingAll;
+  const btn = document.getElementById('showMoreBtn');
+  const body = document.getElementById('weekly-body');
+  if (showingAll) {
+    body.innerHTML = allWeeksHTML;
+    btn.textContent = 'Show Less ▲';
+  } else {
+    body.innerHTML = collapsedHTML;
+    btn.textContent = 'Show All 40 Weeks ▼';
+  }
+}
+
+// ── Main Calculate ─────────────────────────────────────────────────────────
+function calculate() {
+  // Clear errors
+  ['lmp-error','conception-error','ivf-error'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+  ['lmp-date','conception-date','transfer-date'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('error');
+  });
+
+  let lmpDate, todayDate;
+
+  if (activeTab === 'lmp') {
+    const lmpVal = document.getElementById('lmp-date').value;
+    const todayVal = document.getElementById('lmp-today').value;
+    const cycle = parseInt(document.getElementById('cycle-length').value) || 28;
+
+    if (!lmpVal) {
+      document.getElementById('lmp-date').classList.add('error');
+      document.getElementById('lmp-error').textContent = 'Please enter the first day of your last menstrual period.';
+      document.getElementById('lmp-error').classList.add('show');
+      return;
+    }
+    lmpDate = new Date(lmpVal + 'T00:00:00');
+    todayDate = todayVal ? new Date(todayVal + 'T00:00:00') : new Date();
+
+    const cycleDiff = cycle - 28;
+    lmpDate = addDays(lmpDate, 0); // keep
+    var edd = addDays(lmpDate, 280 + cycleDiff);
+    var lmpEquiv = lmpDate;
+
+  } else if (activeTab === 'conception') {
+    const concVal = document.getElementById('conception-date').value;
+    const todayVal = document.getElementById('conception-today').value;
+
+    if (!concVal) {
+      document.getElementById('conception-date').classList.add('error');
+      document.getElementById('conception-error').textContent = 'Please enter your estimated conception date.';
+      document.getElementById('conception-error').classList.add('show');
+      return;
+    }
+    const concDate = new Date(concVal + 'T00:00:00');
+    todayDate = todayVal ? new Date(todayVal + 'T00:00:00') : new Date();
+    var edd = addDays(concDate, 266);
+    var lmpEquiv = addDays(concDate, -14); // LMP equivalent
+
+  } else { // ivf
+    const transferVal = document.getElementById('transfer-date').value;
+    const todayVal = document.getElementById('ivf-today').value;
+    const embryoAge = parseInt(document.getElementById('embryo-age').value) || 5;
+
+    if (!transferVal) {
+      document.getElementById('transfer-date').classList.add('error');
+      document.getElementById('ivf-error').textContent = 'Please enter your embryo transfer date.';
+      document.getElementById('ivf-error').classList.add('show');
+      return;
+    }
+    const transferDate = new Date(transferVal + 'T00:00:00');
+    todayDate = todayVal ? new Date(todayVal + 'T00:00:00') : new Date();
+    // From transfer: add (266 - embryoAge) days for EDD
+    var edd = addDays(transferDate, 266 - embryoAge);
+    var lmpEquiv = addDays(transferDate, -(14 + embryoAge)); // LMP equivalent
+  }
+
+  // Validate: LMP shouldn't be in future, EDD not more than 42 weeks past
+  const lmpEq = lmpEquiv;
+  if (lmpEq > todayDate) {
+    // future LMP — could be ok for planning, but warn
+  }
+
+  const daysFromLMP = diffDays(lmpEq, todayDate);
+  const daysToEDD = diffDays(todayDate, edd);
+  const totalDays = diffDays(lmpEq, edd); // should be ~280
+
+  // Gestational age
+  const gWeeks = Math.floor(daysFromLMP / 7);
+  const gDays = daysFromLMP % 7;
+
+  // Clamp for display
+  const pctRaw = (daysFromLMP / totalDays) * 100;
+  const pct = Math.min(100, Math.max(0, pctRaw));
+
+  // Zone
+  let zoneClass, dotClass, zoneText;
+  if (daysFromLMP < 0) {
+    zoneClass = 'yellow'; dotClass = 'yellow';
+    zoneText = 'Pre-pregnancy planning mode — date is in the future.';
+  } else if (gWeeks < 1) {
+    zoneClass = 'green'; dotClass = 'green';
+    zoneText = 'Week 1 — Very early pregnancy. Congratulations!';
+  } else if (gWeeks < 13) {
+    zoneClass = 'green'; dotClass = 'green';
+    zoneText = `1st Trimester · Week ${gWeeks} — Fetal organs are forming. First prenatal visit recommended.`;
+  } else if (gWeeks < 27) {
+    zoneClass = 'green'; dotClass = 'green';
+    zoneText = `2nd Trimester · Week ${gWeeks} — Often the most comfortable trimester. Anatomy scan around week 20.`;
+  } else if (gWeeks < 37) {
+    zoneClass = 'yellow'; dotClass = 'yellow';
+    zoneText = `3rd Trimester · Week ${gWeeks} — Baby is growing rapidly. Birth preparation begins.`;
+  } else if (gWeeks < 40) {
+    zoneClass = 'green'; dotClass = 'green';
+    zoneText = `Week ${gWeeks} — Early/Full Term. Baby could arrive any time!`;
+  } else if (gWeeks === 40) {
+    zoneClass = 'orange'; dotClass = 'orange';
+    zoneText = `Week 40 — Due Date week! Baby is fully developed.`;
+  } else {
+    zoneClass = 'red'; dotClass = 'red';
+    zoneText = `Week ${gWeeks} — Post-dates. Discuss options with your healthcare provider.`;
+  }
+
+  // Progress fill class
+  let fillClass = 'early';
+  if (pct > 65) fillClass = 'late';
+  else if (pct > 32) fillClass = 'mid';
+  if (gWeeks > 40) fillClass = 'overdue';
+
+  // Stats
+  const daysPreg = Math.max(0, daysFromLMP);
+  const weeksLeft = Math.max(0, Math.floor(daysToEDD / 7));
+  const daysLeftNum = Math.max(0, daysToEDD);
+  const monthsLeft = (daysLeftNum / 30.44).toFixed(1);
+
+  // Conception date
+  const conceptionDate = addDays(lmpEq, 14);
+  // Trimester start dates
+  const t2Start = addDays(lmpEq, 13 * 7); // week 13
+  const t3Start = addDays(lmpEq, 27 * 7); // week 27
+  // Key milestones
+  const milestones = [
+    { name: 'Conception (est.)', week: 2, dayOffset: 14 },
+    { name: 'Missed Period', week: 4, dayOffset: 28 },
+    { name: 'Heartbeat Visible (Ultrasound)', week: 6, dayOffset: 42 },
+    { name: 'End of Embryonic Period', week: 10, dayOffset: 70 },
+    { name: 'NT Scan Window Opens', week: 11, dayOffset: 77 },
+    { name: '2nd Trimester Begins', week: 14, dayOffset: 91 },
+    { name: 'Anatomy Scan (20-Week)', week: 20, dayOffset: 140 },
+    { name: 'Viability Milestone', week: 24, dayOffset: 168 },
+    { name: 'Glucose Tolerance Test', week: 28, dayOffset: 196 },
+    { name: '3rd Trimester Begins', week: 27, dayOffset: 189 },
+    { name: 'Early Term Begins', week: 37, dayOffset: 259 },
+    { name: 'Full Term Begins', week: 39, dayOffset: 273 },
+    { name: 'Estimated Due Date', week: 40, dayOffset: 280 },
+    { name: 'Post-Term (42 weeks)', week: 42, dayOffset: 294 },
+  ].sort((a,b) => a.dayOffset - b.dayOffset);
+
+  // Build milestones HTML
+  let msHTML = '';
+  milestones.forEach(m => {
+    const mDate = addDays(lmpEq, m.dayOffset);
+    const isPast = mDate < todayDate;
+    const isCurrent = !isPast && diffDays(todayDate, mDate) <= 7;
+    const status = isPast ? '✓ Past' : isCurrent ? '← Soon' : '—';
+    const rowClass = isPast ? 'past' : isCurrent ? 'current-week' : '';
+    const tClass = m.week < 14 ? 'badge-t1' : m.week < 27 ? 'badge-t2' : 'badge-t3';
+    msHTML += `<tr class="${rowClass}">
+      <td>${m.name}</td>
+      <td style="white-space:nowrap">${fmtShort(mDate)}</td>
+      <td>Wk ${m.week}</td>
+      <td class="right">${isPast ? '<span style="color:#27ae60">✓</span>' : status}</td>
+    </tr>`;
+  });
+
+  // Build weekly breakdown HTML
+  let allRows = '';
+  for (let w = 1; w <= 40; w++) {
+    const wStart = addDays(lmpEq, (w - 1) * 7);
+    const wEnd = addDays(lmpEq, w * 7);
+    const tBadge = w <= 13 ? '<span class="badge badge-t1">T1</span>' : w <= 26 ? '<span class="badge badge-t2">T2</span>' : '<span class="badge badge-t3">T3</span>';
+    const dLeft = Math.max(0, diffDays(todayDate, wEnd));
+    const isCur = todayDate >= wStart && todayDate < wEnd;
+    const isPast = wEnd <= todayDate;
+    const rowClass = isCur ? 'current-week' : isPast ? 'past' : '';
+    const curBadge = isCur ? ' <span class="badge badge-now">NOW</span>' : '';
+    allRows += `<tr class="${rowClass}">
+      <td>Week ${w}${curBadge}</td>
+      <td style="white-space:nowrap">${fmtShort(wStart)}</td>
+      <td>${tBadge}</td>
+      <td class="right">${isPast ? '—' : fmt(dLeft) + 'd'}</td>
+    </tr>`;
+  }
+
+  // Collapse to show current week ± 4, max 8 rows
+  const curWeek = gWeeks < 1 ? 1 : gWeeks > 40 ? 40 : gWeeks;
+  const showStart = Math.max(1, curWeek - 3) - 1;
+  const showEnd = Math.min(40, curWeek + 4);
+  const rowArr = allRows.split('</tr>').filter(r => r.trim());
+  const collapsedRows = rowArr.slice(showStart, showEnd).join('</tr>') + (rowArr.length > 0 ? '</tr>' : '');
+
+  allWeeksHTML = allRows;
+  collapsedHTML = collapsedRows;
+  showingAll = false;
+
+  // Stats HTML
+  const statsHTML = `
+    <div class="stat-card"><div class="stat-num">${gWeeks}<span style="font-size:1rem">w</span> ${Math.max(0,gDays)}<span style="font-size:1rem">d</span></div><div class="stat-lbl">Gestational Age</div></div>
+    <div class="stat-card"><div class="stat-num">${fmt(daysLeftNum)}</div><div class="stat-lbl">Days Until Due Date</div></div>
+    <div class="stat-card"><div class="stat-num">${weeksLeft}w ${Math.max(0, daysLeftNum % 7)}d</div><div class="stat-lbl">Weeks Remaining</div></div>
+    <div class="stat-card"><div class="stat-num">${monthsLeft}</div><div class="stat-lbl">Months Remaining</div></div>
+  `;
+
+  // All DOM writes in one rAF batch
+  requestAnimationFrame(() => {
+    document.getElementById('edd-display').textContent = fmtDate(edd);
+    document.getElementById('edd-sub').textContent = daysToEDD > 0
+      ? `${fmt(daysToEDD)} days from today · ${fmtShort(todayDate)}`
+      : daysToEDD === 0
+        ? '🎉 Today is your due date!'
+        : `${fmt(Math.abs(daysToEDD))} days past your due date`;
+
+    const zoneEl = document.getElementById('zone-indicator');
+    zoneEl.className = 'zone-indicator ' + zoneClass;
+    document.getElementById('zone-dot').className = 'zone-dot ' + dotClass;
+    document.getElementById('zone-text').textContent = zoneText;
+
+    document.getElementById('prog-now').textContent = `Week ${Math.max(0,gWeeks)} · Now`;
+    const fill = document.getElementById('progress-fill');
+    fill.style.width = pct.toFixed(1) + '%';
+    fill.className = 'progress-fill ' + fillClass;
+
+    document.getElementById('stats-grid').innerHTML = statsHTML;
+    document.getElementById('milestones-body').innerHTML = msHTML;
+    document.getElementById('weekly-body').innerHTML = collapsedHTML;
+    document.getElementById('showMoreBtn').textContent = 'Show All 40 Weeks ▼';
+
+    // Show results with fade
+    const res = document.getElementById('results');
+    res.style.display = 'block';
+    requestAnimationFrame(() => { res.classList.add('visible'); });
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// ── Copy Due Date ──────────────────────────────────────────────────────────
+function copyDueDate() {
+  const text = document.getElementById('edd-display').textContent;
+  if (!text || text === '—') return;
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => flashCopy());
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    flashCopy();
+  }
+}
+function flashCopy() {
+  const btn = document.getElementById('copyBtn');
+  btn.textContent = '✅ Copied!';
+  setTimeout(() => { btn.textContent = '📋 Copy Due Date'; }, 2000);
+}
+
+// ── Button & Enter key ─────────────────────────────────────────────────────
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const tag = e.target.tagName.toLowerCase();
+    if (tag === 'input' || tag === 'select') {
+      requestAnimationFrame(() => { calculate(); });
+    }
+  }
+});
+</script>
+</body>
+</html>
