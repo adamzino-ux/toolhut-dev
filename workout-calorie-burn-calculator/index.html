@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workout Calorie Burn Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate calories burned during any workout with our free exercise calorie calculator. Enter your weight, activity, and duration for instant accurate results.">
+<link rel="canonical" href="https://toolhut.dev/workout-calorie-burn-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Workout Calorie Burn Calculator",
+  "url": "https://toolhut.dev/workout-calorie-burn-calculator/",
+  "description": "Calculate calories burned during any workout or exercise activity based on your weight, duration, and activity type.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand:hover{text-decoration:none;color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px}
+input[type="number"],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none;min-height:44px}
+input[type="number"]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+input[type="range"]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;background:#ddd;outline:none;margin-top:8px;cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:#0077b6;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#0077b6;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.range-labels{display:flex;justify-content:space-between;font-size:0.75rem;color:#888;margin-top:4px}
+.range-val{font-weight:600;color:#0077b6;font-size:0.9rem;margin-top:4px}
+.unit-toggle{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1.2rem;width:fit-content}
+.unit-toggle button{padding:8px 20px;border:none;background:#fff;color:#555;cursor:pointer;font-size:0.9rem;font-weight:500;transition:background 0.2s,color 0.2s;min-height:40px}
+.unit-toggle button.active{background:#0077b6;color:#fff}
+.btn{display:block;width:100%;background:#0077b6;color:#fff;border:none;padding:14px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:48px}
+.btn:hover{background:#006299}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.result-hero{text-align:center;padding:1.5rem 0 1rem}
+.result-cal{font-size:3rem;font-weight:700;color:#0077b6;line-height:1}
+.result-label{font-size:0.95rem;color:#666;margin-top:6px}
+.result-sub{font-size:1rem;color:#444;margin-top:8px}
+.intensity-bar-wrap{margin:1.2rem 0}
+.intensity-bar-wrap h3{font-size:0.85rem;font-weight:500;color:#444;margin-bottom:8px}
+.intensity-track{height:22px;border-radius:11px;background:linear-gradient(to right,#27ae60,#f1c40f,#e67e22,#e74c3c);position:relative;overflow:visible}
+.intensity-needle{position:absolute;top:50%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid #1a1a2e;box-shadow:0 1px 4px rgba(0,0,0,0.3);transition:left 0.4s ease;z-index:2}
+.intensity-zones{display:flex;justify-content:space-between;margin-top:6px}
+.intensity-zones span{font-size:0.7rem;color:#777}
+.zone-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:0.82rem;font-weight:600;margin-top:10px}
+.zone-low{background:#d5f0e0;color:#1a7d3c}
+.zone-mod{background:#fef3cd;color:#9a6a00}
+.zone-high{background:#ffe0c8;color:#b84a00}
+.zone-vhigh{background:#fdd;color:#c0392b}
+.breakdown-table{width:100%;border-collapse:collapse;font-size:0.9rem;margin-top:1rem}
+.breakdown-table th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#555}
+.breakdown-table th:last-child,.breakdown-table td:last-child{text-align:right}
+.breakdown-table td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
+.breakdown-table tr:nth-child(even) td{background:#fafafa}
+.copy-btn{background:none;border:1px solid #ddd;color:#0077b6;padding:6px 14px;border-radius:4px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;margin-top:0.8rem}
+.copy-btn:hover{background:#f0f7fc;border-color:#0077b6}
+.ad-slot{min-height:0;margin:0}
+section.content{margin-bottom:2rem}
+section.content h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin:1.8rem 0 0.6rem}
+section.content p{color:#444;font-size:0.95rem;margin-bottom:0.8rem}
+section.content ul{padding-left:1.4rem;color:#444;font-size:0.95rem}
+section.content ul li{margin-bottom:0.5rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;overflow:hidden}
+summary{padding:12px 16px;cursor:pointer;font-weight:500;font-size:0.95rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'▼';font-size:0.7rem;color:#888;transition:transform 0.2s}
+details[open] summary::after{transform:rotate(180deg)}
+details p{padding:12px 16px;font-size:0.9rem;color:#444;background:#fff}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:0.8rem}
+.related-link{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:10px 14px;font-size:0.88rem;color:#0077b6;transition:background 0.2s}
+.related-link:hover{background:#e8f4fb;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;text-align:center;font-size:0.82rem;color:#888}
+footer a{color:#888;margin:0 0.5rem}
+footer a:hover{color:#0077b6}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px 16px;font-size:0.82rem;color:#7a5c00;margin-top:1rem}
+.section-label{font-size:0.8rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem}
+@media(max-width:600px){
+  .row-2{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.3rem}
+  .result-cal{font-size:2.4rem}
+  .card{padding:1.4rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🛠 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Workout Calorie Burn Calculator</h1>
+  <p class="subtitle">Calculate exactly how many calories you burn during exercise — by activity, weight, and duration.</p>
+
+  <div class="card">
+    <div class="section-label">Your Details</div>
+
+    <div style="margin-bottom:1.2rem">
+      <label>Unit System</label>
+      <div class="unit-toggle">
+        <button class="active" id="btn-imperial" onclick="setUnits('imperial')">Imperial (lb)</button>
+        <button id="btn-metric" onclick="setUnits('metric')">Metric (kg)</button>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="weight" id="weight-label">Body Weight (lbs)</label>
+        <input type="number" id="weight" placeholder="e.g. 160" min="50" max="700" value="">
+        <div class="error-msg" id="weight-err">Please enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" placeholder="e.g. 30" min="10" max="100" value="">
+        <div class="error-msg" id="age-err">Please enter a valid age (10–100).</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Exercise / Activity</label>
+      <select id="activity">
+        <option value="">— Select an activity —</option>
+        <optgroup label="Cardio">
+          <option value="3.5">Walking (slow, 2 mph)</option>
+          <option value="4.5">Walking (moderate, 3 mph)</option>
+          <option value="5.0">Walking (brisk, 3.5 mph)</option>
+          <option value="8.0">Jogging (5 mph)</option>
+          <option value="9.8">Running (6 mph)</option>
+          <option value="11.5">Running (7 mph)</option>
+          <option value="13.5">Running (8 mph)</option>
+          <option value="16.0">Running (fast, 10 mph)</option>
+          <option value="8.5">Cycling (moderate, ~12 mph)</option>
+          <option value="10.0">Cycling (vigorous, ~14-16 mph)</option>
+          <option value="12.0">Cycling (racing, >16 mph)</option>
+          <option value="6.0">Swimming (leisure)</option>
+          <option value="9.5">Swimming (vigorous)</option>
+          <option value="7.0">Jump rope (moderate)</option>
+          <option value="12.3">Jump rope (fast)</option>
+          <option value="5.5">Elliptical (moderate)</option>
+          <option value="8.0">Elliptical (vigorous)</option>
+          <option value="5.0">Rowing machine (moderate)</option>
+          <option value="8.5">Rowing machine (vigorous)</option>
+          <option value="6.5">Stair climbing</option>
+          <option value="7.0">Hiking (moderate terrain)</option>
+        </optgroup>
+        <optgroup label="Strength & HIIT">
+          <option value="3.5">Weight training (light)</option>
+          <option value="5.0">Weight training (moderate)</option>
+          <option value="6.0">Weight training (vigorous)</option>
+          <option value="8.0">CrossFit / HIIT (moderate)</option>
+          <option value="10.0">CrossFit / HIIT (vigorous)</option>
+          <option value="7.0">Circuit training</option>
+          <option value="3.8">Yoga (Hatha)</option>
+          <option value="5.5">Yoga (Power/Vinyasa)</option>
+          <option value="6.0">Pilates</option>
+          <option value="4.5">Stretching / Flexibility</option>
+        </optgroup>
+        <optgroup label="Sports">
+          <option value="8.0">Basketball (game)</option>
+          <option value="6.0">Basketball (shooting around)</option>
+          <option value="7.0">Soccer (recreational)</option>
+          <option value="10.0">Soccer (competitive)</option>
+          <option value="5.0">Tennis (doubles)</option>
+          <option value="8.0">Tennis (singles)</option>
+          <option value="6.0">Volleyball</option>
+          <option value="7.5">Martial arts / Boxing</option>
+          <option value="9.0">Boxing (sparring)</option>
+          <option value="5.5">Golf (walking, no cart)</option>
+        </optgroup>
+        <optgroup label="Daily Activities">
+          <option value="2.5">Light housework</option>
+          <option value="3.0">Gardening</option>
+          <option value="3.5">Dancing (moderate)</option>
+          <option value="6.0">Dancing (vigorous)</option>
+          <option value="2.0">Standing / Light office work</option>
+        </optgroup>
+      </select>
+      <div class="error-msg" id="activity-err">Please select an activity.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="duration-range">Duration: <span class="range-val" id="duration-display">30 minutes</span></label>
+      <input type="range" id="duration-range" min="5" max="180" step="5" value="30" oninput="syncDuration(this.value)">
+      <div class="range-labels"><span>5 min</span><span>1 hr</span><span>3 hrs</span></div>
+    </div>
+
+    <div class="form-group">
+      <label for="duration-input">Or type duration (minutes)</label>
+      <input type="number" id="duration-input" placeholder="e.g. 45" min="1" max="600" value="30" oninput="syncDurationInput(this.value)">
+      <div class="error-msg" id="duration-err">Please enter a valid duration (1–600 min).</div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Calories Burned</button>
+  </div>
+
+  <div class="card results" id="results">
+    <div class="result-hero">
+      <div class="result-cal" id="res-calories">—</div>
+      <div class="result-label">Calories Burned</div>
+      <div class="result-sub" id="res-summary"></div>
+    </div>
+
+    <div class="intensity-bar-wrap">
+      <h3>Burn Intensity Zone</h3>
+      <div class="intensity-track" id="intensity-track">
+        <div class="intensity-needle" id="intensity-needle" style="left:10%"></div>
+      </div>
+      <div class="intensity-zones">
+        <span>Light</span>
+        <span>Moderate</span>
+        <span>High</span>
+        <span>Very High</span>
+      </div>
+      <div style="margin-top:8px">
+        <span class="zone-badge" id="zone-badge">Light</span>
+      </div>
+    </div>
+
+    <table class="breakdown-table" id="breakdown-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody id="breakdown-body"></tbody>
+    </table>
+
+    <button class="copy-btn" id="copy-btn" onclick="copyResults()">📋 Copy Results</button>
+
+    <div class="disclaimer">⚠️ This tool is for informational purposes only. Calorie estimates are based on MET values and may vary by individual fitness level. Consult a healthcare professional for medical advice.</div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <section class="content">
+    <h2>How to Use This Workout Calorie Burn Calculator</h2>
+    <p>Enter your body weight, age, and select the exercise you performed. Use the slider or type in your workout duration in minutes, then click <strong>Calculate Calories Burned</strong>. You'll instantly see your estimated calorie burn along with a breakdown showing rate per minute, equivalent food items, and your intensity zone.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Knowing how many calories you actually burn during a workout is one of the most practical pieces of fitness data you can have. Whether you're trying to lose weight, maintain your current body composition, or fuel up properly before a long run, the numbers make a real difference.</p>
+    <p>Consider this: a 170-pound person burns roughly <strong>270 calories</strong> in 30 minutes of moderate jogging — but only about <strong>130 calories</strong> doing the same 30 minutes of light weight training. That's a 2× difference. Knowing this helps you plan smarter — maybe you pair a short HIIT session with a longer walk instead of spending an hour on the treadmill.</p>
+    <p>Calorie burn data also matters for post-workout nutrition. If you burn 600 calories on a long bike ride, replacing some of that energy (especially carbohydrates and protein) within 45 minutes improves recovery. Athletes, recreational gym-goers, and anyone tracking macros all benefit from accurate exercise calorie data. This calculator uses established MET (Metabolic Equivalent of Task) values from the Compendium of Physical Activities — the same methodology used by researchers and sports scientists.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses the <strong>MET formula</strong>, the gold-standard method for estimating exercise calorie expenditure:</p>
+    <p style="background:#f8f9fa;padding:10px 14px;border-radius:6px;font-family:monospace;font-size:0.9rem;color:#1a1a2e">Calories = MET × Weight (kg) × Duration (hours)</p>
+    <p>Where <strong>MET</strong> (Metabolic Equivalent of Task) is a measure of how much energy an activity requires relative to sitting still. Walking slowly has a MET of ~3.5, while fast running hits MET 16+. Weight in kilograms is used because the standard formula was developed in metric units. Duration is converted to hours (so 30 minutes = 0.5 hours).</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't overestimate rest time.</strong> If your "45-minute workout" includes 10 minutes of rest between sets, calculate for ~35 minutes of actual activity.</li>
+      <li><strong>Fitness level changes burn rate.</strong> As you get fitter, your body becomes more efficient — you burn slightly fewer calories for the same effort. That's normal progress.</li>
+      <li><strong>Heart rate monitors are more accurate</strong> for individuals than MET formulas. Use this calculator for planning, and a chest strap or quality wearable for precise tracking.</li>
+      <li><strong>HIIT burns more post-workout too.</strong> High-intensity intervals trigger EPOC (excess post-exercise oxygen consumption), meaning you continue burning extra calories for hours after. This calculator only shows in-workout burn.</li>
+      <li><strong>Don't eat back all your calories</strong> unless you're an endurance athlete. Most fitness goals benefit from a modest calorie deficit even on workout days.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>Is this calculator accurate for everyone?</summary>
+      <p>The MET-based formula gives a solid estimate for average adults but can vary by ±10–20% depending on fitness level, body composition, metabolism, and workout intensity within the category. It's best used as a planning guide rather than a precise measurement. For more accuracy, use a heart rate monitor or metabolic testing.</p>
+    </details>
+
+    <details>
+      <summary>Why does weight affect calorie burn so much?</summary>
+      <p>Heavier bodies require more energy to move the same distance or perform the same movements — it's simple physics. A 220-pound person burns roughly 35–40% more calories than a 150-pound person doing the same activity for the same duration. This is why the formula multiplies MET by body weight.</p>
+    </details>
+
+    <details>
+      <summary>Does age affect how many calories I burn?</summary>
+      <p>Age is included in this calculator because metabolic rate tends to decline with age — roughly 1–2% per decade after age 30. Older adults also tend to have slightly lower muscle mass, which further reduces resting and active calorie burn. The effect is modest for short workouts but adds up over time.</p>
+    </details>
+
+    <details>
+      <summary>How many calories should I burn per workout?</summary>
+      <p>The American Heart Association recommends 150–300 minutes of moderate activity per week. A 200-calorie burn per 30-minute session, 5 days a week, puts you right in that sweet spot. Elite athletes may target 500–1,000+ calories per session, but for most people, consistency beats intensity.</p>
+    </details>
+
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/vo2-max-calculator/" class="related-link">🫁 VO2 Max Calculator</a>
+      <a href="/calorie-deficit-calculator/" class="related-link">🔥 Calorie Deficit Calculator</a>
+      <a href="/macro-calculator/" class="related-link">🥗 Macro Calculator</a>
+      <a href="/ideal-weight-calculator/" class="related-link">⚖️ Ideal Weight Calculator</a>
+      <a href="/water-intake-calculator/" class="related-link">💧 Water Intake Calculator</a>
+      <a href="/pregnancy-due-date-calculator/" class="related-link">🤰 Pregnancy Due Date Calculator</a>
+    </div>
+  </section>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>© <span id="yr"></span> toolhut.dev &nbsp;|&nbsp;
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let currentUnits = 'imperial';
+let lastResults = null;
+
+function setUnits(u) {
+  currentUnits = u;
+  document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+  document.getElementById('weight-label').textContent = u === 'imperial' ? 'Body Weight (lbs)' : 'Body Weight (kg)';
+  document.getElementById('weight').placeholder = u === 'imperial' ? 'e.g. 160' : 'e.g. 73';
+}
+
+function syncDuration(val) {
+  document.getElementById('duration-display').textContent = val + ' minute' + (val == 1 ? '' : 's');
+  document.getElementById('duration-input').value = val;
+}
+
+function syncDurationInput(val) {
+  const v = Math.min(Math.max(parseInt(val) || 5, 5), 180);
+  document.getElementById('duration-range').value = v;
+  document.getElementById('duration-display').textContent = v + ' minute' + (v == 1 ? '' : 's');
+}
+
+function clearErrors() {
+  ['weight','age','activity','duration'].forEach(function(f) {
+    const el = document.getElementById(f === 'duration' ? 'duration-input' : f);
+    if (el) { el.classList.remove('error'); }
+    const em = document.getElementById(f + '-err');
+    if (em) em.classList.remove('show');
+  });
+}
+
+function showError(field, msg) {
+  const el = document.getElementById(field);
+  if (el) el.classList.add('error');
+  const em = document.getElementById(field + '-err');
+  if (em) { em.textContent = msg; em.classList.add('show'); }
+}
+
+function fmt(n, d) {
+  d = d === undefined ? 0 : d;
+  return Number(n.toFixed(d)).toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+}
+
+function getAgeMultiplier(age) {
+  if (age < 20) return 1.05;
+  if (age < 30) return 1.0;
+  if (age < 40) return 0.98;
+  if (age < 50) return 0.95;
+  if (age < 60) return 0.92;
+  return 0.88;
+}
+
+function calculate() {
+  clearErrors();
+
+  const weightRaw = parseFloat(document.getElementById('weight').value);
+  const age = parseInt(document.getElementById('age').value);
+  const activityVal = document.getElementById('activity').value;
+  const duration = parseInt(document.getElementById('duration-input').value);
+
+  let valid = true;
+
+  if (!weightRaw || isNaN(weightRaw) || weightRaw <= 0) {
+    showError('weight', 'Please enter a valid weight.');
+    valid = false;
+  } else if (currentUnits === 'imperial' && (weightRaw < 50 || weightRaw > 700)) {
+    showError('weight', 'Please enter a weight between 50 and 700 lbs.');
+    valid = false;
+  } else if (currentUnits === 'metric' && (weightRaw < 22 || weightRaw > 320)) {
+    showError('weight', 'Please enter a weight between 22 and 320 kg.');
+    valid = false;
+  }
+
+  if (!age || isNaN(age) || age < 10 || age > 100) {
+    showError('age', 'Please enter a valid age (10–100).');
+    valid = false;
+  }
+
+  if (!activityVal) {
+    showError('activity', 'Please select an activity.');
+    valid = false;
+  }
+
+  if (!duration || isNaN(duration) || duration < 1 || duration > 600) {
+    showError('duration-input', 'Please enter a duration between 1 and 600 minutes.');
+    document.getElementById('duration-err').classList.add('show');
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  const weightKg = currentUnits === 'imperial' ? weightRaw / 2.20462 : weightRaw;
+  const met = parseFloat(activityVal);
+  const durationHrs = duration / 60;
+  const ageMult = getAgeMultiplier(age);
+  const calories = met * weightKg * durationHrs * ageMult;
+  const calPerMin = calories / duration;
+  const weightDisplay = currentUnits === 'imperial' ? fmt(weightRaw, 1) + ' lbs' : fmt(weightRaw, 1) + ' kg';
+  const activityName = document.getElementById('activity').options[document.getElementById('activity').selectedIndex].text;
+
+  // Zone based on cal/min per kg
+  const calPerMinPerKg = calPerMin / weightKg;
+  let zoneLabel, zoneClass, needlePos;
+  if (calPerMinPerKg < 0.06) {
+    zoneLabel = 'Light'; zoneClass = 'zone-low'; needlePos = 10 + (calPerMinPerKg / 0.06) * 20;
+  } else if (calPerMinPerKg < 0.10) {
+    zoneLabel = 'Moderate'; zoneClass = 'zone-mod'; needlePos = 30 + ((calPerMinPerKg - 0.06) / 0.04) * 25;
+  } else if (calPerMinPerKg < 0.15) {
+    zoneLabel = 'High'; zoneClass = 'zone-high'; needlePos = 55 + ((calPerMinPerKg - 0.10) / 0.05) * 25;
+  } else {
+    zoneLabel = 'Very High'; zoneClass = 'zone-vhigh'; needlePos = 80 + Math.min(((calPerMinPerKg - 0.15) / 0.05) * 18, 18);
+  }
+  needlePos = Math.max(3, Math.min(97, needlePos));
+
+  // Equivalents
+  const applesEq = (calories / 95).toFixed(1);
+  const pizzaSlices = (calories / 285).toFixed(1);
+  const walkMins = Math.round(calories / (3.5 * weightKg / 60));
+  const fatGrams = (calories / 9).toFixed(1);
+
+  lastResults = { calories, activityName, duration, weightDisplay, calPerMin, met, age, zoneLabel, applesEq, pizzaSlices, fatGrams };
+
+  const breakdownRows = [
+    ['Activity', activityName],
+    ['Duration', duration + ' minutes'],
+    ['Body Weight', weightDisplay],
+    ['Age', age + ' years'],
+    ['MET Value', fmt(met, 1)],
+    ['Calories Burned', '<strong>' + fmt(calories, 0) + ' kcal</strong>'],
+    ['Burn Rate', fmt(calPerMin, 1) + ' kcal/min'],
+    ['Equivalent fat burned', fatGrams + ' grams'],
+    ['≈ Apples (95 kcal each)', applesEq],
+    ['≈ Pizza slices (285 kcal)', pizzaSlices],
+    ['= Extra walking needed', walkMins + ' min at 3 mph to match']
+  ];
+
+  let rows = '';
+  breakdownRows.forEach(function(r) {
+    rows += '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>';
+  });
+
+  requestAnimationFrame(function() {
+    document.getElementById('res-calories').textContent = fmt(calories, 0);
+    document.getElementById('res-summary').textContent = activityName + ' · ' + duration + ' min · ' + weightDisplay;
+    document.getElementById('intensity-needle').style.left = needlePos + '%';
+    const badge = document.getElementById('zone-badge');
+    badge.textContent = zoneLabel;
+    badge.className = 'zone-badge ' + zoneClass;
+    document.getElementById('breakdown-body').innerHTML = rows;
+    const res = document.getElementById('results');
+    res.classList.add('visible');
+    res.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  });
+}
+
+function copyResults() {
+  if (!lastResults) return;
+  const text = [
+    'Workout Calorie Burn Summary',
+    '============================',
+    'Activity: ' + lastResults.activityName,
+    'Duration: ' + lastResults.duration + ' minutes',
+    'Weight: ' + lastResults.weightDisplay,
+    'Age: ' + lastResults.age + ' years',
+    'Calories Burned: ' + fmt(lastResults.calories, 0) + ' kcal',
+    'Burn Rate: ' + fmt(lastResults.calPerMin, 1) + ' kcal/min',
+    'Intensity Zone: ' + lastResults.zoneLabel,
+    'Fat Burned: ~' + lastResults.fatGrams + ' grams',
+    '',
+    'Calculated at toolhut.dev/workout-calorie-burn-calculator/'
+  ].join('\n');
+
+  navigator.clipboard.writeText(text).then(function() {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(function() { btn.textContent = '📋 Copy Results'; }, 2000);
+  }).catch(function() {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '❌ Copy failed';
+    setTimeout(function() { btn.textContent = '📋 Copy Results'; }, 2000);
+  });
+}
+
+// Enter key support
+document.querySelectorAll('input').forEach(function(inp) {
+  inp.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { requestAnimationFrame(function() { calculate(); }); }
+  });
+});
+
+// Init
+syncDuration(30);
+</script>
+</body>
+</html>
