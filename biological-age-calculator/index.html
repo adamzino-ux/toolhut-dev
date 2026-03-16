@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biological Age Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your biological age based on lifestyle, fitness, and health factors. Find out if you're aging faster or slower than your chronological age.">
+<link rel="canonical" href="https://toolhut.dev/biological-age-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Biological Age Calculator",
+  "url": "https://toolhut.dev/biological-age-calculator/",
+  "description": "Calculate your biological age based on lifestyle, fitness, and health factors.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a2e; line-height: 1.6; }
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+nav { border-bottom: 1px solid #e0e0e0; padding: 0.75rem 1.5rem; }
+nav .nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; }
+nav .site-name { font-weight: 700; font-size: 1.1rem; color: #1a1a2e; }
+nav .site-name:hover { text-decoration: none; color: #0077b6; }
+.container { max-width: 640px; margin: 0 auto; padding: 1.5rem; }
+h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; color: #1a1a2e; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.5rem; }
+.tool-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+.section-title { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid #0077b6; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.8rem; }
+label { font-size: 0.85rem; font-weight: 500; color: #444; }
+input[type="number"], select { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; background: #fff; color: #1a1a2e; transition: border-color 0.2s, box-shadow 0.2s; min-height: 44px; }
+input[type="number"]:focus, select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.15); }
+input.error { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.12); }
+.error-msg { font-size: 0.78rem; color: #e74c3c; margin-top: 2px; }
+.slider-group { margin-bottom: 0.8rem; }
+.slider-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem; }
+.slider-label-row label { font-size: 0.85rem; font-weight: 500; color: #444; }
+.slider-val { font-size: 0.85rem; font-weight: 700; color: #0077b6; min-width: 40px; text-align: right; }
+input[type="range"] { width: 100%; accent-color: #0077b6; height: 6px; cursor: pointer; min-height: 24px; }
+.btn { background: #0077b6; color: #fff; border: none; padding: 12px 24px; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; min-height: 44px; margin-top: 1rem; transition: background 0.2s; }
+.btn:hover { background: #006299; }
+.section-divider { height: 1px; background: #eee; margin: 1.5rem 0; }
+.results { display: none; opacity: 0; transition: opacity 0.3s ease; }
+.results.visible { display: block; opacity: 1; }
+.result-hero { text-align: center; margin-bottom: 1.5rem; }
+.result-label { font-size: 0.9rem; color: #555; margin-bottom: 0.3rem; }
+.result-big { font-size: 3rem; font-weight: 800; color: #0077b6; line-height: 1; }
+.result-unit { font-size: 1rem; color: #555; margin-top: 0.2rem; }
+.result-compare { font-size: 1rem; margin-top: 0.5rem; font-weight: 600; }
+.result-compare.younger { color: #27ae60; }
+.result-compare.same { color: #f39c12; }
+.result-compare.older { color: #e74c3c; }
+.gauge-wrap { margin: 1.5rem 0; }
+.gauge-track { background: linear-gradient(to right, #27ae60 0%, #27ae60 30%, #8bc34a 30%, #f1c40f 55%, #f39c12 70%, #e74c3c 100%); height: 18px; border-radius: 9px; position: relative; }
+.gauge-marker { position: absolute; top: -6px; width: 4px; height: 30px; background: #1a1a2e; border-radius: 2px; transform: translateX(-50%); transition: left 0.5s ease; }
+.gauge-labels { display: flex; justify-content: space-between; margin-top: 4px; font-size: 0.72rem; color: #666; }
+.gauge-title { font-size: 0.8rem; color: #666; text-align: center; margin-bottom: 6px; }
+.zone-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-top: 0.5rem; }
+.zone-excellent { background: #d4edda; color: #155724; }
+.zone-good { background: #d4f1d4; color: #1a6b2e; }
+.zone-average { background: #fff3cd; color: #856404; }
+.zone-fair { background: #ffe0b2; color: #7f3a00; }
+.zone-poor { background: #f8d7da; color: #721c24; }
+.breakdown-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.breakdown-table th { background: #f0f0f0; padding: 8px 10px; text-align: left; font-weight: 600; font-size: 0.82rem; color: #444; }
+.breakdown-table th:last-child { text-align: right; }
+.breakdown-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; }
+.breakdown-table td:last-child { text-align: right; font-weight: 600; }
+.breakdown-table tr:nth-child(even) td { background: #fafafa; }
+.table-scroll { overflow-x: auto; }
+.copy-btn { background: transparent; border: 1px solid #0077b6; color: #0077b6; padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; min-height: 32px; }
+.copy-btn:hover { background: #0077b6; color: #fff; }
+.disclaimer { background: #fff8e1; border-left: 4px solid #f39c12; padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; font-size: 0.82rem; color: #555; margin-top: 1.2rem; }
+.ad-slot { min-height: 0; margin: 0; }
+.content-section { margin-bottom: 2rem; }
+.content-section h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.7rem; margin-top: 1.5rem; }
+.content-section p { font-size: 0.93rem; color: #333; margin-bottom: 0.8rem; line-height: 1.7; }
+.content-section ul { padding-left: 1.3rem; margin-bottom: 0.8rem; }
+.content-section ul li { font-size: 0.93rem; color: #333; margin-bottom: 0.4rem; line-height: 1.6; }
+details { border: 1px solid #e0e0e0; border-radius: 6px; margin-bottom: 0.6rem; }
+details summary { padding: 0.75rem 1rem; font-weight: 600; font-size: 0.92rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+details summary::-webkit-details-marker { display: none; }
+details summary::after { content: '+'; font-size: 1.1rem; color: #0077b6; }
+details[open] summary::after { content: '−'; }
+details p { padding: 0 1rem 0.75rem; font-size: 0.9rem; color: #444; line-height: 1.65; }
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+@media (max-width: 500px) { .related-grid { grid-template-columns: 1fr; } }
+.related-link { display: block; padding: 0.7rem 1rem; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.88rem; color: #0077b6; font-weight: 500; transition: background 0.2s; }
+.related-link:hover { background: #e8f4fc; text-decoration: none; }
+footer { background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 1.2rem 1.5rem; text-align: center; }
+footer .footer-inner { max-width: 640px; margin: 0 auto; }
+footer .footer-links { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.5rem; }
+footer .footer-links a { font-size: 0.85rem; color: #555; }
+footer .footer-links a:hover { color: #0077b6; }
+footer .copyright { font-size: 0.8rem; color: #888; }
+.tabs { display: flex; gap: 0; border-bottom: 2px solid #e0e0e0; margin-bottom: 1.2rem; }
+.tab-btn { background: none; border: none; padding: 8px 16px; font-size: 0.9rem; font-weight: 600; color: #666; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s; min-height: 40px; }
+.tab-btn.active { color: #0077b6; border-bottom-color: #0077b6; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.factor-impact { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; }
+.impact-positive { background: #d4edda; color: #155724; }
+.impact-negative { background: #f8d7da; color: #721c24; }
+.impact-neutral { background: #e2e3e5; color: #383d41; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🛠 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Biological Age Calculator</h1>
+  <p class="subtitle">Discover your body's true age based on lifestyle, fitness, and health habits.</p>
+
+  <div class="tool-card">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('basic')">Basic Info</button>
+      <button class="tab-btn" onclick="switchTab('lifestyle')">Lifestyle</button>
+      <button class="tab-btn" onclick="switchTab('fitness')">Fitness</button>
+    </div>
+
+    <!-- Tab: Basic Info -->
+    <div class="tab-content active" id="tab-basic">
+      <div class="section-title">Personal Information</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="chronoAge">Chronological Age (years)</label>
+          <input type="number" id="chronoAge" min="18" max="100" placeholder="e.g. 35">
+          <span class="error-msg" id="err-age"></span>
+        </div>
+        <div class="form-group">
+          <label for="sex">Biological Sex</label>
+          <select id="sex">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="height">Height (cm)</label>
+          <input type="number" id="height" min="100" max="250" placeholder="e.g. 175">
+          <span class="error-msg" id="err-height"></span>
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight (kg)</label>
+          <input type="number" id="weight" min="30" max="300" placeholder="e.g. 75">
+          <span class="error-msg" id="err-weight"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="waist">Waist Circumference (cm)</label>
+        <input type="number" id="waist" min="40" max="200" placeholder="e.g. 85">
+        <span class="error-msg" id="err-waist"></span>
+      </div>
+      <div class="form-group">
+        <label for="bloodPressure">Resting Blood Pressure (Systolic mmHg)</label>
+        <select id="bloodPressure">
+          <option value="optimal">Optimal (below 120)</option>
+          <option value="normal" selected>Normal (120–129)</option>
+          <option value="elevated">Elevated (130–139)</option>
+          <option value="high1">High Stage 1 (140–159)</option>
+          <option value="high2">High Stage 2 (160+)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tab: Lifestyle -->
+    <div class="tab-content" id="tab-lifestyle">
+      <div class="section-title">Lifestyle Factors</div>
+      <div class="form-group">
+        <label for="smoking">Smoking Status</label>
+        <select id="smoking">
+          <option value="never">Never smoked</option>
+          <option value="former">Former smoker (quit 5+ years ago)</option>
+          <option value="recent">Former smoker (quit &lt;5 years ago)</option>
+          <option value="current">Current smoker</option>
+          <option value="heavy">Heavy smoker (20+ cigs/day)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="alcohol">Alcohol Consumption</label>
+        <select id="alcohol">
+          <option value="none">None / Rarely</option>
+          <option value="light" selected>Light (1–7 drinks/week)</option>
+          <option value="moderate">Moderate (8–14 drinks/week)</option>
+          <option value="heavy">Heavy (15+ drinks/week)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="diet">Diet Quality</label>
+        <select id="diet">
+          <option value="excellent">Excellent (whole foods, lots of veg)</option>
+          <option value="good" selected>Good (mostly healthy, occasional junk)</option>
+          <option value="average">Average (mixed, regular processed food)</option>
+          <option value="poor">Poor (mostly processed/fast food)</option>
+        </select>
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <label for="sleepHours">Sleep Duration (hours/night)</label>
+          <span class="slider-val" id="sleepVal">7</span>
+        </div>
+        <input type="range" id="sleepHours" min="3" max="12" step="0.5" value="7" oninput="document.getElementById('sleepVal').textContent=this.value">
+      </div>
+      <div class="form-group">
+        <label for="stress">Chronic Stress Level</label>
+        <select id="stress">
+          <option value="low">Low (generally relaxed)</option>
+          <option value="moderate" selected>Moderate (occasional stress)</option>
+          <option value="high">High (frequently stressed)</option>
+          <option value="severe">Severe (constant high stress)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="social">Social Connections</label>
+        <select id="social">
+          <option value="strong">Strong (close relationships, active social life)</option>
+          <option value="good" selected>Good (some close friends, regular contact)</option>
+          <option value="weak">Weak (few connections, often isolated)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tab: Fitness -->
+    <div class="tab-content" id="tab-fitness">
+      <div class="section-title">Physical Fitness</div>
+      <div class="form-group">
+        <label for="exerciseFreq">Exercise Frequency</label>
+        <select id="exerciseFreq">
+          <option value="none">None / Sedentary</option>
+          <option value="low">1–2 days/week (light)</option>
+          <option value="moderate" selected>3–4 days/week (moderate)</option>
+          <option value="active">5–6 days/week (active)</option>
+          <option value="athlete">Daily intense training (athlete)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exerciseType">Primary Exercise Type</label>
+        <select id="exerciseType">
+          <option value="mixed" selected>Mixed (cardio + strength)</option>
+          <option value="cardio">Mainly cardio (running, cycling, swimming)</option>
+          <option value="strength">Mainly strength training</option>
+          <option value="flexibility">Mainly flexibility (yoga, stretching)</option>
+          <option value="walking">Walking / light activity only</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="restingHR">Resting Heart Rate (bpm)</label>
+        <select id="restingHR">
+          <option value="athlete">Athlete (below 50)</option>
+          <option value="excellent">Excellent (50–60)</option>
+          <option value="good" selected>Good (61–70)</option>
+          <option value="average">Average (71–80)</option>
+          <option value="poor">Below average (81–90)</option>
+          <option value="veryPoor">Poor (91+)</option>
+        </select>
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <label for="flexScore">Flexibility / Mobility (self-rated)</label>
+          <span class="slider-val" id="flexVal">5</span>
+        </div>
+        <input type="range" id="flexScore" min="1" max="10" step="1" value="5" oninput="document.getElementById('flexVal').textContent=this.value">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:#888;margin-top:2px;"><span>Poor</span><span>Average</span><span>Excellent</span></div>
+      </div>
+      <div class="form-group">
+        <label for="sitting">Daily Sitting / Sedentary Time</label>
+        <select id="sitting">
+          <option value="low">Low (less than 4 hrs/day)</option>
+          <option value="moderate" selected>Moderate (4–7 hrs/day)</option>
+          <option value="high">High (8–10 hrs/day)</option>
+          <option value="veryHigh">Very high (11+ hrs/day)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate My Biological Age</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="tool-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <div class="section-title" style="margin-bottom:0;border:none;padding:0;">Your Result</div>
+        <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy Result</button>
+      </div>
+
+      <div class="result-hero">
+        <div class="result-label">Your Biological Age</div>
+        <div class="result-big" id="bioAgeDisplay">—</div>
+        <div class="result-unit">years old</div>
+        <div class="result-compare" id="compareLine"></div>
+        <div id="zoneBadge"></div>
+      </div>
+
+      <div class="gauge-wrap">
+        <div class="gauge-title">Biological vs. Chronological Age Scale</div>
+        <div class="gauge-track">
+          <div class="gauge-marker" id="gaugeMarker" style="left:50%"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>Much Younger</span>
+          <span>Younger</span>
+          <span>Same</span>
+          <span>Older</span>
+          <span>Much Older</span>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="section-title">Factor Breakdown</div>
+      <div class="table-scroll">
+        <table class="breakdown-table">
+          <thead>
+            <tr>
+              <th>Factor</th>
+              <th>Your Status</th>
+              <th>Impact</th>
+              <th>Age Effect</th>
+            </tr>
+          </thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+
+      <div class="disclaimer">
+        ⚠️ <strong>Disclaimer:</strong> This tool is for informational purposes only. Biological age estimates are based on population-level research and lifestyle correlations. Consult a healthcare professional for medical advice, diagnosis, or treatment.
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Biological Age Calculator</h2>
+    <p>Enter your chronological age, body measurements, and details about your lifestyle across three tabs: Basic Info, Lifestyle, and Fitness. Hit "Calculate My Biological Age" to see your estimated biological age, how it compares to your actual age, and a detailed breakdown of which factors are aging you faster or helping you stay younger.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Your chronological age — the number of candles on your birthday cake — tells only part of the story. Biological age reflects how well your cells, organs, and systems are actually functioning. Two 45-year-olds can have vastly different biological ages: a marathon runner who sleeps 8 hours, never smoked, and eats mostly whole foods might have a biological age of 37, while a sedentary smoker under constant stress could be closer to 56.</p>
+    <p>Research published in journals like <em>Nature Aging</em> and <em>Cell</em> consistently shows that lifestyle choices drive roughly 70–80% of aging outcomes, with genetics accounting for only 20–30%. This means the choices you make today — how much you exercise, what you eat, how well you sleep — are actively determining how fast you age. A Stanford study found that people with lower biological ages had significantly reduced risk of cardiovascular disease, type 2 diabetes, and cognitive decline, even after controlling for their actual age.</p>
+    <p>This tool is useful for anyone wanting a holistic snapshot of their health trajectory — from a 30-year-old curious about their habits, to a 60-year-old tracking improvement after making lifestyle changes.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses a weighted scoring model based on established research into aging biomarkers and lifestyle epidemiology. Each factor contributes a positive or negative adjustment (in years) to your chronological age:</p>
+    <ul>
+      <li><strong>BMI &amp; Waist Circumference:</strong> Excess visceral fat is strongly linked to accelerated cellular aging (±2–5 years).</li>
+      <li><strong>Exercise:</strong> Regular aerobic and strength training is one of the most potent anti-aging interventions (up to −8 years for athletes).</li>
+      <li><strong>Smoking:</strong> Heavy smoking can add 8–10 years biologically by accelerating telomere shortening.</li>
+      <li><strong>Sleep:</strong> Chronic sleep deprivation (under 6 hours) is associated with 2–4 years of additional biological aging.</li>
+      <li><strong>Stress &amp; Social Connection:</strong> Chronic stress increases cortisol, accelerating inflammation and aging. Strong social ties are protective (up to −2 years).</li>
+      <li><strong>Blood Pressure &amp; Resting Heart Rate:</strong> Both are validated proxies for cardiovascular and overall biological age.</li>
+    </ul>
+    <p><strong>Formula (simplified):</strong> Biological Age = Chronological Age + Σ(Factor Adjustments)</p>
+    <p>The result is clamped to a realistic range and adjusted slightly based on sex-specific aging patterns.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't be discouraged by a high result</strong> — most lifestyle factors are reversible. Quitting smoking alone can reduce biological age by 5–10 years over time.</li>
+      <li><strong>Sleep is underrated.</strong> Many people accept 5–6 hours as normal. Research consistently shows 7–9 hours is the sweet spot for cellular repair and memory consolidation.</li>
+      <li><strong>Sitting time matters independently of exercise.</strong> Even if you work out daily, 10+ hours of sitting is a separate risk factor. Break up sedentary time every 45–60 minutes.</li>
+      <li><strong>Waist circumference is a better metric than weight alone.</strong> Visceral fat (belly fat) is metabolically active and more dangerous than subcutaneous fat elsewhere.</li>
+      <li><strong>Stress management is often neglected.</strong> Chronic elevated cortisol damages DNA and shortens telomeres — consider adding meditation, therapy, or even regular social time as serious health tools.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Can I actually reverse my biological age?</summary>
+      <p>Yes — multiple interventions have been shown to reduce biological age markers. A landmark 2021 study in <em>Aging Cell</em> found that a diet, sleep, exercise, and stress-management program reduced DNA methylation age (a biological age biomarker) by an average of 3.23 years in just 8 weeks. Consistency over time yields even greater results.</p>
+    </details>
+    <details>
+      <summary>How accurate is this tool?</summary>
+      <p>This is a lifestyle-based estimation tool, not a clinical measurement. True biological age is typically measured via DNA methylation clocks (like the Horvath clock), telomere length, or blood biomarker panels. Our calculator provides a useful directional estimate based on well-researched lifestyle correlations, but should not replace a medical evaluation.</p>
+    </details>
+    <details>
+      <summary>Why does the calculator ask about waist circumference?</summary>
+      <p>Waist circumference is one of the strongest predictors of metabolic health and visceral fat levels. Unlike BMI, which doesn't distinguish where fat is stored, waist circumference directly reflects abdominal fat — which is closely tied to inflammation, insulin resistance, and accelerated aging. A waist over 102 cm (men) or 88 cm (women) significantly elevates health risk.</p>
+    </details>
+    <details>
+      <summary>How often should I recalculate?</summary>
+      <p>Recalculate every 3–6 months, especially if you've made significant lifestyle changes like starting an exercise program, quitting smoking, or improving your diet. This gives you a meaningful benchmark to track progress. Small changes compound over time, and seeing your biological age improve is a powerful motivator.</p>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/strength-training-volume-calculator/" class="related-link">💪 Strength Training Volume Calculator</a>
+      <a href="/lean-body-mass-calculator/" class="related-link">🏋️ Lean Body Mass Calculator</a>
+      <a href="/workout-calorie-burn-calculator/" class="related-link">🔥 Workout Calorie Burn Calculator</a>
+      <a href="/vo2-max-calculator/" class="related-link">❤️ VO2 Max Calculator</a>
+      <a href="/pregnancy-due-date-calculator/" class="related-link">🤰 Pregnancy Due Date Calculator</a>
+      <a href="/ideal-weight-calculator/" class="related-link">⚖️ Ideal Weight Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="copyright">© 2025 toolhut.dev — Free Online Tools</div>
+  </div>
+</footer>
+
+<script>
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabName).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  document.getElementById('calcBtn').addEventListener('click', () => {
+    requestAnimationFrame(() => { calculate(); });
+  });
+
+  document.querySelectorAll('input[type="number"]').forEach(input => {
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') requestAnimationFrame(() => calculate()); });
+  });
+
+  function clearErrors() {
+    ['err-age','err-height','err-weight','err-waist'].forEach(id => {
+      document.getElementById(id).textContent = '';
+    });
+    ['chronoAge','height','weight','waist'].forEach(id => {
+      document.getElementById(id).classList.remove('error');
+    });
+  }
+
+  function showError(fieldId, errId, msg) {
+    document.getElementById(fieldId).classList.add('error');
+    document.getElementById(errId).textContent = msg;
+  }
+
+  function calculate() {
+    clearErrors();
+
+    const chronoAge = parseFloat(document.getElementById('chronoAge').value);
+    const sex = document.getElementById('sex').value;
+    const height = parseFloat(document.getElementById('height').value);
+    const weight = parseFloat(document.getElementById('weight').value);
+    const waist = parseFloat(document.getElementById('waist').value);
+    const bp = document.getElementById('bloodPressure').value;
+    const smoking = document.getElementById('smoking').value;
+    const alcohol = document.getElementById('alcohol').value;
+    const diet = document.getElementById('diet').value;
+    const sleep = parseFloat(document.getElementById('sleepHours').value);
+    const stress = document.getElementById('stress').value;
+    const social = document.getElementById('social').value;
+    const exerciseFreq = document.getElementById('exerciseFreq').value;
+    const exerciseType = document.getElementById('exerciseType').value;
+    const restingHR = document.getElementById('restingHR').value;
+    const flex = parseFloat(document.getElementById('flexScore').value);
+    const sitting = document.getElementById('sitting').value;
+
+    let valid = true;
+    if (isNaN(chronoAge) || chronoAge < 18 || chronoAge > 100) {
+      showError('chronoAge','err-age','Please enter a valid age between 18 and 100.'); valid = false;
+    }
+    if (isNaN(height) || height < 100 || height > 250) {
+      showError('height','err-height','Please enter a valid height (100–250 cm).'); valid = false;
+    }
+    if (isNaN(weight) || weight < 30 || weight > 300) {
+      showError('weight','err-weight','Please enter a valid weight (30–300 kg).'); valid = false;
+    }
+    if (isNaN(waist) || waist < 40 || waist > 200) {
+      showError('waist','err-waist','Please enter a valid waist measurement (40–200 cm).'); valid = false;
+    }
+    if (!valid) return;
+
+    // === Compute Adjustments ===
+    const factors = [];
+
+    // BMI
+    const bmi = weight / ((height / 100) ** 2);
+    let bmiAdj = 0, bmiStatus = '', bmiImpact = 'neutral';
+    if (bmi < 18.5) { bmiAdj = 1.5; bmiStatus = `Underweight (${bmi.toFixed(1)})`; bmiImpact = 'negative'; }
+    else if (bmi < 25) { bmiAdj = -1; bmiStatus = `Healthy (${bmi.toFixed(1)})`; bmiImpact = 'positive'; }
+    else if (bmi < 30) { bmiAdj = 1.5; bmiStatus = `Overweight (${bmi.toFixed(1)})`; bmiImpact = 'negative'; }
+    else if (bmi < 35) { bmiAdj = 3; bmiStatus = `Obese (${bmi.toFixed(1)})`; bmiImpact = 'negative'; }
+    else { bmiAdj = 5; bmiStatus = `Severely Obese (${bmi.toFixed(1)})`; bmiImpact = 'negative'; }
+    factors.push({ name: 'BMI', status: bmiStatus, impact: bmiImpact, adj: bmiAdj });
+
+    // Waist
+    const waistThresh = sex === 'male' ? [94, 102] : [80, 88];
+    let waistAdj = 0, waistStatus = '', waistImpact = 'neutral';
+    if (waist < waistThresh[0]) { waistAdj = -1; waistStatus = 'Optimal'; waistImpact = 'positive'; }
+    else if (waist < waistThresh[1]) { waistAdj = 1.5; waistStatus = 'Borderline high'; waistImpact = 'negative'; }
+    else { waistAdj = 3; waistStatus = 'High (visceral fat risk)'; waistImpact = 'negative'; }
+    factors.push({ name: 'Waist Circumference', status: `${waistStatus} (${waist} cm)`, impact: waistImpact, adj: waistAdj });
+
+    // Blood Pressure
+    const bpMap = { optimal: {adj: -1.5, status: 'Optimal (<120)', impact: 'positive'}, normal: {adj: 0, status: 'Normal (120–129)', impact: 'neutral'}, elevated: {adj: 1.5, status: 'Elevated (130–139)', impact: 'negative'}, high1: {adj: 3, status: 'High Stage 1 (140–159)', impact: 'negative'}, high2: {adj: 5, status: 'High Stage 2 (160+)', impact: 'negative'} };
+    const bpF = bpMap[bp];
+    factors.push({ name: 'Blood Pressure', status: bpF.status, impact: bpF.impact, adj: bpF.adj });
+
+    // Smoking
+    const smokingMap = { never: {adj: -1, status: 'Never smoked', impact: 'positive'}, former: {adj: 0.5, status: 'Former smoker (5+ yrs)', impact: 'neutral'}, recent: {adj: 2.5, status: 'Former smoker (<5 yrs)', impact: 'negative'}, current: {adj: 5, status: 'Current smoker', impact: 'negative'}, heavy: {adj: 8, status: 'Heavy smoker', impact: 'negative'} };
+    const smF = smokingMap[smoking];
+    factors.push({ name: 'Smoking', status: smF.status, impact: smF.impact, adj: smF.adj });
+
+    // Alcohol
+    const alcMap = { none: {adj: 0, status: 'None / Rarely', impact: 'neutral'}, light: {adj: -0.5, status: 'Light (1–7/week)', impact: 'positive'}, moderate: {adj: 1.5, status: 'Moderate (8–14/week)', impact: 'negative'}, heavy: {adj: 4, status: 'Heavy (15+/week)', impact: 'negative'} };
+    const alcF = alcMap[alcohol];
+    factors.push({ name: 'Alcohol', status: alcF.status, impact: alcF.impact, adj: alcF.adj });
+
+    // Diet
+    const dietMap = { excellent: {adj: -2, status: 'Excellent', impact: 'positive'}, good: {adj: -0.5, status: 'Good', impact: 'positive'}, average: {adj: 1, status: 'Average', impact: 'neutral'}, poor: {adj: 3, status: 'Poor', impact: 'negative'} };
+    const dietF = dietMap[diet];
+    factors.push({ name: 'Diet Quality', status: dietF.status, impact: dietF.impact, adj: dietF.adj });
+
+    // Sleep
+    let sleepAdj = 0, sleepStatus = '', sleepImpact = 'neutral';
+    if (sleep < 5) { sleepAdj = 4; sleepStatus = `Very short (${sleep} hrs)`; sleepImpact = 'negative'; }
+    else if (sleep < 6) { sleepAdj = 2.5; sleepStatus = `Short (${sleep} hrs)`; sleepImpact = 'negative'; }
+    else if (sleep < 7) { sleepAdj = 1; sleepStatus = `Slightly short (${sleep} hrs)`; sleepImpact = 'negative'; }
+    else if (sleep <= 9) { sleepAdj = -1.5; sleepStatus = `Optimal (${sleep} hrs)`; sleepImpact = 'positive'; }
+    else { sleepAdj = 1.5; sleepStatus = `Too long (${sleep} hrs)`; sleepImpact = 'negative'; }
+    factors.push({ name: 'Sleep', status: sleepStatus, impact: sleepImpact, adj: sleepAdj });
+
+    // Stress
+    const stressMap = { low: {adj: -1.5, status: 'Low', impact: 'positive'}, moderate: {adj: 0.5, status: 'Moderate', impact: 'neutral'}, high: {adj: 2.5, status: 'High', impact: 'negative'}, severe: {adj: 5, status: 'Severe', impact: 'negative'} };
+    const stressF = stressMap[stress];
+    factors.push({ name: 'Stress Level', status: stressF.status, impact: stressF.impact, adj: stressF.adj });
+
+    // Social
+    const socialMap = { strong: {adj: -2, status: 'Strong connections', impact: 'positive'}, good: {adj: -0.5, status: 'Good connections', impact: 'positive'}, weak: {adj: 2, status: 'Weak connections', impact: 'negative'} };
+    const socialF = socialMap[social];
+    factors.push({ name: 'Social Connections', status: socialF.status, impact: socialF.impact, adj: socialF.adj });
+
+    // Exercise Frequency
+    const exFreqMap = { none: {adj: 5, status: 'Sedentary', impact: 'negative'}, low: {adj: 2, status: '1–2 days/week', impact: 'negative'}, moderate: {adj: -2, status: '3–4 days/week', impact: 'positive'}, active: {adj: -4, status: '5–6 days/week', impact: 'positive'}, athlete: {adj: -6, status: 'Daily athlete training', impact: 'positive'} };
+    const exFreqF = exFreqMap[exerciseFreq];
+    factors.push({ name: 'Exercise Frequency', status: exFreqF.status, impact: exFreqF.impact, adj: exFreqF.adj });
+
+    // Exercise Type
+    const exTypeMap = { mixed: {adj: -1.5, status: 'Mixed (cardio + strength)', impact: 'positive'}, cardio: {adj: -1, status: 'Mainly cardio', impact: 'positive'}, strength: {adj: -0.5, status: 'Mainly strength', impact: 'positive'}, flexibility: {adj: -0.5, status: 'Flexibility/yoga', impact: 'positive'}, walking: {adj: 0, status: 'Walking/light activity', impact: 'neutral'} };
+    const exTypeF = exTypeMap[exerciseType];
+    factors.push({ name: 'Exercise Type', status: exTypeF.status, impact: exTypeF.impact, adj: exTypeF.adj });
+
+    // Resting Heart Rate
+    const hrMap = { athlete: {adj: -3, status: 'Athlete (<50 bpm)', impact: 'positive'}, excellent: {adj: -2, status: 'Excellent (50–60)', impact: 'positive'}, good: {adj: -1, status: 'Good (61–70)', impact: 'positive'}, average: {adj: 0.5, status: 'Average (71–80)', impact: 'neutral'}, poor: {adj: 2, status: 'Below avg (81–90)', impact: 'negative'}, veryPoor: {adj: 4, status: 'Poor (91+)', impact: 'negative'} };
+    const hrF = hrMap[restingHR];
+    factors.push({ name: 'Resting Heart Rate', status: hrF.status, impact: hrF.impact, adj: hrF.adj });
+
+    // Flexibility
+    let flexAdj = 0, flexStatus = '', flexImpact = 'neutral';
+    if (flex <= 3) { flexAdj = 1.5; flexStatus = `Poor (${flex}/10)`; flexImpact = 'negative'; }
+    else if (flex <= 5) { flexAdj = 0; flexStatus = `Average (${flex}/10)`; flexImpact = 'neutral'; }
+    else if (flex <= 7) { flexAdj = -0.5; flexStatus = `Good (${flex}/10)`; flexImpact = 'positive'; }
+    else { flexAdj = -1.5; flexStatus = `Excellent (${flex}/10)`; flexImpact = 'positive'; }
+    factors.push({ name: 'Flexibility / Mobility', status: flexStatus, impact: flexImpact, adj: flexAdj });
+
+    // Sitting
+    const sitMap = { low: {adj: -1, status: '<4 hrs/day', impact: 'positive'}, moderate: {adj: 0.5, status: '4–7 hrs/day', impact: 'neutral'}, high: {adj: 2, status: '8–10 hrs/day', impact: 'negative'}, veryHigh: {adj: 4, status: '11+ hrs/day', impact: 'negative'} };
+    const sitF = sitMap[sitting];
+    factors.push({ name: 'Daily Sitting Time', status: sitF.status, impact: sitF.impact, adj: sitF.adj });
+
+    // Total adjustment
+    let totalAdj = factors.reduce((sum, f) => sum + f.adj, 0);
+
+    // Sex-based small correction (women age slightly differently)
+    if (sex === 'female') totalAdj *= 0.92;
+
+    // Biological age (clamp between 18 and 99)
+    let bioAge = Math.round(chronoAge + totalAdj);
+    bioAge = Math.max(18, Math.min(99, bioAge));
+    const diff = bioAge - chronoAge;
+
+    // Zone
+    let zone = '', zoneClass = '', compareTxt = '';
+    if (diff <= -8) { zone = 'Excellent'; zoneClass = 'zone-excellent'; compareTxt = `${Math.abs(diff)} years YOUNGER than your age`; }
+    else if (diff <= -3) { zone = 'Good'; zoneClass = 'zone-good'; compareTxt = `${Math.abs(diff)} years younger than your age`; }
+    else if (diff <= 2) { zone = 'Average'; zoneClass = 'zone-average'; compareTxt = diff === 0 ? 'Matches your chronological age' : diff > 0 ? `${diff} year${diff>1?'s':''} older than your age` : `${Math.abs(diff)} year${Math.abs(diff)>1?'s':''} younger than your age`; }
+    else if (diff <= 6) { zone = 'Fair'; zoneClass = 'zone-fair'; compareTxt = `${diff} years OLDER than your age`; }
+    else { zone = 'Needs Attention'; zoneClass = 'zone-poor'; compareTxt = `${diff} years OLDER than your age`; }
+
+    const compareClass = diff < -2 ? 'younger' : diff > 2 ? 'older' : 'same';
+
+    // Gauge position: diff range roughly -15 to +15 mapped to 5% to 95%
+    const gaugeLeft = Math.min(95, Math.max(5, 50 + (diff / 20) * 100));
+
+    // Build table HTML
+    let tableRows = '';
+    factors.forEach(f => {
+      const sign = f.adj > 0 ? '+' : '';
+      const adjStr = `${sign}${f.adj.toFixed(1)} yrs`;
+      const impactLabel = f.impact === 'positive' ? 'Positive' : f.impact === 'negative' ? 'Negative' : 'Neutral';
+      const impactClass = f.impact === 'positive' ? 'impact-positive' : f.impact === 'negative' ? 'impact-negative' : 'impact-neutral';
+      tableRows += `<tr><td>${f.name}</td><td>${f.status}</td><td><span class="factor-impact ${impactClass}">${impactLabel}</span></td><td>${adjStr}</td></tr>`;
+    });
+
+    // Build result summary for copy
+    window._resultText = `Biological Age Calculator Result\nChronological Age: ${chronoAge}\nBiological Age: ${bioAge}\nDifference: ${diff >= 0 ? '+' : ''}${diff} years\nZone: ${zone}`;
+
+    // DOM update
+    document.getElementById('bioAgeDisplay').textContent = bioAge;
+    const compareLine = document.getElementById('compareLine');
+    compareLine.textContent = compareTxt;
+    compareLine.className = 'result-compare ' + compareClass;
+    document.getElementById('zoneBadge').innerHTML = `<span class="zone-badge ${zoneClass}">${zone}</span>`;
+    document.getElementById('gaugeMarker').style.left = gaugeLeft + '%';
+    document.getElementById('breakdownBody').innerHTML = tableRows;
+
+    const resultsEl = document.getElementById('results');
+    resultsEl.style.display = 'block';
+    setTimeout(() => { resultsEl.classList.add('visible'); }, 10);
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copyResult() {
+    if (!window._resultText) return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window._resultText).then(() => flashCopy());
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = window._resultText;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      flashCopy();
+    }
+  }
+
+  function flashCopy() {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy Result'; }, 2000);
+  }
+</script>
+</body>
+</html>
