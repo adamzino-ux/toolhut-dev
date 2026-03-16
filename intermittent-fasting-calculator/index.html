@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intermittent Fasting Schedule Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Generate your personalized intermittent fasting schedule. Choose your protocol (16:8, 18:6, 5:2, OMAD), set wake time, and get exact fasting/eating windows.">
+<link rel="canonical" href="https://toolhut.dev/intermittent-fasting-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Intermittent Fasting Schedule Calculator",
+  "url": "https://toolhut.dev/intermittent-fasting-calculator/",
+  "description": "Generate your personalized intermittent fasting schedule based on your chosen protocol, wake time, and lifestyle preferences.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline;color:#006299}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#0077b6}
+main{max-width:640px;margin:2rem auto;padding:0 1rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+select,input[type="time"],input[type="number"]{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+select:focus,input:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+select.error,input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.protocol-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:1.25rem}
+.p-card{border:2px solid #ddd;border-radius:8px;padding:0.75rem;cursor:pointer;transition:all 0.2s;background:#fff}
+.p-card:hover{border-color:#0077b6;background:#f0f8ff}
+.p-card.selected{border-color:#0077b6;background:#e8f4fd}
+.p-card .p-name{font-weight:700;font-size:0.95rem;color:#1a1a2e}
+.p-card .p-ratio{font-size:1.4rem;font-weight:800;color:#0077b6;line-height:1.1}
+.p-card .p-desc{font-size:0.75rem;color:#666;margin-top:0.2rem}
+.p-card .p-badge{display:inline-block;font-size:0.65rem;font-weight:600;padding:2px 6px;border-radius:10px;margin-top:0.3rem}
+.badge-beginner{background:#d4edda;color:#155724}
+.badge-intermediate{background:#fff3cd;color:#856404}
+.badge-advanced{background:#f8d7da;color:#721c24}
+btn-group{display:flex;gap:0.75rem}
+.btn{display:block;width:100%;padding:13px 24px;background:#0077b6;color:#fff;border:none;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;font-family:inherit}
+.btn:hover{background:#006299}
+.btn-secondary{background:#f8f9fa;color:#1a1a2e;border:1px solid #ddd}
+.btn-secondary:hover{background:#e9ecef}
+.btn-sm{width:auto;padding:7px 14px;font-size:0.8rem;min-height:36px;border-radius:5px}
+.results-section{opacity:0;transition:opacity 0.3s ease;display:none}
+.results-section.visible{opacity:1;display:block}
+.big-number{font-size:2.8rem;font-weight:800;color:#0077b6;line-height:1}
+.big-label{font-size:0.85rem;color:#666;margin-top:0.2rem}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-box{background:#f8f9fa;border-radius:8px;padding:1rem;text-align:center}
+.stat-num{font-size:1.5rem;font-weight:700;color:#0077b6}
+.stat-lbl{font-size:0.75rem;color:#666;margin-top:0.2rem}
+.timeline-wrap{margin:1.5rem 0}
+.timeline-label{font-size:0.85rem;font-weight:600;color:#444;margin-bottom:0.5rem}
+.timeline-bar{display:flex;width:100%;height:48px;border-radius:8px;overflow:hidden;position:relative}
+.bar-fasting{background:linear-gradient(135deg,#4a90d9,#0077b6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;font-weight:600;transition:width 0.4s ease}
+.bar-eating{background:linear-gradient(135deg,#27ae60,#1e8449);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;font-weight:600;transition:width 0.4s ease}
+.legend{display:flex;gap:1.5rem;margin-top:0.5rem;font-size:0.8rem}
+.legend-item{display:flex;align-items:center;gap:0.4rem}
+.legend-dot{width:12px;height:12px;border-radius:3px}
+.dot-fast{background:#0077b6}
+.dot-eat{background:#27ae60}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.8rem;color:#555;border-bottom:2px solid #e0e0e0}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+tr:last-child td{border-bottom:none}
+td:last-child,th:last-child{text-align:right}
+.zone-wrap{margin:1.5rem 0}
+.zone-label{font-size:0.85rem;font-weight:600;color:#444;margin-bottom:0.6rem}
+.zone-track{height:20px;border-radius:10px;background:linear-gradient(to right,#e74c3c 0%,#f39c12 25%,#27ae60 50%,#f39c12 75%,#e74c3c 100%);position:relative;margin-bottom:0.3rem}
+.zone-pointer{position:absolute;top:-6px;width:10px;height:32px;background:#1a1a2e;border-radius:3px;transform:translateX(-50%);transition:left 0.4s ease}
+.zone-labels{display:flex;justify-content:space-between;font-size:0.7rem;color:#666}
+.benefit-tag{display:inline-block;background:#e8f4fd;color:#0077b6;border-radius:12px;padding:3px 10px;font-size:0.75rem;font-weight:500;margin:2px}
+.schedule-block{padding:0.85rem 1rem;border-left:4px solid #0077b6;background:#f8f9fa;border-radius:0 6px 6px 0;margin-bottom:0.6rem}
+.schedule-block.eating{border-left-color:#27ae60}
+.schedule-block.sleep{border-left-color:#9b59b6}
+.schedule-title{font-weight:600;font-size:0.9rem}
+.schedule-time{font-size:0.8rem;color:#666;margin-top:0.1rem}
+.copy-row{display:flex;justify-content:flex-end;margin-top:0.5rem}
+.copied{background:#27ae60!important}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:0.85rem 1rem;font-size:0.8rem;color:#795548;margin-top:1.5rem}
+.disclaimer strong{color:#f57c00}
+.ad-slot{min-height:0;margin:0}
+section.content{margin-bottom:2rem}
+section.content h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;margin-top:1.75rem}
+section.content p{color:#444;font-size:0.95rem;margin-bottom:0.75rem}
+section.content ul{color:#444;font-size:0.95rem;padding-left:1.3rem;margin-bottom:0.75rem}
+section.content ul li{margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;overflow:hidden}
+summary{padding:0.85rem 1rem;cursor:pointer;font-weight:600;font-size:0.9rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"＋";color:#0077b6;font-size:1rem}
+details[open] summary::after{content:"－"}
+details p{padding:0.85rem 1rem;font-size:0.9rem;color:#444}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1rem;font-size:0.85rem;font-weight:500;color:#0077b6;transition:background 0.2s}
+.related-link:hover{background:#e8f4fd;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.25rem 1.5rem;margin-top:2rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.75rem;font-size:0.82rem;color:#666}
+.footer-links{display:flex;gap:1.25rem}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .protocol-cards{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:repeat(3,1fr);gap:0.5rem}
+  .stat-box{padding:0.75rem 0.5rem}
+  .stat-num{font-size:1.2rem}
+  .related-grid{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  h1{font-size:1.35rem}
+  .big-number{font-size:2.2rem}
+}
+@media(max-width:380px){
+  .protocol-cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Intermittent Fasting Schedule Calculator</h1>
+  <p class="subtitle">Generate your personalized fasting and eating windows based on your protocol, wake time, and goals.</p>
+
+  <div class="card">
+    <div class="form-group">
+      <label>Choose Your Fasting Protocol</label>
+      <div class="protocol-cards" id="protocolCards">
+        <div class="p-card selected" data-protocol="16:8" onclick="selectProtocol(this,'16:8',16,8)">
+          <div class="p-ratio">16:8</div>
+          <div class="p-name">Leangains</div>
+          <div class="p-desc">Fast 16h, eat 8h</div>
+          <span class="p-badge badge-beginner">Beginner</span>
+        </div>
+        <div class="p-card" data-protocol="18:6" onclick="selectProtocol(this,'18:6',18,6)">
+          <div class="p-ratio">18:6</div>
+          <div class="p-name">Extended Fast</div>
+          <div class="p-desc">Fast 18h, eat 6h</div>
+          <span class="p-badge badge-intermediate">Intermediate</span>
+        </div>
+        <div class="p-card" data-protocol="20:4" onclick="selectProtocol(this,'20:4',20,4)">
+          <div class="p-ratio">20:4</div>
+          <div class="p-name">Warrior Diet</div>
+          <div class="p-desc">Fast 20h, eat 4h</div>
+          <span class="p-badge badge-advanced">Advanced</span>
+        </div>
+        <div class="p-card" data-protocol="OMAD" onclick="selectProtocol(this,'OMAD',23,1)">
+          <div class="p-ratio">OMAD</div>
+          <div class="p-name">One Meal/Day</div>
+          <div class="p-desc">Fast 23h, eat 1h</div>
+          <span class="p-badge badge-advanced">Advanced</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="wakeTime">Wake-Up Time</label>
+        <input type="time" id="wakeTime" value="07:00">
+        <div class="error-msg" id="wakeErr">Please enter a valid wake-up time.</div>
+      </div>
+      <div class="form-group">
+        <label for="sleepTime">Bedtime</label>
+        <input type="time" id="sleepTime" value="23:00">
+        <div class="error-msg" id="sleepErr">Please enter a valid bedtime.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="startPref">Eating Window Preference</label>
+      <select id="startPref">
+        <option value="morning">Start eating in the morning (e.g., skip dinner)</option>
+        <option value="noon" selected>Start eating around midday (skip breakfast)</option>
+        <option value="evening">Start eating in the evening (skip breakfast & lunch)</option>
+        <option value="custom">Custom — set my own eating start time</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="customStartGroup" style="display:none">
+      <label for="customStart">Custom Eating Window Start Time</label>
+      <input type="time" id="customStart" value="12:00">
+    </div>
+
+    <div class="form-group">
+      <label for="goal">Primary Goal</label>
+      <select id="goal">
+        <option value="weightloss">Weight Loss</option>
+        <option value="metabolic">Metabolic Health</option>
+        <option value="longevity">Longevity & Autophagy</option>
+        <option value="muscle">Muscle Retention</option>
+        <option value="energy">Improved Energy</option>
+      </select>
+    </div>
+
+    <button class="btn" onclick="calculate()">Generate My Schedule</button>
+  </div>
+
+  <div class="results-section" id="resultsSection">
+    <div class="card" id="resultsCard">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem">
+        <div>
+          <div class="big-number" id="protocolDisplay">16:8</div>
+          <div class="big-label" id="protocolName">Leangains Protocol</div>
+        </div>
+        <div style="text-align:right">
+          <button class="btn btn-secondary btn-sm" id="copyBtn" onclick="copySchedule()">Copy Schedule</button>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num" id="fastHours">16h</div>
+          <div class="stat-lbl">Fasting Window</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="eatHours">8h</div>
+          <div class="stat-lbl">Eating Window</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="fastPct">67%</div>
+          <div class="stat-lbl">Day Fasting</div>
+        </div>
+      </div>
+
+      <div class="timeline-wrap">
+        <div class="timeline-label">24-Hour Day Visualization</div>
+        <div class="timeline-bar">
+          <div class="bar-fasting" id="barFast" style="width:67%">🔒 Fasting</div>
+          <div class="bar-eating" id="barEat" style="width:33%">🍽️ Eating</div>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot dot-fast"></div>Fasting</div>
+          <div class="legend-item"><div class="legend-dot dot-eat"></div>Eating</div>
+        </div>
+      </div>
+
+      <div class="zone-wrap">
+        <div class="zone-label">Difficulty Level</div>
+        <div class="zone-track">
+          <div class="zone-pointer" id="diffPointer" style="left:25%"></div>
+        </div>
+        <div class="zone-labels">
+          <span>Very Easy</span><span>Easy</span><span>Moderate</span><span>Hard</span><span>Very Hard</span>
+        </div>
+      </div>
+
+      <div style="margin:1.5rem 0">
+        <div class="timeline-label" style="margin-bottom:0.75rem">Your Daily Schedule</div>
+        <div id="scheduleBlocks"></div>
+      </div>
+
+      <div style="margin:1.5rem 0">
+        <div class="timeline-label" style="margin-bottom:0.75rem">Hourly Breakdown</div>
+        <div style="overflow-x:auto">
+          <table id="scheduleTable">
+            <thead><tr><th>Time</th><th>Phase</th><th>Hours Fasted</th><th>Key Stage</th></tr></thead>
+            <tbody id="scheduleBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="margin-top:1.25rem">
+        <div class="timeline-label">Benefits for Your Goal</div>
+        <div id="benefitTags" style="margin-top:0.5rem"></div>
+      </div>
+
+      <div class="disclaimer">
+        <strong>⚕️ Health Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional before starting any fasting regimen, especially if you have diabetes, are pregnant, or have other medical conditions.
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <section class="content">
+    <h2>How to Use This Intermittent Fasting Calculator</h2>
+    <p>Select your fasting protocol from the four options — 16:8, 18:6, 20:4, or OMAD. Enter your wake-up time and bedtime, then choose whether you prefer to eat in the morning, midday, or evening. Hit "Generate My Schedule" to see your exact fasting start/end times, a visual timeline, and an hourly breakdown of each phase.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Intermittent fasting (IF) isn't just a diet trend — it's a structured eating pattern with documented metabolic benefits. The most popular approach, 16:8, is used by millions worldwide: you fast for 16 hours and eat within an 8-hour window. For example, if you eat from noon to 8 PM, you've effortlessly skipped breakfast and kept your insulin low all morning.</p>
+    <p>Research published in the <em>New England Journal of Medicine</em> shows that time-restricted eating can improve insulin sensitivity, reduce inflammation, and even trigger autophagy — your cells' self-cleaning process — after roughly 14–16 hours of fasting. Athletes use the 16:8 protocol to maintain muscle while cutting fat. Those seeking longevity benefits push toward 18:6 or 20:4, where autophagy ramps up significantly after hour 18. Beginners typically start with 12:12 or 14:10 and gradually extend their fasting window over 2–4 weeks.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The calculator takes your wake time and eating window preference, then computes your eating window start time based on typical meal patterns:</p>
+    <ul>
+      <li><strong>Morning preference:</strong> Eating starts 1–2 hours after wake-up</li>
+      <li><strong>Midday preference:</strong> Eating starts ~5 hours after wake-up (e.g., wake at 7 AM → eat at noon)</li>
+      <li><strong>Evening preference:</strong> Eating starts ~8–10 hours after wake-up</li>
+    </ul>
+    <p><strong>Formula:</strong> Eating End Time = Eating Start Time + Eating Hours. Fasting Window = 24 − Eating Hours. The hourly breakdown tracks cumulative fasted hours to identify key metabolic stages: fat-burning begins around hour 12, ketosis around hour 16–18, and autophagy ramps up at hour 18–24.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Start gradually:</strong> If 16:8 feels too hard, begin with 13:11 or 14:10 for 1–2 weeks before extending.</li>
+      <li><strong>Hydration matters:</strong> Water, black coffee, and plain tea don't break a fast — stay hydrated during fasting hours to manage hunger.</li>
+      <li><strong>Don't overeat in the window:</strong> IF isn't a license to binge. Aim for your normal caloric needs within the eating window.</li>
+      <li><strong>Consistency beats perfection:</strong> Fasting 5–6 days/week produces better results than an all-or-nothing approach that breaks down.</li>
+      <li><strong>Watch for re-feeding crashes:</strong> Breaking a long fast (20+ hours) with high-carb food can cause energy crashes. Break with protein and healthy fats first.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Does coffee break my fast?</summary>
+      <p>Black coffee (no milk, cream, or sugar) does not meaningfully break a fast. It contains virtually zero calories and may actually enhance fat oxidation by raising adrenaline and suppressing appetite. Adding even a splash of cream can trigger an insulin response and technically break the fast.</p>
+    </details>
+    <details>
+      <summary>Can I work out during fasting hours?</summary>
+      <p>Yes — many people train fasted, especially for fat-burning goals. Morning workouts during a fasted state can increase growth hormone and enhance fat utilization. However, if performance or muscle building is your primary goal, consider training near the end of your fasting window so you can eat protein shortly after.</p>
+    </details>
+    <details>
+      <summary>How long until I see results from intermittent fasting?</summary>
+      <p>Most people notice reduced hunger and improved energy within 1–2 weeks as their body adapts to fat burning. Measurable weight loss typically appears within 3–4 weeks, while metabolic markers like insulin sensitivity can improve within 2–8 weeks. Autophagy benefits require consistent 18+ hour fasts over months.</p>
+    </details>
+    <details>
+      <summary>Is OMAD (one meal a day) safe?</summary>
+      <p>OMAD is safe for most healthy adults in the short term, but it's challenging to meet all nutritional needs in one meal. It's not recommended for athletes with high energy demands, anyone with a history of disordered eating, or those on medications that require food intake. Consult your doctor before attempting OMAD long-term.</p>
+    </details>
+  </section>
+
+  <section>
+    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:0.75rem">Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/met-activity-calorie-calculator/">🔥 Caloric Burn Rate by Activity Calculator</a>
+      <a class="related-link" href="/postpartum-weight-loss-calculator/">🤱 Postpartum Weight Loss Calculator</a>
+      <a class="related-link" href="/biological-age-calculator/">🧬 Biological Age Calculator</a>
+      <a class="related-link" href="/strength-training-volume-calculator/">💪 Strength Training Volume Calculator</a>
+      <a class="related-link" href="/lean-body-mass-calculator/">⚖️ Lean Body Mass Calculator</a>
+      <a class="related-link" href="/weight-loss-timeline-calculator/">📅 Weight Loss Timeline Calculator</a>
+    </div>
+  </section>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+let selectedFastH = 16, selectedEatH = 8, selectedProtocol = '16:8';
+let scheduleText = '';
+
+function selectProtocol(el, protocol, fastH, eatH) {
+  document.querySelectorAll('.p-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedProtocol = protocol;
+  selectedFastH = fastH;
+  selectedEatH = eatH;
+}
+
+document.getElementById('startPref').addEventListener('change', function() {
+  document.getElementById('customStartGroup').style.display = this.value === 'custom' ? 'block' : 'none';
+});
+
+function parseTime(str) {
+  const [h, m] = str.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function addMinutes(totalMin) {
+  let t = ((totalMin % 1440) + 1440) % 1440;
+  const h = Math.floor(t / 60);
+  const m = t % 60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function formatTime12(str) {
+  const [h, m] = str.split(':').map(Number);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 || 12;
+  return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+
+function getEatStart(wakeMin, pref, customVal) {
+  if (pref === 'morning') return wakeMin + 60;
+  if (pref === 'noon') return wakeMin + 300;
+  if (pref === 'evening') return wakeMin + 540;
+  if (pref === 'custom') return parseTime(customVal);
+  return wakeMin + 300;
+}
+
+function getFastStage(hoursIn) {
+  if (hoursIn < 4) return 'Normal digestion';
+  if (hoursIn < 8) return 'Glycogen depleting';
+  if (hoursIn < 12) return 'Fat burning begins';
+  if (hoursIn < 16) return 'Ketosis onset';
+  if (hoursIn < 18) return 'Deep fat burning';
+  if (hoursIn < 24) return 'Autophagy active';
+  return 'Deep autophagy';
+}
+
+function getBenefits(protocol, goal) {
+  const map = {
+    '16:8': {
+      weightloss: ['Fat oxidation','Calorie restriction','Reduced insulin spikes','Improved satiety'],
+      metabolic: ['Insulin sensitivity','Lower blood sugar','Reduced inflammation','Improved lipid profile'],
+      longevity: ['Mild autophagy','Cellular repair','Reduced oxidative stress'],
+      muscle: ['Preserved lean mass','HGH elevation','Anabolic window optimization'],
+      energy: ['Stable blood sugar','Mental clarity','Reduced post-meal crashes']
+    },
+    '18:6': {
+      weightloss: ['Enhanced fat burning','Significant calorie reduction','Ketone production'],
+      metabolic: ['Strong insulin sensitivity','Metabolic reset','Reduced chronic inflammation'],
+      longevity: ['Moderate autophagy','Mitochondrial efficiency','Cellular renewal'],
+      muscle: ['Lean mass preservation','Strategic nutrient timing'],
+      energy: ['Mental focus','Reduced brain fog','Steady energy']
+    },
+    '20:4': {
+      weightloss: ['Aggressive fat loss','High ketone levels','Significant calorie deficit'],
+      metabolic: ['Strong metabolic benefits','Major insulin improvement'],
+      longevity: ['Strong autophagy','Deep cellular repair'],
+      muscle: ['Requires strategic protein intake','Post-fast anabolic window'],
+      energy: ['High mental clarity','Norepinephrine boost']
+    },
+    'OMAD': {
+      weightloss: ['Maximum calorie restriction','Deep ketosis','Extreme fat mobilization'],
+      metabolic: ['Profound insulin reset','Metabolic flexibility'],
+      longevity: ['Maximum autophagy','Sirtuins activation','Longevity gene expression'],
+      muscle: ['Challenging — high protein meal essential','Low frequency anabolism'],
+      energy: ['Very high focus when adapted','Circadian rhythm alignment']
+    }
+  };
+  const key = map[protocol] || map['16:8'];
+  return (key[goal] || key['weightloss']);
+}
+
+function getDifficultyPct(protocol) {
+  return {'16:8':20,'18:6':40,'20:4':65,'OMAD':85}[protocol] || 20;
+}
+
+function getProtocolName(protocol) {
+  return {'16:8':'Leangains Protocol','18:6':'Extended Fast','20:4':'Warrior Diet','OMAD':'One Meal a Day'}[protocol] || protocol;
+}
+
+function calculate() {
+  let valid = true;
+  const wakeVal = document.getElementById('wakeTime').value;
+  const sleepVal = document.getElementById('sleepTime').value;
+  const customVal = document.getElementById('customStart').value;
+  const pref = document.getElementById('startPref').value;
+  const goal = document.getElementById('goal').value;
+
+  document.getElementById('wakeErr').style.display = 'none';
+  document.getElementById('sleepErr').style.display = 'none';
+  document.getElementById('wakeTime').classList.remove('error');
+  document.getElementById('sleepTime').classList.remove('error');
+
+  if (!wakeVal) {
+    document.getElementById('wakeErr').style.display = 'block';
+    document.getElementById('wakeTime').classList.add('error');
+    valid = false;
+  }
+  if (!sleepVal) {
+    document.getElementById('sleepErr').style.display = 'block';
+    document.getElementById('sleepTime').classList.add('error');
+    valid = false;
+  }
+  if (!valid) return;
+
+  const wakeMin = parseTime(wakeVal);
+  const sleepMin = parseTime(sleepVal);
+  const eatStartMin = getEatStart(wakeMin, pref, customVal || '12:00');
+  const eatEndMin = eatStartMin + selectedEatH * 60;
+  const fastPct = Math.round((selectedFastH / 24) * 100);
+  const eatPct = 100 - fastPct;
+  const diffPct = getDifficultyPct(selectedProtocol);
+
+  // Schedule blocks
+  const eatStartStr = addMinutes(eatStartMin);
+  const eatEndStr = addMinutes(eatEndMin);
+  const fastEnd = eatStartStr;
+  const fastStart = addMinutes(eatEndMin);
+
+  let blocksHTML = `
+    <div class="schedule-block">
+      <div class="schedule-title">🔒 Fasting Window (${selectedFastH} hours)</div>
+      <div class="schedule-time">${formatTime12(fastStart)} → ${formatTime12(fastEnd)}</div>
+    </div>
+    <div class="schedule-block eating">
+      <div class="schedule-title">🍽️ Eating Window (${selectedEatH} hour${selectedEatH>1?'s':''})</div>
+      <div class="schedule-time">${formatTime12(eatStartStr)} → ${formatTime12(eatEndStr)}</div>
+    </div>
+    <div class="schedule-block sleep">
+      <div class="schedule-title">😴 Sleep / Rest</div>
+      <div class="schedule-time">${formatTime12(sleepVal)} → ${formatTime12(wakeVal)}</div>
+    </div>
+  `;
+
+  // Hourly table (show eat end to next eat start = fast hours)
+  let tableRows = '';
+  const fastStartMin24 = ((eatEndMin % 1440) + 1440) % 1440;
+  const totalRows = selectedFastH + selectedEatH; // = 24
+
+  for (let i = 0; i < 24; i++) {
+    const currentMin = ((fastStartMin24 + i * 60) % 1440 + 1440) % 1440;
+    const timeStr = addMinutes(currentMin);
+    const isFasting = i < selectedFastH;
+    const hoursIn = isFasting ? i : 0;
+    const phase = isFasting ? `🔒 Fasting` : `🍽️ Eating`;
+    const stage = isFasting ? getFastStage(i) : (i === selectedFastH ? 'Break fast' : 'Fed state');
+    const rowClass = i % 2 === 0 ? '' : '';
+    tableRows += `<tr><td>${formatTime12(timeStr)}</td><td>${phase}</td><td style="text-align:right">${isFasting ? i+'h' : '—'}</td><td>${stage}</td></tr>`;
+  }
+
+  const benefits = getBenefits(selectedProtocol, goal);
+  let tagsHTML = benefits.map(b => `<span class="benefit-tag">${b}</span>`).join('');
+
+  scheduleText = `Intermittent Fasting Schedule — ${selectedProtocol} (${getProtocolName(selectedProtocol)})
+Fasting: ${formatTime12(fastStart)} → ${formatTime12(fastEnd)} (${selectedFastH}h)
+Eating: ${formatTime12(eatStartStr)} → ${formatTime12(eatEndStr)} (${selectedEatH}h)
+Goal: ${goal}
+Generated at toolhut.dev/intermittent-fasting-calculator/`;
+
+  requestAnimationFrame(() => {
+    document.getElementById('protocolDisplay').textContent = selectedProtocol;
+    document.getElementById('protocolName').textContent = getProtocolName(selectedProtocol);
+    document.getElementById('fastHours').textContent = selectedFastH + 'h';
+    document.getElementById('eatHours').textContent = selectedEatH + 'h';
+    document.getElementById('fastPct').textContent = fastPct + '%';
+    document.getElementById('barFast').style.width = fastPct + '%';
+    document.getElementById('barEat').style.width = eatPct + '%';
+    document.getElementById('barFast').textContent = fastPct > 20 ? '🔒 Fasting' : '';
+    document.getElementById('barEat').textContent = eatPct > 15 ? '🍽️ Eating' : '';
+    document.getElementById('diffPointer').style.left = diffPct + '%';
+    document.getElementById('scheduleBlocks').innerHTML = blocksHTML;
+    document.getElementById('scheduleBody').innerHTML = tableRows;
+    document.getElementById('benefitTags').innerHTML = tagsHTML;
+
+    const sec = document.getElementById('resultsSection');
+    sec.style.display = 'block';
+    requestAnimationFrame(() => sec.classList.add('visible'));
+    sec.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+
+function copySchedule() {
+  if (!scheduleText) return;
+  navigator.clipboard.writeText(scheduleText).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy Schedule';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = scheduleText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Schedule'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const tag = document.activeElement.tagName.toLowerCase();
+    if (tag === 'input' || tag === 'select') calculate();
+  }
+});
+</script>
+</body>
+</html>
