@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caloric Burn Rate by Activity Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate calories burned by activity using MET values. Enter your weight, duration, and activity type to instantly see your caloric burn rate.">
+<link rel="canonical" href="https://toolhut.dev/met-activity-calorie-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Caloric Burn Rate by Activity Calculator",
+  "url": "https://toolhut.dev/met-activity-calorie-calculator/",
+  "description": "Calculate calories burned by activity using MET values. Enter your weight, duration, and activity type to instantly see your caloric burn rate.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand:hover{text-decoration:none;color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.55rem;font-weight:700;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input[type=number]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.visible{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.unit-toggle{display:flex;gap:.5rem;margin-bottom:1.25rem}
+.unit-btn{flex:1;padding:9px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;font-size:.9rem;cursor:pointer;color:#444;transition:all .2s;min-height:44px}
+.unit-btn.active{background:#0077b6;color:#fff;border-color:#0077b6;font-weight:600}
+.category-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.cat-btn{padding:7px 14px;border:1px solid #ddd;border-radius:20px;background:#fff;font-size:.82rem;cursor:pointer;color:#444;transition:all .2s;min-height:36px}
+.cat-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;max-height:260px;overflow-y:auto;padding-right:2px}
+.activity-option{padding:9px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;font-size:.83rem;cursor:pointer;color:#1a1a2e;transition:all .15s;text-align:left;min-height:44px;line-height:1.3}
+.activity-option:hover{border-color:#0077b6;background:#f0f7ff}
+.activity-option.selected{background:#0077b6;color:#fff;border-color:#0077b6}
+.activity-option .met-badge{display:block;font-size:.72rem;opacity:.75;margin-top:2px}
+.activity-option.selected .met-badge{opacity:.85}
+.slider-group{margin-bottom:1.25rem}
+.slider-row{display:flex;align-items:center;gap:.75rem}
+input[type=range]{flex:1;height:6px;accent-color:#0077b6;cursor:pointer}
+.slider-val{font-weight:700;color:#0077b6;font-size:1.05rem;min-width:52px;text-align:right}
+.btn{background:#0077b6;color:#fff;border:none;border-radius:6px;padding:12px 24px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:48px;transition:background .2s;margin-top:.5rem}
+.btn:hover{background:#006299}
+.results{opacity:0;transition:opacity .3s ease}
+.results.show{opacity:1}
+.big-number{font-size:3rem;font-weight:800;color:#0077b6;line-height:1;margin:.5rem 0}
+.big-label{font-size:.95rem;color:#555}
+.big-unit{font-size:1.1rem;font-weight:600;color:#0077b6}
+.result-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:1.25rem 0}
+.stat-box{background:#f8f9fa;border-radius:8px;padding:1rem;text-align:center;border:1px solid #e8e8e8}
+.stat-val{font-size:1.4rem;font-weight:700;color:#1a1a2e}
+.stat-lbl{font-size:.75rem;color:#666;margin-top:.2rem}
+.burn-gauge{margin:1.5rem 0}
+.burn-gauge-label{font-size:.85rem;font-weight:500;color:#444;margin-bottom:.6rem}
+.gauge-bar{height:24px;border-radius:12px;background:linear-gradient(to right,#2ecc71 0%,#2ecc71 25%,#f1c40f 25%,#f1c40f 55%,#e67e22 55%,#e67e22 80%,#e74c3c 80%,#e74c3c 100%);position:relative;overflow:visible}
+.gauge-marker{position:absolute;top:-8px;width:4px;height:40px;background:#1a1a2e;border-radius:2px;transform:translateX(-2px);transition:left .6s cubic-bezier(.34,1.56,.64,1)}
+.gauge-marker::after{content:'▼';position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.75rem;color:#1a1a2e}
+.gauge-zones{display:flex;justify-content:space-between;margin-top:.35rem}
+.gauge-zone{font-size:.7rem;color:#666;text-align:center;flex:1}
+.zone-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:.82rem;font-weight:600;margin:.5rem 0}
+.zone-low{background:#d5f5e3;color:#1a7a43}
+.zone-mod{background:#fef9e7;color:#9a7d0a}
+.zone-high{background:#fdebd0;color:#a04000}
+.zone-very-high{background:#fadbd8;color:#922b21}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444}
+th:last-child,td:last-child{text-align:right}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+tr:hover td{background:#f0f7ff}
+.copy-btn{background:transparent;border:1px solid #0077b6;color:#0077b6;border-radius:6px;padding:6px 14px;font-size:.82rem;cursor:pointer;transition:all .2s;margin-top:.75rem}
+.copy-btn:hover{background:#0077b6;color:#fff}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:.9rem 1rem;font-size:.82rem;color:#555;margin-top:1.25rem}
+.disclaimer strong{color:#e65100}
+.show-more-btn{background:transparent;border:1px solid #ddd;color:#0077b6;border-radius:6px;padding:8px 18px;font-size:.85rem;cursor:pointer;width:100%;margin-top:.5rem}
+.show-more-btn:hover{border-color:#0077b6;background:#f0f7ff}
+.hidden-rows{display:none}
+.hidden-rows.visible{display:table-row-group}
+h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin:2rem 0 .75rem}
+.content-section p{margin-bottom:.8rem;color:#333;font-size:.95rem}
+.content-section ul{padding-left:1.3rem;margin-bottom:.8rem}
+.content-section ul li{margin-bottom:.4rem;color:#333;font-size:.95rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:.6rem;background:#fff}
+summary{padding:.9rem 1rem;cursor:pointer;font-weight:600;font-size:.92rem;color:#0077b6;list-style:none;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'+ ';color:#0077b6}
+details[open] summary::before{content:'− '}
+details p{padding:.1rem 1rem 1rem;font-size:.9rem;color:#333}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.75rem}
+.related-link{display:block;background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:.7rem 1rem;font-size:.87rem;color:#0077b6;transition:all .2s}
+.related-link:hover{border-color:#0077b6;background:#f0f7ff;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.25rem 1.5rem;margin-top:2rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem;font-size:.85rem;color:#666}
+.footer-links{display:flex;gap:1.1rem}
+.footer-links a{color:#555}
+@media(max-width:600px){
+  .row-2{grid-template-columns:1fr}
+  .result-summary{grid-template-columns:1fr 1fr}
+  .activity-grid{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  .big-number{font-size:2.3rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🔧 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Caloric Burn Rate by Activity Calculator</h1>
+  <p class="subtitle">Find out exactly how many calories you burn during any physical activity using MET-based science.</p>
+
+  <div class="card">
+    <!-- Unit Toggle -->
+    <div class="form-group">
+      <label>Unit System</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btnMetric" onclick="setUnit('metric')">Metric (kg)</button>
+        <button class="unit-btn" id="btnImperial" onclick="setUnit('imperial')">Imperial (lbs)</button>
+      </div>
+    </div>
+
+    <!-- Weight & Age -->
+    <div class="row-2">
+      <div class="form-group">
+        <label id="weightLabel">Body Weight (kg)</label>
+        <input type="number" id="weight" placeholder="70" min="20" max="400" value="">
+        <div class="error-msg" id="weightErr">Please enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label>Age (years)</label>
+        <input type="number" id="age" placeholder="30" min="10" max="100" value="">
+        <div class="error-msg" id="ageErr">Please enter a valid age (10–100).</div>
+      </div>
+    </div>
+
+    <!-- Duration -->
+    <div class="slider-group">
+      <label>Duration: <span id="durDisplay">30 minutes</span></label>
+      <div class="slider-row">
+        <span>5 min</span>
+        <input type="range" id="duration" min="5" max="180" step="5" value="30" oninput="updateDurDisplay()">
+        <span>3 hrs</span>
+        <span class="slider-val" id="durVal">30 min</span>
+      </div>
+    </div>
+
+    <!-- Activity Category Tabs -->
+    <div class="form-group">
+      <label>Activity Category</label>
+      <div class="category-tabs" id="categoryTabs"></div>
+      <div class="activity-grid" id="activityGrid"></div>
+      <div class="error-msg" id="activityErr">Please select an activity.</div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Calories Burned</button>
+  </div>
+
+  <!-- Results -->
+  <div class="card results" id="results">
+    <div style="text-align:center">
+      <div class="big-label">Total Calories Burned</div>
+      <div class="big-number" id="totalCals">—</div>
+      <div class="big-unit">kcal</div>
+    </div>
+
+    <div class="result-summary">
+      <div class="stat-box">
+        <div class="stat-val" id="rCalPerMin">—</div>
+        <div class="stat-lbl">kcal / min</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="rCalPerHour">—</div>
+        <div class="stat-lbl">kcal / hour</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-val" id="rMET">—</div>
+        <div class="stat-lbl">MET value</div>
+      </div>
+    </div>
+
+    <!-- Burn Intensity Gauge -->
+    <div class="burn-gauge">
+      <div class="burn-gauge-label">Burn Intensity Zone</div>
+      <div class="gauge-bar" id="gaugeBar">
+        <div class="gauge-marker" id="gaugeMarker" style="left:10%"></div>
+      </div>
+      <div class="gauge-zones">
+        <div class="gauge-zone">Light<br>(&lt;3 MET)</div>
+        <div class="gauge-zone">Moderate<br>(3–6)</div>
+        <div class="gauge-zone">Vigorous<br>(6–9)</div>
+        <div class="gauge-zone">Very High<br>(9+ MET)</div>
+      </div>
+      <div style="margin-top:.6rem;text-align:center">
+        <span class="zone-badge" id="zoneBadge">—</span>
+      </div>
+    </div>
+
+    <!-- Breakdown Table -->
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Duration</th>
+            <th>Calories Burned</th>
+            <th>Equiv. Activity</th>
+          </tr>
+        </thead>
+        <tbody id="tableVisible"></tbody>
+        <tbody id="tableHidden" class="hidden-rows"></tbody>
+      </table>
+    </div>
+    <button class="show-more-btn" id="showMoreBtn" onclick="toggleMore()" style="display:none">Show More Durations ▼</button>
+
+    <button class="copy-btn" onclick="copyResult()">📋 Copy Result</button>
+
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Calorie estimates are based on MET values and may vary with individual fitness level, metabolism, and intensity. Consult a healthcare professional for medical advice.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Calories Burned by Activity Calculator</h2>
+    <p>Enter your body weight (in kg or lbs), age, and desired workout duration using the slider. Then pick an activity category and select your specific exercise. Hit <strong>Calculate</strong> and you'll instantly see total calories burned, the per-minute and per-hour burn rate, the MET value of your activity, and a color-coded intensity zone.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Most fitness apps give vague calorie estimates — this tool uses validated MET (Metabolic Equivalent of Task) values from the Compendium of Physical Activities to give you science-backed numbers. Here's why that matters in practice:</p>
+    <p>Say you're a 75 kg person trying to lose half a pound per week (~250 kcal/day deficit). A 30-minute jog at moderate pace (MET ~7) burns roughly 263 kcal. That single run effectively covers your entire daily deficit. Contrast that with 30 minutes of gentle yoga (MET ~2.5) which burns only ~94 kcal — a meaningful difference in planning.</p>
+    <p>Athletes use this to plan training load. Rehab patients use it to track safe activity levels. Weight managers use it to balance food intake. Even office workers benefit — knowing that 45 minutes of brisk walking burns ~300 kcal can motivate a lunchtime stroll instead of a desk lunch.</p>
+    <p>The per-hour burn rate is especially useful when comparing activities of different durations, while the intensity zone helps you understand cardiovascular demand beyond just calories.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses the standard MET formula from exercise science:</p>
+    <p><strong>Calories (kcal) = MET × Body Weight (kg) × Duration (hours)</strong></p>
+    <p>MET (Metabolic Equivalent of Task) represents how many times more energy an activity requires compared to sitting at rest (1 MET ≈ 1 kcal/kg/hour). A MET of 7 means the activity burns 7× the energy of rest. Walking leisurely is ~2.5 MET; cycling vigorously is ~10 MET; competitive running can reach 14+ MET.</p>
+    <p>The formula naturally accounts for body weight because heavier individuals require more energy to move, which is physiologically accurate. Age is displayed for reference; advanced models apply small corrections but the standard formula remains industry-standard for general use.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Weight matters more than you think.</strong> A 90 kg person burns ~28% more calories than a 70 kg person doing the same activity for the same duration.</li>
+      <li><strong>Intensity is key.</strong> "Cycling" spans MET 4–14+ depending on pace. Always pick the sub-activity that matches your actual effort level.</li>
+      <li><strong>Don't double-count.</strong> These are gross calories (including resting metabolic rate during exercise), so don't add them on top of a full TDEE calculation — you'd overestimate burn.</li>
+      <li><strong>Duration accuracy counts.</strong> People commonly overestimate workout duration by 15–20%. Track actual active time, not locker-room-to-locker-room time.</li>
+      <li><strong>MET values are averages.</strong> Fitness level, terrain, heat, and equipment all affect real-world burn. Use this as a reliable estimate, not a precise measurement.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>What is a MET value and why does it matter?</summary>
+      <p>MET stands for Metabolic Equivalent of Task. It's a standard unit measuring the energy cost of an activity relative to rest (1 MET). A MET of 6 means you're burning 6× more energy than sitting still. MET values allow researchers and practitioners to compare activities across different body weights and fitness levels using a single universal number.</p>
+    </details>
+
+    <details>
+      <summary>How accurate is this calorie calculator?</summary>
+      <p>The MET formula is the most widely validated method for estimating exercise energy expenditure without lab equipment. Studies show it's accurate within 10–20% for most activities in average-weight adults. Accuracy decreases for very high-intensity interval training, swimming (water resistance varies), and activities with significant skill components that affect actual effort.</p>
+    </details>
+
+    <details>
+      <summary>Does body weight really affect calorie burn that much?</summary>
+      <p>Yes — directly and linearly. If you weigh 100 kg instead of 70 kg, you burn 43% more calories doing the exact same activity. This is because moving a heavier body requires proportionally more muscular force and cardiovascular output. It's one reason why initial weight loss sometimes temporarily increases caloric burn from exercise before diminishing as weight decreases.</p>
+    </details>
+
+    <details>
+      <summary>Can I use this for weight loss planning?</summary>
+      <p>Absolutely. One pound of fat ≈ 3,500 kcal. To lose 1 lb/week, you need a 500 kcal/day deficit through diet and/or exercise. Use this tool to identify activities that fit your schedule and fitness level to contribute to that deficit. Combine with a dietary calorie tracker for the most effective results, and aim for a balanced approach with both cardio and strength training.</p>
+    </details>
+
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/postpartum-weight-loss-calculator/" class="related-link">🤱 Postpartum Weight Loss Calculator</a>
+      <a href="/biological-age-calculator/" class="related-link">🧬 Biological Age Calculator</a>
+      <a href="/strength-training-volume-calculator/" class="related-link">🏋️ Strength Training Volume Calculator</a>
+      <a href="/lean-body-mass-calculator/" class="related-link">💪 Lean Body Mass Calculator</a>
+      <a href="/workout-calorie-burn-calculator/" class="related-link">🔥 Workout Calorie Burn Calculator</a>
+      <a href="/vo2-max-calculator/" class="related-link">❤️ VO2 Max Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Activity Data (MET values from Ainsworth Compendium 2011) ──
+const ACTIVITIES = {
+  "Walking": [
+    {name:"Strolling (very slow)",met:2.0},
+    {name:"Slow walk (2 mph)",met:2.5},
+    {name:"Brisk walk (3.5 mph)",met:3.5},
+    {name:"Fast walk (4 mph)",met:4.3},
+    {name:"Power walk (4.5 mph)",met:5.0},
+    {name:"Uphill walking",met:6.0},
+    {name:"Hiking (moderate)",met:5.3},
+    {name:"Backpacking",met:7.0}
+  ],
+  "Running": [
+    {name:"Light jog (4 mph)",met:6.0},
+    {name:"Run (5 mph)",met:8.3},
+    {name:"Run (6 mph)",met:9.8},
+    {name:"Run (7 mph)",met:11.0},
+    {name:"Run (8 mph)",met:11.8},
+    {name:"Run (9 mph)",met:12.8},
+    {name:"Sprint (10+ mph)",met:14.5},
+    {name:"Trail running",met:9.0}
+  ],
+  "Cycling": [
+    {name:"Leisure (<10 mph)",met:4.0},
+    {name:"Moderate (10–12 mph)",met:6.8},
+    {name:"Vigorous (12–14 mph)",met:8.0},
+    {name:"Racing (14–16 mph)",met:10.0},
+    {name:"Very fast (16–20 mph)",met:12.0},
+    {name:"Mountain biking",met:8.5},
+    {name:"Stationary (moderate)",met:6.8},
+    {name:"Stationary (vigorous)",met:8.8}
+  ],
+  "Swimming": [
+    {name:"Leisurely (freestyle)",met:6.0},
+    {name:"Moderate freestyle",met:7.0},
+    {name:"Vigorous freestyle",met:10.0},
+    {name:"Breaststroke",met:5.3},
+    {name:"Backstroke",met:4.8},
+    {name:"Butterfly",met:13.8},
+    {name:"Water aerobics",met:5.5},
+    {name:"Treading water",met:3.5}
+  ],
+  "Gym / Weights": [
+    {name:"Light weightlifting",met:3.0},
+    {name:"Moderate weightlifting",met:5.0},
+    {name:"Heavy powerlifting",met:6.0},
+    {name:"Circuit training",met:8.0},
+    {name:"Elliptical (moderate)",met:5.0},
+    {name:"Rowing machine (moderate)",met:7.0},
+    {name:"Rowing machine (vigorous)",met:8.5},
+    {name:"Stair climber",met:9.0}
+  ],
+  "Sports": [
+    {name:"Basketball (game)",met:8.0},
+    {name:"Soccer (game)",met:10.0},
+    {name:"Tennis (singles)",met:8.0},
+    {name:"Tennis (doubles)",met:6.0},
+    {name:"Volleyball (competitive)",met:8.0},
+    {name:"Golf (walking, clubs)",met:4.3},
+    {name:"Badminton",met:7.0},
+    {name:"Boxing (sparring)",met:7.8}
+  ],
+  "Home & Misc": [
+    {name:"Yoga (gentle)",met:2.5},
+    {name:"Yoga (power/vinyasa)",met:4.0},
+    {name:"Pilates",met:3.0},
+    {name:"Dancing (general)",met:4.8},
+    {name:"Gardening (moderate)",met:3.5},
+    {name:"Vacuuming/cleaning",met:3.3},
+    {name:"Mowing lawn",met:5.5},
+    {name:"Tai Chi",met:3.0}
+  ]
+};
+
+let currentUnit = 'metric';
+let selectedActivity = null;
+let moreVisible = false;
+
+// Build category tabs
+function buildCategoryTabs() {
+  const tabs = document.getElementById('categoryTabs');
+  let html = '';
+  Object.keys(ACTIVITIES).forEach((cat, i) => {
+    html += `<button class="cat-btn${i===0?' active':''}" onclick="selectCategory('${cat}',this)">${cat}</button>`;
+  });
+  tabs.innerHTML = html;
+  buildActivityGrid(Object.keys(ACTIVITIES)[0]);
+}
+
+function selectCategory(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildActivityGrid(cat);
+  selectedActivity = null;
+}
+
+function buildActivityGrid(cat) {
+  const grid = document.getElementById('activityGrid');
+  const acts = ACTIVITIES[cat];
+  let html = '';
+  acts.forEach((a, i) => {
+    html += `<button class="activity-option" onclick="selectActivity(this,'${escapeAttr(a.name)}',${a.met})" data-name="${escapeAttr(a.name)}" data-met="${a.met}">
+      ${escapeHTML(a.name)}
+      <span class="met-badge">MET: ${a.met}</span>
+    </button>`;
+  });
+  grid.innerHTML = html;
+}
+
+function escapeAttr(s){ return s.replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+function escapeHTML(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function selectActivity(btn, name, met) {
+  document.querySelectorAll('.activity-option').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedActivity = { name, met };
+  clearErr('activityErr');
+  clearErr('activityGrid');
+}
+
+function setUnit(u) {
+  currentUnit = u;
+  document.getElementById('btnMetric').classList.toggle('active', u === 'metric');
+  document.getElementById('btnImperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('weightLabel').textContent = u === 'metric' ? 'Body Weight (kg)' : 'Body Weight (lbs)';
+  document.getElementById('weight').placeholder = u === 'metric' ? '70' : '154';
+}
+
+function updateDurDisplay() {
+  const v = +document.getElementById('duration').value;
+  document.getElementById('durVal').textContent = v + ' min';
+  const h = Math.floor(v/60), m = v%60;
+  document.getElementById('durDisplay').textContent = h > 0 ? `${h}h ${m}m` : `${v} minutes`;
+}
+
+function fmt(n, dec=0) {
+  return Number(n.toFixed(dec)).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.add('visible');
+}
+function clearErr(id) {
+  const el = document.getElementById(id);
+  if(el){ el.classList.remove('visible'); }
+}
+
+function validate() {
+  let ok = true;
+  const weightRaw = +document.getElementById('weight').value;
+  const ageRaw = +document.getElementById('age').value;
+
+  let weightKg = currentUnit === 'metric' ? weightRaw : weightRaw * 0.453592;
+
+  if(!weightRaw || weightKg < 10 || weightKg > 400) {
+    showErr('weightErr', currentUnit === 'metric' ? 'Enter a weight between 20–400 kg.' : 'Enter a weight between 44–880 lbs.');
+    document.getElementById('weight').classList.add('error');
+    ok = false;
+  } else {
+    clearErr('weightErr');
+    document.getElementById('weight').classList.remove('error');
+  }
+
+  if(!ageRaw || ageRaw < 10 || ageRaw > 100) {
+    showErr('ageErr', 'Enter an age between 10 and 100.');
+    document.getElementById('age').classList.add('error');
+    ok = false;
+  } else {
+    clearErr('ageErr');
+    document.getElementById('age').classList.remove('error');
+  }
+
+  if(!selectedActivity) {
+    showErr('activityErr', 'Please select an activity from the list.');
+    ok = false;
+  } else {
+    clearErr('activityErr');
+  }
+
+  return ok;
+}
+
+const equivalents = [
+  {cal: 50,  label: 'a small apple'},
+  {cal: 100, label: '1 slice of bread'},
+  {cal: 150, label: 'a banana'},
+  {cal: 200, label: 'a granola bar'},
+  {cal: 250, label: 'a bowl of cereal'},
+  {cal: 300, label: 'a bowl of oatmeal'},
+  {cal: 400, label: 'a fast-food burger'},
+  {cal: 500, label: 'a large blended coffee'},
+  {cal: 700, label: 'a restaurant pasta dish'},
+  {cal: 900, label: 'a large fast-food combo'},
+];
+function getEquiv(cal) {
+  let best = equivalents[0];
+  for(let e of equivalents) { if(Math.abs(cal - e.cal) < Math.abs(cal - best.cal)) best = e; }
+  return best.label;
+}
+
+function getZone(met) {
+  if(met < 3) return { label:'Light', cls:'zone-low', pct: met/3 * 25 };
+  if(met < 6) return { label:'Moderate', cls:'zone-mod', pct: 25 + (met-3)/3 * 30 };
+  if(met < 9) return { label:'Vigorous', cls:'zone-high', pct: 55 + (met-6)/3 * 25 };
+  return { label:'Very High', cls:'zone-very-high', pct: Math.min(97, 80 + (met-9)/5 * 17) };
+}
+
+function calculate() {
+  if(!validate()) return;
+
+  const weightRaw = +document.getElementById('weight').value;
+  const weightKg = currentUnit === 'metric' ? weightRaw : weightRaw * 0.453592;
+  const duration = +document.getElementById('duration').value;
+  const { name, met } = selectedActivity;
+
+  const durationHrs = duration / 60;
+  const totalCal = met * weightKg * durationHrs;
+  const calPerMin = met * weightKg / 60;
+  const calPerHour = met * weightKg;
+
+  // Build table rows for multiple durations
+  const durations = [5,10,15,20,30,45,60,90,120,150,180];
+  const visibleCount = 5;
+  let visibleHTML = '';
+  let hiddenHTML = '';
+  durations.forEach((d, i) => {
+    const c = met * weightKg * (d/60);
+    const eq = getEquiv(c);
+    const h = Math.floor(d/60), m = d%60;
+    const durLabel = h > 0 ? `${h}h ${m > 0 ? m+'m' : ''}`.trim() : `${d} min`;
+    const row = `<tr${d === duration ? ' style="font-weight:700;background:#e8f4fd"' : ''}>
+      <td>${durLabel}</td>
+      <td style="text-align:right">${fmt(c)} kcal</td>
+      <td>≈ ${eq}</td>
+    </tr>`;
+    if(i < visibleCount) visibleHTML += row;
+    else hiddenHTML += row;
+  });
+
+  const zone = getZone(met);
+
+  requestAnimationFrame(() => {
+    document.getElementById('totalCals').textContent = fmt(totalCal);
+    document.getElementById('rCalPerMin').textContent = fmt(calPerMin, 1);
+    document.getElementById('rCalPerHour').textContent = fmt(calPerHour);
+    document.getElementById('rMET').textContent = met;
+
+    // Gauge
+    document.getElementById('gaugeMarker').style.left = zone.pct + '%';
+    const badge = document.getElementById('zoneBadge');
+    badge.textContent = zone.label + ' Intensity';
+    badge.className = 'zone-badge ' + zone.cls;
+
+    // Table
+    document.getElementById('tableVisible').innerHTML = visibleHTML;
+    document.getElementById('tableHidden').innerHTML = hiddenHTML;
+
+    // Show more button
+    const smBtn = document.getElementById('showMoreBtn');
+    if(durations.length > visibleCount) {
+      smBtn.style.display = 'block';
+      if(!moreVisible) {
+        smBtn.textContent = 'Show More Durations ▼';
+        document.getElementById('tableHidden').classList.remove('visible');
+      }
+    } else {
+      smBtn.style.display = 'none';
+    }
+
+    const res = document.getElementById('results');
+    res.classList.add('show');
+    res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function toggleMore() {
+  moreVisible = !moreVisible;
+  const hidden = document.getElementById('tableHidden');
+  const btn = document.getElementById('showMoreBtn');
+  hidden.classList.toggle('visible', moreVisible);
+  btn.textContent = moreVisible ? 'Show Less ▲' : 'Show More Durations ▼';
+}
+
+function copyResult() {
+  const totalCals = document.getElementById('totalCals').textContent;
+  const cpm = document.getElementById('rCalPerMin').textContent;
+  const cph = document.getElementById('rCalPerHour').textContent;
+  const met = document.getElementById('rMET').textContent;
+  const zone = document.getElementById('zoneBadge').textContent;
+  const dur = document.getElementById('durVal').textContent;
+  const actName = selectedActivity ? selectedActivity.name : '';
+  const wt = document.getElementById('weight').value;
+  const unit = currentUnit === 'metric' ? 'kg' : 'lbs';
+
+  const text = `Caloric Burn Calculator Results
+Activity: ${actName}
+Weight: ${wt} ${unit}
+Duration: ${dur}
+Total Burned: ${totalCals} kcal
+Rate: ${cpm} kcal/min | ${cph} kcal/hr
+MET Value: ${met}
+Intensity: ${zone}
+— toolhut.dev`;
+
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    });
+  }
+}
+
+// Enter key support
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter') {
+    const active = document.activeElement;
+    if(active && (active.tagName === 'INPUT' || active.tagName === 'SELECT')) {
+      calculate();
+    }
+  }
+});
+
+// Init
+buildCategoryTabs();
+updateDurDisplay();
+</script>
+</body>
+</html>
