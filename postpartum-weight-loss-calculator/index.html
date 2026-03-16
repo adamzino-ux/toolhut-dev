@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postpartum Weight Loss Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your postpartum weight loss timeline, daily calorie needs, and healthy goals. Free tool for new moms tracking recovery after pregnancy.">
+<link rel="canonical" href="https://toolhut.dev/postpartum-weight-loss-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Postpartum Weight Loss Calculator",
+  "url": "https://toolhut.dev/postpartum-weight-loss-calculator/",
+  "description": "Calculate your postpartum weight loss timeline, daily calorie needs, and healthy goals after pregnancy.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:12px 1.5rem;background:#fff}
+nav .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:8px}
+nav .site-name{font-weight:700;color:#0077b6;font-size:1.05rem}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;margin-bottom:0.4rem;color:#1a1a2e}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.tool-card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#0077b6;margin-bottom:1rem;padding-bottom:0.4rem;border-bottom:2px solid #e8f4fd}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:5px}
+input,select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:0.95rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.visible{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.unit-toggle{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1rem}
+.unit-toggle button{flex:1;padding:8px 12px;border:none;background:#f8f9fa;cursor:pointer;font-size:0.85rem;font-weight:500;color:#555;transition:background 0.2s,color 0.2s;min-height:36px}
+.unit-toggle button.active{background:#0077b6;color:#fff}
+.btn{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s;margin-top:0.5rem}
+.btn:hover{background:#006299}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.result-hero{text-align:center;padding:1.5rem;background:#f0f7ff;border-radius:8px;margin-bottom:1.5rem}
+.result-hero .big-num{font-size:2.8rem;font-weight:800;color:#0077b6;line-height:1}
+.result-hero .big-label{font-size:0.9rem;color:#555;margin-top:4px}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem}
+.kpi{background:#f8f9fa;border-radius:6px;padding:0.9rem 1rem;text-align:center}
+.kpi .val{font-size:1.4rem;font-weight:700;color:#0077b6}
+.kpi .lbl{font-size:0.78rem;color:#666;margin-top:2px}
+.zone-bar-wrap{margin-bottom:1.5rem}
+.zone-bar-wrap h3{font-size:0.9rem;font-weight:600;color:#444;margin-bottom:8px}
+.zone-bar{height:22px;border-radius:11px;background:linear-gradient(to right,#2ecc71 0%,#2ecc71 33%,#f39c12 33%,#f39c12 66%,#e74c3c 66%,#e74c3c 100%);position:relative;margin-bottom:6px}
+.zone-marker{position:absolute;top:-6px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:12px solid #1a1a2e;transform:translateX(-50%)}
+.zone-labels{display:flex;justify-content:space-between;font-size:0.72rem;color:#666}
+.zone-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:0.82rem;font-weight:600;margin-top:6px}
+.zone-green{background:#d4edda;color:#155724}
+.zone-yellow{background:#fff3cd;color:#856404}
+.zone-red{background:#f8d7da;color:#721c24}
+table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-bottom:1rem}
+th{background:#f0f0f0;padding:8px 10px;text-align:left;font-weight:600;font-size:0.82rem;color:#444}
+th:last-child,td:last-child{text-align:right}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+.copy-btn{background:none;border:1px solid #0077b6;color:#0077b6;border-radius:4px;padding:5px 12px;font-size:0.78rem;cursor:pointer;transition:background 0.2s,color 0.2s;margin-top:0.5rem}
+.copy-btn:hover{background:#0077b6;color:#fff}
+.show-all-btn{background:none;border:1px solid #ddd;color:#0077b6;border-radius:4px;padding:6px 16px;font-size:0.82rem;cursor:pointer;width:100%;margin-top:6px}
+.show-all-btn:hover{background:#f0f7ff}
+.disclaimer{background:#fff8e1;border-left:4px solid #f39c12;padding:0.8rem 1rem;border-radius:0 6px 6px 0;font-size:0.82rem;color:#555;margin-bottom:1.5rem}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin:2rem 0 0.6rem}
+.content-section p{color:#444;font-size:0.95rem;margin-bottom:0.8rem}
+.content-section ul{padding-left:1.3rem;margin-bottom:0.8rem}
+.content-section ul li{color:#444;font-size:0.95rem;margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;overflow:hidden}
+summary{padding:0.75rem 1rem;font-weight:600;font-size:0.9rem;cursor:pointer;background:#f8f9fa;color:#1a1a2e;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'+ ';color:#0077b6;font-weight:700}
+details[open] summary::before{content:'− '}
+details p{padding:0.75rem 1rem;font-size:0.88rem;color:#444;background:#fff}
+.related-tools{margin-bottom:2rem}
+.related-tools h2{font-size:1.2rem;font-weight:700;margin-bottom:0.8rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.related-grid a{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:0.65rem 0.9rem;font-size:0.85rem;color:#0077b6;transition:background 0.2s}
+.related-grid a:hover{background:#e8f4fd;text-decoration:none}
+footer{border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;text-align:center;font-size:0.82rem;color:#777}
+footer a{color:#0077b6;margin:0 8px}
+.progress-bar-wrap{background:#eee;border-radius:6px;height:10px;margin-top:4px;overflow:hidden}
+.progress-bar-fill{height:10px;border-radius:6px;transition:width 0.6s ease}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .tool-card{padding:1.3rem}
+  .result-hero .big-num{font-size:2.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🛠 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Postpartum Weight Loss Calculator</h1>
+  <p class="subtitle">Estimate your healthy weight loss timeline, calorie needs, and weekly goals after pregnancy.</p>
+
+  <div class="tool-card">
+    <div class="section-title">Your Information</div>
+
+    <div class="unit-toggle" role="group" aria-label="Unit system">
+      <button class="active" id="btnImperial" onclick="setUnits('imperial')">Imperial (lbs / ft)</button>
+      <button id="btnMetric" onclick="setUnits('metric')">Metric (kg / cm)</button>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" placeholder="e.g. 29" min="18" max="55">
+        <div class="error-msg" id="age-err">Please enter a valid age (18–55).</div>
+      </div>
+      <div class="form-group">
+        <label for="height" id="height-label">Height (ft &amp; in)</label>
+        <div class="row-2" id="height-ft-wrap">
+          <input type="number" id="heightFt" placeholder="Feet" min="3" max="7">
+          <input type="number" id="heightIn" placeholder="Inches" min="0" max="11">
+        </div>
+        <div id="height-cm-wrap" style="display:none">
+          <input type="number" id="heightCm" placeholder="cm e.g. 165" min="100" max="220">
+        </div>
+        <div class="error-msg" id="height-err">Please enter a valid height.</div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="preWeight" id="pre-label">Pre-pregnancy weight (lbs)</label>
+        <input type="number" id="preWeight" placeholder="e.g. 140" min="80" max="400">
+        <div class="error-msg" id="pre-err">Please enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="currentWeight" id="cur-label">Current weight (lbs)</label>
+        <input type="number" id="currentWeight" placeholder="e.g. 168" min="80" max="450">
+        <div class="error-msg" id="cur-err">Please enter a valid weight.</div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="weeksPostpartum">Weeks since delivery</label>
+        <input type="number" id="weeksPostpartum" placeholder="e.g. 6" min="0" max="104">
+        <div class="error-msg" id="weeks-err">Enter weeks (0–104).</div>
+      </div>
+      <div class="form-group">
+        <label for="activityLevel">Activity level</label>
+        <select id="activityLevel">
+          <option value="1.2">Sedentary (little/no exercise)</option>
+          <option value="1.375">Light (1–2 days/week)</option>
+          <option value="1.55" selected>Moderate (3–4 days/week)</option>
+          <option value="1.725">Active (5+ days/week)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="breastfeeding">Breastfeeding?</label>
+        <select id="breastfeeding">
+          <option value="0">No</option>
+          <option value="500">Yes — exclusively</option>
+          <option value="300">Yes — partially</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goalRate">Weekly loss goal</label>
+        <select id="goalRate">
+          <option value="0.25">0.25 lb/week (very gentle)</option>
+          <option value="0.5" selected>0.5 lb/week (recommended)</option>
+          <option value="1">1 lb/week (moderate)</option>
+          <option value="1.5">1.5 lbs/week (aggressive)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate My Plan</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="disclaimer">⚕️ <strong>Medical disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional before starting any postpartum weight loss plan, especially while breastfeeding.</div>
+
+    <div class="tool-card">
+      <div class="section-title">Your Results</div>
+      <div id="result-inner"></div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT -->
+  <div class="content-section">
+    <h2>How to Use This Postpartum Weight Loss Calculator</h2>
+    <p>Enter your age, height, pre-pregnancy weight, current weight, weeks since delivery, activity level, breastfeeding status, and your desired weekly loss rate. Click <strong>Calculate My Plan</strong> to see your daily calorie target, estimated timeline to reach your pre-pregnancy weight, and a week-by-week progress table.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Postpartum weight loss is one of the most common health concerns new mothers face — and one of the most misunderstood. Many women expect to snap back quickly, but research shows most of the gestational weight gain (typically 25–35 lbs for a healthy pregnancy) takes 6 to 12 months to lose safely. Rushing this process can backfire: too steep a calorie deficit reduces breast milk supply, depletes energy needed for newborn care, and increases the risk of nutrient deficiencies at a time when your body is actively recovering from childbirth.</p>
+    <p>The sweet spot is losing 0.5 to 1 lb per week starting around 6–8 weeks postpartum. Breastfeeding moms burn an extra 300–500 calories daily, which actually accelerates loss — but they also need to maintain adequate intake (at least 1,800 kcal/day) to protect milk supply. This calculator accounts for all of these factors to give you a personalized, safe target.</p>
+    <p>Whether you're 2 weeks or 6 months postpartum, this tool helps you set realistic expectations and avoid the frustration of comparing yourself to celebrity "bounce-back" timelines that simply aren't medically grounded.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>We use the <strong>Mifflin-St Jeor equation</strong> to estimate your Basal Metabolic Rate (BMR):</p>
+    <p><em>BMR = (10 × weight kg) + (6.25 × height cm) − (5 × age) − 161</em></p>
+    <p>Then we multiply by your activity factor (1.2–1.725) to get Total Daily Energy Expenditure (TDEE). Breastfeeding adds 300–500 kcal/day. We then subtract 250–750 kcal/day based on your goal rate (1 lb ≈ 3,500 kcal, so 500 kcal/day deficit = 1 lb/week). A floor of 1,500 kcal/day for non-breastfeeding and 1,800 kcal/day for breastfeeding moms is enforced. Timeline is calculated as: <em>weeks = weight to lose ÷ goal rate per week</em>.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't start before 6–8 weeks postpartum.</strong> Your body needs time to heal from delivery, whether vaginal or C-section. Restricting calories too early can impair healing.</li>
+      <li><strong>Never go below 1,500–1,800 kcal/day.</strong> Severe restriction tanks energy, mood, and (if breastfeeding) milk supply. Slow and steady wins this race.</li>
+      <li><strong>Prioritize protein.</strong> Aim for 80–100g of protein daily to preserve lean muscle while losing fat, and to support tissue repair postpartum.</li>
+      <li><strong>Weight fluctuates daily.</strong> Track trends weekly, not daily. Hormonal shifts, water retention, and sleep deprivation all affect the scale dramatically.</li>
+      <li><strong>Sleep matters more than you think.</strong> Sleep deprivation increases cortisol and ghrelin (hunger hormone), making weight loss physiologically harder for new moms. Prioritize rest whenever possible.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How long does postpartum weight loss realistically take?</summary>
+      <p>Most women lose the majority of pregnancy weight within 6–12 months postpartum with healthy habits. The first 2 weeks see rapid loss (5–12 lbs) from fluid, blood, and delivery itself — after that, gradual fat loss at 0.5–1 lb/week is healthy and sustainable. Factors like starting weight, activity level, breastfeeding, sleep, and genetics all play a role.</p>
+    </details>
+    <details>
+      <summary>Does breastfeeding help with weight loss?</summary>
+      <p>Yes, but it's not a magic bullet. Breastfeeding burns an additional 300–500 kcal per day, which can accelerate weight loss — but many women also experience increased hunger that offsets some of this deficit. The real benefit is the long-term: women who breastfeed for 3+ months tend to return to pre-pregnancy weight faster than those who don't.</p>
+    </details>
+    <details>
+      <summary>Is it safe to diet while breastfeeding?</summary>
+      <p>A modest calorie deficit (250–500 kcal/day) is generally safe while breastfeeding, provided you stay above 1,800 kcal/day and eat nutrient-dense foods. Going below that threshold risks reducing milk volume and quality. Always discuss significant dietary changes with your OB or a registered dietitian.</p>
+    </details>
+    <details>
+      <summary>Why hasn't my weight changed much since giving birth?</summary>
+      <p>This is very common in the first few months, especially if breastfeeding. Elevated prolactin and estrogen levels can cause water retention and fat storage in nursing women as an evolutionary protective mechanism. Hormonal changes, sleep deprivation, and stress all affect metabolism. Progress often accelerates after weaning.</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/biological-age-calculator/">Biological Age Calculator</a>
+      <a href="/strength-training-volume-calculator/">Strength Training Volume Calculator</a>
+      <a href="/lean-body-mass-calculator/">Lean Body Mass Calculator</a>
+      <a href="/workout-calorie-burn-calculator/">Workout Calorie Burn Calculator</a>
+      <a href="/vo2-max-calculator/">VO2 Max Calculator</a>
+      <a href="/pregnancy-due-date-calculator/">Pregnancy Due Date Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <span style="margin-left:8px">© <span id="yr"></span> toolhut.dev</span>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let units = 'imperial';
+
+function setUnits(u) {
+  units = u;
+  document.getElementById('btnImperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('btnMetric').classList.toggle('active', u === 'metric');
+  document.getElementById('height-ft-wrap').style.display = u === 'imperial' ? 'grid' : 'none';
+  document.getElementById('height-cm-wrap').style.display = u === 'metric' ? 'block' : 'none';
+  document.getElementById('height-label').textContent = u === 'imperial' ? 'Height (ft & in)' : 'Height (cm)';
+  document.getElementById('pre-label').textContent = u === 'imperial' ? 'Pre-pregnancy weight (lbs)' : 'Pre-pregnancy weight (kg)';
+  document.getElementById('cur-label').textContent = u === 'imperial' ? 'Current weight (lbs)' : 'Current weight (kg)';
+}
+
+function fmt(n, d=1) {
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+}
+
+function fmtInt(n) {
+  return Math.round(n).toLocaleString('en-US');
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('visible'));
+  document.querySelectorAll('input, select').forEach(e => e.classList.remove('error'));
+}
+
+function showError(inputId, errId) {
+  document.getElementById(inputId).classList.add('error');
+  document.getElementById(errId).classList.add('visible');
+}
+
+function getWeightKg(val) {
+  return units === 'imperial' ? val * 0.453592 : val;
+}
+
+function getHeightCm() {
+  if (units === 'metric') return parseFloat(document.getElementById('heightCm').value);
+  const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+  const inc = parseFloat(document.getElementById('heightIn').value) || 0;
+  return (ft * 12 + inc) * 2.54;
+}
+
+function calculate() {
+  clearErrors();
+  let valid = true;
+
+  const age = parseFloat(document.getElementById('age').value);
+  if (isNaN(age) || age < 18 || age > 55) { showError('age', 'age-err'); valid = false; }
+
+  const heightCm = getHeightCm();
+  if (isNaN(heightCm) || heightCm < 100 || heightCm > 220) {
+    if (units === 'imperial') { showError('heightFt', 'height-err'); } else { showError('heightCm', 'height-err'); }
+    valid = false;
+  }
+
+  const preW = parseFloat(document.getElementById('preWeight').value);
+  if (isNaN(preW) || preW < 30) { showError('preWeight', 'pre-err'); valid = false; }
+
+  const curW = parseFloat(document.getElementById('currentWeight').value);
+  if (isNaN(curW) || curW < 30) { showError('currentWeight', 'cur-err'); valid = false; }
+
+  const weeks = parseFloat(document.getElementById('weeksPostpartum').value);
+  if (isNaN(weeks) || weeks < 0 || weeks > 104) { showError('weeksPostpartum', 'weeks-err'); valid = false; }
+
+  if (!valid) return;
+
+  const activityFactor = parseFloat(document.getElementById('activityLevel').value);
+  const bfBonus = parseFloat(document.getElementById('breastfeeding').value);
+  const goalRateLbsWeek = parseFloat(document.getElementById('goalRate').value);
+
+  // Convert to kg
+  const preWkg = getWeightKg(preW);
+  const curWkg = getWeightKg(curW);
+
+  // BMR (Mifflin-St Jeor, female)
+  const bmr = (10 * curWkg) + (6.25 * heightCm) - (5 * age) - 161;
+  const tdee = bmr * activityFactor + bfBonus;
+
+  // Deficit per day needed
+  const goalRateKgWeek = goalRateLbsWeek * 0.453592;
+  const deficitPerDay = goalRateKgWeek * 7700 / 7; // 7700 kcal/kg fat
+
+  // Min calorie floor
+  const minCalories = bfBonus > 0 ? 1800 : 1500;
+  let targetCalories = Math.max(minCalories, tdee - deficitPerDay);
+
+  // Actual deficit and actual rate
+  const actualDeficit = tdee - targetCalories;
+  const actualRateKgWeek = (actualDeficit * 7) / 7700;
+  const actualRateLbsWeek = actualRateKgWeek / 0.453592;
+
+  // Weight to lose
+  const toLoseKg = Math.max(0, curWkg - preWkg);
+  const toloseLbs = toLoseKg / 0.453592;
+  const weeksToGoal = actualRateKgWeek > 0.01 ? toLoseKg / actualRateKgWeek : null;
+
+  // Current BMI
+  const heightM = heightCm / 100;
+  const bmi = curWkg / (heightM * heightM);
+
+  // BMI zone
+  let bmiZone, bmiColor, bmiLabel;
+  if (bmi < 18.5) { bmiZone = 'underweight'; bmiColor = '#e74c3c'; bmiLabel = 'Underweight'; }
+  else if (bmi < 25) { bmiZone = 'normal'; bmiColor = '#2ecc71'; bmiLabel = 'Normal weight'; }
+  else if (bmi < 30) { bmiZone = 'overweight'; bmiColor = '#f39c12'; bmiLabel = 'Overweight'; }
+  else { bmiZone = 'obese'; bmiColor = '#e74c3c'; bmiLabel = 'Obese'; }
+
+  // Progress bar percent toward pre-pregnancy weight
+  const totalGainKg = curWkg - preWkg;
+  const progressPercent = totalGainKg <= 0 ? 100 : Math.min(100, Math.max(0, 100 - (toLoseKg / (curWkg - (preWkg - 5))) * 100));
+
+  // Safety zone for rate
+  let rateZone, rateBadge;
+  if (actualRateLbsWeek <= 1) { rateZone = 'green'; rateBadge = '✅ Safe Rate'; }
+  else if (actualRateLbsWeek <= 1.5) { rateZone = 'yellow'; rateBadge = '⚠️ Moderate — Monitor Closely'; }
+  else { rateZone = 'red'; rateBadge = '🔴 Aggressive — Consult Your Doctor'; }
+
+  // Zone bar marker position (0.25 = 0%, 2 lbs = 100%)
+  const markerPct = Math.min(100, Math.max(0, ((actualRateLbsWeek - 0.25) / 1.75) * 100));
+
+  // Week-by-week table (up to 52 weeks or until goal)
+  const totalWeeks = weeksToGoal ? Math.min(52, Math.ceil(weeksToGoal) + 2) : 24;
+  let rows = '';
+  for (let w = 1; w <= totalWeeks; w++) {
+    const projectedLossKg = actualRateKgWeek * w;
+    const projectedWeightKg = Math.max(preWkg, curWkg - projectedLossKg);
+    const projectedWeightLbs = projectedWeightKg / 0.453592;
+    const projectedWeightDisp = units === 'imperial' ? fmt(projectedWeightLbs, 1) + ' lbs' : fmt(projectedWeightKg, 1) + ' kg';
+    const reached = projectedWeightKg <= preWkg + 0.2;
+    const highlight = reached ? ' style="background:#d4edda"' : '';
+    rows += `<tr${highlight}><td>Week ${weeks + w}</td><td>${projectedWeightDisp}</td><td>${fmt(projectedLossKg / 0.453592, 1)} lbs</td><td>${reached ? '🎯 Goal!' : ''}</td></tr>`;
+    if (reached) break;
+  }
+
+  const preWeightDisp = units === 'imperial' ? fmt(preW, 1) + ' lbs' : fmt(preW, 1) + ' kg';
+  const curWeightDisp = units === 'imperial' ? fmt(curW, 1) + ' lbs' : fmt(curW, 1) + ' kg';
+  const toLoseDisp = units === 'imperial' ? fmt(toloseLbs, 1) + ' lbs' : fmt(toLoseKg, 1) + ' kg';
+
+  const summaryRows = `
+    <tr><td>Pre-pregnancy weight</td><td>${preWeightDisp}</td></tr>
+    <tr><td>Current weight</td><td>${curWeightDisp}</td></tr>
+    <tr><td>Weight to lose</td><td>${toLoseDisp}</td></tr>
+    <tr><td>BMR (base calories)</td><td>${fmtInt(bmr)} kcal/day</td></tr>
+    <tr><td>TDEE (with activity)</td><td>${fmtInt(tdee - bfBonus)} kcal/day</td></tr>
+    ${bfBonus > 0 ? `<tr><td>Breastfeeding bonus</td><td>+${fmtInt(bfBonus)} kcal/day</td></tr>` : ''}
+    <tr><td>Daily calorie target</td><td><strong>${fmtInt(targetCalories)} kcal</strong></td></tr>
+    <tr><td>Daily calorie deficit</td><td>${fmtInt(actualDeficit)} kcal</td></tr>
+    <tr><td>Actual loss rate</td><td>${fmt(actualRateLbsWeek, 2)} lbs/week</td></tr>
+    <tr><td>Current BMI</td><td>${fmt(bmi, 1)} — ${bmiLabel}</td></tr>
+  `;
+
+  const timelineText = weeksToGoal
+    ? `Estimated <strong>${Math.ceil(weeksToGoal)} weeks</strong> (~${fmt(Math.ceil(weeksToGoal)/4.33, 1)} months) to reach pre-pregnancy weight at this rate.`
+    : toloseLbs < 1 ? `🎉 You're already at or below your pre-pregnancy weight!` : `Rate too slow to estimate — consider increasing activity.`;
+
+  const SHOW_INITIAL = 12;
+  const hasMore = rows.split('<tr').length - 1 > SHOW_INITIAL;
+  const rowArray = rows.match(/<tr[\s\S]*?<\/tr>/g) || [];
+  const initialRows = rowArray.slice(0, SHOW_INITIAL).join('');
+  const extraRows = rowArray.slice(SHOW_INITIAL).join('');
+
+  const html = `
+    <div class="result-hero">
+      <div class="big-num">${fmtInt(targetCalories)}</div>
+      <div class="big-label">Daily Calorie Target (kcal/day)</div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi"><div class="val">${fmt(actualRateLbsWeek, 2)}</div><div class="lbl">lbs lost/week</div></div>
+      <div class="kpi"><div class="val">${weeksToGoal ? Math.ceil(weeksToGoal) + ' wks' : '—'}</div><div class="lbl">to goal weight</div></div>
+      <div class="kpi"><div class="val">${fmt(bmi, 1)}</div><div class="lbl">Current BMI</div></div>
+      <div class="kpi"><div class="val">${fmtInt(actualDeficit)}</div><div class="lbl">kcal deficit/day</div></div>
+    </div>
+
+    <div class="zone-bar-wrap">
+      <h3>Weekly Loss Rate Zone</h3>
+      <div class="zone-bar">
+        <div class="zone-marker" style="left:${markerPct}%"></div>
+      </div>
+      <div class="zone-labels">
+        <span>Gentle (0.25 lb/wk)</span>
+        <span>Recommended</span>
+        <span>Aggressive (2+ lbs)</span>
+      </div>
+      <span class="zone-badge zone-${rateZone}">${rateBadge}</span>
+    </div>
+
+    <div class="zone-bar-wrap">
+      <h3>BMI Category</h3>
+      <div class="zone-bar" style="background:linear-gradient(to right,#3498db 0%,#3498db 24%,#2ecc71 24%,#2ecc71 64%,#f39c12 64%,#f39c12 80%,#e74c3c 80%,#e74c3c 100%)"></div>
+      <div class="zone-labels">
+        <span>Under</span><span>Normal</span><span>Over</span><span>Obese</span>
+      </div>
+      <span class="zone-badge" style="background:${bmiColor}22;color:${bmiColor};border:1px solid ${bmiColor}44">BMI ${fmt(bmi,1)} — ${bmiLabel}</span>
+    </div>
+
+    ${toloseLbs > 0 ? `<div class="zone-bar-wrap">
+      <h3>Progress to Pre-Pregnancy Weight</h3>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${progressPercent}%;background:#0077b6"></div></div>
+      <div style="font-size:0.8rem;color:#666;margin-top:4px">${fmt(progressPercent, 0)}% of the way back — ${toLoseDisp} to go</div>
+    </div>` : `<div style="background:#d4edda;border-radius:6px;padding:0.8rem 1rem;margin-bottom:1rem;font-size:0.9rem;color:#155724">🎉 You're already at or below your pre-pregnancy weight!</div>`}
+
+    <p style="font-size:0.88rem;color:#555;margin-bottom:0.75rem">${timelineText}</p>
+
+    <div style="margin-bottom:1.2rem">
+      <strong style="font-size:0.88rem">Summary</strong>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+          <tbody>${summaryRows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    ${toloseLbs > 0.5 ? `<div>
+      <strong style="font-size:0.88rem">Week-by-Week Projection (from now)</strong>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>Week</th><th>Projected Weight</th><th>Total Lost</th><th></th></tr></thead>
+          <tbody id="initial-rows">${initialRows}</tbody>
+          ${hasMore ? `<tbody id="extra-rows" style="display:none">${extraRows}</tbody>` : ''}
+        </table>
+        ${hasMore ? `<button class="show-all-btn" id="showAllBtn" onclick="toggleAllRows()">Show All Weeks ▼</button>` : ''}
+      </div>
+    </div>` : ''}
+
+    <div style="text-align:center;margin-top:1rem">
+      <button class="copy-btn" id="copyBtn" onclick="copyResults()">Copy Results to Clipboard</button>
+    </div>
+  `;
+
+  requestAnimationFrame(() => {
+    document.getElementById('result-inner').innerHTML = html;
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  // Store for copy
+  window._copyText = `Postpartum Weight Loss Calculator Results
+--------------------------------------------
+Daily Calorie Target: ${fmtInt(targetCalories)} kcal/day
+Daily Calorie Deficit: ${fmtInt(actualDeficit)} kcal
+Weekly Loss Rate: ${fmt(actualRateLbsWeek, 2)} lbs/week
+Weeks to Goal: ${weeksToGoal ? Math.ceil(weeksToGoal) : 'N/A'}
+Current BMI: ${fmt(bmi, 1)} (${bmiLabel})
+Pre-Pregnancy Weight: ${preWeightDisp}
+Current Weight: ${curWeightDisp}
+Weight to Lose: ${toLoseDisp}
+--------------------------------------------
+Generated at toolhut.dev`;
+}
+
+function toggleAllRows() {
+  const extra = document.getElementById('extra-rows');
+  const btn = document.getElementById('showAllBtn');
+  if (!extra) return;
+  const hidden = extra.style.display === 'none';
+  extra.style.display = hidden ? '' : 'none';
+  btn.textContent = hidden ? 'Show Less ▲' : 'Show All Weeks ▼';
+}
+
+function copyResults() {
+  if (!window._copyText) return;
+  const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(window._copyText).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => { if(btn) btn.textContent = 'Copy Results to Clipboard'; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = window._copyText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { if(btn) btn.textContent = 'Copy Results to Clipboard'; }, 2000);
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => calculate());
+});
+
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter') requestAnimationFrame(() => calculate());
+  });
+});
+</script>
+</body>
+</html>
