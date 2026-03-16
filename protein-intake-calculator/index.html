@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protein Intake Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your daily protein intake based on weight, activity level, and goals. Get personalized recommendations for muscle gain, weight loss, or maintenance.">
+<link rel="canonical" href="https://toolhut.dev/protein-intake-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Protein Intake Calculator",
+  "url": "https://toolhut.dev/protein-intake-calculator/",
+  "description": "Calculate your daily protein intake based on weight, activity level, and fitness goals.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:0.75rem 1.5rem;background:#fff}
+nav a{font-weight:600;font-size:1rem;color:#1a1a2e}
+nav a:hover{color:#0077b6;text-decoration:none}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.7rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.tool-card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+input[type="number"],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input[type="number"]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.unit-toggle{display:flex;gap:0;margin-bottom:1.25rem}
+.unit-btn{flex:1;padding:10px;border:1px solid #ddd;background:#f8f9fa;cursor:pointer;font-size:0.9rem;font-weight:500;color:#555;transition:all 0.2s;min-height:44px}
+.unit-btn:first-child{border-radius:6px 0 0 6px}
+.unit-btn:last-child{border-radius:0 6px 6px 0;border-left:none}
+.unit-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
+button.calc-btn{width:100%;background:#0077b6;color:#fff;border:none;padding:14px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;margin-top:0.5rem}
+button.calc-btn:hover{background:#006299}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:all}
+.result-hero{text-align:center;margin-bottom:1.5rem;padding:1.5rem;background:#f8f9fa;border-radius:8px}
+.result-hero .label{font-size:0.85rem;color:#555;font-weight:500;margin-bottom:0.3rem}
+.result-hero .big-num{font-size:3rem;font-weight:700;color:#0077b6;line-height:1}
+.result-hero .unit{font-size:1rem;color:#555;margin-top:0.25rem}
+.zone-bar-wrapper{margin:1.5rem 0}
+.zone-bar-label{display:flex;justify-content:space-between;font-size:0.75rem;color:#666;margin-bottom:0.3rem}
+.zone-bar-track{width:100%;height:20px;border-radius:10px;background:linear-gradient(to right,#e74c3c 0%,#f39c12 30%,#27ae60 55%,#f39c12 80%,#e74c3c 100%);position:relative;overflow:visible}
+.zone-indicator{position:absolute;top:-6px;width:4px;height:32px;background:#1a1a2e;border-radius:2px;transform:translateX(-50%);transition:left 0.4s ease;box-shadow:0 2px 4px rgba(0,0,0,0.3)}
+.zone-labels{display:flex;justify-content:space-between;margin-top:0.5rem;font-size:0.72rem;color:#555}
+.zone-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:0.82rem;font-weight:600;margin-top:0.5rem}
+.zone-badge.green{background:#d4edda;color:#1a5e2e}
+.zone-badge.yellow{background:#fff3cd;color:#7d5a00}
+.zone-badge.red{background:#fde8e8;color:#8b1a1a}
+.breakdown-section{margin-top:1.5rem}
+.breakdown-section h3{font-size:1rem;font-weight:600;margin-bottom:0.75rem;color:#1a1a2e}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444}
+th:last-child{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid #eee;color:#1a1a2e}
+td:last-child{text-align:right;font-weight:500}
+tr:nth-child(even) td{background:#fafafa}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid #ddd;color:#555;padding:6px 14px;border-radius:5px;font-size:0.82rem;cursor:pointer;transition:all 0.2s;margin-top:1rem}
+.copy-btn:hover{border-color:#0077b6;color:#0077b6}
+.meals-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.75rem}
+.meal-chip{background:#f0f8ff;border:1px solid #b3d9f0;border-radius:6px;padding:8px 14px;font-size:0.85rem;text-align:center;flex:1;min-width:80px}
+.meal-chip .chip-num{font-size:1.1rem;font-weight:700;color:#0077b6;display:block}
+.meal-chip .chip-label{font-size:0.72rem;color:#555}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:0.9rem 1rem;font-size:0.82rem;color:#5a4200;margin-top:1.25rem}
+.disclaimer strong{color:#5a4200}
+.ad-slot{min-height:0;margin:0}
+.content-section{margin:2rem 0}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:0.6rem;margin-top:1.5rem}
+.content-section p{color:#444;margin-bottom:0.75rem;font-size:0.95rem}
+.content-section ul{color:#444;font-size:0.95rem;padding-left:1.3rem;margin-bottom:0.75rem}
+.content-section ul li{margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem}
+details summary{padding:0.75rem 1rem;cursor:pointer;font-weight:600;font-size:0.9rem;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::after{content:"＋";font-size:1rem;color:#0077b6}
+details[open] summary::after{content:"－"}
+details p{padding:0 1rem 0.75rem;font-size:0.9rem;color:#444}
+.related-tools{margin:2rem 0}
+.related-tools h2{font-size:1.1rem;font-weight:700;margin-bottom:0.75rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.related-link{display:block;padding:10px 14px;border:1px solid #e0e0e0;border-radius:6px;font-size:0.85rem;color:#0077b6;background:#f8f9fa;transition:all 0.2s}
+.related-link:hover{background:#e8f4fb;border-color:#0077b6;text-decoration:none}
+footer{border-top:1px solid #e0e0e0;padding:1.25rem 1.5rem;text-align:center;font-size:0.82rem;color:#666;background:#f8f9fa}
+footer a{color:#555;margin:0 0.5rem}
+footer a:hover{color:#0077b6}
+.table-scroll{overflow-x:auto}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.4rem}
+  .result-hero .big-num{font-size:2.4rem}
+  .tool-card{padding:1.25rem}
+  .meals-row{gap:0.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/">🔧 toolhut.dev</a>
+</nav>
+
+<div class="container">
+  <h1>Protein Intake Calculator</h1>
+  <p class="subtitle">Find your ideal daily protein intake based on your body, goals, and activity level.</p>
+
+  <div class="tool-card">
+    <!-- Unit Toggle -->
+    <div style="margin-bottom:0.5rem">
+      <label style="margin-bottom:0.4rem">Unit System</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btn-metric" onclick="setUnit('metric')">Metric (kg / cm)</button>
+        <button class="unit-btn" id="btn-imperial" onclick="setUnit('imperial')">Imperial (lbs / in)</button>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="weight" id="weight-label">Weight (kg)</label>
+        <input type="number" id="weight" placeholder="e.g. 75" min="20" max="500" step="0.1">
+        <div class="error-msg" id="weight-err">Please enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="height" id="height-label">Height (cm)</label>
+        <input type="number" id="height" placeholder="e.g. 175" min="50" max="300" step="1">
+        <div class="error-msg" id="height-err">Please enter a valid height.</div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" placeholder="e.g. 30" min="10" max="100" step="1">
+        <div class="error-msg" id="age-err">Please enter a valid age (10–100).</div>
+      </div>
+      <div class="form-group">
+        <label for="sex">Biological Sex</label>
+        <select id="sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Activity Level</label>
+      <select id="activity">
+        <option value="sedentary">Sedentary (desk job, little/no exercise)</option>
+        <option value="light">Lightly Active (1–3 days/week exercise)</option>
+        <option value="moderate" selected>Moderately Active (3–5 days/week)</option>
+        <option value="active">Very Active (6–7 days/week intense exercise)</option>
+        <option value="athlete">Athlete / Twice-daily training</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="goal">Primary Goal</label>
+      <select id="goal">
+        <option value="maintain">Maintain Weight / General Health</option>
+        <option value="lose">Weight Loss / Fat Loss</option>
+        <option value="gain">Muscle Gain / Bulking</option>
+        <option value="recomp">Body Recomposition</option>
+        <option value="endurance">Endurance / Performance</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="meals">Meals Per Day: <span id="meals-display" style="color:#0077b6;font-weight:600">4</span></label>
+      <input type="range" id="meals" min="2" max="8" value="4" step="1" style="width:100%;accent-color:#0077b6;cursor:pointer;height:20px" oninput="document.getElementById('meals-display').textContent=this.value">
+    </div>
+
+    <button class="calc-btn" id="calcBtn">Calculate Protein Intake</button>
+  </div>
+
+  <!-- Results -->
+  <div class="tool-card results" id="results">
+    <div class="result-hero">
+      <div class="label">Recommended Daily Protein</div>
+      <div class="big-num" id="res-grams">—</div>
+      <div class="unit">grams per day</div>
+      <span class="zone-badge green" id="res-badge">Optimal Range</span>
+    </div>
+
+    <!-- Zone Bar -->
+    <div class="zone-bar-wrapper">
+      <div class="zone-bar-label">
+        <span>0g</span>
+        <span id="bar-max-label">300g</span>
+      </div>
+      <div class="zone-bar-track" id="bar-track">
+        <div class="zone-indicator" id="zone-indicator" style="left:50%"></div>
+      </div>
+      <div class="zone-labels">
+        <span>Too Low</span>
+        <span>Minimum</span>
+        <span>Optimal</span>
+        <span>High</span>
+        <span>Excess</span>
+      </div>
+    </div>
+
+    <!-- Range Table -->
+    <div class="breakdown-section">
+      <h3>Your Protein Range</h3>
+      <div class="table-scroll">
+        <table id="range-table">
+          <thead>
+            <tr><th>Category</th><th>g/day</th><th>g/kg body weight</th></tr>
+          </thead>
+          <tbody id="range-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Per Meal Breakdown -->
+    <div class="breakdown-section">
+      <h3>Per Meal Distribution (<span id="meals-count-label">4</span> meals)</h3>
+      <div class="meals-row" id="meals-row"></div>
+    </div>
+
+    <!-- Food Sources Table -->
+    <div class="breakdown-section">
+      <h3>Protein-Rich Food Sources</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Food (100g)</th><th>Protein</th><th>Servings to hit goal</th></tr>
+          </thead>
+          <tbody id="foods-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <button class="copy-btn" id="copy-btn" onclick="copyResults()">
+      <span>📋</span><span id="copy-label">Copy Results</span>
+    </button>
+
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional or registered dietitian for personalized medical or nutritional advice.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Protein Intake Calculator</h2>
+    <p>Enter your weight, height, age, biological sex, activity level, and primary fitness goal. Choose how many meals you eat per day, then click "Calculate Protein Intake." The tool instantly outputs your recommended daily protein in grams and shows where that number falls on an optimality scale.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Protein is the most important macronutrient for body composition, and most people are either under-eating or dramatically overcomplicating it. A sedentary 70kg adult needs roughly 56g/day just to avoid deficiency — but that's a bare minimum, not a target. Someone who lifts weights four days a week needs 2–2.4x that amount to actually build muscle.</p>
+    <p>The difference matters enormously. In one well-known study, athletes eating 2.2g/kg gained significantly more lean mass than those eating 1.2g/kg, even with identical training. For weight loss, high protein intake (1.6–2.4g/kg) preserves muscle while in a calorie deficit — a critical difference between losing fat and losing muscle. Older adults need even more: muscle protein synthesis becomes less efficient after 50, so 1.6–2.0g/kg becomes the practical minimum to prevent sarcopenia. Whether you're 22 and bulking or 58 and trying to stay strong, knowing your number changes outcomes.</p>
+    <p>This calculator accounts for all those variables — body weight, activity, age, sex, and goal — and gives you a realistic, science-backed target, not a generic internet recommendation.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The calculator uses body weight as the primary anchor, with a multiplier adjusted for activity level and goal. The general formula is:</p>
+    <p><strong>Daily Protein (g) = Body Weight (kg) × Multiplier</strong></p>
+    <p>Multipliers by goal:</p>
+    <ul>
+      <li><strong>Maintenance / General Health:</strong> 1.2–1.6 g/kg (sedentary to moderately active)</li>
+      <li><strong>Weight Loss / Fat Loss:</strong> 1.6–2.2 g/kg (higher protein preserves lean mass in a deficit)</li>
+      <li><strong>Muscle Gain:</strong> 1.6–2.4 g/kg (supports muscle protein synthesis during training)</li>
+      <li><strong>Body Recomposition:</strong> 1.8–2.4 g/kg (simultaneous fat loss and muscle gain requires maximum protein)</li>
+      <li><strong>Endurance / Performance:</strong> 1.4–1.8 g/kg (repairs oxidative damage from aerobic training)</li>
+    </ul>
+    <p>Imperial weights are converted to kg before calculation. Age adjustments slightly increase the recommendation for users 50+ to account for anabolic resistance.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't spread it all to dinner.</strong> Muscle protein synthesis is maximized at 20–40g per meal. Eating 150g in one sitting doesn't give you 3x the benefit — distribute protein evenly.</li>
+      <li><strong>Use body weight, not scale weight if significantly overweight.</strong> For people with obesity, base protein targets on lean body mass or goal weight to avoid extremely high absolute numbers.</li>
+      <li><strong>Protein and hydration go together.</strong> Higher protein intake increases nitrogen excretion — drink enough water, especially above 2g/kg.</li>
+      <li><strong>Don't fear the upper range.</strong> Studies consistently show intakes up to 3.0g/kg are safe in healthy adults. The "kidneys will fail" myth applies only to people with pre-existing renal disease.</li>
+      <li><strong>Track for at least a week.</strong> Hitting your protein target on one day means little. Consistent daily intake is what drives results over weeks and months.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is 1g of protein per pound of body weight the right target?</summary>
+      <p>This popular rule (roughly 2.2g/kg) is actually at the high end of most research-backed recommendations, not the standard. It's a practical and safe target for people actively training, but the evidence-based sweet spot for most exercising adults is 1.6–2.2g/kg. The 1g/lb rule works, it's just slightly more than strictly necessary.</p>
+    </details>
+    <details>
+      <summary>Does protein timing matter as much as total daily intake?</summary>
+      <p>Total daily intake is the primary driver of results. That said, distributing protein across 3–5 meals — each containing 20–40g — is meaningfully better than front- or back-loading. Post-workout protein has a modest benefit, but if you're hitting your daily total, timing is a secondary optimization.</p>
+    </details>
+    <details>
+      <summary>Can I get enough protein on a plant-based diet?</summary>
+      <p>Yes, but it requires more planning. Plant proteins are generally less digestible and lower in leucine than animal sources, so plant-based eaters often benefit from targeting the higher end of the recommended range (2.0–2.4g/kg). Combining sources — legumes, tofu, tempeh, seitan, edamame — ensures a complete amino acid profile.</p>
+    </details>
+    <details>
+      <summary>Do protein needs change as I age?</summary>
+      <p>Yes, significantly. After age 50, muscle protein synthesis becomes less responsive to the same protein stimulus — a phenomenon called anabolic resistance. Research suggests adults over 50 benefit from 1.6–2.0g/kg minimum, with some evidence pointing to 2.0–2.4g/kg for those doing resistance training. This calculator applies a modest age-based upward adjustment for users 50 and older.</p>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/met-activity-calorie-calculator/">🔥 Caloric Burn Rate by Activity Calculator</a>
+      <a class="related-link" href="/postpartum-weight-loss-calculator/">🤱 Postpartum Weight Loss Calculator</a>
+      <a class="related-link" href="/biological-age-calculator/">🧬 Biological Age Calculator</a>
+      <a class="related-link" href="/strength-training-volume-calculator/">💪 Strength Training Volume Calculator</a>
+      <a class="related-link" href="/lean-body-mass-calculator/">⚖️ Lean Body Mass Calculator</a>
+      <a class="related-link" href="/weight-loss-timeline-calculator/">📉 Weight Loss Timeline Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:0.4rem">© <span id="yr"></span> toolhut.dev</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let unit = 'metric';
+
+function setUnit(u) {
+  unit = u;
+  const wLabel = document.getElementById('weight-label');
+  const hLabel = document.getElementById('height-label');
+  const wInput = document.getElementById('weight');
+  const hInput = document.getElementById('height');
+  if (u === 'metric') {
+    wLabel.textContent = 'Weight (kg)';
+    hLabel.textContent = 'Height (cm)';
+    wInput.placeholder = 'e.g. 75';
+    hInput.placeholder = 'e.g. 175';
+    wInput.max = 500; hInput.max = 300;
+    document.getElementById('btn-metric').classList.add('active');
+    document.getElementById('btn-imperial').classList.remove('active');
+  } else {
+    wLabel.textContent = 'Weight (lbs)';
+    hLabel.textContent = 'Height (in)';
+    wInput.placeholder = 'e.g. 165';
+    hInput.placeholder = 'e.g. 69';
+    wInput.max = 1100; hInput.max = 120;
+    document.getElementById('btn-imperial').classList.add('active');
+    document.getElementById('btn-metric').classList.remove('active');
+  }
+  wInput.value = '';
+  hInput.value = '';
+}
+
+function fmt(n, dec = 0) {
+  return n.toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
+function clearErrors() {
+  ['weight','height','age'].forEach(id => {
+    document.getElementById(id).classList.remove('error');
+    document.getElementById(id + '-err').classList.remove('show');
+  });
+}
+
+function showError(field, msg) {
+  const el = document.getElementById(field);
+  el.classList.add('error');
+  const errEl = document.getElementById(field + '-err');
+  errEl.textContent = msg;
+  errEl.classList.add('show');
+}
+
+function getMultiplier(activity, goal, age) {
+  // Base range by goal
+  const goalRanges = {
+    maintain:   {low: 1.2, mid: 1.4, high: 1.6},
+    lose:       {low: 1.6, mid: 1.9, high: 2.2},
+    gain:       {low: 1.6, mid: 2.0, high: 2.4},
+    recomp:     {low: 1.8, mid: 2.1, high: 2.4},
+    endurance:  {low: 1.4, mid: 1.6, high: 1.8}
+  };
+  const activityBoost = {sedentary: 0, light: 0.1, moderate: 0.2, active: 0.3, athlete: 0.4};
+  const base = goalRanges[goal];
+  const boost = activityBoost[activity];
+  const ageBoost = age >= 50 ? 0.2 : (age >= 40 ? 0.1 : 0);
+  return {
+    low:  Math.min(base.low + boost * 0.5, 3.5),
+    mid:  Math.min(base.mid + boost * 0.5 + ageBoost, 3.5),
+    high: Math.min(base.high + boost * 0.5 + ageBoost, 3.5)
+  };
+}
+
+function getZone(recommended, weightKg) {
+  const gPerKg = recommended / weightKg;
+  if (gPerKg < 0.8) return {label:'Too Low — Below Minimum', cls:'red'};
+  if (gPerKg < 1.2) return {label:'Below Optimal', cls:'yellow'};
+  if (gPerKg <= 2.4) return {label:'Optimal Range', cls:'green'};
+  if (gPerKg <= 3.0) return {label:'High — Still Safe', cls:'yellow'};
+  return {label:'Very High', cls:'yellow'};
+}
+
+// Bar position: map gPerKg 0-3.5 to 0-100%
+function barPercent(gPerKg) {
+  const max = 3.5;
+  return Math.min(Math.max((gPerKg / max) * 100, 2), 98);
+}
+
+const foods = [
+  {name:'Chicken Breast', protein: 31},
+  {name:'Canned Tuna', protein: 25},
+  {name:'Eggs (2 large)', protein: 13},
+  {name:'Greek Yogurt', protein: 10},
+  {name:'Lentils (cooked)', protein: 9},
+  {name:'Tofu (firm)', protein: 8},
+  {name:'Beef (lean mince)', protein: 26},
+  {name:'Cottage Cheese', protein: 11}
+];
+
+let lastResult = null;
+
+function calculate() {
+  clearErrors();
+  let weightRaw = parseFloat(document.getElementById('weight').value);
+  let heightRaw = parseFloat(document.getElementById('height').value);
+  const age = parseFloat(document.getElementById('age').value);
+  const activity = document.getElementById('activity').value;
+  const goal = document.getElementById('goal').value;
+  const meals = parseInt(document.getElementById('meals').value);
+  let valid = true;
+
+  if (!weightRaw || weightRaw <= 0 || (unit === 'metric' && (weightRaw < 20 || weightRaw > 500)) || (unit === 'imperial' && (weightRaw < 44 || weightRaw > 1100))) {
+    showError('weight', unit === 'metric' ? 'Enter a weight between 20–500 kg.' : 'Enter a weight between 44–1100 lbs.');
+    valid = false;
+  }
+  if (!heightRaw || heightRaw <= 0 || (unit === 'metric' && (heightRaw < 50 || heightRaw > 300)) || (unit === 'imperial' && (heightRaw < 20 || heightRaw > 120))) {
+    showError('height', unit === 'metric' ? 'Enter a height between 50–300 cm.' : 'Enter a height between 20–120 inches.');
+    valid = false;
+  }
+  if (!age || age < 10 || age > 100) {
+    showError('age', 'Enter an age between 10 and 100.');
+    valid = false;
+  }
+  if (!valid) return;
+
+  const weightKg = unit === 'imperial' ? weightRaw * 0.453592 : weightRaw;
+  const mult = getMultiplier(activity, goal, age);
+  const recommended = Math.round(weightKg * mult.mid);
+  const low = Math.round(weightKg * mult.low);
+  const high = Math.round(weightKg * mult.high);
+  const minimum = Math.round(weightKg * 0.8);
+  const zone = getZone(recommended, weightKg);
+  const perMeal = Math.round(recommended / meals);
+  const gPerKg = recommended / weightKg;
+  const barMax = Math.max(high * 1.4, 200);
+
+  lastResult = {recommended, low, high, minimum, meals, gPerKg, weightKg, goal, activity};
+
+  // Build range table
+  const rangeRows = [
+    ['Minimum (RDA)', minimum, fmt(0.8, 1)],
+    ['Low End of Range', low, fmt(mult.low, 1)],
+    ['<b>Recommended (You)</b>', recommended, fmt(gPerKg, 2)],
+    ['High End of Range', high, fmt(mult.high, 1)],
+  ];
+  let rHtml = '';
+  rangeRows.forEach(r => {
+    rHtml += `<tr><td>${r[0]}</td><td>${fmt(r[1])}g</td><td>${r[2]} g/kg</td></tr>`;
+  });
+
+  // Per meal
+  let mealHtml = '';
+  for (let i = 1; i <= meals; i++) {
+    const adj = (i === meals) ? recommended - perMeal * (meals - 1) : perMeal;
+    mealHtml += `<div class="meal-chip"><span class="chip-num">${fmt(Math.max(adj, 0))}g</span><span class="chip-label">Meal ${i}</span></div>`;
+  }
+
+  // Food sources
+  let foodHtml = '';
+  foods.forEach(f => {
+    const servings = (recommended / f.protein).toFixed(1);
+    foodHtml += `<tr><td>${f.name}</td><td>${f.protein}g</td><td>${servings} × 100g</td></tr>`;
+  });
+
+  const pct = barPercent(gPerKg);
+  const barMaxLabel = fmt(Math.round(barMax));
+
+  requestAnimationFrame(() => {
+    document.getElementById('res-grams').textContent = fmt(recommended);
+    const badge = document.getElementById('res-badge');
+    badge.textContent = zone.label;
+    badge.className = 'zone-badge ' + zone.cls;
+    document.getElementById('range-tbody').innerHTML = rHtml;
+    document.getElementById('meals-count-label').textContent = meals;
+    document.getElementById('meals-row').innerHTML = mealHtml;
+    document.getElementById('foods-tbody').innerHTML = foodHtml;
+    document.getElementById('bar-max-label').textContent = barMaxLabel + 'g';
+    // Reposition indicator based on actual bar max
+    const adjustedPct = Math.min(Math.max((recommended / barMax) * 100, 2), 98);
+    document.getElementById('zone-indicator').style.left = adjustedPct + '%';
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+}
+
+function copyResults() {
+  if (!lastResult) return;
+  const {recommended, low, high, meals, gPerKg, goal} = lastResult;
+  const perMeal = Math.round(recommended / meals);
+  const text = `Protein Intake Calculator Results\n` +
+    `Daily Target: ${recommended}g\n` +
+    `Range: ${low}g – ${high}g\n` +
+    `Per meal (${meals} meals): ~${perMeal}g\n` +
+    `Per kg body weight: ${gPerKg.toFixed(2)}g/kg\n` +
+    `Goal: ${goal}\n` +
+    `Generated at toolhut.dev/protein-intake-calculator/`;
+  navigator.clipboard.writeText(text).then(() => {
+    const lbl = document.getElementById('copy-label');
+    lbl.textContent = 'Copied!';
+    setTimeout(() => { lbl.textContent = 'Copy Results'; }, 2000);
+  }).catch(() => {
+    const lbl = document.getElementById('copy-label');
+    lbl.textContent = 'Copy failed';
+    setTimeout(() => { lbl.textContent = 'Copy Results'; }, 2000);
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+['weight','height','age'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      requestAnimationFrame(() => { calculate(); });
+    }
+  });
+});
+
+document.getElementById('activity').addEventListener('keydown', e => {
+  if (e.key === 'Enter') requestAnimationFrame(() => { calculate(); });
+});
+document.getElementById('goal').addEventListener('keydown', e => {
+  if (e.key === 'Enter') requestAnimationFrame(() => { calculate(); });
+});
+</script>
+</body>
+</html>
