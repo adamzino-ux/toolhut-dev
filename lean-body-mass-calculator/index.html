@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lean Body Mass Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your lean body mass instantly using proven formulas. Enter your height, weight, and body fat % to find your LBM. Free, accurate, no signup needed.">
+<link rel="canonical" href="https://toolhut.dev/lean-body-mass-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Lean Body Mass Calculator",
+  "url": "https://toolhut.dev/lean-body-mass-calculator/",
+  "description": "Calculate lean body mass using multiple proven formulas including Boer, James, and Hume methods.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f4f6f9;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 2rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2rem}
+.unit-tabs{display:flex;gap:0;margin-bottom:1.5rem;border:1px solid #ddd;border-radius:6px;overflow:hidden}
+.unit-tab{flex:1;padding:10px 12px;text-align:center;cursor:pointer;background:#f8f9fa;font-size:0.9rem;font-weight:500;color:#555;transition:all 0.2s;border:none;min-height:44px}
+.unit-tab.active{background:#0077b6;color:#fff}
+.unit-tab:hover:not(.active){background:#e9ecef}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-moz-appearance:textfield;appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+input[type=number]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.12)}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.hint{font-size:0.78rem;color:#888;margin-top:3px}
+.slider-wrap{display:flex;align-items:center;gap:12px;margin-top:6px}
+input[type=range]{flex:1;height:6px;accent-color:#0077b6;cursor:pointer}
+.slider-val{font-size:0.9rem;font-weight:600;color:#0077b6;min-width:48px;text-align:right}
+.method-select select{width:100%}
+.calc-btn{width:100%;background:#0077b6;color:#fff;border:none;padding:14px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:50px;margin-top:0.5rem}
+.calc-btn:hover{background:#006299}
+.results{display:none;opacity:0;transition:opacity 0.3s ease}
+.results.show{display:block;animation:fadeIn 0.3s ease forwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.lbm-hero{text-align:center;padding:1.5rem 1rem;background:linear-gradient(135deg,#e8f4fd,#f0f8ff);border-radius:8px;margin-bottom:1.5rem}
+.lbm-label{font-size:0.85rem;color:#555;text-transform:uppercase;letter-spacing:0.05em;font-weight:600}
+.lbm-value{font-size:3rem;font-weight:800;color:#0077b6;line-height:1.1;margin:4px 0}
+.lbm-unit{font-size:1rem;color:#555;font-weight:500}
+.lbm-sub{font-size:0.9rem;color:#666;margin-top:8px}
+.copy-btn{background:transparent;border:1px solid #0077b6;color:#0077b6;padding:6px 14px;border-radius:5px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;margin-top:10px}
+.copy-btn:hover{background:#0077b6;color:#fff}
+.zone-bar-wrap{margin-bottom:1.5rem}
+.zone-bar-wrap h3{font-size:0.95rem;font-weight:600;color:#333;margin-bottom:0.8rem}
+.zone-bar{display:flex;height:20px;border-radius:10px;overflow:hidden;position:relative;margin-bottom:6px}
+.zone-seg{height:100%;transition:flex 0.3s}
+.zone-red{background:#e74c3c}
+.zone-yellow{background:#f39c12}
+.zone-green{background:#27ae60}
+.zone-yellow2{background:#e67e22}
+.zone-red2{background:#c0392b}
+.zone-pointer{position:absolute;top:-4px;width:4px;height:28px;background:#1a1a2e;border-radius:2px;transition:left 0.4s ease;transform:translateX(-50%)}
+.zone-labels{display:flex;justify-content:space-between;font-size:0.72rem;color:#666;margin-top:2px}
+.zone-status{display:inline-block;padding:5px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;margin-top:8px}
+.status-green{background:#d4edda;color:#155724}
+.status-yellow{background:#fff3cd;color:#856404}
+.status-red{background:#f8d7da;color:#721c24}
+.breakdown-table{width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem}
+.breakdown-table th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444;border-bottom:2px solid #ddd}
+.breakdown-table th:last-child,.breakdown-table td:last-child{text-align:right}
+.breakdown-table td{padding:9px 12px;border-bottom:1px solid #f0f0f0;color:#333}
+.breakdown-table tr:nth-child(even) td{background:#fafafa}
+.breakdown-table tr.highlight td{background:#e8f4fd;font-weight:700;color:#0077b6}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;border-left:3px solid #0077b6;padding-left:10px}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px 14px;font-size:0.82rem;color:#555;margin-top:1rem;line-height:1.5}
+.disclaimer strong{color:#e65100}
+.ad-slot{min-height:0;margin:0}
+.content-section{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;margin-bottom:2rem}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin:1.5rem 0 0.6rem;padding-bottom:4px;border-bottom:1px solid #f0f0f0}
+.content-section h2:first-of-type{margin-top:0}
+.content-section p{color:#444;font-size:0.93rem;margin-bottom:0.8rem;line-height:1.7}
+.content-section ul{color:#444;font-size:0.93rem;padding-left:1.2rem;margin-bottom:0.8rem}
+.content-section ul li{margin-bottom:0.5rem;line-height:1.7}
+details{border:1px solid #e8e8e8;border-radius:6px;padding:0;margin-bottom:0.6rem;overflow:hidden}
+summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:0.9rem;color:#1a1a2e;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center;user-select:none}
+summary::after{content:'▼';font-size:0.7rem;color:#888;transition:transform 0.2s}
+details[open] summary::after{transform:rotate(180deg)}
+details[open] summary{background:#e8f4fd;color:#0077b6}
+.details-body{padding:12px 16px;font-size:0.9rem;color:#444;line-height:1.7}
+.related-tools{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:1.5rem;margin-bottom:2rem}
+.related-tools h2{font-size:1.1rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.related-link{display:block;padding:10px 12px;background:#f8f9fa;border:1px solid #e8e8e8;border-radius:6px;font-size:0.85rem;color:#0077b6;font-weight:500;transition:all 0.2s;text-align:center}
+.related-link:hover{background:#e8f4fd;border-color:#0077b6;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;text-align:center;font-size:0.82rem;color:#888}
+footer a{color:#0077b6;margin:0 8px}
+.formula-box{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:12px 14px;font-family:monospace;font-size:0.85rem;color:#333;margin:8px 0;line-height:1.8}
+@media(max-width:640px){
+.row-2{grid-template-columns:1fr}
+.related-grid{grid-template-columns:1fr}
+.lbm-value{font-size:2.4rem}
+h1{font-size:1.35rem}
+.card{padding:1.2rem}
+.content-section{padding:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Lean Body Mass Calculator</h1>
+  <p class="subtitle">Find your lean body mass using proven formulas — enter your stats below.</p>
+
+  <div class="card">
+    <div class="unit-tabs">
+      <button class="unit-tab active" id="tab-imperial" onclick="switchUnit('imperial')">Imperial (lb / in)</button>
+      <button class="unit-tab" id="tab-metric" onclick="switchUnit('metric')">Metric (kg / cm)</button>
+    </div>
+
+    <div class="form-group">
+      <label for="sex">Biological Sex</label>
+      <select id="sex">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label id="weight-label" for="weight">Weight (lb)</label>
+        <input type="number" id="weight" placeholder="e.g. 175" min="50" max="700" step="0.1">
+        <div class="error-msg" id="weight-err">Please enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label id="height-label" for="height">Height (in)</label>
+        <input type="number" id="height" placeholder="e.g. 70" min="36" max="96" step="0.1">
+        <div class="error-msg" id="height-err">Please enter a valid height.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="bf-slider">Body Fat % <span class="hint">(optional — enables direct calculation)</span></label>
+      <div class="slider-wrap">
+        <input type="range" id="bf-slider" min="3" max="50" value="20" oninput="syncBF(this.value)">
+        <span class="slider-val" id="bf-display">20%</span>
+      </div>
+      <input type="number" id="bf-input" placeholder="Enter body fat % (3–50)" min="3" max="50" step="0.1" oninput="syncBFInput(this.value)" style="margin-top:8px">
+      <div class="error-msg" id="bf-err">Body fat % must be between 3 and 50.</div>
+      <p class="hint">Leave at default if you don't know your body fat %.</p>
+    </div>
+
+    <div class="form-group">
+      <label for="method">Formula Method</label>
+      <select id="method">
+        <option value="all">Show All Methods</option>
+        <option value="boer">Boer Formula</option>
+        <option value="james">James Formula</option>
+        <option value="hume">Hume Formula</option>
+        <option value="bf">Body Fat % Method</option>
+      </select>
+    </div>
+
+    <button class="calc-btn" id="calcBtn">Calculate Lean Body Mass</button>
+  </div>
+
+  <div class="results card" id="results">
+    <div class="lbm-hero">
+      <div class="lbm-label">Your Lean Body Mass</div>
+      <div class="lbm-value" id="res-lbm">—</div>
+      <div class="lbm-unit" id="res-unit">lbs</div>
+      <div class="lbm-sub" id="res-percent">— % of total body weight</div>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy Result</button>
+    </div>
+
+    <div class="zone-bar-wrap">
+      <h3>Body Fat % Classification</h3>
+      <div style="position:relative">
+        <div class="zone-bar" id="zone-bar">
+          <!-- segments set by JS -->
+        </div>
+        <div class="zone-pointer" id="zone-pointer" style="left:0%"></div>
+      </div>
+      <div class="zone-labels" id="zone-labels"></div>
+      <div style="margin-top:6px"><span class="zone-status" id="zone-status">—</span></div>
+    </div>
+
+    <div class="section-title">Formula Breakdown</div>
+    <div style="overflow-x:auto">
+      <table class="breakdown-table" id="formula-table">
+        <thead>
+          <tr>
+            <th>Formula</th>
+            <th>LBM</th>
+            <th>Fat Mass</th>
+          </tr>
+        </thead>
+        <tbody id="formula-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="section-title" style="margin-top:1.2rem">Body Composition Summary</div>
+    <div style="overflow-x:auto">
+      <table class="breakdown-table" id="summary-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody id="summary-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      <strong>⚕ Disclaimer:</strong> This tool is for informational purposes only. Results are estimates based on population-average formulas and may not reflect individual variation. Consult a healthcare professional or registered dietitian for personalized medical advice.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="content-section">
+    <h2>How to Use This Lean Body Mass Calculator</h2>
+    <p>Select your unit system (imperial or metric), enter your sex, weight, and height, then optionally slide your known body fat percentage. Choose a formula method or select "Show All Methods" to compare. Hit <strong>Calculate</strong> to instantly see your lean body mass, fat mass, and a breakdown by formula.</p>
+    <p>The body fat % slider enables the direct measurement method — if you've had a DEXA scan, hydrostatic weighing, or use a reliable body fat caliper, enter that value for the most accurate result.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Lean body mass (LBM) is the weight of everything in your body except fat — muscles, organs, bones, water, and connective tissue. It's one of the most useful metrics in fitness and health because it tells you what you're actually working with.</p>
+    <p>For someone like a 180 lb man at 22% body fat, LBM works out to around 140 lbs. That number matters more than total weight for setting protein targets (most research recommends 0.7–1g of protein per pound of LBM), calculating accurate caloric needs, and tracking real progress during a cut or bulk. The scale can stay the same while you lose fat and gain muscle — only LBM tracking reveals that.</p>
+    <p>Athletes, personal trainers, and sports nutritionists use LBM to prescribe medication dosages (several drugs are dosed by LBM, not total weight), set strength benchmarks, and monitor the effectiveness of training programs. Even outside elite athletics, knowing your LBM helps you set realistic expectations: two people at the same BMI can have very different body compositions.</p>
+    <p>It's also valuable for tracking aging — adults lose 3–8% of muscle mass per decade after 30, and LBM monitoring catches this early, allowing intervention through resistance training and adequate protein intake.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>Three established clinical formulas estimate LBM from height and weight alone. Each was derived from different population studies:</p>
+    <div class="formula-box">
+      <strong>Boer (1984):</strong><br>
+      Male: LBM = (0.407 × W) + (0.267 × H) − 19.2<br>
+      Female: LBM = (0.252 × W) + (0.473 × H) − 48.3<br><br>
+      <strong>James (1976):</strong><br>
+      Male: LBM = 1.1W − 128(W/H)²<br>
+      Female: LBM = 1.07W − 148(W/H)²<br><br>
+      <strong>Hume (1966):</strong><br>
+      Male: LBM = (0.3281 × W) + (0.3393 × H) − 29.5336<br>
+      Female: LBM = (0.2969 × W) + (0.4169 × H) − 43.2933<br><br>
+      <strong>Direct (Body Fat %):</strong><br>
+      LBM = Total Weight × (1 − Body Fat% / 100)
+    </div>
+    <p>Where W = weight in kg and H = height in cm. The direct body fat % method is the most accurate if you have a reliable measurement.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't rely on a single formula.</strong> Average the Boer, James, and Hume results for a more reliable estimate if you don't know your body fat %.</li>
+      <li><strong>Use the direct method when possible.</strong> A DEXA scan or hydrostatic weighing is accurate to ±1–2%; scale-based impedance readings can vary ±5%.</li>
+      <li><strong>Weigh yourself consistently.</strong> Morning, post-bathroom, pre-food measurements eliminate daily fluctuations from food and water weight.</li>
+      <li><strong>LBM ≠ muscle mass.</strong> Lean body mass includes bones, organs, and water. Skeletal muscle is roughly 40–50% of LBM in healthy adults.</li>
+      <li><strong>Retest at the same conditions.</strong> Tracking changes over time requires consistency — same time of day, same hydration state, same scale.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What's the difference between lean body mass and fat-free mass?</summary>
+      <div class="details-body">Lean body mass includes a small percentage of essential fat (around 2–5% in men, 10–13% in women) found in the brain, nerves, and cell membranes. Fat-free mass includes absolutely zero fat. In practice, the two terms are often used interchangeably, and the difference is usually clinically insignificant for general fitness tracking.</div>
+    </details>
+    <details>
+      <summary>Which formula is most accurate for me?</summary>
+      <div class="details-body">The Boer formula is generally considered the most accurate for the general population and is widely used in clinical settings. The James formula can underestimate LBM in obese individuals. If you know your body fat percentage from a reliable source (DEXA scan, Bod Pod), the direct method will always be more accurate than any formula.</div>
+    </details>
+    <details>
+      <summary>Can I use this calculator to track muscle gain?</summary>
+      <div class="details-body">Yes, but track consistently. Recalculate monthly under the same conditions — same time of day, same hydration, same body fat measurement method. An increase in LBM alongside stable or decreasing body fat % is a reliable indicator of muscle gain over time.</div>
+    </details>
+    <details>
+      <summary>How much lean body mass is healthy for my height?</summary>
+      <div class="details-body">There's no universal "ideal" LBM — it varies with height, frame size, and fitness goals. A more useful metric is body fat percentage. For men, 10–20% body fat is generally considered healthy and athletic; for women, 18–28%. Use the zone bar in the results to see where your current body fat % falls.</div>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/workout-calorie-burn-calculator/" class="related-link">Workout Calorie Burn Calculator</a>
+      <a href="/vo2-max-calculator/" class="related-link">VO2 Max Calculator</a>
+      <a href="/pregnancy-due-date-calculator/" class="related-link">Pregnancy Due Date Calculator</a>
+      <a href="/ideal-weight-calculator/" class="related-link">Ideal Weight Calculator</a>
+      <a href="/water-intake-calculator/" class="related-link">Water Intake Calculator</a>
+      <a href="/macro-calculator/" class="related-link">Macro Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>© <span id="yr"></span> toolhut.dev &nbsp;|&nbsp;
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let unitSystem = 'imperial';
+
+function switchUnit(u) {
+  unitSystem = u;
+  document.getElementById('tab-imperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('tab-metric').classList.toggle('active', u === 'metric');
+  document.getElementById('weight-label').textContent = u === 'imperial' ? 'Weight (lb)' : 'Weight (kg)';
+  document.getElementById('height-label').textContent = u === 'imperial' ? 'Height (in)' : 'Height (cm)';
+  document.getElementById('weight').placeholder = u === 'imperial' ? 'e.g. 175' : 'e.g. 80';
+  document.getElementById('height').placeholder = u === 'imperial' ? 'e.g. 70' : 'e.g. 178';
+  clearErrors();
+}
+
+function syncBF(v) {
+  document.getElementById('bf-display').textContent = v + '%';
+  document.getElementById('bf-input').value = v;
+}
+
+function syncBFInput(v) {
+  const val = parseFloat(v);
+  if (!isNaN(val) && val >= 3 && val <= 50) {
+    document.getElementById('bf-slider').value = val;
+    document.getElementById('bf-display').textContent = Math.round(val) + '%';
+    document.getElementById('bf-err').classList.remove('show');
+    document.getElementById('bf-input').classList.remove('error');
+  }
+}
+
+function clearErrors() {
+  ['weight', 'height', 'bf-input'].forEach(id => {
+    document.getElementById(id).classList.remove('error');
+  });
+  ['weight-err', 'height-err', 'bf-err'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+}
+
+function fmtNum(n, dec) {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  return n.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+
+// LBM formulas — weight in kg, height in cm
+function boerLBM(wKg, hCm, sex) {
+  return sex === 'male'
+    ? 0.407 * wKg + 0.267 * hCm - 19.2
+    : 0.252 * wKg + 0.473 * hCm - 48.3;
+}
+
+function jamesLBM(wKg, hCm, sex) {
+  const ratio = wKg / (hCm * hCm);
+  return sex === 'male'
+    ? 1.1 * wKg - 128 * ratio
+    : 1.07 * wKg - 148 * ratio;
+}
+
+function humeLBM(wKg, hCm, sex) {
+  return sex === 'male'
+    ? 0.3281 * wKg + 0.3393 * hCm - 29.5336
+    : 0.2969 * wKg + 0.4169 * hCm - 43.2933;
+}
+
+function getBFZones(sex) {
+  if (sex === 'male') {
+    return {
+      zones: [
+        { label: 'Essential\n2–5%', pct: 6, cls: 'zone-red' },
+        { label: 'Athletic\n6–13%', pct: 16, cls: 'zone-yellow' },
+        { label: 'Fitness\n14–17%', pct: 10, cls: 'zone-green' },
+        { label: 'Healthy\n18–24%', pct: 18, cls: 'zone-green' },
+        { label: 'Overfat\n25–31%', pct: 18, cls: 'zone-yellow' },
+        { label: 'Obese\n32%+', pct: 32, cls: 'zone-red' }
+      ],
+      min: 2, max: 50,
+      ranges: [
+        { max: 5, label: 'Essential Fat', cls: 'status-yellow', color: '#f39c12' },
+        { max: 13, label: 'Athletic', cls: 'status-green', color: '#27ae60' },
+        { max: 17, label: 'Fitness', cls: 'status-green', color: '#27ae60' },
+        { max: 24, label: 'Acceptable', cls: 'status-green', color: '#27ae60' },
+        { max: 31, label: 'Overfat', cls: 'status-yellow', color: '#f39c12' },
+        { max: 100, label: 'Obese', cls: 'status-red', color: '#e74c3c' }
+      ]
+    };
+  } else {
+    return {
+      zones: [
+        { label: 'Essential\n10–13%', pct: 8, cls: 'zone-red' },
+        { label: 'Athletic\n14–20%', pct: 14, cls: 'zone-yellow' },
+        { label: 'Fitness\n21–24%', pct: 8, cls: 'zone-green' },
+        { label: 'Healthy\n25–31%', pct: 16, cls: 'zone-green' },
+        { label: 'Overfat\n32–39%', pct: 18, cls: 'zone-yellow' },
+        { label: 'Obese\n40%+', pct: 36, cls: 'zone-red' }
+      ],
+      min: 10, max: 60,
+      ranges: [
+        { max: 13, label: 'Essential Fat', cls: 'status-yellow', color: '#f39c12' },
+        { max: 20, label: 'Athletic', cls: 'status-green', color: '#27ae60' },
+        { max: 24, label: 'Fitness', cls: 'status-green', color: '#27ae60' },
+        { max: 31, label: 'Acceptable', cls: 'status-green', color: '#27ae60' },
+        { max: 39, label: 'Overfat', cls: 'status-yellow', color: '#f39c12' },
+        { max: 100, label: 'Obese', cls: 'status-red', color: '#e74c3c' }
+      ]
+    };
+  }
+}
+
+function calculate() {
+  clearErrors();
+  let valid = true;
+
+  const wRaw = parseFloat(document.getElementById('weight').value);
+  const hRaw = parseFloat(document.getElementById('height').value);
+  const sex = document.getElementById('sex').value;
+  const method = document.getElementById('method').value;
+  const bfInputVal = document.getElementById('bf-input').value;
+  const bfSlider = parseFloat(document.getElementById('bf-slider').value);
+
+  // Use bf-input if filled, else slider
+  let bfPct = bfInputVal !== '' ? parseFloat(bfInputVal) : bfSlider;
+
+  if (isNaN(wRaw) || wRaw <= 0 || (unitSystem === 'imperial' && (wRaw < 50 || wRaw > 700)) || (unitSystem === 'metric' && (wRaw < 22 || wRaw > 320))) {
+    document.getElementById('weight').classList.add('error');
+    document.getElementById('weight-err').classList.add('show');
+    valid = false;
+  }
+  if (isNaN(hRaw) || hRaw <= 0 || (unitSystem === 'imperial' && (hRaw < 36 || hRaw > 108)) || (unitSystem === 'metric' && (hRaw < 90 || hRaw > 275))) {
+    document.getElementById('height').classList.add('error');
+    document.getElementById('height-err').classList.add('show');
+    valid = false;
+  }
+  if (bfInputVal !== '' && (isNaN(bfPct) || bfPct < 3 || bfPct > 50)) {
+    document.getElementById('bf-input').classList.add('error');
+    document.getElementById('bf-err').classList.add('show');
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  // Convert to metric
+  let wKg, hCm;
+  if (unitSystem === 'imperial') {
+    wKg = wRaw * 0.453592;
+    hCm = hRaw * 2.54;
+  } else {
+    wKg = wRaw;
+    hCm = hRaw;
+  }
+
+  const wDisplay = unitSystem === 'imperial' ? wRaw : wRaw;
+  const unitLabel = unitSystem === 'imperial' ? 'lbs' : 'kg';
+  const toDisplay = (kg) => unitSystem === 'imperial' ? kg / 0.453592 : kg;
+
+  // Compute all formulas
+  const boer = boerLBM(wKg, hCm, sex);
+  const james = jamesLBM(wKg, hCm, sex);
+  const hume = humeLBM(wKg, hCm, sex);
+  const bfDirect = wKg * (1 - bfPct / 100);
+
+  const avg = (boer + james + hume) / 3;
+
+  // Determine primary LBM based on method
+  let primaryLBMkg;
+  if (method === 'boer') primaryLBMkg = boer;
+  else if (method === 'james') primaryLBMkg = james;
+  else if (method === 'hume') primaryLBMkg = hume;
+  else if (method === 'bf') primaryLBMkg = bfDirect;
+  else primaryLBMkg = avg; // all = average
+
+  const primaryLBMDisplay = toDisplay(primaryLBMkg);
+  const primaryFatKg = wKg - primaryLBMkg;
+  const primaryFatDisplay = toDisplay(primaryFatKg);
+  const lbmPct = (primaryLBMkg / wKg) * 100;
+  const fatPct = 100 - lbmPct;
+
+  // Zone data
+  const zoneData = getBFZones(sex);
+  const totalPct = zoneData.zones.reduce((a, z) => a + z.pct, 0);
+
+  // Build zone bar segments
+  let zoneBarsHTML = '';
+  zoneData.zones.forEach(z => {
+    const w = (z.pct / totalPct * 100).toFixed(2);
+    zoneBarsHTML += `<div class="zone-seg ${z.cls}" style="flex:${z.pct}"></div>`;
+  });
+
+  // Zone pointer position
+  const zMin = zoneData.min;
+  const zMax = zoneData.max;
+  const clampedBF = Math.min(Math.max(fatPct, zMin), zMax);
+  const pointerPct = ((clampedBF - zMin) / (zMax - zMin)) * 100;
+
+  // Zone label text
+  const zLabels = zoneData.zones.map(z => z.label.split('\n')[1] || '').join(' | ');
+
+  // Status
+  let statusLabel = '—', statusCls = 'status-green';
+  for (const r of zoneData.ranges) {
+    if (fatPct <= r.max) {
+      statusLabel = r.label;
+      statusCls = r.cls;
+      break;
+    }
+  }
+
+  // Build formula table rows
+  const rows = [
+    { name: 'Boer (1984)', lbm: toDisplay(boer), fat: toDisplay(wKg - boer), isSelected: method === 'boer' || method === 'all' },
+    { name: 'James (1976)', lbm: toDisplay(james), fat: toDisplay(wKg - james), isSelected: method === 'james' || method === 'all' },
+    { name: 'Hume (1966)', lbm: toDisplay(hume), fat: toDisplay(wKg - hume), isSelected: method === 'hume' || method === 'all' },
+    { name: 'Body Fat % Method', lbm: toDisplay(bfDirect), fat: toDisplay(wKg - bfDirect), isSelected: method === 'bf' },
+    { name: '★ Average (Boer+James+Hume)', lbm: toDisplay(avg), fat: toDisplay(wKg - avg), isSelected: method === 'all' }
+  ];
+
+  let tbodyHTML = '';
+  rows.forEach(r => {
+    const cls = (r.isSelected && method !== 'all' ? ' class="highlight"' : (r.name.includes('★') && method === 'all' ? ' class="highlight"' : ''));
+    tbodyHTML += `<tr${cls}><td>${r.name}</td><td style="text-align:right">${fmtNum(r.lbm, 1)} ${unitLabel}</td><td style="text-align:right">${fmtNum(r.fat, 1)} ${unitLabel}</td></tr>`;
+  });
+
+  // Summary table
+  const proteinTarget = primaryLBMDisplay * (unitSystem === 'imperial' ? 0.82 : 1.8);
+  let summaryHTML = `
+    <tr><td>Total Body Weight</td><td style="text-align:right">${fmtNum(wDisplay, 1)} ${unitLabel}</td></tr>
+    <tr><td>Lean Body Mass</td><td style="text-align:right">${fmtNum(primaryLBMDisplay, 1)} ${unitLabel}</td></tr>
+    <tr><td>Fat Mass</td><td style="text-align:right">${fmtNum(primaryFatDisplay, 1)} ${unitLabel}</td></tr>
+    <tr><td>LBM Percentage</td><td style="text-align:right">${fmtNum(lbmPct, 1)}%</td></tr>
+    <tr><td>Body Fat Percentage</td><td style="text-align:right">${fmtNum(fatPct, 1)}%</td></tr>
+    <tr><td>Recommended Protein (0.82g/lb LBM)</td><td style="text-align:right">${fmtNum(proteinTarget, 0)} g/day</td></tr>
+  `;
+
+  const copyText = `Lean Body Mass: ${fmtNum(primaryLBMDisplay, 1)} ${unitLabel} | Fat Mass: ${fmtNum(primaryFatDisplay, 1)} ${unitLabel} | LBM%: ${fmtNum(lbmPct, 1)}% | BF%: ${fmtNum(fatPct, 1)}%`;
+  document.getElementById('copyBtn').dataset.copy = copyText;
+
+  requestAnimationFrame(() => {
+    document.getElementById('res-lbm').textContent = fmtNum(primaryLBMDisplay, 1);
+    document.getElementById('res-unit').textContent = unitLabel;
+    document.getElementById('res-percent').textContent = `${fmtNum(lbmPct, 1)}% of total body weight • ${fmtNum(fatPct, 1)}% body fat`;
+    document.getElementById('zone-bar').innerHTML = zoneBarsHTML;
+    document.getElementById('zone-pointer').style.left = pointerPct.toFixed(1) + '%';
+    document.getElementById('zone-labels').innerHTML = `<span>${zoneData.zones[0].label.split('\n')[1]}</span><span>${zoneData.zones[Math.floor(zoneData.zones.length/2)].label.split('\n')[1]}</span><span>${zoneData.zones[zoneData.zones.length-1].label.split('\n')[1]}</span>`;
+    document.getElementById('zone-status').textContent = `Classification: ${statusLabel}`;
+    document.getElementById('zone-status').className = 'zone-status ' + statusCls;
+    document.getElementById('formula-tbody').innerHTML = tbodyHTML;
+    document.getElementById('summary-tbody').innerHTML = summaryHTML;
+    const res = document.getElementById('results');
+    res.style.display = 'block';
+    res.classList.add('show');
+    res.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function copyResult() {
+  const text = document.getElementById('copyBtn').dataset.copy || '';
+  if (!text) return;
+  const btn = document.getElementById('copyBtn');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy Result'; }, 2000);
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy Result'; }, 2000);
+  }
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+document.querySelectorAll('input[type=number], select').forEach(el => {
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { requestAnimationFrame(() => { calculate(); }); }
+  });
+});
+</script>
+</body>
+</html>
