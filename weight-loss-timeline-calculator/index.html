@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weight Loss Timeline Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your personalized weight loss timeline. Enter your current weight, goal weight, and weekly deficit to see exactly when you'll reach your target.">
+<link rel="canonical" href="https://toolhut.dev/weight-loss-timeline-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Weight Loss Timeline Calculator",
+  "url": "https://toolhut.dev/weight-loss-timeline-calculator/",
+  "description": "Calculate your personalized weight loss timeline based on current weight, goal weight, and weekly calorie deficit.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:12px 20px;background:#fff}
+nav .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center}
+nav .site-name{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+nav .site-name:hover{text-decoration:none;color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:2rem 1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.tool-card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:5px}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;outline:none;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input[type=number]:focus,select:focus{border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.unit-toggle{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1.2rem}
+.unit-toggle button{flex:1;padding:10px;border:none;background:#f8f9fa;cursor:pointer;font-size:0.9rem;font-weight:500;color:#555;transition:background 0.2s,color 0.2s;min-height:44px}
+.unit-toggle button.active{background:#0077b6;color:#fff}
+.slider-group{margin-bottom:1.2rem}
+.slider-row{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;accent-color:#0077b6;height:4px;cursor:pointer;min-height:24px}
+.slider-val{font-weight:700;color:#0077b6;min-width:80px;text-align:right;font-size:0.95rem}
+.calc-btn{width:100%;padding:14px 24px;background:#0077b6;color:#fff;border:none;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;margin-top:0.5rem}
+.calc-btn:hover{background:#006299}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:all}
+.result-hero{text-align:center;margin-bottom:1.5rem}
+.result-hero .big-number{font-size:3rem;font-weight:800;color:#0077b6;line-height:1}
+.result-hero .big-label{font-size:1rem;color:#555;margin-top:4px}
+.result-hero .target-date{font-size:1.3rem;font-weight:700;color:#1a1a2e;margin-top:8px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:#f8f9fa;border-radius:8px;padding:1rem;text-align:center}
+.stat-card .val{font-size:1.4rem;font-weight:700;color:#0077b6}
+.stat-card .lbl{font-size:0.78rem;color:#666;margin-top:2px}
+.zone-container{margin-bottom:1.5rem}
+.zone-label{font-size:0.85rem;font-weight:500;color:#444;margin-bottom:8px}
+.zone-bar{display:flex;border-radius:6px;overflow:hidden;height:28px;position:relative}
+.zone-seg{display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:#fff;transition:flex 0.3s}
+.zone-indicator{position:absolute;top:-8px;transform:translateX(-50%);transition:left 0.4s}
+.zone-indicator::after{content:'▼';font-size:1rem;color:#1a1a2e}
+.zone-names{display:flex;margin-top:4px}
+.zone-name{flex:1;font-size:0.7rem;color:#666;text-align:center}
+.rate-status{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.82rem;font-weight:600;margin-top:8px}
+.rate-ok{background:#d4edda;color:#155724}
+.rate-caution{background:#fff3cd;color:#856404}
+.rate-fast{background:#f8d7da;color:#721c24}
+.section-title{font-size:1rem;font-weight:600;color:#1a1a2e;margin-bottom:0.8rem;padding-bottom:6px;border-bottom:1px solid #eee}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.88rem}
+th{background:#f0f0f0;padding:8px 10px;text-align:left;font-weight:600;color:#333;white-space:nowrap}
+th:not(:first-child){text-align:right}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0;color:#1a1a2e}
+td:not(:first-child){text-align:right}
+tr:nth-child(even) td{background:#fafafa}
+.show-all-btn{display:block;width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;background:#f8f9fa;color:#0077b6;font-size:0.88rem;cursor:pointer;margin-top:0.5rem;text-align:center;min-height:44px}
+.show-all-btn:hover{background:#e9f4fb}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#f8f9fa;border:1px solid #ddd;border-radius:6px;font-size:0.82rem;color:#555;cursor:pointer;transition:background 0.2s;min-height:36px;margin-top:1rem}
+.copy-btn:hover{background:#e9f4fb;color:#0077b6}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#5d4037;margin-top:1.5rem}
+.disclaimer strong{color:#e65100}
+.ad-slot{min-height:0;margin:0}
+.content-section{margin-bottom:2rem}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:0.7rem;margin-top:1.8rem}
+.content-section p{color:#333;margin-bottom:0.8rem;font-size:0.95rem}
+.content-section ul{padding-left:1.4rem;margin-bottom:0.8rem}
+.content-section ul li{color:#333;font-size:0.95rem;margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;overflow:hidden}
+summary{padding:12px 14px;font-weight:600;cursor:pointer;font-size:0.92rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+summary::after{content:'﹢';font-size:1.1rem;color:#0077b6}
+details[open] summary::after{content:'﹣'}
+details p{padding:12px 14px;font-size:0.9rem;color:#333;background:#fff}
+.related-tools{margin-bottom:2rem}
+.related-tools h2{font-size:1.1rem;font-weight:700;color:#1a1a2e;margin-bottom:0.8rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.related-grid a{display:block;padding:10px 12px;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;font-size:0.85rem;color:#0077b6;transition:background 0.2s;line-height:1.3}
+.related-grid a:hover{background:#e9f4fb;text-decoration:none}
+footer{border-top:1px solid #e0e0e0;padding:1.5rem;text-align:center;font-size:0.82rem;color:#666}
+footer a{color:#666;margin:0 8px}
+footer a:hover{color:#0077b6}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .result-hero .big-number{font-size:2.4rem}
+}
+@media(max-width:400px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  main{padding:1.5rem 1rem}
+  .tool-card{padding:1.5rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🔧 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Weight Loss Timeline Calculator</h1>
+  <p class="subtitle">Find out exactly when you'll reach your goal weight based on your calorie deficit plan.</p>
+
+  <div class="tool-card">
+    <div class="unit-toggle" role="group" aria-label="Unit system">
+      <button class="active" id="btnLbs" onclick="setUnits('imperial')">Imperial (lbs)</button>
+      <button id="btnKg" onclick="setUnits('metric')">Metric (kg)</button>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="currentWeight">Current Weight (<span class="unit-label">lbs</span>)</label>
+        <input type="number" id="currentWeight" placeholder="e.g. 200" min="50" max="999" step="0.1">
+        <div class="error-msg" id="err-current">Please enter a valid current weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="goalWeight">Goal Weight (<span class="unit-label">lbs</span>)</label>
+        <input type="number" id="goalWeight" placeholder="e.g. 165" min="50" max="999" step="0.1">
+        <div class="error-msg" id="err-goal">Please enter a valid goal weight less than current weight.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="height">Height (<span class="height-unit-label">ft / in</span>)</label>
+      <div class="row-2" id="heightImperial">
+        <input type="number" id="heightFt" placeholder="e.g. 5" min="3" max="8" step="1">
+        <input type="number" id="heightIn" placeholder="e.g. 8" min="0" max="11" step="1">
+      </div>
+      <div id="heightMetric" style="display:none">
+        <input type="number" id="heightCm" placeholder="e.g. 173" min="100" max="250" step="1">
+      </div>
+      <div class="error-msg" id="err-height">Please enter a valid height.</div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" placeholder="e.g. 30" min="15" max="100" step="1">
+        <div class="error-msg" id="err-age">Please enter a valid age (15–100).</div>
+      </div>
+      <div class="form-group">
+        <label for="sex">Biological Sex</label>
+        <select id="sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Activity Level</label>
+      <select id="activity">
+        <option value="1.2">Sedentary (little/no exercise)</option>
+        <option value="1.375">Lightly active (1–3 days/week)</option>
+        <option value="1.55" selected>Moderately active (3–5 days/week)</option>
+        <option value="1.725">Very active (6–7 days/week)</option>
+        <option value="1.9">Extra active (physical job + exercise)</option>
+      </select>
+    </div>
+
+    <div class="slider-group">
+      <label>Weekly Deficit Strategy</label>
+      <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:#666;margin-bottom:4px">
+        <span>Conservative</span><span>Moderate</span><span>Aggressive</span>
+      </div>
+      <div class="slider-row">
+        <input type="range" id="deficitSlider" min="250" max="1500" step="50" value="500" oninput="updateSlider()">
+        <span class="slider-val" id="sliderDisplay">−500 cal/day</span>
+      </div>
+    </div>
+
+    <button class="calc-btn" id="calcBtn">Calculate My Timeline →</button>
+  </div>
+
+  <div class="tool-card results" id="results">
+    <div class="result-hero">
+      <div class="big-number" id="heroWeeks">—</div>
+      <div class="big-label">weeks to reach your goal</div>
+      <div class="target-date" id="heroDate">—</div>
+    </div>
+
+    <div class="zone-container">
+      <div class="zone-label">Weekly Loss Rate Assessment</div>
+      <div style="position:relative;padding-top:20px">
+        <div class="zone-indicator" id="zoneIndicator" style="left:20%"></div>
+        <div class="zone-bar">
+          <div class="zone-seg" style="flex:2;background:#27ae60">Healthy</div>
+          <div class="zone-seg" style="flex:1;background:#f39c12">Caution</div>
+          <div class="zone-seg" style="flex:1;background:#e74c3c">Fast</div>
+        </div>
+        <div class="zone-names">
+          <div class="zone-name" style="flex:2">0.5–1 lb/wk</div>
+          <div class="zone-name" style="flex:1">1–2 lb/wk</div>
+          <div class="zone-name" style="flex:1">&gt;2 lb/wk</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:6px">
+        <span class="rate-status" id="rateStatus">—</span>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="val" id="statTDEE">—</div>
+        <div class="lbl">Maintenance Calories (TDEE)</div>
+      </div>
+      <div class="stat-card">
+        <div class="val" id="statTarget">—</div>
+        <div class="lbl">Daily Calorie Target</div>
+      </div>
+      <div class="stat-card">
+        <div class="val" id="statLoss">—</div>
+        <div class="lbl">Weight to Lose</div>
+      </div>
+      <div class="stat-card">
+        <div class="val" id="statBMI">—</div>
+        <div class="lbl">Goal BMI</div>
+      </div>
+    </div>
+
+    <div class="section-title">Monthly Progress Breakdown</div>
+    <div class="table-wrap">
+      <table id="breakdownTable">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Date</th>
+            <th>Est. Weight</th>
+            <th>Lost So Far</th>
+            <th>Remaining</th>
+          </tr>
+        </thead>
+        <tbody id="breakdownBody"></tbody>
+      </table>
+    </div>
+    <button class="show-all-btn" id="showAllBtn" style="display:none" onclick="showAllRows()">Show all months ▼</button>
+
+    <button class="copy-btn" id="copyBtn" onclick="copyResults()">
+      <span>📋</span> Copy Summary
+    </button>
+
+    <div class="disclaimer">
+      <strong>⚠ Medical Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional before starting any weight loss program. Individual results vary. Very low calorie intakes (&lt;1,200 cal/day for women, &lt;1,500 for men) should only be followed under medical supervision.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="content-section">
+    <h2>How to Use This Weight Loss Timeline Calculator</h2>
+    <p>Enter your current weight, goal weight, height, age, biological sex, and activity level. Then use the deficit slider to choose how aggressively you want to cut calories — from a gentle 250 cal/day deficit to a more intensive 1,500 cal/day. Hit "Calculate My Timeline" and instantly see your projected goal date, weekly progress breakdown, and rate assessment.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Knowing your timeline transforms vague "I want to lose weight" intentions into a concrete plan. If you're 185 lbs and want to reach 155 lbs — that's 30 lbs to lose. At a moderate 500 cal/day deficit (roughly 1 lb/week), you're looking at about 30 weeks, putting your goal date around 7 months from now. That's actionable. That's something you can put on your calendar.</p>
+    <p>Timeline awareness also helps you choose the right deficit. Cutting 1,000 calories a day sounds faster, but for many people it's unsustainable, causes muscle loss, and triggers rebound eating. A 500–750 cal/day deficit is the sweet spot recommended by most dietitians — fast enough to see weekly progress, gentle enough to maintain long-term. This calculator shows you the tradeoff between speed and sustainability in real numbers so you can make an informed choice.</p>
+    <p>It's also useful for milestone planning — wedding in 6 months, reunion in 4 months, summer beach trip in 10 weeks. Work backwards from your event date to find the deficit level you'd need, and check whether it's realistic and safe.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>We use the <strong>Mifflin-St Jeor equation</strong> — the most validated formula for estimating Basal Metabolic Rate (BMR):</p>
+    <ul>
+      <li><strong>Men:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) + 5</li>
+      <li><strong>Women:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) − 161</li>
+    </ul>
+    <p>BMR is then multiplied by an <strong>activity factor</strong> (1.2 to 1.9) to get your Total Daily Energy Expenditure (TDEE) — the calories you burn daily. Your daily calorie target = TDEE − deficit. Since 1 lb of fat ≈ 3,500 calories, weeks to goal = total lbs to lose ÷ (weekly deficit ÷ 3,500).</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't underestimate maintenance calories.</strong> Most people guess their TDEE 15–20% too low, which leads to frustration when the scale doesn't move as fast as expected.</li>
+      <li><strong>Plateaus are normal and expected.</strong> As you lose weight, your BMR drops — this calculator shows your starting TDEE. Real-world progress may slow by weeks 8–12.</li>
+      <li><strong>Never go below 1,200 cal/day (women) or 1,500 (men)</strong> without medical supervision. The calculator flags aggressive deficits for a reason.</li>
+      <li><strong>Track non-scale victories.</strong> Clothing fit, energy levels, and fitness performance often improve before the scale reflects progress.</li>
+      <li><strong>Recalculate every 10–15 lbs lost.</strong> Your TDEE decreases as you lose weight, so recalculating keeps your timeline accurate.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is losing 2 lbs per week safe?</summary>
+      <p>For most adults, 1–2 lbs per week is generally considered the upper safe range. Exceeding 2 lbs/week often requires a very large calorie deficit that can lead to muscle loss, nutrient deficiencies, and fatigue. It's marked as "caution" on our scale — not impossible, but requires careful nutritional planning and ideally medical oversight.</p>
+    </details>
+    <details>
+      <summary>Why does my calorie target feel too low?</summary>
+      <p>A large deficit combined with a low starting TDEE (common for sedentary individuals or shorter people) can push your daily target uncomfortably low. If it falls below 1,200–1,500 calories, consider reducing your deficit and extending your timeline instead. Sustainable beats fast every time.</p>
+    </details>
+    <details>
+      <summary>Does this account for muscle gain or body recomposition?</summary>
+      <p>No — this calculator assumes a pure calorie-deficit fat loss model. If you're strength training intensively, you may gain muscle while losing fat, meaning the scale moves slower but your body composition improves significantly. The scale isn't the full picture.</p>
+    </details>
+    <details>
+      <summary>How accurate is the Mifflin-St Jeor formula?</summary>
+      <p>Studies show it's accurate within ±10% for most people. It tends to slightly overestimate TDEE for very sedentary individuals and slightly underestimate it for very active people. Use the result as a starting estimate and adjust based on 2–3 weeks of real-world data.</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/met-activity-calorie-calculator/">Caloric Burn Rate by Activity Calculator</a>
+      <a href="/postpartum-weight-loss-calculator/">Postpartum Weight Loss Calculator</a>
+      <a href="/biological-age-calculator/">Biological Age Calculator</a>
+      <a href="/strength-training-volume-calculator/">Strength Training Volume Calculator</a>
+      <a href="/lean-body-mass-calculator/">Lean Body Mass Calculator</a>
+      <a href="/workout-calorie-burn-calculator/">Workout Calorie Burn Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:6px">© <span id="yr"></span> toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let useMetric = false;
+let allRows = [];
+let showingAll = false;
+let lastSummary = '';
+
+function setUnits(system) {
+  useMetric = system === 'metric';
+  document.getElementById('btnLbs').classList.toggle('active', !useMetric);
+  document.getElementById('btnKg').classList.toggle('active', useMetric);
+  const ul = document.querySelectorAll('.unit-label');
+  ul.forEach(el => el.textContent = useMetric ? 'kg' : 'lbs');
+  const hl = document.querySelector('.height-unit-label');
+  hl.textContent = useMetric ? 'cm' : 'ft / in';
+  document.getElementById('heightImperial').style.display = useMetric ? 'none' : 'grid';
+  document.getElementById('heightMetric').style.display = useMetric ? 'block' : 'none';
+  document.getElementById('currentWeight').placeholder = useMetric ? 'e.g. 90' : 'e.g. 200';
+  document.getElementById('goalWeight').placeholder = useMetric ? 'e.g. 75' : 'e.g. 165';
+}
+
+function updateSlider() {
+  const v = parseInt(document.getElementById('deficitSlider').value);
+  document.getElementById('sliderDisplay').textContent = '−' + v.toLocaleString() + ' cal/day';
+}
+
+function fmt(n, d = 1) {
+  return parseFloat(n.toFixed(d)).toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
+}
+
+function fmtInt(n) {
+  return Math.round(n).toLocaleString();
+}
+
+function clearErrors() {
+  ['err-current','err-goal','err-height','err-age'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+  ['currentWeight','goalWeight','heightFt','heightIn','heightCm','age'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('error');
+  });
+}
+
+function showError(fieldId, errId) {
+  const f = document.getElementById(fieldId);
+  if (f) f.classList.add('error');
+  document.getElementById(errId).classList.add('show');
+}
+
+function validate() {
+  clearErrors();
+  let valid = true;
+  const cw = parseFloat(document.getElementById('currentWeight').value);
+  const gw = parseFloat(document.getElementById('goalWeight').value);
+  const age = parseFloat(document.getElementById('age').value);
+
+  const minW = useMetric ? 20 : 44;
+  const maxW = useMetric ? 450 : 999;
+
+  if (!cw || cw < minW || cw > maxW) { showError('currentWeight','err-current'); valid = false; }
+  if (!gw || gw < minW || gw >= cw) { showError('goalWeight','err-goal'); valid = false; }
+  if (!age || age < 15 || age > 100) { showError('age','err-age'); valid = false; }
+
+  let heightCm = 0;
+  if (useMetric) {
+    heightCm = parseFloat(document.getElementById('heightCm').value);
+    if (!heightCm || heightCm < 100 || heightCm > 250) { showError('heightCm','err-height'); valid = false; }
+  } else {
+    const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+    const inches = parseFloat(document.getElementById('heightIn').value) || 0;
+    heightCm = (ft * 12 + inches) * 2.54;
+    if (heightCm < 91 || heightCm > 250) { showError('heightFt','err-height'); valid = false; }
+  }
+  return valid;
+}
+
+function getHeightCm() {
+  if (useMetric) return parseFloat(document.getElementById('heightCm').value);
+  const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+  const inches = parseFloat(document.getElementById('heightIn').value) || 0;
+  return (ft * 12 + inches) * 2.54;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const cwInput = parseFloat(document.getElementById('currentWeight').value);
+  const gwInput = parseFloat(document.getElementById('goalWeight').value);
+  const age = parseFloat(document.getElementById('age').value);
+  const sex = document.getElementById('sex').value;
+  const actFactor = parseFloat(document.getElementById('activity').value);
+  const dailyDeficit = parseInt(document.getElementById('deficitSlider').value);
+
+  const cwKg = useMetric ? cwInput : cwInput * 0.453592;
+  const gwKg = useMetric ? gwInput : gwInput * 0.453592;
+  const heightCm = getHeightCm();
+
+  // Mifflin-St Jeor
+  let bmr;
+  if (sex === 'male') {
+    bmr = 10 * cwKg + 6.25 * heightCm - 5 * age + 5;
+  } else {
+    bmr = 10 * cwKg + 6.25 * heightCm - 5 * age - 161;
+  }
+  const tdee = bmr * actFactor;
+  const dailyTarget = tdee - dailyDeficit;
+  const weeklyDeficit = dailyDeficit * 7;
+
+  // Weight difference in kg
+  const diffKg = cwKg - gwKg;
+  const diffLbs = diffKg * 2.20462;
+
+  // 1 kg fat ≈ 7700 cal, 1 lb ≈ 3500 cal
+  const weeksToGoal = (diffKg * 7700) / weeklyDeficit;
+  const weeklyLossKg = weeklyDeficit / 7700;
+  const weeklyLossLbs = weeklyLossKg * 2.20462;
+
+  // Goal BMI
+  const heightM = heightCm / 100;
+  const goalBMI = gwKg / (heightM * heightM);
+
+  // Target date
+  const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + Math.round(weeksToGoal * 7));
+  const dateStr = targetDate.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+
+  // Rate assessment
+  let rateClass, rateText, indicatorPct;
+  if (weeklyLossLbs <= 1) {
+    rateClass = 'rate-ok'; rateText = '✓ Healthy pace'; indicatorPct = Math.min(weeklyLossLbs / 1 * 50, 50);
+  } else if (weeklyLossLbs <= 2) {
+    rateClass = 'rate-caution'; rateText = '⚠ Caution — fast but manageable'; indicatorPct = 50 + (weeklyLossLbs - 1) * 25;
+  } else {
+    rateClass = 'rate-fast'; rateText = '⚠ Very fast — medical supervision advised'; indicatorPct = Math.min(75 + (weeklyLossLbs - 2) * 12.5, 98);
+  }
+
+  // Build monthly table
+  const monthlyRows = [];
+  const startDate = new Date();
+  let currentWtKg = cwKg;
+  const weeklyLossKgVal = weeklyDeficit / 7700;
+  let month = 1;
+  let week = 0;
+  while (currentWtKg > gwKg + 0.01) {
+    week += 4;
+    const d = new Date(startDate);
+    d.setDate(d.getDate() + week * 7);
+    const wt = Math.max(currentWtKg - weeklyLossKgVal * 4, gwKg);
+    const lostKg = cwKg - wt;
+    const remainKg = Math.max(wt - gwKg, 0);
+    const dispWt = useMetric ? fmt(wt, 1) + ' kg' : fmt(wt * 2.20462, 1) + ' lbs';
+    const dispLost = useMetric ? fmt(lostKg, 1) + ' kg' : fmt(lostKg * 2.20462, 1) + ' lbs';
+    const dispRemain = useMetric ? fmt(remainKg, 1) + ' kg' : fmt(remainKg * 2.20462, 1) + ' lbs';
+    monthlyRows.push({
+      month: 'Month ' + month,
+      date: d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}),
+      wt: dispWt,
+      lost: dispLost,
+      remain: dispRemain
+    });
+    currentWtKg = wt;
+    month++;
+    if (month > 60) break;
+  }
+  allRows = monthlyRows;
+
+  const diffDisp = useMetric ? fmt(diffKg, 1) + ' kg' : fmt(diffLbs, 1) + ' lbs';
+  const wkLossDisp = useMetric ? fmt(weeklyLossKg, 2) + ' kg/wk' : fmt(weeklyLossLbs, 2) + ' lbs/wk';
+
+  lastSummary = [
+    'Weight Loss Timeline Summary',
+    '─────────────────────────────',
+    'Weeks to Goal: ' + Math.round(weeksToGoal),
+    'Target Date: ' + dateStr,
+    'Total to Lose: ' + diffDisp,
+    'Weekly Loss Rate: ' + wkLossDisp,
+    'Maintenance Calories (TDEE): ' + fmtInt(tdee) + ' cal',
+    'Daily Calorie Target: ' + fmtInt(dailyTarget) + ' cal',
+    'Goal BMI: ' + fmt(goalBMI, 1),
+    '',
+    'Calculated at toolhut.dev/weight-loss-timeline-calculator/'
+  ].join('\n');
+
+  requestAnimationFrame(() => {
+    document.getElementById('heroWeeks').textContent = Math.round(weeksToGoal).toLocaleString();
+    document.getElementById('heroDate').textContent = 'Estimated Goal: ' + dateStr;
+    document.getElementById('statTDEE').textContent = fmtInt(tdee) + ' cal';
+    document.getElementById('statTarget').textContent = fmtInt(dailyTarget) + ' cal';
+    document.getElementById('statLoss').textContent = diffDisp;
+    document.getElementById('statBMI').textContent = fmt(goalBMI, 1);
+
+    // Zone indicator
+    document.getElementById('zoneIndicator').style.left = Math.round(indicatorPct) + '%';
+    const rs = document.getElementById('rateStatus');
+    rs.className = 'rate-status ' + rateClass;
+    rs.textContent = rateText;
+
+    // Table
+    showingAll = false;
+    renderTable(10);
+
+    if (allRows.length > 10) {
+      document.getElementById('showAllBtn').style.display = 'block';
+      document.getElementById('showAllBtn').textContent = 'Show all ' + allRows.length + ' months ▼';
+    } else {
+      document.getElementById('showAllBtn').style.display = 'none';
+    }
+
+    const resultsEl = document.getElementById('results');
+    resultsEl.classList.add('visible');
+    resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+
+function renderTable(limit) {
+  const rows = showingAll ? allRows : allRows.slice(0, limit);
+  let html = '';
+  rows.forEach((r, i) => {
+    const bg = i % 2 === 1 ? 'background:#fafafa' : '';
+    html += `<tr style="${bg}">
+      <td>${r.month}</td>
+      <td>${r.date}</td>
+      <td>${r.wt}</td>
+      <td>${r.lost}</td>
+      <td>${r.remain}</td>
+    </tr>`;
+  });
+  document.getElementById('breakdownBody').innerHTML = html;
+}
+
+function showAllRows() {
+  showingAll = true;
+  renderTable(allRows.length);
+  document.getElementById('showAllBtn').style.display = 'none';
+}
+
+function copyResults() {
+  if (!lastSummary) return;
+  const btn = document.getElementById('copyBtn');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(lastSummary).then(() => {
+      btn.innerHTML = '<span>✅</span> Copied!';
+      setTimeout(() => { btn.innerHTML = '<span>📋</span> Copy Summary'; }, 2000);
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = lastSummary;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.innerHTML = '<span>✅</span> Copied!';
+    setTimeout(() => { btn.innerHTML = '<span>📋</span> Copy Summary'; }, 2000);
+  }
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+document.querySelectorAll('input[type=number], select').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      requestAnimationFrame(() => { calculate(); });
+    }
+  });
+});
+
+// Init slider display
+updateSlider();
+</script>
+</body>
+</html>
