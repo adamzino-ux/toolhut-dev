@@ -61,6 +61,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://toolhut.dev/intermittent-fasting-calculator/</loc>
+    <lastmod>2026-03-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://toolhut.dev/vo2-max-calculator/</loc>
     <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
