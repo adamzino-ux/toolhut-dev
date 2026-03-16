@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strength Training Volume Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your weekly strength training volume by muscle group. Track sets, reps, and load to optimize your training program and avoid overtraining.">
+<link rel="canonical" href="https://toolhut.dev/strength-training-volume-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Strength Training Volume Calculator",
+  "url": "https://toolhut.dev/strength-training-volume-calculator/",
+  "description": "Calculate your weekly strength training volume by muscle group. Track sets, reps, and load to optimize your training program.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a2e; font-size: 16px; line-height: 1.6; }
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; color: #006299; }
+nav { border-bottom: 1px solid #e0e0e0; padding: 0 1.5rem; }
+nav .nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; height: 52px; }
+nav .site-name { font-weight: 700; font-size: 1.1rem; color: #1a1a2e; }
+nav .site-name:hover { text-decoration: none; color: #0077b6; }
+.container { max-width: 640px; margin: 0 auto; padding: 2rem 1.5rem; }
+h1 { font-size: 1.75rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.5rem; line-height: 1.3; }
+.subtitle { color: #555; margin-bottom: 2rem; font-size: 0.95rem; }
+.card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+.section-label { font-size: 1rem; font-weight: 600; color: #1a1a2e; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e0e0e0; }
+label { display: block; font-size: 0.85rem; font-weight: 500; color: #444; margin-bottom: 6px; }
+input[type="number"], select { width: 100%; border: 1px solid #ddd; border-radius: 5px; padding: 12px 16px; font-size: 1rem; font-family: inherit; color: #1a1a2e; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; min-height: 44px; }
+input[type="number"]:focus, select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.15); }
+input.error { border-color: #e74c3c; }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 4px; display: none; }
+.error-msg.show { display: block; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.btn { background: #0077b6; color: #fff; border: none; border-radius: 6px; padding: 12px 24px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; min-height: 44px; width: 100%; }
+.btn:hover { background: #006299; }
+.btn-secondary { background: #f0f0f0; color: #1a1a2e; font-size: 0.85rem; padding: 8px 16px; min-height: 36px; width: auto; border-radius: 5px; border: 1px solid #ddd; cursor: pointer; font-family: inherit; font-weight: 500; transition: background 0.2s; }
+.btn-secondary:hover { background: #e0e0e0; }
+.btn-add { background: #e8f4fd; color: #0077b6; border: 1px dashed #0077b6; border-radius: 6px; padding: 10px 16px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; min-height: 44px; width: 100%; margin-bottom: 1rem; font-family: inherit; }
+.btn-add:hover { background: #d0eafb; }
+.btn-remove { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 1.2rem; padding: 4px 8px; min-height: 32px; line-height: 1; font-family: inherit; }
+.btn-remove:hover { color: #c0392b; }
+.exercise-block { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem; margin-bottom: 1rem; position: relative; }
+.exercise-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.exercise-title { font-size: 0.9rem; font-weight: 600; color: #444; }
+.results-section { display: none; opacity: 0; transition: opacity 0.3s ease; }
+.results-section.visible { display: block; opacity: 1; }
+.big-number { font-size: 2.5rem; font-weight: 700; color: #0077b6; line-height: 1; margin-bottom: 0.25rem; }
+.big-label { font-size: 0.9rem; color: #666; margin-bottom: 1.5rem; }
+.metric-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.metric-box { background: #f8f9fa; border-radius: 6px; padding: 1rem; text-align: center; border: 1px solid #e0e0e0; }
+.metric-val { font-size: 1.4rem; font-weight: 700; color: #0077b6; }
+.metric-lbl { font-size: 0.75rem; color: #666; margin-top: 4px; }
+.volume-bar-wrap { margin-bottom: 1.5rem; }
+.volume-bar-track { background: #e0e0e0; border-radius: 8px; height: 28px; overflow: hidden; position: relative; margin-top: 8px; }
+.volume-bar-fill { height: 100%; border-radius: 8px; transition: width 0.5s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 0.8rem; font-weight: 600; color: #fff; }
+.zone-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: #888; margin-top: 4px; }
+.zone-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; margin-bottom: 1rem; }
+.zone-low { background: #fff3cd; color: #856404; }
+.zone-optimal { background: #d1e7dd; color: #0f5132; }
+.zone-high { background: #f8d7da; color: #842029; }
+.zone-very-high { background: #f5c2c7; color: #58151c; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { background: #f0f0f0; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 0.82rem; color: #444; border-bottom: 2px solid #ddd; }
+th.num { text-align: right; }
+td { padding: 9px 12px; border-bottom: 1px solid #eee; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr:nth-child(even) td { background: #fafafa; }
+.table-wrap { overflow-x: auto; }
+.muscle-bar { height: 10px; background: #e0e0e0; border-radius: 5px; min-width: 60px; }
+.muscle-bar-fill { height: 100%; border-radius: 5px; background: #0077b6; }
+.copy-row { display: flex; justify-content: flex-end; margin-bottom: 1rem; gap: 0.5rem; }
+.disclaimer { background: #fff3cd; border: 1px solid #ffd700; border-radius: 6px; padding: 0.75rem 1rem; font-size: 0.82rem; color: #856404; margin-bottom: 1.5rem; }
+.disclaimer strong { display: block; margin-bottom: 2px; }
+.content-section { margin-bottom: 2rem; }
+.content-section h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.75rem; margin-top: 2rem; }
+.content-section p { color: #444; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.content-section ul { padding-left: 1.25rem; color: #444; font-size: 0.95rem; }
+.content-section ul li { margin-bottom: 0.4rem; }
+details { border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; }
+summary { font-weight: 600; cursor: pointer; font-size: 0.95rem; color: #1a1a2e; }
+summary:hover { color: #0077b6; }
+details p { margin-top: 0.5rem; font-size: 0.9rem; color: #555; }
+.related-tools { background: #f8f9fa; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; }
+.related-tools h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.related-grid a { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.6rem 0.9rem; font-size: 0.85rem; font-weight: 500; color: #0077b6; transition: border-color 0.2s, background 0.2s; }
+.related-grid a:hover { border-color: #0077b6; background: #e8f4fd; text-decoration: none; }
+.ad-slot { min-height: 0; margin: 0; }
+footer { border-top: 1px solid #e0e0e0; padding: 1.5rem; text-align: center; font-size: 0.82rem; color: #888; }
+footer a { color: #888; margin: 0 0.5rem; }
+footer a:hover { color: #0077b6; }
+@media (max-width: 640px) {
+  h1 { font-size: 1.4rem; }
+  .card { padding: 1.25rem; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; gap: 0; }
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .big-number { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🔧 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Strength Training Volume Calculator</h1>
+  <p class="subtitle">Calculate your total weekly training volume by muscle group — sets, reps, tonnage, and more.</p>
+
+  <div class="card">
+    <div class="section-label">Weekly Training Session Builder</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="trainDays">Training Days / Week</label>
+        <select id="trainDays">
+          <option value="2">2 days</option>
+          <option value="3" selected>3 days</option>
+          <option value="4">4 days</option>
+          <option value="5">5 days</option>
+          <option value="6">6 days</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goalSelect">Training Goal</label>
+        <select id="goalSelect">
+          <option value="strength">Strength (1–5 reps)</option>
+          <option value="hypertrophy" selected>Hypertrophy (6–12 reps)</option>
+          <option value="endurance">Endurance (13–20 reps)</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="exerciseList"></div>
+    <button class="btn-add" id="addExerciseBtn">+ Add Exercise</button>
+
+    <button class="btn" id="calcBtn">Calculate Volume</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results-section card" id="resultsSection">
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer</strong>
+      This tool is for informational purposes only. Consult a healthcare professional for medical advice.
+    </div>
+
+    <div class="copy-row">
+      <button class="btn-secondary" id="copyBtn">📋 Copy Summary</button>
+    </div>
+
+    <div id="resultsInner"></div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Training Volume Calculator</h2>
+    <p>Add each exercise you perform in a typical week, selecting the target muscle group, number of sets, average reps per set, and the weight lifted. Hit <strong>Calculate Volume</strong> to instantly see your total weekly tonnage (total load), working sets per muscle group, and how your volume stacks up against evidence-based recommendations.</p>
+    <p>You can log multiple exercises targeting the same muscle group — the tool aggregates everything automatically.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Training volume — the total amount of work you perform — is arguably the most important driver of muscle hypertrophy and strength adaptation. Too little, and you won't stimulate sufficient growth. Too much, and you risk overtraining, injury, and burnout. Getting the balance right matters enormously.</p>
+    <p>Research by Brad Schoenfeld, Mike Israetel, and others suggests that most natural lifters benefit from <strong>10–20 working sets per muscle group per week</strong> for hypertrophy. Beginners can see gains at just 5–10 sets/week, while advanced trainees may push to 20–25 sets for some muscles. Strength-focused athletes typically operate at lower volumes (3–8 sets) with heavier loads. Weekly tonnage — total weight lifted across all sets and reps — gives you an objective measure to track progress over time.</p>
+    <p>Tracking volume also helps you balance your program. Many lifters over-train pushing muscles (chest, shoulders, triceps) while under-training pulling muscles (back, rear delts, biceps) — a recipe for postural issues and shoulder injuries.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>Weekly Tonnage (per exercise):</strong> Sets × Reps × Weight (kg or lb)</p>
+    <p><strong>Total Weekly Sets (per muscle):</strong> Sum of all sets across all exercises targeting that muscle group</p>
+    <p><strong>Volume Load Index:</strong> Total tonnage summed across all exercises</p>
+    <p>Volume zones are based on published guidelines: <em>Low</em> = under 10 sets/muscle/week, <em>Optimal</em> = 10–20 sets, <em>High</em> = 21–25 sets, <em>Very High</em> = 25+ sets.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't count warm-up sets:</strong> Only working sets (at or near your target intensity) drive adaptation. Easy warm-up sets don't count.</li>
+      <li><strong>Progressive overload matters more than raw volume:</strong> Adding 2.5 kg every 1–2 weeks over a year beats doing 30 sets at the same weight forever.</li>
+      <li><strong>Balance pushing and pulling:</strong> Aim for roughly equal sets of horizontal push vs. horizontal pull, and vertical push vs. vertical pull.</li>
+      <li><strong>Recovery is part of the equation:</strong> Hitting 20 sets/week for a muscle only works if you recover between sessions. Split the volume across at least 2 sessions per week.</li>
+      <li><strong>Track over weeks, not single sessions:</strong> A hard deload week followed by a big volume week is normal — what matters is your monthly average.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How many sets per muscle group per week is optimal?</summary>
+      <p>Research suggests 10–20 working sets per muscle group per week is the "sweet spot" for most natural lifters pursuing hypertrophy. Beginners can see excellent results at 5–10 sets. Advanced lifters may temporarily use 20–30 sets during accumulation phases, but this requires careful recovery management.</p>
+    </details>
+    <details>
+      <summary>Does rep range affect volume calculations?</summary>
+      <p>Yes — higher rep sets with lighter weight can generate similar or greater hypertrophic stimulus than lower rep sets with heavy weight, but total tonnage will differ significantly. For comparing volume across rep ranges, sets-per-muscle is a more reliable metric than raw tonnage. Use tonnage primarily to track load progression over time.</p>
+    </details>
+    <details>
+      <summary>Should I count compound lifts toward multiple muscle groups?</summary>
+      <p>Yes, partially. A bench press counts primarily toward chest volume, but also contributes to shoulder and triceps volume. When adding exercises, choose the <em>primary</em> muscle group — many coaches recommend counting compound exercises as 1 full set for the primary muscle and 0.5 sets for secondaries, though this tool uses whole sets for simplicity.</p>
+    </details>
+    <details>
+      <summary>What's the difference between volume and intensity?</summary>
+      <p>Volume refers to the total amount of work (sets × reps × load), while intensity refers to the load relative to your maximum (expressed as %1RM). A high-volume program (many sets, moderate reps) differs from a high-intensity program (few sets, heavy loads). Effective programs balance both across training phases.</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/lean-body-mass-calculator/">Lean Body Mass Calculator</a>
+      <a href="/workout-calorie-burn-calculator/">Workout Calorie Burn Calculator</a>
+      <a href="/vo2-max-calculator/">VO2 Max Calculator</a>
+      <a href="/pregnancy-due-date-calculator/">Pregnancy Due Date Calculator</a>
+      <a href="/ideal-weight-calculator/">Ideal Weight Calculator</a>
+      <a href="/water-intake-calculator/">Water Intake Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <br><br>
+  © <span id="yr"></span> toolhut.dev
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const MUSCLES = [
+  'Chest','Back','Shoulders','Biceps','Triceps','Quads','Hamstrings','Glutes','Calves','Core','Traps','Forearms'
+];
+
+const MUSCLE_COLORS = {
+  'Chest':'#0077b6','Back':'#2d6a4f','Shoulders':'#e76f51','Biceps':'#9b5de5',
+  'Triceps':'#f15bb5','Quads':'#fee440','Hamstrings':'#00bbf9','Glutes':'#fb8500',
+  'Calves':'#06d6a0','Core':'#8338ec','Traps':'#3a86ff','Forearms':'#e63946'
+};
+
+let exerciseCount = 0;
+const exercises = [];
+
+function addExercise(name='', muscle='Chest', sets=3, reps=10, weight=60) {
+  exerciseCount++;
+  const id = exerciseCount;
+  exercises.push({ id });
+
+  const block = document.createElement('div');
+  block.className = 'exercise-block';
+  block.id = 'ex-' + id;
+
+  const muscleOptions = MUSCLES.map(m => `<option value="${m}"${m===muscle?' selected':''}>${m}</option>`).join('');
+
+  block.innerHTML = `
+    <div class="exercise-header">
+      <span class="exercise-title">Exercise #${id}</span>
+      <button class="btn-remove" onclick="removeExercise(${id})" title="Remove">×</button>
+    </div>
+    <div class="form-group">
+      <label>Exercise Name (optional)</label>
+      <input type="text" id="name-${id}" placeholder="e.g. Bench Press" value="${name}" style="width:100%;border:1px solid #ddd;border-radius:5px;padding:10px 14px;font-size:0.95rem;font-family:inherit;min-height:44px;">
+    </div>
+    <div class="form-row-3">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Muscle Group</label>
+        <select id="muscle-${id}">${muscleOptions}</select>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Sets</label>
+        <input type="number" id="sets-${id}" value="${sets}" min="1" max="30" step="1">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Reps / Set</label>
+        <input type="number" id="reps-${id}" value="${reps}" min="1" max="50" step="1">
+      </div>
+    </div>
+    <div class="form-row" style="margin-top:0.75rem;margin-bottom:0">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Weight (kg)</label>
+        <input type="number" id="weight-${id}" value="${weight}" min="0" max="1000" step="0.5">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Tonnage Preview</label>
+        <div style="background:#f0f0f0;border-radius:5px;padding:12px 16px;font-size:0.95rem;font-weight:600;color:#0077b6;min-height:44px;display:flex;align-items:center;" id="preview-${id}">${fmt(sets*reps*weight)} kg</div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('exerciseList').appendChild(block);
+
+  // Live preview
+  ['sets','reps','weight'].forEach(field => {
+    document.getElementById(`${field}-${id}`).addEventListener('input', () => updatePreview(id));
+  });
+}
+
+function updatePreview(id) {
+  const s = parseFloat(document.getElementById('sets-'+id).value)||0;
+  const r = parseFloat(document.getElementById('reps-'+id).value)||0;
+  const w = parseFloat(document.getElementById('weight-'+id).value)||0;
+  document.getElementById('preview-'+id).textContent = fmt(s*r*w) + ' kg';
+}
+
+function removeExercise(id) {
+  const el = document.getElementById('ex-'+id);
+  if (el) el.remove();
+  const idx = exercises.findIndex(e => e.id === id);
+  if (idx > -1) exercises.splice(idx, 1);
+}
+
+document.getElementById('addExerciseBtn').addEventListener('click', () => addExercise());
+
+// Default exercises
+addExercise('Bench Press','Chest',4,8,80);
+addExercise('Barbell Row','Back',4,8,70);
+addExercise('Overhead Press','Shoulders',3,10,50);
+addExercise('Squat','Quads',4,6,100);
+addExercise('Romanian Deadlift','Hamstrings',3,10,80);
+
+function fmt(n) {
+  if (n === undefined || n === null || isNaN(n)) return '0';
+  return Math.round(n).toLocaleString('en-US');
+}
+
+function fmtDec(n, d=1) {
+  return n.toLocaleString('en-US', {minimumFractionDigits:d, maximumFractionDigits:d});
+}
+
+function getZone(avgSets) {
+  if (avgSets < 5) return { label:'Very Low', class:'zone-low', color:'#856404', pct: Math.max(5, (avgSets/25)*100) };
+  if (avgSets < 10) return { label:'Low', class:'zone-low', color:'#856404', pct:(avgSets/25)*100 };
+  if (avgSets <= 20) return { label:'Optimal', class:'zone-optimal', color:'#0f5132', pct:(avgSets/25)*100 };
+  if (avgSets <= 25) return { label:'High', class:'zone-high', color:'#842029', pct:(avgSets/25)*100 };
+  return { label:'Very High', class:'zone-very-high', color:'#58151c', pct:100 };
+}
+
+function getBarColor(avgSets) {
+  if (avgSets < 10) return '#ffc107';
+  if (avgSets <= 20) return '#198754';
+  if (avgSets <= 25) return '#fd7e14';
+  return '#dc3545';
+}
+
+function calculate() {
+  // Gather data
+  const blocks = document.querySelectorAll('.exercise-block');
+  if (blocks.length === 0) {
+    alert('Please add at least one exercise.');
+    return;
+  }
+
+  const rows = [];
+  let valid = true;
+
+  blocks.forEach(block => {
+    const id = block.id.replace('ex-','');
+    const name = (document.getElementById('name-'+id)?.value || '').trim() || `Exercise #${id}`;
+    const muscle = document.getElementById('muscle-'+id)?.value || 'Chest';
+    const sets = parseFloat(document.getElementById('sets-'+id)?.value);
+    const reps = parseFloat(document.getElementById('reps-'+id)?.value);
+    const weight = parseFloat(document.getElementById('weight-'+id)?.value);
+
+    if (isNaN(sets)||sets<1||isNaN(reps)||reps<1||isNaN(weight)||weight<0) {
+      valid = false;
+      return;
+    }
+    const tonnage = sets * reps * weight;
+    rows.push({ name, muscle, sets, reps, weight, tonnage });
+  });
+
+  if (!valid) {
+    alert('Please fill in valid values (sets ≥ 1, reps ≥ 1, weight ≥ 0) for all exercises.');
+    return;
+  }
+
+  const trainDays = parseInt(document.getElementById('trainDays').value);
+  const goal = document.getElementById('goalSelect').value;
+
+  // Aggregate by muscle
+  const muscleMap = {};
+  rows.forEach(r => {
+    if (!muscleMap[r.muscle]) muscleMap[r.muscle] = { sets:0, reps:0, tonnage:0, exercises:0 };
+    muscleMap[r.muscle].sets += r.sets;
+    muscleMap[r.muscle].tonnage += r.tonnage;
+    muscleMap[r.muscle].exercises += 1;
+  });
+
+  const totalTonnage = rows.reduce((a,b) => a+b.tonnage, 0);
+  const totalSets = rows.reduce((a,b) => a+b.sets, 0);
+  const totalExercises = rows.length;
+  const muscleCount = Object.keys(muscleMap).length;
+  const avgSetsPerMuscle = totalSets / Math.max(muscleCount,1);
+  const maxMuscleSets = Math.max(...Object.values(muscleMap).map(m=>m.sets));
+
+  const zone = getZone(avgSetsPerMuscle);
+  const barColor = getBarColor(avgSetsPerMuscle);
+  const barPct = Math.min(100, zone.pct);
+
+  // Goal recommendations
+  const goalRecs = {
+    strength: { sets: '3–8', reps: '1–5', note: 'Strength: prioritize load, lower reps' },
+    hypertrophy: { sets: '10–20', reps: '6–12', note: 'Hypertrophy: moderate load, moderate reps' },
+    endurance: { sets: '15–25', reps: '13–20', note: 'Endurance: lighter load, higher reps' }
+  };
+  const rec = goalRecs[goal];
+
+  // Build exercise table
+  let exTableRows = '';
+  rows.forEach(r => {
+    exTableRows += `<tr>
+      <td>${r.name}</td>
+      <td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${MUSCLE_COLORS[r.muscle]||'#0077b6'};margin-right:5px;vertical-align:middle;"></span>${r.muscle}</td>
+      <td class="num">${r.sets}</td>
+      <td class="num">${r.reps}</td>
+      <td class="num">${fmt(r.weight)}</td>
+      <td class="num">${fmt(r.tonnage)}</td>
+    </tr>`;
+  });
+
+  // Build muscle summary table
+  const sortedMuscles = Object.entries(muscleMap).sort((a,b) => b[1].sets - a[1].sets);
+  let muscleTableRows = '';
+  sortedMuscles.forEach(([muscle, data]) => {
+    const pct = Math.min(100, (data.sets / Math.max(maxMuscleSets,1)) * 100);
+    const mZone = getZone(data.sets);
+    muscleTableRows += `<tr>
+      <td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${MUSCLE_COLORS[muscle]||'#0077b6'};margin-right:5px;vertical-align:middle;"></span>${muscle}</td>
+      <td class="num"><strong>${data.sets}</strong></td>
+      <td class="num">${fmt(data.tonnage)}</td>
+      <td><span class="zone-badge ${mZone.class}" style="font-size:0.75rem;padding:2px 8px;">${mZone.label}</span></td>
+      <td><div class="muscle-bar"><div class="muscle-bar-fill" style="width:${pct.toFixed(1)}%;background:${MUSCLE_COLORS[muscle]||'#0077b6'};"></div></div></td>
+    </tr>`;
+  });
+
+  const html = `
+    <div class="section-label" style="margin-bottom:1rem;">📊 Volume Summary</div>
+    <div class="big-number">${fmt(totalTonnage)} <span style="font-size:1.2rem;color:#888;">kg</span></div>
+    <div class="big-label">Total Weekly Tonnage</div>
+
+    <div class="metric-grid">
+      <div class="metric-box">
+        <div class="metric-val">${fmt(totalSets)}</div>
+        <div class="metric-lbl">Total Sets</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">${muscleCount}</div>
+        <div class="metric-lbl">Muscle Groups</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">${fmtDec(avgSetsPerMuscle)}</div>
+        <div class="metric-lbl">Avg Sets / Muscle</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">${trainDays}</div>
+        <div class="metric-lbl">Training Days</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">${totalExercises}</div>
+        <div class="metric-lbl">Exercises</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">${fmtDec(totalSets/Math.max(trainDays,1),1)}</div>
+        <div class="metric-lbl">Sets / Day</div>
+      </div>
+    </div>
+
+    <div class="volume-bar-wrap">
+      <label style="font-size:0.85rem;font-weight:600;color:#444;">Volume Zone (avg sets/muscle vs. optimal 10–20)</label>
+      <div class="volume-bar-track">
+        <div class="volume-bar-fill" style="width:${barPct.toFixed(1)}%;background:${barColor};">
+          ${fmtDec(avgSetsPerMuscle)} sets
+        </div>
+      </div>
+      <div class="zone-labels">
+        <span>0</span><span>5 (Low)</span><span>10 (Optimal)</span><span>20 (High)</span><span>25+</span>
+      </div>
+    </div>
+
+    <div>
+      <span class="zone-badge ${zone.class}">Volume Zone: ${zone.label}</span>
+      &nbsp;&nbsp;
+      <span style="font-size:0.82rem;color:#666;">Goal: ${rec.note}</span>
+    </div>
+    <p style="font-size:0.85rem;color:#666;margin-bottom:1.5rem;">Recommended sets/muscle for your goal: <strong>${rec.sets}</strong> &nbsp;|&nbsp; Recommended reps: <strong>${rec.reps}</strong></p>
+
+    <div class="section-label" style="margin-bottom:0.75rem;">Muscle Group Breakdown</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Muscle</th>
+            <th class="num">Sets</th>
+            <th class="num">Tonnage (kg)</th>
+            <th>Zone</th>
+            <th style="min-width:80px;">Relative Volume</th>
+          </tr>
+        </thead>
+        <tbody>${muscleTableRows}</tbody>
+      </table>
+    </div>
+
+    <div class="section-label" style="margin-top:1.5rem;margin-bottom:0.75rem;">Exercise Detail</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Muscle</th>
+            <th class="num">Sets</th>
+            <th class="num">Reps</th>
+            <th class="num">Weight (kg)</th>
+            <th class="num">Tonnage (kg)</th>
+          </tr>
+        </thead>
+        <tbody>${exTableRows}</tbody>
+      </table>
+    </div>
+  `;
+
+  requestAnimationFrame(() => {
+    document.getElementById('resultsInner').innerHTML = html;
+    const sec = document.getElementById('resultsSection');
+    sec.style.display = 'block';
+    requestAnimationFrame(() => {
+      sec.classList.add('visible');
+      sec.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => calculate());
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && e.target.matches('input')) {
+    requestAnimationFrame(() => calculate());
+  }
+});
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const blocks = document.querySelectorAll('.exercise-block');
+  let text = 'WEEKLY TRAINING VOLUME SUMMARY\n';
+  text += '================================\n\n';
+
+  blocks.forEach(block => {
+    const id = block.id.replace('ex-','');
+    const name = (document.getElementById('name-'+id)?.value||'').trim()||`Exercise #${id}`;
+    const muscle = document.getElementById('muscle-'+id)?.value||'';
+    const sets = document.getElementById('sets-'+id)?.value||0;
+    const reps = document.getElementById('reps-'+id)?.value||0;
+    const weight = document.getElementById('weight-'+id)?.value||0;
+    const tonnage = sets*reps*weight;
+    text += `${name} (${muscle}): ${sets}×${reps} @ ${weight}kg = ${fmt(tonnage)}kg\n`;
+  });
+
+  const ri = document.getElementById('resultsInner');
+  if (ri && ri.textContent) {
+    text += '\n--- Summary data in app ---\n';
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '📋 Copy Summary'; }, 2000);
+  }).catch(() => {
+    alert('Copy failed. Please copy manually.');
+  });
+});
+</script>
+</body>
+</html>
