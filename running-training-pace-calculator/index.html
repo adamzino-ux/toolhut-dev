@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running Training Pace Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your optimal running training paces for easy runs, tempo, intervals, and race day using your recent race time or goal pace. Free training pace calculator.">
+<link rel="canonical" href="https://toolhut.dev/running-training-pace-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Running Training Pace Calculator",
+  "url": "https://toolhut.dev/running-training-pace-calculator/",
+  "description": "Calculate optimal running training paces for all workout types based on your recent race time or goal pace.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f4f6f9;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:48px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.55rem;font-weight:700;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:2rem}
+.field{margin-bottom:1.2rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem}
+.input-row{display:flex;gap:.5rem;align-items:stretch}
+input[type=number],input[type=text],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.1)}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.time-inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+.time-label-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.25rem}
+.time-label-row span{font-size:.75rem;color:#888;text-align:center}
+.seg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+button{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background .2s}
+button:hover{background:#006299}
+button.secondary{background:#f0f0f0;color:#1a1a2e;font-weight:500}
+button.secondary:hover{background:#e0e0e0}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:all}
+.pace-hero{text-align:center;padding:1.2rem 0 .8rem}
+.pace-hero .label{font-size:.85rem;color:#555;margin-bottom:.3rem}
+.pace-hero .value{font-size:2.4rem;font-weight:800;color:#0077b6;letter-spacing:.02em}
+.pace-hero .sub{font-size:.85rem;color:#777;margin-top:.2rem}
+.zone-bar-wrap{margin:1.2rem 0}
+.zone-bar-label{font-size:.8rem;color:#555;margin-bottom:.4rem;font-weight:500}
+.zone-bar{display:flex;height:18px;border-radius:9px;overflow:hidden;width:100%}
+.zone-bar .seg{height:100%;transition:flex .4s}
+.zone-bar .seg.z1{background:#3bb0a0}
+.zone-bar .seg.z2{background:#5aab61}
+.zone-bar .seg.z3{background:#f0c040}
+.zone-bar .seg.z4{background:#e87c3e}
+.zone-bar .seg.z5{background:#e03e3e}
+.zone-labels{display:flex;justify-content:space-between;font-size:.72rem;color:#777;margin-top:.25rem}
+.pace-table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #eee;vertical-align:middle}
+tr:nth-child(even) td{background:#fafafa}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.zone-dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.zone-label-cell{display:flex;align-items:center;white-space:nowrap}
+.copy-btn{background:#f0f0f0;color:#444;border:none;padding:6px 14px;border-radius:5px;font-size:.8rem;cursor:pointer;float:right;min-height:32px;font-weight:500;transition:background .2s}
+.copy-btn:hover{background:#e0e0e0}
+.copy-btn.copied{background:#d4edda;color:#2d6a4f}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.results-header h2{font-size:1.1rem;margin:0}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:.85rem 1rem;font-size:.82rem;color:#7a5a00;margin-top:1.2rem}
+.disclaimer strong{display:block;margin-bottom:.2rem}
+.ad-slot{min-height:0;margin:0}
+section.content{margin-bottom:2rem}
+section.content h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin:1.4rem 0 .5rem;border-bottom:1px solid #eee;padding-bottom:.4rem}
+section.content p{margin-bottom:.75rem;color:#333;font-size:.95rem}
+section.content ul{padding-left:1.3rem;margin-bottom:.75rem}
+section.content ul li{margin-bottom:.4rem;font-size:.95rem;color:#333}
+details{border:1px solid #e8e8e8;border-radius:6px;margin-bottom:.6rem}
+summary{cursor:pointer;padding:.75rem 1rem;font-weight:600;font-size:.92rem;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"▸";color:#0077b6;font-size:.85rem;transition:transform .2s}
+details[open] summary::after{transform:rotate(90deg)}
+details[open] summary{border-bottom:1px solid #eee}
+.details-body{padding:.75rem 1rem;font-size:.9rem;color:#333;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.75rem}
+.related-link{background:#f0f7ff;border:1px solid #c8e0f0;border-radius:6px;padding:.6rem .85rem;font-size:.85rem;color:#0077b6;font-weight:500;transition:background .2s}
+.related-link:hover{background:#dceefb;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;text-align:center;font-size:.82rem;color:#888}
+footer a{color:#0077b6;margin:0 .5rem}
+.input-mode-tabs{display:flex;gap:.5rem;margin-bottom:1.2rem}
+.tab-btn{flex:1;background:#f0f0f0;color:#555;border:none;padding:9px 12px;border-radius:6px;font-size:.88rem;font-weight:500;cursor:pointer;min-height:40px;transition:all .2s}
+.tab-btn.active{background:#0077b6;color:#fff;font-weight:600}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.formula-box{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:.85rem 1rem;font-size:.88rem;font-family:monospace;color:#333;margin:.5rem 0 1rem}
+@media(max-width:640px){
+  main{padding:1rem}
+  .card{padding:1.2rem}
+  .seg-row{grid-template-columns:1fr}
+  h1{font-size:1.3rem}
+  .related-grid{grid-template-columns:1fr}
+  .pace-hero .value{font-size:2rem}
+  .time-inputs{gap:.35rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Running Training Pace Calculator</h1>
+  <p class="subtitle">Get personalized training paces for every workout type — easy runs, tempo, intervals, and race day.</p>
+
+  <div class="card">
+    <div class="input-mode-tabs" role="tablist" aria-label="Input method">
+      <button class="tab-btn active" id="tab-race" onclick="switchTab('race')" role="tab" aria-selected="true">Use Race Time</button>
+      <button class="tab-btn" id="tab-pace" onclick="switchTab('pace')" role="tab" aria-selected="false">Use Known Pace</button>
+    </div>
+
+    <!-- Race time tab -->
+    <div class="tab-content active" id="tc-race">
+      <div class="seg-row">
+        <div class="field">
+          <label for="race-dist">Race Distance</label>
+          <select id="race-dist">
+            <option value="5k">5K (3.1 mi)</option>
+            <option value="10k">10K (6.2 mi)</option>
+            <option value="half" selected>Half Marathon (13.1 mi)</option>
+            <option value="full">Marathon (26.2 mi)</option>
+            <option value="custom">Custom Distance</option>
+          </select>
+        </div>
+        <div class="field" id="custom-dist-wrap" style="display:none">
+          <label for="custom-dist">Distance</label>
+          <div class="input-row">
+            <input type="number" id="custom-dist" placeholder="e.g. 10" min="0.1" step="0.1">
+            <select id="custom-unit" style="max-width:80px;min-width:70px;width:auto;flex-shrink:0">
+              <option value="miles">mi</option>
+              <option value="km">km</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Finish Time (hh : mm : ss)</label>
+        <div class="time-label-row"><span>Hours</span><span>Minutes</span><span>Seconds</span></div>
+        <div class="time-inputs">
+          <input type="number" id="rt-h" placeholder="0" min="0" max="23" aria-label="Hours">
+          <input type="number" id="rt-m" placeholder="00" min="0" max="59" aria-label="Minutes">
+          <input type="number" id="rt-s" placeholder="00" min="0" max="59" aria-label="Seconds">
+        </div>
+        <div class="error-msg" id="err-race">Please enter a valid finish time.</div>
+      </div>
+    </div>
+
+    <!-- Known pace tab -->
+    <div class="tab-content" id="tc-pace">
+      <div class="field">
+        <label>Your Current Race Pace</label>
+        <div class="time-label-row" style="grid-template-columns:1fr 1fr 1fr"><span>Min</span><span>Sec</span><span>Per</span></div>
+        <div class="time-inputs">
+          <input type="number" id="kp-m" placeholder="8" min="0" max="59" aria-label="Pace minutes">
+          <input type="number" id="kp-s" placeholder="30" min="0" max="59" aria-label="Pace seconds">
+          <select id="kp-unit" style="padding:12px 8px">
+            <option value="mile">Mile</option>
+            <option value="km">KM</option>
+          </select>
+        </div>
+        <div class="error-msg" id="err-pace">Please enter a valid pace.</div>
+      </div>
+      <p style="font-size:.8rem;color:#888;margin-top:-.5rem;margin-bottom:1rem">Enter your current race pace (e.g. 5K or 10K pace) to generate training zones.</p>
+    </div>
+
+    <div class="field">
+      <label for="unit-pref">Display Paces In</label>
+      <select id="unit-pref">
+        <option value="mile">min/mile</option>
+        <option value="km">min/km</option>
+      </select>
+    </div>
+
+    <button onclick="calculate()">Calculate Training Paces</button>
+  </div>
+
+  <!-- Results -->
+  <div class="card results" id="results-card">
+    <div class="results-header">
+      <h2>Your Training Paces</h2>
+      <button class="copy-btn" id="copy-btn" onclick="copyResults()">Copy Results</button>
+    </div>
+
+    <div class="pace-hero">
+      <div class="label">Your Estimated Race Pace (VDOT Reference)</div>
+      <div class="value" id="hero-pace">—</div>
+      <div class="sub" id="hero-sub">per mile</div>
+    </div>
+
+    <div class="zone-bar-wrap">
+      <div class="zone-bar-label">Training Intensity Spectrum</div>
+      <div class="zone-bar">
+        <div class="seg z1" style="flex:1" title="Easy / Recovery"></div>
+        <div class="seg z2" style="flex:1" title="Aerobic"></div>
+        <div class="seg z3" style="flex:1" title="Tempo / Threshold"></div>
+        <div class="seg z4" style="flex:1" title="Interval"></div>
+        <div class="seg z5" style="flex:1" title="Repetition / Race"></div>
+      </div>
+      <div class="zone-labels">
+        <span>Easy</span><span>Aerobic</span><span>Tempo</span><span>Interval</span><span>Race/Rep</span>
+      </div>
+    </div>
+
+    <div class="pace-table-wrap" id="pace-table-wrap">
+      <!-- Filled by JS -->
+    </div>
+
+    <div class="disclaimer">
+      <strong>⚠️ Informational Use Only</strong>
+      This tool is for informational purposes only. Training paces are estimates based on well-established formulas. Consult a certified running coach or healthcare professional before starting a new training program, especially if you have health concerns.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <section class="content">
+    <h2>How to Use This Training Pace Calculator</h2>
+    <p>Enter a recent race result (5K, 10K, Half Marathon, or Marathon) and your finish time, then click <strong>Calculate Training Paces</strong>. The tool instantly outputs six training zones — from easy recovery jogs to all-out race repetitions — displayed as pace ranges per mile or per kilometer. You can also switch to the <em>Known Pace</em> tab if you only know your approximate current race pace.</p>
+    <p>Toggle between min/mile and min/km display using the dropdown at the bottom of the inputs. Use the copy button to save your results to the clipboard.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Running too fast on easy days is the single most common training mistake. Studies show elite runners perform 75–80% of their weekly mileage at conversational, easy paces — yet recreational runners often run 90% of their miles at a "moderate-hard" effort that's too fast to maximize aerobic development and too slow to build real speed. The result? Perpetual mediocrity, elevated injury risk, and burnout.</p>
+    <p>Consider a runner who recently ran a 25-minute 5K (just over 8:00/mile pace). Their easy run pace should be around 9:45–10:30/mile — nearly 2 minutes per mile slower than race pace. Most runners would feel this is "embarrassingly slow," but this is exactly the pace that builds the aerobic base needed for faster races. Meanwhile, their tempo pace sits around 8:35/mile — a controlled, comfortably hard effort for 20–40 minute runs. Knowing these distinct zones takes the guesswork out of every single workout and makes training purposeful.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>This tool uses <strong>Jack Daniels' VDOT running formula</strong>, the gold standard in training pace prescription, derived from VO₂max research. The key formula for equivalent race performance:</p>
+    <div class="formula-box">VDOT = v × (0.000104 × v² + 0.182258 × v − 4.60) / (0.8 + 0.1894393 × e^(−0.012778 × t) + 0.2989558 × e^(−0.1932605 × t))</div>
+    <p>Where <em>v</em> is the velocity in meters/minute and <em>t</em> is time in minutes. From the VDOT score, training velocities are back-calculated for each zone. Easy pace runs at 59–74% of VDOT velocity; Marathon pace at ~75–84%; Threshold/Tempo at 83–88%; Interval at 95–100%; and Repetition pace at 105–120%.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't skip the easy runs.</strong> If a pace feels "too easy," it's probably exactly right. Easy pace should feel like you could hold a full conversation.</li>
+      <li><strong>Use a recent, well-executed race.</strong> A race you partially walked or ran in bad conditions will skew your zones. Use your best effort from the past 8–12 weeks.</li>
+      <li><strong>Tempo ≠ marathon pace.</strong> Tempo (threshold) pace is faster than marathon race pace. Many runners confuse these two zones.</li>
+      <li><strong>Conditions matter.</strong> Add 20–30 seconds per mile in heat/humidity, or on hilly terrain. Zones are based on flat road conditions at comfortable temperatures.</li>
+      <li><strong>Revisit every 6–8 weeks.</strong> As fitness improves, your VDOT rises. Recalculate your paces after each meaningful race or time trial to ensure zones stay accurate.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>What if I don't have a recent race time?</summary>
+      <div class="details-body">Use the "Known Pace" tab and enter your estimated current pace for a 5K or 10K effort — even a rough estimate gives useful zones. Alternatively, run a timed mile or 5K on a track and use that as your input race.</div>
+    </details>
+
+    <details>
+      <summary>Are the paces different for treadmill running?</summary>
+      <div class="details-body">Treadmill running at 0% incline is generally slightly easier than outdoor running due to lack of wind resistance. A 1% incline setting closely mimics outdoor effort. Use the same paces but set your treadmill to 1% grade for accurate training stimulus.</div>
+    </details>
+
+    <details>
+      <summary>How often should I run in each zone?</summary>
+      <div class="details-body">Most coaches recommend 70–80% of weekly mileage in the easy/aerobic zones (Z1–Z2), with tempo runs once per week, and interval or repetition work once per week. Beginners should spend 90%+ in easy zones before adding quality sessions.</div>
+    </details>
+
+    <details>
+      <summary>What is VDOT and why does it matter?</summary>
+      <div class="details-body">VDOT is a practical measure of your current running fitness — a surrogate for VO₂max adjusted for running economy. Developed by Jack Daniels, Ph.D., it lets you predict equivalent race performances across distances and set scientifically validated training paces. A VDOT of 40 corresponds roughly to a 4:30 marathon; 55 to about 3:10.</div>
+    </details>
+
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/waist-to-height-ratio-calculator/">Waist-to-Height Ratio Calculator</a>
+      <a class="related-link" href="/met-activity-calorie-calculator/">Caloric Burn Rate by Activity</a>
+      <a class="related-link" href="/postpartum-weight-loss-calculator/">Postpartum Weight Loss Calculator</a>
+      <a class="related-link" href="/biological-age-calculator/">Biological Age Calculator</a>
+      <a class="related-link" href="/strength-training-volume-calculator/">Strength Training Volume Calculator</a>
+      <a class="related-link" href="/lean-body-mass-calculator/">Lean Body Mass Calculator</a>
+    </div>
+  </section>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:.4rem">© <span id="yr"></span> toolhut.dev</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Tab switching
+function switchTab(tab) {
+  document.getElementById('tc-race').classList.toggle('active', tab === 'race');
+  document.getElementById('tc-pace').classList.toggle('active', tab === 'pace');
+  document.getElementById('tab-race').classList.toggle('active', tab === 'race');
+  document.getElementById('tab-pace').classList.toggle('active', tab === 'pace');
+  document.getElementById('tab-race').setAttribute('aria-selected', tab === 'race');
+  document.getElementById('tab-pace').setAttribute('aria-selected', tab === 'pace');
+}
+
+// Show/hide custom distance
+document.getElementById('race-dist').addEventListener('change', function() {
+  document.getElementById('custom-dist-wrap').style.display = this.value === 'custom' ? 'block' : 'none';
+});
+
+// Race distances in meters
+const DISTANCES = { '5k': 5000, '10k': 10000, 'half': 21097.5, 'full': 42195 };
+
+function parseTime(h, m, s) {
+  const hv = parseFloat(h)||0, mv = parseFloat(m)||0, sv = parseFloat(s)||0;
+  if(hv < 0 || mv < 0 || mv > 59 || sv < 0 || sv > 59) return null;
+  return hv*3600 + mv*60 + sv;
+}
+
+function secsToMMSS(secs) {
+  if(!isFinite(secs) || secs <= 0) return '--:--';
+  const m = Math.floor(secs / 60);
+  const s = Math.round(secs % 60);
+  if(s === 60) return (m+1) + ':00';
+  return m + ':' + String(s).padStart(2,'0');
+}
+
+// VDOT calculation (Jack Daniels)
+function computeVDOT(distanceM, timeSecs) {
+  const t = timeSecs / 60; // minutes
+  const v = distanceM / t; // meters/min
+
+  const pctMax = 0.8 + 0.1894393 * Math.exp(-0.012778 * t) + 0.2989558 * Math.exp(-0.1932605 * t);
+  const vo2 = -4.60 + 0.182258 * v + 0.000104 * v * v;
+  return vo2 / pctMax;
+}
+
+// Velocity at a given % of VDOT in meters/min, solve quadratic: 0.000104v² + 0.182258v - (4.60 + VDOT*pct) = 0
+function vdotPctToVelocity(vdot, pct) {
+  const a = 0.000104, b = 0.182258, c = -(4.60 + vdot * pct);
+  return (-b + Math.sqrt(b*b - 4*a*c)) / (2*a); // m/min
+}
+
+// Velocity to pace (sec/mile or sec/km)
+function velToPace(mpm, unit) {
+  if(unit === 'mile') return (1609.34 / mpm); // sec/mile
+  return (1000 / mpm); // sec/km
+}
+
+function calculate() {
+  let distM = 0, totalSecs = 0;
+
+  // Determine active tab
+  const isRaceTab = document.getElementById('tc-race').classList.contains('active');
+  const errRace = document.getElementById('err-race');
+  const errPace = document.getElementById('err-pace');
+  errRace.classList.remove('show');
+  errPace.classList.remove('show');
+
+  const unitPref = document.getElementById('unit-pref').value;
+
+  if(isRaceTab) {
+    const distSel = document.getElementById('race-dist').value;
+    if(distSel === 'custom') {
+      const cd = parseFloat(document.getElementById('custom-dist').value);
+      const cu = document.getElementById('custom-unit').value;
+      if(!cd || cd <= 0) { showErr('err-race','Please enter a valid custom distance.'); return; }
+      distM = cu === 'km' ? cd * 1000 : cd * 1609.34;
+    } else {
+      distM = DISTANCES[distSel];
+    }
+    totalSecs = parseTime(
+      document.getElementById('rt-h').value,
+      document.getElementById('rt-m').value,
+      document.getElementById('rt-s').value
+    );
+    if(!totalSecs || totalSecs <= 0) { showErr('err-race','Please enter a valid finish time (must be > 0).'); return; }
+    // Sanity: minimum 3 min for any race
+    if(totalSecs < 180) { showErr('err-race','Finish time seems too fast. Please check your input.'); return; }
+  } else {
+    // Known pace tab
+    const pm = parseFloat(document.getElementById('kp-m').value)||0;
+    const ps = parseFloat(document.getElementById('kp-s').value)||0;
+    const pu = document.getElementById('kp-unit').value;
+    if(pm <= 0 && ps <= 0) { showErr('err-pace','Please enter a valid pace.'); return; }
+    const paceSecs = pm * 60 + ps; // sec per mile or km
+    if(paceSecs <= 0) { showErr('err-pace','Please enter a valid pace.'); return; }
+    // Use a 5k equivalent time
+    const distanceForConversion = pu === 'mile' ? 5000 : 5000;
+    const milesOrKm = pu === 'mile' ? (5000/1609.34) : 5;
+    totalSecs = paceSecs * milesOrKm;
+    distM = 5000;
+  }
+
+  const vdot = computeVDOT(distM, totalSecs);
+  if(!isFinite(vdot) || vdot <= 0) { showErr(isRaceTab?'err-race':'err-pace','Could not compute VDOT. Please check your inputs.'); return; }
+
+  // Training zone percentages of VDOT (Jack Daniels / Lydiard hybrid)
+  const zones = [
+    { name: 'Easy / Recovery',     color: '#3bb0a0', dotColor:'#3bb0a0', pctLo: 0.59, pctHi: 0.74, desc: 'Daily easy runs, recovery, warm-up, cool-down' },
+    { name: 'Long Run / Aerobic',  color: '#5aab61', dotColor:'#5aab61', pctLo: 0.68, pctHi: 0.78, desc: 'Weekend long runs, base building' },
+    { name: 'Marathon Pace',       color: '#8bc34a', dotColor:'#8bc34a', pctLo: 0.75, pctHi: 0.84, desc: 'Goal marathon race pace' },
+    { name: 'Tempo / Threshold',   color: '#f0c040', dotColor:'#f0c040', pctLo: 0.83, pctHi: 0.88, desc: '20–40 min sustained runs or cruise intervals' },
+    { name: 'Interval (VO₂max)',   color: '#e87c3e', dotColor:'#e87c3e', pctLo: 0.95, pctHi: 1.00, desc: '3–5 min reps at 5K effort, 2–3 min recovery' },
+    { name: 'Repetition / Speed',  color: '#e03e3e', dotColor:'#e03e3e', pctLo: 1.05, pctHi: 1.10, desc: '30 sec–2 min reps, full recovery between' },
+  ];
+
+  // Race pace from VDOT (reference 5K pace at ~97.5%)
+  const refVel = vdotPctToVelocity(vdot, 0.975);
+  const refPaceSec = velToPace(refVel, unitPref);
+
+  const rows = zones.map(z => {
+    const vLo = vdotPctToVelocity(vdot, z.pctLo);
+    const vHi = vdotPctToVelocity(vdot, z.pctHi);
+    const paceLo = velToPace(vHi, unitPref); // faster = shorter time = higher speed
+    const paceHi = velToPace(vLo, unitPref);
+    return { ...z, paceLo, paceHi };
+  });
+
+  const unitLabel = unitPref === 'mile' ? 'min/mile' : 'min/km';
+  const vdotDisplay = vdot.toFixed(1);
+
+  let tableHTML = `<table><thead><tr><th>Zone</th><th>Pace Range (${unitLabel})</th><th>Purpose</th></tr></thead><tbody>`;
+  rows.forEach(r => {
+    tableHTML += `<tr>
+      <td><span class="zone-label-cell"><span class="zone-dot" style="background:${r.dotColor}"></span>${r.name}</span></td>
+      <td class="num">${secsToMMSS(r.paceLo)} – ${secsToMMSS(r.paceHi)}</td>
+      <td style="font-size:.8rem;color:#555">${r.desc}</td>
+    </tr>`;
+  });
+  tableHTML += `</tbody></table>`;
+
+  requestAnimationFrame(() => {
+    document.getElementById('hero-pace').textContent = secsToMMSS(refPaceSec);
+    document.getElementById('hero-sub').textContent = `per ${unitPref} · VDOT: ${vdotDisplay}`;
+    document.getElementById('pace-table-wrap').innerHTML = tableHTML;
+    const card = document.getElementById('results-card');
+    card.classList.add('visible');
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // Store for copy
+  window._lastResults = { rows, unitPref, unitLabel, vdot, refPaceSec };
+}
+
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+function copyResults() {
+  if(!window._lastResults) return;
+  const { rows, unitLabel, vdot, refPaceSec, unitPref } = window._lastResults;
+  let text = `Running Training Paces (VDOT: ${vdot.toFixed(1)})\n`;
+  text += `Reference Pace: ${secsToMMSS(refPaceSec)} per ${unitPref}\n\n`;
+  rows.forEach(r => {
+    text += `${r.name}: ${secsToMMSS(r.paceLo)} – ${secsToMMSS(r.paceHi)} ${unitLabel}\n`;
+  });
+  text += `\nGenerated at toolhut.dev/running-training-pace-calculator/`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Results'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Results'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// Enter key triggers calculate
+document.querySelectorAll('input').forEach(el => {
+  el.addEventListener('keydown', e => { if(e.key === 'Enter') calculate(); });
+});
+</script>
+</body>
+</html>
