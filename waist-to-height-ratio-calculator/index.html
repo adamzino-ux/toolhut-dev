@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waist-to-Height Ratio Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your waist-to-height ratio instantly. Find out if your measurements are in the healthy range with color-coded results and personalized health insights.">
+<link rel="canonical" href="https://toolhut.dev/waist-to-height-ratio-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Waist-to-Height Ratio Calculator",
+  "url": "https://toolhut.dev/waist-to-height-ratio-calculator/",
+  "description": "Calculate your waist-to-height ratio and find out where you fall on the health risk scale.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:48px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand:hover{text-decoration:none;color:#0077b6}
+
+.page-wrap{max-width:640px;margin:0 auto;padding:1.5rem}
+
+h1{font-size:1.6rem;font-weight:700;margin-bottom:0.4rem;color:#1a1a2e}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2rem}
+
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px}
+input[type="number"],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px;-moz-appearance:textfield}
+input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none}
+input[type="number"]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.12)}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.unit-toggle{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1.25rem}
+.unit-toggle button{flex:1;padding:10px 16px;border:none;background:#fff;color:#555;font-size:0.9rem;cursor:pointer;transition:background 0.15s,color 0.15s;min-height:44px}
+.unit-toggle button.active{background:#0077b6;color:#fff;font-weight:600}
+.unit-toggle button:not(.active):hover{background:#f0f0f0}
+
+.calc-btn{width:100%;background:#0077b6;color:#fff;border:none;padding:13px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:48px;margin-top:0.5rem}
+.calc-btn:hover{background:#006299}
+.calc-btn:active{background:#005580}
+
+/* Results */
+.results-section{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results-section.visible{opacity:1;pointer-events:auto}
+
+.ratio-display{text-align:center;margin-bottom:1.5rem}
+.ratio-value{font-size:3rem;font-weight:800;color:#0077b6;line-height:1}
+.ratio-label{font-size:0.9rem;color:#666;margin-top:4px}
+
+.category-badge{display:inline-block;padding:6px 18px;border-radius:20px;font-size:0.95rem;font-weight:700;margin-top:10px;text-transform:uppercase;letter-spacing:0.04em}
+.badge-green{background:#d4edda;color:#155724}
+.badge-yellow{background:#fff3cd;color:#856404}
+.badge-orange{background:#ffe5d0;color:#7b3000}
+.badge-red{background:#f8d7da;color:#721c24}
+
+/* Visual scale */
+.scale-wrap{margin:1.5rem 0}
+.scale-label-row{display:flex;justify-content:space-between;font-size:0.72rem;color:#666;margin-bottom:5px}
+.scale-bar{height:18px;border-radius:9px;background:linear-gradient(to right,#27ae60 0%,#27ae60 30%,#f1c40f 30%,#f1c40f 45%,#e67e22 45%,#e67e22 55%,#e74c3c 55%,#e74c3c 100%);position:relative;overflow:visible}
+.scale-marker{position:absolute;top:-6px;width:4px;height:30px;background:#1a1a2e;border-radius:2px;transform:translateX(-50%);transition:left 0.4s ease}
+.scale-marker::after{content:'▼';position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:0.75rem;color:#1a1a2e;white-space:nowrap}
+
+.scale-zones{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;margin-top:8px}
+.zone{border-radius:4px;padding:6px 4px;text-align:center;font-size:0.72rem;font-weight:600}
+.zone-green{background:#d4edda;color:#155724}
+.zone-yellow{background:#fff3cd;color:#856404}
+.zone-orange{background:#ffe5d0;color:#7b3000}
+.zone-red{background:#f8d7da;color:#721c24}
+
+.stats-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.9rem}
+.stats-table th{background:#f0f0f0;text-align:left;padding:8px 12px;font-weight:600;font-size:0.8rem;color:#444}
+.stats-table td{padding:8px 12px;border-bottom:1px solid #eee}
+.stats-table tr:nth-child(even) td{background:#fafafa}
+.stats-table td:last-child{text-align:right;font-weight:600}
+
+.copy-btn{background:none;border:1px solid #ddd;color:#555;padding:6px 14px;border-radius:4px;font-size:0.8rem;cursor:pointer;transition:all 0.15s;float:right;margin-top:-2px}
+.copy-btn:hover{background:#f0f0f0;border-color:#bbb}
+
+.disclaimer{background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:12px 16px;font-size:0.82rem;color:#856404;margin-top:1.5rem;line-height:1.5}
+.disclaimer strong{display:block;margin-bottom:2px}
+
+.ad-slot{min-height:0;margin:0}
+
+.content-section{margin-bottom:2rem}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;padding-bottom:6px;border-bottom:2px solid #e0e0e0}
+.content-section p{font-size:0.92rem;color:#333;margin-bottom:0.75rem;line-height:1.7}
+.content-section ul{padding-left:1.25rem;margin-bottom:0.75rem}
+.content-section li{font-size:0.92rem;color:#333;margin-bottom:0.4rem;line-height:1.6}
+
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;overflow:hidden}
+details[open]{border-color:#0077b6}
+summary{padding:12px 16px;font-size:0.92rem;font-weight:600;cursor:pointer;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';font-size:1rem;color:#0077b6;font-weight:400}
+details[open] summary::after{content:'－'}
+details p{padding:12px 16px;font-size:0.9rem;color:#333;line-height:1.6;background:#fff;border-top:1px solid #eee}
+
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:10px 14px;font-size:0.85rem;color:#0077b6;transition:background 0.15s,border-color 0.15s;min-height:44px;display:flex;align-items:center}
+.related-link:hover{background:#e8f4fb;border-color:#0077b6;text-decoration:none}
+
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.25rem 1.5rem;text-align:center;font-size:0.82rem;color:#666}
+.footer-links{display:flex;justify-content:center;gap:1.25rem;margin-bottom:0.5rem;flex-wrap:wrap}
+.footer-links a{color:#555}
+
+@media(max-width:639px){
+  .row-2{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .ratio-value{font-size:2.5rem}
+  .scale-zones{grid-template-columns:1fr 1fr}
+  .scale-label-row{font-size:0.65rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <h1>Waist-to-Height Ratio Calculator</h1>
+  <p class="subtitle">Find out if your waist circumference is proportionate to your height — a key indicator of metabolic health risk.</p>
+
+  <div class="card">
+    <div style="margin-bottom:1rem">
+      <div style="font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px">Unit System</div>
+      <div class="unit-toggle">
+        <button class="active" id="btn-metric" onclick="switchUnit('metric')">Metric (cm)</button>
+        <button id="btn-imperial" onclick="switchUnit('imperial')">Imperial (in)</button>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="waist">Waist Circumference <span id="waist-unit-label">(cm)</span></label>
+        <input type="number" id="waist" placeholder="e.g. 80" min="1" max="300" step="0.1">
+        <div class="error-msg" id="waist-error">Please enter a valid waist measurement.</div>
+      </div>
+      <div class="form-group">
+        <label for="height">Height <span id="height-unit-label">(cm)</span></label>
+        <input type="number" id="height" placeholder="e.g. 175" min="1" max="300" step="0.1">
+        <div class="error-msg" id="height-error">Please enter a valid height.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sex">Biological Sex <span style="font-weight:400;color:#888">(for reference ranges)</span></label>
+      <select id="sex">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+
+    <button class="calc-btn" id="calcBtn">Calculate Ratio</button>
+  </div>
+
+  <!-- Results -->
+  <div class="card results-section" id="results-card">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:0.5rem">
+      <div style="font-size:1rem;font-weight:700;color:#1a1a2e">Your Result</div>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy Result</button>
+    </div>
+
+    <div class="ratio-display">
+      <div class="ratio-value" id="ratio-val">—</div>
+      <div class="ratio-label">Waist-to-Height Ratio</div>
+      <div id="category-badge" class="category-badge badge-green" style="margin-top:10px">—</div>
+    </div>
+
+    <!-- Visual scale -->
+    <div class="scale-wrap">
+      <div class="scale-label-row">
+        <span>Slim<br>≤ 0.40</span>
+        <span>Healthy<br>0.40–0.49</span>
+        <span>Overweight<br>0.50–0.54</span>
+        <span>Obese<br>≥ 0.55</span>
+      </div>
+      <div class="scale-bar" id="scale-bar">
+        <div class="scale-marker" id="scale-marker" style="left:0%"></div>
+      </div>
+      <div class="scale-zones" style="margin-top:8px">
+        <div class="zone zone-yellow">Slim / Underweight<br>&lt; 0.40</div>
+        <div class="zone zone-green">Healthy<br>0.40 – 0.49</div>
+        <div class="zone zone-orange">Overweight<br>0.50 – 0.54</div>
+        <div class="zone zone-red">High Risk<br>≥ 0.55</div>
+      </div>
+    </div>
+
+    <table class="stats-table" id="stats-table">
+      <thead>
+        <tr><th>Measurement</th><th>Value</th></tr>
+      </thead>
+      <tbody id="stats-body"></tbody>
+    </table>
+
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer</strong>
+      This tool is for informational purposes only and does not constitute medical advice. Waist-to-height ratio is a screening tool, not a diagnosis. Consult a qualified healthcare professional for medical advice, diagnosis, or treatment.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content -->
+  <div class="content-section">
+    <h2>How to Use This Waist-to-Height Ratio Calculator</h2>
+    <p>Enter your waist circumference (measured at the narrowest point of your torso, usually just above the belly button) and your standing height. Choose your preferred unit system — metric (centimeters) or imperial (inches) — and click <strong>Calculate Ratio</strong>. Your ratio will appear instantly alongside a color-coded scale showing where you fall in the health risk categories.</p>
+    <p>Selecting your biological sex adjusts the contextual reference ranges shown in the results, since research suggests slightly different thresholds are meaningful for males and females.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Why This Matters</h2>
+    <p>Waist-to-height ratio (WHtR) is one of the most powerful and underused metrics in everyday health tracking. Unlike BMI, which only accounts for your total weight relative to height, WHtR specifically measures central adiposity — the amount of fat stored around your abdomen and organs. This visceral fat is metabolically active and strongly linked to cardiovascular disease, type 2 diabetes, hypertension, and metabolic syndrome.</p>
+    <p>Research published in journals like <em>Obesity Reviews</em> and <em>Diabetes Care</em> has consistently found that WHtR outperforms BMI at predicting cardiometabolic risk. A landmark study of over 300,000 people found that a WHtR of 0.5 or above was a significantly better predictor of heart disease risk than BMI alone.</p>
+    <p>The simple rule of thumb: <strong>keep your waist less than half your height</strong>. A 175 cm tall person should aim for a waist under 87.5 cm. A 5'9" person should keep their waist under 34.5 inches. This single rule translates across virtually every age group, sex, and ethnicity — making it remarkably practical for everyday health monitoring.</p>
+    <p>Athletes tracking body composition, people managing weight loss, or anyone curious about their metabolic health can use this tool to get meaningful, actionable insight in under 10 seconds.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>How It's Calculated</h2>
+    <p>The formula is elegantly simple:</p>
+    <div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:1rem 1.25rem;font-family:monospace;font-size:1rem;margin:0.75rem 0;text-align:center;color:#1a1a2e">
+      WHtR = Waist Circumference ÷ Height
+    </div>
+    <p>Both measurements must be in the same unit (both in cm, or both in inches). The result is a dimensionless ratio, typically ranging from about 0.30 to 0.70 for most adults.</p>
+    <p><strong>Interpretation thresholds (widely accepted in research):</strong></p>
+    <ul>
+      <li><strong>Below 0.40</strong> — Very slim; may indicate underweight or low muscle mass</li>
+      <li><strong>0.40 – 0.49</strong> — Healthy range; low cardiometabolic risk</li>
+      <li><strong>0.50 – 0.54</strong> — Overweight range; increased risk; lifestyle changes recommended</li>
+      <li><strong>0.55 and above</strong> — High risk; associated with significantly elevated risk of metabolic disease</li>
+    </ul>
+    <p>Some research uses 0.53 for women and 0.54 for men as the upper healthy boundary, reflecting slight physiological differences. This calculator notes these sex-specific thresholds in the results.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Measure waist correctly:</strong> Don't measure at your hips or the widest point of your abdomen. The standard measurement is at the narrowest part of your torso, roughly 1 inch above your belly button, after a gentle exhale.</li>
+      <li><strong>Don't suck in:</strong> Many people hold their breath and pull their stomach in while measuring. Breathe normally and measure at the end of a relaxed exhale for accuracy.</li>
+      <li><strong>Don't rely on WHtR alone:</strong> It's a powerful screening tool, but combine it with other markers — blood pressure, fasting glucose, cholesterol levels — for a complete picture.</li>
+      <li><strong>Track trends, not just snapshots:</strong> A single measurement is less meaningful than tracking monthly. Waist circumference responding to lifestyle changes is a reliable indicator of improving visceral fat levels.</li>
+      <li><strong>Context matters:</strong> Athletes with significant muscle mass may have a slightly larger waist that isn't from fat. Always consider your overall health context.</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>Is waist-to-height ratio better than BMI?</summary>
+      <p>For predicting cardiometabolic risk specifically, most research suggests WHtR is equal or superior to BMI. BMI doesn't distinguish between fat and muscle, and doesn't account for where fat is stored. WHtR directly measures abdominal fat distribution, which is more tightly linked to heart disease and diabetes. However, BMI remains widely used clinically, so both have value.</p>
+    </details>
+
+    <details>
+      <summary>What waist-to-height ratio is considered healthy?</summary>
+      <p>A WHtR between 0.40 and 0.49 is generally considered healthy for both men and women. The popular "keep your waist less than half your height" rule corresponds to a ratio below 0.50. Some studies use slightly lower thresholds for women (0.48) versus men (0.52) to account for physiological differences in fat distribution.</p>
+    </details>
+
+    <details>
+      <summary>Can children use this calculator?</summary>
+      <p>The standard WHtR thresholds (0.40–0.50) are primarily validated for adults aged 18 and older. While WHtR can be applied to children, the healthy ranges differ by age and growth stage. For children and adolescents, consult age-specific charts and a pediatrician rather than using adult thresholds.</p>
+    </details>
+
+    <details>
+      <summary>How often should I measure my waist-to-height ratio?</summary>
+      <p>Monthly tracking is typically sufficient for most people. If you're actively working to reduce your waist circumference through diet or exercise, measuring every 2–4 weeks gives a meaningful feedback loop without the noise of daily fluctuations. Morning measurements before eating, taken consistently, give the most comparable results over time.</p>
+    </details>
+  </div>
+
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/met-activity-calorie-calculator/" class="related-link">🔥 Caloric Burn Rate by Activity Calculator</a>
+      <a href="/postpartum-weight-loss-calculator/" class="related-link">🤱 Postpartum Weight Loss Calculator</a>
+      <a href="/biological-age-calculator/" class="related-link">🧬 Biological Age Calculator</a>
+      <a href="/strength-training-volume-calculator/" class="related-link">🏋️ Strength Training Volume Calculator</a>
+      <a href="/lean-body-mass-calculator/" class="related-link">💪 Lean Body Mass Calculator</a>
+      <a href="/weight-loss-timeline-calculator/" class="related-link">📅 Weight Loss Timeline Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+</div><!-- end page-wrap -->
+
+<footer>
+  <div class="footer-links">
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div>© <span id="yr"></span> toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let currentUnit = 'metric';
+let lastResult = null;
+
+function switchUnit(unit) {
+  currentUnit = unit;
+  document.getElementById('btn-metric').classList.toggle('active', unit === 'metric');
+  document.getElementById('btn-imperial').classList.toggle('active', unit === 'imperial');
+  const wLabel = unit === 'metric' ? '(cm)' : '(in)';
+  const hLabel = unit === 'metric' ? '(cm)' : '(in)';
+  document.getElementById('waist-unit-label').textContent = wLabel;
+  document.getElementById('height-unit-label').textContent = hLabel;
+  document.getElementById('waist').placeholder = unit === 'metric' ? 'e.g. 80' : 'e.g. 31.5';
+  document.getElementById('height').placeholder = unit === 'metric' ? 'e.g. 175' : 'e.g. 68.9';
+}
+
+function validate() {
+  let valid = true;
+  const waistVal = parseFloat(document.getElementById('waist').value);
+  const heightVal = parseFloat(document.getElementById('height').value);
+  const waistInput = document.getElementById('waist');
+  const heightInput = document.getElementById('height');
+  const waistErr = document.getElementById('waist-error');
+  const heightErr = document.getElementById('height-error');
+
+  waistInput.classList.remove('error');
+  heightInput.classList.remove('error');
+  waistErr.classList.remove('show');
+  heightErr.classList.remove('show');
+
+  if (!waistVal || waistVal <= 0 || waistVal > 300) {
+    waistInput.classList.add('error');
+    waistErr.textContent = currentUnit === 'metric'
+      ? 'Please enter a waist between 1 and 300 cm.'
+      : 'Please enter a waist between 1 and 118 inches.';
+    waistErr.classList.add('show');
+    valid = false;
+  }
+  if (!heightVal || heightVal <= 0 || heightVal > 300) {
+    heightInput.classList.add('error');
+    heightErr.textContent = currentUnit === 'metric'
+      ? 'Please enter a height between 1 and 300 cm.'
+      : 'Please enter a height between 1 and 118 inches.';
+    heightErr.classList.add('show');
+    valid = false;
+  }
+  return valid ? { waist: waistVal, height: heightVal } : null;
+}
+
+function getRiskCategory(ratio, sex) {
+  const upperHealthy = sex === 'female' ? 0.49 : 0.50;
+  if (ratio < 0.40) return { label: 'Slim / Underweight', badgeClass: 'badge-yellow', description: 'Your ratio is below the typical healthy range. This may indicate low body mass or an underweight condition.' };
+  if (ratio <= upperHealthy) return { label: 'Healthy', badgeClass: 'badge-green', description: 'Your waist circumference is well-proportioned to your height. This is associated with low cardiometabolic risk.' };
+  if (ratio <= 0.54) return { label: 'Overweight Range', badgeClass: 'badge-orange', description: 'Your ratio suggests increased central adiposity. Consider lifestyle changes to reduce waist circumference.' };
+  return { label: 'High Risk', badgeClass: 'badge-red', description: 'Your ratio is associated with significantly elevated risk of metabolic and cardiovascular disease. Consult a healthcare professional.' };
+}
+
+function ratioToPercent(ratio) {
+  const minR = 0.25, maxR = 0.70;
+  const pct = ((ratio - minR) / (maxR - minR)) * 100;
+  return Math.max(1, Math.min(99, pct));
+}
+
+function fmt(n, decimals = 2) {
+  return Number(n.toFixed(decimals)).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+function calculate() {
+  const vals = validate();
+  if (!vals) return;
+
+  const { waist, height } = vals;
+  const sex = document.getElementById('sex').value;
+  const ratio = waist / height;
+  const risk = getRiskCategory(ratio, sex);
+  const pct = ratioToPercent(ratio);
+  const unitLabel = currentUnit === 'metric' ? 'cm' : 'in';
+  const healthyWaistMax = (height * (sex === 'female' ? 0.49 : 0.50)).toFixed(1);
+  const diff = (waist - parseFloat(healthyWaistMax)).toFixed(1);
+  const diffText = parseFloat(diff) > 0
+    ? `${Math.abs(diff)} ${unitLabel} above healthy max`
+    : parseFloat(diff) < 0
+      ? `${Math.abs(diff)} ${unitLabel} below healthy max`
+      : 'At healthy max';
+
+  lastResult = { ratio, waist, height, unit: unitLabel, risk };
+
+  const statsHtml = `
+    <tr><td>Waist Circumference</td><td>${fmt(waist, 1)} ${unitLabel}</td></tr>
+    <tr><td>Height</td><td>${fmt(height, 1)} ${unitLabel}</td></tr>
+    <tr><td>Waist-to-Height Ratio</td><td>${fmt(ratio, 4)}</td></tr>
+    <tr><td>Healthy Waist Maximum</td><td>${healthyWaistMax} ${unitLabel}</td></tr>
+    <tr><td>Distance from Healthy Max</td><td>${diffText}</td></tr>
+    <tr><td>Risk Category</td><td>${risk.label}</td></tr>
+  `;
+
+  requestAnimationFrame(() => {
+    document.getElementById('ratio-val').textContent = fmt(ratio, 3);
+    const badge = document.getElementById('category-badge');
+    badge.className = 'category-badge ' + risk.badgeClass;
+    badge.textContent = risk.label;
+    document.getElementById('scale-marker').style.left = pct + '%';
+    document.getElementById('stats-body').innerHTML = statsHtml;
+
+    const card = document.getElementById('results-card');
+    card.classList.add('visible');
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function copyResult() {
+  if (!lastResult) return;
+  const { ratio, waist, height, unit, risk } = lastResult;
+  const text = `Waist-to-Height Ratio: ${ratio.toFixed(4)}\nWaist: ${waist} ${unit}\nHeight: ${height} ${unit}\nCategory: ${risk.label}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  }).catch(() => {});
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+['waist', 'height'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      requestAnimationFrame(() => { calculate(); });
+    }
+  });
+});
+
+document.getElementById('sex').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    requestAnimationFrame(() => { calculate(); });
+  }
+});
+</script>
+</body>
+</html>
