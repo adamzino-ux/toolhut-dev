@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menstrual Cycle Tracker & Ovulation Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Track your menstrual cycle and find your fertile window with our free ovulation calculator. Enter your last period date and cycle length to predict ovulation.">
+<link rel="canonical" href="https://toolhut.dev/menstrual-cycle-ovulation-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Menstrual Cycle Tracker & Ovulation Calculator",
+  "url": "https://toolhut.dev/menstrual-cycle-ovulation-calculator/",
+  "description": "Free online ovulation calculator and menstrual cycle tracker. Predict your fertile window, ovulation date, and next period.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a2e; line-height: 1.6; font-size: 16px; }
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 640px; margin: 0 auto; padding: 1rem 1.5rem; }
+
+nav { border-bottom: 1px solid #e0e0e0; padding: 0.75rem 0; margin-bottom: 2rem; }
+nav .container { display: flex; align-items: center; }
+.nav-brand { font-weight: 700; font-size: 1.1rem; color: #1a1a2e; }
+.nav-brand:hover { text-decoration: none; }
+
+h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.4rem; color: #1a1a2e; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+.card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+
+.form-group { margin-bottom: 1.25rem; }
+label { display: block; font-size: 0.85rem; font-weight: 500; color: #444; margin-bottom: 6px; }
+input[type="date"], input[type="number"], select {
+  width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 6px;
+  font-size: 1rem; font-family: inherit; color: #1a1a2e; background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s; min-height: 44px; appearance: none; -webkit-appearance: none;
+}
+input:focus, select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.15); }
+input.error { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.15); }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 4px; display: none; }
+.error-msg.show { display: block; }
+
+.row { display: flex; gap: 1rem; }
+.row .form-group { flex: 1; }
+
+.range-row { display: flex; align-items: center; gap: 1rem; }
+input[type="range"] { flex: 1; height: 6px; accent-color: #0077b6; cursor: pointer; }
+.range-val { font-weight: 700; color: #0077b6; min-width: 2rem; text-align: right; }
+
+button { min-height: 44px; cursor: pointer; font-family: inherit; font-size: 1rem; font-weight: 600; border: none; border-radius: 6px; transition: background 0.2s; }
+.btn-primary { background: #0077b6; color: #fff; padding: 12px 24px; width: 100%; margin-top: 0.5rem; }
+.btn-primary:hover { background: #006299; }
+.btn-secondary { background: #f0f0f0; color: #1a1a2e; padding: 8px 16px; font-size: 0.85rem; font-weight: 500; }
+.btn-secondary:hover { background: #e0e0e0; }
+
+.results { opacity: 0; transition: opacity 0.3s ease; }
+.results.show { opacity: 1; }
+
+.big-number { font-size: 2rem; font-weight: 800; color: #0077b6; }
+.big-label { font-size: 0.85rem; color: #555; margin-top: 2px; }
+
+.key-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.date-card { background: #f8f9fa; border-radius: 8px; padding: 1rem; border-left: 4px solid #ccc; }
+.date-card.ovulation { border-left-color: #0077b6; }
+.date-card.fertile { border-left-color: #2ecc71; }
+.date-card.next-period { border-left-color: #e67e22; }
+.date-card.luteal { border-left-color: #9b59b6; }
+.date-card .dc-label { font-size: 0.78rem; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+.date-card .dc-date { font-size: 1.05rem; font-weight: 700; color: #1a1a2e; }
+.date-card .dc-sub { font-size: 0.8rem; color: #777; margin-top: 2px; }
+
+.section-title { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 1rem; }
+
+/* Cycle timeline bar */
+.timeline-wrap { margin-bottom: 1.5rem; }
+.timeline-label { display: flex; justify-content: space-between; font-size: 0.75rem; color: #888; margin-bottom: 4px; }
+.timeline-bar { height: 28px; border-radius: 6px; overflow: hidden; display: flex; position: relative; background: #f0f0f0; }
+.tl-seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: #fff; transition: width 0.4s ease; overflow: hidden; white-space: nowrap; }
+.tl-menstrual { background: #e74c3c; }
+.tl-follicular { background: #3498db; }
+.tl-fertile { background: #2ecc71; }
+.tl-ovulation { background: #f39c12; }
+.tl-luteal { background: #9b59b6; }
+.timeline-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 0.75rem; }
+.tl-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #555; }
+.tl-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+/* Phase indicator */
+.phase-zone { display: flex; border-radius: 6px; overflow: hidden; height: 12px; margin-bottom: 0.5rem; }
+.phase-seg { flex: 1; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { background: #f0f0f0; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 0.82rem; color: #444; }
+td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; }
+tr:nth-child(even) td { background: #fafafa; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.copy-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.copy-btn { display: flex; align-items: center; gap: 5px; font-size: 0.8rem; }
+
+.disclaimer { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 0.85rem 1rem; font-size: 0.82rem; color: #5d4037; margin-top: 1rem; }
+.disclaimer strong { display: block; margin-bottom: 2px; }
+
+.ad-slot { min-height: 0; margin: 0; }
+
+.content-section { margin-bottom: 2rem; }
+.content-section h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; color: #1a1a2e; border-bottom: 2px solid #0077b6; padding-bottom: 0.4rem; }
+.content-section p { margin-bottom: 0.75rem; color: #333; font-size: 0.95rem; }
+.content-section ul { padding-left: 1.4rem; margin-bottom: 0.75rem; }
+.content-section li { margin-bottom: 0.4rem; color: #333; font-size: 0.95rem; }
+details { border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; }
+summary { font-weight: 600; cursor: pointer; font-size: 0.95rem; list-style: none; display: flex; align-items: center; gap: 0.5rem; }
+summary::before { content: "▶"; font-size: 0.7rem; color: #0077b6; transition: transform 0.2s; }
+details[open] summary::before { transform: rotate(90deg); }
+details p { margin-top: 0.5rem; font-size: 0.9rem; color: #444; }
+
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.related-link { display: block; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.6rem 0.85rem; font-size: 0.85rem; color: #0077b6; font-weight: 500; transition: background 0.2s; }
+.related-link:hover { background: #e8f4fd; text-decoration: none; }
+
+footer { border-top: 1px solid #e0e0e0; padding: 1.5rem 0; margin-top: 2rem; font-size: 0.85rem; color: #777; }
+footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; }
+footer a { color: #777; }
+footer a:hover { color: #0077b6; }
+.footer-links { display: flex; gap: 1rem; }
+
+@media (max-width: 640px) {
+  h1 { font-size: 1.35rem; }
+  .card { padding: 1.25rem; }
+  .row { flex-direction: column; gap: 0; }
+  .key-dates { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .copy-row { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  footer .container { flex-direction: column; align-items: flex-start; }
+  .footer-links { flex-wrap: wrap; gap: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="nav-brand">🛠 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Menstrual Cycle Tracker & Ovulation Calculator</h1>
+  <p class="subtitle">Predict your fertile window, ovulation date, and next period — free, private, and instant.</p>
+
+  <div class="card">
+    <div class="form-group">
+      <label for="lastPeriod">First Day of Last Period</label>
+      <input type="date" id="lastPeriod" />
+      <div class="error-msg" id="err-date">Please enter the date of your last period.</div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="cycleLen">Cycle Length (days)</label>
+        <div class="range-row">
+          <input type="range" id="cycleLenSlider" min="21" max="45" value="28" aria-label="Cycle length slider">
+          <span class="range-val" id="cycleLenVal">28</span>
+        </div>
+        <input type="number" id="cycleLen" min="21" max="45" value="28" placeholder="21–45" />
+        <div class="error-msg" id="err-cycle">Cycle length should be between 21 and 45 days.</div>
+      </div>
+      <div class="form-group">
+        <label for="periodLen">Period Length (days)</label>
+        <div class="range-row">
+          <input type="range" id="periodLenSlider" min="1" max="10" value="5" aria-label="Period length slider">
+          <span class="range-val" id="periodLenVal">5</span>
+        </div>
+        <input type="number" id="periodLen" min="1" max="10" value="5" placeholder="1–10" />
+        <div class="error-msg" id="err-period">Period length should be between 1 and 10 days.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cycles">Number of Future Cycles to Show</label>
+      <select id="cycles">
+        <option value="3">3 months</option>
+        <option value="6" selected>6 months</option>
+        <option value="12">12 months</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" id="calcBtn">Calculate My Cycle →</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+
+    <div class="card">
+      <div class="copy-row">
+        <div class="section-title" style="margin-bottom:0;">Your Current Cycle</div>
+        <button class="btn-secondary copy-btn" id="copyBtn">📋 Copy Results</button>
+      </div>
+
+      <div class="key-dates" id="keyDates"><!-- filled by JS --></div>
+
+      <div class="timeline-wrap">
+        <div class="section-title">Cycle Phase Timeline</div>
+        <div class="timeline-label">
+          <span>Day 1</span>
+          <span id="tl-mid"></span>
+          <span id="tl-end"></span>
+        </div>
+        <div class="timeline-bar" id="timelineBar"><!-- filled by JS --></div>
+        <div class="timeline-legend">
+          <div class="tl-legend-item"><div class="tl-dot tl-menstrual"></div> Menstrual</div>
+          <div class="tl-legend-item"><div class="tl-dot tl-follicular"></div> Follicular</div>
+          <div class="tl-legend-item"><div class="tl-dot tl-fertile"></div> Fertile Window</div>
+          <div class="tl-legend-item"><div class="tl-dot tl-ovulation"></div> Ovulation Day</div>
+          <div class="tl-legend-item"><div class="tl-dot tl-luteal"></div> Luteal</div>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <strong>⚠ Disclaimer</strong>
+        This tool is for informational purposes only and provides estimates based on average cycle patterns. Consult a healthcare professional for medical advice, especially if you are trying to conceive or have irregular cycles.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Future Cycle Predictions</div>
+      <div style="overflow-x:auto;">
+        <table id="cycleTable">
+          <thead>
+            <tr>
+              <th>Cycle</th>
+              <th>Period Starts</th>
+              <th>Fertile Window</th>
+              <th>Ovulation</th>
+              <th>Next Period</th>
+            </tr>
+          </thead>
+          <tbody id="cycleBody"><!-- filled by JS --></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="ad-slot" id="ad-mid"></div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Ovulation Calculator</h2>
+    <p>Enter the first day of your last menstrual period, your typical cycle length (the number of days from the first day of one period to the first day of the next), and how many days your period typically lasts. Click <strong>Calculate My Cycle</strong> to instantly see your predicted ovulation date, fertile window, and upcoming cycle schedule for up to 12 months.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Why This Matters</h2>
+    <p>Understanding your menstrual cycle is one of the most practical things you can do for your reproductive health — whether you're actively trying to conceive, practicing natural family planning, or simply wanting to know your body better.</p>
+    <p>For couples trying to conceive, timing matters enormously. Sperm can survive inside the female reproductive tract for up to 5 days, and an egg is viable for only 12–24 hours after ovulation. That means your actual fertile window is roughly 6 days — the 5 days before ovulation plus the day of ovulation itself. Missing this window by even a day or two can mean waiting another full month.</p>
+    <p>For those using fertility awareness as birth control, tracking your cycle helps identify the days when pregnancy is most and least likely. And for anyone managing PMS, mood shifts, energy levels, or skin changes, knowing where you are in your cycle helps you plan workouts, social commitments, and self-care routines with much more intention.</p>
+    <p>The average cycle is 28 days, but anything from 21 to 45 days is considered within the normal range. Many women have naturally longer or shorter cycles — this calculator handles cycles anywhere in that range.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses the standard <strong>luteal phase method</strong>, which assumes ovulation occurs approximately 14 days before the next expected period — not necessarily on day 14 of your cycle.</p>
+    <p><strong>Ovulation Day</strong> = First Day of Last Period + (Cycle Length − 14)</p>
+    <p><strong>Fertile Window</strong> = Ovulation Day − 5 days to Ovulation Day + 1 day</p>
+    <p><strong>Next Period</strong> = First Day of Last Period + Cycle Length</p>
+    <p>For example, if your cycle is 32 days, ovulation is estimated at day 18 (32 − 14 = 18), not day 14. The cycle timeline is divided into four phases: menstrual (days 1 through your period length), follicular (period end to fertile window start), fertile/ovulation window (5 days pre-ovulation through ovulation), and the luteal phase (ovulation +1 through end of cycle).</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Count from Day 1, not Day 0.</strong> The first day of your period — even if it starts late in the evening — is Day 1 of your cycle. Many people mistakenly count the day before bleeding starts.</li>
+      <li><strong>Average your cycle length over 3–6 months.</strong> A single cycle isn't representative. Stress, illness, travel, and weight changes can all shift your cycle. Tracking consistently gives you a better baseline.</li>
+      <li><strong>Don't rely solely on this calculator for contraception.</strong> Cycle-based methods have a higher failure rate than barrier or hormonal methods, especially for women with irregular cycles.</li>
+      <li><strong>Ovulation signs can confirm the estimate.</strong> Use basal body temperature (BBT) tracking or ovulation predictor kits (OPKs) alongside this calculator. A slight BBT rise of 0.2–0.5°C typically signals ovulation has occurred.</li>
+      <li><strong>Stress genuinely delays ovulation.</strong> If you're going through a difficult period emotionally or physically, ovulation can shift by several days — sometimes more. Don't assume your cycle is broken; it may just be delayed.</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is this ovulation calculator?</summary>
+      <p>This calculator provides estimates based on average cycle patterns. It's most accurate for women with regular cycles between 24 and 35 days. Women with irregular cycles (PCOS, perimenopause, post-hormonal-birth-control) may find the predictions less reliable. For greater accuracy, pair this with BBT tracking or OPK testing.</p>
+    </details>
+    <details>
+      <summary>Can I get pregnant outside the fertile window?</summary>
+      <p>It's very unlikely but not impossible. Since ovulation can shift due to stress or illness, having unprotected sex outside the predicted fertile window carries a small risk. Sperm can survive up to 5 days, so intercourse several days before expected ovulation can still result in pregnancy if ovulation is delayed.</p>
+    </details>
+    <details>
+      <summary>What if my cycle length changes each month?</summary>
+      <p>Cycle length naturally varies by a few days each month. Enter your average cycle length for the most useful predictions. If your cycle varies by more than 7–9 days regularly, you may have an irregular cycle — speak with a gynecologist or OB-GYN, as conditions like PCOS can cause significant variability.</p>
+    </details>
+    <details>
+      <summary>Does this work if I just stopped hormonal birth control?</summary>
+      <p>It may take 1–3 months (sometimes longer) for your cycle to regulate after stopping hormonal contraceptives. During this transition, predictions will be less reliable. Start tracking once you've had 2–3 natural cycles and use the average of those to set your cycle length.</p>
+    </details>
+  </div>
+
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/body-frame-size-calculator/" class="related-link">Body Frame Size Calculator</a>
+      <a href="/calorie-burn-by-exercise-calculator/" class="related-link">Calorie Burn by Exercise Calculator</a>
+      <a href="/running-training-pace-calculator/" class="related-link">Running Training Pace Calculator</a>
+      <a href="/waist-to-height-ratio-calculator/" class="related-link">Waist-to-Height Ratio Calculator</a>
+      <a href="/met-activity-calorie-calculator/" class="related-link">Caloric Burn Rate by Activity Calculator</a>
+      <a href="/postpartum-weight-loss-calculator/" class="related-link">Postpartum Weight Loss Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div class="container">
+    <span>© <span id="yr"></span> toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Sync sliders and number inputs
+function syncInputs(sliderId, numId, valId) {
+  const slider = document.getElementById(sliderId);
+  const num = document.getElementById(numId);
+  const val = document.getElementById(valId);
+  slider.addEventListener('input', () => {
+    num.value = slider.value;
+    val.textContent = slider.value;
+  });
+  num.addEventListener('input', () => {
+    const v = Math.max(+num.min, Math.min(+num.max, +num.value));
+    slider.value = v;
+    val.textContent = v;
+  });
+}
+syncInputs('cycleLenSlider', 'cycleLen', 'cycleLenVal');
+syncInputs('periodLenSlider', 'periodLen', 'periodLenVal');
+
+// Helpers
+function fmtDate(d) {
+  const opts = { year: 'numeric', month: 'short', day: 'numeric' };
+  return d.toLocaleDateString('en-US', opts);
+}
+function fmtDateShort(d) {
+  const opts = { month: 'short', day: 'numeric' };
+  return d.toLocaleDateString('en-US', opts);
+}
+function addDays(d, n) {
+  const r = new Date(d);
+  r.setDate(r.getDate() + n);
+  return r;
+}
+function daysBetween(a, b) {
+  return Math.round((b - a) / 86400000);
+}
+function daysFromNow(d) {
+  const n = daysBetween(new Date().setHours(0,0,0,0), d);
+  if (n === 0) return 'Today';
+  if (n === 1) return 'Tomorrow';
+  if (n === -1) return 'Yesterday';
+  if (n > 0) return `In ${n} days`;
+  return `${Math.abs(n)} days ago`;
+}
+
+function validate() {
+  let ok = true;
+  const dateVal = document.getElementById('lastPeriod').value;
+  const cycleVal = +document.getElementById('cycleLen').value;
+  const periodVal = +document.getElementById('periodLen').value;
+  const errDate = document.getElementById('err-date');
+  const errCycle = document.getElementById('err-cycle');
+  const errPeriod = document.getElementById('err-period');
+  const dateEl = document.getElementById('lastPeriod');
+  const cycleEl = document.getElementById('cycleLen');
+  const periodEl = document.getElementById('periodLen');
+
+  if (!dateVal) {
+    errDate.classList.add('show'); dateEl.classList.add('error'); ok = false;
+  } else { errDate.classList.remove('show'); dateEl.classList.remove('error'); }
+
+  if (!cycleVal || cycleVal < 21 || cycleVal > 45) {
+    errCycle.classList.add('show'); cycleEl.classList.add('error'); ok = false;
+  } else { errCycle.classList.remove('show'); cycleEl.classList.remove('error'); }
+
+  if (!periodVal || periodVal < 1 || periodVal > 10) {
+    errPeriod.classList.add('show'); periodEl.classList.add('error'); ok = false;
+  } else { errPeriod.classList.remove('show'); periodEl.classList.remove('error'); }
+
+  return ok;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const lastPeriodStr = document.getElementById('lastPeriod').value;
+  const cycleLen = +document.getElementById('cycleLen').value;
+  const periodLen = +document.getElementById('periodLen').value;
+  const numCycles = +document.getElementById('cycles').value;
+
+  const lastPeriod = new Date(lastPeriodStr + 'T00:00:00');
+
+  // Current cycle calculations
+  const ovulationDay = cycleLen - 14; // day in cycle (1-indexed)
+  const ovulationDate = addDays(lastPeriod, ovulationDay - 1);
+  const fertileStart = addDays(ovulationDate, -5);
+  const fertileEnd = addDays(ovulationDate, 1);
+  const nextPeriod = addDays(lastPeriod, cycleLen);
+  const lutealStart = addDays(ovulationDate, 1);
+  const lutealDays = daysBetween(lutealStart, nextPeriod);
+
+  // Build key dates cards
+  let kdHTML = `
+    <div class="date-card ovulation">
+      <div class="dc-label">🔵 Ovulation Day</div>
+      <div class="dc-date">${fmtDate(ovulationDate)}</div>
+      <div class="dc-sub">${daysFromNow(ovulationDate)} · Day ${ovulationDay} of cycle</div>
+    </div>
+    <div class="date-card fertile">
+      <div class="dc-label">🟢 Fertile Window</div>
+      <div class="dc-date">${fmtDateShort(fertileStart)} – ${fmtDateShort(fertileEnd)}</div>
+      <div class="dc-sub">7 days · starts ${daysFromNow(fertileStart)}</div>
+    </div>
+    <div class="date-card next-period">
+      <div class="dc-label">🟠 Next Period</div>
+      <div class="dc-date">${fmtDate(nextPeriod)}</div>
+      <div class="dc-sub">${daysFromNow(nextPeriod)}</div>
+    </div>
+    <div class="date-card luteal">
+      <div class="dc-label">🟣 Luteal Phase</div>
+      <div class="dc-date">${fmtDateShort(lutealStart)} – ${fmtDateShort(addDays(nextPeriod,-1))}</div>
+      <div class="dc-sub">${lutealDays} days</div>
+    </div>
+  `;
+
+  // Timeline segments (percentages of cycle)
+  const menstrualPct = (periodLen / cycleLen * 100).toFixed(1);
+  // Follicular: period end to fertile window start
+  const follicularDays = daysBetween(addDays(lastPeriod, periodLen), fertileStart);
+  const follicularPct = Math.max(0, (follicularDays / cycleLen * 100)).toFixed(1);
+  // Fertile window: fertileStart to ovulation day (5 days)
+  const fertileSegDays = 5;
+  const fertileSegPct = (fertileSegDays / cycleLen * 100).toFixed(1);
+  // Ovulation: 1 day
+  const ovulationPct = (2 / cycleLen * 100).toFixed(1);
+  // Luteal phase remainder
+  const lutealPct = (lutealDays / cycleLen * 100).toFixed(1);
+
+  const tlBarHTML = `
+    <div class="tl-seg tl-menstrual" style="width:${menstrualPct}%">${periodLen}d</div>
+    <div class="tl-seg tl-follicular" style="width:${follicularPct}%">${follicularDays}d</div>
+    <div class="tl-seg tl-fertile" style="width:${fertileSegPct}%">5d</div>
+    <div class="tl-seg tl-ovulation" style="width:${ovulationPct}%">O</div>
+    <div class="tl-seg tl-luteal" style="width:${lutealPct}%">${lutealDays}d</div>
+  `;
+
+  // Future cycles table
+  let tableHTML = '';
+  for (let i = 0; i < numCycles; i++) {
+    const ps = addDays(lastPeriod, i * cycleLen);
+    const ov = addDays(ps, ovulationDay - 1);
+    const fs = addDays(ov, -5);
+    const fe = addDays(ov, 1);
+    const np = addDays(ps, cycleLen);
+    const rowClass = i % 2 === 1 ? '' : '';
+    tableHTML += `<tr>
+      <td>${i + 1}</td>
+      <td>${fmtDate(ps)}</td>
+      <td>${fmtDateShort(fs)} – ${fmtDateShort(fe)}</td>
+      <td><strong>${fmtDate(ov)}</strong></td>
+      <td>${fmtDate(np)}</td>
+    </tr>`;
+  }
+
+  requestAnimationFrame(() => {
+    document.getElementById('keyDates').innerHTML = kdHTML;
+    document.getElementById('tl-mid').textContent = `Day ${Math.round(cycleLen/2)}`;
+    document.getElementById('tl-end').textContent = `Day ${cycleLen}`;
+    document.getElementById('timelineBar').innerHTML = tlBarHTML;
+    document.getElementById('cycleBody').innerHTML = tableHTML;
+    const res = document.getElementById('results');
+    res.classList.add('show');
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// Copy to clipboard
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const lastPeriodStr = document.getElementById('lastPeriod').value;
+  if (!lastPeriodStr) return;
+  const cycleLen = +document.getElementById('cycleLen').value;
+  const periodLen = +document.getElementById('periodLen').value;
+  const lastPeriod = new Date(lastPeriodStr + 'T00:00:00');
+  const ovulationDay = cycleLen - 14;
+  const ovulationDate = addDays(lastPeriod, ovulationDay - 1);
+  const fertileStart = addDays(ovulationDate, -5);
+  const fertileEnd = addDays(ovulationDate, 1);
+  const nextPeriod = addDays(lastPeriod, cycleLen);
+  const text = [
+    'Menstrual Cycle Summary',
+    '=======================',
+    `Last Period: ${fmtDate(lastPeriod)}`,
+    `Cycle Length: ${cycleLen} days | Period Length: ${periodLen} days`,
+    `Ovulation Day: ${fmtDate(ovulationDate)}`,
+    `Fertile Window: ${fmtDate(fertileStart)} – ${fmtDate(fertileEnd)}`,
+    `Next Period: ${fmtDate(nextPeriod)}`,
+    '',
+    'Generated by toolhut.dev'
+  ].join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.innerHTML = '📋 Copy Results', 2000);
+  });
+});
+
+// Calculate on Enter
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const active = document.activeElement;
+    if (['lastPeriod','cycleLen','periodLen'].includes(active.id)) {
+      requestAnimationFrame(() => calculate());
+    }
+  }
+});
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => calculate());
+});
+
+// Set default date to today minus 14 days for demo helpfulness
+const today = new Date();
+const defaultDate = new Date(today);
+defaultDate.setDate(today.getDate() - 14);
+const dd = defaultDate;
+const y = dd.getFullYear();
+const m = String(dd.getMonth()+1).padStart(2,'0');
+const d2 = String(dd.getDate()).padStart(2,'0');
+document.getElementById('lastPeriod').value = `${y}-${m}-${d2}`;
+</script>
+</body>
+</html>
