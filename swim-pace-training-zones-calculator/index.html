@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swim Pace & Training Zones Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your swim pace per 100m/100yd and get personalized training zones instantly. Free swim pace calculator for all levels — pool & open water.">
+<link rel="canonical" href="https://toolhut.dev/swim-pace-training-zones-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Swim Pace & Training Zones Calculator",
+  "url": "https://toolhut.dev/swim-pace-training-zones-calculator/",
+  "description": "Calculate swim pace per 100m or 100yd and get personalized training zones for endurance, tempo, threshold, and sprint work.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:12px 20px}
+nav a{font-weight:600;font-size:1rem;color:#1a1a2e}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;margin-bottom:.4rem;color:#1a1a2e}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:5px}
+input,select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.12)}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:4px;display:none}
+.error-msg.visible{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background .2s}
+.btn:hover{background:#006299}
+.btn-sm{width:auto;padding:6px 14px;font-size:.82rem;font-weight:500;border-radius:4px;min-height:36px}
+.results{opacity:0;transition:opacity .3s ease;display:none}
+.results.visible{opacity:1;display:block}
+.key-result{text-align:center;padding:1.5rem 1rem;background:#f0f8ff;border-radius:8px;margin-bottom:1.5rem;border:1px solid #bee3f8}
+.key-number{font-size:2.4rem;font-weight:700;color:#0077b6;display:block}
+.key-label{font-size:.9rem;color:#555;margin-top:.3rem}
+.copy-row{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-top:.8rem;flex-wrap:wrap}
+.copy-btn{background:#f0f0f0;color:#333;border:1px solid #ddd}
+.copy-btn:hover{background:#e0e0e0}
+.zones-title{font-size:1rem;font-weight:600;margin-bottom:.8rem;color:#1a1a2e}
+.zone-bar-wrap{margin-bottom:.9rem}
+.zone-name{font-size:.82rem;font-weight:600;color:#444;margin-bottom:3px;display:flex;justify-content:space-between}
+.zone-bar-track{background:#eee;border-radius:4px;height:22px;overflow:hidden;position:relative}
+.zone-bar-fill{height:100%;border-radius:4px;transition:width .4s ease;display:flex;align-items:center;padding-left:8px;font-size:.75rem;font-weight:600;color:#fff}
+.zone-pace{font-size:.78rem;color:#666;margin-top:2px}
+.zone1-color{background:#27ae60}
+.zone2-color{background:#2ecc71}
+.zone3-color{background:#f39c12}
+.zone4-color{background:#e67e22}
+.zone5-color{background:#e74c3c}
+.zone6-color{background:#c0392b}
+.current-zone-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.78rem;font-weight:600;color:#fff;margin-left:6px}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#333}
+td{padding:8px 12px;border-bottom:1px solid #eee}
+tr:nth-child(even) td{background:#fafafa}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.table-wrap{overflow-x:auto;border-radius:6px;border:1px solid #e0e0e0;margin-bottom:1rem}
+.section{margin-bottom:2rem}
+.section h2{font-size:1.15rem;font-weight:700;margin-bottom:.7rem;color:#1a1a2e}
+.content-section{margin-top:2.5rem}
+.content-section h2{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:#1a1a2e;border-top:1px solid #eee;padding-top:1.2rem}
+.content-section p{font-size:.92rem;color:#444;margin-bottom:.7rem}
+.content-section ul{font-size:.92rem;color:#444;padding-left:1.2rem;margin-bottom:.7rem}
+.content-section ul li{margin-bottom:.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:.6rem;background:#fafafa}
+summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:.9rem;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';color:#0077b6;font-size:1rem}
+details[open] summary::after{content:'－'}
+details p{padding:0 16px 14px;font-size:.88rem;color:#444}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px 16px;font-size:.82rem;color:#5d4037;margin-bottom:1.5rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.6rem}
+.related-link{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:10px 12px;font-size:.82rem;font-weight:500;color:#0077b6;transition:background .15s}
+.related-link:hover{background:#e8f4fb;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{border-top:1px solid #e0e0e0;padding:1.2rem 20px;text-align:center;font-size:.82rem;color:#888;margin-top:1.5rem}
+footer a{color:#888;margin:0 8px}
+footer a:hover{color:#0077b6}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.tab-btn{background:#f0f0f0;border:1px solid #ddd;border-radius:6px;padding:8px 16px;font-size:.85rem;font-weight:500;cursor:pointer;min-height:36px;transition:background .15s,border-color .15s;color:#333}
+.tab-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
+.pace-input-group{display:flex;gap:.5rem;align-items:center}
+.pace-input-group span{font-weight:500;color:#555;white-space:nowrap}
+.pace-input-group input{flex:1;min-width:60px}
+.swim-level-hint{font-size:.78rem;color:#888;margin-top:3px}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  .key-number{font-size:2rem}
+  .card{padding:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/">🛠 toolhut.dev</a>
+</nav>
+
+<div class="container">
+  <h1>Swim Pace & Training Zones Calculator</h1>
+  <p class="subtitle">Find your pace per 100m/yd and get all 6 training zones for smarter swim workouts.</p>
+
+  <div class="card">
+    <!-- Input Mode Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-pace" onclick="switchTab('pace')">Pace from Swim</button>
+      <button class="tab-btn" id="tab-css" onclick="switchTab('css')">CSS (Threshold Pace)</button>
+    </div>
+
+    <!-- Tab: Pace from Swim -->
+    <div id="panel-pace">
+      <div class="row-2">
+        <div class="form-group">
+          <label for="dist">Distance Swum</label>
+          <input type="number" id="dist" placeholder="e.g. 400" min="1" inputmode="decimal">
+          <div class="error-msg" id="err-dist">Enter a valid distance > 0.</div>
+        </div>
+        <div class="form-group">
+          <label for="dist-unit">Unit</label>
+          <select id="dist-unit">
+            <option value="m">Metres (m)</option>
+            <option value="yd">Yards (yd)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Time Taken</label>
+        <div class="row-2">
+          <div>
+            <label for="mins" style="font-size:.78rem;color:#888">Minutes</label>
+            <input type="number" id="mins" placeholder="e.g. 6" min="0" inputmode="decimal">
+          </div>
+          <div>
+            <label for="secs" style="font-size:.78rem;color:#888">Seconds</label>
+            <input type="number" id="secs" placeholder="e.g. 30" min="0" max="59" inputmode="decimal">
+          </div>
+        </div>
+        <div class="error-msg" id="err-time">Enter a valid time (at least 1 second).</div>
+      </div>
+    </div>
+
+    <!-- Tab: CSS Input -->
+    <div id="panel-css" style="display:none">
+      <p style="font-size:.85rem;color:#555;margin-bottom:1rem">Enter your <strong>Critical Swim Speed (CSS)</strong> — your threshold pace per 100m/yd. CSS is typically measured via a 400m and 200m time trial.</p>
+      <div class="row-2">
+        <div class="form-group">
+          <label for="css-mins">Pace Minutes (per 100)</label>
+          <input type="number" id="css-mins" placeholder="e.g. 1" min="0" inputmode="decimal">
+        </div>
+        <div class="form-group">
+          <label for="css-secs">Pace Seconds (per 100)</label>
+          <input type="number" id="css-secs" placeholder="e.g. 45" min="0" max="59" inputmode="decimal">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="css-unit">Unit</label>
+        <select id="css-unit">
+          <option value="m">Per 100 Metres</option>
+          <option value="yd">Per 100 Yards</option>
+        </select>
+      </div>
+      <div class="error-msg" id="err-css">Enter a valid CSS pace (at least 10 seconds per 100).</div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Pace & Zones</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="card">
+      <div class="disclaimer">⚠️ This tool is for informational purposes only. Consult a healthcare professional or certified coach for medical or training advice.</div>
+
+      <div class="key-result" id="key-result-box">
+        <span class="key-number" id="key-pace">—</span>
+        <div class="key-label" id="key-pace-label">Pace per 100m</div>
+        <div class="copy-row">
+          <button class="btn btn-sm copy-btn" id="copyBtn" onclick="copyPace()">Copy Pace</button>
+          <span id="copy-confirm" style="font-size:.8rem;color:#27ae60;display:none">✓ Copied!</span>
+        </div>
+      </div>
+
+      <!-- Zone Visual -->
+      <div class="section">
+        <div class="zones-title">🏊 Training Zones — Your pace is highlighted</div>
+        <div id="zone-bars"></div>
+      </div>
+
+      <!-- Zone Table -->
+      <div class="section">
+        <div class="zones-title">Zone Details & Target Paces</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Zone</th><th>Name</th><th>Effort</th><th>Pace Range (per 100)</th><th>Purpose</th></tr>
+            </thead>
+            <tbody id="zone-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Split table -->
+      <div class="section">
+        <div class="zones-title">Common Set Splits at Your Threshold Pace</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Distance</th><th>Target Time</th><th>Rest (≈10%)</th></tr>
+            </thead>
+            <tbody id="splits-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+
+    <h2>How to Use This Swim Pace Calculator</h2>
+    <p>Choose <strong>Pace from Swim</strong> to enter a distance and time you've actually swum — the tool calculates your pace per 100m or 100yd automatically. Or choose <strong>CSS (Threshold Pace)</strong> to enter your known Critical Swim Speed directly. Hit Calculate to see all six training zones.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Training without structure is one of the biggest mistakes swimmers make at every level. A recreational swimmer churning out 30 laps at the same moderate effort every session will plateau within weeks. A structured approach using training zones changes everything.</p>
+    <p>Zones 1–2 build your aerobic base and teach your body to use fat as fuel — essential for triathletes and open-water swimmers. Zone 3 (tempo) improves your lactate threshold, the key driver of sustained speed. Zone 4 (threshold/CSS) is where most performance gains happen for competitive swimmers — intervals at this pace with short rest are the bread and butter of elite squad training. Zones 5–6 develop raw speed and VO2max, critical for 50–200m racers.</p>
+    <p>A common example: a 1:50/100m swimmer doing threshold sets (Zone 4) with 10-second rests turns a 400m swim from a slog into a structured workout with measurable improvement week over week. Knowing your zones means every metre you swim has a purpose.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>Pace:</strong> Total seconds ÷ (Distance ÷ 100) = seconds per 100m or yd.</p>
+    <p><strong>Training zones</strong> are derived from your threshold pace (CSS), using widely-accepted percentage multipliers:</p>
+    <ul>
+      <li><strong>Zone 1 (Recovery):</strong> CSS × 1.30–1.50 — very easy, active recovery</li>
+      <li><strong>Zone 2 (Endurance):</strong> CSS × 1.15–1.30 — aerobic base building</li>
+      <li><strong>Zone 3 (Tempo):</strong> CSS × 1.05–1.15 — moderate, comfortably hard</li>
+      <li><strong>Zone 4 (Threshold/CSS):</strong> CSS × 0.97–1.05 — race-specific effort</li>
+      <li><strong>Zone 5 (VO2max):</strong> CSS × 0.90–0.97 — very hard, short intervals</li>
+      <li><strong>Zone 6 (Sprint/Anaerobic):</strong> CSS × 0.80–0.90 — all-out sprinting</li>
+    </ul>
+    <p>Higher pace values (more seconds) = slower swimming. Zone 1 has the highest seconds/100 value.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't confuse faster with lower numbers.</strong> A pace of 1:20/100m is faster than 1:50/100m — remember pace = time, so lower = faster.</li>
+      <li><strong>Measure CSS properly:</strong> Swim a 400m time trial, rest fully, then a 200m time trial. CSS = (400m time − 200m time) ÷ 200. This gives a true lactate threshold pace.</li>
+      <li><strong>Don't spend all your time in Zone 3.</strong> Most endurance coaches recommend 80% of training at Zone 1–2 and only 20% at Zone 4+.</li>
+      <li><strong>Account for the turn:</strong> Open-water pace is typically 5–10% slower than pool pace — adjust zones accordingly for triathlon or OWS events.</li>
+      <li><strong>Reassess every 4–6 weeks.</strong> As fitness improves, your CSS drops (gets faster) — your zones need updating or you'll underestimate your ability.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>What is Critical Swim Speed (CSS)?</summary>
+      <p>CSS is the theoretical maximum pace you could sustain indefinitely without accumulating lactate — in practice it's your ~1,500m race pace for trained swimmers. It's the gold-standard threshold marker for swim training. You calculate it by comparing your 400m and 200m all-out time trial results.</p>
+    </details>
+
+    <details>
+      <summary>Should I train in metres or yards?</summary>
+      <p>Train in whatever unit your pool uses. Most 25m and 50m pools worldwide use metres; most US pools are 25-yard courses. The pace difference is small (~9%) but meaningful — always specify your unit to avoid incorrect zone targets. This calculator supports both.</p>
+    </details>
+
+    <details>
+      <summary>How accurate are these training zones?</summary>
+      <p>They're based on well-established percentage ranges used by coaches worldwide, but individual physiology varies. If a zone feels too easy or too hard after a few sessions, adjust by 3–5 seconds per 100 in the appropriate direction. Heart-rate and RPE data alongside pace gives the most complete picture.</p>
+    </details>
+
+    <details>
+      <summary>Can I use this for open-water swimming?</summary>
+      <p>Yes — enter your GPS-tracked open-water pace (distance and time) into the calculator. Bear in mind that open-water pace is typically 5–10% slower than pool pace due to sighting, turns, and current. Your zones will still be valid as relative targets for OWS training.</p>
+    </details>
+
+  </div>
+
+  <!-- Related Tools -->
+  <div class="section" style="margin-top:2rem">
+    <h2 style="font-size:1.05rem;font-weight:700;margin-bottom:.7rem">Related Tools</h2>
+    <div class="related-grid">
+      <a href="/running-training-pace-calculator/" class="related-link">🏃 Running Training Pace Calculator</a>
+      <a href="/calorie-burn-by-exercise-calculator/" class="related-link">🔥 Calorie Burn by Exercise Calculator</a>
+      <a href="/met-activity-calorie-calculator/" class="related-link">⚡ Caloric Burn Rate by Activity</a>
+      <a href="/body-frame-size-calculator/" class="related-link">📏 Body Frame Size Calculator</a>
+      <a href="/waist-to-height-ratio-calculator/" class="related-link">⚖️ Waist-to-Height Ratio Calculator</a>
+      <a href="/menstrual-cycle-ovulation-calculator/" class="related-link">🗓 Menstrual Cycle & Ovulation Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <span style="display:block;margin-top:6px">© 2025 toolhut.dev</span>
+</footer>
+
+<script>
+let currentTab = 'pace';
+let currentPaceSeconds = 0;
+let currentUnit = 'm';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('panel-pace').style.display = tab === 'pace' ? '' : 'none';
+  document.getElementById('panel-css').style.display = tab === 'css' ? '' : 'none';
+  document.getElementById('tab-pace').classList.toggle('active', tab === 'pace');
+  document.getElementById('tab-css').classList.toggle('active', tab === 'css');
+}
+
+function fmtTime(totalSeconds) {
+  if (!isFinite(totalSeconds) || totalSeconds <= 0) return '—';
+  const m = Math.floor(totalSeconds / 60);
+  const s = Math.round(totalSeconds % 60);
+  return m + ':' + String(s).padStart(2, '0');
+}
+
+function fmtTimeFull(totalSeconds) {
+  if (!isFinite(totalSeconds) || totalSeconds <= 0) return '—';
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = Math.round(totalSeconds % 60);
+  if (h > 0) return h + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  return m + ':' + String(s).padStart(2, '0');
+}
+
+function clearErrors() {
+  ['err-dist','err-time','err-css'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.remove('visible');
+  });
+  ['dist','mins','secs','css-mins','css-secs'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.remove('error');
+  });
+}
+
+function showError(errId, inputIds) {
+  const el = document.getElementById(errId);
+  if(el) el.classList.add('visible');
+  inputIds.forEach(id => {
+    const inp = document.getElementById(id);
+    if(inp) inp.classList.add('error');
+  });
+}
+
+function calculate() {
+  clearErrors();
+  let paceSeconds = 0;
+  let unit = 'm';
+
+  if (currentTab === 'pace') {
+    const dist = parseFloat(document.getElementById('dist').value);
+    const mins = parseFloat(document.getElementById('mins').value) || 0;
+    const secs = parseFloat(document.getElementById('secs').value) || 0;
+    unit = document.getElementById('dist-unit').value;
+
+    if (!dist || dist <= 0 || isNaN(dist)) {
+      showError('err-dist', ['dist']); return;
+    }
+    const totalSecs = mins * 60 + secs;
+    if (totalSecs <= 0) {
+      showError('err-time', ['mins','secs']); return;
+    }
+    paceSeconds = (totalSecs / dist) * 100;
+
+  } else {
+    const cm = parseFloat(document.getElementById('css-mins').value) || 0;
+    const cs = parseFloat(document.getElementById('css-secs').value) || 0;
+    unit = document.getElementById('css-unit').value;
+    const totalSecs = cm * 60 + cs;
+    if (totalSecs < 10) {
+      showError('err-css', ['css-mins','css-secs']); return;
+    }
+    paceSeconds = totalSecs;
+  }
+
+  currentPaceSeconds = paceSeconds;
+  currentUnit = unit;
+
+  requestAnimationFrame(() => {
+    renderResults(paceSeconds, unit);
+  });
+}
+
+const zoneConfig = [
+  { num: 1, name: 'Recovery',    short: 'Z1', effort: 'Very Easy',      minPct: 1.30, maxPct: 1.50, color: '#27ae60', purpose: 'Active recovery, technique' },
+  { num: 2, name: 'Endurance',   short: 'Z2', effort: 'Easy–Moderate',  minPct: 1.15, maxPct: 1.30, color: '#2ecc71', purpose: 'Aerobic base building' },
+  { num: 3, name: 'Tempo',       short: 'Z3', effort: 'Moderate–Hard',  minPct: 1.05, maxPct: 1.15, color: '#f39c12', purpose: 'Lactate threshold dev.' },
+  { num: 4, name: 'Threshold',   short: 'Z4', effort: 'Hard (CSS)',      minPct: 0.97, maxPct: 1.05, color: '#e67e22', purpose: 'Race-specific fitness' },
+  { num: 5, name: 'VO2max',      short: 'Z5', effort: 'Very Hard',       minPct: 0.90, maxPct: 0.97, color: '#e74c3c', purpose: 'Max aerobic capacity' },
+  { num: 6, name: 'Sprint',      short: 'Z6', effort: 'All-Out',         minPct: 0.80, maxPct: 0.90, color: '#c0392b', purpose: 'Speed, power' },
+];
+
+function getCurrentZone(paceSeconds, css) {
+  for (let i = 0; i < zoneConfig.length; i++) {
+    const z = zoneConfig[i];
+    if (paceSeconds >= css * z.maxPct * 0.9999 - 0.01 && paceSeconds <= css * z.maxPct + 0.01) {
+      // fallthrough — use range check below
+    }
+  }
+  // Proper check: slower pace = higher seconds
+  for (let i = 0; i < zoneConfig.length; i++) {
+    const z = zoneConfig[i];
+    const lo = css * z.minPct;
+    const hi = css * z.maxPct;
+    if (paceSeconds >= lo - 0.01 && paceSeconds <= hi + 0.01) return i;
+  }
+  if (paceSeconds > zoneConfig[0].maxPct * css) return -1; // slower than Z1
+  if (paceSeconds < zoneConfig[5].minPct * css) return 6;  // faster than Z6
+  return -1;
+}
+
+function renderResults(paceSeconds, unit) {
+  const unitLabel = unit === 'm' ? '100m' : '100yd';
+
+  // CSS is defined as the input pace when tab is CSS, or estimated as the entered pace (treat entered pace as approximate threshold if from pace tab)
+  // For pace tab: we assume the entered pace is their current pace, use it to derive zones
+  // CSS is set to paceSeconds as baseline for zone calculation
+  const css = paceSeconds;
+
+  document.getElementById('key-pace').textContent = fmtTime(paceSeconds);
+  document.getElementById('key-pace-label').textContent = 'Your pace per ' + unitLabel;
+
+  const currentZoneIdx = getCurrentZone(paceSeconds, css);
+
+  // Zone bars
+  let barsHTML = '';
+  zoneConfig.forEach((z, i) => {
+    const paceHi = css * z.maxPct; // slowest end (more seconds)
+    const paceLo = css * z.minPct; // fastest end (fewer seconds)
+    const isCurrent = (i === currentZoneIdx);
+    const widths = [40, 55, 65, 75, 85, 95];
+    const w = widths[i];
+    const badgeHTML = isCurrent ? `<span class="current-zone-badge" style="background:${z.color}">← Your pace</span>` : '';
+    barsHTML += `
+      <div class="zone-bar-wrap">
+        <div class="zone-name">
+          <span><strong>${z.short}</strong> — ${z.name} ${badgeHTML}</span>
+          <span style="font-weight:400;color:#888">${z.effort}</span>
+        </div>
+        <div class="zone-bar-track">
+          <div class="zone-bar-fill" style="background:${z.color};width:${w}%">${fmtTime(paceLo)}–${fmtTime(paceHi)}</div>
+        </div>
+        <div class="zone-pace">${z.purpose} &nbsp;|&nbsp; <strong>${fmtTime(paceLo)}</strong> – <strong>${fmtTime(paceHi)}</strong> / ${unitLabel}</div>
+      </div>`;
+  });
+  document.getElementById('zone-bars').innerHTML = barsHTML;
+
+  // Zone table
+  let tableHTML = '';
+  zoneConfig.forEach((z, i) => {
+    const paceHi = css * z.maxPct;
+    const paceLo = css * z.minPct;
+    const isCurrent = (i === currentZoneIdx);
+    const rowStyle = isCurrent ? `style="background:${z.color}18;font-weight:600"` : '';
+    tableHTML += `<tr ${rowStyle}>
+      <td><span style="display:inline-block;width:14px;height:14px;background:${z.color};border-radius:3px;vertical-align:middle;margin-right:5px"></span>${z.short}</td>
+      <td>${z.name}</td>
+      <td>${z.effort}</td>
+      <td class="num">${fmtTime(paceLo)} – ${fmtTime(paceHi)}</td>
+      <td>${z.purpose}</td>
+    </tr>`;
+  });
+  document.getElementById('zone-table-body').innerHTML = tableHTML;
+
+  // Splits table (at threshold pace = CSS)
+  const splitDists = [25, 50, 100, 200, 400, 800, 1000, 1500, 1609];
+  const splitNames = ['25'+unit, '50'+unit, '100'+unit, '200'+unit, '400'+unit, '800'+unit, '1,000'+unit, '1,500'+unit, '1 mile'];
+  let splitsHTML = '';
+  splitDists.forEach((d, idx) => {
+    const t = (css / 100) * d;
+    const rest = Math.ceil(t * 0.1);
+    splitsHTML += `<tr>
+      <td>${splitNames[idx]}</td>
+      <td class="num">${fmtTimeFull(t)}</td>
+      <td class="num">${fmtTimeFull(rest)}</td>
+    </tr>`;
+  });
+  document.getElementById('splits-body').innerHTML = splitsHTML;
+
+  const resultsEl = document.getElementById('results');
+  resultsEl.style.display = 'block';
+  requestAnimationFrame(() => { resultsEl.classList.add('visible'); });
+}
+
+function copyPace() {
+  const paceText = document.getElementById('key-pace').textContent;
+  const label = document.getElementById('key-pace-label').textContent;
+  const text = paceText + ' / ' + label;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => showCopied());
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showCopied();
+  }
+}
+
+function showCopied() {
+  const el = document.getElementById('copy-confirm');
+  el.style.display = 'inline';
+  setTimeout(() => { el.style.display = 'none'; }, 2000);
+}
+
+// Enter key support
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const tag = document.activeElement.tagName;
+    if (tag === 'INPUT' || tag === 'SELECT') calculate();
+  }
+});
+</script>
+</body>
+</html>
