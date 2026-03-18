@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weight Loss Calorie Plateau Breaker — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Break through your weight loss plateau with personalized calorie targets, deficit strategies, and adaptive eating cycles. Free weight loss plateau calculator.">
+<link rel="canonical" href="https://toolhut.dev/weight-loss-plateau-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Weight Loss Calorie Plateau Breaker",
+  "url": "https://toolhut.dev/weight-loss-plateau-calculator/",
+  "description": "Break through your weight loss plateau with personalized calorie targets, deficit strategies, and adaptive eating cycles.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:50px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand:hover{text-decoration:none;color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.55rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.25}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:2px solid #e8f4fd}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}
+.form-group.full{grid-column:1/-1}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit;background:#fff;color:#1a1a2e;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none}
+input[type=number]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.1)}
+.error-msg{font-size:0.8rem;color:#e74c3c;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.radio-group{display:flex;gap:0.5rem;flex-wrap:wrap}
+.radio-group label{background:#f8f9fa;border:1px solid #ddd;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:0.85rem;font-weight:500;color:#444;transition:all 0.2s;display:flex;align-items:center;gap:6px;min-height:44px}
+.radio-group input[type=radio]{display:none}
+.radio-group input[type=radio]:checked+label{background:#e8f4fd;border-color:#0077b6;color:#0077b6}
+.unit-tabs{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1rem}
+.unit-tab{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:500;color:#666;background:#f8f9fa;border:none;font-family:inherit;transition:all 0.2s;min-height:44px}
+.unit-tab.active{background:#0077b6;color:#fff}
+.slider-wrap{position:relative}
+input[type=range]{width:100%;accent-color:#0077b6;height:6px;cursor:pointer}
+.slider-val{font-size:0.85rem;font-weight:600;color:#0077b6;text-align:center;margin-top:4px}
+.btn{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;transition:background 0.2s;min-height:44px;font-family:inherit}
+.btn:hover{background:#006299}
+.btn:active{background:#005580}
+.results{display:none;animation:fadeIn 0.3s ease}
+.results.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.big-metric{text-align:center;margin-bottom:1.5rem}
+.big-number{font-size:2.8rem;font-weight:800;color:#0077b6;line-height:1}
+.big-label{font-size:0.9rem;color:#666;margin-top:4px}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem}
+.metric-box{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:0.9rem 1rem;text-align:center}
+.metric-val{font-size:1.4rem;font-weight:700;color:#1a1a2e}
+.metric-lbl{font-size:0.75rem;color:#777;margin-top:2px}
+.zone-bar-wrap{margin-bottom:1.5rem}
+.zone-bar-wrap h3{font-size:0.85rem;font-weight:600;color:#444;margin-bottom:0.6rem}
+.zone-bar{height:18px;border-radius:9px;background:linear-gradient(to right,#e74c3c 0%,#f39c12 35%,#2ecc71 55%,#f39c12 75%,#e74c3c 100%);position:relative;margin-bottom:6px}
+.zone-pointer{position:absolute;top:-6px;width:6px;height:30px;background:#1a1a2e;border-radius:3px;transform:translateX(-50%);transition:left 0.5s ease}
+.zone-pointer::after{content:'▲';position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:0.55rem;color:#1a1a2e}
+.zone-labels{display:flex;justify-content:space-between;font-size:0.7rem;color:#888}
+.zone-badge{display:inline-block;padding:5px 14px;border-radius:20px;font-size:0.85rem;font-weight:700;margin-bottom:1rem}
+.zone-green{background:#d4efdf;color:#1e8449}
+.zone-yellow{background:#fef9e7;color:#b7770d}
+.zone-red{background:#fde8e8;color:#c0392b}
+.strategy-tabs{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1rem}
+.stab{flex:1;padding:9px 6px;text-align:center;cursor:pointer;font-size:0.8rem;font-weight:500;color:#666;background:#f8f9fa;border:none;font-family:inherit;transition:all 0.2s;min-height:44px;line-height:1.2}
+.stab.active{background:#0077b6;color:#fff}
+.strat-content{display:none}
+.strat-content.active{display:block}
+table{width:100%;border-collapse:collapse;font-size:0.88rem}
+th{background:#f0f0f0;padding:8px 10px;text-align:left;font-weight:600;font-size:0.8rem;color:#555;border-bottom:2px solid #ddd}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+tr:nth-child(odd) td{background:#fff}
+td:last-child,th:last-child{text-align:right}
+.tbl-scroll{overflow-x:auto}
+.week-bar{display:inline-block;height:10px;background:#0077b6;border-radius:3px;vertical-align:middle}
+.copy-btn{background:#f0f0f0;border:1px solid #ddd;color:#444;padding:6px 14px;border-radius:5px;font-size:0.8rem;cursor:pointer;font-family:inherit;transition:all 0.2s;white-space:nowrap}
+.copy-btn:hover{background:#e0e0e0}
+.result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:gap}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:0.9rem 1rem;font-size:0.8rem;color:#795548;margin-top:1rem;line-height:1.5}
+.disclaimer strong{color:#5d4037}
+.ad-slot{min-height:0;margin:0}
+h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.7rem;margin-top:0}
+.content-section{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;margin-bottom:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.content-section p{color:#444;font-size:0.92rem;margin-bottom:0.8rem;line-height:1.7}
+.content-section ul{color:#444;font-size:0.92rem;padding-left:1.4rem;margin-bottom:0.8rem}
+.content-section li{margin-bottom:0.4rem;line-height:1.6}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;overflow:hidden}
+summary{padding:0.8rem 1rem;cursor:pointer;font-weight:600;font-size:0.9rem;background:#f8f9fa;list-style:none;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶ ';font-size:0.7rem;color:#0077b6}
+details[open] summary::before{content:'▼ '}
+details p{padding:0.9rem 1rem;font-size:0.88rem;color:#444;line-height:1.6;background:#fff}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.related-link{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:0.7rem 1rem;font-size:0.85rem;font-weight:500;color:#0077b6;transition:all 0.2s;display:block}
+.related-link:hover{background:#e8f4fd;border-color:#0077b6;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;text-align:center;font-size:0.82rem;color:#888}
+footer a{color:#888;margin:0 0.5rem}
+footer a:hover{color:#0077b6}
+.green-text{color:#27ae60;font-weight:700}
+.yellow-text{color:#e67e22;font-weight:700}
+.red-text{color:#e74c3c;font-weight:700}
+.info-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0f0f0;font-size:0.88rem}
+.info-row:last-child{border-bottom:none}
+.info-key{color:#777}
+.info-val{font-weight:600;color:#1a1a2e}
+@media(max-width:640px){
+  .form-row{grid-template-columns:1fr}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.3rem}
+  .big-number{font-size:2.2rem}
+  .card{padding:1.4rem}
+  .content-section{padding:1.4rem}
+  .stab{font-size:0.75rem;padding:8px 4px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🛠 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Weight Loss Calorie Plateau Breaker</h1>
+  <p class="subtitle">Calculate exactly how many calories to eat to break through a weight loss plateau — with adaptive strategies.</p>
+
+  <div class="card">
+    <div class="section-title">📋 Your Details</div>
+
+    <div class="unit-tabs">
+      <button class="unit-tab active" id="tabImperial" onclick="switchUnits('imperial')">Imperial (lbs/in)</button>
+      <button class="unit-tab" id="tabMetric" onclick="switchUnits('metric')">Metric (kg/cm)</button>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" min="15" max="100" placeholder="e.g. 35">
+        <div class="error-msg" id="age-err">Enter a valid age (15–100).</div>
+      </div>
+      <div class="form-group">
+        <label>Sex</label>
+        <div class="radio-group">
+          <input type="radio" name="sex" id="sexM" value="male" checked><label for="sexM">Male</label>
+          <input type="radio" name="sex" id="sexF" value="female"><label for="sexF">Female</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row" id="imperialFields">
+      <div class="form-group">
+        <label for="weightLbs">Current Weight (lbs)</label>
+        <input type="number" id="weightLbs" min="50" max="700" placeholder="e.g. 185">
+        <div class="error-msg" id="wlbs-err">Enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="heightIn">Height (inches)</label>
+        <input type="number" id="heightIn" min="48" max="96" placeholder="e.g. 68">
+        <div class="error-msg" id="hin-err">Enter a valid height.</div>
+      </div>
+    </div>
+
+    <div class="form-row" id="metricFields" style="display:none">
+      <div class="form-group">
+        <label for="weightKg">Current Weight (kg)</label>
+        <input type="number" id="weightKg" min="25" max="320" placeholder="e.g. 84">
+        <div class="error-msg" id="wkg-err">Enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="heightCm">Height (cm)</label>
+        <input type="number" id="heightCm" min="120" max="250" placeholder="e.g. 173">
+        <div class="error-msg" id="hcm-err">Enter a valid height.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Activity Level</label>
+      <select id="activity">
+        <option value="1.2">Sedentary (desk job, little/no exercise)</option>
+        <option value="1.375">Lightly active (1–3 days/week exercise)</option>
+        <option value="1.55" selected>Moderately active (3–5 days/week)</option>
+        <option value="1.725">Very active (6–7 days/week hard exercise)</option>
+        <option value="1.9">Extremely active (physical job + daily training)</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="currentCalories">Current Daily Calories (your stuck intake)</label>
+        <input type="number" id="currentCalories" min="500" max="5000" placeholder="e.g. 1500">
+        <div class="error-msg" id="cal-err">Enter calories between 500–5,000.</div>
+      </div>
+      <div class="form-group">
+        <label for="weeksPlateau">Weeks at Plateau</label>
+        <input type="number" id="weeksPlateau" min="1" max="52" placeholder="e.g. 6">
+        <div class="error-msg" id="wks-err">Enter weeks between 1–52.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="goalLbs">Goal: Weekly Weight Loss (lbs)</label>
+      <div class="slider-wrap">
+        <input type="range" id="goalLbs" min="0.25" max="2" step="0.25" value="1" oninput="updateGoalLabel()">
+        <div class="slider-val" id="goalLblDisplay">1.0 lb/week</div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">🔍 Break My Plateau</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card results" id="resultsSection">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem">
+      <div class="section-title" style="margin:0">📊 Your Plateau-Breaking Plan</div>
+      <button class="copy-btn" id="copyBtn" onclick="copyResults()">📋 Copy Results</button>
+    </div>
+
+    <div class="big-metric">
+      <div class="big-number" id="targetCalDisplay">—</div>
+      <div class="big-label">Target Daily Calories to Break Plateau</div>
+    </div>
+
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="zone-badge" id="zoneBadge">—</span>
+    </div>
+
+    <div class="zone-bar-wrap">
+      <h3>Calorie Deficit Intensity Scale</h3>
+      <div class="zone-bar">
+        <div class="zone-pointer" id="zonePtr" style="left:50%"></div>
+      </div>
+      <div class="zone-labels">
+        <span>Too Aggressive<br>(muscle loss)</span>
+        <span style="text-align:center">Optimal Zone<br>(fat loss)</span>
+        <span style="text-align:right">Maintenance/<br>Refeed</span>
+      </div>
+    </div>
+
+    <div class="metrics-grid" id="metricsGrid"></div>
+
+    <div style="margin-bottom:1rem" id="summaryRows"></div>
+
+    <!-- Strategy Tabs -->
+    <div class="section-title" style="margin-top:0.5rem">🔄 Plateau-Breaking Strategies</div>
+    <div class="strategy-tabs">
+      <button class="stab active" onclick="showStrat(0)">Calorie Cycling</button>
+      <button class="stab" onclick="showStrat(1)">Deficit Reset</button>
+      <button class="stab" onclick="showStrat(2)">Refeed Days</button>
+      <button class="stab" onclick="showStrat(3)">12-Week Plan</button>
+    </div>
+
+    <div class="strat-content active" id="strat0">
+      <p style="font-size:0.85rem;color:#555;margin-bottom:0.8rem">Calorie cycling keeps your metabolism guessing by varying intake across the week while hitting the same weekly average.</p>
+      <div class="tbl-scroll"><table id="cyclingTable"></table></div>
+    </div>
+    <div class="strat-content" id="strat1">
+      <p style="font-size:0.85rem;color:#555;margin-bottom:0.8rem">A diet break at maintenance calories for 1–2 weeks resets leptin levels and signals to your body that it's not starving. Then resume.</p>
+      <div id="resetContent"></div>
+    </div>
+    <div class="strat-content" id="strat2">
+      <p style="font-size:0.85rem;color:#555;margin-bottom:0.8rem">Strategic refeed days (1–2 per week at maintenance/slight surplus) restore glycogen, boost hormones, and improve long-term fat loss.</p>
+      <div class="tbl-scroll"><table id="refeedTable"></table></div>
+    </div>
+    <div class="strat-content" id="strat3">
+      <p style="font-size:0.85rem;color:#555;margin-bottom:0.8rem">A 12-week phased approach cycles between deficit and maintenance periods for sustainable plateau-breaking.</p>
+      <div class="tbl-scroll"><table id="weeklyPlanTable"></table></div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Calorie needs vary based on individual factors. Consult a healthcare professional or registered dietitian for medical advice, especially if you have any health conditions.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+    <h2>How to Use This Weight Loss Plateau Calculator</h2>
+    <p>Enter your age, sex, current weight, height, and activity level to calculate your true TDEE (Total Daily Energy Expenditure). Then input how many calories you're currently eating and how many weeks you've been stuck. Adjust the goal slider for your desired weekly loss rate. Click "Break My Plateau" to receive a personalized calorie target plus four specific strategies to restart fat loss.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Weight loss plateaus are extremely common — studies show most people hit their first plateau within 6–8 weeks of dieting. The frustrating truth is that your body is working against you. As you lose weight, your TDEE drops because you're lighter. On top of that, prolonged caloric restriction triggers metabolic adaptation — your metabolism can slow by 200–500 calories/day beyond what weight loss alone would predict.</p>
+    <p>Here's a real scenario: A 165-pound woman who's been eating 1,400 calories for 3 months may have metabolically adapted to the point where her actual burn is closer to 1,600 calories — not the 2,000+ she started with. Simply eating less won't break this. You need a strategic intervention.</p>
+    <p>That's where calorie cycling, structured refeed days, and diet breaks come in. These methods are backed by research on leptin, thyroid hormones, and metabolic flexibility. A 2020 study in <em>Obesity</em> found that participants using a 2-week diet break every 2 weeks lost significantly more fat than continuous dieters over 16 weeks — a concept called the "MATADOR" protocol.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>We use the <strong>Mifflin-St Jeor equation</strong> — the most accurate BMR formula for the general population:</p>
+    <ul>
+      <li><strong>Men:</strong> BMR = (10 × kg) + (6.25 × cm) − (5 × age) + 5</li>
+      <li><strong>Women:</strong> BMR = (10 × kg) + (6.25 × cm) − (5 × age) − 161</li>
+    </ul>
+    <p>BMR is multiplied by your activity factor (1.2 to 1.9) to get TDEE. We then apply a <strong>metabolic adaptation penalty</strong> based on how long you've been plateaued (up to ~8% reduction in TDEE). Your plateau-breaking calorie target is set to create a 500–750 calorie/day deficit from your adapted TDEE — enough for sustainable fat loss without triggering further metabolic slowdown.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't eat less — eat smarter.</strong> Cutting calories below 1,200 (women) or 1,500 (men) usually causes muscle loss and further metabolic adaptation, making the plateau worse.</li>
+      <li><strong>Recalculate every 10 lbs lost.</strong> Your TDEE changes as your weight drops — what worked at 200 lbs won't work at 180 lbs.</li>
+      <li><strong>Track everything for 2 weeks.</strong> Research shows people routinely underestimate intake by 20–30%. A food diary (or app) often reveals hidden calories that explain the plateau.</li>
+      <li><strong>Increase protein to 0.7–1g per lb of body weight.</strong> High protein preserves muscle during a deficit, which keeps your metabolism higher and improves body composition.</li>
+      <li><strong>Don't skip the refeed.</strong> Many people fear eating more will "set them back." In reality, strategic refeeds 1–2x per week can actually accelerate fat loss over time by restoring leptin sensitivity.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How long does a weight loss plateau typically last?</summary>
+      <p>Most plateaus last 2–6 weeks if you don't change your approach. Without intervention, some can persist for months as your body continues to adapt. Implementing a structured strategy — like those in this calculator — can restart fat loss within 1–3 weeks.</p>
+    </details>
+    <details>
+      <summary>Should I eat more or exercise more to break a plateau?</summary>
+      <p>Often, the most effective answer is both — but specifically, a strategic combination of diet cycling AND adding strength training (if you're not already). Strength training increases NEAT (non-exercise activity thermogenesis) and preserves metabolically active muscle tissue. Just adding more cardio on a very low-calorie diet can worsen metabolic adaptation.</p>
+    </details>
+    <details>
+      <summary>What is a "refeed day" and will it make me gain weight?</summary>
+      <p>A refeed day involves eating at or slightly above maintenance calories — primarily from carbohydrates — for 1–2 days per week. You may see a temporary 1–2 lb increase from glycogen and water retention, but this is not fat gain. Over the following days, your metabolism responds positively, often accelerating fat loss the rest of the week.</p>
+    </details>
+    <details>
+      <summary>Is 1,200 calories too low to break a plateau?</summary>
+      <p>For most adults, yes. Very-low-calorie diets (VLCDs) below 1,200 calories accelerate metabolic adaptation and muscle breakdown, making future weight loss even harder. This calculator will warn you if your target falls below a safe minimum threshold and suggest the refeed/reset strategy instead.</p>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/calorie-burn-by-exercise-calculator/" class="related-link">🔥 Calorie Burn by Exercise Calculator</a>
+      <a href="/body-frame-size-calculator/" class="related-link">📏 Body Frame Size Calculator</a>
+      <a href="/waist-to-height-ratio-calculator/" class="related-link">📐 Waist-to-Height Ratio Calculator</a>
+      <a href="/running-training-pace-calculator/" class="related-link">🏃 Running Training Pace Calculator</a>
+      <a href="/swim-pace-training-zones-calculator/" class="related-link">🏊 Swim Pace & Training Zones Calculator</a>
+      <a href="/menstrual-cycle-ovulation-calculator/" class="related-link">🌙 Menstrual Cycle & Ovulation Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <span style="display:block;margin-top:0.4rem">© 2025 toolhut.dev — Free Online Tools</span>
+</footer>
+
+<script>
+let currentUnit = 'imperial';
+
+function switchUnits(u) {
+  currentUnit = u;
+  document.getElementById('tabImperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('tabMetric').classList.toggle('active', u === 'metric');
+  document.getElementById('imperialFields').style.display = u === 'imperial' ? 'grid' : 'none';
+  document.getElementById('metricFields').style.display = u === 'metric' ? 'grid' : 'none';
+}
+
+function updateGoalLabel() {
+  const v = parseFloat(document.getElementById('goalLbs').value);
+  document.getElementById('goalLblDisplay').textContent = v.toFixed(2).replace(/\.00$/,'') + ' lb/week';
+}
+
+function fmt(n) {
+  return Math.round(n).toLocaleString('en-US');
+}
+function fmtDec(n,d=1) {
+  return n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+  document.querySelectorAll('input').forEach(e => e.classList.remove('error'));
+}
+
+function showError(fieldId, msgId) {
+  document.getElementById(fieldId).classList.add('error');
+  document.getElementById(msgId).classList.add('show');
+}
+
+function getInputs() {
+  clearErrors();
+  let valid = true;
+  const age = parseFloat(document.getElementById('age').value);
+  if (!age || age < 15 || age > 100) { showError('age','age-err'); valid = false; }
+
+  let weightKg, heightCm;
+  if (currentUnit === 'imperial') {
+    const wlbs = parseFloat(document.getElementById('weightLbs').value);
+    const hin = parseFloat(document.getElementById('heightIn').value);
+    if (!wlbs || wlbs < 50 || wlbs > 700) { showError('weightLbs','wlbs-err'); valid = false; }
+    if (!hin || hin < 48 || hin > 96) { showError('heightIn','hin-err'); valid = false; }
+    if (valid) { weightKg = wlbs * 0.453592; heightCm = hin * 2.54; }
+    if (valid) return { age, sex: document.querySelector('input[name=sex]:checked').value, weightKg, heightCm, weightLbs: wlbs, valid };
+  } else {
+    const wkg = parseFloat(document.getElementById('weightKg').value);
+    const hcm = parseFloat(document.getElementById('heightCm').value);
+    if (!wkg || wkg < 25 || wkg > 320) { showError('weightKg','wkg-err'); valid = false; }
+    if (!hcm || hcm < 120 || hcm > 250) { showError('heightCm','hcm-err'); valid = false; }
+    if (valid) { weightKg = wkg; heightCm = hcm; }
+    if (valid) return { age, sex: document.querySelector('input[name=sex]:checked').value, weightKg, heightCm, weightLbs: weightKg / 0.453592, valid };
+  }
+  return { valid: false };
+}
+
+function calculate() {
+  const inp = getInputs();
+  if (!inp.valid) return;
+
+  const currentCal = parseFloat(document.getElementById('currentCalories').value);
+  if (!currentCal || currentCal < 500 || currentCal > 5000) { showError('currentCalories','cal-err'); return; }
+
+  const weeksPlateau = parseFloat(document.getElementById('weeksPlateau').value);
+  if (!weeksPlateau || weeksPlateau < 1 || weeksPlateau > 52) { showError('weeksPlateau','wks-err'); return; }
+
+  const activityFactor = parseFloat(document.getElementById('activity').value);
+  const goalLbsPerWeek = parseFloat(document.getElementById('goalLbs').value);
+
+  // BMR Mifflin-St Jeor
+  let bmr;
+  if (inp.sex === 'male') {
+    bmr = (10 * inp.weightKg) + (6.25 * inp.heightCm) - (5 * inp.age) + 5;
+  } else {
+    bmr = (10 * inp.weightKg) + (6.25 * inp.heightCm) - (5 * inp.age) - 161;
+  }
+
+  const tdeeNominal = bmr * activityFactor;
+
+  // Metabolic adaptation: up to 8% reduction based on plateau duration and deficit
+  // Weeks 1–4: 1% per 2 weeks; weeks 5–12: up to 5%; 12+: up to 8%
+  const adaptationRate = Math.min(0.08, weeksPlateau * 0.006);
+  const tdeeAdapted = tdeeNominal * (1 - adaptationRate);
+
+  // Calorie deficit needed for goal (3,500 kcal per lb)
+  const weeklyDeficit = goalLbsPerWeek * 3500;
+  const dailyDeficit = weeklyDeficit / 7;
+
+  // Safe minimums
+  const minCalories = inp.sex === 'male' ? 1500 : 1200;
+
+  let targetCal = tdeeAdapted - dailyDeficit;
+  const tooLow = targetCal < minCalories;
+  if (tooLow) targetCal = minCalories;
+
+  // Determine zone
+  const deficitPct = (tdeeAdapted - targetCal) / tdeeAdapted;
+  let zone, zoneCls, zonePos;
+  if (deficitPct < 0.05) { zone = '🟢 Maintenance / Refeed Phase'; zoneCls = 'zone-green'; zonePos = 85; }
+  else if (deficitPct <= 0.25) { zone = '🟢 Optimal Fat Loss Zone'; zoneCls = 'zone-green'; zonePos = 52; }
+  else if (deficitPct <= 0.35) { zone = '🟡 Aggressive Deficit (monitor)'; zoneCls = 'zone-yellow'; zonePos = 30; }
+  else { zone = '🔴 Too Aggressive — Risk of Muscle Loss'; zoneCls = 'zone-red'; zonePos = 10; }
+
+  const bmi = inp.weightKg / Math.pow(inp.heightCm / 100, 2);
+  const projectedLoss4Weeks = tooLow ? ((tdeeAdapted - minCalories) * 28 / 3500) : goalLbsPerWeek * 4;
+
+  // Calorie cycling
+  const highDay = Math.round(targetCal * 1.15);
+  const lowDay = Math.round(targetCal * 0.85);
+  const weekAvg = Math.round((highDay * 2 + targetCal * 3 + lowDay * 2) / 7);
+
+  // Maintenance for refeeds
+  const maintenanceCal = Math.round(tdeeAdapted);
+
+  requestAnimationFrame(() => {
+    document.getElementById('targetCalDisplay').textContent = fmt(targetCal);
+    const badge = document.getElementById('zoneBadge');
+    badge.textContent = zone;
+    badge.className = 'zone-badge ' + zoneCls;
+    document.getElementById('zonePtr').style.left = zonePos + '%';
+
+    // Metrics grid
+    document.getElementById('metricsGrid').innerHTML = `
+      <div class="metric-box"><div class="metric-val">${fmt(Math.round(bmr))}</div><div class="metric-lbl">BMR (kcal/day)</div></div>
+      <div class="metric-box"><div class="metric-val">${fmt(Math.round(tdeeNominal))}</div><div class="metric-lbl">Your TDEE</div></div>
+      <div class="metric-box"><div class="metric-val">${fmt(Math.round(tdeeAdapted))}</div><div class="metric-lbl">Adapted TDEE (plateau)</div></div>
+      <div class="metric-box"><div class="metric-val">${fmtDec(bmi)}</div><div class="metric-lbl">BMI</div></div>
+    `;
+
+    // Summary rows
+    const adaptPct = (adaptationRate * 100).toFixed(1);
+    const deficitCals = Math.round(tdeeAdapted - targetCal);
+    document.getElementById('summaryRows').innerHTML = `
+      <div class="info-row"><span class="info-key">Current eating</span><span class="info-val">${fmt(currentCal)} kcal/day</span></div>
+      <div class="info-row"><span class="info-key">Plateau duration</span><span class="info-val">${weeksPlateau} week${weeksPlateau>1?'s':''}</span></div>
+      <div class="info-row"><span class="info-key">Metabolic adaptation penalty</span><span class="info-val ${adaptationRate>0.05?'red-text':'yellow-text'}">−${adaptPct}% (−${fmt(Math.round(tdeeNominal - tdeeAdapted))} kcal)</span></div>
+      <div class="info-row"><span class="info-key">Daily deficit from adapted TDEE</span><span class="info-val">−${fmt(deficitCals)} kcal</span></div>
+      <div class="info-row"><span class="info-key">Projected loss (4 weeks)</span><span class="info-val green-text">~${fmtDec(projectedLoss4Weeks)} lbs</span></div>
+      ${tooLow ? '<div class="info-row" style="background:#fff3cd;border-radius:4px;padding:6px 10px"><span style="color:#856404;font-size:0.82rem">⚠️ Your goal deficit would go below safe minimums. Calorie target has been set to ' + fmt(minCalories) + ' kcal/day. Consider the Refeed/Reset strategy.</span></div>' : ''}
+    `;
+
+    // Calorie cycling table
+    const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    const types = ['Training','Low','Training','Normal','Training','High','Low'];
+    const cals = [highDay, lowDay, highDay, targetCal, targetCal, highDay, lowDay];
+    let cycHTML = `<thead><tr><th>Day</th><th>Type</th><th>Calories</th><th>vs Target</th></tr></thead><tbody>`;
+    days.forEach((d,i) => {
+      const diff = cals[i] - targetCal;
+      const diffStr = diff === 0 ? '—' : (diff > 0 ? '+' + fmt(diff) : fmt(diff));
+      const diffColor = diff > 0 ? '#27ae60' : diff < 0 ? '#e74c3c' : '#888';
+      cycHTML += `<tr><td>${d}</td><td>${types[i]}</td><td>${fmt(cals[i])}</td><td style="color:${diffColor}">${diffStr}</td></tr>`;
+    });
+    cycHTML += `<tr style="font-weight:700;background:#f0f0f0"><td colspan="2">Weekly Average</td><td>${fmt(weekAvg)}</td><td>—</td></tr></tbody>`;
+    document.getElementById('cyclingTable').innerHTML = cycHTML;
+
+    // Refeed table
+    let refHTML = `<thead><tr><th>Day Type</th><th>Days/Week</th><th>Calories</th><th>Weekly Avg</th></tr></thead><tbody>`;
+    const refeedCal = Math.round(tdeeAdapted * 1.0);
+    const defDays = 5; const refDays = 2;
+    const refAvg = Math.round((targetCal * defDays + refeedCal * refDays) / 7);
+    refHTML += `<tr><td>Deficit Days</td><td>${defDays}</td><td>${fmt(targetCal)}</td><td rowspan="2" style="vertical-align:middle;font-weight:700">${fmt(refAvg)}</td></tr>`;
+    refHTML += `<tr><td>Refeed Days</td><td>${refDays}</td><td>${fmt(refeedCal)}</td></tr>`;
+    refHTML += `</tbody>`;
+    document.getElementById('refeedTable').innerHTML = refHTML;
+
+    // Reset/Deficit content
+    document.getElementById('resetContent').innerHTML = `
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Phase</th><th>Duration</th><th>Daily Calories</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Diet Break</td><td>2 weeks</td><td>${fmt(maintenanceCal)}</td><td>Restore leptin, hormones</td></tr>
+          <tr><td>Moderate Deficit</td><td>4 weeks</td><td>${fmt(Math.round(tdeeAdapted - dailyDeficit * 0.75))}</td><td>Restart fat loss</td></tr>
+          <tr><td>Full Deficit</td><td>6 weeks</td><td>${fmt(targetCal)}</td><td>Accelerate progress</td></tr>
+          <tr><td>Mini Break</td><td>1 week</td><td>${fmt(maintenanceCal)}</td><td>Prevent re-adaptation</td></tr>
+          <tr><td>Repeat Cycle</td><td>Ongoing</td><td>Alternate</td><td>Long-term sustainability</td></tr>
+        </tbody>
+      </table></div>`;
+
+    // 12-week plan
+    const phases = [
+      {w:'1–2',phase:'Diet Break',cal:maintenanceCal,goal:'Hormone reset'},
+      {w:'3–4',phase:'Moderate Deficit',cal:Math.round(tdeeAdapted - dailyDeficit * 0.5),goal:'Ease into deficit'},
+      {w:'5–6',phase:'Full Deficit',cal:targetCal,goal:'Active fat loss'},
+      {w:'7',phase:'Refeed Week',cal:Math.round(maintenanceCal * 0.95),goal:'Leptin restoration'},
+      {w:'8–9',phase:'Full Deficit',cal:targetCal,goal:'Active fat loss'},
+      {w:'10',phase:'Calorie Cycling',cal:weekAvg,goal:'Metabolic flexibility'},
+      {w:'11–12',phase:'Full Deficit',cal:targetCal,goal:'Push to new low'},
+    ];
+    const maxCal = Math.max(...phases.map(p=>p.cal));
+    let planHTML = `<thead><tr><th>Week(s)</th><th>Phase</th><th>Calories</th><th>Goal</th></tr></thead><tbody>`;
+    phases.forEach(p => {
+      const barW = Math.round((p.cal / maxCal) * 80);
+      planHTML += `<tr><td>${p.w}</td><td>${p.phase}</td><td><span class="week-bar" style="width:${barW}px"></span> ${fmt(p.cal)}</td><td>${p.goal}</td></tr>`;
+    });
+    planHTML += `</tbody>`;
+    document.getElementById('weeklyPlanTable').innerHTML = planHTML;
+
+    document.getElementById('resultsSection').classList.add('show');
+    document.getElementById('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});
+
+    // Store for copy
+    window._resultsText = [
+      'WEIGHT LOSS PLATEAU BREAKER — toolhut.dev',
+      '='.repeat(42),
+      `Target Calories: ${fmt(targetCal)} kcal/day`,
+      `Zone: ${zone}`,
+      `BMR: ${fmt(Math.round(bmr))} kcal | TDEE: ${fmt(Math.round(tdeeNominal))} kcal | Adapted TDEE: ${fmt(Math.round(tdeeAdapted))} kcal`,
+      `Daily Deficit: -${fmt(Math.round(tdeeAdapted - targetCal))} kcal | Metabolic Adaptation: -${adaptPct}%`,
+      `Projected 4-Week Loss: ~${fmtDec(projectedLoss4Weeks)} lbs`,
+      '',
+      'CALORIE CYCLING WEEK:',
+      days.map((d,i)=>`  ${d}: ${fmt(cals[i])} kcal`).join('\n'),
+      `  Weekly Average: ${fmt(weekAvg)} kcal`,
+    ].join('\n');
+  });
+}
+
+function showStrat(i) {
+  document.querySelectorAll('.stab').forEach((b,j) => b.classList.toggle('active', i===j));
+  document.querySelectorAll('.strat-content').forEach((c,j) => c.classList.toggle('active', i===j));
+}
+
+function copyResults() {
+  if (!window._resultsText) return;
+  navigator.clipboard.writeText(window._resultsText).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Results', 2000);
+  }).catch(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '❌ Failed';
+    setTimeout(() => btn.textContent = '📋 Copy Results', 2000);
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && ['INPUT','SELECT'].includes(e.target.tagName)) {
+    calculate();
+  }
+});
+</script>
+</body>
+</html>
