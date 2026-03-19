@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycling Power Zone Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your cycling power training zones from FTP. Get precise watt ranges for all 7 zones to optimize your training. Free, instant, no signup required.">
+<link rel="canonical" href="https://toolhut.dev/cycling-power-zone-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Cycling Power Zone Calculator",
+  "url": "https://toolhut.dev/cycling-power-zone-calculator/",
+  "description": "Calculate your cycling power training zones from FTP. Get precise watt ranges for all 7 zones to optimize your training.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline;color:#006299}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.3}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px}
+input[type=number],input[type=text],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem}
+.field{margin-bottom:1.2rem}
+.hint{font-size:0.78rem;color:#888;margin-top:4px}
+.slider-wrap{display:flex;align-items:center;gap:12px;margin-top:8px}
+input[type=range]{flex:1;height:6px;accent-color:#0077b6;cursor:pointer;min-height:0}
+.slider-val{font-weight:700;color:#0077b6;min-width:60px;text-align:right;font-size:1rem}
+.btn{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s}
+.btn:hover{background:#006299}
+.btn-secondary{background:#f0f4f8;color:#0077b6;border:1px solid #0077b6;margin-top:0.8rem}
+.btn-secondary:hover{background:#e0eef6}
+.results{opacity:0;transition:opacity 0.3s ease;display:none}
+.results.show{display:block;opacity:1}
+.zone-chart{margin:1.5rem 0}
+.zone-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;position:relative}
+.zone-label{font-size:0.78rem;font-weight:700;min-width:64px;color:#444}
+.zone-bar-wrap{flex:1;background:#f0f0f0;border-radius:4px;height:34px;overflow:hidden;position:relative}
+.zone-bar{height:100%;border-radius:4px;transition:width 0.6s ease;display:flex;align-items:center;padding-left:10px;font-size:0.78rem;font-weight:700;color:#fff;white-space:nowrap;min-width:30px}
+.zone-watts{font-size:0.8rem;color:#555;min-width:100px;text-align:right;font-weight:600}
+.z1{background:#a8d5e2}
+.z2{background:#2ecc71}
+.z3{background:#f1c40f}
+.z4{background:#e67e22}
+.z5{background:#e74c3c}
+.z6{background:#c0392b}
+.z7{background:#8e1a10}
+.current-zone-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:700;margin-left:8px;vertical-align:middle}
+.big-result{text-align:center;padding:1.2rem;background:#f8f9fa;border-radius:8px;margin-bottom:1.5rem;border:1px solid #e0e0e0}
+.big-number{font-size:2.8rem;font-weight:900;color:#0077b6;line-height:1}
+.big-label{font-size:0.9rem;color:#555;margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#555;border-bottom:2px solid #ddd}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+td:last-child,th:last-child{text-align:right}
+td:nth-child(3),th:nth-child(3){text-align:right}
+.zone-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.copy-btn{background:#f0f4f8;color:#0077b6;border:1px solid #ddd;padding:6px 14px;border-radius:5px;font-size:0.82rem;cursor:pointer;transition:background 0.2s;float:right}
+.copy-btn:hover{background:#e0eef6}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:12px 16px;font-size:0.82rem;color:#795548;margin-top:1.2rem}
+.disclaimer strong{color:#5d4037}
+.tabs{display:flex;gap:4px;margin-bottom:1.2rem}
+.tab{flex:1;padding:9px 12px;border:1px solid #ddd;border-radius:6px;background:#f8f9fa;font-size:0.85rem;font-weight:600;cursor:pointer;text-align:center;color:#555;transition:all 0.2s;min-height:44px;display:flex;align-items:center;justify-content:center}
+.tab.active{background:#0077b6;color:#fff;border-color:#0077b6}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.ftp-test-info{background:#f0f7ff;border:1px solid #bee3f8;border-radius:6px;padding:12px 16px;font-size:0.85rem;color:#1a4a6e;margin-bottom:1rem}
+.section{margin-bottom:2rem}
+.section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.8rem;padding-bottom:0.4rem;border-bottom:2px solid #f0f0f0}
+.section p{color:#444;font-size:0.95rem;margin-bottom:0.8rem}
+.section ul,ol{padding-left:1.4rem;color:#444;font-size:0.95rem}
+.section li{margin-bottom:0.5rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.7rem}
+summary{padding:12px 16px;font-weight:600;cursor:pointer;font-size:0.9rem;color:#1a1a2e;list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:44px}
+summary::after{content:'▾';color:#0077b6;font-size:1rem}
+details[open] summary::after{content:'▴'}
+details p{padding:0 16px 14px;color:#444;font-size:0.9rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:10px 14px;font-size:0.85rem;color:#0077b6;font-weight:500;transition:background 0.2s;min-height:44px;display:flex;align-items:center}
+.related-link:hover{background:#e0eef6;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;text-align:center;font-size:0.82rem;color:#888;margin-top:2rem}
+footer a{color:#0077b6;margin:0 8px}
+.ad-slot{min-height:0;margin:0}
+.formula-box{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:14px 16px;font-family:'Courier New',monospace;font-size:0.9rem;color:#1a1a2e;margin:0.8rem 0}
+.progress-indicator{display:flex;gap:4px;margin:1rem 0}
+.pi-seg{flex:1;height:8px;border-radius:4px}
+@media(max-width:600px){
+  .row{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .card{padding:1.4rem}
+  .zone-watts{min-width:80px;font-size:0.75rem}
+  .zone-label{min-width:54px;font-size:0.74rem}
+  .big-number{font-size:2.2rem}
+  td,th{padding:8px 8px;font-size:0.82rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Cycling Power Zone Calculator</h1>
+  <p class="subtitle">Enter your FTP to instantly calculate all 7 cycling power training zones in watts.</p>
+
+  <div class="card">
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('ftp')">I Know My FTP</div>
+      <div class="tab" onclick="switchTab('test')">Estimate FTP</div>
+    </div>
+
+    <div id="tab-ftp" class="tab-panel active">
+      <div class="field">
+        <label for="ftp">Functional Threshold Power (FTP) — Watts</label>
+        <div class="slider-wrap">
+          <input type="range" id="ftp-slider" min="50" max="500" value="250" oninput="syncSlider('ftp','ftp-slider')">
+          <span class="slider-val" id="ftp-slider-display">250 W</span>
+        </div>
+        <input type="number" id="ftp" placeholder="e.g. 250" min="1" max="2000" value="250" oninput="syncInput('ftp','ftp-slider')" onkeydown="handleEnter(event)">
+        <div class="error-msg" id="ftp-error">Please enter a valid FTP between 50 and 2000 watts.</div>
+        <div class="hint">Your 1-hour maximum sustainable power output. Common range: 150–450 W.</div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="weight">Body Weight (optional)</label>
+          <input type="number" id="weight" placeholder="e.g. 70" min="30" max="300" oninput="syncWeightCalc()" onkeydown="handleEnter(event)">
+        </div>
+        <div class="field">
+          <label for="weight-unit">Unit</label>
+          <select id="weight-unit" onchange="syncWeightCalc()">
+            <option value="kg">kg</option>
+            <option value="lb">lb</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-test" class="tab-panel">
+      <div class="ftp-test-info">
+        <strong>20-Minute FTP Test:</strong> Ride all-out for 20 minutes. Your FTP ≈ 95% of your average power for that effort.
+      </div>
+      <div class="field">
+        <label for="test-power">Average Power During 20-Min Test — Watts</label>
+        <input type="number" id="test-power" placeholder="e.g. 263" min="1" max="2000" oninput="calcFTPfromTest()" onkeydown="handleEnter(event)">
+        <div class="hint">Measured average power from your 20-minute all-out effort.</div>
+      </div>
+      <div class="field" id="ramp-field">
+        <label for="ramp-power">— or — Ramp Test Peak Power — Watts</label>
+        <input type="number" id="ramp-power" placeholder="e.g. 310" min="1" max="2000" oninput="calcFTPfromRamp()" onkeydown="handleEnter(event)">
+        <div class="hint">FTP ≈ 75% of peak 1-minute power from a ramp test.</div>
+      </div>
+      <div id="estimated-ftp-display" style="display:none;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:6px;padding:10px 14px;font-size:0.9rem;margin-bottom:1rem;color:#1b5e20;">
+        <strong>Estimated FTP:</strong> <span id="est-ftp-val">—</span> W
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="weight2">Body Weight (optional)</label>
+          <input type="number" id="weight2" placeholder="e.g. 70" min="30" max="300" oninput="syncWeightCalc2()" onkeydown="handleEnter(event)">
+        </div>
+        <div class="field">
+          <label for="weight-unit2">Unit</label>
+          <select id="weight-unit2" onchange="syncWeightCalc2()">
+            <option value="kg">kg</option>
+            <option value="lb">lb</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Power Zones</button>
+  </div>
+
+  <div class="results" id="results">
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem">
+        <h2 style="border:none;margin:0;padding:0;font-size:1.1rem">Your Power Zones</h2>
+        <button class="copy-btn" onclick="copyResults()">Copy Results</button>
+      </div>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+        <div class="big-result" style="flex:1;min-width:130px">
+          <div class="big-number" id="res-ftp">—</div>
+          <div class="big-label">FTP (Watts)</div>
+        </div>
+        <div class="big-result" style="flex:1;min-width:130px" id="wpkg-box">
+          <div class="big-number" id="res-wpkg">—</div>
+          <div class="big-label">W/kg Power-to-Weight</div>
+        </div>
+        <div class="big-result" style="flex:1;min-width:130px" id="category-box">
+          <div class="big-number" id="res-category" style="font-size:1.3rem">—</div>
+          <div class="big-label">Rider Category</div>
+        </div>
+      </div>
+
+      <div id="wpkg-scale" style="display:none;margin-bottom:1.5rem">
+        <div style="font-size:0.82rem;font-weight:600;color:#555;margin-bottom:6px">Power-to-Weight Scale (W/kg)</div>
+        <div class="progress-indicator" id="wpkg-bar-wrap"></div>
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:#888;margin-top:4px">
+          <span>Beginner &lt;2.0</span><span>Untrained 2–3</span><span>Trained 3–4</span><span>Elite 4–5</span><span>Pro 5+</span>
+        </div>
+      </div>
+
+      <div class="zone-chart" id="zone-chart"></div>
+
+      <div style="overflow-x:auto">
+        <table id="zone-table">
+          <thead>
+            <tr>
+              <th>Zone</th>
+              <th>Name</th>
+              <th>Power Range</th>
+              <th>% FTP</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody id="zone-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="disclaimer" style="margin-top:1.2rem">
+        <strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional or certified coach for medical advice and personalized training guidance.
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="card section">
+    <h2>How to Use This Cycling Power Zone Calculator</h2>
+    <p>Enter your Functional Threshold Power (FTP) in watts using the slider or input field. If you don't know your FTP, switch to the "Estimate FTP" tab and input your 20-minute test average or ramp test peak power — the tool calculates your FTP automatically. Optionally add your body weight to see your watts-per-kilogram (W/kg) ratio and rider category.</p>
+    <p>Click <strong>Calculate Power Zones</strong> to see all 7 training zones with watt ranges, percentage of FTP, and the training purpose of each zone.</p>
+  </div>
+
+  <div class="card section">
+    <h2>Why This Matters</h2>
+    <p>Training by power zones is the most precise way to structure cycling workouts. Unlike heart rate, power responds instantly — no lag, no drift from heat or fatigue. A cyclist with an FTP of 280W who trains in Zone 2 (168–196W) for 10+ hours per week will develop a massive aerobic engine. That same rider doing everything at 260W (Zone 3/"no man's land") will plateau within months.</p>
+    <p>Power zones matter for every type of cyclist: the gran fondo rider who needs a strong Zone 2 base, the criterium racer who needs explosive Zone 6 repeatability, and the Ironman triathlete who races at Zone 3-4 for 5+ hours. Knowing your zones prevents overtraining (too much time in Zone 4-5) and undertraining (never pushing into Zone 5-7).</p>
+    <p>The W/kg metric matters for climbing. At 3.5 W/kg you'll hold pace in an amateur group ride. At 4.5 W/kg you're Cat 2 territory. At 5.5+ W/kg, you're approaching professional racing standards. These benchmarks give you realistic context for where you stand.</p>
+  </div>
+
+  <div class="card section">
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses the <strong>Andy Coggan 7-Zone Power Model</strong>, the industry standard used by TrainingPeaks, Garmin, and most coaching platforms. Each zone is defined as a percentage range of your FTP:</p>
+    <div class="formula-box">
+Zone Power (W) = FTP × Zone Percentage
+FTP from 20-min test = 20-min avg power × 0.95
+FTP from ramp test = ramp peak power × 0.75
+W/kg = FTP ÷ Body Weight (kg)</div>
+    <p>The zones scale linearly from your FTP, so if your FTP improves from 250W to 275W, every zone automatically recalibrates. This is why retesting FTP every 6–8 weeks during a training block keeps your zones accurate.</p>
+    <p>Zone boundaries: Z1 &lt;55%, Z2 56–75%, Z3 76–90%, Z4 91–105%, Z5 106–120%, Z6 121–150%, Z7 &gt;150% of FTP.</p>
+  </div>
+
+  <div class="card section">
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't test on tired legs.</strong> An FTP test done after a hard week will underestimate your true fitness by 5–15%. Do a proper 24-48hr taper before testing.</li>
+      <li><strong>Retest every 6–8 weeks.</strong> As fitness improves, your FTP rises and your old zones become too easy. Outdated zones mean you're training below your potential.</li>
+      <li><strong>Avoid "Zone 3 purgatory."</strong> Most recreational cyclists ride almost everything at moderate effort — hard enough to feel like work, easy enough to always finish. This trains neither endurance nor top-end power effectively.</li>
+      <li><strong>Zone 2 is harder to stay in than you think.</strong> For most riders, Zone 2 feels embarrassingly easy. That's correct. Riding with non-power-trained friends will push you into Zone 3-4.</li>
+      <li><strong>W/kg is most meaningful for climbing.</strong> On flat terrain, raw watts matter more. On climbs &gt;5%, the lighter rider wins even with lower absolute watts.</li>
+    </ul>
+  </div>
+
+  <div class="card section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is FTP and how do I test it?</summary>
+      <p>Functional Threshold Power (FTP) is the maximum average power you can sustain for approximately one hour. The most common test is the "20-minute FTP test": after a warm-up, ride as hard as possible for 20 minutes, then multiply your average power by 0.95. Alternatively, a ramp test (increasing power every minute until failure) uses 75% of your best 1-minute power.</p>
+    </details>
+    <details>
+      <summary>How often should I recalculate my zones?</summary>
+      <p>Retest your FTP and recalculate zones every 6–8 weeks during a structured training block, or after any significant fitness change (illness, extended time off, major training increase). During a maintenance period or off-season, every 3 months is sufficient. Always retest at the start of a new training season.</p>
+    </details>
+    <details>
+      <summary>Are these zones the same as Zwift or Garmin zones?</summary>
+      <p>Most platforms use the Coggan model this calculator is based on, but slight variations exist. Zwift uses the same 7-zone model. Garmin Connect defaults to a 5-zone model but can be switched to 7 zones. TrainingPeaks uses Coggan's exact percentages. If your platform uses a different zone model, the watt values will differ slightly.</p>
+    </details>
+    <details>
+      <summary>Can I use heart rate zones instead of power zones?</summary>
+      <p>Heart rate zones are useful but less precise. Heart rate lags 30–60 seconds behind effort changes, drifts upward with heat and fatigue (cardiac drift), and varies with caffeine, hydration, and sleep. Power is instantaneous and objective. For serious training, power is preferred — but heart rate still provides valuable data about recovery and aerobic efficiency when used alongside power.</p>
+    </details>
+  </div>
+
+  <div class="card section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/glycemic-load-calculator/" class="related-link">Glycemic Load Meal Planner</a>
+      <a href="/resting-metabolic-rate-calculator/" class="related-link">Resting Metabolic Rate Calculator</a>
+      <a href="/post-workout-protein-timing-calculator/" class="related-link">Anabolic Window Protein Timer</a>
+      <a href="/workout-meal-timing-calculator/" class="related-link">Anabolic Window & Meal Timing Optimizer</a>
+      <a href="/weight-loss-plateau-calculator/" class="related-link">Weight Loss Calorie Plateau Breaker</a>
+      <a href="/swim-pace-training-zones-calculator/" class="related-link">Swim Pace & Training Zones Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:6px">© 2025 toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+const ZONES = [
+  {num:1, name:'Active Recovery', pctLow:0,   pctHigh:55,  color:'#a8d5e2', cls:'z1', purpose:'Recovery, very easy spinning'},
+  {num:2, name:'Endurance',       pctLow:56,  pctHigh:75,  color:'#2ecc71', cls:'z2', purpose:'Aerobic base, long rides'},
+  {num:3, name:'Tempo',           pctLow:76,  pctHigh:90,  color:'#f1c40f', cls:'z3', purpose:'Sustained effort, aerobic power'},
+  {num:4, name:'Lactate Threshold',pctLow:91, pctHigh:105, color:'#e67e22', cls:'z4', purpose:'FTP work, race pace training'},
+  {num:5, name:'VO2 Max',         pctLow:106, pctHigh:120, color:'#e74c3c', cls:'z5', purpose:'Max aerobic capacity intervals'},
+  {num:6, name:'Anaerobic',       pctLow:121, pctHigh:150, color:'#c0392b', cls:'z6', purpose:'Short hard efforts, attacks'},
+  {num:7, name:'Neuromuscular',   pctLow:151, pctHigh:999, color:'#8e1a10', cls:'z7', purpose:'Sprints, max power efforts'}
+];
+
+const RIDER_CATEGORIES = [
+  {label:'Beginner',    min:0,   max:2.0,  color:'#a8d5e2'},
+  {label:'Untrained',   min:2.0, max:3.0,  color:'#2ecc71'},
+  {label:'Trained',     min:3.0, max:3.5,  color:'#f1c40f'},
+  {label:'Competitive', min:3.5, max:4.0,  color:'#e67e22'},
+  {label:'Cat 3-4',     min:4.0, max:4.5,  color:'#e74c3c'},
+  {label:'Cat 1-2',     min:4.5, max:5.5,  color:'#c0392b'},
+  {label:'Pro/Elite',   min:5.5, max:99,   color:'#8e1a10'}
+];
+
+let currentTab = 'ftp';
+let lastFTP = 0;
+let copyText = '';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-ftp').classList.toggle('active', tab === 'ftp');
+  document.getElementById('tab-test').classList.toggle('active', tab === 'test');
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='ftp')||(i===1&&tab==='test')));
+}
+
+function syncSlider(inputId, sliderId) {
+  const val = parseFloat(document.getElementById(inputId).value) || 250;
+  document.getElementById(sliderId).value = Math.min(Math.max(val, 50), 500);
+  document.getElementById(sliderId + '-display').textContent = val + ' W';
+}
+
+function syncInput(inputId, sliderId) {
+  const val = parseFloat(document.getElementById(sliderId).value);
+  document.getElementById(inputId).value = val;
+  document.getElementById(sliderId + '-display').textContent = val + ' W';
+}
+
+function syncWeightCalc() {}
+function syncWeightCalc2() {}
+
+function calcFTPfromTest() {
+  const v = parseFloat(document.getElementById('test-power').value);
+  if (!isNaN(v) && v > 0) {
+    const est = Math.round(v * 0.95);
+    document.getElementById('est-ftp-val').textContent = est;
+    document.getElementById('estimated-ftp-display').style.display = 'block';
+    document.getElementById('ramp-power').value = '';
+  }
+}
+
+function calcFTPfromRamp() {
+  const v = parseFloat(document.getElementById('ramp-power').value);
+  if (!isNaN(v) && v > 0) {
+    const est = Math.round(v * 0.75);
+    document.getElementById('est-ftp-val').textContent = est;
+    document.getElementById('estimated-ftp-display').style.display = 'block';
+    document.getElementById('test-power').value = '';
+  }
+}
+
+function getFTP() {
+  if (currentTab === 'ftp') {
+    return parseFloat(document.getElementById('ftp').value);
+  } else {
+    const tp = parseFloat(document.getElementById('test-power').value);
+    const rp = parseFloat(document.getElementById('ramp-power').value);
+    if (!isNaN(tp) && tp > 0) return Math.round(tp * 0.95);
+    if (!isNaN(rp) && rp > 0) return Math.round(rp * 0.75);
+    return NaN;
+  }
+}
+
+function getWeight() {
+  if (currentTab === 'ftp') {
+    const w = parseFloat(document.getElementById('weight').value);
+    const u = document.getElementById('weight-unit').value;
+    if (isNaN(w) || w <= 0) return null;
+    return u === 'lb' ? w * 0.453592 : w;
+  } else {
+    const w = parseFloat(document.getElementById('weight2').value);
+    const u = document.getElementById('weight-unit2').value;
+    if (isNaN(w) || w <= 0) return null;
+    return u === 'lb' ? w * 0.453592 : w;
+  }
+}
+
+function fmt(n) {
+  return n.toLocaleString('en-US');
+}
+
+function calculate() {
+  const errEl = document.getElementById('ftp-error');
+  const ftpInput = document.getElementById('ftp');
+  if (currentTab === 'ftp') ftpInput.classList.remove('error');
+  errEl.classList.remove('show');
+
+  const ftp = getFTP();
+  if (isNaN(ftp) || ftp < 10 || ftp > 2000) {
+    if (currentTab === 'ftp') {
+      ftpInput.classList.add('error');
+      errEl.classList.add('show');
+    } else {
+      alert('Please enter valid test power values to estimate FTP.');
+    }
+    return;
+  }
+
+  const weightKg = getWeight();
+  const wpkg = weightKg ? (ftp / weightKg) : null;
+
+  requestAnimationFrame(() => {
+    renderResults(ftp, weightKg, wpkg);
+  });
+}
+
+function renderResults(ftp, weightKg, wpkg) {
+  lastFTP = ftp;
+
+  // Big numbers
+  const resFtp = document.getElementById('res-ftp');
+  const resWpkg = document.getElementById('res-wpkg');
+  const resCat = document.getElementById('res-category');
+  const wpkgBox = document.getElementById('wpkg-box');
+  const catBox = document.getElementById('category-box');
+  const wpkgScale = document.getElementById('wpkg-scale');
+
+  resFtp.textContent = fmt(ftp);
+
+  if (wpkg) {
+    wpkgBox.style.display = '';
+    catBox.style.display = '';
+    resWpkg.textContent = wpkg.toFixed(2);
+
+    const cat = RIDER_CATEGORIES.find(c => wpkg >= c.min && wpkg < c.max) || RIDER_CATEGORIES[RIDER_CATEGORIES.length-1];
+    resCat.textContent = cat.label;
+    resCat.style.color = cat.color;
+
+    wpkgScale.style.display = 'block';
+    const breakpoints = [2.0, 3.0, 3.5, 4.0, 4.5, 5.5, 7.0];
+    const segColors = ['#a8d5e2','#2ecc71','#f1c40f','#e67e22','#e74c3c','#c0392b','#8e1a10'];
+    const clampedWpkg = Math.min(wpkg, 7.0);
+    let barHTML = '';
+    for (let i = 0; i < breakpoints.length; i++) {
+      const segMin = i === 0 ? 0 : breakpoints[i-1];
+      const segMax = breakpoints[i];
+      const filled = clampedWpkg >= segMax ? 1 : clampedWpkg <= segMin ? 0 : (clampedWpkg - segMin) / (segMax - segMin);
+      barHTML += `<div class="pi-seg" style="background:linear-gradient(to right,${segColors[i]} ${filled*100}%,#e0e0e0 ${filled*100}%);border-radius:4px"></div>`;
+    }
+    document.getElementById('wpkg-bar-wrap').innerHTML = barHTML;
+  } else {
+    wpkgBox.style.display = 'none';
+    catBox.style.display = 'none';
+    wpkgScale.style.display = 'none';
+  }
+
+  // Zone chart
+  let chartHTML = '';
+  let tableRows = '';
+  let copyLines = [`Cycling Power Zones — FTP: ${ftp}W${wpkg ? ` | W/kg: ${wpkg.toFixed(2)}` : ''}\n`];
+  copyLines.push('Zone | Name | Power Range | % FTP | Purpose');
+
+  ZONES.forEach((z, i) => {
+    const low = Math.round(ftp * z.pctLow / 100);
+    const high = z.pctHigh === 999 ? null : Math.round(ftp * z.pctHigh / 100);
+    const watts = high ? `${fmt(low)}–${fmt(high)} W` : `${fmt(low)}+ W`;
+    const pctStr = z.pctHigh === 999 ? `>150%` : (z.pctLow === 0 ? `<55%` : `${z.pctLow}–${z.pctHigh}%`);
+
+    // Bar width relative to zone 7 max (150%)
+    const barPct = Math.min((z.pctHigh === 999 ? 175 : z.pctHigh) / 175 * 100, 100);
+
+    chartHTML += `
+      <div class="zone-row">
+        <div class="zone-label">Zone ${z.num}</div>
+        <div class="zone-bar-wrap">
+          <div class="zone-bar ${z.cls}" style="width:${barPct}%;background:${z.color}">Z${z.num}</div>
+        </div>
+        <div class="zone-watts">${watts}</div>
+      </div>`;
+
+    tableRows += `<tr>
+      <td><span class="zone-dot" style="background:${z.color}"></span>Z${z.num}</td>
+      <td>${z.name}</td>
+      <td style="text-align:right;font-weight:600">${watts}</td>
+      <td style="text-align:right">${pctStr}</td>
+      <td>${z.purpose}</td>
+    </tr>`;
+
+    copyLines.push(`Z${z.num} | ${z.name} | ${watts} | ${pctStr} | ${z.purpose}`);
+  });
+
+  document.getElementById('zone-chart').innerHTML = chartHTML;
+  document.getElementById('zone-tbody').innerHTML = tableRows;
+  copyText = copyLines.join('\n');
+
+  const resultsEl = document.getElementById('results');
+  resultsEl.style.display = 'block';
+  requestAnimationFrame(() => { resultsEl.classList.add('show'); });
+  resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function copyResults() {
+  if (!copyText) return;
+  const btn = document.querySelector('.copy-btn');
+  navigator.clipboard.writeText(copyText).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy Results'; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = copyText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy Results'; }, 2000);
+  });
+}
+
+function handleEnter(e) {
+  if (e.key === 'Enter') calculate();
+}
+
+// Initial slider sync
+document.getElementById('ftp-slider').addEventListener('input', function() {
+  document.getElementById('ftp').value = this.value;
+  document.getElementById('ftp-slider-display').textContent = this.value + ' W';
+});
+</script>
+</body>
+</html>
