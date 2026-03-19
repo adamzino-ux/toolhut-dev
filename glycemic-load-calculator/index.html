@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glycemic Load Meal Planner — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate glycemic load for your meals with our free GL calculator. Track carbs, GI values, and optimize your diet for better blood sugar control.">
+<link rel="canonical" href="https://toolhut.dev/glycemic-load-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Glycemic Load Meal Planner",
+  "url": "https://toolhut.dev/glycemic-load-calculator/",
+  "description": "Calculate glycemic load for your meals and plan a balanced diet for better blood sugar control.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0" }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #1a1a2e; line-height: 1.6; font-size: 16px; }
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; color: #006299; }
+
+nav { border-bottom: 1px solid #e0e0e0; padding: 0.75rem 1.5rem; }
+nav .nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; }
+nav .site-name { font-weight: 700; font-size: 1.05rem; color: #1a1a2e; }
+nav .site-name:hover { text-decoration: none; color: #0077b6; }
+
+.container { max-width: 640px; margin: 0 auto; padding: 1.5rem; }
+
+h1 { font-size: 1.6rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.4rem; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+.card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.75rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06); margin-bottom: 2rem; }
+.card-title { font-size: 1.05rem; font-weight: 700; color: #1a1a2e; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.4rem; }
+
+label { display: block; font-size: 0.85rem; font-weight: 500; color: #444; margin-bottom: 0.3rem; }
+input, select { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; font-family: inherit; color: #1a1a2e; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; min-height: 44px; }
+input:focus, select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.15); }
+input.error { border-color: #e74c3c; }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 0.25rem; display: none; }
+.error-msg.show { display: block; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-col { display: flex; flex-direction: column; }
+.form-full { margin-bottom: 1rem; }
+
+.btn { background: #0077b6; color: #fff; border: none; padding: 12px 24px; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; min-height: 44px; width: 100%; font-family: inherit; }
+.btn:hover { background: #006299; }
+.btn-sm { padding: 6px 14px; font-size: 0.8rem; min-height: 34px; width: auto; border-radius: 5px; }
+.btn-ghost { background: transparent; color: #0077b6; border: 1px solid #0077b6; }
+.btn-ghost:hover { background: #f0f8ff; }
+.btn-danger { background: #e74c3c; }
+.btn-danger:hover { background: #c0392b; }
+
+.food-item { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 6px; padding: 1rem; margin-bottom: 0.75rem; position: relative; }
+.food-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.food-item-name { font-weight: 600; font-size: 0.9rem; color: #1a1a2e; }
+.food-item-gl { font-size: 0.85rem; font-weight: 700; }
+.food-item-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.6rem; }
+.food-stat { font-size: 0.78rem; color: #555; }
+.food-stat strong { display: block; font-size: 0.9rem; color: #1a1a2e; }
+
+.quick-add-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+.quick-btn { background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 0.5rem 0.75rem; font-size: 0.8rem; cursor: pointer; text-align: left; transition: all 0.15s; min-height: 44px; font-family: inherit; color: #1a1a2e; }
+.quick-btn:hover { border-color: #0077b6; background: #f0f8ff; color: #0077b6; }
+.quick-btn span { display: block; font-size: 0.72rem; color: #777; }
+
+.results-section { opacity: 0; transition: opacity 0.3s ease; display: none; }
+.results-section.visible { opacity: 1; display: block; }
+
+.gl-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.gl-stat-box { text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px; border: 1px solid #e0e0e0; }
+.gl-stat-box .big-num { font-size: 1.8rem; font-weight: 700; color: #0077b6; line-height: 1.1; }
+.gl-stat-box .stat-label { font-size: 0.75rem; color: #666; margin-top: 0.2rem; }
+
+.zone-bar-wrap { margin: 1.25rem 0; }
+.zone-bar-label { font-size: 0.82rem; color: #444; margin-bottom: 0.5rem; font-weight: 500; }
+.zone-bar-track { position: relative; height: 22px; border-radius: 11px; overflow: hidden; background: linear-gradient(to right, #27ae60 0%, #27ae60 40%, #f39c12 40%, #f39c12 70%, #e74c3c 70%, #e74c3c 100%); }
+.zone-marker { position: absolute; top: -4px; width: 14px; height: 30px; background: #1a1a2e; border-radius: 3px; transform: translateX(-50%); transition: left 0.5s ease; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.zone-labels { display: flex; justify-content: space-between; font-size: 0.72rem; color: #666; margin-top: 0.4rem; }
+.zone-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-top: 0.5rem; }
+.zone-low { background: #d4edda; color: #155724; }
+.zone-medium { background: #fff3cd; color: #856404; }
+.zone-high { background: #f8d7da; color: #721c24; }
+
+.breakdown-table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+.breakdown-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 400px; }
+.breakdown-table th { background: #f0f0f0; padding: 8px 10px; text-align: left; font-weight: 600; font-size: 0.82rem; color: #444; border-bottom: 2px solid #ddd; }
+.breakdown-table th.num { text-align: right; }
+.breakdown-table td { padding: 8px 10px; border-bottom: 1px solid #eee; }
+.breakdown-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.breakdown-table tr:nth-child(even) { background: #fafafa; }
+.breakdown-table tr:hover { background: #f0f8ff; }
+.breakdown-table tfoot td { font-weight: 700; background: #f0f0f0; border-top: 2px solid #ddd; }
+
+.gl-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
+.gl-low { background: #27ae60; }
+.gl-medium { background: #f39c12; }
+.gl-high { background: #e74c3c; }
+
+.disclaimer { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 0.85rem 1rem; font-size: 0.8rem; color: #5d4037; margin-top: 1.25rem; line-height: 1.5; }
+
+.copy-row { display: flex; justify-content: flex-end; margin-top: 0.75rem; }
+
+.section { margin-bottom: 2rem; }
+.section h2 { font-size: 1.15rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.7rem; border-bottom: 2px solid #e0e0e0; padding-bottom: 0.4rem; }
+.section p { color: #333; margin-bottom: 0.6rem; font-size: 0.95rem; }
+.section ul { padding-left: 1.3rem; color: #333; font-size: 0.95rem; }
+.section ul li { margin-bottom: 0.4rem; }
+details { margin-bottom: 0.6rem; border: 1px solid #e0e0e0; border-radius: 6px; }
+summary { padding: 0.75rem 1rem; font-weight: 600; font-size: 0.92rem; cursor: pointer; color: #1a1a2e; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+summary::after { content: '+'; font-size: 1.1rem; color: #0077b6; }
+details[open] summary::after { content: '−'; }
+details p { padding: 0 1rem 0.75rem; color: #444; font-size: 0.9rem; }
+
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.related-link { display: block; padding: 0.65rem 0.9rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.85rem; color: #0077b6; background: #f8f9fa; transition: all 0.15s; }
+.related-link:hover { background: #f0f8ff; border-color: #0077b6; text-decoration: none; }
+
+.ad-slot { min-height: 0; margin: 0; }
+
+footer { background: #f8f9fa; border-top: 1px solid #e0e0e0; padding: 1.25rem 1.5rem; text-align: center; font-size: 0.82rem; color: #666; margin-top: 2rem; }
+footer a { color: #0077b6; margin: 0 0.5rem; }
+
+.meals-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.meal-tab { padding: 8px 16px; border: 1px solid #ddd; border-radius: 20px; font-size: 0.85rem; cursor: pointer; background: #fff; color: #555; transition: all 0.15s; font-family: inherit; min-height: 36px; }
+.meal-tab.active { background: #0077b6; color: #fff; border-color: #0077b6; }
+.meal-tab:hover:not(.active) { border-color: #0077b6; color: #0077b6; }
+
+.meal-panel { display: none; }
+.meal-panel.active { display: block; }
+
+.no-foods { color: #888; font-size: 0.9rem; text-align: center; padding: 1.5rem; background: #f8f9fa; border-radius: 6px; border: 1px dashed #ddd; }
+
+@media (max-width: 640px) {
+  h1 { font-size: 1.3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .gl-summary { grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+  .gl-stat-box .big-num { font-size: 1.4rem; }
+  .quick-add-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .food-item-grid { grid-template-columns: 1fr 1fr; }
+  .meals-tabs { gap: 0.35rem; }
+  .meal-tab { padding: 7px 12px; font-size: 0.8rem; }
+}
+@media (max-width: 400px) {
+  .gl-summary { grid-template-columns: 1fr; }
+  .card { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🧰 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Glycemic Load Meal Planner</h1>
+  <p class="subtitle">Calculate glycemic load per food and plan balanced meals to manage blood sugar effectively.</p>
+
+  <!-- MEAL TABS -->
+  <div class="card">
+    <div class="card-title">📋 Meal Planner</div>
+    <div class="meals-tabs" id="mealTabs">
+      <button class="meal-tab active" onclick="switchMeal('breakfast')">Breakfast</button>
+      <button class="meal-tab" onclick="switchMeal('lunch')">Lunch</button>
+      <button class="meal-tab" onclick="switchMeal('dinner')">Dinner</button>
+      <button class="meal-tab" onclick="switchMeal('snack')">Snacks</button>
+    </div>
+
+    <!-- Add Food Form -->
+    <div style="margin-bottom:1rem;">
+      <div class="form-row">
+        <div class="form-col">
+          <label for="foodName">Food Name</label>
+          <input type="text" id="foodName" placeholder="e.g., Brown Rice" maxlength="50">
+          <span class="error-msg" id="nameErr">Please enter a food name.</span>
+        </div>
+        <div class="form-col">
+          <label for="giValue">Glycemic Index (GI)</label>
+          <input type="number" id="giValue" placeholder="0 – 100" min="0" max="100" step="1">
+          <span class="error-msg" id="giErr">Enter a GI value between 0 and 100.</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-col">
+          <label for="carbGrams">Net Carbs (grams)</label>
+          <input type="number" id="carbGrams" placeholder="e.g., 45" min="0" max="500" step="0.1">
+          <span class="error-msg" id="carbErr">Enter carbs between 0 and 500g.</span>
+        </div>
+        <div class="form-col">
+          <label for="servingSize">Serving Size (g, optional)</label>
+          <input type="number" id="servingSize" placeholder="e.g., 150" min="0" max="2000" step="1">
+        </div>
+      </div>
+      <button class="btn" onclick="addFood()">＋ Add Food to Meal</button>
+    </div>
+
+    <!-- Quick Add -->
+    <div style="margin-bottom:0.5rem;">
+      <label style="margin-bottom:0.5rem;">⚡ Quick Add Common Foods</label>
+      <div class="quick-add-grid" id="quickAddGrid"></div>
+    </div>
+  </div>
+
+  <!-- Meal Panels -->
+  <div id="panelBreakfast" class="meal-panel active">
+    <div class="card" style="padding-top:1.25rem;">
+      <div class="card-title">🌅 Breakfast</div>
+      <div id="listBreakfast"><div class="no-foods">No foods added yet. Use the form above.</div></div>
+    </div>
+  </div>
+  <div id="panelLunch" class="meal-panel">
+    <div class="card" style="padding-top:1.25rem;">
+      <div class="card-title">☀️ Lunch</div>
+      <div id="listLunch"><div class="no-foods">No foods added yet. Use the form above.</div></div>
+    </div>
+  </div>
+  <div id="panelDinner" class="meal-panel">
+    <div class="card" style="padding-top:1.25rem;">
+      <div class="card-title">🌙 Dinner</div>
+      <div id="listDinner"><div class="no-foods">No foods added yet. Use the form above.</div></div>
+    </div>
+  </div>
+  <div id="panelSnack" class="meal-panel">
+    <div class="card" style="padding-top:1.25rem;">
+      <div class="card-title">🍎 Snacks</div>
+      <div id="listSnack"><div class="no-foods">No foods added yet. Use the form above.</div></div>
+    </div>
+  </div>
+
+  <!-- Calculate Button -->
+  <button class="btn" style="margin-bottom:1.5rem;" onclick="calculate()">📊 Calculate Glycemic Load</button>
+
+  <!-- Results -->
+  <div class="results-section" id="resultsSection">
+    <div class="card">
+      <div class="card-title">📈 Daily GL Summary</div>
+      <div class="gl-summary" id="glSummary"></div>
+
+      <div class="zone-bar-wrap">
+        <div class="zone-bar-label">Daily Glycemic Load Scale</div>
+        <div class="zone-bar-track"><div class="zone-marker" id="zoneMarker"></div></div>
+        <div class="zone-labels">
+          <span>0 (Low)</span>
+          <span>Low &lt;80</span>
+          <span>Med 80–120</span>
+          <span>High &gt;120</span>
+          <span>200+</span>
+        </div>
+        <div id="zoneBadge"></div>
+      </div>
+
+      <div class="breakdown-table-wrap">
+        <table class="breakdown-table" id="breakdownTable">
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Meal</th>
+              <th class="num">GI</th>
+              <th class="num">Carbs (g)</th>
+              <th class="num">GL</th>
+              <th class="num">Level</th>
+            </tr>
+          </thead>
+          <tbody id="breakdownBody"></tbody>
+          <tfoot id="breakdownFoot"></tfoot>
+        </table>
+      </div>
+
+      <div class="copy-row">
+        <button class="btn btn-ghost btn-sm" id="copyBtn" onclick="copyResults()">📋 Copy Summary</button>
+      </div>
+
+      <div class="disclaimer">⚕️ <strong>Disclaimer:</strong> This tool is for informational purposes only. Glycemic response varies between individuals. Consult a registered dietitian or healthcare professional for personalized medical advice.</div>
+    </div>
+    <div class="ad-slot" id="ad-mid"></div>
+  </div>
+
+  <!-- CONTENT SECTIONS -->
+  <div class="section">
+    <h2>How to Use This Glycemic Load Calculator</h2>
+    <p>Select a meal tab (Breakfast, Lunch, Dinner, or Snacks), then enter a food name, its Glycemic Index (GI) value, and the grams of net carbohydrates in your serving. Click <strong>"Add Food to Meal"</strong> to log it. Repeat for every food in your day, then hit <strong>"Calculate Glycemic Load"</strong> to see your total daily GL, a color-coded zone indicator, and a full breakdown table.</p>
+    <p>Use the <strong>Quick Add</strong> buttons to instantly insert popular foods with pre-filled GI and carb values — just adjust the serving if needed.</p>
+  </div>
+
+  <div class="section">
+    <h2>Why Glycemic Load Matters</h2>
+    <p>Glycemic Index (GI) alone only tells you how fast a food raises blood sugar relative to glucose — not how much it actually affects you in a real serving. A watermelon has a high GI of 72, but a standard 120g slice contains only about 6g of net carbs, giving it a GL of just 4 — firmly in the "low" category. This is why GL is the superior metric for real-world meal planning.</p>
+    <p>Nutritionists and endocrinologists recommend keeping your <strong>daily total GL under 100</strong> for metabolic health, with an ideal target of 60–80 for people managing type 2 diabetes or insulin resistance. For reference, a typical Western diet often exceeds 180–220 GL per day — mostly from white bread, sugary drinks, and refined cereals.</p>
+    <p>Athletes optimizing performance may strategically eat higher-GL foods around training to maximize glycogen replenishment. People managing PCOS, metabolic syndrome, or prediabetes benefit most from keeping daily GL below 80. Even if you're healthy, awareness of GL helps you choose satisfying foods that prevent the energy crashes caused by blood sugar spikes.</p>
+  </div>
+
+  <div class="section">
+    <h2>How It's Calculated</h2>
+    <p>The Glycemic Load formula is straightforward:</p>
+    <div style="background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;margin:0.75rem 0;font-family:monospace;font-size:0.92rem;">
+      GL = (GI × Net Carbohydrates) ÷ 100
+    </div>
+    <p>Where <strong>GI</strong> is the Glycemic Index of the food (0–100 scale, with glucose = 100) and <strong>Net Carbohydrates</strong> is the grams of carbohydrates in your specific serving (total carbs minus fiber). For individual foods, GL is classified as: <strong>Low ≤ 10</strong>, <strong>Medium 11–19</strong>, <strong>High ≥ 20</strong>. For a full day's meals, <strong>Low &lt; 80</strong>, <strong>Medium 80–120</strong>, <strong>High &gt; 120</strong>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Use net carbs, not total carbs.</strong> Fiber doesn't spike blood sugar. Subtract dietary fiber from total carbs for an accurate GL calculation. Labels in the US list fiber separately.</li>
+      <li><strong>Cooking method changes GI.</strong> Al dente pasta has a lower GI than overcooked pasta. Cooled cooked rice has more resistant starch and a lower GI than freshly cooked rice.</li>
+      <li><strong>Eat carbs last.</strong> Research shows eating protein and vegetables before carbohydrates in a meal reduces post-meal blood sugar spikes by up to 30%.</li>
+      <li><strong>Don't judge foods in isolation.</strong> Adding fat, protein, or fiber to a meal lowers the combined GL effect. A potato eaten plain has a much bigger blood sugar impact than one eaten with butter and a salad.</li>
+      <li><strong>Daily total matters most.</strong> A single high-GL food doesn't define your diet. Aim for a total daily GL under 100 by balancing meals throughout the day.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is a good daily glycemic load target?</summary>
+      <p>Most nutrition researchers consider a daily GL under 80 to be low, 80–120 as moderate, and above 120 as high. For healthy adults, aiming for 80–100 is a reasonable target. People with diabetes, insulin resistance, or metabolic syndrome benefit most from staying under 80 per day.</p>
+    </details>
+    <details>
+      <summary>Is glycemic load the same as glycemic index?</summary>
+      <p>No — GI tells you how quickly a food raises blood sugar on a scale of 0–100. GL accounts for both the GI <em>and</em> the actual portion size. This makes GL much more practical: a food can have a high GI but a low GL if you eat a small amount of it (like watermelon). GL is almost always the more useful number for meal planning.</p>
+    </details>
+    <details>
+      <summary>Where can I find GI values for foods?</summary>
+      <p>The University of Sydney maintains the most comprehensive GI database at glycemicindex.com. The Harvard Medical School also publishes an extensive GI/GL list. When in doubt, use 55 as a reasonable estimate for most whole-grain foods and 70+ for refined starchy foods.</p>
+    </details>
+    <details>
+      <summary>Can a low-GL diet help with weight loss?</summary>
+      <p>Yes, evidence suggests low-GL diets improve satiety and reduce hunger hormones compared to high-GL diets with the same calories. By preventing sharp blood sugar spikes and crashes, you're less likely to experience intense cravings 1–2 hours after eating. Several randomized trials show modest additional weight loss benefits over low-fat diets, particularly for people with insulin resistance.</p>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/resting-metabolic-rate-calculator/" class="related-link">🔥 Resting Metabolic Rate Calculator</a>
+      <a href="/post-workout-protein-timing-calculator/" class="related-link">💪 Anabolic Window Protein Timer</a>
+      <a href="/workout-meal-timing-calculator/" class="related-link">⏱️ Meal Timing Optimizer</a>
+      <a href="/weight-loss-plateau-calculator/" class="related-link">📉 Weight Loss Plateau Breaker</a>
+      <a href="/swim-pace-training-zones-calculator/" class="related-link">🏊 Swim Pace & Training Zones</a>
+      <a href="/menstrual-cycle-ovulation-calculator/" class="related-link">📅 Cycle & Ovulation Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div>© <span id="yr"></span> toolhut.dev &nbsp;|&nbsp;
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ── Data ──────────────────────────────────────────────────────────────
+const QUICK_FOODS = [
+  { name: 'White Rice (cooked)', gi: 72, carbs: 45, serving: 180 },
+  { name: 'Brown Rice (cooked)', gi: 50, carbs: 38, serving: 180 },
+  { name: 'White Bread (1 slice)', gi: 75, carbs: 14, serving: 30 },
+  { name: 'Whole Wheat Bread', gi: 69, carbs: 12, serving: 30 },
+  { name: 'Oatmeal (cooked)', gi: 55, carbs: 27, serving: 234 },
+  { name: 'Banana (medium)', gi: 51, carbs: 27, serving: 118 },
+  { name: 'Apple (medium)', gi: 36, carbs: 21, serving: 182 },
+  { name: 'Sweet Potato', gi: 63, carbs: 20, serving: 150 },
+  { name: 'White Potato (baked)', gi: 85, carbs: 30, serving: 150 },
+  { name: 'Pasta (al dente)', gi: 45, carbs: 56, serving: 180 },
+  { name: 'Watermelon', gi: 72, carbs: 6, serving: 120 },
+  { name: 'Lentils (cooked)', gi: 32, carbs: 20, serving: 150 },
+];
+
+// ── State ─────────────────────────────────────────────────────────────
+let meals = { breakfast: [], lunch: [], dinner: [], snack: [] };
+let currentMeal = 'breakfast';
+let foodIdCounter = 0;
+
+// ── Quick Add Buttons ─────────────────────────────────────────────────
+(function buildQuickAdd() {
+  const grid = document.getElementById('quickAddGrid');
+  let html = '';
+  QUICK_FOODS.forEach((f, i) => {
+    const gl = ((f.gi * f.carbs) / 100).toFixed(1);
+    html += `<button class="quick-btn" onclick="quickAdd(${i})">${f.name}<span>GI ${f.gi} · ${f.carbs}g carbs · GL ${gl}</span></button>`;
+  });
+  grid.innerHTML = html;
+})();
+
+function quickAdd(idx) {
+  const f = QUICK_FOODS[idx];
+  const gl = (f.gi * f.carbs) / 100;
+  const item = { id: ++foodIdCounter, name: f.name, gi: f.gi, carbs: f.carbs, serving: f.serving || '', gl: parseFloat(gl.toFixed(2)) };
+  meals[currentMeal].push(item);
+  renderMeal(currentMeal);
+}
+
+// ── Meal Tab Switching ────────────────────────────────────────────────
+function switchMeal(meal) {
+  currentMeal = meal;
+  document.querySelectorAll('.meal-tab').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.meal-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel' + meal.charAt(0).toUpperCase() + meal.slice(1)).classList.add('active');
+}
+
+// ── Add Food ──────────────────────────────────────────────────────────
+function addFood() {
+  const nameEl = document.getElementById('foodName');
+  const giEl   = document.getElementById('giValue');
+  const carbEl = document.getElementById('carbGrams');
+  const servEl = document.getElementById('servingSize');
+
+  let valid = true;
+  clearErrors();
+
+  const name = nameEl.value.trim();
+  const gi   = parseFloat(giEl.value);
+  const carbs= parseFloat(carbEl.value);
+  const serv = servEl.value ? parseFloat(servEl.value) : '';
+
+  if (!name) { showErr('nameErr', nameEl, 'nameErr'); valid = false; }
+  if (isNaN(gi) || gi < 0 || gi > 100) { showErr('giErr', giEl, 'giErr'); valid = false; }
+  if (isNaN(carbs) || carbs < 0 || carbs > 500) { showErr('carbErr', carbEl, 'carbErr'); valid = false; }
+
+  if (!valid) return;
+
+  const gl = (gi * carbs) / 100;
+  const item = { id: ++foodIdCounter, name, gi, carbs, serving: serv, gl: parseFloat(gl.toFixed(2)) };
+  meals[currentMeal].push(item);
+  renderMeal(currentMeal);
+
+  nameEl.value = '';
+  giEl.value = '';
+  carbEl.value = '';
+  servEl.value = '';
+  nameEl.focus();
+}
+
+function showErr(msgId, inputEl, errId) {
+  inputEl.classList.add('error');
+  document.getElementById(errId).classList.add('show');
+}
+
+function clearErrors() {
+  ['foodName','giValue','carbGrams'].forEach(id => {
+    document.getElementById(id).classList.remove('error');
+  });
+  ['nameErr','giErr','carbErr'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+}
+
+// ── Render Meal Foods ─────────────────────────────────────────────────
+function renderMeal(meal) {
+  const list = document.getElementById('list' + meal.charAt(0).toUpperCase() + meal.slice(1));
+  const foods = meals[meal];
+  if (!foods.length) {
+    list.innerHTML = '<div class="no-foods">No foods added yet. Use the form above.</div>';
+    return;
+  }
+  let html = '';
+  foods.forEach(f => {
+    const glClass = f.gl <= 10 ? 'gl-low' : f.gl <= 19 ? 'gl-medium' : 'gl-high';
+    const glColor = f.gl <= 10 ? '#27ae60' : f.gl <= 19 ? '#f39c12' : '#e74c3c';
+    html += `<div class="food-item">
+      <div class="food-item-header">
+        <span class="food-item-name">${escHtml(f.name)}</span>
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+          <span class="food-item-gl" style="color:${glColor}">GL ${f.gl}</span>
+          <button class="btn btn-danger btn-sm" onclick="removeFood('${meal}',${f.id})">✕</button>
+        </div>
+      </div>
+      <div class="food-item-grid">
+        <div class="food-stat"><span>GI</span><strong>${f.gi}</strong></div>
+        <div class="food-stat"><span>Net Carbs</span><strong>${f.carbs}g</strong></div>
+        ${f.serving ? `<div class="food-stat"><span>Serving</span><strong>${f.serving}g</strong></div>` : '<div class="food-stat"></div>'}
+      </div>
+    </div>`;
+  });
+  list.innerHTML = html;
+}
+
+function removeFood(meal, id) {
+  meals[meal] = meals[meal].filter(f => f.id !== id);
+  renderMeal(meal);
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Calculate ─────────────────────────────────────────────────────────
+function calculate() {
+  const allFoods = [];
+  const mealLabels = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner', snack: 'Snacks' };
+
+  Object.entries(meals).forEach(([meal, foods]) => {
+    foods.forEach(f => allFoods.push({ ...f, meal: mealLabels[meal] }));
+  });
+
+  if (!allFoods.length) {
+    alert('Please add at least one food before calculating.');
+    return;
+  }
+
+  const totalGL = allFoods.reduce((s, f) => s + f.gl, 0);
+  const totalCarbs = allFoods.reduce((s, f) => s + f.carbs, 0);
+  const avgGI = allFoods.reduce((s, f) => s + f.gi, 0) / allFoods.length;
+
+  requestAnimationFrame(() => {
+    // Summary boxes
+    const glZone = totalGL < 80 ? 'Low' : totalGL <= 120 ? 'Medium' : 'High';
+    const glColor = totalGL < 80 ? '#27ae60' : totalGL <= 120 ? '#f39c12' : '#e74c3c';
+
+    document.getElementById('glSummary').innerHTML = `
+      <div class="gl-stat-box"><div class="big-num" style="color:${glColor}">${fmt(totalGL,1)}</div><div class="stat-label">Total Daily GL</div></div>
+      <div class="gl-stat-box"><div class="big-num">${fmt(totalCarbs,1)}g</div><div class="stat-label">Total Net Carbs</div></div>
+      <div class="gl-stat-box"><div class="big-num">${fmt(avgGI,0)}</div><div class="stat-label">Avg GI</div></div>
+    `;
+
+    // Zone marker (0-200+ mapped to 0-100%)
+    const pct = Math.min((totalGL / 200) * 100, 100);
+    document.getElementById('zoneMarker').style.left = pct + '%';
+
+    const badgeClass = totalGL < 80 ? 'zone-low' : totalGL <= 120 ? 'zone-medium' : 'zone-high';
+    const badgeText = totalGL < 80 ? '✅ Low GL — Great for blood sugar control'
+                    : totalGL <= 120 ? '⚠️ Moderate GL — Consider reducing refined carbs'
+                    : '🔴 High GL — Consider swapping some high-GI foods';
+    document.getElementById('zoneBadge').innerHTML = `<span class="zone-badge ${badgeClass}">${badgeText}</span>`;
+
+    // Breakdown table
+    let bodyHtml = '';
+    allFoods.forEach(f => {
+      const dotClass = f.gl <= 10 ? 'gl-low' : f.gl <= 19 ? 'gl-medium' : 'gl-high';
+      const lvl = f.gl <= 10 ? 'Low' : f.gl <= 19 ? 'Med' : 'High';
+      bodyHtml += `<tr>
+        <td>${escHtml(f.name)}</td>
+        <td>${f.meal}</td>
+        <td class="num">${f.gi}</td>
+        <td class="num">${fmt(f.carbs,1)}</td>
+        <td class="num"><strong>${fmt(f.gl,1)}</strong></td>
+        <td class="num"><span class="gl-dot ${dotClass}"></span>${lvl}</td>
+      </tr>`;
+    });
+    document.getElementById('breakdownBody').innerHTML = bodyHtml;
+
+    document.getElementById('breakdownFoot').innerHTML = `<tr>
+      <td colspan="3"><strong>Daily Total (${allFoods.length} foods)</strong></td>
+      <td class="num">${fmt(totalCarbs,1)}g</td>
+      <td class="num">${fmt(totalGL,1)}</td>
+      <td class="num"></td>
+    </tr>`;
+
+    // Show results
+    const rs = document.getElementById('resultsSection');
+    rs.style.display = 'block';
+    requestAnimationFrame(() => { rs.classList.add('visible'); });
+    rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function fmt(n, dec) {
+  if (typeof n !== 'number' || isNaN(n)) return '0';
+  return n.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+
+// ── Copy ──────────────────────────────────────────────────────────────
+function copyResults() {
+  const allFoods = [];
+  const mealLabels = { breakfast: 'Breakfast', lunch: 'Lunch', dinner: 'Dinner', snack: 'Snacks' };
+  Object.entries(meals).forEach(([meal, foods]) => {
+    foods.forEach(f => allFoods.push({ ...f, meal: mealLabels[meal] }));
+  });
+  if (!allFoods.length) return;
+
+  const totalGL = allFoods.reduce((s, f) => s + f.gl, 0);
+  const totalCarbs = allFoods.reduce((s, f) => s + f.carbs, 0);
+
+  let text = 'Glycemic Load Meal Summary\n';
+  text += '='.repeat(40) + '\n';
+  allFoods.forEach(f => {
+    text += `${f.meal}: ${f.name} — GI ${f.gi}, Carbs ${f.carbs}g, GL ${f.gl}\n`;
+  });
+  text += '='.repeat(40) + '\n';
+  text += `Total Net Carbs: ${totalCarbs.toFixed(1)}g\nTotal Daily GL: ${totalGL.toFixed(1)}\n`;
+  text += `GL Zone: ${totalGL < 80 ? 'Low' : totalGL <= 120 ? 'Moderate' : 'High'}\n`;
+  text += '\nCalculated at toolhut.dev/glycemic-load-calculator/';
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '📋 Copy Summary'; }, 2000);
+  });
+}
+
+// ── Enter key support ─────────────────────────────────────────────────
+['foodName','giValue','carbGrams','servingSize'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') addFood();
+  });
+});
+</script>
+</body>
+</html>
