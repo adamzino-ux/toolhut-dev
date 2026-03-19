@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anabolic Window Protein Timer Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your optimal post-workout protein timing window. Enter workout details to get personalized protein intake recommendations and timing alerts for maximum muscle gains.">
+<link rel="canonical" href="https://toolhut.dev/post-workout-protein-timing-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Anabolic Window Protein Timer Calculator",
+  "url": "https://toolhut.dev/post-workout-protein-timing-calculator/",
+  "description": "Calculate your optimal post-workout protein timing window and get personalized protein intake recommendations for maximum muscle recovery and growth.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline;color:#006299}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand:hover{text-decoration:none;color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.55rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.3}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.tool-card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid #e8f4fd}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:5px}
+input,select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:0.95rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px;-webkit-appearance:none;appearance:none}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.form-group{margin-bottom:1.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.range-wrap{display:flex;align-items:center;gap:12px}
+input[type="range"]{padding:0;min-height:0;height:6px;cursor:pointer;accent-color:#0077b6;border:none;box-shadow:none}
+input[type="range"]:focus{box-shadow:none}
+.range-val{font-weight:700;color:#0077b6;min-width:50px;font-size:0.95rem;white-space:nowrap}
+.btn{background:#0077b6;color:#fff;border:none;padding:13px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s;margin-top:0.5rem}
+.btn:hover{background:#006299}
+.btn-secondary{background:#f0f4f8;color:#1a1a2e;border:1px solid #ddd;margin-top:0.5rem}
+.btn-secondary:hover{background:#e0e8f0}
+.results{opacity:0;transition:opacity 0.3s ease;display:none}
+.results.show{opacity:1;display:block}
+.big-number{font-size:2.8rem;font-weight:800;color:#0077b6;line-height:1}
+.big-label{font-size:0.9rem;color:#666;margin-top:4px}
+.result-hero{text-align:center;padding:1.5rem;background:#f0f8ff;border-radius:8px;margin-bottom:1.5rem;border:1px solid #c8e6f7}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.result-card{background:#f8f9fa;border-radius:8px;padding:1rem;text-align:center;border:1px solid #e8e8e8}
+.result-card .val{font-size:1.5rem;font-weight:700;color:#0077b6}
+.result-card .lbl{font-size:0.78rem;color:#666;margin-top:2px}
+/* Timing window gauge */
+.gauge-wrap{margin-bottom:1.5rem}
+.gauge-label{font-size:0.85rem;font-weight:600;color:#444;margin-bottom:0.5rem}
+.gauge-bar{height:22px;border-radius:11px;background:linear-gradient(to right,#27ae60 0%,#27ae60 33%,#f39c12 33%,#f39c12 66%,#e74c3c 66%,#e74c3c 100%);position:relative;overflow:visible}
+.gauge-marker{position:absolute;top:-6px;width:12px;height:34px;background:#1a1a2e;border-radius:3px;transform:translateX(-50%);transition:left 0.5s ease;box-shadow:0 2px 6px rgba(0,0,0,0.3)}
+.gauge-zones{display:flex;font-size:0.7rem;color:#666;justify-content:space-between;margin-top:4px}
+.window-status{text-align:center;padding:0.75rem;border-radius:6px;font-weight:700;font-size:0.95rem;margin-bottom:1.5rem}
+.status-optimal{background:#d5f5e3;color:#1e8449;border:1px solid #a9dfbf}
+.status-caution{background:#fef9e7;color:#9a7d0a;border:1px solid #f9e79f}
+.status-late{background:#fdecea;color:#c0392b;border:1px solid #fadbd8}
+/* Timer */
+.timer-section{background:#fff;border:2px solid #0077b6;border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;text-align:center}
+.timer-display{font-size:2.5rem;font-weight:800;font-family:monospace;color:#0077b6;margin:0.5rem 0;letter-spacing:2px}
+.timer-label{font-size:0.85rem;color:#555;margin-bottom:0.5rem}
+.timer-progress-wrap{height:10px;background:#e0e0e0;border-radius:5px;overflow:hidden;margin:0.75rem 0}
+.timer-progress-bar{height:100%;border-radius:5px;transition:width 1s linear,background 0.5s}
+.timer-btns{display:flex;gap:0.75rem;margin-top:1rem}
+.timer-btns .btn{margin-top:0;flex:1;padding:10px 16px;font-size:0.9rem}
+/* Table */
+.table-wrap{overflow-x:auto;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:0.88rem}
+th{background:#f0f0f0;padding:9px 10px;text-align:left;font-weight:600;color:#333;border-bottom:2px solid #ddd}
+td{padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a2e}
+tr:nth-child(even){background:#fafafa}
+td:last-child,th:last-child{text-align:right}
+.td-green{color:#1e8449;font-weight:600}
+.td-yellow{color:#9a7d0a;font-weight:600}
+.td-red{color:#c0392b;font-weight:600}
+.copy-btn{background:#f0f4f8;color:#0077b6;border:1px solid #c8dff0;padding:6px 14px;border-radius:5px;font-size:0.8rem;font-weight:600;cursor:pointer;transition:background 0.2s}
+.copy-btn:hover{background:#dbeaf6}
+.copy-row{display:flex;justify-content:flex-end;margin-bottom:0.75rem}
+/* Disclaimer */
+.disclaimer{background:#fef9e7;border:1px solid #f9e79f;border-radius:6px;padding:0.9rem;font-size:0.78rem;color:#7d6608;margin-bottom:1.5rem}
+.disclaimer strong{color:#6d5a08}
+/* Content */
+.content-section{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:1.5rem 2rem;margin-bottom:2rem}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;margin-top:1.5rem}
+.content-section h2:first-child{margin-top:0}
+.content-section p{font-size:0.92rem;color:#333;margin-bottom:0.75rem}
+.content-section ul{padding-left:1.4rem;margin-bottom:0.75rem}
+.content-section li{font-size:0.92rem;color:#333;margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.75rem;overflow:hidden}
+summary{padding:0.75rem 1rem;cursor:pointer;font-weight:600;font-size:0.92rem;background:#f8f9fa;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:'▼';font-size:0.7rem;color:#0077b6;transition:transform 0.2s}
+details[open] summary::after{transform:rotate(180deg)}
+.details-body{padding:0.75rem 1rem;font-size:0.9rem;color:#333}
+/* Related tools */
+.related-section{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:1.5rem;margin-bottom:2rem}
+.related-section h2{font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:#1a1a2e}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1rem;font-size:0.85rem;font-weight:500;color:#0077b6;transition:background 0.2s}
+.related-link:hover{background:#e8f4fd;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1.5rem;text-align:center;font-size:0.82rem;color:#666}
+.footer-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.5rem;flex-wrap:wrap}
+.formula-box{background:#f0f8ff;border-left:3px solid #0077b6;padding:0.75rem 1rem;border-radius:0 6px 6px 0;font-family:monospace;font-size:0.88rem;margin:0.75rem 0;color:#1a1a2e}
+@media(max-width:640px){
+  .form-row{grid-template-columns:1fr}
+  .result-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  .timer-btns{flex-direction:column}
+  main{padding:1rem}
+  .tool-card{padding:1.25rem}
+  h1{font-size:1.3rem}
+  .big-number{font-size:2.2rem}
+  .timer-display{font-size:2rem}
+}
+@media(max-width:375px){
+  .result-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🏋️ toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Anabolic Window Protein Timer Calculator</h1>
+  <p class="subtitle">Find your optimal post-workout protein timing window, recommended intake, and start a countdown timer to stay on track.</p>
+
+  <div class="tool-card">
+    <div class="section-title">Your Workout Details</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="bodyWeight">Body Weight</label>
+        <input type="number" id="bodyWeight" placeholder="e.g. 180" min="50" max="500" step="0.1">
+        <div class="error-msg" id="err-weight">Please enter a valid weight (50–500).</div>
+      </div>
+      <div class="form-group">
+        <label for="weightUnit">Unit</label>
+        <select id="weightUnit">
+          <option value="lbs">lbs</option>
+          <option value="kg">kg</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="workoutType">Workout Type</label>
+        <select id="workoutType">
+          <option value="strength">Strength / Weight Training</option>
+          <option value="hypertrophy">Hypertrophy (Muscle Building)</option>
+          <option value="hiit">HIIT / Circuit Training</option>
+          <option value="endurance">Endurance / Cardio</option>
+          <option value="sports">Sports / Athletics</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="intensity">Workout Intensity</label>
+        <select id="intensity">
+          <option value="moderate">Moderate</option>
+          <option value="high">High</option>
+          <option value="very_high">Very High</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="workoutDuration">Workout Duration: <span id="durationDisplay">60</span> min</label>
+      <div class="range-wrap">
+        <input type="range" id="workoutDuration" min="15" max="180" value="60" step="5">
+        <span class="range-val" id="durationVal">60 min</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="timeSince">Time Since Workout Ended: <span id="timeSinceDisplay">0</span> min</label>
+      <div class="range-wrap">
+        <input type="range" id="timeSince" min="0" max="240" value="0" step="5">
+        <span class="range-val" id="timeSinceVal">0 min</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="goal">Primary Goal</label>
+        <select id="goal">
+          <option value="muscle_gain">Muscle Gain</option>
+          <option value="fat_loss">Fat Loss + Preserve Muscle</option>
+          <option value="maintenance">Maintenance</option>
+          <option value="endurance_perf">Endurance Performance</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="preworkoutMeal">Pre-Workout Meal?</label>
+        <select id="preworkoutMeal">
+          <option value="yes_recent">Yes, within 1–2 hrs</option>
+          <option value="yes_early">Yes, 2–4 hrs ago</option>
+          <option value="no">No / Fasted</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate My Protein Window</button>
+    <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+
+    <div class="disclaimer">
+      <strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional or registered dietitian for personalized medical or nutritional advice.
+    </div>
+
+    <div class="tool-card">
+      <div class="section-title">Your Protein Timing Results</div>
+
+      <div class="result-hero">
+        <div class="big-number" id="res-protein">0g</div>
+        <div class="big-label">Recommended Post-Workout Protein</div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-card">
+          <div class="val" id="res-window">60 min</div>
+          <div class="lbl">Optimal Window Duration</div>
+        </div>
+        <div class="result-card">
+          <div class="val" id="res-deadline">—</div>
+          <div class="lbl">Latest Ideal Intake Time</div>
+        </div>
+        <div class="result-card">
+          <div class="val" id="res-carbs">0g</div>
+          <div class="lbl">Suggested Carbs</div>
+        </div>
+        <div class="result-card">
+          <div class="val" id="res-ratio">3:1</div>
+          <div class="lbl">Carb:Protein Ratio</div>
+        </div>
+      </div>
+
+      <!-- Gauge -->
+      <div class="gauge-wrap">
+        <div class="gauge-label">⏱ Where You Are in the Anabolic Window</div>
+        <div class="gauge-bar" id="gauge-bar">
+          <div class="gauge-marker" id="gauge-marker" style="left:0%"></div>
+        </div>
+        <div class="gauge-zones">
+          <span>🟢 Optimal (0–60 min)</span>
+          <span>🟡 Caution (60–120 min)</span>
+          <span>🔴 Late (120+ min)</span>
+        </div>
+      </div>
+
+      <div class="window-status" id="window-status">Calculating...</div>
+
+      <!-- Countdown Timer -->
+      <div class="timer-section">
+        <div class="timer-label" id="timer-label">Time remaining in your optimal window</div>
+        <div class="timer-display" id="timer-display">00:00</div>
+        <div class="timer-progress-wrap">
+          <div class="timer-progress-bar" id="timer-progress-bar" style="width:100%;background:#27ae60"></div>
+        </div>
+        <div style="font-size:0.78rem;color:#888;" id="timer-sub">Press Start to begin countdown</div>
+        <div class="timer-btns">
+          <button class="btn" id="timerStartBtn" style="margin-top:0">▶ Start Timer</button>
+          <button class="btn btn-secondary" id="timerResetBtn" style="margin-top:0">↺ Reset Timer</button>
+        </div>
+      </div>
+
+      <!-- Breakdown Table -->
+      <div class="copy-row">
+        <button class="copy-btn" id="copyBtn">📋 Copy Results</button>
+      </div>
+      <div class="table-wrap">
+        <table id="breakdown-table">
+          <thead>
+            <tr><th>Metric</th><th>Value</th><th>Status</th></tr>
+          </thead>
+          <tbody id="breakdown-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Meal Suggestions -->
+      <div class="section-title" style="margin-top:1rem">🍽️ Meal Suggestions</div>
+      <div id="meal-suggestions" style="font-size:0.9rem;color:#333"></div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+    <h2>How to Use This Post Workout Protein Timing Calculator</h2>
+    <p>Enter your body weight, workout type, intensity, duration, and how long ago you finished your workout. Select your fitness goal and whether you had a pre-workout meal. Click "Calculate My Protein Window" to instantly see your personalized protein recommendation, timing window, and a live countdown timer.</p>
+    <p>The calculator outputs your ideal protein intake in grams, optimal carbohydrate pairing, your current position in the anabolic window, and meal suggestions matched to your goal.</p>
+
+    <h2>Why This Matters</h2>
+    <p>The post-workout anabolic window — often called the "golden hour" — is the period after exercise when your muscles are primed to absorb nutrients for repair and growth. During this window, muscle protein synthesis (MPS) is significantly elevated, and getting protein in quickly can meaningfully accelerate recovery.</p>
+    <p>Research published in the <em>Journal of the International Society of Sports Nutrition</em> found that consuming 20–40g of high-quality protein within 60 minutes post-workout maximizes MPS. For a 180 lb (82 kg) strength athlete, that means hitting a specific window — not just "sometime today." Miss it and you leave gains on the table. For fasted trainees or those who trained for 90+ minutes at high intensity, the urgency is even greater.</p>
+    <p>Beyond muscle building, proper timing helps fat-loss clients preserve lean muscle during a deficit, reduces delayed onset muscle soreness (DOMS), and restores glycogen in endurance athletes. Whether you're a competitive bodybuilder or a recreational gym-goer, protein timing is a simple, evidence-backed lever you can pull for better results.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses a multi-factor model based on peer-reviewed sports nutrition research:</p>
+    <div class="formula-box">Protein (g) = Body Weight (kg) × Multiplier (0.25–0.40 g/kg based on intensity & goal)</div>
+    <div class="formula-box">Optimal Window = 30–90 min (shortened for fasted workouts, extended with pre-workout meal)</div>
+    <div class="formula-box">Carbs (g) = Protein × Carb:Protein Ratio (1:1 to 4:1 based on workout type)</div>
+    <p>The <strong>protein multiplier</strong> scales from 0.25 g/kg (light cardio, maintenance goal) to 0.40 g/kg (very high intensity, fasted, muscle gain goal). The <strong>carb-to-protein ratio</strong> ranges from 1:1 for strength training to 4:1 for endurance workouts, reflecting the different demands on glycogen stores. The <strong>anabolic window</strong> shrinks to ~30–45 minutes if you trained fasted, and extends to 90–120 minutes if you had a substantial pre-workout meal within 2 hours.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't confuse total daily protein with post-workout protein.</strong> The 20–40g recommendation is for your post-workout serving, not your daily total (which is typically 1.6–2.2 g/kg/day).</li>
+      <li><strong>Liquid sources are faster.</strong> Whey protein shakes, chocolate milk, or Greek yogurt smoothies absorb more quickly than whole-food meals — ideal if you're short on time.</li>
+      <li><strong>Fasted training? Your window is shorter.</strong> Without a pre-workout meal providing amino acids, muscle breakdown accelerates and you should aim to eat within 30–45 minutes.</li>
+      <li><strong>Don't forget carbs after intense training.</strong> Protein alone won't stop cortisol spikes after HIIT or heavy lifting. Carbs blunt cortisol and restore glycogen.</li>
+      <li><strong>Quality matters as much as timing.</strong> Complete proteins (all 9 essential amino acids) — whey, eggs, chicken, fish — are far more effective than incomplete plant proteins at the same gram count.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Is the "anabolic window" real or just bro science?</summary>
+      <div class="details-body">The concept is grounded in real science, though it's more nuanced than gym folklore suggests. Muscle protein synthesis is genuinely elevated for 24–48 hours post-workout, with the sharpest spike in the first 1–2 hours. For fasted trainees or those who haven't eaten in 3+ hours pre-workout, the window is very real. If you had a protein-rich meal 2 hours before training, the urgency is lower — but it still matters.</div>
+    </details>
+    <details>
+      <summary>How much protein can my body actually absorb at once?</summary>
+      <div class="details-body">The "30g limit" myth has been largely debunked. Your body can absorb and utilize more protein per meal — it just processes it more slowly. However, studies suggest 0.4 g/kg per meal (about 25–40g for most adults) is the sweet spot for maximizing muscle protein synthesis from a single serving. Eating more in one sitting isn't wasted, but spreading intake across 3–5 meals is more effective overall.</div>
+    </details>
+    <details>
+      <summary>Does the type of protein matter post-workout?</summary>
+      <div class="details-body">Yes, significantly. Whey protein is the gold standard post-workout because it's rapidly digested and rich in leucine, the amino acid that triggers MPS most powerfully. Casein (slow-digesting) is better for bedtime. Plant proteins like pea or soy are viable alternatives but often require larger serving sizes or blending to match whey's amino acid profile.</div>
+    </details>
+    <details>
+      <summary>What if I can't eat protein immediately after training?</summary>
+      <div class="details-body">Don't panic — having a protein-rich meal 2–3 hours post-workout is far better than skipping it entirely. If you trained after a substantial pre-workout meal, the urgency is lower. Carry a protein shake or Greek yogurt if you know your schedule is tight. The timer in this calculator helps you plan ahead so you're never caught off guard.</div>
+    </details>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="related-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/workout-meal-timing-calculator/" class="related-link">🕐 Anabolic Window &amp; Meal Timing Optimizer</a>
+      <a href="/weight-loss-plateau-calculator/" class="related-link">📉 Weight Loss Calorie Plateau Breaker</a>
+      <a href="/swim-pace-training-zones-calculator/" class="related-link">🏊 Swim Pace &amp; Training Zones Calculator</a>
+      <a href="/menstrual-cycle-ovulation-calculator/" class="related-link">📅 Menstrual Cycle Tracker &amp; Ovulation Calculator</a>
+      <a href="/body-frame-size-calculator/" class="related-link">📐 Body Frame Size Calculator</a>
+      <a href="/calorie-burn-by-exercise-calculator/" class="related-link">🔥 Calorie Burn by Exercise Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div>© 2025 toolhut.dev — Free Online Tools</div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  // State
+  let timerInterval = null;
+  let timerSeconds = 0;
+  let timerTotalSeconds = 0;
+  let timerRunning = false;
+  let lastCalcData = null;
+
+  // Sliders
+  const durSlider = document.getElementById('workoutDuration');
+  const durVal = document.getElementById('durationVal');
+  const durDisp = document.getElementById('durationDisplay');
+  const tsSlider = document.getElementById('timeSince');
+  const tsVal = document.getElementById('timeSinceVal');
+  const tsDisp = document.getElementById('timeSinceDisplay');
+
+  durSlider.addEventListener('input', () => {
+    const v = durSlider.value;
+    durVal.textContent = v + ' min';
+    durDisp.textContent = v;
+  });
+  tsSlider.addEventListener('input', () => {
+    const v = tsSlider.value;
+    tsVal.textContent = v + ' min';
+    tsDisp.textContent = v;
+  });
+
+  // Enter key
+  document.querySelectorAll('input,select').forEach(el => {
+    el.addEventListener('keydown', e => { if(e.key === 'Enter') triggerCalc(); });
+  });
+
+  document.getElementById('calcBtn').addEventListener('click', triggerCalc);
+  document.getElementById('resetBtn').addEventListener('click', resetAll);
+
+  function triggerCalc(){
+    requestAnimationFrame(() => { calculate(); });
+  }
+
+  function resetAll(){
+    document.getElementById('bodyWeight').value = '';
+    document.getElementById('workoutType').value = 'strength';
+    document.getElementById('intensity').value = 'moderate';
+    durSlider.value = 60; durVal.textContent = '60 min'; durDisp.textContent = '60';
+    tsSlider.value = 0; tsVal.textContent = '0 min'; tsDisp.textContent = '0';
+    document.getElementById('goal').value = 'muscle_gain';
+    document.getElementById('preworkoutMeal').value = 'yes_recent';
+    document.getElementById('weightUnit').value = 'lbs';
+    clearErrors();
+    const res = document.getElementById('results');
+    res.classList.remove('show');
+    stopTimer();
+    lastCalcData = null;
+  }
+
+  function clearErrors(){
+    document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+    document.querySelectorAll('input.error,select.error').forEach(e => e.classList.remove('error'));
+  }
+
+  function showError(id, msgId){
+    document.getElementById(id).classList.add('error');
+    document.getElementById(msgId).classList.add('show');
+  }
+
+  function calculate(){
+    clearErrors();
+    const rawWeight = parseFloat(document.getElementById('bodyWeight').value);
+    const unit = document.getElementById('weightUnit').value;
+    const workoutType = document.getElementById('workoutType').value;
+    const intensity = document.getElementById('intensity').value;
+    const duration = parseInt(durSlider.value);
+    const timeSince = parseInt(tsSlider.value);
+    const goal = document.getElementById('goal').value;
+    const preWorkout = document.getElementById('preworkoutMeal').value;
+
+    // Validate
+    let valid = true;
+    if(isNaN(rawWeight) || rawWeight < 50 || rawWeight > 500){
+      showError('bodyWeight','err-weight');
+      valid = false;
+    }
+    if(!valid) return;
+
+    // Convert to kg
+    const weightKg = unit === 'lbs' ? rawWeight * 0.453592 : rawWeight;
+
+    // Protein multiplier (g per kg body weight)
+    let proteinMult = 0.30; // base
+    const intensityMod = {light: -0.04, moderate: 0, high: 0.05, very_high: 0.10};
+    const goalMod = {muscle_gain: 0.05, fat_loss: 0.03, maintenance: 0, endurance_perf: -0.02};
+    const typeMod = {strength: 0.05, hypertrophy: 0.07, hiit: 0.03, endurance: -0.03, sports: 0.02};
+    const preMod = {yes_recent: -0.03, yes_early: 0, no: 0.05};
+    const durationMod = duration > 90 ? 0.04 : duration > 60 ? 0.02 : 0;
+
+    proteinMult = Math.min(0.45, Math.max(0.20,
+      proteinMult
+      + (intensityMod[intensity] || 0)
+      + (goalMod[goal] || 0)
+      + (typeMod[workoutType] || 0)
+      + (preMod[preWorkout] || 0)
+      + durationMod
+    ));
+
+    const proteinG = Math.round(weightKg * proteinMult);
+
+    // Carb ratio
+    const carbRatios = {strength: 1.5, hypertrophy: 1.5, hiit: 2.5, endurance: 3.5, sports: 2.0};
+    const goalCarbMod = {muscle_gain: 0, fat_loss: -0.5, maintenance: 0, endurance_perf: 0.5};
+    const carbRatio = Math.max(0.5, (carbRatios[workoutType] || 2) + (goalCarbMod[goal] || 0));
+    const carbsG = Math.round(proteinG * carbRatio);
+
+    // Optimal window duration (minutes)
+    let windowMin = 60; // base
+    if(preWorkout === 'no') windowMin = 45;
+    else if(preWorkout === 'yes_recent') windowMin = 90;
+    else windowMin = 70;
+    if(intensity === 'very_high') windowMin = Math.max(windowMin - 10, 30);
+    if(duration > 90) windowMin = Math.max(windowMin - 5, 30);
+
+    // Gauge position (0–240 min mapped to 0–100%)
+    const gaugeMax = 180;
+    const gaugePct = Math.min(100, (timeSince / gaugeMax) * 100);
+
+    // Status
+    let statusClass, statusText, tdClass;
+    const remainMin = Math.max(0, windowMin - timeSince);
+    if(timeSince <= windowMin * 0.5){
+      statusClass = 'status-optimal';
+      statusText = '🟢 You are in the OPTIMAL anabolic window — consume protein now!';
+      tdClass = 'td-green';
+    } else if(timeSince <= windowMin){
+      statusClass = 'status-caution';
+      statusText = '🟡 CAUTION — Your anabolic window is closing. Consume protein ASAP!';
+      tdClass = 'td-yellow';
+    } else {
+      statusClass = 'status-late';
+      statusText = '🔴 LATE — You have passed the optimal window. Still consume protein — recovery still ongoing.';
+      tdClass = 'td-red';
+    }
+
+    // Deadline
+    const now = new Date();
+    const deadlineDate = new Date(now.getTime() + remainMin * 60000);
+    const deadlineStr = remainMin > 0
+      ? deadlineDate.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})
+      : 'Now (window passed)';
+
+    // Meal suggestions
+    const meals = getMealSuggestions(workoutType, goal, proteinG, carbsG);
+
+    // Breakdown rows
+    const breakdownRows = [
+      ['Body Weight', (unit === 'lbs' ? fmtNum(rawWeight,1) + ' lbs' : fmtNum(rawWeight,1) + ' kg') + ' (' + fmtNum(weightKg,1) + ' kg)', '—'],
+      ['Workout Type', capitalize(workoutType.replace('_',' ')), '—'],
+      ['Intensity', capitalize(intensity.replace('_',' ')), '—'],
+      ['Duration', duration + ' minutes', duration > 90 ? 'LONG' : duration >= 45 ? 'OPTIMAL' : 'SHORT'],
+      ['Time Since Workout', timeSince + ' minutes', timeSince <= windowMin ? (timeSince <= windowMin*0.5 ? 'OPTIMAL' : 'CAUTION') : 'LATE'],
+      ['Protein Multiplier', fmtNum(proteinMult,2) + ' g/kg', '—'],
+      ['Recommended Protein', proteinG + 'g', 'TARGET'],
+      ['Recommended Carbs', carbsG + 'g', 'TARGET'],
+      ['Carb:Protein Ratio', fmtNum(carbRatio,1) + ':1', '—'],
+      ['Optimal Window', windowMin + ' minutes', '—'],
+      ['Time Remaining', remainMin > 0 ? remainMin + ' minutes' : 'Window passed', remainMin > windowMin*0.5 ? 'OPTIMAL' : remainMin > 0 ? 'CAUTION' : 'LATE'],
+      ['Latest Intake Time', deadlineStr, remainMin > 0 ? 'UPCOMING' : 'PASSED'],
+    ];
+
+    function rowStatusClass(s){
+      if(s === 'OPTIMAL' || s === 'TARGET' || s === 'UPCOMING') return 'td-green';
+      if(s === 'CAUTION' || s === 'LONG' || s === 'SHORT') return 'td-yellow';
+      if(s === 'LATE' || s === 'PASSED') return 'td-red';
+      return '';
+    }
+
+    let tbodyHTML = '';
+    breakdownRows.forEach(r => {
+      const cls = rowStatusClass(r[2]);
+      tbodyHTML += `<tr><td>${r[0]}</td><td style="text-align:right">${r[1]}</td><td class="${cls}" style="text-align:right">${r[2]}</td></tr>`;
+    });
+
+    // Timer setup
+    stopTimer();
+    timerTotalSeconds = remainMin * 60;
+    timerSeconds = timerTotalSeconds;
+
+    // Build copy text
+    const copyText = [
+      '=== Post-Workout Protein Timing Results ===',
+      `Body Weight: ${unit === 'lbs' ? rawWeight + ' lbs' : rawWeight + ' kg'} (${fmtNum(weightKg,1)} kg)`,
+      `Workout: ${capitalize(workoutType.replace('_',' '))} | ${capitalize(intensity.replace('_',' '))} | ${duration} min`,
+      `Time Since Workout: ${timeSince} min`,
+      `--- Recommendations ---`,
+      `Protein: ${proteinG}g`,
+      `Carbs: ${carbsG}g`,
+      `Carb:Protein Ratio: ${fmtNum(carbRatio,1)}:1`,
+      `Optimal Window: ${windowMin} min`,
+      `Time Remaining: ${remainMin > 0 ? remainMin + ' min' : 'Window passed'}`,
+      `Latest Intake Time: ${deadlineStr}`,
+      `Status: ${statusText.replace(/[🟢🟡🔴]/g,'').trim()}`,
+      `---`,
+      `Generated by toolhut.dev/post-workout-protein-timing-calculator/`
+    ].join('\n');
+
+    lastCalcData = { copyText, timerTotalSeconds, remainMin };
+
+    requestAnimationFrame(() => {
+      // Update hero
+      document.getElementById('res-protein').textContent = proteinG + 'g';
+      document.getElementById('res-window').textContent = windowMin + ' min';
+      document.getElementById('res-deadline').textContent = deadlineStr;
+      document.getElementById('res-carbs').textContent = carbsG + 'g';
+      document.getElementById('res-ratio').textContent = fmtNum(carbRatio,1) + ':1';
+
+      // Gauge
+      document.getElementById('gauge-marker').style.left = gaugePct + '%';
+
+      // Status
+      const ws = document.getElementById('window-status');
+      ws.className = 'window-status ' + statusClass;
+      ws.textContent = statusText;
+
+      // Timer display
+      updateTimerDisplay();
+      document.getElementById('timer-sub').textContent = timerTotalSeconds > 0
+        ? 'Press Start to begin your ' + windowMin + '-minute countdown'
+        : 'Your window has passed — eat protein now!';
+
+      // Breakdown
+      document.getElementById('breakdown-body').innerHTML = tbodyHTML;
+
+      // Meals
+      document.getElementById('meal-suggestions').innerHTML = meals;
+
+      // Show results
+      const res = document.getElementById('results');
+      res.style.display = 'block';
+      requestAnimationFrame(() => { res.classList.add('show'); });
+
+      // Scroll into view
+      setTimeout(() => { res.scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+    });
+  }
+
+  // Timer functions
+  function updateTimerDisplay(){
+    const m = Math.floor(timerSeconds / 60);
+    const s = timerSeconds % 60;
+    document.getElementById('timer-display').textContent =
+      String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+
+    const pct = timerTotalSeconds > 0 ? (timerSeconds / timerTotalSeconds) * 100 : 0;
+    const bar = document.getElementById('timer-progress-bar');
+    bar.style.width = pct + '%';
+    bar.style.background = pct > 60 ? '#27ae60' : pct > 25 ? '#f39c12' : '#e74c3c';
+  }
+
+  function stopTimer(){
+    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+    timerRunning = false;
+    document.getElementById('timerStartBtn').textContent = '▶ Start Timer';
+  }
+
+  document.getElementById('timerStartBtn').addEventListener('click', () => {
+    if(!lastCalcData){ return; }
+    if(timerRunning){
+      stopTimer();
+      return;
+    }
+    if(timerSeconds <= 0){
+      timerSeconds = timerTotalSeconds;
+      updateTimerDisplay();
+    }
+    timerRunning = true;
+    document.getElementById('timerStartBtn').textContent = '⏸ Pause Timer';
+    timerInterval = setInterval(() => {
+      if(timerSeconds > 0){
+        timerSeconds--;
+        updateTimerDisplay();
+        if(timerSeconds === 0){
+          stopTimer();
+          document.getElementById('timer-display').textContent = '⏰ EAT NOW!';
+          document.getElementById('timer-sub').textContent = 'Your anabolic window has ended — consume protein immediately!';
+        }
+      }
+    }, 1000);
+  });
+
+  document.getElementById('timerResetBtn').addEventListener('click', () => {
+    stopTimer();
+    if(lastCalcData){
+      timerSeconds = timerTotalSeconds;
+      updateTimerDisplay();
+    }
+  });
+
+  // Copy button
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    if(!lastCalcData) return;
+    navigator.clipboard.writeText(lastCalcData.copyText).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = '📋 Copy Results'; }, 2000);
+    }).catch(() => {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = lastCalcData.copyText;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = '📋 Copy Results'; }, 2000);
+    });
+  });
+
+  // Helpers
+  function fmtNum(n, dec){
+    if(isNaN(n)) return '0';
+    return dec !== undefined ? n.toFixed(dec) : n.toLocaleString();
+  }
+
+  function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function getMealSuggestions(type, goal, protein, carbs){
+    const meals = {
+      strength: {
+        muscle_gain: ['Whey protein shake + banana + peanut butter','Grilled chicken breast + white rice + broccoli','Eggs + toast + orange juice'],
+        fat_loss: ['Whey protein + berries (no banana)','Grilled chicken + quinoa + greens','Cottage cheese + cucumber slices'],
+        maintenance: ['Greek yogurt + granola + fruit','Tuna wrap with whole grain tortilla','Egg white omelette + veggies'],
+        endurance_perf: ['Chocolate milk (natural 3:1 ratio)','Turkey + rice cakes + banana','Protein bar + sports drink'],
+      },
+      hypertrophy: {
+        muscle_gain: ['Mass gainer shake (whey + oats + banana)','Beef + sweet potato + spinach','Salmon + jasmine rice + avocado'],
+        fat_loss: ['Whey isolate + protein-rich veg stir-fry','Tilapia + cauliflower rice','Egg whites + turkey bacon'],
+        maintenance: ['Greek yogurt parfait + berries','Chicken wrap + hummus','Protein smoothie bowl'],
+        endurance_perf: ['Whey shake + banana + honey','Brown rice + chicken','Energy balls (oats, protein, honey)'],
+      },
+      hiit: {
+        muscle_gain: ['Chocolate milk + protein bar','Whey shake + 2 bananas','Rice pudding + whey'],
+        fat_loss: ['Whey isolate shake + apple','Turkey slices + rice cakes','Egg whites + salsa wrap'],
+        maintenance: ['Greek yogurt + granola','Tuna + crackers + fruit','Protein shake + trail mix'],
+        endurance_perf: ['Sports drink + whey protein','Banana + peanut butter + protein shake','Date balls + protein shake'],
+      },
+      endurance: {
+        muscle_gain: ['Pasta + grilled salmon + olive oil','Sweet potato + ground turkey + veggies','Oatmeal + whey protein + raisins'],
+        fat_loss: ['Quinoa + grilled chicken + leafy greens','Whey shake + fruit salad','Lentil soup + whole grain bread'],
+        maintenance: ['Pasta + tuna + olive oil','Banana smoothie with protein','Rice + chicken + avocado'],
+        endurance_perf: ['Chocolate milk (ideal carb:protein ratio)','Bagel + turkey + fruit','Granola + yogurt + honey'],
+      },
+      sports: {
+        muscle_gain: ['Chicken + rice + veggies','Protein shake + fruit','Beef tacos + beans'],
+        fat_loss: ['Shrimp + zucchini noodles + light sauce','Whey protein + apple','Turkey lettuce wraps'],
+        maintenance: ['Sandwich + protein shake','Yogurt parfait + nuts','Omelette + whole grain toast'],
+        endurance_perf: ['Pasta + lean protein','Banana + peanut butter wrap','Sports drink + protein bar'],
+      }
+    };
+
+    const typeKey = meals[type] || meals['strength'];
+    const list = (typeKey[goal] || typeKey['maintenance'] || []).map(m => `<li>🥗 ${m} <em style="color:#888;font-size:0.8rem">(~${protein}g protein / ~${carbs}g carbs)</em></li>`).join('');
+    return `<ul style="padding-left:1.4rem;line-height:1.9">${list}</ul><p style="font-size:0.8rem;color:#888;margin-top:0.5rem">Adjust portions to hit your exact targets above.</p>`;
+  }
+
+})();
+</script>
+</body>
+</html>
