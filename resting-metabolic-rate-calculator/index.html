@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resting Metabolic Rate Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your Resting Metabolic Rate (RMR) using the Mifflin-St Jeor formula. Find out how many calories your body burns at rest to optimize your diet and fitness goals.">
+<link rel="canonical" href="https://toolhut.dev/resting-metabolic-rate-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Resting Metabolic Rate Calculator",
+  "url": "https://toolhut.dev/resting-metabolic-rate-calculator/",
+  "description": "Calculate your Resting Metabolic Rate (RMR) using the Mifflin-St Jeor formula. Find out how many calories your body burns at rest.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:0.75rem 1.5rem;background:#fff}
+nav .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center}
+nav .site-name{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+nav .site-name:hover{text-decoration:none;color:#0077b6}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.5rem}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:2rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+input[type="number"],select{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px 16px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input[type="number"]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
+.error-msg.show{display:block}
+.gender-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem}
+.gender-btn{border:2px solid #ddd;background:#fff;border-radius:8px;padding:0.75rem;cursor:pointer;font-size:0.95rem;font-weight:500;color:#555;transition:all 0.2s;min-height:44px;display:flex;align-items:center;justify-content:center;gap:0.4rem}
+.gender-btn.active{border-color:#0077b6;background:rgba(0,119,182,0.08);color:#0077b6}
+.unit-toggle{display:flex;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1.5rem}
+.unit-btn{flex:1;padding:10px;border:none;background:#fff;cursor:pointer;font-size:0.9rem;font-weight:500;color:#555;transition:all 0.2s;min-height:44px}
+.unit-btn.active{background:#0077b6;color:#fff}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.calc-btn{width:100%;background:#0077b6;color:#fff;border:none;border-radius:6px;padding:14px 24px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;font-family:inherit}
+.calc-btn:hover{background:#006299}
+.results-section{opacity:0;transition:opacity 0.3s ease;display:none}
+.results-section.visible{opacity:1;display:block}
+.result-main{text-align:center;padding:1.5rem 1rem;background:linear-gradient(135deg,#f0f8ff,#e8f4fc);border-radius:8px;margin-bottom:1.5rem}
+.result-label{font-size:0.9rem;color:#555;margin-bottom:0.25rem}
+.result-value{font-size:3rem;font-weight:800;color:#0077b6;line-height:1}
+.result-unit{font-size:1rem;color:#555;margin-top:0.25rem}
+.copy-btn{background:transparent;border:1px solid #0077b6;color:#0077b6;border-radius:6px;padding:6px 14px;font-size:0.8rem;cursor:pointer;margin-top:0.75rem;font-family:inherit;transition:all 0.2s;min-height:36px}
+.copy-btn:hover{background:#0077b6;color:#fff}
+.zone-label{font-size:0.8rem;font-weight:600;margin-bottom:0.4rem;color:#444}
+.gauge-bar{width:100%;height:28px;border-radius:14px;background:linear-gradient(to right,#3498db 0%,#2ecc71 25%,#27ae60 50%,#f39c12 75%,#e74c3c 100%);position:relative;margin:0.5rem 0 0.25rem;overflow:visible}
+.gauge-pointer{position:absolute;top:-5px;width:4px;height:38px;background:#1a1a2e;border-radius:2px;transform:translateX(-50%);transition:left 0.5s ease}
+.gauge-pointer::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:12px;height:12px;background:#1a1a2e;border-radius:50%}
+.gauge-labels{display:flex;justify-content:space-between;font-size:0.7rem;color:#666;margin-top:0.35rem}
+.zone-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;margin-top:0.5rem}
+.zone-badge.low{background:#dbeafe;color:#1d4ed8}
+.zone-badge.normal{background:#dcfce7;color:#15803d}
+.zone-badge.high{background:#fef9c3;color:#854d0e}
+.zone-badge.very-high{background:#fee2e2;color:#b91c1c}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;color:#333;font-size:0.85rem}
+th.num,td.num{text-align:right}
+tr:nth-child(even) td{background:#fafafa}
+td{padding:10px 12px;border-bottom:1px solid #eee;color:#333}
+tr:last-child td{border-bottom:none}
+.table-wrap{overflow-x:auto;border-radius:6px;border:1px solid #e0e0e0}
+.section-title{font-size:1rem;font-weight:700;margin-bottom:0.75rem;color:#1a1a2e}
+.activity-note{font-size:0.8rem;color:#666;margin-top:0.5rem;font-style:italic}
+.disclaimer{background:#fff8e1;border:1px solid #fdd835;border-radius:6px;padding:0.85rem 1rem;font-size:0.82rem;color:#6d4c00;margin-top:1rem}
+.disclaimer strong{color:#5d4037}
+h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;margin-top:0;padding-top:0}
+.content-section{margin-bottom:2rem}
+.content-section p{color:#333;margin-bottom:0.75rem;font-size:0.95rem}
+.content-section ul{padding-left:1.25rem;margin-bottom:0.75rem}
+.content-section li{color:#333;margin-bottom:0.4rem;font-size:0.95rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.75rem}
+summary{padding:0.85rem 1rem;cursor:pointer;font-weight:600;color:#1a1a2e;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"＋";color:#0077b6;font-size:1rem}
+details[open] summary::after{content:"－"}
+summary::-webkit-details-marker{display:none}
+.faq-answer{padding:0 1rem 1rem;font-size:0.9rem;color:#333;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.related-link{display:block;padding:0.75rem 1rem;border:1px solid #e0e0e0;border-radius:6px;font-size:0.85rem;font-weight:500;color:#0077b6;background:#f8f9fa;transition:all 0.2s}
+.related-link:hover{background:#e8f4fc;border-color:#0077b6;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{border-top:1px solid #e0e0e0;padding:1.5rem;text-align:center;font-size:0.85rem;color:#666;margin-top:2rem}
+footer a{color:#0077b6;margin:0 0.5rem}
+.formula-box{background:#f8f9fa;border-left:4px solid #0077b6;padding:0.85rem 1rem;border-radius:0 6px 6px 0;font-family:monospace;font-size:0.85rem;color:#333;margin:0.75rem 0}
+.tab-row{display:flex;gap:0.5rem;margin-bottom:1rem}
+.tab-btn{flex:1;padding:8px;border:1px solid #ddd;background:#f8f9fa;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;color:#555;transition:all 0.2s;min-height:40px;font-family:inherit}
+.tab-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
+.slider-group{margin-bottom:1.25rem}
+.slider-row{display:flex;align-items:center;gap:0.75rem}
+.slider-row input[type="range"]{flex:1;min-height:36px;accent-color:#0077b6}
+.slider-val{width:60px;text-align:right;font-weight:600;color:#0077b6;font-size:0.9rem}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  .result-value{font-size:2.4rem}
+  .card{padding:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🛠 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Resting Metabolic Rate Calculator</h1>
+  <p class="subtitle">Find out how many calories your body burns at complete rest — the foundation of every smart nutrition plan.</p>
+
+  <div class="card">
+    <!-- Gender -->
+    <div class="form-group">
+      <label>Biological Sex</label>
+      <div class="gender-row">
+        <button class="gender-btn active" id="btn-male" onclick="setGender('male')">♂ Male</button>
+        <button class="gender-btn" id="btn-female" onclick="setGender('female')">♀ Female</button>
+      </div>
+    </div>
+
+    <!-- Units -->
+    <div class="form-group">
+      <label>Unit System</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="unit-metric" onclick="setUnit('metric')">Metric (kg / cm)</button>
+        <button class="unit-btn" id="unit-imperial" onclick="setUnit('imperial')">Imperial (lbs / in)</button>
+      </div>
+    </div>
+
+    <!-- Age -->
+    <div class="form-group">
+      <label for="age">Age (years)</label>
+      <input type="number" id="age" placeholder="e.g. 30" min="1" max="120">
+      <div class="error-msg" id="age-err">Please enter a valid age between 1 and 120.</div>
+    </div>
+
+    <!-- Height / Weight -->
+    <div class="row-2" id="metric-inputs">
+      <div class="form-group">
+        <label for="weight-kg">Weight (kg)</label>
+        <input type="number" id="weight-kg" placeholder="e.g. 70" min="1" max="500">
+        <div class="error-msg" id="wkg-err">Enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="height-cm">Height (cm)</label>
+        <input type="number" id="height-cm" placeholder="e.g. 170" min="50" max="300">
+        <div class="error-msg" id="hcm-err">Enter a valid height.</div>
+      </div>
+    </div>
+
+    <div class="row-2" id="imperial-inputs" style="display:none">
+      <div class="form-group">
+        <label for="weight-lbs">Weight (lbs)</label>
+        <input type="number" id="weight-lbs" placeholder="e.g. 154" min="1" max="1100">
+        <div class="error-msg" id="wlb-err">Enter a valid weight.</div>
+      </div>
+      <div class="form-group">
+        <label for="height-in">Height (inches)</label>
+        <input type="number" id="height-in" placeholder="e.g. 67" min="20" max="120">
+        <div class="error-msg" id="hin-err">Enter a valid height.</div>
+      </div>
+    </div>
+
+    <!-- Activity Level -->
+    <div class="form-group">
+      <label for="activity">Activity Level (for TDEE)</label>
+      <select id="activity">
+        <option value="1.2">Sedentary — little or no exercise</option>
+        <option value="1.375">Lightly Active — light exercise 1–3 days/week</option>
+        <option value="1.55" selected>Moderately Active — moderate exercise 3–5 days/week</option>
+        <option value="1.725">Very Active — hard exercise 6–7 days/week</option>
+        <option value="1.9">Extra Active — very hard exercise or physical job</option>
+      </select>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate My RMR</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results-section" id="results-section">
+    <div class="card">
+      <div class="result-main" id="result-main">
+        <div class="result-label">Your Resting Metabolic Rate</div>
+        <div class="result-value" id="rmr-value">—</div>
+        <div class="result-unit">calories / day</div>
+        <button class="copy-btn" id="copy-btn" onclick="copyResult()">Copy Result</button>
+      </div>
+
+      <!-- Gauge -->
+      <div style="margin-bottom:1.5rem">
+        <div class="zone-label">Where you fall on the RMR spectrum:</div>
+        <div style="position:relative;padding:8px 0 0">
+          <div class="gauge-bar" id="gauge-bar">
+            <div class="gauge-pointer" id="gauge-pointer" style="left:50%"></div>
+          </div>
+          <div class="gauge-labels">
+            <span>Very Low<br>&lt;1,000</span>
+            <span style="text-align:center">Low<br>1,000–1,400</span>
+            <span style="text-align:center">Average<br>1,400–2,000</span>
+            <span style="text-align:center">High<br>2,000–2,600</span>
+            <span style="text-align:right">Very High<br>&gt;2,600</span>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:0.5rem">
+          <span class="zone-badge" id="zone-badge">—</span>
+        </div>
+      </div>
+
+      <!-- TDEE & Calorie Goals -->
+      <div class="section-title">Daily Calorie Targets</div>
+      <div class="table-wrap" style="margin-bottom:1rem">
+        <table id="tdee-table">
+          <thead>
+            <tr><th>Goal</th><th class="num">Calories/Day</th></tr>
+          </thead>
+          <tbody id="tdee-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Formula Comparison Tabs -->
+      <div class="section-title" style="margin-top:1.5rem">Formula Comparison</div>
+      <div class="tab-row">
+        <button class="tab-btn active" id="tab-mifflin" onclick="switchTab('mifflin')">Mifflin-St Jeor</button>
+        <button class="tab-btn" id="tab-harris" onclick="switchTab('harris')">Harris-Benedict</button>
+        <button class="tab-btn" id="tab-katch" onclick="switchTab('katch')">Katch-McArdle</button>
+      </div>
+      <div id="formula-detail"></div>
+
+      <!-- Macro Breakdown -->
+      <div class="section-title" style="margin-top:1.5rem">Macro Breakdown (based on TDEE)</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Macro</th><th class="num">Grams/Day</th><th class="num">Calories</th></tr>
+          </thead>
+          <tbody id="macro-body"></tbody>
+        </table>
+      </div>
+      <p class="activity-note">Based on a balanced 30% protein / 40% carbs / 30% fat split from your TDEE.</p>
+
+      <div class="disclaimer">
+        <strong>⚠ Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional for medical advice. Individual metabolic rates can vary significantly from formula-based estimates.
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content -->
+  <div class="content-section">
+    <h2>How to Use This Resting Metabolic Rate Calculator</h2>
+    <p>Enter your biological sex, age, height, and weight — then pick your typical activity level. Hit "Calculate My RMR" to instantly see how many calories your body burns at complete rest, your Total Daily Energy Expenditure (TDEE), and your personalized calorie targets for weight loss, maintenance, or gain.</p>
+    <p>Switch between Metric (kg/cm) and Imperial (lbs/inches) units at any time. The formula comparison tab shows you results from three leading RMR equations side by side.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Why This Matters</h2>
+    <p>Your Resting Metabolic Rate is the single biggest piece of the calorie-balance puzzle. For most people, RMR accounts for 60–75% of total daily energy expenditure — meaning the majority of the calories you burn happen while you're just sitting still, breathing, and keeping your organs running.</p>
+    <p>Here's why this number is so powerful: a 35-year-old woman, 165 cm, 65 kg has an RMR of roughly 1,430 kcal/day. If she eats 1,200 kcal (a common "diet" target), she's actually eating <em>below her resting needs</em> — triggering metabolic adaptation, muscle loss, and fatigue. Knowing your RMR prevents that mistake.</p>
+    <p>Fitness coaches use RMR to set safe minimum calorie floors for clients. Registered dietitians use it to structure sustainable meal plans. Athletes use it to avoid under-fueling during training blocks. And anyone tracking weight loss uses it to understand why eating less than ~500 kcal below TDEE is usually the sweet spot for fat loss without metabolic damage.</p>
+    <p>If you've ever hit a weight-loss plateau, been constantly fatigued on a diet, or gained fat despite "eating healthy," your actual RMR is likely the missing variable.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>How It's Calculated</h2>
+    <p>This calculator defaults to the <strong>Mifflin-St Jeor equation</strong>, which most dietitians consider the most accurate for the general population (within ±10% of measured RMR in research studies):</p>
+    <div class="formula-box">
+      Men:&nbsp;&nbsp; RMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) + 5<br>
+      Women: RMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) − 161
+    </div>
+    <p>We also show the original <strong>Harris-Benedict</strong> (1919, revised 1984) and the <strong>Katch-McArdle</strong> formula (which accounts for lean body mass, estimated at ~80% of body weight if body fat isn't entered). TDEE is calculated by multiplying your RMR by an activity factor ranging from 1.2 (sedentary) to 1.9 (very active).</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't eat below your RMR.</strong> Consistently eating below your resting calorie needs causes muscle loss and metabolic slowdown. Most health guidelines recommend a minimum of 1,200 kcal (women) or 1,500 kcal (men) regardless of RMR.</li>
+      <li><strong>Use TDEE, not RMR, as your baseline.</strong> RMR is what you burn at rest — TDEE is what you actually burn living your life. Start from TDEE when setting calorie goals.</li>
+      <li><strong>Activity levels are easy to overestimate.</strong> Most gym-goers who exercise 3–4x/week and sit at a desk fall into "Lightly Active," not "Moderately Active."</li>
+      <li><strong>RMR changes with age and muscle mass.</strong> Muscle tissue burns ~6 kcal/kg/day at rest versus ~2 kcal/kg/day for fat tissue. Strength training can meaningfully raise your RMR over time.</li>
+      <li><strong>Formula results are estimates.</strong> True RMR requires indirect calorimetry in a clinical setting. These formulas are accurate within ±10–15% for most healthy adults but can vary more for very lean athletes or individuals with thyroid conditions.</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What's the difference between RMR and BMR?</summary>
+      <div class="faq-answer">Basal Metabolic Rate (BMR) is measured under very strict laboratory conditions — fasted overnight, lying still in a thermoneutral environment. Resting Metabolic Rate (RMR) is measured under more relaxed conditions and is typically 10–20% higher than BMR. In practice, the terms are often used interchangeably, and the difference rarely matters for day-to-day nutrition planning.</div>
+    </details>
+    <details>
+      <summary>Why is my RMR higher or lower than a friend's who weighs the same?</summary>
+      <div class="faq-answer">Body composition plays a huge role — someone with more lean muscle mass will have a higher RMR even at the same body weight because muscle is metabolically active tissue. Age, hormonal factors (thyroid, testosterone, estrogen), genetics, and even ambient temperature can influence your actual metabolic rate. Two people of the same weight, height, and age can have RMRs that differ by 200–300+ calories per day.</div>
+    </details>
+    <details>
+      <summary>How do I use my RMR to lose weight?</summary>
+      <div class="faq-answer">Start with your TDEE (RMR × activity factor) and subtract 300–500 calories to create a moderate deficit. This pace typically produces 0.5–1 lb of fat loss per week. Going more aggressive than 500 kcal below TDEE risks muscle loss, fatigue, and metabolic adaptation. If weight loss stalls after 2–3 weeks, a small calorie adjustment or a "diet break" week at maintenance can help reset your metabolism.</div>
+    </details>
+    <details>
+      <summary>Which formula should I trust — Mifflin, Harris-Benedict, or Katch-McArdle?</summary>
+      <div class="faq-answer">For most people, Mifflin-St Jeor is the most validated in modern research and is the default recommendation from the Academy of Nutrition and Dietetics. Harris-Benedict (revised) is also widely used and generally within 5% of Mifflin. Katch-McArdle is theoretically the most accurate if you know your body fat percentage, because it uses lean body mass. If you've had a DEXA scan or accurate body fat measurement, Katch-McArdle may give you a better estimate.</div>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/post-workout-protein-timing-calculator/" class="related-link">⏱ Anabolic Window Protein Timer Calculator</a>
+      <a href="/workout-meal-timing-calculator/" class="related-link">🍽 Anabolic Window &amp; Meal Timing Optimizer</a>
+      <a href="/weight-loss-plateau-calculator/" class="related-link">📉 Weight Loss Calorie Plateau Breaker</a>
+      <a href="/swim-pace-training-zones-calculator/" class="related-link">🏊 Swim Pace &amp; Training Zones Calculator</a>
+      <a href="/menstrual-cycle-ovulation-calculator/" class="related-link">🗓 Menstrual Cycle Tracker &amp; Ovulation Calculator</a>
+      <a href="/body-frame-size-calculator/" class="related-link">📐 Body Frame Size Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <br><br>
+  © <span id="yr"></span> toolhut.dev
+</footer>
+
+<script>
+let gender = 'male';
+let unit = 'metric';
+let currentRMR = 0;
+let currentTDEE = 0;
+let currentTab = 'mifflin';
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+function setGender(g) {
+  gender = g;
+  document.getElementById('btn-male').classList.toggle('active', g === 'male');
+  document.getElementById('btn-female').classList.toggle('active', g === 'female');
+}
+
+function setUnit(u) {
+  unit = u;
+  document.getElementById('unit-metric').classList.toggle('active', u === 'metric');
+  document.getElementById('unit-imperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('metric-inputs').style.display = u === 'metric' ? 'grid' : 'none';
+  document.getElementById('imperial-inputs').style.display = u === 'imperial' ? 'grid' : 'none';
+}
+
+function clearErrors() {
+  ['age-err','wkg-err','hcm-err','wlb-err','hin-err'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.classList.remove('show'); }
+  });
+  ['age','weight-kg','height-cm','weight-lbs','height-in'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('error');
+  });
+}
+
+function showError(inputId, msgId) {
+  const inp = document.getElementById(inputId);
+  const msg = document.getElementById(msgId);
+  if (inp) inp.classList.add('error');
+  if (msg) msg.classList.add('show');
+}
+
+function fmt(n, dec = 0) {
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
+function calcMifflin(wkg, hcm, age, isMale) {
+  const base = 10 * wkg + 6.25 * hcm - 5 * age;
+  return isMale ? base + 5 : base - 161;
+}
+
+function calcHarris(wkg, hcm, age, isMale) {
+  if (isMale) {
+    return 88.362 + 13.397 * wkg + 4.799 * hcm - 5.677 * age;
+  } else {
+    return 447.593 + 9.247 * wkg + 3.098 * hcm - 4.330 * age;
+  }
+}
+
+function calcKatch(wkg) {
+  const lbm = wkg * 0.80;
+  return 370 + 21.6 * lbm;
+}
+
+function getZone(rmr) {
+  if (rmr < 1000) return { label: 'Very Low', cls: 'low', pct: 5 };
+  if (rmr < 1400) return { label: 'Low', cls: 'low', pct: 20 };
+  if (rmr < 1700) return { label: 'Average', cls: 'normal', pct: 45 };
+  if (rmr < 2000) return { label: 'Average-High', cls: 'normal', pct: 58 };
+  if (rmr < 2600) return { label: 'High', cls: 'high', pct: 75 };
+  return { label: 'Very High', cls: 'very-high', pct: 95 };
+}
+
+function buildFormulaDetail(wkg, hcm, age, isMale, actFactor) {
+  const miff = Math.round(calcMifflin(wkg, hcm, age, isMale));
+  const harr = Math.round(calcHarris(wkg, hcm, age, isMale));
+  const katc = Math.round(calcKatch(wkg));
+
+  const formulas = {
+    mifflin: {
+      name: 'Mifflin-St Jeor (1990)',
+      rmr: miff,
+      tdee: Math.round(miff * actFactor),
+      desc: 'The most widely recommended formula for healthy adults. Developed from a large modern study of 498 subjects.',
+      formula: isMale
+        ? `(10 × ${wkg}) + (6.25 × ${hcm}) − (5 × ${age}) + 5 = ${fmt(miff)} kcal`
+        : `(10 × ${wkg}) + (6.25 × ${hcm}) − (5 × ${age}) − 161 = ${fmt(miff)} kcal`
+    },
+    harris: {
+      name: 'Harris-Benedict (Revised 1984)',
+      rmr: harr,
+      tdee: Math.round(harr * actFactor),
+      desc: 'Originally developed in 1919 and revised in 1984. Widely used for over a century, slightly less accurate than Mifflin for modern populations.',
+      formula: isMale
+        ? `88.362 + (13.397 × ${wkg}) + (4.799 × ${hcm}) − (5.677 × ${age}) = ${fmt(harr)} kcal`
+        : `447.593 + (9.247 × ${wkg}) + (3.098 × ${hcm}) − (4.330 × ${age}) = ${fmt(harr)} kcal`
+    },
+    katch: {
+      name: 'Katch-McArdle',
+      rmr: katc,
+      tdee: Math.round(katc * actFactor),
+      desc: 'Uses lean body mass instead of total weight — theoretically more accurate for lean athletes. Estimated LBM at 80% of body weight.',
+      formula: `LBM ≈ ${fmt(wkg * 0.8, 1)} kg → 370 + (21.6 × ${fmt(wkg * 0.8, 1)}) = ${fmt(katc)} kcal`
+    }
+  };
+
+  const f = formulas[currentTab];
+  return `
+    <div style="background:#f8f9fa;border-radius:6px;padding:1rem">
+      <div style="font-weight:700;color:#1a1a2e;margin-bottom:0.4rem">${f.name}</div>
+      <p style="font-size:0.85rem;color:#555;margin-bottom:0.6rem">${f.desc}</p>
+      <div class="formula-box" style="margin:0.5rem 0">${f.formula}</div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.75rem">
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem;text-align:center">
+          <div style="font-size:0.75rem;color:#666">RMR</div>
+          <div style="font-size:1.4rem;font-weight:800;color:#0077b6">${fmt(f.rmr)}</div>
+          <div style="font-size:0.75rem;color:#888">kcal/day</div>
+        </div>
+        <div style="flex:1;min-width:120px;background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem;text-align:center">
+          <div style="font-size:0.75rem;color:#666">TDEE</div>
+          <div style="font-size:1.4rem;font-weight:800;color:#27ae60">${fmt(f.tdee)}</div>
+          <div style="font-size:0.75rem;color:#888">kcal/day</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  ['mifflin','harris','katch'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+  });
+
+  // Get stored values and rebuild detail only
+  const wkg = parseFloat(document.getElementById('weight-kg').value) || (parseFloat(document.getElementById('weight-lbs').value) / 2.20462);
+  const hcm = parseFloat(document.getElementById('height-cm').value) || (parseFloat(document.getElementById('height-in').value) * 2.54);
+  const age = parseFloat(document.getElementById('age').value);
+  const actFactor = parseFloat(document.getElementById('activity').value);
+  const isMale = gender === 'male';
+
+  requestAnimationFrame(() => {
+    document.getElementById('formula-detail').innerHTML = buildFormulaDetail(wkg, hcm, age, isMale, actFactor);
+  });
+}
+
+function calculate() {
+  clearErrors();
+  let valid = true;
+
+  const age = parseFloat(document.getElementById('age').value);
+  if (!age || age < 1 || age > 120) { showError('age','age-err'); valid = false; }
+
+  let wkg, hcm;
+  if (unit === 'metric') {
+    wkg = parseFloat(document.getElementById('weight-kg').value);
+    hcm = parseFloat(document.getElementById('height-cm').value);
+    if (!wkg || wkg < 1 || wkg > 500) { showError('weight-kg','wkg-err'); valid = false; }
+    if (!hcm || hcm < 50 || hcm > 300) { showError('height-cm','hcm-err'); valid = false; }
+  } else {
+    const lbs = parseFloat(document.getElementById('weight-lbs').value);
+    const inches = parseFloat(document.getElementById('height-in').value);
+    if (!lbs || lbs < 1 || lbs > 1100) { showError('weight-lbs','wlb-err'); valid = false; }
+    if (!inches || inches < 20 || inches > 120) { showError('height-in','hin-err'); valid = false; }
+    if (valid) {
+      wkg = lbs / 2.20462;
+      hcm = inches * 2.54;
+    }
+  }
+
+  if (!valid) return;
+
+  const actFactor = parseFloat(document.getElementById('activity').value);
+  const isMale = gender === 'male';
+
+  const rmr = Math.round(calcMifflin(wkg, hcm, age, isMale));
+  const tdee = Math.round(rmr * actFactor);
+  currentRMR = rmr;
+  currentTDEE = tdee;
+
+  const zone = getZone(rmr);
+
+  // TDEE table rows
+  const goals = [
+    { label: 'Extreme Fat Loss (−1000)', cal: tdee - 1000, note: '⚠ Very aggressive' },
+    { label: 'Fat Loss (−500)', cal: tdee - 500, note: '~0.5 kg/week loss' },
+    { label: 'Mild Fat Loss (−250)', cal: tdee - 250, note: '~0.25 kg/week loss' },
+    { label: 'Maintenance', cal: tdee, note: 'Your TDEE' },
+    { label: 'Lean Gain (+250)', cal: tdee + 250, note: 'Slow muscle gain' },
+    { label: 'Muscle Gain (+500)', cal: tdee + 500, note: 'Moderate bulk' },
+  ];
+
+  let tdeeRows = '';
+  goals.forEach(g => {
+    const calVal = Math.max(0, g.cal);
+    tdeeRows += `<tr><td>${g.label}<br><span style="font-size:0.75rem;color:#888">${g.note}</span></td><td class="num">${fmt(calVal)}</td></tr>`;
+  });
+
+  // Macro rows
+  const protCal = Math.round(tdee * 0.30);
+  const carbCal = Math.round(tdee * 0.40);
+  const fatCal  = Math.round(tdee * 0.30);
+  const protG   = Math.round(protCal / 4);
+  const carbG   = Math.round(carbCal / 4);
+  const fatG    = Math.round(fatCal / 9);
+  const macroRows = `
+    <tr><td>Protein (30%)</td><td class="num">${fmt(protG)}</td><td class="num">${fmt(protCal)}</td></tr>
+    <tr><td>Carbohydrates (40%)</td><td class="num">${fmt(carbG)}</td><td class="num">${fmt(carbCal)}</td></tr>
+    <tr><td>Fat (30%)</td><td class="num">${fmt(fatG)}</td><td class="num">${fmt(fatCal)}</td></tr>
+  `;
+
+  const formulaHTML = buildFormulaDetail(wkg, hcm, age, isMale, actFactor);
+
+  requestAnimationFrame(() => {
+    document.getElementById('rmr-value').textContent = fmt(rmr);
+    document.getElementById('gauge-pointer').style.left = zone.pct + '%';
+    const badge = document.getElementById('zone-badge');
+    badge.textContent = zone.label + ' RMR';
+    badge.className = 'zone-badge ' + zone.cls;
+    document.getElementById('tdee-body').innerHTML = tdeeRows;
+    document.getElementById('macro-body').innerHTML = macroRows;
+    document.getElementById('formula-detail').innerHTML = formulaHTML;
+
+    const sec = document.getElementById('results-section');
+    sec.style.display = 'block';
+    requestAnimationFrame(() => { sec.classList.add('visible'); });
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function copyResult() {
+  const text = `My Resting Metabolic Rate: ${fmt(currentRMR)} calories/day\nTDEE: ${fmt(currentTDEE)} calories/day\nCalculated at toolhut.dev`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy Result'; }, 2000);
+  }).catch(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copy failed';
+    setTimeout(() => { btn.textContent = 'Copy Result'; }, 2000);
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { calculate(); }
+});
+</script>
+</body>
+</html>
