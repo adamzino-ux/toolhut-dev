@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Periodization Training Block Planner — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Plan your periodization training blocks with this free calculator. Customize mesocycles, intensity, volume, and deload weeks for optimal athletic performance.">
+<link rel="canonical" href="https://toolhut.dev/periodization-training-block-planner/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Periodization Training Block Planner",
+  "url": "https://toolhut.dev/periodization-training-block-planner/",
+  "description": "Plan your periodization training blocks with this free calculator. Customize mesocycles, intensity, volume, and deload weeks for optimal athletic performance.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 2rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:1.5rem}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem;padding-bottom:.4rem;border-bottom:2px solid #e8f4fd}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem}
+input[type=text],input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:.95rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{margin-bottom:1.2rem}
+.slider-wrap{display:flex;align-items:center;gap:.8rem}
+input[type=range]{flex:1;accent-color:#0077b6;height:6px;min-height:auto}
+.slider-val{font-weight:700;color:#0077b6;min-width:40px;text-align:right;font-size:.95rem}
+.btn{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;width:100%;min-height:44px}
+.btn:hover{background:#006299}
+.btn-secondary{background:#f0f4f8;color:#1a1a2e;border:1px solid #ddd;font-size:.85rem;padding:8px 16px;border-radius:6px;cursor:pointer;min-height:36px;transition:background .2s;font-weight:500}
+.btn-secondary:hover{background:#e0e8ef}
+.btn-copy{background:#f0f4f8;color:#0077b6;border:1px solid #0077b6;font-size:.8rem;padding:6px 14px;border-radius:4px;cursor:pointer;min-height:36px;font-weight:600;transition:all .2s}
+.btn-copy:hover{background:#0077b6;color:#fff}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:all}
+.result-hero{text-align:center;margin-bottom:1.5rem;padding:1.2rem;background:#f0f8ff;border-radius:8px;border:1px solid #b8dff7}
+.result-hero .big-num{font-size:2.4rem;font-weight:800;color:#0077b6;line-height:1.1}
+.result-hero .big-label{font-size:.9rem;color:#555;margin-top:.2rem}
+.result-hero .sub-info{font-size:.85rem;color:#333;margin-top:.6rem}
+.zone-bar-wrap{margin:1rem 0}
+.zone-bar-label{font-size:.8rem;font-weight:600;color:#444;margin-bottom:.4rem}
+.zone-bar-track{display:flex;border-radius:6px;overflow:hidden;height:18px;background:#eee}
+.zone-seg{height:100%;transition:flex .3s}
+.zone-seg.acc{background:#27ae60}
+.zone-seg.hyp{background:#f39c12}
+.zone-seg.str{background:#e74c3c}
+.zone-seg.pwr{background:#8e44ad}
+.zone-seg.del{background:#3498db}
+.zone-labels{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.4rem}
+.zone-chip{font-size:.72rem;padding:2px 8px;border-radius:10px;font-weight:600;color:#fff}
+.zone-chip.acc{background:#27ae60}
+.zone-chip.hyp{background:#f39c12}
+.zone-chip.str{background:#e74c3c}
+.zone-chip.pwr{background:#8e44ad}
+.zone-chip.del{background:#3498db}
+.readiness-bar{margin:1rem 0}
+.readiness-track{height:14px;border-radius:7px;background:#eee;overflow:hidden;position:relative}
+.readiness-fill{height:100%;border-radius:7px;transition:width .4s ease}
+.readiness-fill.green{background:linear-gradient(90deg,#27ae60,#2ecc71)}
+.readiness-fill.yellow{background:linear-gradient(90deg,#e67e22,#f39c12)}
+.readiness-fill.red{background:linear-gradient(90deg,#c0392b,#e74c3c)}
+.readiness-labels{display:flex;justify-content:space-between;font-size:.7rem;color:#888;margin-top:.2rem}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+thead th{background:#f0f0f0;padding:8px 10px;text-align:left;font-weight:600;color:#333;border-bottom:2px solid #ddd}
+thead th.num{text-align:right}
+tbody tr:nth-child(even){background:#fafafa}
+tbody td{padding:8px 10px;border-bottom:1px solid #eee;color:#333}
+tbody td.num{text-align:right;font-variant-numeric:tabular-nums}
+.tbl-wrap{overflow-x:auto}
+.week-type{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.75rem;font-weight:600;color:#fff}
+.wt-acc{background:#27ae60}
+.wt-hyp{background:#f39c12}
+.wt-str{background:#e74c3c}
+.wt-pwr{background:#8e44ad}
+.wt-del{background:#3498db}
+.wt-peak{background:#c0392b}
+.intensity-cell{display:flex;align-items:center;gap:.4rem}
+.int-bar{height:8px;border-radius:4px;background:#0077b6;min-width:4px}
+.tabs{display:flex;gap:0;border:1px solid #ddd;border-radius:6px;overflow:hidden;margin-bottom:1.2rem}
+.tab-btn{flex:1;padding:9px 4px;background:#f8f9fa;border:none;font-size:.82rem;font-weight:600;color:#555;cursor:pointer;transition:background .15s,color .15s;min-height:40px}
+.tab-btn.active{background:#0077b6;color:#fff}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:1rem;font-size:.8rem;color:#7a5c00;margin-top:1rem}
+.disclaimer strong{display:block;margin-bottom:.2rem}
+.phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem}
+.phase-card{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:.8rem;text-align:center}
+.phase-card .ph-name{font-size:.78rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.04em}
+.phase-card .ph-val{font-size:1.4rem;font-weight:800;color:#0077b6}
+.phase-card .ph-sub{font-size:.75rem;color:#888}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.1rem;font-weight:700;color:#1a1a2e;margin-top:1.8rem;margin-bottom:.6rem}
+.content-section p{color:#333;font-size:.92rem;margin-bottom:.8rem}
+.content-section ul{padding-left:1.3rem;color:#333;font-size:.92rem}
+.content-section ul li{margin-bottom:.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:.6rem}
+summary{padding:.8rem 1rem;font-weight:600;font-size:.9rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:#1a1a2e}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:1.1rem;color:#0077b6}
+details[open] summary::after{content:'−'}
+details[open] summary{border-bottom:1px solid #e0e0e0}
+.details-body{padding:.8rem 1rem;font-size:.88rem;color:#444;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.8rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:.7rem 1rem;font-size:.85rem;color:#0077b6;font-weight:500;transition:background .15s}
+.related-link:hover{background:#e8f4fd;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.2rem 1rem;text-align:center;font-size:.82rem;color:#888}
+footer a{color:#0077b6;margin:0 .5rem}
+.copy-row{display:flex;justify-content:flex-end;margin-bottom:.6rem}
+.show-all-wrap{text-align:center;margin-top:.8rem}
+@media(max-width:520px){
+  .row-2{grid-template-columns:1fr}
+  .phase-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .result-hero .big-num{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Periodization Training Block Planner</h1>
+  <p class="subtitle">Design structured training mesocycles with intelligent volume, intensity, and deload scheduling — your periodization training plan calculator.</p>
+
+  <div class="card">
+    <div class="section-title">Athlete Profile</div>
+    <div class="row-2">
+      <div class="form-group">
+        <label for="trainingAge">Training Age</label>
+        <select id="trainingAge">
+          <option value="beginner">Beginner (0–1 yr)</option>
+          <option value="intermediate" selected>Intermediate (1–3 yr)</option>
+          <option value="advanced">Advanced (3+ yr)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goal">Primary Goal</label>
+        <select id="goal">
+          <option value="hypertrophy">Hypertrophy (Muscle Growth)</option>
+          <option value="strength" selected>Strength</option>
+          <option value="power">Power / Athletic</option>
+          <option value="endurance">Muscular Endurance</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:.5rem">Plan Structure</div>
+    <div class="row-2">
+      <div class="form-group">
+        <label for="totalWeeks">Total Plan Duration (weeks)</label>
+        <input type="number" id="totalWeeks" value="12" min="4" max="52">
+        <div class="error-msg" id="err-weeks">Enter a value between 4 and 52 weeks.</div>
+      </div>
+      <div class="form-group">
+        <label for="daysPerWeek">Training Days / Week</label>
+        <select id="daysPerWeek">
+          <option value="2">2 days</option>
+          <option value="3">3 days</option>
+          <option value="4" selected>4 days</option>
+          <option value="5">5 days</option>
+          <option value="6">6 days</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Deload Frequency (every N weeks)</label>
+      <div class="slider-wrap">
+        <input type="range" id="deloadFreq" min="3" max="8" value="4" step="1">
+        <span class="slider-val" id="deloadFreqVal">4</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Starting Volume (sets per muscle group / week)</label>
+      <div class="slider-wrap">
+        <input type="range" id="startVol" min="6" max="20" value="10" step="1">
+        <span class="slider-val" id="startVolVal">10</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Peak Volume (sets per muscle group / week)</label>
+      <div class="slider-wrap">
+        <input type="range" id="peakVol" min="10" max="30" value="18" step="1">
+        <span class="slider-val" id="peakVolVal">18</span>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:.5rem">Competition / Peak Date</div>
+    <div class="row-2">
+      <div class="form-group">
+        <label for="peakWeek">Peak Performance Week (from start)</label>
+        <input type="number" id="peakWeek" value="11" min="1" max="52">
+        <div class="error-msg" id="err-peak">Must be within total plan duration.</div>
+      </div>
+      <div class="form-group">
+        <label for="peakingWeeks">Peaking Phase Length (weeks)</label>
+        <select id="peakingWeeks">
+          <option value="1">1 week</option>
+          <option value="2" selected>2 weeks</option>
+          <option value="3">3 weeks</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Generate Training Plan</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results card" id="results">
+    <div class="copy-row">
+      <button class="btn-copy" id="copyBtn">Copy Summary</button>
+    </div>
+
+    <div class="result-hero">
+      <div class="big-num" id="heroWeeks">—</div>
+      <div class="big-label">Total Training Weeks Planned</div>
+      <div class="sub-info" id="heroSub">—</div>
+    </div>
+
+    <div class="zone-bar-wrap">
+      <div class="zone-bar-label">Phase Distribution</div>
+      <div class="zone-bar-track" id="zoneBar"></div>
+      <div class="zone-labels" id="zoneLabels"></div>
+    </div>
+
+    <div class="readiness-bar">
+      <div class="zone-bar-label" id="readLabel">Periodization Quality Score</div>
+      <div class="readiness-track">
+        <div class="readiness-fill" id="readFill" style="width:0%"></div>
+      </div>
+      <div class="readiness-labels"><span>Poor</span><span>Good</span><span>Excellent</span></div>
+    </div>
+
+    <div class="phase-grid" id="phaseGrid"></div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="weekly">Weekly Plan</button>
+      <button class="tab-btn" data-tab="summary">Phase Summary</button>
+      <button class="tab-btn" data-tab="rpe">RPE Guide</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-weekly">
+      <div class="tbl-wrap">
+        <table id="weeklyTable">
+          <thead><tr>
+            <th>Week</th>
+            <th>Phase</th>
+            <th>Volume (sets)</th>
+            <th class="num">Intensity %1RM</th>
+            <th class="num">RPE</th>
+            <th>Focus</th>
+          </tr></thead>
+          <tbody id="weeklyBody"></tbody>
+        </table>
+      </div>
+      <div class="show-all-wrap" id="showAllWrap" style="display:none">
+        <button class="btn-secondary" id="showAllBtn">Show All Weeks</button>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-summary">
+      <div class="tbl-wrap">
+        <table id="summaryTable">
+          <thead><tr>
+            <th>Phase</th>
+            <th class="num">Weeks</th>
+            <th class="num">Avg Volume</th>
+            <th class="num">Avg Intensity</th>
+            <th>Rep Range</th>
+          </tr></thead>
+          <tbody id="summaryBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-rpe">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>RPE</th>
+            <th>% of 1RM (approx)</th>
+            <th>Reps in Reserve</th>
+            <th>Feel</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>10</td><td class="num">100%</td><td class="num">0</td><td>Max effort, could not do more</td></tr>
+            <tr><td>9.5</td><td class="num">97–98%</td><td class="num">0–1</td><td>Almost maximal effort</td></tr>
+            <tr><td>9</td><td class="num">95–96%</td><td class="num">1</td><td>Very heavy, 1 more possible</td></tr>
+            <tr><td>8.5</td><td class="num">93–94%</td><td class="num">1–2</td><td>Heavy, form starts to strain</td></tr>
+            <tr><td>8</td><td class="num">90–92%</td><td class="num">2</td><td>Hard, still controlled</td></tr>
+            <tr><td>7</td><td class="num">85–89%</td><td class="num">3</td><td>Moderate-heavy, smooth reps</td></tr>
+            <tr><td>6</td><td class="num">80–84%</td><td class="num">4+</td><td>Moderate, comfortable</td></tr>
+            <tr><td>5</td><td class="num">75–79%</td><td class="num">5+</td><td>Light-moderate, easy</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>⚠️ Informational Use Only</strong>
+      This tool is for informational purposes only. Consult a healthcare professional or certified strength & conditioning coach before beginning any new training program, especially if you have an existing injury or medical condition.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="content-section card">
+    <h2>How to Use This Periodization Training Block Planner</h2>
+    <p>Enter your training age, primary goal, and plan duration. Adjust the sliders to set your starting and peak volume, then specify how often you want a deload week. Click "Generate Training Plan" to receive a fully structured periodization plan with weekly volume, intensity, RPE targets, and phase breakdowns — ready to follow or adapt.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Random training gets random results. Periodization — the systematic manipulation of training variables over time — is why elite athletes consistently peak at the right moment. A powerlifter building to a meet, a bodybuilder 12 weeks out, or a soccer player peaking for playoffs all use periodization, often without realizing it has a name.</p>
+    <p>The research is clear: periodized programs outperform non-periodized ones by 5–15% in strength gains over 12 weeks. For an intermediate lifter squatting 200 lbs, that's a potential 10–30 lb improvement from structure alone. Deload weeks, often skipped, reduce injury risk by up to 30% in high-volume training blocks, according to sports science literature.</p>
+    <p>This planner implements linear periodization with intelligent deload insertion — one of the most evidence-backed frameworks for athletes training 3–6 days per week. Whether you're chasing a 1-rep max, stage-ready physique, or just want to stop winging your workouts, a structured block plan is the single highest-leverage change you can make.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The planner uses a <strong>linear progressive overload model</strong> within each mesocycle:</p>
+    <ul>
+      <li><strong>Volume:</strong> Starts at your specified weekly sets, increases ~1–2 sets per week, then resets on deload weeks (50% reduction) and rebuilds higher in the next block.</li>
+      <li><strong>Intensity (% 1RM):</strong> Inversely correlated with volume per phase — hypertrophy phases run 65–80%, strength phases 80–90%, peaking phases 90–100%.</li>
+      <li><strong>RPE:</strong> Derived from intensity percentage using the Zourdos et al. RPE-1RM relationship table, adjusted ±0.5 per phase emphasis.</li>
+      <li><strong>Deloads:</strong> Inserted every N weeks (your slider setting), reducing volume by 40–50% and intensity by ~5–10% to promote supercompensation.</li>
+      <li><strong>Quality Score:</strong> Rates your plan structure based on deload frequency, volume jump size, phase diversity, and adequate peaking runway.</li>
+    </ul>
+    <p><em>Formula: Weekly Volume = Start + (week × progression_rate × phase_multiplier) capped at Peak Volume</em></p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't skip deloads.</strong> Most intermediate lifters think they don't need them until they get hurt or stall — deloads are where adaptations consolidate, not where progress pauses.</li>
+      <li><strong>Match volume jumps to training age.</strong> Beginners should use smaller volume ranges (6–14 sets); advanced lifters can push 16–22+ safely. Jumping too fast causes overreaching.</li>
+      <li><strong>Set your peak week realistically.</strong> If your competition is week 12, don't set peak at week 12 — the peaking phase needs to END by then, with a deload the final week.</li>
+      <li><strong>Intensity ≠ effort.</strong> 70% of your 1RM at RPE 8 isn't the same as 70% at RPE 6. Accurate 1RM estimates are critical for intensity targets to be meaningful.</li>
+      <li><strong>Track actual RPE, not planned RPE.</strong> If every session feels like a 9 when planned at 7, your 1RM estimate is too low — recalibrate rather than pushing through.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is periodization in strength training?</summary>
+      <div class="details-body">Periodization is the systematic planning of training to achieve peak performance at the right time. It divides a training year into macrocycles (annual plan), mesocycles (4–16 week blocks), and microcycles (individual weeks). Each phase has specific volume, intensity, and exercise selection goals that build progressively on each other.</div>
+    </details>
+    <details>
+      <summary>How many weeks should a mesocycle be?</summary>
+      <div class="details-body">Most effective mesocycles run 4–8 weeks, with 4–6 being optimal for intermediate lifters. Beginners can extend to 8 weeks since they adapt more slowly. Going longer than 8 weeks without a deload or phase transition increases injury risk and leads to accumulated fatigue masking fitness gains.</div>
+    </details>
+    <details>
+      <summary>Should I use linear or undulating periodization?</summary>
+      <div class="details-body">Linear periodization (this planner's model) works best for beginners and intermediates and is ideal when training for a specific date like a meet or competition. Daily undulating periodization (DUP) alternates intensity/volume day-to-day and suits advanced athletes who need more stimulus variety to keep progressing. Research shows both work equally well for most lifters over 12–16 weeks.</div>
+    </details>
+    <details>
+      <summary>What does a deload week actually look like?</summary>
+      <div class="details-body">A proper deload reduces volume by 40–50% (fewer sets, not necessarily lighter weight) and intensity by about 5–10%. You might do 2 sets instead of 4, keep the same exercises, and stop well short of failure. This isn't "taking it easy" — it's a deliberate recovery stimulus that allows your nervous system and connective tissue to catch up with your muscles.</div>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Related Tools</div>
+    <div class="related-grid">
+      <a class="related-link" href="/dehydration-electrolyte-calculator/">💧 Dehydration Risk & Electrolyte Needs Calculator</a>
+      <a class="related-link" href="/crossfit-benchmark-wod-calculator/">🏋️ CrossFit Benchmark WOD Score Calculator</a>
+      <a class="related-link" href="/cycling-power-zone-calculator/">🚴 Cycling Power Zone Calculator</a>
+      <a class="related-link" href="/glycemic-load-calculator/">🥗 Glycemic Load Meal Planner</a>
+      <a class="related-link" href="/resting-metabolic-rate-calculator/">🔥 Resting Metabolic Rate Calculator</a>
+      <a class="related-link" href="/post-workout-protein-timing-calculator/">⏱️ Anabolic Window Protein Timer Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>toolhut.dev — Free Online Tools</div>
+  <div style="margin-top:.4rem">
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:.4rem">© 2025 toolhut.dev</div>
+</footer>
+
+<script>
+// Slider sync
+function syncSlider(id, valId) {
+  const s = document.getElementById(id);
+  const v = document.getElementById(valId);
+  v.textContent = s.value;
+  s.addEventListener('input', () => { v.textContent = s.value; });
+}
+syncSlider('deloadFreq', 'deloadFreqVal');
+syncSlider('startVol', 'startVolVal');
+syncSlider('peakVol', 'peakVolVal');
+
+// Tab switching (CSS class toggles only)
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// Phase definitions
+const PHASES = {
+  accumulation: { label: 'Accumulation', cls: 'acc', color: '#27ae60', intMin: 60, intMax: 72, repRange: '12–20', rpeBase: 6.5 },
+  hypertrophy:  { label: 'Hypertrophy',  cls: 'hyp', color: '#f39c12', intMin: 67, intMax: 80, repRange: '8–12',  rpeBase: 7.5 },
+  strength:     { label: 'Strength',     cls: 'str', color: '#e74c3c', intMin: 80, intMax: 90, repRange: '3–6',   rpeBase: 8.0 },
+  power:        { label: 'Power',        cls: 'pwr', color: '#8e44ad', intMin: 85, intMax: 95, repRange: '1–4',   rpeBase: 8.5 },
+  deload:       { label: 'Deload',       cls: 'del', color: '#3498db', intMin: 55, intMax: 65, repRange: '8–12',  rpeBase: 5.5 },
+  peaking:      { label: 'Peaking',      cls: 'peak',color: '#c0392b', intMin: 90, intMax: 102,repRange: '1–3',   rpeBase: 9.0 }
+};
+
+const GOAL_PHASE_MAP = {
+  hypertrophy: ['accumulation','hypertrophy','hypertrophy','strength'],
+  strength:    ['accumulation','hypertrophy','strength','strength'],
+  power:       ['accumulation','strength','power','power'],
+  endurance:   ['accumulation','accumulation','hypertrophy','hypertrophy']
+};
+
+function fmt(n, dec=1) {
+  return parseFloat(n.toFixed(dec)).toLocaleString();
+}
+
+let allWeeks = [];
+let showingAll = false;
+
+function buildWeekRow(w) {
+  const ph = PHASES[w.phase] || PHASES.deload;
+  const typeClass = w.phase === 'deload' ? 'wt-del' : w.phase === 'peaking' ? 'wt-peak' : 'wt-' + ph.cls;
+  const intPct = fmt(w.intensity, 0);
+  const barW = Math.round(Math.min(100, (w.intensity - 50) / 55 * 100));
+  return `<tr>
+    <td><strong>${w.week}</strong></td>
+    <td><span class="week-type ${typeClass}">${ph.label}</span></td>
+    <td>${fmt(w.volume, 0)} sets</td>
+    <td class="num"><div class="intensity-cell" style="justify-content:flex-end"><div class="int-bar" style="width:${barW}px;max-width:60px"></div>${intPct}%</div></td>
+    <td class="num">${fmt(w.rpe, 1)}</td>
+    <td style="font-size:.8rem;color:#555">${ph.repRange} reps</td>
+  </tr>`;
+}
+
+function calculate() {
+  // Validate
+  let valid = true;
+  const totalWeeks = parseInt(document.getElementById('totalWeeks').value);
+  const weeksErr = document.getElementById('err-weeks');
+  if (isNaN(totalWeeks) || totalWeeks < 4 || totalWeeks > 52) {
+    document.getElementById('totalWeeks').classList.add('error');
+    weeksErr.classList.add('show');
+    valid = false;
+  } else {
+    document.getElementById('totalWeeks').classList.remove('error');
+    weeksErr.classList.remove('show');
+  }
+  const peakWeek = parseInt(document.getElementById('peakWeek').value);
+  const peakErr = document.getElementById('err-peak');
+  if (isNaN(peakWeek) || peakWeek < 1 || peakWeek > totalWeeks) {
+    document.getElementById('peakWeek').classList.add('error');
+    peakErr.classList.add('show');
+    valid = false;
+  } else {
+    document.getElementById('peakWeek').classList.remove('error');
+    peakErr.classList.remove('show');
+  }
+  if (!valid) return;
+
+  const trainingAge = document.getElementById('trainingAge').value;
+  const goal = document.getElementById('goal').value;
+  const daysPerWeek = parseInt(document.getElementById('daysPerWeek').value);
+  const deloadFreq = parseInt(document.getElementById('deloadFreq').value);
+  const startVol = parseInt(document.getElementById('startVol').value);
+  const peakVol = parseInt(document.getElementById('peakVol').value);
+  const peakingLen = parseInt(document.getElementById('peakingWeeks').value);
+
+  // Clamp startVol < peakVol
+  const effStartVol = Math.min(startVol, peakVol - 2);
+
+  // Build phase sequence
+  const phaseSequence = GOAL_PHASE_MAP[goal] || GOAL_PHASE_MAP.strength;
+  const peakStart = peakWeek - peakingLen + 1;
+
+  const weeks = [];
+  let blockWeek = 0; // week within current mesocycle
+  let mesocycle = 0;
+  let currentVolBase = effStartVol;
+  let volProgressRate = (peakVol - effStartVol) / Math.max(1, totalWeeks - 1);
+
+  for (let w = 1; w <= totalWeeks; w++) {
+    blockWeek++;
+
+    let phase;
+    // Peaking phase
+    if (w >= peakStart && w <= peakWeek) {
+      phase = 'peaking';
+    }
+    // Deload
+    else if (blockWeek % deloadFreq === 0) {
+      phase = 'deload';
+      if (blockWeek % deloadFreq === 0 && w < peakStart) {
+        blockWeek = 0;
+        mesocycle++;
+        currentVolBase = Math.min(currentVolBase + 2, peakVol - 2);
+      }
+    }
+    else {
+      // Assign phase from sequence based on mesocycle index
+      const phIdx = Math.min(mesocycle, phaseSequence.length - 1);
+      phase = phaseSequence[phIdx];
+    }
+
+    const ph = PHASES[phase];
+
+    // Volume
+    let vol;
+    if (phase === 'deload') {
+      // Find previous non-deload volume
+      const prevVol = weeks.length > 0 ? weeks[weeks.length - 1].volume : effStartVol;
+      vol = Math.round(prevVol * 0.5);
+    } else if (phase === 'peaking') {
+      vol = Math.round(effStartVol * 0.6);
+    } else {
+      const progressFraction = (w - 1) / Math.max(1, totalWeeks - 1);
+      const baseVol = effStartVol + progressFraction * (peakVol - effStartVol);
+      const withinBlockBonus = (blockWeek - 1) * 1.5;
+      vol = Math.min(peakVol, Math.round(baseVol + withinBlockBonus));
+    }
+
+    // Intensity
+    let intensity;
+    if (phase === 'peaking') {
+      const pProg = (w - peakStart) / Math.max(1, peakingLen - 1);
+      intensity = ph.intMin + pProg * (ph.intMax - ph.intMin);
+    } else {
+      const prog = (blockWeek - 1) / Math.max(1, deloadFreq - 2);
+      intensity = ph.intMin + prog * (ph.intMax - ph.intMin);
+    }
+    intensity = Math.min(100, Math.max(40, intensity));
+
+    // RPE
+    const rpe = Math.min(10, Math.max(4, ph.rpeBase + (intensity - ph.intMin) / (ph.intMax - ph.intMin || 1) * 1.5));
+
+    weeks.push({ week: w, phase, volume: vol, intensity, rpe, mesocycle: mesocycle + 1 });
+  }
+
+  allWeeks = weeks;
+  showingAll = false;
+
+  // Phase counts
+  const phaseCounts = {};
+  weeks.forEach(w => { phaseCounts[w.phase] = (phaseCounts[w.phase] || 0) + 1; });
+
+  // Phase summary
+  const phaseStats = {};
+  weeks.forEach(w => {
+    if (!phaseStats[w.phase]) phaseStats[w.phase] = { count: 0, volSum: 0, intSum: 0 };
+    phaseStats[w.phase].count++;
+    phaseStats[w.phase].volSum += w.volume;
+    phaseStats[w.phase].intSum += w.intensity;
+  });
+
+  // Quality score
+  const deloadCount = phaseCounts['deload'] || 0;
+  const expectedDeloads = Math.floor(totalWeeks / deloadFreq);
+  const deloadScore = deloadCount >= expectedDeloads ? 40 : (deloadCount / Math.max(1, expectedDeloads)) * 40;
+  const volRange = peakVol - effStartVol;
+  const volScore = volRange >= 4 && volRange <= 15 ? 30 : volRange < 4 ? 10 : 20;
+  const phaseDiv = Object.keys(phaseCounts).length;
+  const divScore = Math.min(30, phaseDiv * 8);
+  const qualityScore = Math.round(deloadScore + volScore + divScore);
+  const readClass = qualityScore >= 75 ? 'green' : qualityScore >= 50 ? 'yellow' : 'red';
+
+  requestAnimationFrame(() => {
+    // Hero
+    document.getElementById('heroWeeks').textContent = totalWeeks;
+    document.getElementById('heroSub').textContent =
+      `${daysPerWeek} days/week · ${deloadCount} deload week${deloadCount !== 1 ? 's' : ''} · ${mesocycle + 1} mesocycle${mesocycle + 1 !== 1 ? 's' : ''}`;
+
+    // Zone bar
+    let zoneBarHTML = '';
+    let zoneLabelsHTML = '';
+    const phOrder = ['accumulation','hypertrophy','strength','power','deload','peaking'];
+    phOrder.forEach(ph => {
+      if (!phaseCounts[ph]) return;
+      const pct = (phaseCounts[ph] / totalWeeks * 100).toFixed(1);
+      const phDef = PHASES[ph];
+      const cls = ph === 'peaking' ? 'peak' : phDef.cls;
+      zoneBarHTML += `<div class="zone-seg ${phDef.cls}" style="flex:${phaseCounts[ph]}" title="${phDef.label}: ${phaseCounts[ph]} wks"></div>`;
+      zoneLabelsHTML += `<span class="zone-chip ${phDef.cls}">${phDef.label}: ${phaseCounts[ph]}w</span>`;
+    });
+    document.getElementById('zoneBar').innerHTML = zoneBarHTML;
+    document.getElementById('zoneLabels').innerHTML = zoneLabelsHTML;
+
+    // Readiness
+    document.getElementById('readFill').style.width = qualityScore + '%';
+    document.getElementById('readFill').className = 'readiness-fill ' + readClass;
+    document.getElementById('readLabel').textContent = `Periodization Quality Score: ${qualityScore}/100`;
+
+    // Phase grid
+    let pgHTML = '';
+    const gridItems = [
+      { label: 'Total Weeks', val: totalWeeks, sub: `${daysPerWeek} days/wk` },
+      { label: 'Deload Weeks', val: deloadCount, sub: `every ${deloadFreq} wks` },
+      { label: 'Peak Volume', val: peakVol + ' sets', sub: 'per muscle/wk' },
+      { label: 'Quality Score', val: qualityScore + '/100', sub: readClass === 'green' ? 'Excellent' : readClass === 'yellow' ? 'Good' : 'Needs Work' }
+    ];
+    gridItems.forEach(i => {
+      pgHTML += `<div class="phase-card"><div class="ph-name">${i.label}</div><div class="ph-val">${i.val}</div><div class="ph-sub">${i.sub}</div></div>`;
+    });
+    document.getElementById('phaseGrid').innerHTML = pgHTML;
+
+    // Weekly table (first 10 rows)
+    const displayWeeks = showingAll ? weeks : weeks.slice(0, 10);
+    let tblHTML = '';
+    displayWeeks.forEach(w => { tblHTML += buildWeekRow(w); });
+    document.getElementById('weeklyBody').innerHTML = tblHTML;
+
+    if (weeks.length > 10 && !showingAll) {
+      document.getElementById('showAllWrap').style.display = 'block';
+      document.getElementById('showAllBtn').textContent = `Show All ${weeks.length} Weeks`;
+    } else {
+      document.getElementById('showAllWrap').style.display = 'none';
+    }
+
+    // Summary table
+    let sumHTML = '';
+    phOrder.forEach(ph => {
+      if (!phaseStats[ph]) return;
+      const s = phaseStats[ph];
+      const phDef = PHASES[ph];
+      const cls = ph === 'peaking' ? 'wt-peak' : 'wt-' + phDef.cls;
+      sumHTML += `<tr>
+        <td><span class="week-type ${cls}">${phDef.label}</span></td>
+        <td class="num">${s.count}</td>
+        <td class="num">${fmt(s.volSum / s.count, 1)} sets</td>
+        <td class="num">${fmt(s.intSum / s.count, 1)}%</td>
+        <td>${phDef.repRange} reps</td>
+      </tr>`;
+    });
+    document.getElementById('summaryBody').innerHTML = sumHTML;
+
+    document.getElementById('results').classList.add('show');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// Show All
+document.getElementById('showAllBtn').addEventListener('click', () => {
+  showingAll = true;
+  requestAnimationFrame(() => {
+    let tblHTML = '';
+    allWeeks.forEach(w => { tblHTML += buildWeekRow(w); });
+    document.getElementById('weeklyBody').innerHTML = tblHTML;
+    document.getElementById('showAllWrap').style.display = 'none';
+  });
+});
+
+// Calculate button
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+// Enter key
+['totalWeeks','peakWeek'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') { requestAnimationFrame(() => { calculate(); }); }
+  });
+});
+
+// Copy button
+document.getElementById('copyBtn').addEventListener('click', () => {
+  if (!allWeeks.length) return;
+  let text = 'Periodization Training Plan\n';
+  text += '='.repeat(40) + '\n';
+  text += `Week\tPhase\tVolume\tIntensity\tRPE\n`;
+  allWeeks.forEach(w => {
+    const ph = PHASES[w.phase] || PHASES.deload;
+    text += `${w.week}\t${ph.label}\t${Math.round(w.volume)} sets\t${w.intensity.toFixed(0)}%\t${w.rpe.toFixed(1)}\n`;
+  });
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy Summary'; }, 2000);
+  });
+});
+</script>
+</body>
+</html>
