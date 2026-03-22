@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrossFit Benchmark WOD Score Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate and rank your CrossFit benchmark WOD scores for Fran, Cindy, Murph, Grace, and more. See where you stand vs. elite, advanced, and beginner times.">
+<link rel="canonical" href="https://toolhut.dev/crossfit-benchmark-wod-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CrossFit Benchmark WOD Score Calculator",
+  "url": "https://toolhut.dev/crossfit-benchmark-wod-calculator/",
+  "description": "Calculate and rank your CrossFit benchmark WOD scores. Compare against elite, advanced, intermediate, and beginner benchmarks.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline;color:#006299}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0.75rem 1.5rem}
+nav .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:0.5rem}
+nav .site-name{font-weight:700;font-size:1.1rem;color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.2}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.35rem}
+select,input[type="text"],input[type="number"]{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none}
+select:focus,input:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+select.error,input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
+.error-msg.show{display:block}
+.time-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.btn{background:#0077b6;color:#fff;border:none;padding:12px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s}
+.btn:hover{background:#006299}
+.btn-secondary{background:#f8f9fa;color:#0077b6;border:1px solid #0077b6;margin-top:0.5rem}
+.btn-secondary:hover{background:#e8f4fb}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:all}
+.big-score{text-align:center;margin:1rem 0}
+.big-score .score-val{font-size:2.8rem;font-weight:900;color:#0077b6;display:block;line-height:1}
+.big-score .score-label{font-size:0.9rem;color:#666;margin-top:0.3rem}
+.rank-badge{display:inline-block;padding:5px 18px;border-radius:20px;font-weight:700;font-size:1rem;margin-top:0.5rem}
+.rank-elite{background:#1a7a4a;color:#fff}
+.rank-advanced{background:#2980b9;color:#fff}
+.rank-intermediate{background:#f39c12;color:#fff}
+.rank-beginner{background:#e74c3c;color:#fff}
+/* Zone bar */
+.zone-bar-wrap{margin:1.5rem 0 0.5rem}
+.zone-bar-label{font-size:0.8rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+.zone-bar-track{display:flex;border-radius:6px;overflow:hidden;height:22px;border:1px solid #e0e0e0}
+.zone-seg{flex:1;position:relative;transition:opacity 0.2s}
+.zone-seg.active-zone{outline:3px solid #1a1a2e;outline-offset:-2px}
+.zone-seg span{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:0.65rem;color:#555;white-space:nowrap}
+.zone-marker-row{display:flex;justify-content:space-between;font-size:0.65rem;color:#888;margin-top:20px}
+.zone-legend{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;font-size:0.78rem}
+.zone-legend-item{display:flex;align-items:center;gap:4px}
+.zone-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+table{width:100%;border-collapse:collapse;font-size:0.88rem}
+thead th{background:#f0f0f0;padding:8px 10px;text-align:left;font-weight:600;color:#333}
+thead th:last-child{text-align:right}
+tbody tr:nth-child(odd){background:#fafafa}
+tbody tr:nth-child(even){background:#fff}
+tbody td{padding:8px 10px;border-bottom:1px solid #eee}
+tbody td:last-child{text-align:right;font-weight:600}
+.table-wrap{overflow-x:auto}
+.copy-btn{background:#f8f9fa;border:1px solid #ddd;border-radius:5px;padding:5px 14px;font-size:0.8rem;cursor:pointer;color:#444;margin-top:0.75rem;transition:background 0.2s;min-height:36px}
+.copy-btn:hover{background:#e8e8e8}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:0.9rem 1rem;font-size:0.8rem;color:#6d5000;margin-top:1.2rem}
+.disclaimer strong{color:#5a4000}
+section.content{margin-bottom:2rem}
+section.content h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.6rem;margin-top:1.5rem}
+section.content p{margin-bottom:0.75rem;color:#333;font-size:0.93rem}
+section.content ul{margin:0.5rem 0 0.75rem 1.2rem;color:#333;font-size:0.93rem}
+section.content ul li{margin-bottom:0.35rem}
+details{border:1px solid #e0e0e0;border-radius:6px;padding:0.75rem 1rem;margin-bottom:0.6rem;background:#fafafa}
+summary{font-weight:600;cursor:pointer;color:#0077b6;font-size:0.92rem}
+details p{margin-top:0.6rem;font-size:0.88rem;color:#333}
+.related-tools{background:#f8f9fa;border-radius:8px;padding:1.2rem 1.5rem;margin-bottom:2rem}
+.related-tools h2{font-size:1rem;font-weight:700;margin-bottom:0.7rem;color:#1a1a2e}
+.related-tools ul{list-style:none;display:flex;flex-wrap:wrap;gap:0.5rem}
+.related-tools ul li a{background:#fff;border:1px solid #e0e0e0;border-radius:20px;padding:5px 14px;font-size:0.83rem;color:#0077b6;display:block}
+.related-tools ul li a:hover{background:#e8f4fb;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{text-align:center;padding:1.5rem;font-size:0.82rem;color:#888;border-top:1px solid #e0e0e0;background:#fff;margin-top:1rem}
+footer a{color:#0077b6;margin:0 0.4rem}
+.wod-desc{background:#f8f9fa;border-radius:6px;padding:0.75rem 1rem;font-size:0.83rem;color:#444;margin-top:-0.5rem;margin-bottom:1rem;border-left:3px solid #0077b6}
+.tab-row{display:flex;gap:0;border-bottom:2px solid #e0e0e0;margin-bottom:1.5rem}
+.tab-btn{background:none;border:none;padding:9px 16px;font-size:0.88rem;font-weight:600;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;min-height:40px}
+.tab-btn.active{color:#0077b6;border-bottom-color:#0077b6}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.score-type-hint{font-size:0.78rem;color:#888;margin-top:0.25rem}
+@media(max-width:640px){
+  h1{font-size:1.3rem}
+  .card{padding:1.25rem}
+  .time-row{grid-template-columns:1fr 1fr}
+  .big-score .score-val{font-size:2.2rem}
+  .tab-btn{padding:8px 10px;font-size:0.82rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🏋️ toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>CrossFit Benchmark WOD Score Calculator</h1>
+  <p class="subtitle">Enter your score for any benchmark WOD and see exactly where you rank — beginner to elite.</p>
+
+  <div class="card">
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab('timed')" id="tab-timed">For Time WODs</button>
+      <button class="tab-btn" onclick="switchTab('amrap')" id="tab-amrap">AMRAP WODs</button>
+      <button class="tab-btn" onclick="switchTab('max')" id="tab-max">Max Load WODs</button>
+    </div>
+
+    <!-- TIMED TAB -->
+    <div class="tab-panel active" id="panel-timed">
+      <div class="form-group">
+        <label for="timedWod">Select Benchmark WOD</label>
+        <select id="timedWod" onchange="updateTimedDesc()">
+          <option value="fran">Fran (21-15-9: Thrusters 95/65lb + Pull-ups)</option>
+          <option value="grace">Grace (30 Clean & Jerks 135/95lb)</option>
+          <option value="isabel">Isabel (30 Snatches 135/95lb)</option>
+          <option value="helen">Helen (3 Rounds: 400m Run + 21 KB Swings + 12 Pull-ups)</option>
+          <option value="diane">Diane (21-15-9: Deadlifts 225/155lb + HSPU)</option>
+          <option value="elizabeth">Elizabeth (21-15-9: Cleans 135/95lb + Ring Dips)</option>
+          <option value="jackie">Jackie (1000m Row + 50 Thrusters 45/35lb + 30 Pull-ups)</option>
+          <option value="karen">Karen (150 Wall Balls 20/14lb)</option>
+          <option value="murph">Murph (1mi Run + 100 Pull-ups + 200 Push-ups + 300 Squats + 1mi Run)</option>
+          <option value="eva">Eva (5 Rounds: 800m Run + 30 KB Swings + 30 Pull-ups)</option>
+          <option value="barbara">Barbara (5 Rounds: 20 Pull-ups + 30 Push-ups + 40 Sit-ups + 50 Squats)</option>
+          <option value="chelsea">Chelsea (30 Rounds: 5 Pull-ups + 10 Push-ups + 15 Squats)</option>
+        </select>
+      </div>
+      <div class="wod-desc" id="timedDesc"></div>
+      <div class="form-group">
+        <label>Gender</label>
+        <div style="display:flex;gap:0.75rem;margin-top:0.25rem">
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:400;color:#333;cursor:pointer"><input type="radio" name="timedGender" value="male" checked> Male</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:400;color:#333;cursor:pointer"><input type="radio" name="timedGender" value="female"> Female</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your Time (mm:ss)</label>
+        <div class="time-row">
+          <div>
+            <input type="number" id="timedMin" placeholder="Minutes" min="0" max="999">
+            <div class="error-msg" id="timedMinErr">Enter valid minutes (0–999)</div>
+          </div>
+          <div>
+            <input type="number" id="timedSec" placeholder="Seconds" min="0" max="59">
+            <div class="error-msg" id="timedSecErr">Enter seconds (0–59)</div>
+          </div>
+        </div>
+        <div class="score-type-hint">Lower time = better score</div>
+      </div>
+      <button class="btn" onclick="calcTimed()">Calculate Score</button>
+    </div>
+
+    <!-- AMRAP TAB -->
+    <div class="tab-panel" id="panel-amrap">
+      <div class="form-group">
+        <label for="amrapWod">Select Benchmark WOD</label>
+        <select id="amrapWod" onchange="updateAmrapDesc()">
+          <option value="cindy">Cindy (20 min: 5 Pull-ups + 10 Push-ups + 15 Squats)</option>
+          <option value="mary">Mary (20 min: 5 HSPU + 10 Pistols + 15 Pull-ups)</option>
+          <option value="annie">Annie (50-40-30-20-10: Double-Unders + Sit-ups) — scored for time</option>
+          <option value="lynne">Lynne (5 Rounds: Max Bench Press BW + Max Pull-ups)</option>
+        </select>
+      </div>
+      <div class="wod-desc" id="amrapDesc"></div>
+      <div class="form-group">
+        <label>Gender</label>
+        <div style="display:flex;gap:0.75rem;margin-top:0.25rem">
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:400;color:#333;cursor:pointer"><input type="radio" name="amrapGender" value="male" checked> Male</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:400;color:#333;cursor:pointer"><input type="radio" name="amrapGender" value="female"> Female</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label id="amrapScoreLabel">Your Score (rounds + reps)</label>
+        <div class="time-row">
+          <div>
+            <input type="number" id="amrapRounds" placeholder="Rounds" min="0" max="999">
+            <div class="error-msg" id="amrapRoundsErr">Enter valid rounds (0+)</div>
+          </div>
+          <div>
+            <input type="number" id="amrapReps" placeholder="Reps" min="0" max="999">
+            <div class="error-msg" id="amrapRepsErr">Enter valid reps (0–999)</div>
+          </div>
+        </div>
+        <div class="score-type-hint" id="amrapScoreHint">Higher rounds+reps = better score</div>
+      </div>
+      <button class="btn" onclick="calcAmrap()">Calculate Score</button>
+    </div>
+
+    <!-- MAX LOAD TAB -->
+    <div class="tab-panel" id="panel-max">
+      <div class="form-group">
+        <label for="maxWod">Select Benchmark WOD</label>
+        <select id="maxWod" onchange="updateMaxDesc()">
+          <option value="deadlift1rm">Deadlift 1RM</option>
+          <option value="backsquat1rm">Back Squat 1RM</option>
+          <option value="frontsquat1rm">Front Squat 1RM</option>
+          <option value="cleanjerk1rm">Clean & Jerk 1RM</option>
+          <option value="snatch1rm">Snatch 1RM</option>
+          <option value="press1rm">Strict Press 1RM</option>
+          <option value="benchpress1rm">Bench Press 1RM</option>
+        </select>
+      </div>
+      <div class="wod-desc" id="maxDesc"></div>
+      <div class="form-group">
+        <label>Gender</label>
+        <div style="display:flex;gap:0.75rem;margin-top:0.25rem">
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:400;color:#333;cursor:pointer"><input type="radio" name="maxGender" value="male" checked> Male</label>
+          <label style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:400;color:#333;cursor:pointer"><input type="radio" name="maxGender" value="female"> Female</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your Lift (lbs)</label>
+        <input type="number" id="maxLoad" placeholder="e.g. 315" min="1" max="9999">
+        <div class="error-msg" id="maxLoadErr">Enter a valid weight in pounds (1–9999)</div>
+        <div class="score-type-hint">Higher weight = better score</div>
+      </div>
+      <div class="form-group">
+        <label>Body Weight (lbs) — for relative strength ratio</label>
+        <input type="number" id="bodyWeight" placeholder="e.g. 180" min="50" max="500">
+        <div class="error-msg" id="bodyWeightErr">Enter a valid body weight (50–500 lbs)</div>
+      </div>
+      <button class="btn" onclick="calcMax()">Calculate Score</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card results" id="resultsCard">
+    <div id="resultsContent"></div>
+    <div class="disclaimer"><strong>⚠️ Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional or certified CrossFit coach for medical and training advice. Benchmarks are community-based averages and may vary.</div>
+    <button class="copy-btn" id="copyBtn" onclick="copyResult()">📋 Copy Result</button>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <section class="content">
+    <h2>How to Use This CrossFit WOD Score Calculator</h2>
+    <p>Select your WOD type (For Time, AMRAP, or Max Load), choose the specific benchmark workout, enter your gender, and input your score. For timed WODs, enter minutes and seconds. For AMRAPs like Cindy, enter completed rounds and extra reps. For strength lifts, enter your 1RM and body weight. Hit <strong>Calculate Score</strong> to instantly see your rank and how you compare to the CrossFit community.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Benchmark WODs — often called "The Girls" (Fran, Grace, Helen...) and Hero WODs (Murph) — are the universal language of CrossFit performance. When you say "I Franned in 3:15," every CrossFitter in the world immediately knows you're a serious athlete.</p>
+    <p>These benchmarks matter because they give you <strong>objective, repeatable progress markers</strong>. A gym member who first does Fran in 12 minutes might hit 7 minutes six months later — that improvement is hard to fake and deeply motivating. Elite Games athletes typically Fran in under 2:30; the average fit CrossFitter is around 5–7 minutes.</p>
+    <p>Knowing your rank also helps coaches program appropriately. If you're a beginner hitting Helen in 18 minutes, you need different accessory work than an advanced athlete at 10 minutes. The same logic applies to strength benchmarks — a 2x bodyweight deadlift is the typical "advanced" threshold, while 3x is elite-level territory typically seen at the CrossFit Games.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>Scores are compared against established community benchmarks compiled from CrossFit affiliate data, Games athlete profiles, and open workout statistics. Rankings are defined as:</p>
+    <ul>
+      <li><strong>Elite:</strong> Top ~5% of competitive CrossFitters (Games/Regionals level)</li>
+      <li><strong>Advanced:</strong> Top ~20% — competitive affiliate athlete, consistent training 4–5x/week</li>
+      <li><strong>Intermediate:</strong> Middle ~50% — regular CrossFit member, 1–2 years experience</li>
+      <li><strong>Beginner:</strong> Bottom ~25% — newer to CrossFit or returning after a break</li>
+    </ul>
+    <p>For relative strength, the ratio formula is: <strong>Lift Ratio = Your 1RM ÷ Body Weight</strong>. A ratio of 2.0 on the deadlift means you're lifting twice your bodyweight — the standard "advanced" threshold.</p>
+    <p>A percentile estimate is also provided, calculated using a simplified linear interpolation between the four benchmark tiers.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't cherry-pick conditions.</strong> Record your benchmark score under consistent conditions — same time of day, warm-up protocol, and equipment. A Monday morning Fran after 9 hours sleep isn't comparable to a Thursday evening Fran after a hard week.</li>
+      <li><strong>Rx vs. Scaled matters.</strong> Only compare Rx scores to Rx benchmarks. A scaled Fran in 2 minutes doesn't mean you're elite. Always note if you scaled weight or movements.</li>
+      <li><strong>Re-test every 3–6 months.</strong> Benchmarking too frequently (every 2 weeks) doesn't give enough training stimulus to show real adaptation. Most coaches recommend quarterly testing.</li>
+      <li><strong>Use video for accuracy.</strong> Especially for pull-up standards (chin over bar vs. chest to bar) — these dramatically affect your time and comparability.</li>
+      <li><strong>Context is everything.</strong> A 45-year-old masters athlete hitting intermediate-level Fran scores is genuinely impressive. Age-adjust your expectations and celebrate relative progress.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What are "The Girls" WODs in CrossFit?</summary>
+      <p>"The Girls" are a series of named benchmark WODs introduced by CrossFit founder Greg Glassman, including Fran, Grace, Helen, Diane, Isabel, Karen, and others. They're all female names and designed to be short, intense workouts that can be repeated to measure fitness progress over time. The name reportedly came from Glassman's idea that workouts this intense deserve a name you'll remember — like a hurricane.</p>
+    </details>
+    <details>
+      <summary>How accurate are the benchmark rankings?</summary>
+      <p>These rankings are based on aggregated community data and are useful for general comparison, but individual variation is significant. Factors like gym equipment, judging standards, altitude, and individual physiology all affect scores. Treat these as rough guides rather than absolute truth — use your own previous scores as your most meaningful benchmark.</p>
+    </details>
+    <details>
+      <summary>Should I compare my score to males or females?</summary>
+      <p>CrossFit Rx weights are already scaled by gender (e.g., Fran uses 95lb for men, 65lb for women), so if you're doing the standard Rx version for your gender, select your gender for an accurate comparison. If you're using the male Rx weight as a female, you can compare against male benchmarks. Always note which version you completed.</p>
+    </details>
+    <details>
+      <summary>What's a good Fran time for a beginner?</summary>
+      <p>Any completed Fran is a win for a beginner. Completing it Rx under 15 minutes is solid for someone new to CrossFit. As you progress, the goal is to break 10 minutes, then 7 minutes. Sub-5 minutes is considered advanced, and sub-3 minutes is elite-level performance seen at the CrossFit Games level.</p>
+    </details>
+  </section>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <ul>
+      <li><a href="/cycling-power-zone-calculator/">Cycling Power Zone Calculator</a></li>
+      <li><a href="/glycemic-load-calculator/">Glycemic Load Meal Planner</a></li>
+      <li><a href="/resting-metabolic-rate-calculator/">Resting Metabolic Rate Calculator</a></li>
+      <li><a href="/post-workout-protein-timing-calculator/">Anabolic Window Protein Timer Calculator</a></li>
+      <li><a href="/workout-meal-timing-calculator/">Anabolic Window & Meal Timing Optimizer</a></li>
+      <li><a href="/weight-loss-plateau-calculator/">Weight Loss Calorie Plateau Breaker</a></li>
+    </ul>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <a href="/about/">About</a> | <a href="/privacy/">Privacy</a> | <a href="/contact/">Contact</a>
+  <br><span>© 2025 toolhut.dev — Free Online Tools</span>
+</footer>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────────────────
+const TIMED_WODS = {
+  fran:      { name:"Fran", desc:"21-15-9 reps of Thrusters (95/65 lb) and Pull-ups. The quintessential CrossFit benchmark — short, brutal, and humbling.", male:{elite:150,advanced:300,intermediate:480,beginner:780}, female:{elite:180,advanced:360,intermediate:600,beginner:900} },
+  grace:     { name:"Grace", desc:"30 Clean & Jerks at 135/95 lb for time. A pure test of barbell cycling efficiency and shoulder stamina.", male:{elite:90,advanced:180,intermediate:300,beginner:480}, female:{elite:120,advanced:210,intermediate:360,beginner:540} },
+  isabel:    { name:"Isabel", desc:"30 Snatches at 135/95 lb for time. Tests Olympic lifting technique under fatigue.", male:{elite:90,advanced:180,intermediate:330,beginner:540}, female:{elite:120,advanced:210,intermediate:390,beginner:600} },
+  helen:     { name:"Helen", desc:"3 Rounds: 400m Run + 21 KB Swings (53/35 lb) + 12 Pull-ups. Classic triplet testing metabolic conditioning.", male:{elite:570,advanced:660,intermediate:780,beginner:1020}, female:{elite:630,advanced:750,intermediate:900,beginner:1200} },
+  diane:     { name:"Diane", desc:"21-15-9 reps of Deadlifts (225/155 lb) and Handstand Push-ups. A heavy strength + gymnastics combo.", male:{elite:120,advanced:240,intermediate:420,beginner:720}, female:{elite:150,advanced:300,intermediate:540,beginner:840} },
+  elizabeth: { name:"Elizabeth", desc:"21-15-9 reps of Cleans (135/95 lb) and Ring Dips. Olympic lifting meets gymnastics.", male:{elite:150,advanced:270,intermediate:420,beginner:660}, female:{elite:180,advanced:330,intermediate:510,beginner:780} },
+  jackie:    { name:"Jackie", desc:"1000m Row + 50 Thrusters (45/35 lb) + 30 Pull-ups. Rowing, lightweight thrusters, and pull-ups — a long grind.", male:{elite:360,advanced:480,intermediate:660,beginner:900}, female:{elite:420,advanced:540,intermediate:750,beginner:1020} },
+  karen:     { name:"Karen", desc:"150 Wall Balls (20/14 lb to 10/9 ft) for time. Pure leg and shoulder endurance.", male:{elite:360,advanced:480,intermediate:660,beginner:900}, female:{elite:420,advanced:540,intermediate:720,beginner:960} },
+  murph:     { name:"Murph", desc:"1 mile Run + 100 Pull-ups + 200 Push-ups + 300 Squats + 1 mile Run (with 20 lb vest Rx). A Hero WOD honoring Navy SEAL Michael Murphy.", male:{elite:2400,advanced:3000,intermediate:3900,beginner:5400}, female:{elite:2700,advanced:3300,intermediate:4500,beginner:6000} },
+  eva:       { name:"Eva", desc:"5 Rounds: 800m Run + 30 KB Swings (70/55 lb) + 30 Pull-ups. One of the hardest benchmark WODs — plan for 45+ minutes.", male:{elite:3000,advanced:3600,intermediate:4800,beginner:6600}, female:{elite:3300,advanced:4200,intermediate:5700,beginner:7500} },
+  barbara:   { name:"Barbara", desc:"5 Rounds: 20 Pull-ups + 30 Push-ups + 40 Sit-ups + 50 Squats (3 min rest between rounds). A high-volume bodyweight test.", male:{elite:1200,advanced:1500,intermediate:2100,beginner:2700}, female:{elite:1500,advanced:1800,intermediate:2400,beginner:3000} },
+  chelsea:   { name:"Chelsea", desc:"Every Minute on the Minute for 30 min: 5 Pull-ups + 10 Push-ups + 15 Squats. Scored as time to complete all rounds.", male:{elite:1800,advanced:1800,intermediate:2400,beginner:3000}, female:{elite:1800,advanced:1800,intermediate:2700,beginner:3600} },
+};
+
+const AMRAP_WODS = {
+  cindy:  { name:"Cindy", desc:"20 min AMRAP: 5 Pull-ups + 10 Push-ups + 15 Squats. Pure work capacity benchmark.", scoreType:"amrap", male:{elite:25,advanced:20,intermediate:15,beginner:10}, female:{elite:22,advanced:17,intermediate:12,beginner:8} },
+  mary:   { name:"Mary", desc:"20 min AMRAP: 5 HSPU + 10 Pistol Squats + 15 Pull-ups. Advanced gymnastics benchmark.", scoreType:"amrap", male:{elite:20,advanced:15,intermediate:10,beginner:6}, female:{elite:17,advanced:12,intermediate:8,beginner:4} },
+  annie:  { name:"Annie", desc:"50-40-30-20-10: Double-Unders + Sit-ups for time. Jump rope skill meets core endurance.", scoreType:"time", male:{elite:360,advanced:480,intermediate:660,beginner:900}, female:{elite:390,advanced:540,intermediate:720,beginner:1020} },
+  lynne:  { name:"Lynne", desc:"5 Rounds: Max Bench Press (bodyweight) + Max Pull-ups. No time component — total reps are your score.", scoreType:"amrap", male:{elite:100,advanced:70,intermediate:45,beginner:25}, female:{elite:80,advanced:55,intermediate:35,beginner:20} },
+};
+
+const MAX_WODS = {
+  deadlift1rm:   { name:"Deadlift 1RM", desc:"Maximum single-rep deadlift. The king of strength tests — tests total posterior chain power.", male:{elite:2.5,advanced:2.0,intermediate:1.5,beginner:1.0}, female:{elite:2.0,advanced:1.6,intermediate:1.2,beginner:0.8} },
+  backsquat1rm:  { name:"Back Squat 1RM", desc:"Maximum single-rep back squat. Core lower body strength indicator.", male:{elite:2.0,advanced:1.75,intermediate:1.25,beginner:0.85}, female:{elite:1.75,advanced:1.4,intermediate:1.0,beginner:0.65} },
+  frontsquat1rm: { name:"Front Squat 1RM", desc:"Maximum single-rep front squat. Typically ~85% of back squat for advanced athletes.", male:{elite:1.8,advanced:1.5,intermediate:1.1,beginner:0.75}, female:{elite:1.5,advanced:1.2,intermediate:0.9,beginner:0.6} },
+  cleanjerk1rm:  { name:"Clean & Jerk 1RM", desc:"Maximum single-rep clean and jerk. The ultimate test of explosive Olympic lifting power.", male:{elite:1.5,advanced:1.2,intermediate:0.9,beginner:0.65}, female:{elite:1.2,advanced:0.95,intermediate:0.7,beginner:0.5} },
+  snatch1rm:     { name:"Snatch 1RM", desc:"Maximum single-rep snatch. The most technically demanding Olympic lift benchmark.", male:{elite:1.2,advanced:0.95,intermediate:0.7,beginner:0.5}, female:{elite:0.95,advanced:0.75,intermediate:0.55,beginner:0.38} },
+  press1rm:      { name:"Strict Press 1RM", desc:"Maximum single-rep strict overhead press. A pure shoulder strength test with no leg drive.", male:{elite:1.0,advanced:0.8,intermediate:0.65,beginner:0.45}, female:{elite:0.75,advanced:0.6,intermediate:0.45,beginner:0.3} },
+  benchpress1rm: { name:"Bench Press 1RM", desc:"Maximum single-rep bench press. Upper body horizontal push strength.", male:{elite:1.5,advanced:1.25,intermediate:1.0,beginner:0.7}, female:{elite:1.0,advanced:0.8,intermediate:0.6,beginner:0.4} },
+};
+
+// ─── TAB SWITCHING ─────────────────────────────────────────────────────────
+function switchTab(tab) {
+  ['timed','amrap','max'].forEach(t => {
+    document.getElementById('panel-'+t).classList.toggle('active', t===tab);
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+  });
+  hideResults();
+}
+
+function hideResults() {
+  document.getElementById('resultsCard').classList.remove('visible');
+}
+
+// ─── DESC UPDATES ──────────────────────────────────────────────────────────
+function updateTimedDesc() {
+  var v = document.getElementById('timedWod').value;
+  document.getElementById('timedDesc').textContent = TIMED_WODS[v] ? TIMED_WODS[v].desc : '';
+  hideResults();
+}
+function updateAmrapDesc() {
+  var v = document.getElementById('amrapWod').value;
+  var wod = AMRAP_WODS[v];
+  document.getElementById('amrapDesc').textContent = wod ? wod.desc : '';
+  if (wod && wod.scoreType === 'time') {
+    document.getElementById('amrapScoreLabel').textContent = 'Your Time (mm:ss)';
+    document.getElementById('amrapRounds').placeholder = 'Minutes';
+    document.getElementById('amrapReps').placeholder = 'Seconds';
+    document.getElementById('amrapScoreHint').textContent = 'Lower time = better score';
+  } else if (wod && wod.name === 'Lynne') {
+    document.getElementById('amrapScoreLabel').textContent = 'Total Reps (all 5 rounds combined)';
+    document.getElementById('amrapRounds').placeholder = 'Total Reps';
+    document.getElementById('amrapReps').placeholder = '0';
+    document.getElementById('amrapScoreHint').textContent = 'Higher total reps = better score';
+  } else {
+    document.getElementById('amrapScoreLabel').textContent = 'Your Score (rounds + extra reps)';
+    document.getElementById('amrapRounds').placeholder = 'Rounds';
+    document.getElementById('amrapReps').placeholder = 'Reps';
+    document.getElementById('amrapScoreHint').textContent = 'Higher rounds+reps = better score';
+  }
+  hideResults();
+}
+function updateMaxDesc() {
+  var v = document.getElementById('maxWod').value;
+  document.getElementById('maxDesc').textContent = MAX_WODS[v] ? MAX_WODS[v].desc : '';
+  hideResults();
+}
+
+// ─── HELPERS ───────────────────────────────────────────────────────────────
+function fmtTime(secs) {
+  var m = Math.floor(secs/60), s = secs % 60;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+function fmtNum(n, dec) {
+  if (dec === undefined) dec = 0;
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+}
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+  document.querySelectorAll('input,select').forEach(e => e.classList.remove('error'));
+}
+function showError(id, inputId) {
+  document.getElementById(id).classList.add('show');
+  if (inputId) document.getElementById(inputId).classList.add('error');
+}
+
+function getRankLabel(rank) {
+  var map = {elite:'Elite',advanced:'Advanced',intermediate:'Intermediate',beginner:'Beginner'};
+  return map[rank] || rank;
+}
+function getRankClass(rank) {
+  return 'rank-' + rank;
+}
+
+// Percentile calc: linear interp between tiers
+// For timed (lower=better): elite < advanced < intermediate < beginner
+// For higher=better: elite > advanced > intermediate > beginner
+function calcPercentile(score, benchmarks, lowerIsBetter) {
+  var e = benchmarks.elite, a = benchmarks.advanced, i = benchmarks.intermediate, b = benchmarks.beginner;
+  var pct;
+  if (lowerIsBetter) {
+    if (score <= e) pct = 95 + (e - score) / e * 5;
+    else if (score <= a) pct = 80 + (a - score) / (a - e) * 15;
+    else if (score <= i) pct = 40 + (i - score) / (i - a) * 40;
+    else if (score <= b) pct = 15 + (b - score) / (b - i) * 25;
+    else pct = Math.max(1, 15 - (score - b) / b * 14);
+  } else {
+    if (score >= e) pct = 95 + (score - e) / e * 5;
+    else if (score >= a) pct = 80 + (score - a) / (e - a) * 15;
+    else if (score >= i) pct = 40 + (score - i) / (a - i) * 40;
+    else if (score >= b) pct = 15 + (score - b) / (i - b) * 25;
+    else pct = Math.max(1, 15 - (b - score) / b * 14);
+  }
+  return Math.min(99, Math.max(1, Math.round(pct)));
+}
+
+function getRank(score, benchmarks, lowerIsBetter) {
+  var e = benchmarks.elite, a = benchmarks.advanced, i = benchmarks.intermediate;
+  if (lowerIsBetter) {
+    if (score <= e) return 'elite';
+    if (score <= a) return 'advanced';
+    if (score <= i) return 'intermediate';
+    return 'beginner';
+  } else {
+    if (score >= e) return 'elite';
+    if (score >= a) return 'advanced';
+    if (score >= i) return 'intermediate';
+    return 'beginner';
+  }
+}
+
+// ─── ZONE BAR ──────────────────────────────────────────────────────────────
+function buildZoneBar(rank, lowerIsBetter) {
+  var zones = lowerIsBetter
+    ? ['elite','advanced','intermediate','beginner']
+    : ['beginner','intermediate','advanced','elite'];
+  var colors = {elite:'#1a7a4a',advanced:'#2980b9',intermediate:'#f39c12',beginner:'#e74c3c'};
+  var segs = zones.map(z => {
+    var active = z === rank ? ' active-zone' : '';
+    return '<div class="zone-seg'+active+'" style="background:'+colors[z]+'" title="'+getRankLabel(z)+'"></div>';
+  }).join('');
+  var labels = zones.map(z => '<span>'+getRankLabel(z)+'</span>').join('');
+  return '<div class="zone-bar-wrap"><div class="zone-bar-label">Performance Level</div><div class="zone-bar-track">'+segs+'</div><div class="zone-marker-row">'+labels+'</div></div>';
+}
+
+function buildLegend() {
+  var items = [
+    {c:'#1a7a4a',l:'Elite (top ~5%)'},
+    {c:'#2980b9',l:'Advanced (top ~20%)'},
+    {c:'#f39c12',l:'Intermediate (top ~70%)'},
+    {c:'#e74c3c',l:'Beginner'},
+  ];
+  return '<div class="zone-legend">'+items.map(i=>'<div class="zone-legend-item"><div class="zone-dot" style="background:'+i.c+'"></div><span>'+i.l+'</span></div>').join('')+'</div>';
+}
+
+// ─── BUILD BENCHMARK TABLE ──────────────────────────────────────────────────
+function buildBenchTable(benchmarks, lowerIsBetter, formatFn) {
+  var rows = [
+    ['Elite', formatFn(benchmarks.elite), '#1a7a4a'],
+    ['Advanced', formatFn(benchmarks.advanced), '#2980b9'],
+    ['Intermediate', formatFn(benchmarks.intermediate), '#f39c12'],
+    ['Beginner', formatFn(benchmarks.beginner), '#e74c3c'],
+  ];
+  var html = '<div class="table-wrap"><table><thead><tr><th>Level</th><th>Benchmark</th></tr></thead><tbody>';
+  rows.forEach(function(r) {
+    html += '<tr><td><span style="color:'+r[2]+';font-weight:700">'+r[0]+'</span></td><td>'+r[1]+'</td></tr>';
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+
+// ─── COPY ──────────────────────────────────────────────────────────────────
+var _copyText = '';
+function copyResult() {
+  if (!_copyText) return;
+  try {
+    navigator.clipboard.writeText(_copyText).then(function(){
+      var btn = document.getElementById('copyBtn');
+      btn.textContent = '✅ Copied!';
+      setTimeout(function(){ btn.textContent = '📋 Copy Result'; }, 2000);
+    });
+  } catch(e) {
+    var ta = document.createElement('textarea');
+    ta.value = _copyText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    document.getElementById('copyBtn').textContent = '✅ Copied!';
+    setTimeout(function(){ document.getElementById('copyBtn').textContent = '📋 Copy Result'; }, 2000);
+  }
+}
+
+// ─── CALCULATE TIMED ───────────────────────────────────────────────────────
+function calcTimed() {
+  clearErrors();
+  var wod = document.getElementById('timedWod').value;
+  var gender = document.querySelector('input[name="timedGender"]:checked').value;
+  var mVal = document.getElementById('timedMin').value.trim();
+  var sVal = document.getElementById('timedSec').value.trim();
+
+  var ok = true;
+  var mins = parseInt(mVal);
+  var secs = parseInt(sVal);
+  if (mVal === '' || isNaN(mins) || mins < 0 || mins > 999) { showError('timedMinErr','timedMin'); ok=false; }
+  if (sVal === '' || isNaN(secs) || secs < 0 || secs > 59) { showError('timedSecErr','timedSec'); ok=false; }
+  if (!ok) return;
+
+  var totalSecs = mins * 60 + secs;
+  if (totalSecs === 0) { showError('timedMinErr','timedMin'); showError('timedSecErr','timedSec'); return; }
+
+  var data = TIMED_WODS[wod];
+  var benchmarks = data[gender];
+  var rank = getRank(totalSecs, benchmarks, true);
+  var pct = calcPercentile(totalSecs, benchmarks, true);
+
+  var html = '<h2 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">'+data.name+' — '+getRankLabel(gender.charAt(0).toUpperCase()+gender.slice(1))+'</h2>';
+  html += '<div class="big-score"><span class="score-val">'+fmtTime(totalSecs)+'</span><span class="score-label">Your Time · <span class="rank-badge '+getRankClass(rank)+'">'+getRankLabel(rank)+'</span></span></div>';
+  html += '<p style="text-align:center;font-size:0.9rem;color:#555;margin:0.5rem 0">Estimated top <strong>'+pct+'th percentile</strong> among '+gender+'s</p>';
+  html += buildZoneBar(rank, true);
+  html += buildLegend();
+  html += '<h3 style="font-size:0.95rem;font-weight:600;margin:1.2rem 0 0.5rem">Benchmark Standards ('+gender+')</h3>';
+  html += buildBenchTable(benchmarks, true, fmtTime);
+
+  _copyText = data.name + ' Score: ' + fmtTime(totalSecs) + ' | Rank: ' + getRankLabel(rank) + ' | Est. Top ' + pct + 'th percentile (' + gender + ')';
+  requestAnimationFrame(function() {
+    document.getElementById('resultsContent').innerHTML = html;
+    document.getElementById('resultsCard').classList.add('visible');
+    document.getElementById('resultsCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+}
+
+// ─── CALCULATE AMRAP ───────────────────────────────────────────────────────
+function calcAmrap() {
+  clearErrors();
+  var wod = document.getElementById('amrapWod').value;
+  var gender = document.querySelector('input[name="amrapGender"]:checked').value;
+  var r = document.getElementById('amrapRounds').value.trim();
+  var rp = document.getElementById('amrapReps').value.trim();
+
+  var ok = true;
+  var rounds = parseInt(r);
+  var reps = parseInt(rp) || 0;
+  if (r === '' || isNaN(rounds) || rounds < 0) { showError('amrapRoundsErr','amrapRounds'); ok=false; }
+  if (!ok) return;
+
+  var data = AMRAP_WODS[wod];
+  var benchmarks = data[gender];
+
+  var html = '';
+  if (data.scoreType === 'time') {
+    // Annie: treated as time
+    var secs2 = parseInt(rp) || 0;
+    if (isNaN(rounds) || rounds < 0) { showError('amrapRoundsErr','amrapRounds'); return; }
+    if (isNaN(secs2) || secs2 < 0 || secs2 > 59) { showError('amrapRepsErr','amrapReps'); return; }
+    var total = rounds * 60 + secs2;
+    var rank = getRank(total, benchmarks, true);
+    var pct = calcPercentile(total, benchmarks, true);
+    html = '<h2 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">'+data.name+'</h2>';
+    html += '<div class="big-score"><span class="score-val">'+fmtTime(total)+'</span><span class="score-label">Your Time · <span class="rank-badge '+getRankClass(rank)+'">'+getRankLabel(rank)+'</span></span></div>';
+    html += '<p style="text-align:center;font-size:0.9rem;color:#555;margin:0.5rem 0">Estimated top <strong>'+pct+'th percentile</strong> among '+gender+'s</p>';
+    html += buildZoneBar(rank, true);
+    html += buildLegend();
+    html += '<h3 style="font-size:0.95rem;font-weight:600;margin:1.2rem 0 0.5rem">Benchmark Standards ('+gender+')</h3>';
+    html += buildBenchTable(benchmarks, true, fmtTime);
+    _copyText = data.name + ' Score: ' + fmtTime(total) + ' | Rank: ' + getRankLabel(rank) + ' | Est. Top ' + pct + 'th percentile (' + gender + ')';
+  } else if (data.name === 'Lynne') {
+    var totalReps = rounds; // user enters total reps in "rounds" field
+    var rank = getRank(totalReps, benchmarks, false);
+    var pct = calcPercentile(totalReps, benchmarks, false);
+    html = '<h2 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">'+data.name+'</h2>';
+    html += '<div class="big-score"><span class="score-val">'+fmtNum(totalReps)+' reps</span><span class="score-label">Total Reps · <span class="rank-badge '+getRankClass(rank)+'">'+getRankLabel(rank)+'</span></span></div>';
+    html += '<p style="text-align:center;font-size:0.9rem;color:#555;margin:0.5rem 0">Estimated top <strong>'+pct+'th percentile</strong> among '+gender+'s</p>';
+    html += buildZoneBar(rank, false);
+    html += buildLegend();
+    html += '<h3 style="font-size:0.95rem;font-weight:600;margin:1.2rem 0 0.5rem">Benchmark Standards (total reps, '+gender+')</h3>';
+    html += buildBenchTable(benchmarks, false, function(v){ return fmtNum(v)+' reps'; });
+    _copyText = data.name + ' Score: ' + fmtNum(totalReps) + ' total reps | Rank: ' + getRankLabel(rank) + ' | Est. Top ' + pct + 'th percentile (' + gender + ')';
+  } else {
+    // AMRAP rounds
+    var repsPerRound = {cindy:30, mary:30}[wod] || 30;
+    var totalScore = rounds + reps / repsPerRound;
+    var rankScore = rounds + reps / repsPerRound;
+    var rank = getRank(rankScore, benchmarks, false);
+    var pct = calcPercentile(rankScore, benchmarks, false);
+    var scoreStr = rounds + ' rounds' + (reps > 0 ? ' + ' + reps + ' reps' : '');
+    html = '<h2 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">'+data.name+'</h2>';
+    html += '<div class="big-score"><span class="score-val">'+scoreStr+'</span><span class="score-label">Your Score · <span class="rank-badge '+getRankClass(rank)+'">'+getRankLabel(rank)+'</span></span></div>';
+    html += '<p style="text-align:center;font-size:0.9rem;color:#555;margin:0.5rem 0">Estimated top <strong>'+pct+'th percentile</strong> among '+gender+'s</p>';
+    html += buildZoneBar(rank, false);
+    html += buildLegend();
+    html += '<h3 style="font-size:0.95rem;font-weight:600;margin:1.2rem 0 0.5rem">Benchmark Standards (complete rounds, '+gender+')</h3>';
+    html += buildBenchTable(benchmarks, false, function(v){ return fmtNum(v)+' rounds'; });
+    _copyText = data.name + ' Score: ' + scoreStr + ' | Rank: ' + getRankLabel(rank) + ' | Est. Top ' + pct + 'th percentile (' + gender + ')';
+  }
+
+  requestAnimationFrame(function() {
+    document.getElementById('resultsContent').innerHTML = html;
+    document.getElementById('resultsCard').classList.add('visible');
+    document.getElementById('resultsCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+}
+
+// ─── CALCULATE MAX ─────────────────────────────────────────────────────────
+function calcMax() {
+  clearErrors();
+  var wod = document.getElementById('maxWod').value;
+  var gender = document.querySelector('input[name="maxGender"]:checked').value;
+  var lv = document.getElementById('maxLoad').value.trim();
+  var bw = document.getElementById('bodyWeight').value.trim();
+
+  var ok = true;
+  var load = parseFloat(lv);
+  var bwVal = parseFloat(bw);
+  if (lv === '' || isNaN(load) || load < 1 || load > 9999) { showError('maxLoadErr','maxLoad'); ok=false; }
+  if (bw === '' || isNaN(bwVal) || bwVal < 50 || bwVal > 500) { showError('bodyWeightErr','bodyWeight'); ok=false; }
+  if (!ok) return;
+
+  var data = MAX_WODS[wod];
+  var benchmarks = data[gender]; // stored as ratios
+  var ratio = load / bwVal;
+  var rank = getRank(ratio, benchmarks, false);
+  var pct = calcPercentile(ratio, benchmarks, false);
+
+  var html = '<h2 style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">'+data.name+'</h2>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0">';
+  html += '<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:#0077b6;display:block">'+fmtNum(load)+' lb</span><span style="font-size:0.8rem;color:#666">Your 1RM</span></div>';
+  html += '<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:#0077b6;display:block">'+ratio.toFixed(2)+'×</span><span style="font-size:0.8rem;color:#666">Bodyweight Ratio</span></div>';
+  html += '</div>';
+  html += '<div style="text-align:center;margin-bottom:0.75rem"><span class="rank-badge '+getRankClass(rank)+'">'+getRankLabel(rank)+'</span></div>';
+  html += '<p style="text-align:center;font-size:0.9rem;color:#555;margin:0.25rem 0 0.75rem">Estimated top <strong>'+pct+'th percentile</strong> among '+gender+'s</p>';
+  html += buildZoneBar(rank, false);
+  html += buildLegend();
+  html += '<h3 style="font-size:0.95rem;font-weight:600;margin:1.2rem 0 0.5rem">Bodyweight Ratio Standards ('+gender+', '+fmtNum(bwVal)+' lb BW)</h3>';
+  var relBench = { elite: benchmarks.elite, advanced: benchmarks.advanced, intermediate: benchmarks.intermediate, beginner: benchmarks.beginner };
+  html += buildBenchTable(relBench, false, function(v){ return v.toFixed(2)+'× BW (' + fmtNum(Math.round(v * bwVal)) + ' lb)'; });
+
+  _copyText = data.name + ': ' + fmtNum(load) + ' lb (' + ratio.toFixed(2) + '× BW) | Rank: ' + getRankLabel(rank) + ' | Est. Top ' + pct + 'th percentile (' + gender + ')';
+  requestAnimationFrame(function() {
+    document.getElementById('resultsContent').innerHTML = html;
+    document.getElementById('resultsCard').classList.add('visible');
+    document.getElementById('resultsCard').scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+}
+
+// ─── ENTER KEY ─────────────────────────────────────────────────────────────
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Enter') return;
+  var active = document.querySelector('.tab-panel.active');
+  if (!active) return;
+  if (active.id === 'panel-timed') calcTimed();
+  else if (active.id === 'panel-amrap') calcAmrap();
+  else if (active.id === 'panel-max') calcMax();
+});
+
+// ─── INIT ──────────────────────────────────────────────────────────────────
+updateTimedDesc();
+updateAmrapDesc();
+updateMaxDesc();
+</script>
+</body>
+</html>
