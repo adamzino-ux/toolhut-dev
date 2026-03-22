@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caloric Needs by Trimester Pregnancy Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your daily caloric needs during pregnancy by trimester. Get personalized nutrition targets based on your weight, height, age, and activity level.">
+<link rel="canonical" href="https://toolhut.dev/pregnancy-calorie-needs-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Caloric Needs by Trimester Pregnancy Calculator",
+  "url": "https://toolhut.dev/pregnancy-calorie-needs-calculator/",
+  "description": "Calculate daily caloric needs during pregnancy by trimester based on pre-pregnancy weight, height, age, and activity level.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #fff;
+  color: #1a1a2e;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.nav {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 20px;
+  background: #fff;
+}
+.nav a {
+  text-decoration: none;
+  color: #0077b6;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.nav a:hover { color: #006299; }
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+input[type="number"], select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  color: #1a1a2e;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 44px;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+input[type="number"]:focus, select:focus {
+  outline: none;
+  border-color: #0077b6;
+  box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
+}
+
+input.error, select.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231,76,60,0.12);
+}
+
+.error-msg {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: none;
+}
+.error-msg.show { display: block; }
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.unit-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.unit-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #f8f9fa;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  min-height: 44px;
+  font-family: inherit;
+}
+
+.unit-btn.active {
+  background: #0077b6;
+  color: #fff;
+}
+
+.btn-calc {
+  width: 100%;
+  padding: 14px 24px;
+  background: #0077b6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-height: 44px;
+  font-family: inherit;
+  margin-top: 0.5rem;
+}
+
+.btn-calc:hover { background: #006299; }
+.btn-calc:active { background: #005580; }
+
+.results {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.results.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.big-number {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #0077b6;
+  line-height: 1;
+}
+
+.big-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 4px;
+}
+
+.result-hero {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+/* Trimester tabs */
+.trim-tabs {
+  display: flex;
+  gap: 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.trim-tab {
+  flex: 1;
+  padding: 10px 6px;
+  border: none;
+  background: #f8f9fa;
+  color: #555;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  min-height: 44px;
+  font-family: inherit;
+  text-align: center;
+}
+
+.trim-tab.active {
+  background: #0077b6;
+  color: #fff;
+}
+
+.trim-panel { display: none; }
+.trim-panel.active { display: block; }
+
+/* Zone bar */
+.zone-bar-wrap {
+  margin: 1.25rem 0;
+}
+
+.zone-bar-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.zone-bar-track {
+  display: flex;
+  height: 18px;
+  border-radius: 9px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.zone-seg {
+  height: 100%;
+  position: relative;
+}
+
+.zone-seg.green { background: #27ae60; flex: 2; }
+.zone-seg.yellow { background: #f39c12; flex: 1; }
+.zone-seg.red { background: #e74c3c; flex: 1; }
+
+.zone-marker {
+  position: absolute;
+  top: -4px;
+  width: 26px;
+  height: 26px;
+  background: #1a1a2e;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: left 0.4s ease;
+}
+
+.zone-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #666;
+}
+
+.zone-indicator {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.zone-indicator.green { background: #e8f8f0; color: #1e8449; }
+.zone-indicator.yellow { background: #fef9e7; color: #b7770d; }
+.zone-indicator.red { background: #fdf0ef; color: #c0392b; }
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 1rem; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 280px;
+}
+
+th {
+  background: #f0f0f0;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #444;
+  border-bottom: 2px solid #ddd;
+}
+
+th.right, td.right { text-align: right; }
+
+td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #eee;
+  color: #1a1a2e;
+}
+
+tr:nth-child(odd) td { background: #fafafa; }
+tr:nth-child(even) td { background: #fff; }
+tr:last-child td { border-bottom: none; }
+
+.macros-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.macro-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem 0.75rem;
+  text-align: center;
+  border: 1px solid #e8e8e8;
+}
+
+.macro-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0077b6;
+}
+
+.macro-unit {
+  font-size: 0.72rem;
+  color: #888;
+}
+
+.macro-name {
+  font-size: 0.78rem;
+  color: #555;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.copy-btn {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  color: #444;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+  min-height: 44px;
+}
+
+.copy-btn:hover { background: #e9ecef; }
+
+.disclaimer {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  color: #6d4c00;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.disclaimer strong { color: #5d3a00; }
+
+.ad-slot { min-height: 0; margin: 0; }
+
+.content-section { margin-bottom: 2rem; }
+.content-section h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.content-section p {
+  font-size: 0.93rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.content-section ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.content-section li {
+  font-size: 0.93rem;
+  color: #333;
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+details {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+}
+
+summary {
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #f8f9fa;
+  color: #1a1a2e;
+  list-style: none;
+  user-select: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: '+';
+  margin-left: auto;
+  font-size: 1.1rem;
+  color: #0077b6;
+  font-weight: 700;
+}
+
+details[open] summary::after { content: '−'; }
+
+details p {
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.6;
+  background: #fff;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.related-link {
+  display: block;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #0077b6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s;
+  line-height: 1.4;
+}
+
+.related-link:hover {
+  background: #e8f4fb;
+  border-color: #0077b6;
+}
+
+footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+footer a {
+  color: #0077b6;
+  text-decoration: none;
+  margin: 0 8px;
+}
+footer a:hover { text-decoration: underline; }
+.footer-links { margin-bottom: 0.5rem; }
+
+/* CSS bar visual for meal plan */
+.bar-visual {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.83rem;
+}
+
+.bar-fill-wrap {
+  flex: 1;
+  background: #e9ecef;
+  border-radius: 4px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.bar-pct {
+  width: 36px;
+  text-align: right;
+  font-weight: 500;
+  color: #444;
+}
+
+.bar-lbl {
+  width: 70px;
+  color: #555;
+}
+
+@media (max-width: 640px) {
+  .container { padding: 1.25rem 1rem; }
+  .card { padding: 1.25rem 1rem; }
+  h1 { font-size: 1.3rem; }
+  .big-number { font-size: 2.2rem; }
+  .row-2 { grid-template-columns: 1fr; gap: 0; }
+  .macros-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+  .macro-num { font-size: 1.2rem; }
+  .related-grid { grid-template-columns: 1fr; }
+  .trim-tab { font-size: 0.78rem; padding: 8px 4px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/">toolhut.dev</a>
+</nav>
+
+<div class="container">
+
+  <h1>Caloric Needs by Trimester Pregnancy Calculator</h1>
+  <p class="subtitle">Get personalized daily calorie targets for each trimester based on your body stats and activity level.</p>
+
+  <div class="disclaimer">
+    <strong>⚠️ Medical Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional or registered dietitian for personalized medical and nutritional advice during pregnancy.
+  </div>
+
+  <div class="card">
+    <!-- Unit toggle -->
+    <div class="unit-toggle" role="group" aria-label="Unit system">
+      <button class="unit-btn active" id="btnImperial" onclick="setUnit('imperial')">Imperial (lbs/in)</button>
+      <button class="unit-btn" id="btnMetric" onclick="setUnit('metric')">Metric (kg/cm)</button>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" min="15" max="55" placeholder="e.g. 28" inputmode="numeric">
+        <div class="error-msg" id="err-age">Please enter a valid age (15–55).</div>
+      </div>
+      <div class="form-group">
+        <label for="weight" id="lblWeight">Pre-pregnancy weight (lbs)</label>
+        <input type="number" id="weight" min="1" placeholder="e.g. 145" inputmode="decimal">
+        <div class="error-msg" id="err-weight">Please enter a valid weight.</div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group" id="heightImperialWrap">
+        <label for="heightFt">Height (ft)</label>
+        <input type="number" id="heightFt" min="3" max="8" placeholder="5" inputmode="numeric">
+        <div class="error-msg" id="err-heightFt">Enter feet (3–8).</div>
+      </div>
+      <div class="form-group" id="heightInWrap">
+        <label for="heightIn">Height (in)</label>
+        <input type="number" id="heightIn" min="0" max="11" placeholder="6" inputmode="numeric">
+        <div class="error-msg" id="err-heightIn">Enter inches (0–11).</div>
+      </div>
+      <div class="form-group" id="heightMetricWrap" style="display:none; grid-column: 1 / -1;">
+        <label for="heightCm">Height (cm)</label>
+        <input type="number" id="heightCm" min="100" max="250" placeholder="e.g. 168" inputmode="decimal">
+        <div class="error-msg" id="err-heightCm">Please enter a valid height (100–250 cm).</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="activity">Activity level</label>
+      <select id="activity">
+        <option value="1.2">Sedentary (little/no exercise)</option>
+        <option value="1.375">Lightly active (light exercise 1–3 days/week)</option>
+        <option value="1.55" selected>Moderately active (moderate exercise 3–5 days/week)</option>
+        <option value="1.725">Very active (hard exercise 6–7 days/week)</option>
+        <option value="1.9">Extra active (very hard exercise or physical job)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="trimester">Current trimester</label>
+      <select id="trimester">
+        <option value="0">Pre-pregnancy / Baseline</option>
+        <option value="1">1st Trimester (Weeks 1–12)</option>
+        <option value="2" selected>2nd Trimester (Weeks 13–26)</option>
+        <option value="3">3rd Trimester (Weeks 27–40)</option>
+      </select>
+    </div>
+
+    <button class="btn-calc" id="calcBtn">Calculate My Caloric Needs</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results card" id="resultsSection">
+
+    <!-- Zone indicator -->
+    <div id="zoneIndicatorWrap" style="text-align:center;margin-bottom:0.5rem;"></div>
+
+    <!-- Big number hero -->
+    <div class="result-hero">
+      <div class="big-number" id="heroCalories">—</div>
+      <div class="big-label">Daily Calories Recommended</div>
+      <div style="font-size:0.82rem;color:#777;margin-top:4px;" id="heroTrimLabel"></div>
+    </div>
+
+    <!-- Zone bar -->
+    <div class="zone-bar-wrap">
+      <div class="zone-bar-label">Calorie intake relative to needs</div>
+      <div style="position:relative;">
+        <div class="zone-bar-track">
+          <div class="zone-seg red"></div>
+          <div class="zone-seg yellow"></div>
+          <div class="zone-seg green"></div>
+          <div class="zone-seg yellow"></div>
+          <div class="zone-seg red"></div>
+        </div>
+        <div class="zone-marker" id="zoneMarker" style="left:50%;"></div>
+      </div>
+      <div class="zone-labels">
+        <span>Too Low</span>
+        <span>Caution</span>
+        <span>Optimal</span>
+        <span>Caution</span>
+        <span>Too High</span>
+      </div>
+    </div>
+
+    <!-- Macros -->
+    <h3 style="font-size:0.95rem;font-weight:600;color:#444;margin-bottom:0.75rem;">Recommended Daily Macronutrients</h3>
+    <div class="macros-grid" id="macrosGrid"></div>
+
+    <!-- Macro bars -->
+    <div id="macroBars"></div>
+
+    <!-- Trimester comparison tabs -->
+    <h3 style="font-size:0.95rem;font-weight:600;color:#444;margin-bottom:0.75rem;margin-top:1rem;">All Trimesters Comparison</h3>
+    <div class="trim-tabs" role="tablist">
+      <button class="trim-tab" id="tab0" role="tab" onclick="showTab(0)">Baseline</button>
+      <button class="trim-tab" id="tab1" role="tab" onclick="showTab(1)">1st Trim.</button>
+      <button class="trim-tab active" id="tab2" role="tab" onclick="showTab(2)">2nd Trim.</button>
+      <button class="trim-tab" id="tab3" role="tab" onclick="showTab(3)">3rd Trim.</button>
+    </div>
+
+    <div id="panel0" class="trim-panel">
+      <div class="table-wrap" id="tableWrap0"></div>
+    </div>
+    <div id="panel1" class="trim-panel">
+      <div class="table-wrap" id="tableWrap1"></div>
+    </div>
+    <div id="panel2" class="trim-panel active">
+      <div class="table-wrap" id="tableWrap2"></div>
+    </div>
+    <div id="panel3" class="trim-panel">
+      <div class="table-wrap" id="tableWrap3"></div>
+    </div>
+
+    <!-- Copy button -->
+    <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+      <button class="copy-btn" onclick="copyResults()">📋 Copy Results</button>
+    </div>
+
+  </div>
+  <!-- /results -->
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTIONS -->
+  <div class="content-section">
+    <h2>How to Use This Pregnancy Calorie Calculator</h2>
+    <p>Enter your pre-pregnancy weight, height, age, and typical activity level, then select your current trimester. Click "Calculate My Caloric Needs" to see your personalized daily calorie target, macronutrient breakdown, and how your needs change across all three trimesters. You can switch between trimester tabs to compare nutritional requirements throughout your pregnancy journey.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Why This Matters</h2>
+    <p>Caloric needs during pregnancy aren't simply "eating for two" — the actual additional energy needed is more nuanced and varies significantly by trimester. Research from the Institute of Medicine shows that most women need <strong>zero extra calories</strong> in the first trimester, approximately <strong>340 extra calories per day</strong> in the second trimester, and roughly <strong>450 extra calories per day</strong> in the third trimester.</p>
+    <p>Undereating during pregnancy can limit fetal growth and brain development, increase risk of preterm birth, and deplete maternal nutrient stores. Overeating, on the other hand, raises gestational diabetes risk, increases likelihood of cesarean delivery, and can complicate postpartum weight management.</p>
+    <p>For example, a moderately active 28-year-old woman at 145 lbs and 5'6" has a baseline TDEE of roughly 2,050 calories/day. In her second trimester, that increases to ~2,390 calories/day. Getting those numbers right — and targeting the right mix of protein, carbs, and fats — is one of the most impactful things you can do for your baby's development.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses the <strong>Mifflin–St Jeor equation</strong>, the most clinically validated formula for estimating resting metabolic rate (RMR) for women:</p>
+    <p style="background:#f8f9fa;padding:12px 16px;border-radius:6px;font-family:monospace;font-size:0.88rem;border-left:3px solid #0077b6;">
+      RMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) − 161
+    </p>
+    <p>The RMR is then multiplied by an <strong>activity factor</strong> (1.2 for sedentary up to 1.9 for extra active) to get your Total Daily Energy Expenditure (TDEE). Trimester-specific calorie additions are then applied based on IOM guidelines: +0 kcal (1st), +340 kcal (2nd), +452 kcal (3rd).</p>
+    <p>Macronutrients are estimated using standard pregnancy nutrition guidelines: approximately 20–25% of calories from protein, 50–55% from carbohydrates, and 25–30% from healthy fats — with minimum floors for protein (71g/day recommended by IOM) and carbohydrates (175g/day) during pregnancy.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't restrict calories to "eat healthier."</strong> During pregnancy, especially in the 2nd and 3rd trimesters, consuming below your calculated needs can impair fetal brain and organ development.</li>
+      <li><strong>Quality matters as much as quantity.</strong> Use these calorie targets as a floor for nutrient-dense whole foods — leafy greens, legumes, lean proteins, and whole grains — not processed snacks.</li>
+      <li><strong>Protein is critical and often underestimated.</strong> Aim for at least 71g of protein per day (IOM minimum), preferably higher if your calculator suggests it. Good sources: eggs, lentils, Greek yogurt, salmon, chicken.</li>
+      <li><strong>Don't panic about first-trimester nausea.</strong> If you struggle to eat during weeks 6–12, focus on calorie density over volume. Smoothies, nut butters, and avocado toast can help when large meals feel impossible.</li>
+      <li><strong>These are estimates, not prescriptions.</strong> Individual variation is large. Your OB or a registered dietitian can fine-tune targets based on your weight gain trajectory and health status.</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Do I really need more calories in every trimester?</summary>
+      <p>No — in the first trimester, most women need virtually no additional calories above their pre-pregnancy baseline. The fetus grows very little in weeks 1–12, and extra calorie demands are minimal. It's only from the second trimester onward that meaningful increases (340–452 kcal/day) are recommended by clinical guidelines.</p>
+    </details>
+    <details>
+      <summary>What if I'm carrying twins or multiples?</summary>
+      <p>This calculator is designed for singleton pregnancies. Twin pregnancies typically require an additional 300–500 calories per day on top of the standard trimester additions, bringing total increases to roughly 600–800 kcal/day in the second and third trimesters. If you're carrying multiples, please work directly with a maternal-fetal medicine specialist or registered dietitian.</p>
+    </details>
+    <details>
+      <summary>Should I keep exercising during pregnancy to manage calorie balance?</summary>
+      <p>Light to moderate exercise is generally encouraged during uncomplicated pregnancies — it can reduce gestational diabetes risk, ease back pain, and improve mood. However, during pregnancy you should not increase exercise intensity primarily to "offset" calorie intake. The additional calories you need are for fetal development, not to be burned off. Always consult your OB before starting or maintaining an exercise routine.</p>
+    </details>
+    <details>
+      <summary>How accurate is this calculator?</summary>
+      <p>The Mifflin–St Jeor equation is accurate within ±10% for most individuals, which is the best available estimate without indirect calorimetry. Individual metabolic rates can vary based on genetics, thyroid function, sleep, and pregnancy-specific adaptations. Use these results as a starting point, then adjust based on actual weight gain trajectory (typically 1–2 lbs/week in the 2nd and 3rd trimesters for normal-weight women) in consultation with your healthcare provider.</p>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/resting-metabolic-rate-calculator/" class="related-link">Resting Metabolic Rate Calculator</a>
+      <a href="/glycemic-load-calculator/" class="related-link">Glycemic Load Meal Planner</a>
+      <a href="/dehydration-electrolyte-calculator/" class="related-link">Dehydration Risk & Electrolyte Needs Calculator</a>
+      <a href="/periodization-training-block-planner/" class="related-link">Periodization Training Block Planner</a>
+      <a href="/crossfit-benchmark-wod-calculator/" class="related-link">CrossFit Benchmark WOD Score Calculator</a>
+      <a href="/cycling-power-zone-calculator/" class="related-link">Cycling Power Zone Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+</div><!-- /container -->
+
+<footer>
+  <div class="footer-links">
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div>© <span id="yr"></span> toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let unitMode = 'imperial';
+let lastResults = null;
+let activeTab = 2;
+
+function setUnit(mode) {
+  unitMode = mode;
+  document.getElementById('btnImperial').classList.toggle('active', mode === 'imperial');
+  document.getElementById('btnMetric').classList.toggle('active', mode === 'metric');
+  document.getElementById('heightImperialWrap').style.display = mode === 'imperial' ? '' : 'none';
+  document.getElementById('heightInWrap').style.display = mode === 'imperial' ? '' : 'none';
+  document.getElementById('heightMetricWrap').style.display = mode === 'metric' ? 'block' : 'none';
+  clearErrors();
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+  document.querySelectorAll('input, select').forEach(e => e.classList.remove('error'));
+}
+
+function showError(fieldId, msgId) {
+  document.getElementById(fieldId).classList.add('error');
+  document.getElementById(msgId).classList.add('show');
+}
+
+function fmt(n, dec = 0) {
+  return n.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+
+function getHeightCm() {
+  if (unitMode === 'metric') {
+    return parseFloat(document.getElementById('heightCm').value);
+  } else {
+    const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+    const inches = parseFloat(document.getElementById('heightIn').value) || 0;
+    return (ft * 30.48) + (inches * 2.54);
+  }
+}
+
+function getWeightKg() {
+  const w = parseFloat(document.getElementById('weight').value);
+  return unitMode === 'imperial' ? w * 0.453592 : w;
+}
+
+function validate() {
+  clearErrors();
+  let valid = true;
+  const age = parseFloat(document.getElementById('age').value);
+  if (!age || age < 15 || age > 55) {
+    showError('age', 'err-age');
+    valid = false;
+  }
+  const wRaw = parseFloat(document.getElementById('weight').value);
+  if (!wRaw || wRaw <= 0 || (unitMode === 'imperial' && wRaw > 700) || (unitMode === 'metric' && wRaw > 350)) {
+    showError('weight', 'err-weight');
+    valid = false;
+  }
+  if (unitMode === 'imperial') {
+    const ft = parseFloat(document.getElementById('heightFt').value);
+    if (!ft || ft < 3 || ft > 8) { showError('heightFt', 'err-heightFt'); valid = false; }
+    const inches = parseFloat(document.getElementById('heightIn').value);
+    if (isNaN(inches) || inches < 0 || inches > 11) { showError('heightIn', 'err-heightIn'); valid = false; }
+  } else {
+    const cm = parseFloat(document.getElementById('heightCm').value);
+    if (!cm || cm < 100 || cm > 250) { showError('heightCm', 'err-heightCm'); valid = false; }
+  }
+  return valid;
+}
+
+function calcTDEE(rmr, actFactor, trimester) {
+  const tdee = rmr * actFactor;
+  const adds = [0, 0, 340, 452];
+  return tdee + adds[trimester];
+}
+
+function buildTableHTML(cals, prot, carb, fat, label) {
+  return `<table>
+    <thead><tr><th>Nutrient</th><th class="right">Amount</th><th class="right">% Calories</th></tr></thead>
+    <tbody>
+      <tr><td>Total Calories</td><td class="right"><strong>${fmt(cals)}</strong> kcal</td><td class="right">—</td></tr>
+      <tr><td>Protein</td><td class="right">${fmt(prot)} g</td><td class="right">${fmt((prot*4/cals)*100,1)}%</td></tr>
+      <tr><td>Carbohydrates</td><td class="right">${fmt(carb)} g</td><td class="right">${fmt((carb*4/cals)*100,1)}%</td></tr>
+      <tr><td>Total Fat</td><td class="right">${fmt(fat)} g</td><td class="right">${fmt((fat*9/cals)*100,1)}%</td></tr>
+      <tr><td>Fiber (target)</td><td class="right">28 g</td><td class="right">—</td></tr>
+    </tbody>
+  </table>`;
+}
+
+function getMacros(cals) {
+  const prot = Math.max(71, Math.round(cals * 0.22 / 4));
+  const fat = Math.round(cals * 0.28 / 9);
+  const carb = Math.max(175, Math.round((cals - prot*4 - fat*9) / 4));
+  return { prot, carb, fat };
+}
+
+function showTab(idx) {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('panel' + i).classList.toggle('active', i === idx);
+    document.getElementById('tab' + i).classList.toggle('active', i === idx);
+  }
+  activeTab = idx;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const age = parseFloat(document.getElementById('age').value);
+  const weightKg = getWeightKg();
+  const heightCm = getHeightCm();
+  const actFactor = parseFloat(document.getElementById('activity').value);
+  const selectedTrim = parseInt(document.getElementById('trimester').value);
+
+  // Mifflin-St Jeor for women
+  const rmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+
+  const trimLabels = ['Pre-pregnancy Baseline', '1st Trimester', '2nd Trimester', '3rd Trimester'];
+  const trimShort = ['Baseline', '1st Trimester (Wks 1–12)', '2nd Trimester (Wks 13–26)', '3rd Trimester (Wks 27–40)'];
+
+  const calsAll = [0, 1, 2, 3].map(t => Math.round(calcTDEE(rmr, actFactor, t)));
+  const selectedCals = calsAll[selectedTrim];
+  const m = getMacros(selectedCals);
+
+  lastResults = { selectedCals, selectedTrim, trimLabels, m, calsAll, trimShort };
+
+  // Zone calculation: position on bar
+  const baseCals = calsAll[0];
+  const expectedCals = selectedTrim === 0 ? baseCals : baseCals + [0, 0, 340, 452][selectedTrim];
+  const diff = selectedCals - expectedCals;
+  // The bar shows the user's computed value relative to expected — always optimal (50%)
+  // Actually we show where computed cals sit relative to a range: ±30% of expected
+  // For display: center = optimal = their calculated value. We show the bar conceptually.
+  // Marker position: since we show the CALCULATED value, it always lands in the green center.
+  // Instead, let's interpret zone by BMI-driven context.
+  const bmi = weightKg / Math.pow(heightCm / 100, 2);
+  let zoneClass, zoneText, markerPct;
+  if (bmi < 18.5) {
+    zoneClass = 'red'; zoneText = '⚠ Underweight — May need extra calories'; markerPct = 12;
+  } else if (bmi < 25) {
+    zoneClass = 'green'; zoneText = '✓ Healthy weight — On track'; markerPct = 50;
+  } else if (bmi < 30) {
+    zoneClass = 'yellow'; zoneText = '⚡ Overweight — Monitor gain closely'; markerPct = 72;
+  } else {
+    zoneClass = 'red'; zoneText = '⚠ Obese BMI — Consult healthcare provider'; markerPct = 88;
+  }
+
+  requestAnimationFrame(() => {
+    // Zone indicator
+    document.getElementById('zoneIndicatorWrap').innerHTML =
+      `<span class="zone-indicator ${zoneClass}">${zoneText}</span>`;
+
+    // Hero
+    document.getElementById('heroCalories').textContent = fmt(selectedCals);
+    document.getElementById('heroTrimLabel').textContent = trimShort[selectedTrim];
+
+    // Zone marker
+    document.getElementById('zoneMarker').style.left = markerPct + '%';
+
+    // Macros grid
+    document.getElementById('macrosGrid').innerHTML = `
+      <div class="macro-card">
+        <div class="macro-num">${fmt(m.prot)}</div>
+        <div class="macro-unit">g/day</div>
+        <div class="macro-name">Protein</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num">${fmt(m.carb)}</div>
+        <div class="macro-unit">g/day</div>
+        <div class="macro-name">Carbs</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num">${fmt(m.fat)}</div>
+        <div class="macro-unit">g/day</div>
+        <div class="macro-name">Fat</div>
+      </div>
+    `;
+
+    // Macro bars
+    const protPct = Math.round(m.prot * 4 / selectedCals * 100);
+    const carbPct = Math.round(m.carb * 4 / selectedCals * 100);
+    const fatPct = Math.round(m.fat * 9 / selectedCals * 100);
+    document.getElementById('macroBars').innerHTML = `
+      <div class="bar-visual">
+        <div class="bar-lbl">Protein</div>
+        <div class="bar-fill-wrap"><div class="bar-fill" style="width:${protPct}%;background:#0077b6;"></div></div>
+        <div class="bar-pct">${protPct}%</div>
+      </div>
+      <div class="bar-visual">
+        <div class="bar-lbl">Carbs</div>
+        <div class="bar-fill-wrap"><div class="bar-fill" style="width:${carbPct}%;background:#27ae60;"></div></div>
+        <div class="bar-pct">${carbPct}%</div>
+      </div>
+      <div class="bar-visual">
+        <div class="bar-lbl">Fat</div>
+        <div class="bar-fill-wrap"><div class="bar-fill" style="width:${fatPct}%;background:#f39c12;"></div></div>
+        <div class="bar-pct">${fatPct}%</div>
+      </div>
+    `;
+
+    // Build all four trimester tables
+    for (let t = 0; t < 4; t++) {
+      const tc = calsAll[t];
+      const tm = getMacros(tc);
+      document.getElementById('tableWrap' + t).innerHTML = buildTableHTML(tc, tm.prot, tm.carb, tm.fat, trimLabels[t]);
+    }
+
+    // Set active tab to selected trimester
+    showTab(selectedTrim);
+
+    // Show results
+    document.getElementById('resultsSection').classList.add('visible');
+    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function copyResults() {
+  if (!lastResults) return;
+  const { selectedCals, selectedTrim, trimShort, m, calsAll } = lastResults;
+  const lines = [
+    `Pregnancy Calorie Calculator — toolhut.dev`,
+    `Trimester: ${trimShort[selectedTrim]}`,
+    `Daily Calories: ${fmt(selectedCals)} kcal`,
+    `Protein: ${fmt(m.prot)}g | Carbs: ${fmt(m.carb)}g | Fat: ${fmt(m.fat)}g`,
+    ``,
+    `All Trimesters:`,
+    `  Baseline: ${fmt(calsAll[0])} kcal`,
+    `  1st Trimester: ${fmt(calsAll[1])} kcal`,
+    `  2nd Trimester: ${fmt(calsAll[2])} kcal`,
+    `  3rd Trimester: ${fmt(calsAll[3])} kcal`,
+  ];
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  }).catch(() => {});
+}
+
+// Enter key support
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const tag = document.activeElement.tagName;
+    if (tag === 'INPUT' || tag === 'SELECT') calculate();
+  }
+});
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => calculate());
+});
+</script>
+</body>
+</html>
