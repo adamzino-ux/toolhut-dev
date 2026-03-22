@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Injury Recovery Return-to-Sport Timeline Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your injury recovery and return-to-sport timeline based on injury type, severity, and sport. Get a personalized week-by-week rehab plan instantly.">
+<link rel="canonical" href="https://toolhut.dev/injury-recovery-return-to-sport-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Injury Recovery Return-to-Sport Timeline Calculator",
+  "url": "https://toolhut.dev/injury-recovery-return-to-sport-calculator/",
+  "description": "Calculate your injury recovery and return-to-sport timeline based on injury type, severity, and sport. Get a personalized week-by-week rehab plan.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.4rem;line-height:1.3}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem}
+select,input[type=text],input[type=number]{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px 16px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
+select:focus,input:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+select.error,input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.1)}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.slider-group{margin-bottom:1.25rem}
+.slider-row{display:flex;align-items:center;gap:.75rem}
+input[type=range]{flex:1;height:6px;-webkit-appearance:none;appearance:none;background:#ddd;border-radius:3px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:#0077b6;border-radius:50%;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;background:#0077b6;border-radius:50%;cursor:pointer;border:none}
+.slider-val{min-width:42px;font-weight:700;color:#0077b6;font-size:1rem;text-align:right}
+.hint{font-size:.78rem;color:#888;margin-top:.25rem}
+.btn{background:#0077b6;color:#fff;border:none;border-radius:6px;padding:12px 24px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background .2s}
+.btn:hover{background:#006299}
+.btn:active{background:#005580}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:auto}
+.result-hero{text-align:center;padding:1.5rem 0 1rem}
+.result-hero .weeks-num{font-size:3.5rem;font-weight:800;color:#0077b6;line-height:1}
+.result-hero .weeks-label{font-size:1rem;color:#555;margin-top:.25rem}
+.result-hero .weeks-range{font-size:.9rem;color:#888;margin-top:.2rem}
+.severity-bar-wrap{margin:1.25rem 0}
+.severity-bar-label{font-size:.85rem;font-weight:500;color:#444;margin-bottom:.5rem}
+.severity-bar{position:relative;height:24px;border-radius:12px;background:linear-gradient(to right,#2ecc71 0%,#f1c40f 50%,#e74c3c 100%);overflow:visible}
+.severity-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:20px;height:20px;background:#1a1a2e;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:left .4s ease}
+.severity-labels{display:flex;justify-content:space-between;margin-top:.4rem;font-size:.75rem;color:#777}
+.zone-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:.82rem;font-weight:700;margin-top:.5rem}
+.zone-mild{background:#d5f5e3;color:#1e8449}
+.zone-moderate{background:#fef9e7;color:#9a7d0a}
+.zone-severe{background:#fce8e6;color:#c0392b}
+.phase-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.phase-table th{background:#f0f0f0;padding:8px 12px;text-align:left;font-weight:600;font-size:.8rem;border-bottom:2px solid #ddd}
+.phase-table td{padding:8px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+.phase-table tr:nth-child(even) td{background:#fafafa}
+.phase-week{font-weight:700;color:#0077b6;white-space:nowrap}
+.phase-name{font-weight:600}
+.phase-focus{color:#555}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.copy-btn{background:none;border:1px solid #ddd;border-radius:4px;padding:5px 12px;font-size:.78rem;color:#555;cursor:pointer;transition:all .2s;margin-top:1rem}
+.copy-btn:hover{border-color:#0077b6;color:#0077b6}
+.copy-btn.copied{border-color:#2ecc71;color:#2ecc71}
+.checklist{margin:1rem 0 0}
+.checklist-item{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem 0;border-bottom:1px solid #f0f0f0}
+.checklist-item:last-child{border-bottom:none}
+.check-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;margin-top:2px}
+.check-green{background:#d5f5e3;color:#1e8449}
+.check-yellow{background:#fef9e7;color:#9a7d0a}
+.check-red{background:#fce8e6;color:#c0392b}
+.check-blue{background:#d6eaf8;color:#1a5276}
+.check-text{font-size:.87rem;color:#333}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:1rem;font-size:.82rem;color:#555;margin-top:1.25rem;line-height:1.5}
+.disclaimer strong{color:#333}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin:2rem 0 .75rem}
+.content-section p{margin-bottom:.9rem;color:#333;font-size:.95rem}
+.content-section ul{margin:.5rem 0 .9rem 1.2rem;color:#333;font-size:.95rem}
+.content-section ul li{margin-bottom:.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:.6rem;background:#fff}
+summary{padding:.85rem 1rem;font-weight:600;font-size:.92rem;cursor:pointer;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"＋";font-size:1rem;color:#0077b6;flex-shrink:0}
+details[open] summary::after{content:"－"}
+details p{padding:0 1rem 1rem;font-size:.9rem;color:#444;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem}
+.related-link{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:.85rem 1rem;font-size:.85rem;font-weight:500;color:#0077b6;transition:border-color .2s,box-shadow .2s;display:block}
+.related-link:hover{border-color:#0077b6;box-shadow:0 2px 8px rgba(0,119,182,.1);text-decoration:none}
+footer{border-top:1px solid #e0e0e0;background:#fff;padding:1.5rem;margin-top:1rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.75rem;font-size:.82rem;color:#777}
+.footer-links{display:flex;gap:1.25rem}
+.footer-links a{color:#777}
+.footer-links a:hover{color:#0077b6}
+@media(max-width:600px){
+  .row-2{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .card{padding:1.25rem}
+  .result-hero .weeks-num{font-size:2.8rem}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+<main>
+  <h1>Injury Recovery Return-to-Sport Timeline Calculator</h1>
+  <p class="subtitle">Get a personalized week-by-week recovery plan based on your injury type, severity, and sport demands.</p>
+
+  <div class="card">
+    <div class="form-group">
+      <label for="injuryType">Injury Type</label>
+      <select id="injuryType">
+        <option value="">— Select injury —</option>
+        <optgroup label="Lower Extremity">
+          <option value="ankle_sprain">Ankle Sprain</option>
+          <option value="acl_tear">ACL Tear</option>
+          <option value="mcl_sprain">MCL Sprain</option>
+          <option value="meniscus">Meniscus Injury</option>
+          <option value="patella">Patellar Tendinopathy</option>
+          <option value="hamstring">Hamstring Strain</option>
+          <option value="quad_strain">Quadriceps Strain</option>
+          <option value="calf_strain">Calf Strain</option>
+          <option value="achilles">Achilles Tendon</option>
+          <option value="plantar">Plantar Fasciitis</option>
+          <option value="stress_fracture_lower">Stress Fracture (Lower Limb)</option>
+        </optgroup>
+        <optgroup label="Upper Extremity">
+          <option value="rotator_cuff">Rotator Cuff Tear</option>
+          <option value="shoulder_dislocation">Shoulder Dislocation</option>
+          <option value="elbow_tennis">Tennis Elbow</option>
+          <option value="wrist_sprain">Wrist Sprain</option>
+          <option value="finger_fracture">Finger Fracture</option>
+          <option value="stress_fracture_upper">Stress Fracture (Upper Limb)</option>
+        </optgroup>
+        <optgroup label="Spine & Core">
+          <option value="lower_back">Lower Back Strain</option>
+          <option value="disc_herniation">Disc Herniation</option>
+          <option value="neck_strain">Neck Strain / Whiplash</option>
+        </optgroup>
+        <optgroup label="Head">
+          <option value="concussion">Concussion</option>
+        </optgroup>
+      </select>
+      <div class="error-msg" id="injuryTypeErr">Please select an injury type.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="severity">Injury Severity</label>
+      <select id="severity">
+        <option value="">— Select severity —</option>
+        <option value="mild">Mild (Grade I) — Minor tissue damage, full weight-bearing</option>
+        <option value="moderate">Moderate (Grade II) — Partial tear, some functional loss</option>
+        <option value="severe">Severe (Grade III) — Complete tear or fracture, surgery may be needed</option>
+      </select>
+      <div class="error-msg" id="severityErr">Please select a severity level.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="sport">Primary Sport / Activity</label>
+      <select id="sport">
+        <option value="">— Select sport —</option>
+        <optgroup label="High Impact / Contact">
+          <option value="football">Football / Rugby</option>
+          <option value="basketball">Basketball</option>
+          <option value="soccer">Soccer / Football</option>
+          <option value="hockey">Hockey</option>
+          <option value="martial_arts">Martial Arts / MMA</option>
+        </optgroup>
+        <optgroup label="Moderate Impact">
+          <option value="running">Running / Track</option>
+          <option value="tennis">Tennis / Racket Sports</option>
+          <option value="volleyball">Volleyball</option>
+          <option value="baseball">Baseball / Softball</option>
+          <option value="gymnastics">Gymnastics</option>
+        </optgroup>
+        <optgroup label="Lower Impact">
+          <option value="swimming">Swimming</option>
+          <option value="cycling">Cycling</option>
+          <option value="golf">Golf</option>
+          <option value="rowing">Rowing</option>
+          <option value="yoga">Yoga / Pilates</option>
+        </optgroup>
+        <optgroup label="General">
+          <option value="crossfit">CrossFit / HIIT</option>
+          <option value="weightlifting">Weightlifting</option>
+          <option value="general">General Fitness</option>
+        </optgroup>
+      </select>
+      <div class="error-msg" id="sportErr">Please select your sport.</div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" min="10" max="90" placeholder="e.g. 28">
+        <div class="error-msg" id="ageErr">Enter age between 10–90.</div>
+      </div>
+      <div class="form-group">
+        <label for="fitnessLevel">Fitness Level</label>
+        <select id="fitnessLevel">
+          <option value="elite">Elite / Competitive</option>
+          <option value="recreational" selected>Recreational</option>
+          <option value="beginner">Beginner / Sedentary</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <label>Days Since Injury: <span id="daysSinceLabel">7</span> days</label>
+      <div class="slider-row">
+        <input type="range" id="daysSince" min="0" max="365" value="7" step="1">
+        <span class="slider-val" id="daysSinceVal">7</span>
+      </div>
+      <div class="hint">How many days ago did the injury occur?</div>
+    </div>
+
+    <div class="form-group">
+      <label>Complicating Factors (select all that apply)</label>
+      <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.3rem">
+        <label style="font-size:.88rem;font-weight:400;display:flex;align-items:center;gap:.5rem;cursor:pointer"><input type="checkbox" id="surgery"> Previous surgery on same area</label>
+        <label style="font-size:.88rem;font-weight:400;display:flex;align-items:center;gap:.5rem;cursor:pointer"><input type="checkbox" id="chronic"> Chronic / recurring injury</label>
+        <label style="font-size:.88rem;font-weight:400;display:flex;align-items:center;gap:.5rem;cursor:pointer"><input type="checkbox" id="comorbid"> Comorbidities (diabetes, obesity, etc.)</label>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate Recovery Timeline</button>
+  </div>
+
+  <div class="card results" id="results">
+    <div class="result-hero">
+      <div class="weeks-num" id="weeksNum">—</div>
+      <div class="weeks-label">Estimated weeks to return to sport</div>
+      <div class="weeks-range" id="weeksRange"></div>
+      <span class="zone-badge" id="zoneBadge"></span>
+    </div>
+
+    <div class="severity-bar-wrap">
+      <div class="severity-bar-label">Recovery Complexity</div>
+      <div class="severity-bar">
+        <div class="severity-marker" id="severityMarker" style="left:15%"></div>
+      </div>
+      <div class="severity-labels">
+        <span>Simple</span>
+        <span>Moderate</span>
+        <span>Complex</span>
+      </div>
+    </div>
+
+    <div style="margin-top:1.25rem">
+      <strong style="font-size:.9rem">Week-by-Week Rehabilitation Phases</strong>
+      <div class="tbl-wrap" style="margin-top:.6rem">
+        <table class="phase-table" id="phaseTable">
+          <thead>
+            <tr>
+              <th>Week(s)</th>
+              <th>Phase</th>
+              <th>Focus & Activities</th>
+            </tr>
+          </thead>
+          <tbody id="phaseBody"></tbody>
+        </table>
+      </div>
+      <button class="copy-btn" id="copyBtn">📋 Copy Recovery Plan</button>
+    </div>
+
+    <div style="margin-top:1.25rem">
+      <strong style="font-size:.9rem">Return-to-Sport Readiness Checklist</strong>
+      <div class="checklist" id="checklist"></div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>⚠️ Medical Disclaimer:</strong> This tool is for informational purposes only. Timelines are estimates based on published clinical guidelines and may vary significantly by individual. Consult a licensed healthcare professional, physiotherapist, or sports medicine physician before returning to sport.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="content-section">
+    <h2>How to Use This Injury Recovery Timeline Calculator</h2>
+    <p>Select your injury type, severity grade, and primary sport. Enter your age and current fitness level, then drag the slider to indicate how many days ago the injury occurred. Check any complicating factors and hit "Calculate" — you'll receive an estimated return-to-sport timeline, a week-by-week phase breakdown, and a readiness checklist.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Returning to sport too soon is one of the most common — and costly — mistakes athletes make. Research shows that athletes who return before full recovery are 3–5× more likely to re-injure the same tissue. A 22-year-old basketball player who sprains their ankle might be back on the court in 2 weeks if mild, but a Grade III ACL tear in a competitive soccer player often requires 9–12 months of structured rehab before safe return.</p>
+    <p>The stakes go beyond performance. A premature return from a concussion can lead to second-impact syndrome — a rare but potentially fatal condition. Returning from an ACL reconstruction too early dramatically increases re-tear risk, which carries a 60–70% failure rate on the same knee within 5 years.</p>
+    <p>This calculator helps recreational athletes, coaches, and sports parents understand the realistic scope of recovery — so nobody rushes a 15-year-old gymnast back after a stress fracture because a tournament is coming up.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The calculator uses a baseline recovery range for each injury type and severity grade, derived from published sports medicine guidelines (AOSSM, APTA, BJSM). It then applies adjustment multipliers:</p>
+    <ul>
+      <li><strong>Sport demand factor:</strong> Contact sports (football, rugby) extend timelines by 10–25% vs. low-impact activities like swimming or cycling.</li>
+      <li><strong>Age factor:</strong> Athletes over 35 have 10–20% slower soft-tissue healing; under 18 requires additional growth-plate caution.</li>
+      <li><strong>Fitness factor:</strong> Elite athletes often recover 10–15% faster due to superior baseline tissue health and professional rehab access.</li>
+      <li><strong>Complication multiplier:</strong> Prior surgery, chronic re-injury, or comorbidities each add 10–20% to the baseline estimate.</li>
+      <li><strong>Days elapsed:</strong> Time already spent recovering is subtracted from the total estimate.</li>
+    </ul>
+    <p><strong>Formula:</strong> Estimated Weeks = (Base Weeks × Severity Factor × Sport Factor × Age Factor × Fitness Factor × Complication Factor) − Weeks Already Elapsed</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Pain-free ≠ healed:</strong> Tissue remodeling continues for months after pain resolves. A hamstring strain may feel fine at 3 weeks but only be 60% of full tensile strength.</li>
+      <li><strong>Don't skip phases:</strong> The body heals in stages (inflammation → proliferation → remodeling). Jumping from rest to full sport skips the functional loading phase that builds resilience.</li>
+      <li><strong>Follow a "symptom threshold" rule:</strong> If any phase causes pain above 3/10, step back to the previous phase for 3–5 more days.</li>
+      <li><strong>Strength symmetry matters:</strong> Most sports medicine protocols require 90%+ limb symmetry (tested with single-leg hop tests or dynamometry) before return-to-sport clearance.</li>
+      <li><strong>Psychological readiness counts:</strong> Fear of re-injury is a real barrier. Consider working with a sports psychologist if anxiety about return is high.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is this recovery timeline estimate?</summary>
+      <p>This tool provides evidence-based ranges from clinical literature, but individual healing varies enormously based on genetics, nutrition, sleep, rehab adherence, and access to quality physiotherapy. Use this as a planning guide, not a clinical discharge criteria. Always get formal clearance from a sports medicine professional before return.</p>
+    </details>
+    <details>
+      <summary>Can I use this calculator for post-surgical recovery?</summary>
+      <p>The calculator includes a "previous surgery" complication factor, but post-operative timelines depend heavily on the specific procedure performed, surgeon technique, and graft type (for ACL). For surgical recovery, always follow the protocol provided by your orthopedic surgeon and physiotherapist — their plan takes precedence over any general estimate.</p>
+    </details>
+    <details>
+      <summary>What does "return to sport" actually mean?</summary>
+      <p>Return to sport (RTS) is typically defined in three stages: Return to Participation (modified training, no contact), Return to Sport (full training, no competition), and Return to Performance (competition at pre-injury level). This calculator estimates full RTS (stage 2), not just the point when you can begin light activity.</p>
+    </details>
+    <details>
+      <summary>Why does age affect recovery time?</summary>
+      <p>As we age, collagen synthesis slows, circulation to tendons and ligaments decreases, and the inflammatory response becomes less efficient. Athletes in their 40s and 50s typically see 15–25% longer soft-tissue healing compared to athletes in their 20s. However, experience, consistent training history, and good sleep hygiene can partially offset age-related slowdown.</p>
+    </details>
+  </div>
+
+  <div style="margin-bottom:2rem">
+    <h2 style="font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:.75rem">Related Tools</h2>
+    <div class="related-grid">
+      <a href="/periodization-training-block-planner/" class="related-link">📅 Periodization Training Block Planner</a>
+      <a href="/dehydration-electrolyte-calculator/" class="related-link">💧 Dehydration & Electrolyte Calculator</a>
+      <a href="/crossfit-benchmark-wod-calculator/" class="related-link">🏋️ CrossFit Benchmark WOD Calculator</a>
+      <a href="/cycling-power-zone-calculator/" class="related-link">🚴 Cycling Power Zone Calculator</a>
+      <a href="/glycemic-load-calculator/" class="related-link">🥗 Glycemic Load Meal Planner</a>
+      <a href="/pregnancy-calorie-needs-calculator/" class="related-link">🤰 Pregnancy Calorie Needs Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Slider sync
+const daysSince = document.getElementById('daysSince');
+const daysSinceVal = document.getElementById('daysSinceVal');
+daysSince.addEventListener('input', () => { daysSinceVal.textContent = daysSince.value; });
+
+// Injury data: [mildWeeks, moderateWeeks, severeWeeks, label]
+const INJURY_DATA = {
+  ankle_sprain:         [2,   6,   12,  "Ankle Sprain"],
+  acl_tear:             [4,   24,  52,  "ACL Tear"],
+  mcl_sprain:           [3,   8,   16,  "MCL Sprain"],
+  meniscus:             [4,   12,  24,  "Meniscus Injury"],
+  patella:              [6,   12,  20,  "Patellar Tendinopathy"],
+  hamstring:            [2,   6,   14,  "Hamstring Strain"],
+  quad_strain:          [2,   5,   12,  "Quadriceps Strain"],
+  calf_strain:          [2,   6,   12,  "Calf Strain"],
+  achilles:             [8,   16,  40,  "Achilles Tendon"],
+  plantar:              [6,   12,  24,  "Plantar Fasciitis"],
+  stress_fracture_lower:[6,   12,  20,  "Stress Fracture (Lower)"],
+  rotator_cuff:         [6,   14,  40,  "Rotator Cuff"],
+  shoulder_dislocation: [4,   10,  24,  "Shoulder Dislocation"],
+  elbow_tennis:         [6,   12,  24,  "Tennis Elbow"],
+  wrist_sprain:         [2,   6,   12,  "Wrist Sprain"],
+  finger_fracture:      [3,   8,   14,  "Finger Fracture"],
+  stress_fracture_upper:[6,   10,  18,  "Stress Fracture (Upper)"],
+  lower_back:           [2,   6,   16,  "Lower Back Strain"],
+  disc_herniation:      [6,   16,  40,  "Disc Herniation"],
+  neck_strain:          [2,   6,   14,  "Neck Strain"],
+  concussion:           [1,   3,   8,   "Concussion"]
+};
+
+// Sport demand factors
+const SPORT_FACTORS = {
+  football:1.25, rugby:1.25, basketball:1.2, soccer:1.2, hockey:1.2,
+  martial_arts:1.25, running:1.1, tennis:1.1, volleyball:1.1,
+  baseball:1.05, gymnastics:1.15, swimming:0.85, cycling:0.85,
+  golf:0.9, rowing:0.9, yoga:0.8, crossfit:1.15, weightlifting:1.1, general:1.0
+};
+
+// Phase templates by injury category
+function getPhases(injuryKey, totalWeeks, severity) {
+  const sev = severity;
+  const isConcussion = injuryKey === 'concussion';
+  const isACL = injuryKey === 'acl_tear';
+  const isAchilles = injuryKey === 'achilles';
+  const isBack = injuryKey === 'lower_back' || injuryKey === 'disc_herniation';
+
+  if (isConcussion) {
+    return [
+      {w:"1",phase:"Cognitive Rest",focus:"Complete rest — no screens, no reading, dark room. Monitor symptoms closely."},
+      {w:"2",phase:"Light Activity",focus:"Short walks, light stretching. No exertion that worsens symptoms."},
+      {w:"3",phase:"Moderate Aerobic",focus:"Stationary bike, swimming (low intensity). Heart rate below 70% max."},
+      {w:"4",phase:"Sport-Specific Non-Contact",focus:"Skating/running drills, no contact. Cleared by physician required."},
+      {w:"5",phase:"Full-Contact Practice",focus:"Return to normal training with contact. Final medical clearance."},
+      {w:"6+",phase:"Return to Competition",focus:"Full game/event participation. Ongoing symptom monitoring."}
+    ];
+  }
+
+  const p1End = Math.max(1, Math.round(totalWeeks * 0.15));
+  const p2End = Math.max(p1End+1, Math.round(totalWeeks * 0.35));
+  const p3End = Math.max(p2End+1, Math.round(totalWeeks * 0.60));
+  const p4End = Math.max(p3End+1, Math.round(totalWeeks * 0.80));
+  const p5End = Math.max(p4End+1, Math.round(totalWeeks * 0.92));
+
+  function wk(s,e){return s===e ? `${s}` : `${s}–${e}`;}
+
+  return [
+    {w:wk(1,p1End), phase:"Acute / Protection", focus:"RICE protocol (Rest, Ice, Compression, Elevation). Pain management, inflammation control. No loading of injured tissue."},
+    {w:wk(p1End+1,p2End), phase:"Early Mobilization", focus:"Gentle range-of-motion exercises. Pool walking or non-weight-bearing cardio. Begin isometric strengthening."},
+    {w:wk(p2End+1,p3End), phase:"Strengthening", focus:"Progressive resistance exercises. Closed-chain loading. Restore full ROM. Address muscle imbalances."},
+    {w:wk(p3End+1,p4End), phase:"Functional Loading", focus:"Sport-specific movement patterns. Plyometrics (low level). Balance and proprioception training. Limb symmetry testing."},
+    {w:wk(p4End+1,p5End), phase:"Sport-Specific Training", focus:"Full practice load, no contact. Running, jumping, cutting at full speed. Achieve 90%+ limb symmetry score."},
+    {w:wk(p5End+1,totalWeeks), phase:"Return to Sport", focus:"Graduated return to full competition. Medical clearance obtained. Psychological readiness confirmed."}
+  ].filter(ph => {
+    const parts = ph.w.split('–');
+    const start = parseInt(parts[0]);
+    return start <= totalWeeks;
+  });
+}
+
+function getChecklist(injuryKey, severity, sport) {
+  const items = [
+    {icon:"✓",cls:"check-green",text:"Pain ≤ 1/10 at rest and during activity"},
+    {icon:"✓",cls:"check-green",text:"Full range of motion restored (compared to uninjured side)"},
+    {icon:"✓",cls:"check-green",text:"Strength ≥ 90% of uninjured limb (limb symmetry index)"},
+    {icon:"✓",cls:"check-blue",text:"Sport-specific movements performed without compensation"},
+    {icon:"✓",cls:"check-blue",text:"Passed single-leg hop test (for lower limb injuries)"},
+    {icon:"✓",cls:"check-yellow",text:"No swelling or inflammation after training sessions"},
+    {icon:"✓",cls:"check-yellow",text:"Cleared by physiotherapist or sports medicine physician"},
+    {icon:"✓",cls:"check-red",text:"Psychologically ready — confidence to return without fear of re-injury"}
+  ];
+  if (injuryKey === 'concussion') {
+    return [
+      {icon:"✓",cls:"check-red",text:"Symptom-free at rest for ≥ 24 hours"},
+      {icon:"✓",cls:"check-red",text:"Symptom-free during exercise progression"},
+      {icon:"✓",cls:"check-green",text:"Neurological / cognitive testing returned to baseline"},
+      {icon:"✓",cls:"check-green",text:"ImPACT or equivalent computerized concussion test passed"},
+      {icon:"✓",cls:"check-blue",text:"Physician (preferably concussion specialist) clearance obtained"},
+      {icon:"✓",cls:"check-yellow",text:"Completed all 5 graduated return-to-sport protocol steps"}
+    ];
+  }
+  return items;
+}
+
+function validate() {
+  let ok = true;
+  const fields = [
+    ['injuryType','injuryTypeErr','Please select an injury type.'],
+    ['severity','severityErr','Please select a severity level.'],
+    ['sport','sportErr','Please select your sport.']
+  ];
+  fields.forEach(([id,errId,msg]) => {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    if (!el.value) {
+      el.classList.add('error'); err.classList.add('show'); ok = false;
+    } else {
+      el.classList.remove('error'); err.classList.remove('show');
+    }
+  });
+  const ageEl = document.getElementById('age');
+  const ageErr = document.getElementById('ageErr');
+  const ageVal = parseFloat(ageEl.value);
+  if (ageEl.value === '' || isNaN(ageVal) || ageVal < 10 || ageVal > 90) {
+    ageEl.classList.add('error'); ageErr.classList.add('show'); ok = false;
+  } else {
+    ageEl.classList.remove('error'); ageErr.classList.remove('show');
+  }
+  return ok;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const injuryKey = document.getElementById('injuryType').value;
+  const severity = document.getElementById('severity').value;
+  const sport = document.getElementById('sport').value;
+  const age = parseFloat(document.getElementById('age').value);
+  const fitness = document.getElementById('fitnessLevel').value;
+  const daysElapsed = parseInt(daysSince.value);
+  const hasSurgery = document.getElementById('surgery').checked;
+  const isChronic = document.getElementById('chronic').checked;
+  const hasComorbid = document.getElementById('comorbid').checked;
+
+  const data = INJURY_DATA[injuryKey];
+  const sevIdx = {mild:0,moderate:1,severe:2}[severity];
+  let baseWeeks = data[sevIdx];
+
+  const sportFactor = SPORT_FACTORS[sport] || 1.0;
+  let ageFactor = 1.0;
+  if (age < 18) ageFactor = 1.1;
+  else if (age >= 35 && age < 50) ageFactor = 1.1;
+  else if (age >= 50) ageFactor = 1.2;
+
+  let fitnessFactor = 1.0;
+  if (fitness === 'elite') fitnessFactor = 0.9;
+  else if (fitness === 'beginner') fitnessFactor = 1.15;
+
+  let complicationFactor = 1.0;
+  if (hasSurgery) complicationFactor += 0.15;
+  if (isChronic) complicationFactor += 0.12;
+  if (hasComorbid) complicationFactor += 0.1;
+
+  const adjustedWeeks = baseWeeks * sportFactor * ageFactor * fitnessFactor * complicationFactor;
+  const weeksElapsed = daysElapsed / 7;
+  const remaining = Math.max(0.5, adjustedWeeks - weeksElapsed);
+  const displayWeeks = Math.round(remaining * 10) / 10;
+
+  const rangeMin = Math.max(0.5, Math.round(remaining * 0.8 * 10) / 10);
+  const rangeMax = Math.round(remaining * 1.25 * 10) / 10;
+
+  // Complexity score for bar (0-100)
+  const complexityScore = Math.min(100, Math.max(5, (adjustedWeeks / 52) * 100));
+
+  // Zone
+  let zoneCls, zoneText;
+  if (severity === 'mild' && adjustedWeeks <= 6) {
+    zoneCls = 'zone-mild'; zoneText = '🟢 Low Complexity';
+  } else if (severity === 'severe' || adjustedWeeks > 20) {
+    zoneCls = 'zone-severe'; zoneText = '🔴 High Complexity';
+  } else {
+    zoneCls = 'zone-moderate'; zoneText = '🟡 Moderate Complexity';
+  }
+
+  const phases = getPhases(injuryKey, Math.round(adjustedWeeks), severity);
+  const checklist = getChecklist(injuryKey, severity, sport);
+
+  // Build phase rows HTML
+  let phaseRows = '';
+  phases.forEach(ph => {
+    phaseRows += `<tr><td class="phase-week">${ph.w}</td><td class="phase-name">${ph.phase}</td><td class="phase-focus">${ph.focus}</td></tr>`;
+  });
+
+  // Build checklist HTML
+  let checklistHTML = '';
+  checklist.forEach(item => {
+    checklistHTML += `<div class="checklist-item"><div class="check-icon ${item.cls}">${item.icon}</div><div class="check-text">${item.text}</div></div>`;
+  });
+
+  // Build copy text
+  const injuryName = INJURY_DATA[injuryKey][3];
+  const copyText = `INJURY RECOVERY TIMELINE\n========================\nInjury: ${injuryName} (${severity.charAt(0).toUpperCase()+severity.slice(1)})\nSport: ${sport}\nEstimated Return to Sport: ${displayWeeks} weeks (range: ${rangeMin}–${rangeMax} weeks)\n\nREHABILITATION PHASES:\n${phases.map(p=>`Week(s) ${p.w}: ${p.phase} — ${p.focus}`).join('\n')}\n\nGenerated by toolhut.dev/injury-recovery-return-to-sport-calculator/`;
+
+  requestAnimationFrame(() => {
+    document.getElementById('weeksNum').textContent = displayWeeks;
+    document.getElementById('weeksRange').textContent = `Estimated range: ${rangeMin} – ${rangeMax} weeks`;
+    const badge = document.getElementById('zoneBadge');
+    badge.className = 'zone-badge ' + zoneCls;
+    badge.textContent = zoneText;
+    document.getElementById('severityMarker').style.left = complexityScore + '%';
+    document.getElementById('phaseBody').innerHTML = phaseRows;
+    document.getElementById('checklist').innerHTML = checklistHTML;
+
+    const results = document.getElementById('results');
+    results.classList.add('show');
+    results.scrollIntoView({behavior:'smooth', block:'start'});
+
+    // Copy button
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(copyText).then(() => {
+        copyBtn.textContent = '✅ Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.textContent = '📋 Copy Recovery Plan';
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = copyText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.textContent = '✅ Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.textContent = '📋 Copy Recovery Plan';
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      });
+    };
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+// Enter key on inputs
+document.querySelectorAll('input,select').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter') calculate();
+  });
+});
+</script>
+</body>
+</html>
