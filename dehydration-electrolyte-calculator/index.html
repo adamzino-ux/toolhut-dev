@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dehydration Risk & Electrolyte Needs Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your dehydration risk and daily electrolyte needs based on weight, activity, climate, and sweat rate. Free electrolyte needs calculator with personalized recommendations.">
+<link rel="canonical" href="https://toolhut.dev/dehydration-electrolyte-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Dehydration Risk & Electrolyte Needs Calculator",
+  "url": "https://toolhut.dev/dehydration-electrolyte-calculator/",
+  "description": "Calculate your dehydration risk and daily electrolyte needs based on weight, activity level, climate, and sweat rate.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline;color:#006299}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0 1rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#0077b6}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 3rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.25}
+.subtitle{font-size:0.95rem;color:#555;margin-bottom:1.8rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#0077b6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1.2rem;padding-bottom:0.4rem;border-bottom:2px solid #e8f4fb}
+.form-row{margin-bottom:1.2rem}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:5px}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px;appearance:none;-webkit-appearance:none}
+input[type=number]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error{border-color:#e74c3c}
+.error-msg{font-size:0.8rem;color:#e74c3c;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.unit-toggle{display:flex;gap:0;margin-bottom:1.2rem}
+.unit-btn{flex:1;padding:10px;border:1px solid #ddd;background:#f8f9fa;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.2s;min-height:44px}
+.unit-btn:first-child{border-radius:6px 0 0 6px}
+.unit-btn:last-child{border-radius:0 6px 6px 0;border-left:none}
+.unit-btn.active{background:#0077b6;color:#fff;border-color:#0077b6}
+.slider-wrap{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;height:6px;-webkit-appearance:none;appearance:none;background:#e0e0e0;border-radius:3px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:#0077b6;border-radius:50%;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;background:#0077b6;border-radius:50%;cursor:pointer;border:none}
+.slider-val{font-size:0.95rem;font-weight:700;color:#0077b6;min-width:50px;text-align:right}
+.btn{display:block;width:100%;background:#0077b6;color:#fff;border:none;border-radius:6px;padding:14px 24px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;margin-top:1.5rem}
+.btn:hover{background:#006299}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.risk-banner{border-radius:8px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:14px}
+.risk-banner.low{background:#e8f5e9;border:1px solid #a5d6a7}
+.risk-banner.moderate{background:#fff8e1;border:1px solid #ffe082}
+.risk-banner.high{background:#ffebee;border:1px solid #ef9a9a}
+.risk-banner.very-high{background:#fce4ec;border:1px solid #f48fb1}
+.risk-icon{font-size:2rem;line-height:1}
+.risk-label{font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;opacity:0.75}
+.risk-name{font-size:1.3rem;font-weight:800}
+.risk-banner.low .risk-name{color:#2e7d32}
+.risk-banner.moderate .risk-name{color:#f57f17}
+.risk-banner.high .risk-name{color:#c62828}
+.risk-banner.very-high .risk-name{color:#880e4f}
+.gauge-wrap{margin-bottom:1.5rem}
+.gauge-label{font-size:0.8rem;font-weight:600;color:#666;margin-bottom:6px}
+.gauge-track{height:18px;border-radius:9px;background:linear-gradient(to right,#43a047,#ffb300,#e53935,#880e4f);position:relative;overflow:visible}
+.gauge-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:22px;height:22px;background:#fff;border:3px solid #1a1a2e;border-radius:50%;transition:left 0.6s cubic-bezier(.34,1.56,.64,1);z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+.gauge-zones{display:flex;justify-content:space-between;margin-top:4px}
+.gauge-zones span{font-size:0.7rem;color:#888}
+.key-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.metric-card{background:#f8f9fa;border:1px solid #e8e8e8;border-radius:8px;padding:1rem;text-align:center}
+.metric-val{font-size:1.6rem;font-weight:800;color:#0077b6;line-height:1.1}
+.metric-unit{font-size:0.75rem;color:#666;font-weight:500}
+.metric-label{font-size:0.8rem;color:#555;margin-top:3px}
+.elec-table-wrap{overflow-x:auto;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444;border-bottom:2px solid #ddd}
+th:last-child,td:last-child{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid #eee;color:#1a1a2e}
+tr:nth-child(even) td{background:#fafafa}
+.status-badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.75rem;font-weight:600}
+.status-normal{background:#e8f5e9;color:#2e7d32}
+.status-elevated{background:#fff8e1;color:#f57f17}
+.status-high{background:#ffebee;color:#c62828}
+.tips-box{background:#e8f4fb;border-left:4px solid #0077b6;border-radius:0 6px 6px 0;padding:1rem 1.2rem;margin-bottom:1.5rem}
+.tips-box h3{font-size:0.9rem;font-weight:700;color:#0077b6;margin-bottom:0.6rem}
+.tips-box ul{padding-left:1.1rem}
+.tips-box li{font-size:0.88rem;color:#333;margin-bottom:4px}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:#f8f9fa;color:#444;border:1px solid #ddd;border-radius:5px;padding:7px 14px;font-size:0.82rem;cursor:pointer;transition:all 0.2s;margin-bottom:1rem}
+.copy-btn:hover{background:#e8f4fb;border-color:#0077b6;color:#0077b6}
+.disclaimer{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:1rem;font-size:0.8rem;color:#666;margin-top:1rem;line-height:1.5}
+.disclaimer strong{color:#555}
+.ad-slot{min-height:0;margin:0}
+.content-section{margin-bottom:2rem}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;padding-top:0.5rem}
+.content-section p{font-size:0.93rem;color:#444;margin-bottom:0.8rem;line-height:1.7}
+.content-section ul{padding-left:1.3rem;margin-bottom:0.8rem}
+.content-section li{font-size:0.93rem;color:#444;margin-bottom:5px;line-height:1.6}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;background:#fff}
+summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:0.93rem;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";color:#0077b6;font-size:1rem;transition:transform 0.2s}
+details[open] summary::after{content:"－"}
+details p{padding:0 16px 14px;font-size:0.9rem;color:#555;line-height:1.65}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.related-link{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:12px 14px;font-size:0.88rem;font-weight:500;color:#0077b6;transition:all 0.2s;display:block;min-height:44px;display:flex;align-items:center}
+.related-link:hover{background:#e8f4fb;border-color:#0077b6;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e0e0e0;padding:1.5rem 1rem;margin-top:2rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0.8rem}
+.footer-links{display:flex;gap:1.2rem;flex-wrap:wrap}
+.footer-links a{font-size:0.85rem;color:#555}
+.footer-copy{font-size:0.82rem;color:#888}
+@media(max-width:540px){
+  .form-row-2{grid-template-columns:1fr}
+  .key-metrics{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .card{padding:1.4rem 1.2rem}
+  .metric-val{font-size:1.35rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Dehydration Risk & Electrolyte Needs Calculator</h1>
+  <p class="subtitle">Get a personalized dehydration risk score and daily electrolyte targets based on your body, activity, and environment.</p>
+
+  <div class="card">
+    <div class="section-title">Unit System</div>
+    <div class="unit-toggle">
+      <button class="unit-btn active" id="btnMetric" onclick="setUnit('metric')">Metric (kg / °C)</button>
+      <button class="unit-btn" id="btnImperial" onclick="setUnit('imperial')">Imperial (lb / °F)</button>
+    </div>
+
+    <div class="section-title">Body & Personal Info</div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0">
+        <label for="weight">Body Weight (<span class="wt-unit">kg</span>)</label>
+        <input type="number" id="weight" placeholder="70" min="20" max="300" step="0.1">
+        <div class="error-msg" id="err-weight">Enter a valid weight.</div>
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" placeholder="30" min="5" max="100" step="1">
+        <div class="error-msg" id="err-age">Enter a valid age (5–100).</div>
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0">
+        <label for="sex">Biological Sex</label>
+        <select id="sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label for="prehydration">Pre-activity Hydration</label>
+        <select id="prehydration">
+          <option value="good">Well hydrated</option>
+          <option value="moderate">Slightly thirsty</option>
+          <option value="poor">Noticeably thirsty</option>
+          <option value="dehydrated">Already dehydrated</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:1.5rem">Activity & Duration</div>
+    <div class="form-row">
+      <label for="activity">Activity Type</label>
+      <select id="activity">
+        <option value="rest">Rest / Sedentary</option>
+        <option value="light">Light (walking, yoga)</option>
+        <option value="moderate">Moderate (cycling, hiking)</option>
+        <option value="vigorous">Vigorous (running, HIIT)</option>
+        <option value="extreme">Extreme (marathon, triathlon)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>Activity Duration: <span id="durLabel">60 min</span></label>
+      <div class="slider-wrap">
+        <input type="range" id="duration" min="0" max="360" step="10" value="60">
+        <span class="slider-val" id="durDisp">60 min</span>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Sweat Rate (perceived): <span id="sweatLabel">Moderate</span></label>
+      <div class="slider-wrap">
+        <input type="range" id="sweatRate" min="1" max="5" step="1" value="3">
+        <span class="slider-val" id="sweatDisp">3/5</span>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:1.5rem">Environment</div>
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0">
+        <label for="temp">Ambient Temp (<span class="temp-unit">°C</span>)</label>
+        <input type="number" id="temp" placeholder="22" min="-20" max="60" step="1">
+        <div class="error-msg" id="err-temp">Enter a valid temperature.</div>
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label for="humidity">Humidity (%)</label>
+        <input type="number" id="humidity" placeholder="50" min="0" max="100" step="1">
+        <div class="error-msg" id="err-humidity">Enter 0–100%.</div>
+      </div>
+    </div>
+    <div class="form-row" style="margin-top:1rem">
+      <label for="conditions">Special Conditions</label>
+      <select id="conditions">
+        <option value="none">None</option>
+        <option value="altitude">High altitude (>2,500m)</option>
+        <option value="illness">Recent illness / fever</option>
+        <option value="alcohol">Recent alcohol consumption</option>
+        <option value="pregnancy">Pregnancy / breastfeeding</option>
+        <option value="elderly">Age 65+ or chronic condition</option>
+      </select>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate My Dehydration Risk & Electrolyte Needs</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results card" id="results">
+    <div class="section-title">Your Results</div>
+
+    <div id="riskBanner" class="risk-banner low">
+      <div class="risk-icon" id="riskIcon">💧</div>
+      <div>
+        <div class="risk-label">Dehydration Risk</div>
+        <div class="risk-name" id="riskName">Low</div>
+        <div id="riskDesc" style="font-size:0.83rem;color:#555;margin-top:2px"></div>
+      </div>
+    </div>
+
+    <div class="gauge-wrap">
+      <div class="gauge-label">Risk Level Scale</div>
+      <div class="gauge-track">
+        <div class="gauge-marker" id="gaugeMarker" style="left:12%"></div>
+      </div>
+      <div class="gauge-zones">
+        <span>Low</span><span>Moderate</span><span>High</span><span>Very High</span>
+      </div>
+    </div>
+
+    <div class="key-metrics" id="keyMetrics"></div>
+
+    <button class="copy-btn" id="copyBtn" onclick="copyResults()">📋 Copy Results to Clipboard</button>
+
+    <div class="section-title">Daily Electrolyte Targets</div>
+    <div class="elec-table-wrap">
+      <table id="elecTable">
+        <thead>
+          <tr>
+            <th>Electrolyte</th>
+            <th>Baseline (mg)</th>
+            <th>Your Target (mg)</th>
+            <th>Good Sources</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="elecBody"></tbody>
+      </table>
+    </div>
+
+    <div class="tips-box">
+      <h3>💡 Personalized Hydration Tips</h3>
+      <ul id="tipsList"></ul>
+    </div>
+
+    <div class="disclaimer">
+      <strong>⚠️ Medical Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional for medical advice. If you experience symptoms of severe dehydration (dizziness, rapid heartbeat, confusion, fainting), seek immediate medical attention.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT -->
+  <div class="content-section card">
+    <h2>How to Use This Electrolyte Needs Calculator</h2>
+    <p>Enter your body weight, age, sex, and hydration status, then describe your activity (type, duration, and perceived sweat rate). Add your environment conditions — temperature, humidity, and any special factors like altitude or illness. Hit <strong>Calculate</strong> to instantly see your dehydration risk level and a full electrolyte breakdown with personalized targets.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Even mild dehydration of just 2% body weight loss can impair cognitive performance, reduce endurance by up to 10%, and trigger headaches and fatigue. A 70kg athlete losing 1.4kg of sweat during a 90-minute run in 28°C heat is already in moderate-to-high territory — yet most people don't notice until they're thirsty, which itself signals 1–2% fluid deficit.</p>
+    <p>Electrolytes aren't just about performance. Sodium drives fluid retention and nerve signaling; potassium controls muscle contraction and heart rhythm; magnesium regulates over 300 enzyme reactions. Athletes doing two-a-days, people working outdoors in summer, pregnant women, and adults over 65 all have substantially elevated needs that plain water can't meet alone. A runner who drinks only water during a marathon can develop hyponatremia — dangerously low sodium — which is more life-threatening than dehydration itself.</p>
+    <p>This calculator combines evidence-based sweat rate data, ACSM hydration guidelines, and electrolyte reference intakes to give you a practical, individualized plan — not just generic "drink 8 glasses a day" advice.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The dehydration risk score combines several weighted factors:</p>
+    <ul>
+      <li><strong>Base water need:</strong> ~35 mL per kg body weight per day (WHO baseline)</li>
+      <li><strong>Sweat loss estimate:</strong> Activity intensity × duration × perceived sweat rate × temperature/humidity multiplier (0.4–1.8L/hr range)</li>
+      <li><strong>Risk score:</strong> % body weight predicted fluid loss, scaled by age, prehydration status, and special conditions</li>
+    </ul>
+    <p>Electrolyte targets are based on baseline DRI values adjusted upward by a multiplier derived from total estimated sweat loss. Sweat contains roughly 900–1,400 mg sodium/L, 150–250 mg potassium/L, 10–30 mg magnesium/L, and 20–50 mg calcium/L. The formula: <strong>Target = Baseline DRI + (Sweat Loss (L) × Electrolyte Concentration)</strong>.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't rely solely on thirst:</strong> By the time you feel thirsty, you're already 1–2% dehydrated. Pre-hydrate 2 hours before intense activity.</li>
+      <li><strong>Beware of overhydration:</strong> Drinking too much plain water during endurance events dilutes sodium. Use electrolyte drinks for sessions over 60 minutes.</li>
+      <li><strong>Account for temperature lag:</strong> Hot weather dehydrates you even at rest — add 200–300mL per hour in temperatures above 30°C.</li>
+      <li><strong>Coffee ≠ full dehydration:</strong> Moderate caffeine (under 400mg/day) is mildly diuretic but not significantly dehydrating for regular consumers.</li>
+      <li><strong>Rehydrate incrementally:</strong> After exercise, aim to replace 150% of weight lost over 4–6 hours with electrolyte-containing fluids — not all at once.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How much water should I drink per day?</summary>
+      <p>General guidance is 35 mL per kg of body weight as a baseline — about 2.45L for a 70kg adult. This rises significantly with exercise, heat, illness, or pregnancy. The calculator above gives you a personalized daily target that accounts for all these factors rather than a one-size-fits-all number.</p>
+    </details>
+    <details>
+      <summary>What are the signs I need more electrolytes, not just water?</summary>
+      <p>Muscle cramps (especially in the calves or hamstrings during or after exercise), fatigue that doesn't resolve with rest, headaches after sweating heavily, and nausea during prolonged activity all suggest electrolyte depletion rather than simple dehydration. If plain water doesn't relieve symptoms within 20 minutes, electrolytes are likely needed.</p>
+    </details>
+    <details>
+      <summary>Is sodium bad for hydration?</summary>
+      <p>No — sodium is essential for hydration. It's the primary extracellular electrolyte that regulates fluid balance and drives water retention in cells. The concern about sodium is chronic excess in sedentary people; for active individuals, adequate sodium intake actually improves hydration efficiency. Sports with heavy sweating often require additional sodium beyond normal dietary intake.</p>
+    </details>
+    <details>
+      <summary>Can I use this for children or elderly individuals?</summary>
+      <p>The calculator adjusts targets for age, but children under 12 and adults over 65 have unique physiological differences — children have higher surface-area-to-mass ratios (losing heat and water faster), while older adults have a blunted thirst mechanism. Always consult a pediatrician or physician for clinical hydration guidance in these populations.</p>
+    </details>
+  </div>
+
+  <div class="content-section card">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/crossfit-benchmark-wod-calculator/" class="related-link">🏋️ CrossFit Benchmark WOD Score Calculator</a>
+      <a href="/cycling-power-zone-calculator/" class="related-link">🚴 Cycling Power Zone Calculator</a>
+      <a href="/glycemic-load-calculator/" class="related-link">🥗 Glycemic Load Meal Planner</a>
+      <a href="/resting-metabolic-rate-calculator/" class="related-link">🔥 Resting Metabolic Rate Calculator</a>
+      <a href="/post-workout-protein-timing-calculator/" class="related-link">💪 Anabolic Window Protein Timer</a>
+      <a href="/workout-meal-timing-calculator/" class="related-link">⏱️ Anabolic Window & Meal Timing Optimizer</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="footer-copy">© <span id="yr"></span> toolhut.dev</div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+let unitSystem = 'metric';
+
+function setUnit(u) {
+  unitSystem = u;
+  document.getElementById('btnMetric').classList.toggle('active', u === 'metric');
+  document.getElementById('btnImperial').classList.toggle('active', u === 'imperial');
+  document.querySelectorAll('.wt-unit').forEach(el => el.textContent = u === 'metric' ? 'kg' : 'lb');
+  document.querySelectorAll('.temp-unit').forEach(el => el.textContent = u === 'metric' ? '°C' : '°F');
+  const wEl = document.getElementById('weight');
+  const tEl = document.getElementById('temp');
+  if (wEl.value) wEl.placeholder = u === 'metric' ? '70' : '154';
+  if (tEl.value) tEl.placeholder = u === 'metric' ? '22' : '72';
+  wEl.placeholder = u === 'metric' ? '70' : '154';
+  tEl.placeholder = u === 'metric' ? '22' : '72';
+}
+
+const durSlider = document.getElementById('duration');
+const durLabel = document.getElementById('durLabel');
+const durDisp = document.getElementById('durDisp');
+durSlider.addEventListener('input', () => {
+  const v = parseInt(durSlider.value);
+  const txt = v === 0 ? 'No activity' : v + ' min';
+  durLabel.textContent = txt;
+  durDisp.textContent = txt;
+});
+
+const sweatSlider = document.getElementById('sweatRate');
+const sweatLabel = document.getElementById('sweatLabel');
+const sweatDisp = document.getElementById('sweatDisp');
+const sweatLabels = ['','Very Low','Low','Moderate','High','Very High'];
+sweatSlider.addEventListener('input', () => {
+  const v = parseInt(sweatSlider.value);
+  sweatLabel.textContent = sweatLabels[v];
+  sweatDisp.textContent = v + '/5';
+});
+
+function fmt(n, dec = 0) {
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
+function showErr(id, show) {
+  const el = document.getElementById('err-' + id);
+  const inp = document.getElementById(id);
+  if (el) el.classList.toggle('show', show);
+  if (inp) inp.classList.toggle('error', show);
+}
+
+function clearErrors() {
+  ['weight','age','temp','humidity'].forEach(id => showErr(id, false));
+}
+
+function validate() {
+  let ok = true;
+  const wVal = parseFloat(document.getElementById('weight').value);
+  const aVal = parseFloat(document.getElementById('age').value);
+  const tVal = parseFloat(document.getElementById('temp').value);
+  const hVal = parseFloat(document.getElementById('humidity').value);
+
+  if (!document.getElementById('weight').value || isNaN(wVal) || wVal < 10 || wVal > 500) { showErr('weight', true); ok = false; } else showErr('weight', false);
+  if (!document.getElementById('age').value || isNaN(aVal) || aVal < 5 || aVal > 110) { showErr('age', true); ok = false; } else showErr('age', false);
+  if (!document.getElementById('temp').value || isNaN(tVal)) { showErr('temp', true); ok = false; } else showErr('temp', false);
+  if (!document.getElementById('humidity').value || isNaN(hVal) || hVal < 0 || hVal > 100) { showErr('humidity', true); ok = false; } else showErr('humidity', false);
+  return ok;
+}
+
+function calculate() {
+  clearErrors();
+  if (!validate()) return;
+
+  // --- Gather inputs ---
+  let weightKg = parseFloat(document.getElementById('weight').value);
+  if (unitSystem === 'imperial') weightKg = weightKg * 0.453592;
+  const age = parseFloat(document.getElementById('age').value);
+  const sex = document.getElementById('sex').value;
+  const prehydration = document.getElementById('prehydration').value;
+  const activity = document.getElementById('activity').value;
+  const durationMin = parseInt(document.getElementById('duration').value);
+  const sweatRateScore = parseInt(document.getElementById('sweatRate').value);
+  let tempC = parseFloat(document.getElementById('temp').value);
+  if (unitSystem === 'imperial') tempC = (tempC - 32) * 5/9;
+  const humidity = parseFloat(document.getElementById('humidity').value);
+  const conditions = document.getElementById('conditions').value;
+
+  // --- Activity intensity multiplier (L/hr sweat base) ---
+  const activitySweat = {rest:0,light:0.35,moderate:0.6,vigorous:0.9,extreme:1.3};
+  const baseSweatLhr = activitySweat[activity] || 0;
+
+  // Sweat rate personal multiplier
+  const sweatMult = 0.5 + (sweatRateScore - 1) * 0.25; // 0.5–1.5
+
+  // Temperature/humidity multiplier
+  let envMult = 1.0;
+  if (tempC > 35) envMult = 1.45;
+  else if (tempC > 28) envMult = 1.25;
+  else if (tempC > 22) envMult = 1.1;
+  else if (tempC < 5) envMult = 0.85;
+  if (humidity > 70) envMult += 0.15;
+  else if (humidity > 50) envMult += 0.05;
+
+  // Total sweat loss (L)
+  const durationHr = durationMin / 60;
+  const sweatLossL = baseSweatLhr * sweatMult * envMult * durationHr;
+
+  // Base water need
+  const baseWaterL = weightKg * 0.035;
+
+  // Total water need
+  let totalWaterL = baseWaterL + sweatLossL;
+
+  // Age adjustment
+  if (age >= 65) totalWaterL *= 1.1;
+  else if (age < 14) totalWaterL *= 0.85;
+
+  // Sex adjustment
+  if (sex === 'female') totalWaterL *= 0.92;
+
+  // Prehydration penalty
+  const prehydPenalty = {good: 0, moderate: 0.05, poor: 0.1, dehydrated: 0.18};
+  const prehydBodyWtPct = prehydPenalty[prehydration] || 0;
+
+  // Conditions multiplier
+  const condMult = {none:0, altitude:0.08, illness:0.12, alcohol:0.08, pregnancy:0.1, elderly:0.06};
+  const condAdd = condMult[conditions] || 0;
+
+  // --- Risk Score (0–100) ---
+  // Base: predicted fluid loss as % body weight
+  let fluidLossPct = (sweatLossL / weightKg) * 100 + prehydBodyWtPct * 100 + condAdd * 100;
+
+  // Activity risk base
+  const actRiskBase = {rest:2, light:8, moderate:18, vigorous:32, extreme:50};
+  let riskScore = (actRiskBase[activity] || 0) * sweatMult * envMult;
+  riskScore += (prehydBodyWtPct * 100) * 2;
+  riskScore += (condAdd * 100) * 1.5;
+  if (age >= 65 || conditions === 'elderly') riskScore += 12;
+  if (age < 12) riskScore += 8;
+  riskScore = Math.min(100, Math.max(0, riskScore));
+
+  // Risk category
+  let riskCat, riskName, riskIcon, riskDesc, riskClass;
+  if (riskScore < 20) {
+    riskCat = 'low'; riskName = 'Low Risk'; riskIcon = '💧';
+    riskDesc = 'Minimal dehydration concern. Maintain regular fluid intake.';
+    riskClass = 'low';
+  } else if (riskScore < 45) {
+    riskCat = 'moderate'; riskName = 'Moderate Risk'; riskIcon = '⚡';
+    riskDesc = 'Increased fluid and electrolyte needs. Hydrate proactively.';
+    riskClass = 'moderate';
+  } else if (riskScore < 70) {
+    riskCat = 'high'; riskName = 'High Risk'; riskIcon = '🔥';
+    riskDesc = 'Significant dehydration risk. Use electrolyte drinks, not just water.';
+    riskClass = 'high';
+  } else {
+    riskCat = 'very-high'; riskName = 'Very High Risk'; riskIcon = '🚨';
+    riskDesc = 'Extreme dehydration risk. Monitor closely, consider medical guidance.';
+    riskClass = 'very-high';
+  }
+
+  // Gauge position
+  const gaugeLeft = Math.min(93, Math.max(5, riskScore * 0.93)) + '%';
+
+  // --- Electrolyte Calculations ---
+  // Baseline DRIs (mg/day) — adults
+  const baseline = {
+    sodium: sex === 'male' ? 1500 : 1300,
+    potassium: sex === 'male' ? 3400 : 2600,
+    magnesium: (age < 31 ? (sex === 'male' ? 400 : 310) : (sex === 'male' ? 420 : 320)),
+    calcium: (age > 50 ? 1200 : 1000),
+    chloride: 2300,
+    phosphorus: 700
+  };
+
+  // Sweat concentration (mg/L)
+  const sweatConc = {sodium:1100, potassium:200, magnesium:18, calcium:35, chloride:1400, phosphorus:12};
+
+  // Target = baseline + sweat replacement
+  const adjustedSweat = Math.max(0, sweatLossL);
+  const targets = {};
+  for (const key in baseline) {
+    targets[key] = Math.round(baseline[key] + adjustedSweat * sweatConc[key]);
+  }
+
+  // Age/condition adjustments
+  if (age >= 65) { targets.calcium = Math.round(targets.calcium * 1.2); }
+  if (conditions === 'pregnancy') { targets.calcium = Math.max(targets.calcium, 1300); targets.magnesium = Math.max(targets.magnesium, 360); }
+  if (conditions === 'illness') { targets.sodium = Math.round(targets.sodium * 1.15); targets.potassium = Math.round(targets.potassium * 1.1); }
+
+  // Status determination
+  function getStatus(key, target) {
+    const ratio = target / baseline[key];
+    if (ratio < 1.15) return '<span class="status-badge status-normal">Normal</span>';
+    if (ratio < 1.5) return '<span class="status-badge status-elevated">Elevated Need</span>';
+    return '<span class="status-badge status-high">High Need</span>';
+  }
+
+  // Sources
+  const sources = {
+    sodium: 'Salt, pickles, sports drinks',
+    potassium: 'Banana, sweet potato, avocado',
+    magnesium: 'Nuts, seeds, dark chocolate',
+    calcium: 'Dairy, fortified milk, broccoli',
+    chloride: 'Salt, seaweed, olives',
+    phosphorus: 'Meat, dairy, legumes'
+  };
+
+  const elecNames = {sodium:'Sodium (Na⁺)',potassium:'Potassium (K⁺)',magnesium:'Magnesium (Mg²⁺)',calcium:'Calcium (Ca²⁺)',chloride:'Chloride (Cl⁻)',phosphorus:'Phosphorus (P)'};
+
+  // --- Build result string for copy ---
+  let copyText = `DEHYDRATION RISK & ELECTROLYTE NEEDS RESULTS\n`;
+  copyText += `Risk Level: ${riskName} (Score: ${fmt(riskScore,1)}/100)\n`;
+  copyText += `Daily Water Target: ${fmt(totalWaterL,2)} L\n`;
+  copyText += `Est. Sweat Loss: ${fmt(sweatLossL,2)} L\n\n`;
+  copyText += `ELECTROLYTE TARGETS:\n`;
+  for (const key in targets) {
+    copyText += `${elecNames[key]}: ${fmt(targets[key])} mg/day\n`;
+  }
+  copyText += `\nGenerated at toolhut.dev/dehydration-electrolyte-calculator/`;
+  window._copyText = copyText;
+
+  // --- Tips ---
+  const tips = [];
+  tips.push(`Drink approximately <strong>${fmt(totalWaterL, 2)} L (${fmt(totalWaterL * 33.8, 0)} oz)</strong> of fluids today.`);
+  if (sweatLossL > 0.5) tips.push(`You'll lose ~<strong>${fmt(sweatLossL, 2)} L of sweat</strong> during activity — replace with electrolyte-containing drinks, not just plain water.`);
+  if (tempC > 28) tips.push(`In <strong>${fmt(tempC, 0)}°C heat</strong>, pre-hydrate 500mL 2 hours before going outside.`);
+  if (riskCat === 'high' || riskCat === 'very-high') tips.push(`Consider sodium-containing sports drinks or electrolyte tablets — your sodium need today is <strong>${fmt(targets.sodium)} mg</strong>.`);
+  if (conditions === 'altitude') tips.push(`At high altitude, breathing faster increases water vapor loss — add an extra 500–750mL/day beyond your calculated target.`);
+  if (conditions === 'illness') tips.push(`Illness increases fluid and electrolyte loss significantly — consider oral rehydration solutions (ORS) which contain ideal salt:sugar:water ratios.`);
+  if (age >= 65) tips.push(`Older adults have a reduced thirst sensation — drink on a schedule (e.g., a glass every hour) rather than waiting to feel thirsty.`);
+  if (prehydration === 'dehydrated') tips.push(`You started dehydrated. Prioritize rehydration with an electrolyte drink before your activity begins.`);
+  if (tips.length < 3) tips.push(`Aim to spread fluid intake evenly throughout the day. Large amounts at once are less effective than consistent small sips.`);
+
+  requestAnimationFrame(() => {
+    // Banner
+    const banner = document.getElementById('riskBanner');
+    banner.className = 'risk-banner ' + riskClass;
+    document.getElementById('riskIcon').textContent = riskIcon;
+    document.getElementById('riskName').textContent = riskName;
+    document.getElementById('riskDesc').textContent = riskDesc;
+
+    // Gauge
+    document.getElementById('gaugeMarker').style.left = gaugeLeft;
+
+    // Key metrics
+    document.getElementById('keyMetrics').innerHTML = `
+      <div class="metric-card">
+        <div class="metric-val">${fmt(totalWaterL, 2)}</div>
+        <div class="metric-unit">litres / day</div>
+        <div class="metric-label">💧 Total Water Need</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">${fmt(sweatLossL, 2)}</div>
+        <div class="metric-unit">litres during activity</div>
+        <div class="metric-label">💦 Est. Sweat Loss</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">${fmt(riskScore, 0)}</div>
+        <div class="metric-unit">out of 100</div>
+        <div class="metric-label">📊 Risk Score</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">${fmt(targets.sodium)}</div>
+        <div class="metric-unit">mg / day</div>
+        <div class="metric-label">🧂 Sodium Target</div>
+      </div>
+    `;
+
+    // Electrolyte table
+    let tableHTML = '';
+    for (const key in targets) {
+      tableHTML += `<tr>
+        <td>${elecNames[key]}</td>
+        <td style="text-align:right">${fmt(baseline[key])}</td>
+        <td style="text-align:right"><strong>${fmt(targets[key])}</strong></td>
+        <td>${sources[key]}</td>
+        <td>${getStatus(key, targets[key])}</td>
+      </tr>`;
+    }
+    document.getElementById('elecBody').innerHTML = tableHTML;
+
+    // Tips
+    document.getElementById('tipsList').innerHTML = tips.map(t => `<li>${t}</li>`).join('');
+
+    // Show results
+    const res = document.getElementById('results');
+    res.classList.add('visible');
+    res.scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
+}
+
+function copyResults() {
+  if (!window._copyText) return;
+  navigator.clipboard.writeText(window._copyText).then(() => {
+    const btn = document.getElementById('copyBtn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  }).catch(() => {
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = window._copyText;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copyBtn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => calculate());
+});
+
+document.querySelectorAll('input[type=number]').forEach(inp => {
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') requestAnimationFrame(() => calculate());
+  });
+});
+</script>
+</body>
+</html>
