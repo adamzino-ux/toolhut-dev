@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grip Strength Percentile Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Find your grip strength percentile by age and sex using research-backed norms. Instantly see where you rank and what it means for your health.">
+<link rel="canonical" href="https://toolhut.dev/grip-strength-percentile-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Grip Strength Percentile Calculator",
+  "url": "https://toolhut.dev/grip-strength-percentile-calculator/",
+  "description": "Calculate your grip strength percentile by age and sex using validated norms. Understand where you stand relative to your peers.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline;color:#006299}
+nav{border-bottom:1px solid #e0e0e0;padding:12px 1.5rem;background:#fff}
+nav .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center}
+nav .site-name{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+nav .site-name span{color:#0077b6}
+.container{max-width:640px;margin:0 auto;padding:2rem 1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:.5rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:2rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem}
+input[type=number],select{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px 16px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+input[type=number]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.unit-toggle{display:flex;gap:.5rem;margin-bottom:1.25rem}
+.unit-btn{flex:1;padding:9px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;font-size:.9rem;cursor:pointer;color:#555;transition:all .2s;min-height:44px}
+.unit-btn.active{background:#0077b6;color:#fff;border-color:#0077b6;font-weight:600}
+button.calc-btn{width:100%;background:#0077b6;color:#fff;border:none;border-radius:6px;padding:14px 24px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;min-height:44px;margin-top:.5rem}
+button.calc-btn:hover{background:#006299}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.percentile-hero{text-align:center;padding:1.5rem 0 1rem}
+.percentile-number{font-size:3.5rem;font-weight:800;color:#0077b6;line-height:1}
+.percentile-label{font-size:1rem;color:#555;margin-top:.3rem}
+.category-badge{display:inline-block;margin-top:.75rem;padding:6px 18px;border-radius:20px;font-size:.85rem;font-weight:700;letter-spacing:.03em}
+.cat-excellent{background:#d4edda;color:#155724}
+.cat-good{background:#cce5ff;color:#004085}
+.cat-average{background:#fff3cd;color:#856404}
+.cat-below{background:#ffe0b2;color:#7a3f00}
+.cat-poor{background:#f8d7da;color:#721c24}
+.gauge-wrap{margin:1.25rem 0}
+.gauge-label{font-size:.8rem;font-weight:500;color:#555;margin-bottom:.4rem}
+.gauge-bar-bg{width:100%;height:22px;border-radius:11px;background:linear-gradient(to right,#e74c3c 0%,#ff9800 25%,#ffc107 45%,#4caf50 70%,#2196f3 90%);position:relative;overflow:visible}
+.gauge-marker{position:absolute;top:-6px;width:4px;height:34px;background:#1a1a2e;border-radius:2px;transform:translateX(-50%);transition:left .5s ease}
+.gauge-marker::after{content:'▲';position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:.6rem;color:#1a1a2e}
+.gauge-ticks{display:flex;justify-content:space-between;margin-top:2px}
+.gauge-ticks span{font-size:.7rem;color:#888}
+.data-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:1rem}
+.data-table th{background:#f0f0f0;padding:8px 12px;text-align:left;font-weight:600;font-size:.8rem;color:#444;border-bottom:2px solid #ddd}
+.data-table td{padding:8px 12px;border-bottom:1px solid #eee;color:#1a1a2e}
+.data-table tr:nth-child(even) td{background:#fafafa}
+.data-table td:last-child,.data-table th:last-child{text-align:right}
+.highlight-row td{font-weight:700;color:#0077b6;background:#e8f4fd!important}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:.75rem;margin-top:1.25rem;border-left:3px solid #0077b6;padding-left:.75rem}
+.copy-btn{display:inline-flex;align-items:center;gap:.4rem;background:#f0f0f0;border:1px solid #ddd;border-radius:6px;padding:7px 14px;font-size:.8rem;cursor:pointer;color:#444;transition:all .2s;min-height:36px}
+.copy-btn:hover{background:#e0e0e0}
+.copy-btn.copied{background:#d4edda;color:#155724;border-color:#c3e6cb}
+.disclaimer{background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:1rem;font-size:.8rem;color:#7a3f00;margin-top:1rem;line-height:1.5}
+.disclaimer strong{display:block;margin-bottom:.25rem}
+.ad-slot{min-height:0;margin:0}
+.content-section{margin-top:2rem}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:.75rem;margin-top:1.75rem}
+.content-section p{color:#333;font-size:.93rem;margin-bottom:.75rem;line-height:1.7}
+.content-section ul{padding-left:1.25rem;margin-bottom:.75rem}
+.content-section ul li{color:#333;font-size:.93rem;margin-bottom:.4rem;line-height:1.7}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:.75rem;overflow:hidden}
+details summary{padding:12px 16px;font-weight:600;font-size:.93rem;cursor:pointer;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+details summary::after{content:'＋';font-size:1.1rem;color:#0077b6}
+details[open] summary::after{content:'－'}
+details p{padding:12px 16px;font-size:.88rem;color:#333;line-height:1.7;background:#fff}
+.related-tools{background:#f8f9fa;border-radius:8px;padding:1.5rem;margin-top:2rem}
+.related-tools h2{font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:#1a1a2e}
+.related-links{display:flex;flex-direction:column;gap:.6rem}
+.related-links a{color:#0077b6;font-size:.9rem;padding:8px 0;border-bottom:1px solid #e0e0e0;display:block}
+.related-links a:last-child{border-bottom:none}
+footer{border-top:1px solid #e0e0e0;padding:1.5rem;text-align:center;font-size:.8rem;color:#888;margin-top:2rem}
+footer a{color:#888;margin:0 .5rem}
+footer a:hover{color:#0077b6}
+.table-scroll{overflow-x:auto}
+@media(max-width:640px){
+  .input-row{grid-template-columns:1fr}
+  .container{padding:1.5rem 1rem}
+  h1{font-size:1.35rem}
+  .percentile-number{font-size:2.8rem}
+  .card{padding:1.5rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Grip Strength Percentile Calculator</h1>
+  <p class="subtitle">Find where your grip strength ranks compared to grip strength norms by age and sex — using research-backed reference data.</p>
+
+  <div class="card">
+    <div class="form-group">
+      <label>Measurement Unit</label>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btnKg" onclick="setUnit('kg')">Kilograms (kg)</button>
+        <button class="unit-btn" id="btnLbs" onclick="setUnit('lbs')">Pounds (lbs)</button>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="form-group">
+        <label for="gripVal">Grip Strength (<span id="unitLabel">kg</span>)</label>
+        <input type="number" id="gripVal" min="1" max="200" step="0.1" placeholder="e.g. 40">
+        <div class="error-msg" id="gripErr">Please enter a valid grip strength value.</div>
+      </div>
+      <div class="form-group">
+        <label for="ageVal">Age (years)</label>
+        <input type="number" id="ageVal" min="6" max="90" step="1" placeholder="e.g. 35">
+        <div class="error-msg" id="ageErr">Please enter an age between 6 and 90.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sexVal">Sex</label>
+      <select id="sexVal">
+        <option value="">— Select —</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <div class="error-msg" id="sexErr">Please select a sex.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="handVal">Hand</label>
+      <select id="handVal">
+        <option value="dominant">Dominant hand</option>
+        <option value="non-dominant">Non-dominant hand</option>
+      </select>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate My Percentile</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card results" id="resultsCard">
+    <div class="percentile-hero">
+      <div class="percentile-number" id="resPercentile">—</div>
+      <div class="percentile-label">Percentile for your age &amp; sex group</div>
+      <div id="resBadge" class="category-badge"></div>
+    </div>
+
+    <div class="gauge-wrap">
+      <div class="gauge-label">Where you fall on the population scale</div>
+      <div class="gauge-bar-bg" id="gaugeBar">
+        <div class="gauge-marker" id="gaugeMarker" style="left:0%"></div>
+      </div>
+      <div class="gauge-ticks">
+        <span>0th</span><span>25th</span><span>50th</span><span>75th</span><span>100th</span>
+      </div>
+    </div>
+
+    <div id="summaryText" style="font-size:.9rem;color:#555;margin:.5rem 0 1rem"></div>
+
+    <div class="section-title">Grip Strength Norms for Your Age &amp; Sex</div>
+    <div class="table-scroll">
+      <table class="data-table" id="normsTable"></table>
+    </div>
+
+    <div id="allAgesWrap" style="margin-top:1rem">
+      <div class="section-title">Norms Across All Age Groups</div>
+      <div class="table-scroll">
+        <table class="data-table" id="allAgesTable"></table>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;margin-top:1rem">
+      <button class="copy-btn" id="copyBtn" onclick="copyResults()">📋 Copy Results</button>
+    </div>
+
+    <div class="disclaimer">
+      <strong>⚠️ Medical Disclaimer</strong>
+      This tool is for informational purposes only. Grip strength norms are population-based estimates. Consult a healthcare professional for medical advice, diagnosis, or treatment.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT -->
+  <div class="content-section">
+
+    <h2>How to Use This Grip Strength Percentile Calculator</h2>
+    <p>Enter your grip strength measurement (in kg or lbs), your age, and your sex. If you measured both hands, use your dominant hand for comparison — most normative databases use the dominant hand as the primary measure. Hit "Calculate" and you'll instantly see your percentile rank and which performance category you fall into.</p>
+    <p>Don't have a dynamometer? Grip strength is typically measured using a Jamar or similar hand dynamometer. You can get a reading at many physiotherapy clinics, gyms, or sports medicine facilities.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Grip strength is one of the most powerful biomarkers in health research. A landmark 2015 study in <em>The Lancet</em> tracking 139,691 adults across 17 countries found that every 5 kg decrease in grip strength was associated with a 17% higher risk of cardiovascular death and a 9% higher risk of stroke. It's not just about how hard you can squeeze — grip strength reflects overall musculoskeletal health, neurological function, and even nutritional status.</p>
+    <p>Clinicians use grip strength norms by age and sex to screen for sarcopenia (age-related muscle loss), monitor recovery after injury or surgery, assess fall risk in older adults, and track the progress of patients with conditions like arthritis, multiple sclerosis, or stroke. For athletes, grip strength relates directly to performance in sports like climbing, wrestling, tennis, and weightlifting.</p>
+    <p>For a 60-year-old man, a grip reading below 27 kg flags clinical concern. For a 35-year-old woman, 26 kg would put her roughly at the 50th percentile. Knowing exactly where you stand helps you set meaningful training goals or have an informed conversation with your doctor.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>This calculator uses normative reference data derived from large-scale epidemiological studies including the UK Biobank, NHANES (National Health and Nutrition Examination Survey), and published meta-analyses of grip strength across the lifespan. For each age group and sex, the tool stores mean and standard deviation values, then estimates your percentile using the cumulative normal distribution:</p>
+    <p><strong>Z-score = (Your Grip − Age/Sex Mean) ÷ Standard Deviation</strong></p>
+    <p>The Z-score is then converted to a percentile using the standard normal CDF. A Z-score of 0 = 50th percentile (exactly average). A Z-score of +1 = ~84th percentile. A Z-score of −1 = ~16th percentile.</p>
+    <p>Norms are stratified by 5- or 10-year age bands. Your age is mapped to the nearest band and the appropriate reference values are applied.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Test correctly:</strong> Sit upright, elbow at 90°, wrist in neutral. Squeeze maximally for 3 seconds. Use the best of 3 trials — not the average — for normative comparison.</li>
+      <li><strong>Dominant vs. non-dominant:</strong> Non-dominant hand is typically 5–10% weaker. Most norms reference dominant hand; switching hands changes your percentile significantly.</li>
+      <li><strong>Time of day matters:</strong> Grip strength peaks in the late afternoon. Morning readings can be 5–10% lower. Try to test consistently.</li>
+      <li><strong>Don't confuse a low score with permanent weakness:</strong> Grip improves with training. Farmer's carries, dead hangs, and thick-bar training are highly effective.</li>
+      <li><strong>Pain influences results:</strong> If you have hand, wrist, or elbow pain during testing, your reading will underestimate your true capacity — note this for your clinician.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>What is a normal grip strength by age?</summary>
+      <p>Norms vary substantially by age and sex. For adult males (30–39), 50th percentile is roughly 46–50 kg; for females the same age, around 27–30 kg. Grip strength peaks in the late 20s to mid-30s then declines gradually — more steeply after age 60. The table in the results section shows full norms for your group.</p>
+    </details>
+
+    <details>
+      <summary>Can I improve my grip strength?</summary>
+      <p>Absolutely. Grip strength responds well to training. Even 6–8 weeks of targeted work — farmer's carries, plate pinches, dead hangs, or using a gripper tool — can produce 10–20% gains. General strength training (deadlifts, rows, pull-ups) also builds grip as a byproduct.</p>
+    </details>
+
+    <details>
+      <summary>Is low grip strength dangerous?</summary>
+      <p>A single measurement isn't diagnostic, but consistently low grip strength relative to your age group is associated with higher mortality risk, cardiovascular disease, and faster physical decline in aging. If your reading is significantly below average, it's worth discussing with a doctor — especially if you're over 50.</p>
+    </details>
+
+    <details>
+      <summary>Which hand should I use for testing?</summary>
+      <p>Most normative databases and clinical protocols use the dominant hand as the primary reference. However, many clinicians test both hands and calculate a symmetry ratio. If you're tracking rehabilitation progress, use the affected hand. For general fitness comparison, use dominant.</p>
+    </details>
+
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-links">
+      <a href="/injury-recovery-return-to-sport-calculator/">Injury Recovery Return-to-Sport Timeline Calculator</a>
+      <a href="/pregnancy-calorie-needs-calculator/">Caloric Needs by Trimester Pregnancy Calculator</a>
+      <a href="/periodization-training-block-planner/">Periodization Training Block Planner</a>
+      <a href="/dehydration-electrolyte-calculator/">Dehydration Risk &amp; Electrolyte Needs Calculator</a>
+      <a href="/crossfit-benchmark-wod-calculator/">CrossFit Benchmark WOD Score Calculator</a>
+      <a href="/cycling-power-zone-calculator/">Cycling Power Zone Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <span style="display:block;margin-top:.5rem">© 2025 toolhut.dev</span>
+</footer>
+
+<script>
+// ── Normative data: [mean_kg, sd_kg] for dominant hand
+// Sources: UK Biobank, NHANES, Dodds et al. 2016, Mathiowetz et al., Bohannon 2019 meta-analysis
+const NORMS = {
+  male: [
+    // [ageMin, ageMax, mean, sd]
+    [6,  9,  14.0, 3.5],
+    [10, 12, 19.5, 4.5],
+    [13, 15, 30.0, 7.0],
+    [16, 19, 42.5, 8.5],
+    [20, 24, 50.5, 9.0],
+    [25, 29, 52.0, 9.2],
+    [30, 34, 51.5, 9.0],
+    [35, 39, 50.5, 8.8],
+    [40, 44, 49.5, 8.8],
+    [45, 49, 48.0, 8.6],
+    [50, 54, 46.0, 8.5],
+    [55, 59, 43.5, 8.5],
+    [60, 64, 40.5, 8.2],
+    [65, 69, 37.5, 7.8],
+    [70, 74, 34.5, 7.5],
+    [75, 79, 31.5, 7.2],
+    [80, 90, 28.0, 7.0]
+  ],
+  female: [
+    [6,  9,  10.0, 2.8],
+    [10, 12, 14.5, 3.5],
+    [13, 15, 21.0, 5.0],
+    [16, 19, 26.5, 5.5],
+    [20, 24, 29.5, 5.5],
+    [25, 29, 30.5, 5.8],
+    [30, 34, 30.0, 5.8],
+    [35, 39, 29.5, 5.6],
+    [40, 44, 28.5, 5.6],
+    [45, 49, 27.5, 5.5],
+    [50, 54, 26.5, 5.5],
+    [55, 59, 25.0, 5.3],
+    [60, 64, 23.5, 5.2],
+    [65, 69, 21.5, 5.0],
+    [70, 74, 19.5, 4.8],
+    [75, 79, 17.5, 4.5],
+    [80, 90, 15.5, 4.2]
+  ]
+};
+
+const AGE_LABELS = [
+  '6–9','10–12','13–15','16–19','20–24','25–29',
+  '30–34','35–39','40–44','45–49','50–54','55–59',
+  '60–64','65–69','70–74','75–79','80+'
+];
+
+let currentUnit = 'kg';
+let lastResultText = '';
+
+function setUnit(u) {
+  currentUnit = u;
+  document.getElementById('unitLabel').textContent = u;
+  document.getElementById('btnKg').classList.toggle('active', u === 'kg');
+  document.getElementById('btnLbs').classList.toggle('active', u === 'lbs');
+}
+
+// Normal CDF approximation (Abramowitz & Stegun)
+function normalCDF(z) {
+  const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+  const sign = z < 0 ? -1 : 1;
+  const x = Math.abs(z) / Math.sqrt(2);
+  const t = 1 / (1 + p * x);
+  const y = 1 - (((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+  return 0.5 * (1 + sign * y);
+}
+
+function getNormRow(sex, age) {
+  const rows = NORMS[sex];
+  for (let i = 0; i < rows.length; i++) {
+    if (age >= rows[i][0] && age <= rows[i][1]) return { row: rows[i], idx: i };
+  }
+  return { row: rows[rows.length - 1], idx: rows.length - 1 };
+}
+
+function getCategoryInfo(pct) {
+  if (pct >= 85) return { label: 'Excellent', cls: 'cat-excellent', color: '#28a745' };
+  if (pct >= 65) return { label: 'Good', cls: 'cat-good', color: '#0077b6' };
+  if (pct >= 35) return { label: 'Average', cls: 'cat-average', color: '#ffc107' };
+  if (pct >= 15) return { label: 'Below Average', cls: 'cat-below', color: '#ff9800' };
+  return { label: 'Low', cls: 'cat-poor', color: '#e74c3c' };
+}
+
+function fmt(n, d=1) {
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits:d,maximumFractionDigits:d});
+}
+
+function validate() {
+  let ok = true;
+  const grip = parseFloat(document.getElementById('gripVal').value);
+  const age = parseInt(document.getElementById('ageVal').value);
+  const sex = document.getElementById('sexVal').value;
+
+  const maxGrip = currentUnit === 'kg' ? 200 : 441;
+  const minGrip = 0.5;
+
+  const gEl = document.getElementById('gripVal');
+  const gErr = document.getElementById('gripErr');
+  if (!gripVal.value || isNaN(grip) || grip < minGrip || grip > maxGrip) {
+    gEl.classList.add('error'); gErr.style.display='block'; ok=false;
+  } else { gEl.classList.remove('error'); gErr.style.display='none'; }
+
+  const aEl = document.getElementById('ageVal');
+  const aErr = document.getElementById('ageErr');
+  if (!ageVal.value || isNaN(age) || age < 6 || age > 90) {
+    aEl.classList.add('error'); aErr.style.display='block'; ok=false;
+  } else { aEl.classList.remove('error'); aErr.style.display='none'; }
+
+  const sEl = document.getElementById('sexVal');
+  const sErr = document.getElementById('sexErr');
+  if (!sex) {
+    sEl.classList.add('error'); sErr.style.display='block'; ok=false;
+  } else { sEl.classList.remove('error'); sErr.style.display='none'; }
+
+  return ok;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const rawGrip = parseFloat(document.getElementById('gripVal').value);
+  const age = parseInt(document.getElementById('ageVal').value);
+  const sex = document.getElementById('sexVal').value;
+  const hand = document.getElementById('handVal').value;
+
+  // Convert to kg for calculation
+  let gripKg = currentUnit === 'lbs' ? rawGrip * 0.453592 : rawGrip;
+  // Non-dominant adjustment: ~8% lower means we boost it for comparison
+  if (hand === 'non-dominant') gripKg = gripKg * 1.08;
+
+  const { row, idx } = getNormRow(sex, age);
+  const mean = row[2], sd = row[3];
+  const z = (gripKg - mean) / sd;
+  const pct = Math.min(99.9, Math.max(0.1, normalCDF(z) * 100));
+  const cat = getCategoryInfo(pct);
+
+  const pctRounded = Math.round(pct * 10) / 10;
+  const pct5 = [5, 10, 25, 50, 75, 90, 95].map(p => {
+    const zv = p === 50 ? 0 : (p < 50 ? -normalCDFInv((100-p)/100) : normalCDFInv(p/100));
+    return mean + zv * sd;
+  });
+
+  // Build norms table for user's group
+  const percLabels = ['5th','10th','25th','50th','75th','90th','95th'];
+  const zVals = [-1.645,-1.282,-0.674,0,0.674,1.282,1.645];
+  let normsHTML = '<thead><tr><th>Percentile</th><th>Grip (kg)</th><th>Grip (lbs)</th></tr></thead><tbody>';
+  let isHighlighted = false;
+  zVals.forEach((zv, i) => {
+    const val = mean + zv * sd;
+    const lbs = val * 2.20462;
+    const isMe = !isHighlighted && pct <= (parseInt(percLabels[i]) + (i < 6 ? (parseInt(percLabels[i+1]) - parseInt(percLabels[i])) / 2 : 5));
+    normsHTML += `<tr><td>${percLabels[i]}</td><td>${fmt(val)} kg</td><td>${fmt(lbs)} lbs</td></tr>`;
+  });
+  normsHTML += `<tr class="highlight-row"><td>▶ You (${fmt(pctRounded,1)}th)</td><td>${fmt(gripKg)} kg</td><td>${fmt(gripKg*2.20462)} lbs</td></tr>`;
+  normsHTML += '</tbody>';
+
+  // Build all-ages table
+  const allRows = NORMS[sex];
+  let allHTML = `<thead><tr><th>Age Group</th><th>5th pct</th><th>50th pct</th><th>95th pct</th></tr></thead><tbody>`;
+  allRows.forEach((r, i) => {
+    const isCurrent = i === idx;
+    const p5 = r[2] - 1.645 * r[3];
+    const p50 = r[2];
+    const p95 = r[2] + 1.645 * r[3];
+    allHTML += `<tr${isCurrent ? ' class="highlight-row"' : ''}>
+      <td>${AGE_LABELS[i]}${isCurrent ? ' ◀' : ''}</td>
+      <td>${fmt(p5)} kg</td>
+      <td>${fmt(p50)} kg</td>
+      <td>${fmt(p95)} kg</td>
+    </tr>`;
+  });
+  allHTML += '</tbody>';
+
+  const summaryTxt = `Your ${fmt(gripKg, 1)} kg grip is ${pct > 50 ? 'above' : 'below'} the average of ${fmt(mean, 1)} kg for ${sex}s aged ${row[0]}–${row[1] === 90 ? '80+' : row[1]}. You score better than approximately ${fmt(pctRounded, 1)}% of people in your age and sex group.`;
+
+  lastResultText = `Grip Strength Percentile: ${fmt(pctRounded, 1)}th percentile\nCategory: ${cat.label}\nGrip Strength: ${fmt(gripKg, 1)} kg / ${fmt(gripKg * 2.20462, 1)} lbs\nAge Group Mean: ${fmt(mean, 1)} kg\n${summaryTxt}`;
+
+  requestAnimationFrame(() => {
+    document.getElementById('resPercentile').textContent = fmt(pctRounded, 1) + 'th';
+    const badge = document.getElementById('resBadge');
+    badge.textContent = cat.label;
+    badge.className = 'category-badge ' + cat.cls;
+
+    // Gauge
+    const markerPct = Math.min(98, Math.max(2, pct));
+    document.getElementById('gaugeMarker').style.left = markerPct + '%';
+
+    document.getElementById('summaryText').textContent = summaryTxt;
+    document.getElementById('normsTable').innerHTML = normsHTML;
+    document.getElementById('allAgesTable').innerHTML = allHTML;
+
+    const rc = document.getElementById('resultsCard');
+    rc.classList.add('visible');
+    rc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// Inverse normal CDF approximation (Beasley-Springer-Moro)
+function normalCDFInv(p) {
+  const a = [2.50662823884,-18.61500062529,41.39119773534,-25.44106049637];
+  const b = [-8.47351093090,23.08336743743,-21.06224101826,3.13082909833];
+  const c = [0.3374754822726147,0.9761690190917186,0.1607979714918209,0.0276438810333863,0.0038405729373609,0.0003951896511349,0.0000321767881768,0.0000002888167364,0.0000003960315187];
+  const y = p - 0.5;
+  if (Math.abs(y) < 0.42) {
+    const r = y * y;
+    return y * (((a[3]*r+a[2])*r+a[1])*r+a[0]) / ((((b[3]*r+b[2])*r+b[1])*r+b[0])*r+1);
+  }
+  let r = p < 0.5 ? p : 1 - p;
+  r = Math.sqrt(-Math.log(r));
+  let x = c[0];
+  for (let i = 1; i < 9; i++) x += c[i] * Math.pow(r, i);
+  return p < 0.5 ? -x : x;
+}
+
+function copyResults() {
+  if (!lastResultText) return;
+  navigator.clipboard.writeText(lastResultText).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Results'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = lastResultText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Copy Results'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const active = document.activeElement;
+    if (['gripVal','ageVal','sexVal','handVal'].includes(active.id)) {
+      requestAnimationFrame(() => calculate());
+    }
+  }
+});
+</script>
+</body>
+</html>
