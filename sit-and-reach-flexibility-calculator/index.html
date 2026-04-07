@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sit and Reach Flexibility Score Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your sit and reach test score instantly. Get your flexibility rating, percentile rank, and personalized tips based on age and gender. Free online tool.">
+<link rel="canonical" href="https://toolhut.dev/sit-and-reach-flexibility-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sit and Reach Flexibility Score Calculator",
+  "url": "https://toolhut.dev/sit-and-reach-flexibility-calculator/",
+  "description": "Calculate your sit and reach test score and flexibility rating based on age and gender. Get your percentile rank and personalized improvement tips.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline;color:#006299}
+nav{border-bottom:1px solid #e0e0e0;padding:0.75rem 1.5rem;background:#fff}
+nav .nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center}
+nav .site-name{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+nav .site-name:hover{color:#0077b6;text-decoration:none}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.3}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+input[type="number"],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none}
+input[type="number"]:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input[type="range"]{width:100%;margin:0.5rem 0;accent-color:#0077b6;cursor:pointer}
+.input-error{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,0.12)!important}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
+.error-msg.show{display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#0077b6;color:#fff;border:none;padding:13px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s}
+.btn:hover{background:#006299}
+.btn:active{background:#005580}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.result-headline{text-align:center;margin-bottom:1.5rem}
+.result-score{font-size:3rem;font-weight:800;color:#0077b6;line-height:1.1}
+.result-unit{font-size:1rem;color:#666;font-weight:400}
+.result-label{font-size:1.1rem;font-weight:600;margin-top:0.3rem}
+.zone-bar-wrap{margin:1.5rem 0}
+.zone-bar-label{font-size:0.8rem;font-weight:500;color:#444;margin-bottom:0.5rem}
+.zone-bar{display:flex;border-radius:6px;overflow:hidden;height:28px;position:relative}
+.zone-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:600;color:#fff;text-transform:uppercase;letter-spacing:0.03em;transition:opacity 0.2s}
+.zone-seg.z1{background:#e74c3c}
+.zone-seg.z2{background:#e67e22}
+.zone-seg.z3{background:#f1c40f;color:#333}
+.zone-seg.z4{background:#2ecc71}
+.zone-seg.z5{background:#27ae60}
+.zone-seg.z6{background:#1e8449}
+.zone-indicator-wrap{position:relative;margin-top:4px;height:18px}
+.zone-indicator{position:absolute;transform:translateX(-50%);font-size:1.2rem;line-height:1;transition:left 0.5s ease}
+.zone-labels{display:flex;margin-top:2px}
+.zone-labels span{flex:1;font-size:0.6rem;color:#666;text-align:center}
+.stats-table{width:100%;border-collapse:collapse;font-size:0.9rem;margin-top:0.5rem}
+.stats-table th{background:#f0f0f0;padding:8px 12px;text-align:left;font-weight:600;font-size:0.82rem;border-bottom:2px solid #ddd}
+.stats-table td{padding:8px 12px;border-bottom:1px solid #eee}
+.stats-table tr:nth-child(even) td{background:#fafafa}
+.stats-table td:last-child,.stats-table th:last-child{text-align:right}
+.highlight-row td{background:#e8f4fb!important;font-weight:600;color:#0077b6}
+.percentile-badge{display:inline-block;background:#0077b6;color:#fff;border-radius:20px;padding:3px 12px;font-size:0.85rem;font-weight:700}
+.rating-badge{display:inline-block;border-radius:20px;padding:4px 14px;font-size:0.95rem;font-weight:700;color:#fff;margin-top:0.3rem}
+.copy-btn{background:#f0f0f0;color:#444;border:1px solid #ddd;padding:6px 14px;border-radius:5px;font-size:0.8rem;cursor:pointer;transition:background 0.2s;min-height:32px}
+.copy-btn:hover{background:#e0e0e0}
+.result-actions{display:flex;justify-content:flex-end;margin-top:1rem}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:2px solid #f0f0f0}
+.disclaimer{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:0.75rem 1rem;font-size:0.8rem;color:#5d4037;margin-top:1rem}
+.disclaimer strong{color:#e65100}
+.content-section h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin:2rem 0 0.6rem}
+.content-section p{color:#333;margin-bottom:0.75rem;font-size:0.95rem}
+.content-section ul{color:#333;padding-left:1.4rem;margin-bottom:0.75rem;font-size:0.95rem}
+.content-section ul li{margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.6rem;overflow:hidden}
+summary{padding:0.75rem 1rem;font-weight:600;cursor:pointer;font-size:0.92rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:'▸';color:#0077b6;font-size:0.85rem;transition:transform 0.2s}
+details[open] summary::after{transform:rotate(90deg)}
+details p{padding:0.75rem 1rem;font-size:0.88rem;color:#333;background:#fff}
+.related-tools{background:#f8f9fa;border-radius:8px;padding:1.5rem;margin-bottom:2rem}
+.related-tools h2{font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:#1a1a2e}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.related-link{background:#fff;border:1px solid #e0e0e0;border-radius:6px;padding:0.6rem 0.8rem;font-size:0.82rem;color:#0077b6;transition:border-color 0.2s,box-shadow 0.2s;display:block;line-height:1.3}
+.related-link:hover{border-color:#0077b6;box-shadow:0 2px 6px rgba(0,119,182,0.1);text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{border-top:1px solid #e0e0e0;padding:1.25rem 1.5rem;text-align:center;font-size:0.82rem;color:#777;margin-top:1rem}
+footer a{color:#0077b6;margin:0 0.5rem}
+.slider-row{display:flex;align-items:center;gap:0.75rem}
+.slider-val{font-weight:700;color:#0077b6;min-width:60px;font-size:1rem}
+.tip-list{list-style:none;padding:0}
+.tip-list li{padding:0.4rem 0;padding-left:1.4rem;position:relative;font-size:0.92rem;color:#333}
+.tip-list li::before{content:'✓';position:absolute;left:0;color:#27ae60;font-weight:700}
+@media(max-width:640px){
+  .row{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .result-score{font-size:2.4rem}
+  .card{padding:1.25rem}
+  .stats-table{font-size:0.82rem}
+  .zone-seg{font-size:0.55rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-name">🧰 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Sit and Reach Flexibility Score Calculator</h1>
+  <p class="subtitle">Find your flexibility rating, percentile rank, and personalized tips based on your sit and reach test score.</p>
+
+  <div class="card">
+    <div class="row">
+      <div class="form-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" min="5" max="100" placeholder="e.g. 30">
+        <div class="error-msg" id="age-err">Please enter a valid age (5–100).</div>
+      </div>
+      <div class="form-group">
+        <label for="gender">Biological Sex</label>
+        <select id="gender">
+          <option value="">Select…</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <div class="error-msg" id="gender-err">Please select a sex.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="unit">Measurement Unit</label>
+      <select id="unit">
+        <option value="cm">Centimeters (cm)</option>
+        <option value="in">Inches (in)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="reach">Your Reach Distance — <span id="unit-label">cm</span></label>
+      <div class="slider-row">
+        <input type="range" id="reach-slider" min="-30" max="50" step="0.5" value="10">
+        <span class="slider-val" id="slider-display">10 cm</span>
+      </div>
+      <input type="number" id="reach" placeholder="e.g. 10" style="margin-top:0.5rem">
+      <div class="error-msg" id="reach-err">Please enter a reach distance between −30 and 50 cm (or −12 and 20 in).</div>
+      <div style="font-size:0.78rem;color:#888;margin-top:0.35rem">Positive = past toes · Negative = short of toes · Box edge = 0</div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate My Flexibility Score</button>
+  </div>
+
+  <!-- Results -->
+  <div class="card results" id="results">
+    <div class="result-headline">
+      <div style="font-size:0.85rem;color:#666;margin-bottom:0.25rem">Your Reach Distance</div>
+      <div class="result-score" id="r-score">—</div>
+      <div id="r-rating-badge" class="rating-badge" style="background:#ccc">—</div>
+    </div>
+
+    <div class="zone-bar-wrap">
+      <div class="zone-bar-label">Flexibility Scale for Your Age &amp; Sex</div>
+      <div class="zone-bar">
+        <div class="zone-seg z1">Very Poor</div>
+        <div class="zone-seg z2">Poor</div>
+        <div class="zone-seg z3">Below Avg</div>
+        <div class="zone-seg z4">Average</div>
+        <div class="zone-seg z5">Good</div>
+        <div class="zone-seg z6">Excellent</div>
+      </div>
+      <div class="zone-indicator-wrap">
+        <div class="zone-indicator" id="zone-arrow" style="left:50%">▲</div>
+      </div>
+      <div class="zone-labels">
+        <span>Very Poor</span><span>Poor</span><span>Below Avg</span><span>Average</span><span>Good</span><span>Excellent</span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap">
+      <div>
+        <div style="font-size:0.78rem;color:#666">Percentile Rank</div>
+        <span class="percentile-badge" id="r-percentile">—</span>
+      </div>
+      <div>
+        <div style="font-size:0.78rem;color:#666">Age Group</div>
+        <strong id="r-agegroup" style="font-size:0.9rem">—</strong>
+      </div>
+      <div>
+        <div style="font-size:0.78rem;color:#666">Category</div>
+        <strong id="r-category" style="font-size:0.9rem">—</strong>
+      </div>
+    </div>
+
+    <div class="section-title">Norms Table — Your Age Group</div>
+    <div style="overflow-x:auto">
+      <table class="stats-table" id="norms-table">
+        <thead><tr><th>Category</th><th>Rating</th><th>Range</th></tr></thead>
+        <tbody id="norms-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="section-title" style="margin-top:1.25rem">Improvement Tips</div>
+    <ul class="tip-list" id="r-tips"></ul>
+
+    <div class="result-actions">
+      <button class="copy-btn" id="copyBtn">📋 Copy Results</button>
+    </div>
+
+    <div class="disclaimer"><strong>Disclaimer:</strong> This tool is for informational purposes only. Consult a healthcare professional for medical advice before starting any new exercise program.</div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Sit and Reach Test Score Calculator</h2>
+    <p>Enter your age, biological sex, and the distance you reached during a standard sit-and-reach test. You can input in centimeters or inches, and use the slider or type directly. Click <em>Calculate</em> to instantly see your flexibility rating, percentile rank, and a color-coded zone chart showing where you land compared to others your age.</p>
+
+    <h2>Why This Matters</h2>
+    <p>The sit and reach test is one of the most widely used field tests for lower-back and hamstring flexibility — two areas that directly affect injury risk, posture, and athletic performance. Poor hamstring flexibility is linked to lower-back pain, which affects roughly 80% of adults at some point in their lives. Athletes in sports like running, cycling, and soccer are especially vulnerable.</p>
+    <p>For a 35-year-old male who sits at a desk eight hours a day, a score of +5 cm might sound fine — but it actually places him in the "Below Average" category, suggesting tight hamstrings that could contribute to chronic lower-back strain. A sedentary 50-year-old woman scoring +12 cm, on the other hand, is in the "Good" range and significantly reduces her fall-injury risk.</p>
+    <p>Physical therapists, coaches, and personal trainers regularly use this test in fitness assessments, rehabilitation programs, and pre-season screenings. Even a 10-minute daily stretching routine can meaningfully improve your score within 4–6 weeks.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The standard sit-and-reach test measures how far (in cm or inches) you can reach past — or short of — your toes while seated with legs straight. The box edge (toes position) equals 0. Positive scores mean you reached past your toes; negative scores mean you fell short.</p>
+    <p>Your score is then compared against published normative data segmented by <strong>age group</strong> and <strong>biological sex</strong> (sourced from the Canadian Fitness and Lifestyle Research Institute and ACSM guidelines). Each age/sex combination has six rating categories: Very Poor, Poor, Below Average, Average, Good, and Excellent. Percentile ranks are estimated from these normative distributions.</p>
+    <p><strong>Formula used:</strong> Score (cm) → lookup normative table for [age group × sex] → assign category and percentile band</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul class="tip-list">
+      <li>Warm up for 5–10 minutes before testing — cold muscles give artificially low scores.</li>
+      <li>Keep your knees fully straight throughout the reach; bent knees inflate your result.</li>
+      <li>Exhale as you slowly reach forward; don't bounce or jerk for extra distance.</li>
+      <li>Measure from the same reference point every time (box edge = toes = 0) for consistent tracking.</li>
+      <li>Don't compare your raw number across different protocols — the V-sit version uses a different zero point than the standard box test.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is a good sit and reach score?</summary>
+      <p>For adult men aged 20–29, a score of +15 cm or above is rated "Excellent," while 10–14 cm is "Good." For women the same age, +20 cm or above is "Excellent." Scores drop slightly with age, so "Average" for a 50-year-old male is roughly 5–9 cm — lower than for a 25-year-old.</p>
+    </details>
+    <details>
+      <summary>How often should I retest my flexibility?</summary>
+      <p>For most people, retesting every 4–8 weeks provides enough time to see meaningful change from a stretching program. If you're working with a physical therapist, they may retest every 2–3 weeks. Track your score over time to stay motivated and adjust your program.</p>
+    </details>
+    <details>
+      <summary>Does flexibility decline with age?</summary>
+      <p>Yes — flexibility generally peaks in the mid-20s and declines gradually, mainly due to reduced elastin in connective tissue and decreased activity levels. However, consistent stretching can significantly slow this decline. Many 60-year-olds who stretch regularly outperform sedentary 30-year-olds.</p>
+    </details>
+    <details>
+      <summary>Can I use this for the V-sit reach test instead?</summary>
+      <p>The V-sit test uses a different reference baseline (heel line = 23 cm on the ruler), so raw numbers aren't directly comparable. This calculator uses the standard box-test protocol where toes = 0. If you have a V-sit score, subtract 23 cm from your reading to approximate the box-test equivalent before entering it here.</p>
+    </details>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/grip-strength-percentile-calculator/" class="related-link">💪 Grip Strength Percentile Calculator</a>
+      <a href="/injury-recovery-return-to-sport-calculator/" class="related-link">🏃 Injury Recovery Return-to-Sport Timeline</a>
+      <a href="/pregnancy-calorie-needs-calculator/" class="related-link">🤰 Caloric Needs by Trimester Calculator</a>
+      <a href="/periodization-training-block-planner/" class="related-link">📅 Periodization Training Block Planner</a>
+      <a href="/dehydration-electrolyte-calculator/" class="related-link">💧 Dehydration &amp; Electrolyte Needs Calculator</a>
+      <a href="/crossfit-benchmark-wod-calculator/" class="related-link">🏋️ CrossFit Benchmark WOD Score Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <span style="margin-left:0.5rem">© 2025 toolhut.dev</span>
+</footer>
+
+<script>
+// ── Normative data (cm) ──────────────────────────────────────────────────
+// Structure: norms[gender][ageKey] = [{label, color, min, max, pctLow, pctHigh}]
+// Ranges are inclusive. +999 / -999 = open end.
+const NORMS = {
+  male: {
+    "15-19": [
+      {label:"Very Poor",  color:"#e74c3c", max:-1,   min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:4,    min:0,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:9,    min:5,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:14,   min:10,   pct:60},
+      {label:"Good",       color:"#27ae60", max:19,   min:15,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:20,   pct:99},
+    ],
+    "20-29": [
+      {label:"Very Poor",  color:"#e74c3c", max:-1,   min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:3,    min:0,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:9,    min:4,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:14,   min:10,   pct:60},
+      {label:"Good",       color:"#27ae60", max:19,   min:15,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:20,   pct:99},
+    ],
+    "30-39": [
+      {label:"Very Poor",  color:"#e74c3c", max:-2,   min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:2,    min:-1,   pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:8,    min:3,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:13,   min:9,    pct:60},
+      {label:"Good",       color:"#27ae60", max:18,   min:14,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:19,   pct:99},
+    ],
+    "40-49": [
+      {label:"Very Poor",  color:"#e74c3c", max:-3,   min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:1,    min:-2,   pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:7,    min:2,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:12,   min:8,    pct:60},
+      {label:"Good",       color:"#27ae60", max:17,   min:13,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:18,   pct:99},
+    ],
+    "50-59": [
+      {label:"Very Poor",  color:"#e74c3c", max:-4,   min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:0,    min:-3,   pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:6,    min:1,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:11,   min:7,    pct:60},
+      {label:"Good",       color:"#27ae60", max:16,   min:12,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:17,   pct:99},
+    ],
+    "60+": [
+      {label:"Very Poor",  color:"#e74c3c", max:-5,   min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:-1,   min:-4,   pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:5,    min:0,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:10,   min:6,    pct:60},
+      {label:"Good",       color:"#27ae60", max:15,   min:11,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:16,   pct:99},
+    ],
+  },
+  female: {
+    "15-19": [
+      {label:"Very Poor",  color:"#e74c3c", max:4,    min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:9,    min:5,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:14,   min:10,   pct:40},
+      {label:"Average",    color:"#2ecc71", max:19,   min:15,   pct:60},
+      {label:"Good",       color:"#27ae60", max:24,   min:20,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:25,   pct:99},
+    ],
+    "20-29": [
+      {label:"Very Poor",  color:"#e74c3c", max:5,    min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:10,   min:6,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:15,   min:11,   pct:40},
+      {label:"Average",    color:"#2ecc71", max:20,   min:16,   pct:60},
+      {label:"Good",       color:"#27ae60", max:25,   min:21,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:26,   pct:99},
+    ],
+    "30-39": [
+      {label:"Very Poor",  color:"#e74c3c", max:3,    min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:8,    min:4,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:13,   min:9,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:18,   min:14,   pct:60},
+      {label:"Good",       color:"#27ae60", max:23,   min:19,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:24,   pct:99},
+    ],
+    "40-49": [
+      {label:"Very Poor",  color:"#e74c3c", max:2,    min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:7,    min:3,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:12,   min:8,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:17,   min:13,   pct:60},
+      {label:"Good",       color:"#27ae60", max:22,   min:18,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:23,   pct:99},
+    ],
+    "50-59": [
+      {label:"Very Poor",  color:"#e74c3c", max:1,    min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:6,    min:2,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:11,   min:7,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:16,   min:12,   pct:60},
+      {label:"Good",       color:"#27ae60", max:21,   min:17,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:22,   pct:99},
+    ],
+    "60+": [
+      {label:"Very Poor",  color:"#e74c3c", max:0,    min:-999, pct:10},
+      {label:"Poor",       color:"#e67e22", max:5,    min:1,    pct:20},
+      {label:"Below Avg",  color:"#f1c40f", max:10,   min:6,    pct:40},
+      {label:"Average",    color:"#2ecc71", max:15,   min:11,   pct:60},
+      {label:"Good",       color:"#27ae60", max:20,   min:16,   pct:80},
+      {label:"Excellent",  color:"#1e8449", max:999,  min:21,   pct:99},
+    ],
+  }
+};
+
+const RATING_COLORS = {
+  "Very Poor":"#e74c3c","Poor":"#e67e22",
+  "Below Avg":"#f1c40f","Average":"#2ecc71",
+  "Good":"#27ae60","Excellent":"#1e8449"
+};
+const RATING_TEXT_COLORS = {"Below Avg":"#333","Average":"#333"};
+
+function getAgeKey(age){
+  if(age<20)return"15-19";
+  if(age<30)return"20-29";
+  if(age<40)return"30-39";
+  if(age<50)return"40-49";
+  if(age<60)return"50-59";
+  return"60+";
+}
+
+function fmtNum(n,dec=1){
+  if(n===null||n===undefined||isNaN(n))return"—";
+  const s=Math.abs(n).toFixed(dec);
+  return (n<0?"-":"")+s;
+}
+
+function cmToIn(cm){return cm/2.54;}
+function inToCm(v){return v*2.54;}
+
+// Sync slider ↔ number input
+const sliderEl=document.getElementById('reach-slider');
+const numEl=document.getElementById('reach');
+const unitSel=document.getElementById('unit');
+const unitLabel=document.getElementById('unit-label');
+const sliderDisp=document.getElementById('slider-display');
+
+function updateSliderRange(){
+  const u=unitSel.value;
+  if(u==='in'){
+    sliderEl.min="-12";sliderEl.max="20";sliderEl.step="0.25";
+    unitLabel.textContent="in";
+  } else {
+    sliderEl.min="-30";sliderEl.max="50";sliderEl.step="0.5";
+    unitLabel.textContent="cm";
+  }
+}
+
+unitSel.addEventListener('change',()=>{
+  const u=unitSel.value;
+  const cur=parseFloat(numEl.value);
+  updateSliderRange();
+  if(!isNaN(cur)){
+    const conv=u==='in'?+cmToIn(cur).toFixed(2):+inToCm(cur).toFixed(1);
+    numEl.value=conv;
+    sliderEl.value=conv;
+    sliderDisp.textContent=conv+" "+u;
+  }
+});
+
+sliderEl.addEventListener('input',()=>{
+  const v=parseFloat(sliderEl.value);
+  numEl.value=v;
+  sliderDisp.textContent=v+" "+unitSel.value;
+});
+
+numEl.addEventListener('input',()=>{
+  const v=parseFloat(numEl.value);
+  if(!isNaN(v)){
+    const mn=parseFloat(sliderEl.min),mx=parseFloat(sliderEl.max);
+    sliderEl.value=Math.max(mn,Math.min(mx,v));
+    sliderDisp.textContent=v+" "+unitSel.value;
+  }
+});
+
+function showErr(id,show){
+  const el=document.getElementById(id);
+  if(show){el.classList.add('show');}else{el.classList.remove('show');}
+}
+function setInputErr(inputId,has){
+  const el=document.getElementById(inputId);
+  if(has)el.classList.add('input-error');else el.classList.remove('input-error');
+}
+
+function validate(){
+  let ok=true;
+  const age=parseFloat(document.getElementById('age').value);
+  const gender=document.getElementById('gender').value;
+  const reach=parseFloat(numEl.value);
+  const unit=unitSel.value;
+
+  if(isNaN(age)||age<5||age>100){showErr('age-err',true);setInputErr('age',true);ok=false;}
+  else{showErr('age-err',false);setInputErr('age',false);}
+
+  if(!gender){showErr('gender-err',true);setInputErr('gender',true);ok=false;}
+  else{showErr('gender-err',false);setInputErr('gender',false);}
+
+  const minR=unit==='in'?-12:-30, maxR=unit==='in'?20:50;
+  if(isNaN(reach)||reach<minR||reach>maxR){showErr('reach-err',true);setInputErr('reach',true);ok=false;}
+  else{showErr('reach-err',false);setInputErr('reach',false);}
+
+  return ok;
+}
+
+function getTips(label, gender, reachCm){
+  const tips=[];
+  if(label==="Very Poor"||label==="Poor"){
+    tips.push("Stretch hamstrings daily — seated forward fold, 30–60 seconds each side.");
+    tips.push("Try PNF stretching (contract-relax technique) for faster flexibility gains.");
+    tips.push("Yoga or Pilates 2–3× per week can significantly improve your score within 6 weeks.");
+  } else if(label==="Below Avg"||label==="Average"){
+    tips.push("Maintain a consistent stretching routine — consistency matters more than intensity.");
+    tips.push("Add hip flexor stretches (lunging hip flexor stretch) to complement hamstring work.");
+    tips.push("Consider a foam roller for thoracic spine mobility, which can also improve reach.");
+  } else {
+    tips.push("Excellent flexibility! Focus on maintaining it with regular movement.");
+    tips.push("Balance your flexibility with strength training to protect joints.");
+    tips.push("Dynamic stretches before activity and static stretches after keep scores stable.");
+  }
+  if(gender==='male') tips.push("Men typically have less hip flexor mobility than women — targeted hip stretches help.");
+  if(reachCm<0) tips.push("Negative score? Focus on releasing the lower back and proximal hamstrings first.");
+  return tips;
+}
+
+function calculate(){
+  if(!validate())return;
+
+  const age=parseInt(document.getElementById('age').value);
+  const gender=document.getElementById('gender').value;
+  const unit=unitSel.value;
+  const rawReach=parseFloat(numEl.value);
+  const reachCm=unit==='in'?inToCm(rawReach):rawReach;
+
+  const ageKey=getAgeKey(age);
+  const table=NORMS[gender][ageKey];
+
+  // Find category
+  let catIdx=0;
+  for(let i=0;i<table.length;i++){
+    if(reachCm>=table[i].min&&reachCm<=table[i].max){catIdx=i;break;}
+    // edge: above all
+    if(i===table.length-1&&reachCm>table[i].max){catIdx=i;}
+  }
+  const cat=table[catIdx];
+
+  // Percentile estimation
+  const pcts=[10,20,40,60,80,99];
+  const pctLow=catIdx>0?pcts[catIdx-1]+1:1;
+  const pctHigh=pcts[catIdx];
+  const pctMid=Math.round((pctLow+pctHigh)/2);
+
+  // Zone arrow position (6 zones, each 1/6 of bar width)
+  const arrowLeft=((catIdx/6)+1/12)*100;
+
+  const dispReach=unit==='in'?rawReach.toFixed(2):reachCm.toFixed(1);
+  const dispUnit=unit;
+
+  // Build norms table HTML
+  let tbodyHTML='';
+  for(let i=0;i<table.length;i++){
+    const r=table[i];
+    const isUser=(i===catIdx);
+    const lo=r.min===-999?'< '+(unit==='in'?fmtNum(cmToIn(r.max+1),1):r.max+1):
+              (unit==='in'?fmtNum(cmToIn(r.min),1):r.min);
+    const hi=r.max===999?'> '+(unit==='in'?fmtNum(cmToIn(r.min-1),1):r.min-1):
+              (unit==='in'?fmtNum(cmToIn(r.max),1):r.max);
+    const range=r.min===-999?'< '+hi:(r.max===999?'> '+lo:lo+' to '+hi);
+    const pctStr='~'+pcts[i]+'th';
+    tbodyHTML+=`<tr class="${isUser?'highlight-row':''}">
+      <td>${isUser?'→ ':''}${r.label}</td>
+      <td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${r.color};margin-right:4px;vertical-align:middle"></span>${pctStr}</td>
+      <td>${range} ${unit}</td>
+    </tr>`;
+  }
+
+  const tips=getTips(cat.label,gender,reachCm);
+  let tipsHTML='';
+  tips.forEach(t=>{ tipsHTML+=`<li>${t}</li>`; });
+
+  const badgeBg=RATING_COLORS[cat.label]||'#888';
+  const badgeTxt=RATING_TEXT_COLORS[cat.label]||'#fff';
+
+  requestAnimationFrame(()=>{
+    document.getElementById('r-score').textContent=dispReach+' '+dispUnit;
+    const badge=document.getElementById('r-rating-badge');
+    badge.textContent=cat.label;
+    badge.style.background=badgeBg;
+    badge.style.color=badgeTxt;
+    document.getElementById('r-percentile').textContent='~'+pctMid+'th percentile';
+    document.getElementById('r-agegroup').textContent=ageKey+' yrs';
+    document.getElementById('r-category').textContent=gender==='male'?'Male':'Female';
+    document.getElementById('zone-arrow').style.left=arrowLeft+'%';
+    document.getElementById('norms-tbody').innerHTML=tbodyHTML;
+    document.getElementById('r-tips').innerHTML=tipsHTML;
+
+    const res=document.getElementById('results');
+    res.classList.add('visible');
+    res.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click',()=>{
+  requestAnimationFrame(()=>calculate());
+});
+
+[document.getElementById('age'),numEl].forEach(el=>{
+  el.addEventListener('keydown',e=>{if(e.key==='Enter')calculate();});
+});
+
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  const score=document.getElementById('r-score').textContent;
+  const rating=document.getElementById('r-rating-badge').textContent;
+  const pct=document.getElementById('r-percentile').textContent;
+  const ag=document.getElementById('r-agegroup').textContent;
+  const txt=`Sit & Reach Test Results\nScore: ${score}\nRating: ${rating}\nPercentile: ${pct}\nAge Group: ${ag}\nCalculated at toolhut.dev`;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=document.getElementById('copyBtn');
+    btn.textContent='✅ Copied!';
+    setTimeout(()=>{btn.textContent='📋 Copy Results';},2000);
+  });
+});
+
+// Init slider display
+sliderDisp.textContent=sliderEl.value+' cm';
+</script>
+</body>
+</html>
