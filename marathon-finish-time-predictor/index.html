@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathon Finish Time Predictor — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Predict your marathon finish time based on recent race results or training paces. Free online marathon finish time predictor with performance zone analysis.">
+<link rel="canonical" href="https://toolhut.dev/marathon-finish-time-predictor/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Marathon Finish Time Predictor",
+  "url": "https://toolhut.dev/marathon-finish-time-predictor/",
+  "description": "Predict your marathon finish time based on recent race results or training paces.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f4f8; color: #1a1a2e; line-height: 1.6; }
+a { color: #0077b6; text-decoration: none; }
+a:hover { text-decoration: underline; color: #006299; }
+
+nav { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 0 1.5rem; }
+.nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; height: 52px; }
+.nav-brand { font-weight: 700; font-size: 1.1rem; color: #1a1a2e; }
+.nav-brand span { color: #0077b6; }
+
+.page-wrap { max-width: 640px; margin: 0 auto; padding: 2rem 1rem 3rem; }
+h1 { font-size: 1.65rem; font-weight: 800; color: #1a1a2e; margin-bottom: 0.4rem; line-height: 1.25; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.75rem; }
+
+.card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+
+/* Tabs */
+.tab-bar { display: flex; gap: 0; border-bottom: 2px solid #e0e0e0; margin-bottom: 1.75rem; }
+.tab-btn { background: none; border: none; padding: 0.65rem 1.2rem; font-size: 0.9rem; font-weight: 600; color: #777; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s, border-color 0.2s; min-height: 44px; }
+.tab-btn.active { color: #0077b6; border-bottom-color: #0077b6; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+label { display: block; font-size: 0.85rem; font-weight: 500; color: #444; margin-bottom: 0.4rem; margin-top: 1rem; }
+label:first-child { margin-top: 0; }
+input[type="number"], input[type="text"], select {
+  width: 100%; border: 1px solid #ddd; border-radius: 6px; padding: 12px 16px;
+  font-size: 0.95rem; color: #1a1a2e; background: #fff; transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none; appearance: none;
+}
+input:focus, select:focus { outline: none; border-color: #0077b6; box-shadow: 0 0 0 3px rgba(0,119,182,0.15); }
+input.error { border-color: #e74c3c; }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 0.3rem; display: none; }
+.error-msg.show { display: block; }
+
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.input-hint { font-size: 0.78rem; color: #888; margin-top: 0.3rem; }
+
+input[type="range"] { width: 100%; accent-color: #0077b6; height: 6px; cursor: pointer; margin-top: 0.5rem; }
+.slider-row { display: flex; justify-content: space-between; font-size: 0.78rem; color: #888; }
+
+.btn { display: block; width: 100%; background: #0077b6; color: #fff; border: none; border-radius: 6px; padding: 14px 24px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 1.5rem; min-height: 44px; transition: background 0.2s; letter-spacing: 0.01em; }
+.btn:hover { background: #006299; }
+.btn:active { background: #005580; }
+
+/* Results */
+.results-section { opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.results-section.visible { opacity: 1; pointer-events: auto; }
+
+.big-result { text-align: center; margin-bottom: 1.5rem; }
+.big-time { font-size: 3rem; font-weight: 900; color: #0077b6; letter-spacing: -1px; line-height: 1; }
+.big-label { font-size: 0.9rem; color: #666; margin-top: 0.3rem; }
+.big-pace { font-size: 1.1rem; color: #444; margin-top: 0.5rem; font-weight: 600; }
+
+/* Performance Zone Bar */
+.zone-section { margin: 1.5rem 0; }
+.zone-title { font-size: 0.85rem; font-weight: 600; color: #444; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.zone-bar-wrap { position: relative; height: 28px; border-radius: 14px; overflow: hidden; display: flex; }
+.zone-seg { height: 100%; transition: flex 0.3s; }
+.zone-seg.s1 { background: linear-gradient(90deg, #e74c3c, #e67e22); flex: 15; }
+.zone-seg.s2 { background: linear-gradient(90deg, #e67e22, #f1c40f); flex: 20; }
+.zone-seg.s3 { background: linear-gradient(90deg, #f1c40f, #2ecc71); flex: 30; }
+.zone-seg.s4 { background: linear-gradient(90deg, #2ecc71, #27ae60); flex: 20; }
+.zone-seg.s5 { background: linear-gradient(90deg, #27ae60, #0077b6); flex: 15; }
+
+.zone-marker { position: absolute; top: 0; height: 100%; width: 4px; background: #1a1a2e; border-radius: 2px; transform: translateX(-50%); box-shadow: 0 0 0 2px #fff; transition: left 0.4s ease; }
+.zone-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.72rem; color: #888; }
+.zone-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; color: #fff; margin-top: 0.75rem; }
+
+.splits-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.88rem; }
+.splits-table th { background: #f0f0f0; padding: 8px 12px; text-align: left; font-weight: 600; font-size: 0.8rem; border-bottom: 2px solid #e0e0e0; }
+.splits-table th.num { text-align: right; }
+.splits-table td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; }
+.splits-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.splits-table tr:nth-child(even) td { background: #fafafa; }
+
+.section-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.section-hdr h3 { font-size: 1rem; font-weight: 700; }
+
+.copy-btn { background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; padding: 4px 12px; font-size: 0.78rem; cursor: pointer; color: #444; transition: background 0.2s; }
+.copy-btn:hover { background: #e0e0e0; }
+.copy-btn.copied { background: #27ae60; color: #fff; border-color: #27ae60; }
+
+.disclaimer { background: #fff8e1; border: 1px solid #ffe082; border-radius: 6px; padding: 0.85rem 1rem; font-size: 0.8rem; color: #795548; margin-top: 1.25rem; }
+.disclaimer strong { color: #5d4037; }
+
+.ad-slot { min-height: 0; margin: 0; }
+
+/* Content sections */
+.content-section { margin-bottom: 2rem; }
+.content-section h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid #e0e0e0; }
+.content-section p { color: #444; font-size: 0.93rem; margin-bottom: 0.75rem; }
+.content-section ul { padding-left: 1.25rem; color: #444; font-size: 0.93rem; }
+.content-section ul li { margin-bottom: 0.5rem; }
+details { border: 1px solid #e0e0e0; border-radius: 6px; margin-bottom: 0.6rem; }
+details summary { padding: 0.75rem 1rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: #1a1a2e; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+details summary::after { content: '+'; font-size: 1.1rem; color: #0077b6; }
+details[open] summary::after { content: '−'; }
+details p { padding: 0 1rem 0.85rem; font-size: 0.88rem; color: #555; }
+
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.related-link { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.65rem 0.9rem; font-size: 0.83rem; font-weight: 500; color: #0077b6; transition: background 0.2s; }
+.related-link:hover { background: #e8f4fd; text-decoration: none; }
+
+footer { background: #fff; border-top: 1px solid #e0e0e0; padding: 1.25rem 1rem; text-align: center; font-size: 0.82rem; color: #888; }
+footer a { color: #888; margin: 0 0.4rem; }
+footer a:hover { color: #0077b6; }
+
+@media (max-width: 480px) {
+  .row-2 { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .big-time { font-size: 2.4rem; }
+  .card { padding: 1.25rem; }
+  h1 { font-size: 1.35rem; }
+  .tab-btn { padding: 0.65rem 0.85rem; font-size: 0.82rem; }
+  .splits-table { font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <h1>Marathon Finish Time Predictor</h1>
+  <p class="subtitle">Predict your 26.2-mile finish time from a recent race result or your current training pace.</p>
+
+  <div class="card">
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('race')">From Race Result</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('pace')">From Training Pace</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('custom')">Custom Distance</button>
+    </div>
+
+    <!-- Tab 1: From Race Result -->
+    <div id="tab-race" class="tab-panel active">
+      <label>Recent Race Distance</label>
+      <select id="race-dist">
+        <option value="5">5K (3.107 mi)</option>
+        <option value="10">10K (6.214 mi)</option>
+        <option value="21.0975" selected>Half Marathon (13.1 mi)</option>
+        <option value="30">30K (18.6 mi)</option>
+        <option value="42.195">Marathon (full — show equivalent)</option>
+      </select>
+
+      <label>Your Finish Time</label>
+      <div class="row-2">
+        <div>
+          <input type="number" id="r-hours" min="0" max="23" placeholder="Hours" />
+          <div class="input-hint">hrs</div>
+        </div>
+        <div>
+          <input type="number" id="r-minutes" min="0" max="59" placeholder="Minutes" />
+          <div class="input-hint">min</div>
+        </div>
+      </div>
+      <div>
+        <input type="number" id="r-seconds" min="0" max="59" placeholder="Seconds (optional)" style="margin-top:1rem;" />
+        <div class="input-hint">sec</div>
+      </div>
+      <div class="error-msg" id="err-race">Please enter a valid finish time.</div>
+
+      <label>Prediction Formula</label>
+      <select id="race-formula">
+        <option value="riegel">Riegel Formula (most popular)</option>
+        <option value="cameron">Cameron Formula</option>
+        <option value="pete">Pete Riegel + Fatigue Factor</option>
+      </select>
+      <div class="input-hint">Riegel works best for similar effort races. Cameron adjusts for distance drop-offs.</div>
+    </div>
+
+    <!-- Tab 2: From Training Pace -->
+    <div id="tab-pace" class="tab-panel">
+      <label>Your Current Long Run Pace</label>
+      <div class="row-2">
+        <div>
+          <input type="number" id="p-min" min="3" max="20" placeholder="Min" />
+          <div class="input-hint">min per mile</div>
+        </div>
+        <div>
+          <input type="number" id="p-sec" min="0" max="59" placeholder="Sec" />
+          <div class="input-hint">sec per mile</div>
+        </div>
+      </div>
+      <div class="error-msg" id="err-pace">Please enter a valid pace (min 3:00/mile, max 20:00/mile).</div>
+
+      <label>Experience Level</label>
+      <select id="p-level">
+        <option value="1.0">Elite / Sub-elite</option>
+        <option value="1.06" selected>Experienced (5+ marathons)</option>
+        <option value="1.12">Intermediate (2–4 marathons)</option>
+        <option value="1.18">Novice (first or second)</option>
+      </select>
+      <div class="input-hint">Novice runners typically race at ~85–88% of long run pace; elites closer to 95%.</div>
+
+      <label>Training Weeks Completed</label>
+      <input type="range" id="p-weeks" min="8" max="24" value="16" oninput="document.getElementById('p-weeks-val').textContent=this.value">
+      <div class="slider-row"><span>8 wks</span><span id="p-weeks-val">16</span> weeks<span>24 wks</span></div>
+    </div>
+
+    <!-- Tab 3: Custom Distance -->
+    <div id="tab-custom" class="tab-panel">
+      <label>Custom Race Distance (km)</label>
+      <input type="number" id="c-dist" min="1" max="42.195" step="0.1" placeholder="e.g. 15" />
+      <div class="error-msg" id="err-cdist">Enter a distance between 1 km and 42.195 km.</div>
+
+      <label>Your Finish Time</label>
+      <div class="row-2">
+        <div>
+          <input type="number" id="c-hours" min="0" max="23" placeholder="Hours" />
+          <div class="input-hint">hrs</div>
+        </div>
+        <div>
+          <input type="number" id="c-minutes" min="0" max="59" placeholder="Minutes" />
+          <div class="input-hint">min</div>
+        </div>
+      </div>
+      <div>
+        <input type="number" id="c-seconds" min="0" max="59" placeholder="Seconds" style="margin-top:1rem;" />
+        <div class="input-hint">sec</div>
+      </div>
+      <div class="error-msg" id="err-ctime">Please enter a valid finish time.</div>
+    </div>
+
+    <button class="btn" id="calcBtn">Predict My Marathon Time →</button>
+  </div>
+
+  <!-- Results -->
+  <div class="card results-section" id="results-card">
+    <div class="big-result">
+      <div class="big-time" id="res-time">—</div>
+      <div class="big-label">Predicted Marathon Finish Time</div>
+      <div class="big-pace" id="res-pace"></div>
+    </div>
+
+    <div class="zone-section">
+      <div class="zone-title">Performance Zone</div>
+      <div style="position:relative;">
+        <div class="zone-bar-wrap" id="zone-bar">
+          <div class="zone-seg s1"></div>
+          <div class="zone-seg s2"></div>
+          <div class="zone-seg s3"></div>
+          <div class="zone-seg s4"></div>
+          <div class="zone-seg s5"></div>
+          <div class="zone-marker" id="zone-marker" style="left:50%"></div>
+        </div>
+      </div>
+      <div class="zone-labels">
+        <span>4:00+</span><span>3:30</span><span>3:00</span><span>2:30</span><span>&lt;2:05</span>
+      </div>
+      <div id="zone-badge" class="zone-badge" style="background:#27ae60">Good for Age</div>
+    </div>
+
+    <div class="section-hdr" style="margin-top:1.5rem;">
+      <h3>5K Split Breakdown</h3>
+      <button class="copy-btn" id="copyBtn" onclick="copyResults()">Copy Results</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="splits-table" id="splits-table">
+        <thead>
+          <tr>
+            <th>Split</th>
+            <th>Distance</th>
+            <th class="num">Time</th>
+            <th class="num">Cumulative</th>
+          </tr>
+        </thead>
+        <tbody id="splits-body"></tbody>
+      </table>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Disclaimer:</strong> This tool is for informational purposes only. Predictions are estimates based on mathematical formulas and do not account for weather, elevation, training quality, or individual physiology. Consult a certified running coach or healthcare professional for personalized advice.
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Sections -->
+  <div class="content-section">
+    <h2>How to Use This Marathon Finish Time Predictor</h2>
+    <p>Choose your input method from the three tabs: enter a recent race result (5K through half marathon), input your current training pace per mile, or use any custom race distance. Fill in your time, select the prediction formula or experience level, then click <strong>Predict My Marathon Time</strong>. You'll see your projected finish time, per-mile pace, your performance zone on a color-coded bar, and a full 5K split breakdown.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Why This Matters</h2>
+    <p>Setting a realistic goal time is one of the most important decisions you'll make before race day. Go out too fast and you'll hit the wall — that dreaded crash around mile 18–20 where glycogen runs out and pace collapses. Go out too slow and you leave time on the table after months of training.</p>
+    <p>Consider this: a runner who finishes a half marathon in 1:55:00 is predicted to finish a full marathon in approximately 3:59–4:05. But a first-timer with the same half time, due to less race-specific endurance and pacing experience, often finishes closer to 4:15–4:25. The difference is very real — and very trainable.</p>
+    <p>Coaches, pace groups, and training plans all rely on time predictions to set workout targets. Your predicted marathon pace becomes your "goal marathon pace" (GMP), which drives your tempo runs, long run efforts, and race-day strategy. Using a scientifically-grounded predictor — rather than gut feel — gives you a number you can trust and build a race plan around.</p>
+    <p>This tool also shows your <strong>performance zone</strong>: whether you're on track for a Boston Qualifier, a sub-4, a sub-5, or simply your best personal effort. Knowing where you stand helps you pick the right corral and the right mindset.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>How It's Calculated</h2>
+    <p><strong>Riegel Formula</strong> (default): <code>T₂ = T₁ × (D₂ / D₁)^1.06</code> — where T₁ is your known race time, D₁ is that race distance, D₂ is 42.195 km, and 1.06 is the fatigue exponent. This exponent reflects that longer races feel disproportionately harder.</p>
+    <p><strong>Cameron Formula</strong>: Uses a slightly different exponent curve that some researchers argue better fits recreational runners: <code>T₂ = T₁ × (D₂/D₁) × [(a + b × D₂) / (a + b × D₁)]</code> with empirically derived constants.</p>
+    <p><strong>Training Pace Method</strong>: Your long run pace is multiplied by an experience factor (1.06–1.18) and a training completeness factor based on weeks trained. The result is your predicted marathon pace, then multiplied by 26.2188 miles (full marathon distance).</p>
+    <p>The 5K splits assume an even-effort pacing strategy — the single most effective race plan for first-time finishers and those chasing a PR.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Use a recent, raced-hard result.</strong> A casual fun-run time will give you an optimistic (unrealistic) prediction. Your reference race should be within the last 8–12 weeks and run at full effort.</li>
+      <li><strong>Don't ignore the 5K splits.</strong> The table shows even splits — start at or slightly slower than these for the first half. Many runners go 10–15 sec/mile too fast early and pay dearly at mile 20.</li>
+      <li><strong>Half marathon is the gold standard input.</strong> 5K predictions have higher variance over 26.2 miles. A half marathon result, run hard, gives the most accurate marathon forecast.</li>
+      <li><strong>First marathon? Add 5–8%..</strong> The "wall" is real for newcomers. Your first marathon almost always takes longer than the formula suggests. Select "Novice" experience level to build that buffer in.</li>
+      <li><strong>Weather adds time.</strong> Above 60°F (15°C), expect to slow ~20–30 seconds per mile for every 10°F rise. The calculator doesn't account for conditions, so adjust mentally on race day.</li>
+    </ul>
+  </div>
+
+  <div class="content-section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is the Riegel formula for marathon prediction?</summary>
+      <p>For runners who have trained consistently and raced the reference distance near full effort, Riegel is typically accurate within 3–7 minutes for most recreational runners. Elite runners tend to fall within 1–2 minutes. The accuracy drops when using very short reference races (5K) or when the runner is new to the marathon distance.</p>
+    </details>
+    <details>
+      <summary>Can I use a parkrun (5K) time to predict my marathon?</summary>
+      <p>Yes, but with caution. A 5K covers such a short distance that small variations in fitness, course, and effort create larger prediction errors at 26.2 miles. Use the result as a rough guide and round up by 3–5 minutes to be conservative, especially if you haven't done marathon-specific long runs.</p>
+    </details>
+    <details>
+      <summary>What counts as a "Boston Qualifier" time?</summary>
+      <p>Boston Qualifying times vary by age and gender — for men 18–34 it's 3:00:00, rising to 3:10 for 35–39, and so on; women's standards are 30 minutes slower per age group. Note: due to high demand, the actual cutoff is typically 2–6 minutes faster than the published standard. Check the BAA website for current standards.</p>
+    </details>
+    <details>
+      <summary>Why does the tool show a different time than other predictors?</summary>
+      <p>Different calculators use different fatigue exponents and correction factors. The Riegel exponent of 1.06 is the most commonly cited, but some tools use 1.07–1.08 for more conservative estimates. Try all three formula options in this tool — your true finish time will likely fall within that range.</p>
+    </details>
+  </div>
+
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/sit-and-reach-flexibility-calculator/">Sit and Reach Flexibility Score Calculator</a>
+      <a class="related-link" href="/grip-strength-percentile-calculator/">Grip Strength Percentile Calculator</a>
+      <a class="related-link" href="/injury-recovery-return-to-sport-calculator/">Injury Recovery Return-to-Sport Timeline Calculator</a>
+      <a class="related-link" href="/pregnancy-calorie-needs-calculator/">Caloric Needs by Trimester Pregnancy Calculator</a>
+      <a class="related-link" href="/periodization-training-block-planner/">Periodization Training Block Planner</a>
+      <a class="related-link" href="/dehydration-electrolyte-calculator/">Dehydration Risk & Electrolyte Needs Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div>toolhut.dev &mdash; Free Online Tools</div>
+  <div style="margin-top:0.4rem;">
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:0.4rem;">© 2025 toolhut.dev</div>
+</footer>
+
+<script>
+var currentTab = 'race';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  var idx = ['race','pace','custom'].indexOf(tab);
+  if(btns[idx]) btns[idx].classList.add('active');
+  document.querySelector('.results-section').classList.remove('visible');
+}
+
+function fmtTime(totalSecs) {
+  totalSecs = Math.round(totalSecs);
+  var h = Math.floor(totalSecs / 3600);
+  var m = Math.floor((totalSecs % 3600) / 60);
+  var s = totalSecs % 60;
+  return (h > 0 ? h + ':' : '') + (h > 0 ? String(m).padStart(2,'0') : m) + ':' + String(s).padStart(2,'0');
+}
+
+function fmtPace(secsPerMile) {
+  var m = Math.floor(secsPerMile / 60);
+  var s = Math.round(secsPerMile % 60);
+  return m + ':' + String(s).padStart(2,'0') + ' /mile';
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+  document.querySelectorAll('input').forEach(e => e.classList.remove('error'));
+}
+
+function showError(id, inputId) {
+  var el = document.getElementById(id);
+  if(el) el.classList.add('show');
+  if(inputId) {
+    var inp = document.getElementById(inputId);
+    if(inp) inp.classList.add('error');
+  }
+}
+
+function riegelPredict(t1Secs, d1Km, d2Km) {
+  return t1Secs * Math.pow(d2Km / d1Km, 1.06);
+}
+
+function cameronPredict(t1Secs, d1Km, d2Km) {
+  var a = 13.49681, b = 0.000030482;
+  var c1 = d1Km * 1000, c2 = d2Km * 1000;
+  return t1Secs * (d2Km / d1Km) * ((a + b * c2) / (a + b * c1));
+}
+
+function petePredict(t1Secs, d1Km, d2Km) {
+  return t1Secs * Math.pow(d2Km / d1Km, 1.07);
+}
+
+function getZoneInfo(totalMins) {
+  // Marathon zone bands (minutes)
+  // Elite < 130, Sub-3 130-180, Good 180-240, Recreational 240-300, Beginner 300+
+  if(totalMins < 130)       return { pct: 98, label: 'Elite', color: '#0077b6' };
+  if(totalMins < 180)       return { pct: 88, label: 'Sub-3:00 / BQ (Open)', color: '#27ae60' };
+  if(totalMins < 210)       return { pct: 75, label: 'Sub-3:30 / Good for Age', color: '#2ecc71' };
+  if(totalMins < 240)       return { pct: 60, label: 'Sub-4:00 / Solid Runner', color: '#f1c40f' };
+  if(totalMins < 270)       return { pct: 45, label: 'Sub-4:30 / Recreational', color: '#e67e22' };
+  if(totalMins < 300)       return { pct: 28, label: 'Sub-5:00 / Club Runner', color: '#e67e22' };
+  return                           { pct: 12, label: 'Finisher / Beginner', color: '#e74c3c' };
+}
+
+function calculate() {
+  clearErrors();
+  var MARATHON_KM = 42.195;
+  var MARATHON_MI = 26.2188;
+  var marathonSecs;
+
+  if(currentTab === 'race') {
+    var dist = parseFloat(document.getElementById('race-dist').value);
+    var hrs  = parseFloat(document.getElementById('r-hours').value) || 0;
+    var mins = parseFloat(document.getElementById('r-minutes').value) || 0;
+    var secs = parseFloat(document.getElementById('r-seconds').value) || 0;
+    var totalSecs = hrs*3600 + mins*60 + secs;
+    if(!totalSecs || totalSecs < 60) { showError('err-race','r-minutes'); return; }
+    var formula = document.getElementById('race-formula').value;
+    if(formula === 'riegel')   marathonSecs = riegelPredict(totalSecs, dist, MARATHON_KM);
+    else if(formula === 'cameron') marathonSecs = cameronPredict(totalSecs, dist, MARATHON_KM);
+    else                       marathonSecs = petePredict(totalSecs, dist, MARATHON_KM);
+
+  } else if(currentTab === 'pace') {
+    var pMin = parseFloat(document.getElementById('p-min').value);
+    var pSec = parseFloat(document.getElementById('p-sec').value) || 0;
+    if(isNaN(pMin) || pMin < 3 || pMin > 20) { showError('err-pace','p-min'); return; }
+    var paceSecPerMile = pMin*60 + pSec;
+    if(paceSecPerMile < 180 || paceSecPerMile > 1200) { showError('err-pace','p-min'); return; }
+    var levelFactor = parseFloat(document.getElementById('p-level').value);
+    var weeks = parseInt(document.getElementById('p-weeks').value);
+    var weekFactor = 1 + (24 - weeks) * 0.003; // more weeks = less penalty
+    var racePaceSecPerMile = paceSecPerMile * levelFactor * Math.max(0.97, Math.min(1.0, weekFactor));
+    marathonSecs = racePaceSecPerMile * MARATHON_MI;
+
+  } else { // custom
+    var cDist = parseFloat(document.getElementById('c-dist').value);
+    if(isNaN(cDist) || cDist < 1 || cDist > 42.195) { showError('err-cdist','c-dist'); return; }
+    var ch = parseFloat(document.getElementById('c-hours').value) || 0;
+    var cm = parseFloat(document.getElementById('c-minutes').value) || 0;
+    var cs = parseFloat(document.getElementById('c-seconds').value) || 0;
+    var cTotal = ch*3600 + cm*60 + cs;
+    if(!cTotal || cTotal < 30) { showError('err-ctime','c-minutes'); return; }
+    marathonSecs = riegelPredict(cTotal, cDist, MARATHON_KM);
+  }
+
+  marathonSecs = Math.round(marathonSecs);
+  var totalMins = marathonSecs / 60;
+  var paceSecPerMile = marathonSecs / MARATHON_MI;
+  var zone = getZoneInfo(totalMins);
+
+  // Build splits (every 5K)
+  var splits = [];
+  var splitDist = 5; // km
+  var numSplits = Math.floor(MARATHON_KM / splitDist);
+  var secsPerKm = marathonSecs / MARATHON_KM;
+  var cumSecs = 0;
+  for(var i = 1; i <= numSplits; i++) {
+    var distStart = (i-1)*splitDist;
+    var distEnd = Math.min(i*splitDist, MARATHON_KM);
+    var splitKm = distEnd - distStart;
+    var splitSec = secsPerKm * splitKm;
+    cumSecs += splitSec;
+    splits.push({
+      label: distStart === 0 ? '0–5K' : distStart+'–'+Math.round(distEnd)+'K',
+      dist: (splitKm*0.621371).toFixed(2)+' mi',
+      time: fmtTime(splitSec),
+      cum: fmtTime(cumSecs)
+    });
+  }
+  // Last partial split
+  var lastStart = numSplits * splitDist;
+  if(lastStart < MARATHON_KM) {
+    var remKm = MARATHON_KM - lastStart;
+    var remSec = secsPerKm * remKm;
+    cumSecs += remSec;
+    splits.push({
+      label: lastStart+'–42.2K',
+      dist: (remKm*0.621371).toFixed(2)+' mi',
+      time: fmtTime(remSec),
+      cum: fmtTime(cumSecs)
+    });
+  }
+
+  var splitsHTML = '';
+  for(var s = 0; s < splits.length; s++) {
+    splitsHTML += '<tr><td>'+splits[s].label+'</td><td>'+splits[s].dist+'</td><td class="num">'+splits[s].time+'</td><td class="num">'+splits[s].cum+'</td></tr>';
+  }
+
+  // Store for copy
+  window._marathonResult = {
+    time: fmtTime(marathonSecs),
+    pace: fmtPace(paceSecPerMile),
+    zone: zone.label,
+    splits: splits
+  };
+
+  requestAnimationFrame(function() {
+    document.getElementById('res-time').textContent = fmtTime(marathonSecs);
+    document.getElementById('res-pace').textContent = fmtPace(paceSecPerMile) + ' avg';
+    document.getElementById('splits-body').innerHTML = splitsHTML;
+
+    // Zone marker: map totalMins (125–360) to 2%–98%
+    var minMins = 125, maxMins = 360;
+    var clampedMins = Math.max(minMins, Math.min(maxMins, totalMins));
+    var pct = 100 - ((clampedMins - minMins) / (maxMins - minMins)) * 96 - 2;
+    document.getElementById('zone-marker').style.left = pct.toFixed(1) + '%';
+
+    var badge = document.getElementById('zone-badge');
+    badge.textContent = zone.label;
+    badge.style.background = zone.color;
+
+    document.querySelector('.results-section').classList.add('visible');
+    document.getElementById('results-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function copyResults() {
+  var r = window._marathonResult;
+  if(!r) return;
+  var text = 'Marathon Finish Time Prediction\n';
+  text += 'Predicted Time: ' + r.time + '\n';
+  text += 'Avg Pace: ' + r.pace + '\n';
+  text += 'Zone: ' + r.zone + '\n\n';
+  text += 'Split Breakdown:\n';
+  for(var i = 0; i < r.splits.length; i++) {
+    text += r.splits[i].label + ' — ' + r.splits[i].time + ' (cum: ' + r.splits[i].cum + ')\n';
+  }
+  text += '\nGenerated by toolhut.dev/marathon-finish-time-predictor/';
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = 'Copy Results'; btn.classList.remove('copied'); }, 2000);
+  }).catch(function(){
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = 'Failed';
+    setTimeout(function(){ btn.textContent = 'Copy Results'; }, 2000);
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', function() {
+  requestAnimationFrame(function() { calculate(); });
+});
+
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Enter') {
+    requestAnimationFrame(function() { calculate(); });
+  }
+});
+</script>
+</body>
+</html>
