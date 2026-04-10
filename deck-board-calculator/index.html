@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deck Board Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how many deck boards you need for any deck size. Get board count, waste factor, cost estimates, and a materials shopping list instantly.">
+<link rel="canonical" href="https://toolhut.dev/deck-board-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Deck Board Calculator",
+  "url": "https://toolhut.dev/deck-board-calculator/",
+  "description": "Calculate exactly how many deck boards you need for any deck size. Get board count, waste factor, cost estimates, and a materials shopping list.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-logo{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-logo span{color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem}
+input,select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit;background:#fff;color:#1a1a2e;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#2d6a4f;color:#fff;border:none;padding:13px 28px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background .2s}
+.btn:hover{background:#245c43}
+.btn-secondary{background:#e76f51;font-size:.85rem;padding:8px 16px;width:auto;border-radius:5px}
+.btn-secondary:hover{background:#d4603f}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.big-number{font-size:2.8rem;font-weight:700;color:#2d6a4f;line-height:1}
+.big-label{font-size:.9rem;color:#666;margin-top:.25rem}
+.key-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.metric-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.metric-val{font-size:1.6rem;font-weight:700;color:#2d6a4f}
+.metric-lbl{font-size:.78rem;color:#666;margin-top:.15rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444;border-bottom:2px solid #dee2e6}
+td{padding:9px 12px;border-bottom:1px solid #eee}
+tr:nth-child(even) td{background:#fafafa}
+td:last-child,th:last-child{text-align:right}
+.table-wrap{overflow-x:auto}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+.section-title::before{content:'';display:inline-block;width:4px;height:1.1em;background:#2d6a4f;border-radius:2px}
+.pro-tip{background:#fff8f0;border:1px solid #f0c070;border-left:4px solid #e76f51;border-radius:6px;padding:1rem 1.2rem;margin-top:1rem}
+.pro-tip strong{color:#e76f51}
+.time-estimate{display:flex;gap:1rem;margin-bottom:1rem}
+.time-box{flex:1;background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:.9rem;text-align:center}
+.time-box .t-label{font-size:.78rem;color:#666;margin-bottom:.2rem}
+.time-box .t-val{font-size:1rem;font-weight:700;color:#1a1a2e}
+.shopping-list li{padding:.4rem 0;border-bottom:1px solid #f0f0f0;font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
+.shopping-list{list-style:none}
+.shop-qty{font-weight:700;color:#2d6a4f}
+.copy-btn{display:inline-flex;align-items:center;gap:.35rem;background:#f0f0f0;border:1px solid #ddd;color:#444;padding:6px 12px;border-radius:5px;font-size:.8rem;cursor:pointer;transition:background .2s;min-height:36px}
+.copy-btn:hover{background:#e0e0e0}
+.copy-btn.copied{background:#e8f5e9;border-color:#c8e6c9;color:#2d6a4f}
+svg#deck-diagram{width:100%;border:1px solid #dee2e6;border-radius:8px;background:#f8f9fa;display:block}
+.diagram-wrap{margin-bottom:1rem}
+h2{font-size:1.15rem;font-weight:700;margin:1.5rem 0 .6rem;color:#1a1a2e}
+h2:first-of-type{margin-top:0}
+p{margin-bottom:.8rem;color:#333;font-size:.95rem}
+ul.content-list{padding-left:1.4rem;margin-bottom:.8rem}
+ul.content-list li{margin-bottom:.4rem;font-size:.95rem;color:#333}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem;overflow:hidden}
+summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:.9rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:44px}
+summary::after{content:'▼';font-size:.7rem;color:#888;transition:transform .2s}
+details[open] summary::after{transform:rotate(180deg)}
+details p{padding:.75rem 1rem 1rem;margin:0;font-size:.9rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.related-link{display:block;background:#fff;border:1px solid #dee2e6;border-radius:6px;padding:.7rem 1rem;font-size:.85rem;color:#2d6a4f;transition:background .2s}
+.related-link:hover{background:#f0f7f4;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.25rem 1.5rem;margin-top:2rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem;font-size:.82rem;color:#888}
+.footer-links{display:flex;gap:1rem}
+.footer-links a{color:#888}
+.footer-links a:hover{color:#2d6a4f}
+.slider-row{display:flex;align-items:center;gap:.75rem}
+.slider-row input[type=range]{flex:1;padding:0;border:none;box-shadow:none;background:transparent;accent-color:#2d6a4f;min-height:auto;height:20px}
+.slider-val{min-width:48px;text-align:right;font-weight:600;color:#2d6a4f}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .key-metrics{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.3rem}
+  .big-number{font-size:2.2rem}
+  .time-estimate{flex-direction:column;gap:.5rem}
+  .key-metrics .metric-box:last-child{grid-column:1/-1}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Deck Board Calculator</h1>
+  <p class="subtitle">Calculate boards, fasteners, cost, and get a full materials list for your deck project.</p>
+
+  <div class="card">
+    <div class="row-2">
+      <div class="form-group">
+        <label for="deckLength">Deck Length (ft)</label>
+        <input type="number" id="deckLength" placeholder="e.g. 16" min="1" max="500" step="0.5">
+        <div class="error-msg" id="err-length">Enter a valid length (1–500 ft)</div>
+      </div>
+      <div class="form-group">
+        <label for="deckWidth">Deck Width (ft)</label>
+        <input type="number" id="deckWidth" placeholder="e.g. 12" min="1" max="500" step="0.5">
+        <div class="error-msg" id="err-width">Enter a valid width (1–500 ft)</div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="boardWidth">Board Width (inches)</label>
+        <select id="boardWidth">
+          <option value="3.5">2×4 (3.5" actual)</option>
+          <option value="5.5" selected>2×6 (5.5" actual)</option>
+          <option value="7.25">2×8 (7.25" actual)</option>
+          <option value="3.25">5/4×4 (3.25" actual)</option>
+          <option value="5.25">5/4×6 (5.25" actual)</option>
+          <option value="custom">Custom width…</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="boardLength">Board Length (ft)</label>
+        <select id="boardLength">
+          <option value="8">8 ft</option>
+          <option value="10">10 ft</option>
+          <option value="12">12 ft</option>
+          <option value="16" selected>16 ft</option>
+          <option value="20">20 ft</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" id="customWidthGroup" style="display:none">
+      <label for="customWidth">Custom Board Width (inches)</label>
+      <input type="number" id="customWidth" placeholder="e.g. 4.75" min="1" max="24" step="0.125">
+      <div class="error-msg" id="err-custom">Enter a width between 1 and 24 inches</div>
+    </div>
+
+    <div class="form-group">
+      <label for="gapSize">Board Gap (inches) — <span id="gapLabel">0.25"</span></label>
+      <div class="slider-row">
+        <input type="range" id="gapSize" min="0" max="0.5" step="0.0625" value="0.25">
+        <span class="slider-val" id="gapDisplay">¼"</span>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="wastePct">Waste / Trim Factor (%)</label>
+        <div class="slider-row">
+          <input type="range" id="wastePct" min="5" max="20" step="1" value="10">
+          <span class="slider-val" id="wasteDisplay">10%</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="deckAngle">Board Angle</label>
+        <select id="deckAngle">
+          <option value="1">Straight (0°)</option>
+          <option value="1.15">Diagonal (45°) +15%</option>
+          <option value="1.42">Herringbone +42%</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="pricePerBoard">Price per Board ($)</label>
+        <input type="number" id="pricePerBoard" placeholder="e.g. 18.50" min="0" step="0.01" value="18.50">
+        <div class="error-msg" id="err-price">Enter a valid price</div>
+      </div>
+      <div class="form-group">
+        <label for="fastenType">Fastener Type</label>
+        <select id="fastenType">
+          <option value="screws">Deck Screws</option>
+          <option value="hidden">Hidden Clips</option>
+          <option value="nails">Ring Shank Nails</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate Deck Boards</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+
+    <div class="card">
+      <div class="section-title">Deck Layout Preview</div>
+      <div class="diagram-wrap">
+        <svg id="deck-diagram" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" aria-label="Deck board layout diagram"></svg>
+      </div>
+
+      <div class="key-metrics" id="keyMetrics"></div>
+
+      <div class="section-title" style="margin-bottom:.6rem">Breakdown</div>
+      <div class="table-wrap">
+        <table id="breakdownTable"></table>
+      </div>
+
+      <div style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+        <button class="copy-btn" id="copyBtn">📋 Copy Results</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Materials Shopping List</div>
+      <ul class="shopping-list" id="shoppingList"></ul>
+
+      <div class="pro-tip" id="proTip">
+        <strong>🔨 Pro Tip:</strong> <span id="proTipText"></span>
+      </div>
+
+      <div style="margin-top:1.25rem">
+        <div class="section-title">Project Time Estimate</div>
+        <div class="time-estimate">
+          <div class="time-box">
+            <div class="t-label">🟢 Experienced DIYer</div>
+            <div class="t-val" id="timeExp">—</div>
+          </div>
+          <div class="time-box">
+            <div class="t-label">🟡 First-Time Builder</div>
+            <div class="t-val" id="timeBeg">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END RESULTS -->
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT -->
+  <div class="card">
+    <h2>How to Use This Deck Board Calculator</h2>
+    <p>Enter your deck's length and width in feet, choose your board size and the spacing gap you want between boards, then set a waste percentage and click <strong>Calculate</strong>. The tool instantly shows how many boards to buy, total cost, fastener quantities, and a full materials shopping list — everything you need before heading to the lumber yard.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Buying too few boards means a frustrating mid-project trip back to the store — and risking a color or grain mismatch from a different production batch. Buying too many wastes money. A typical 16×12 ft deck (192 sq ft) using 2×6 boards needs around 44 boards at roughly $18.50 each — that's $814 in lumber alone. Getting it right on the first pass saves both money and weekend time.</p>
+    <p>Diagonal and herringbone patterns look stunning but require 15–42% more material because every board end needs to be cut at an angle, dramatically increasing off-cuts. Contractors routinely see homeowners underestimate this and run short on day two of a three-day project. This calculator accounts for board pattern, spacing gaps, and a waste factor so your estimate is realistic, not optimistic.</p>
+    <p>Hidden fastener clips cost more upfront (~$120–$180 per 100 sq ft) but eliminate visible screw heads and give your deck a clean, modern look. Traditional deck screws run about $30–$50 for the same area. This tool breaks down both scenarios so you can decide what fits your budget.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>Boards across width:</strong> <code>⌈ deck_width_inches ÷ (board_width + gap) ⌉</code></p>
+    <p><strong>Boards in length:</strong> <code>⌈ deck_length ÷ board_length ⌉</code> — then multiplied by the across-count to get total raw boards.</p>
+    <p><strong>With waste:</strong> <code>total_boards × (1 + waste_factor) × angle_multiplier</code></p>
+    <p>The gap is added to each board's actual width so spacing is consistent. The waste factor covers end cuts, splits, and defects. Diagonal patterns use a 1.15× multiplier; herringbone uses 1.42× because nearly every board gets cut twice.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul class="content-list">
+      <li><strong>Always buy at least 10% extra</strong> — even with a perfect plan, defects and splits happen. Most stores won't take back cut lumber.</li>
+      <li><strong>Check actual vs. nominal dimensions</strong> — a "2×6" board is actually 1.5"×5.5". This calculator uses actual dimensions automatically.</li>
+      <li><strong>Order all boards from the same batch</strong> — pressure-treated lumber color varies between production runs. Mixing batches shows after weathering.</li>
+      <li><strong>Account for your joist spacing when choosing screws</strong> — 16" joist spacing is standard; screws need to be at least 2.5" long for 5/4 decking, 3" for 2× decking.</li>
+      <li><strong>Let pressure-treated lumber dry before sealing</strong> — new PT wood is kiln-wet. Wait 3–6 months before applying stain or sealer or it won't penetrate.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What gap should I leave between deck boards?</summary>
+      <p>The standard recommendation is 1/4" (about the diameter of a 16d nail). This allows drainage and air circulation while preventing debris from falling through. In wet climates, some builders go up to 3/8" to improve drainage and reduce rot risk.</p>
+    </details>
+    <details>
+      <summary>Should I use 2×6 or 5/4×6 decking boards?</summary>
+      <p>5/4×6 (1"×5.5" actual) is the most popular choice — it's lighter, slightly cheaper, and has rounded "eased" edges that feel comfortable underfoot. 2×6 is heavier, stronger, and better for spans over 16". For most residential decks with 16" joist spacing, 5/4×6 is the go-to choice.</p>
+    </details>
+    <details>
+      <summary>How do I calculate boards for an L-shaped or irregular deck?</summary>
+      <p>Break the deck into rectangular sections, calculate each section separately, and add the totals together. Add your waste factor once at the end (not to each section), to avoid double-counting. This calculator works for each rectangle individually.</p>
+    </details>
+    <details>
+      <summary>Do I need to account for the perimeter "picture frame" border boards?</summary>
+      <p>Yes, if you're adding a picture frame border, calculate those boards separately — they run perpendicular to the field boards and need their own length calculations. A typical 16×12 ft deck perimeter is 56 linear feet, so you'd need 4–5 additional 16 ft boards for the frame.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Related Tools</div>
+    <div class="related-grid">
+      <a href="/marathon-finish-time-predictor/" class="related-link">🏃 Marathon Finish Time Predictor</a>
+      <a href="/sit-and-reach-flexibility-calculator/" class="related-link">🤸 Sit &amp; Reach Flexibility Score</a>
+      <a href="/grip-strength-percentile-calculator/" class="related-link">💪 Grip Strength Percentile</a>
+      <a href="/injury-recovery-return-to-sport-calculator/" class="related-link">🩺 Injury Recovery Timeline</a>
+      <a href="/pregnancy-calorie-needs-calculator/" class="related-link">🤰 Pregnancy Caloric Needs</a>
+      <a href="/periodization-training-block-planner/" class="related-link">📅 Training Block Planner</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© <span id="yr"></span> toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Slider live labels
+const gapSlider = document.getElementById('gapSize');
+const gapDisplay = document.getElementById('gapDisplay');
+const wasteSlider = document.getElementById('wastePct');
+const wasteDisplay = document.getElementById('wasteDisplay');
+
+const gapLabels = {'0':'0"','0.0625':'1/16"','0.125':'1/8"','0.1875':'3/16"','0.25':'1/4"','0.3125':'5/16"','0.375':'3/8"','0.4375':'7/16"','0.5':'1/2"'};
+gapSlider.addEventListener('input', () => {
+  const v = parseFloat(gapSlider.value).toFixed(4);
+  const key = parseFloat(gapSlider.value).toString();
+  gapDisplay.textContent = gapLabels[key] || parseFloat(gapSlider.value).toFixed(3)+'"';
+});
+wasteSlider.addEventListener('input', () => {
+  wasteDisplay.textContent = wasteSlider.value + '%';
+});
+
+// Custom width toggle
+document.getElementById('boardWidth').addEventListener('change', function(){
+  const grp = document.getElementById('customWidthGroup');
+  grp.style.display = this.value === 'custom' ? 'block' : 'none';
+});
+
+// Enter key
+document.querySelectorAll('input,select').forEach(el => {
+  el.addEventListener('keydown', e => { if(e.key === 'Enter') calculate(); });
+});
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => { calculate(); });
+});
+
+function fmt(n, dec=0) {
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+}
+function fmtMoney(n) {
+  return '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+  document.querySelectorAll('input').forEach(e => e.classList.remove('error'));
+}
+
+function showError(fieldId, msgId) {
+  document.getElementById(fieldId).classList.add('error');
+  document.getElementById(msgId).classList.add('show');
+}
+
+function calculate() {
+  clearErrors();
+  let valid = true;
+
+  const deckL = parseFloat(document.getElementById('deckLength').value);
+  const deckW = parseFloat(document.getElementById('deckWidth').value);
+  const boardLenFt = parseFloat(document.getElementById('boardLength').value);
+  const boardWidthSel = document.getElementById('boardWidth').value;
+  const gap = parseFloat(document.getElementById('gapSize').value);
+  const wastePct = parseInt(document.getElementById('wastePct').value) / 100;
+  const angleMultiplier = parseFloat(document.getElementById('deckAngle').value);
+  const fastenType = document.getElementById('fastenType').value;
+  const pricePerBoard = parseFloat(document.getElementById('pricePerBoard').value) || 18.50;
+
+  if (isNaN(deckL) || deckL < 1 || deckL > 500) { showError('deckLength','err-length'); valid=false; }
+  if (isNaN(deckW) || deckW < 1 || deckW > 500) { showError('deckWidth','err-width'); valid=false; }
+
+  let boardWidthIn;
+  if (boardWidthSel === 'custom') {
+    boardWidthIn = parseFloat(document.getElementById('customWidth').value);
+    if (isNaN(boardWidthIn) || boardWidthIn < 1 || boardWidthIn > 24) {
+      showError('customWidth','err-custom'); valid=false;
+    }
+  } else {
+    boardWidthIn = parseFloat(boardWidthSel);
+  }
+
+  if (!valid) return;
+
+  const deckAreaSqFt = deckL * deckW;
+  const deckWidthIn = deckW * 12;
+  const deckLengthIn = deckL * 12;
+  const boardLenIn = boardLenFt * 12;
+  const effectiveBoardWidth = boardWidthIn + gap; // board + gap
+
+  // Boards running across the width dimension
+  const boardsAcross = Math.ceil(deckWidthIn / effectiveBoardWidth);
+  // Boards needed per row (along length)
+  const boardsPerRow = Math.ceil(deckLengthIn / boardLenIn);
+  // Total raw boards
+  const rawBoards = boardsAcross * boardsPerRow;
+  // Apply angle multiplier and waste
+  const totalBoards = Math.ceil(rawBoards * angleMultiplier * (1 + wastePct));
+  const wasteBoards = totalBoards - Math.ceil(rawBoards * angleMultiplier);
+
+  // Coverage
+  const coveragePerBoard = (boardLenFt * boardWidthIn) / 144; // sq ft
+  const totalLinearFt = totalBoards * boardLenFt;
+
+  // Fasteners
+  let fastenersNeeded, fastenUnit, fastenCost, fastenPackSize;
+  const joistSpacing = 16; // standard 16" OC
+  const screwsPerBoard = Math.ceil((boardLenIn / joistSpacing) + 1) * 2;
+  if (fastenType === 'screws') {
+    fastenersNeeded = Math.ceil(totalBoards * screwsPerBoard);
+    fastenUnit = '3" deck screws';
+    fastenPackSize = 5; // lb box ~225 screws/lb
+    const lbsNeeded = Math.ceil(fastenersNeeded / (225 * fastenPackSize)) * fastenPackSize;
+    fastenCost = Math.ceil(lbsNeeded / 5) * 18;
+    fastenUnit = `${fmt(fastenersNeeded)} deck screws (~${Math.ceil(fastenersNeeded/225)} lb box)`;
+    fastenCost = Math.ceil(fastenersNeeded / 225) * 18;
+  } else if (fastenType === 'hidden') {
+    const clipsNeeded = Math.ceil(totalBoards * Math.ceil((boardLenIn / joistSpacing) + 1));
+    fastenersNeeded = clipsNeeded;
+    fastenUnit = `${fmt(clipsNeeded)} hidden clips`;
+    fastenCost = Math.ceil(clipsNeeded / 100) * 55;
+  } else {
+    const nailsNeeded = Math.ceil(totalBoards * screwsPerBoard);
+    fastenersNeeded = nailsNeeded;
+    fastenUnit = `${fmt(nailsNeeded)} ring shank nails (~${Math.ceil(nailsNeeded/250)} lb box)`;
+    fastenCost = Math.ceil(nailsNeeded / 250) * 22;
+  }
+
+  // Costs
+  const lumberCost = totalBoards * pricePerBoard;
+  // Sealer: ~$35/100 sq ft
+  const sealerGallons = Math.ceil(deckAreaSqFt / 100);
+  const sealerCost = sealerGallons * 35;
+  const totalCost = lumberCost + fastenCost + sealerCost;
+
+  // Time estimates (rough: 50 sq ft/hr experienced, 20 sq ft/hr beginner)
+  const hrExp = deckAreaSqFt / 55;
+  const hrBeg = deckAreaSqFt / 22;
+  function fmtHours(h) {
+    if (h < 1) return '<1 hr';
+    const days = Math.floor(h / 8);
+    const remaining = Math.round(h % 8);
+    if (days === 0) return Math.round(h) + ' hrs';
+    return days + 'd ' + (remaining > 0 ? remaining+'h' : '');
+  }
+
+  // Build results HTML
+  const keyMetricsHTML = `
+    <div class="metric-box"><div class="metric-val">${fmt(totalBoards)}</div><div class="metric-lbl">Boards to Buy</div></div>
+    <div class="metric-box"><div class="metric-val">${fmt(deckAreaSqFt)}</div><div class="metric-lbl">Sq Ft of Deck</div></div>
+    <div class="metric-box"><div class="metric-val">${fmtMoney(totalCost)}</div><div class="metric-lbl">Est. Total Cost</div></div>
+  `;
+
+  const breakdownRows = [
+    ['Deck Area', `${fmt(deckAreaSqFt)} sq ft`],
+    ['Board Size', `${boardWidthSel !== 'custom' ? document.getElementById('boardWidth').options[document.getElementById('boardWidth').selectedIndex].text : boardWidthIn+'" custom'}`],
+    ['Board Length', `${boardLenFt} ft`],
+    ['Gap Between Boards', `${gapLabels[parseFloat(gap).toString()] || gap+'"'}`],
+    ['Boards Across Width', fmt(boardsAcross)],
+    ['Boards per Row (length)', fmt(boardsPerRow)],
+    ['Raw Boards (no waste)', fmt(Math.ceil(rawBoards * angleMultiplier))],
+    ['Waste/Trim Factor', `${Math.round(wastePct*100)}% (+${fmt(wasteBoards)} boards)`],
+    ['Pattern Multiplier', document.getElementById('deckAngle').options[document.getElementById('deckAngle').selectedIndex].text],
+    ['<strong>Total Boards to Buy</strong>', `<strong>${fmt(totalBoards)}</strong>`],
+    ['Total Linear Feet', `${fmt(totalLinearFt)} ft`],
+    ['Lumber Cost', fmtMoney(lumberCost)],
+    ['Fastener Cost (est.)', fmtMoney(fastenCost)],
+    ['Sealer Cost (est.)', fmtMoney(sealerCost)],
+    ['<strong>Total Estimated Cost</strong>', `<strong>${fmtMoney(totalCost)}</strong>`],
+  ];
+
+  let tableHTML = '<thead><tr><th>Item</th><th>Value</th></tr></thead><tbody>';
+  breakdownRows.forEach(r => {
+    tableHTML += `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`;
+  });
+  tableHTML += '</tbody>';
+
+  // Shopping list
+  const boardDescSelect = document.getElementById('boardWidth').value;
+  const boardDesc = boardDescSelect !== 'custom'
+    ? document.getElementById('boardWidth').options[document.getElementById('boardWidth').selectedIndex].text.split(' (')[0]
+    : boardWidthIn+'" wide decking';
+  const shoppingItems = [
+    [boardDesc + ' × ' + boardLenFt + 'ft Deck Boards', `${fmt(totalBoards)} boards`, fmtMoney(lumberCost)],
+    [fastenType === 'screws' ? '3" Deck Screws (5 lb box)' : fastenType === 'hidden' ? 'Hidden Deck Fastener Clips (100-pk)' : 'Ring Shank Nails (5 lb box)', fastenUnit, fmtMoney(fastenCost)],
+    ['Deck Stain/Sealer (gal)', `${sealerGallons} gallon${sealerGallons>1?'s':''}`, fmtMoney(sealerCost)],
+    ['Sandpaper (80+120 grit)', '2 packs', '~$12'],
+    ['Chalk Line + Pencils', '1 set', '~$8'],
+  ];
+
+  let shopHTML = '';
+  shoppingItems.forEach(item => {
+    shopHTML += `<li><span>${item[0]}</span><span class="shop-qty">${item[1]} — ${item[2]}</span></li>`;
+  });
+
+  // Pro tip based on inputs
+  let proTipText = '';
+  if (parseFloat(document.getElementById('deckAngle').value) > 1) {
+    proTipText = 'Diagonal patterns are beautiful but unforgiving — snap chalk lines at 45° across the whole deck before cutting a single board. This saves enormous re-work later. Rent a 10" compound miter saw if you don\'t own one.';
+  } else if (fastenType === 'hidden') {
+    proTipText = 'Hidden fastener clips require a groove cut in your boards (or grooved decking). Make sure your boards are rated for the clip system you buy — not all clips fit all boards. Test-fit 3–4 boards before installing the whole deck to verify spacing.';
+  } else if (boardLenFt >= deckL) {
+    proTipText = `Your deck length (${deckL} ft) fits within a single board length (${boardLenFt} ft) — no butt joints needed! This is ideal. Make sure to run boards the full length for a cleaner look and to avoid mid-span joints over joists.`;
+  } else {
+    proTipText = `Stagger your butt joints by at least 2 joist spacings (32") so they don't line up row-to-row. This looks better and is structurally stronger. Mark joist locations with chalk before you start screwing.`;
+  }
+
+  // SVG diagram
+  drawDiagram(deckL, deckW, boardWidthIn, gap, boardLenFt, boardsAcross, boardsPerRow);
+
+  // Time
+  const timeExpText = fmtHours(hrExp) + ' (laying only)';
+  const timeBegText = fmtHours(hrBeg) + ' (laying only)';
+
+  // Copy text
+  const copyText = `Deck Board Calculator Results\n` +
+    `Deck: ${deckL} ft × ${deckW} ft = ${fmt(deckAreaSqFt)} sq ft\n` +
+    `Boards to Buy: ${fmt(totalBoards)}\n` +
+    `Total Linear Feet: ${fmt(totalLinearFt)} ft\n` +
+    `Lumber Cost: ${fmtMoney(lumberCost)}\n` +
+    `Fasteners: ${fastenUnit}\n` +
+    `Sealer: ${sealerGallons} gal — ${fmtMoney(sealerCost)}\n` +
+    `Total Estimated Cost: ${fmtMoney(totalCost)}`;
+
+  requestAnimationFrame(() => {
+    document.getElementById('keyMetrics').innerHTML = keyMetricsHTML;
+    document.getElementById('breakdownTable').innerHTML = tableHTML;
+    document.getElementById('shoppingList').innerHTML = shopHTML;
+    document.getElementById('proTipText').textContent = proTipText;
+    document.getElementById('timeExp').textContent = timeExpText;
+    document.getElementById('timeBeg').textContent = timeBegText;
+
+    const results = document.getElementById('results');
+    results.classList.add('visible');
+    results.scrollIntoView({behavior:'smooth', block:'start'});
+
+    // Copy button
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(copyText).then(() => {
+        copyBtn.textContent = '✅ Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.innerHTML = '📋 Copy Results'; copyBtn.classList.remove('copied'); }, 2000);
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = copyText;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.textContent = '✅ Copied!';
+        setTimeout(() => { copyBtn.innerHTML = '📋 Copy Results'; }, 2000);
+      });
+    };
+  });
+}
+
+function drawDiagram(deckL, deckW, boardWidthIn, gap, boardLenFt, boardsAcross, boardsPerRow) {
+  const svg = document.getElementById('deck-diagram');
+  const W = 400, H = 220;
+  const pad = 40;
+  const drawW = W - pad*2;
+  const drawH = H - pad*2;
+
+  // Scale to fit
+  const scaleX = drawW / deckL;
+  const scaleY = drawH / deckW;
+  const scale = Math.min(scaleX, scaleY, 12);
+  const rectW = deckL * scale;
+  const rectH = deckW * scale;
+  const ox = (W - rectW) / 2;
+  const oy = (H - rectH) / 2;
+
+  let boards = '';
+  const effectiveIn = boardWidthIn + gap;
+  const effectivePx = (effectiveIn / 12) * scale;
+  const boardPxW = (boardWidthIn / 12) * scale;
+  const boardLenPx = boardLenFt * scale;
+
+  const angleVal = parseFloat(document.getElementById('deckAngle').value);
+  const isDiag = angleVal > 1.1;
+
+  if (!isDiag) {
+    // Horizontal boards
+    let y = oy;
+    let count = 0;
+    while (y < oy + rectH && count < 80) {
+      const bh = Math.min(boardPxW, oy + rectH - y);
+      if (bh <= 0) break;
+      let x = ox;
+      // Stagger every other row
+      const staggerOffset = (Math.floor(count / 1) % boardsPerRow === 0 && boardLenPx < rectW) ? -(boardLenPx * 0.4) : 0;
+      let bx = ox + (count % 2 === 0 ? 0 : -(boardLenPx * 0.3));
+      let seg = 0;
+      while (bx < ox + rectW && seg < 20) {
+        const bw = Math.min(boardLenPx, ox + rectW - Math.max(bx, ox));
+        const bxClamped = Math.max(bx, ox);
+        const actualW = Math.min(boardLenPx - (bxClamped - bx), ox + rectW - bxClamped);
+        if (actualW > 0.5) {
+          const hue = 28 + (seg % 2) * 10;
+          boards += `<rect x="${bxClamped.toFixed(1)}" y="${y.toFixed(1)}" width="${actualW.toFixed(1)}" height="${bh.toFixed(1)}" fill="hsl(${hue},55%,${68 + (count%3)*4}%)" stroke="#a0784a" stroke-width="0.5"/>`;
+        }
+        bx += boardLenPx;
+        seg++;
+      }
+      y += effectivePx;
+      count++;
+    }
+  } else {
+    // Diagonal boards
+    const totalSpan = rectW + rectH;
+    const stepPx = effectivePx * 1.414;
+    let offset = -(rectH);
+    let count = 0;
+    while (offset < rectW + rectH && count < 80) {
+      const hue = 28 + (count % 2) * 10;
+      // Clipped to deck rectangle
+      const x1 = ox + offset, y1 = oy;
+      const x2 = ox, y2 = oy + offset;
+      const x3 = ox + offset + rectH, y3 = oy + rectH;
+      const x4 = ox + rectW, y4 = oy + (offset + rectH - rectW);
+      boards += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="hsl(${hue},55%,65%)" stroke-width="${Math.max(boardPxW*0.8,1).toFixed(1)}" stroke-linecap="butt"/>`;
+      offset += stepPx;
+      count++;
+    }
+  }
+
+  const labelDeckL = deckL >= 10 ? `${deckL}'` : `${deckL} ft`;
+  const labelDeckW = deckW >= 10 ? `${deckW}'` : `${deckW} ft`;
+
+  svg.innerHTML = `
+    <defs>
+      <clipPath id="deckClip">
+        <rect x="${ox}" y="${oy}" width="${rectW}" height="${rectH}"/>
+      </clipPath>
+    </defs>
+    <rect x="${ox}" y="${oy}" width="${rectW}" height="${rectH}" fill="#d4a96a" stroke="none"/>
+    <g clip-path="url(#deckClip)">${boards}</g>
+    <rect x="${ox}" y="${oy}" width="${rectW}" height="${rectH}" fill="none" stroke="#6b4c2a" stroke-width="2.5"/>
+    <!-- Dimension arrows -->
+    <line x1="${ox}" y1="${oy-10}" x2="${ox+rectW}" y2="${oy-10}" stroke="#555" stroke-width="1" marker-end="url(#arr)" marker-start="url(#arr)"/>
+    <text x="${ox+rectW/2}" y="${oy-15}" text-anchor="middle" font-size="11" fill="#333" font-family="sans-serif">${labelDeckL}</text>
+    <line x1="${ox+rectW+10}" y1="${oy}" x2="${ox+rectW+10}" y2="${oy+rectH}" stroke="#555" stroke-width="1"/>
+    <text x="${ox+rectW+22}" y="${oy+rectH/2}" text-anchor="middle" font-size="11" fill="#333" font-family="sans-serif" transform="rotate(90,${ox+rectW+22},${oy+rectH/2})">${labelDeckW}</text>
+    <text x="${ox+rectW/2}" y="${oy+rectH/2+4}" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.85)" font-weight="bold" font-family="sans-serif">${fmt(boardsAcross)} boards</text>
+  `;
+}
+</script>
+</body>
+</html>
