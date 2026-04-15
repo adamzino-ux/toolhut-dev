@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patio Paver Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how many pavers you need for your patio project. Get materials list, cost estimates, and time estimates instantly — free patio paver calculator.">
+<link rel="canonical" href="https://toolhut.dev/patio-paver-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Patio Paver Calculator",
+  "url": "https://toolhut.dev/patio-paver-calculator/",
+  "description": "Calculate exactly how many pavers, how much sand, and gravel you need for any patio project. Includes cost estimates and materials shopping list.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:1.5rem}
+.section-title{font-size:1rem;font-weight:700;color:#2d6a4f;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.04em}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:.35rem}
+.form-group.full{grid-column:1/-1}
+label{font-size:.85rem;font-weight:500;color:#444}
+input,select{width:100%;border:1px solid #dee2e6;border-radius:6px;padding:12px 16px;font-size:1rem;font-family:inherit;background:#fff;color:#1a1a2e;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.78rem;margin-top:.2rem;display:none}
+.error-msg.show{display:block}
+.hint{font-size:.75rem;color:#888;margin-top:.15rem}
+.btn{background:#2d6a4f;color:#fff;border:none;border-radius:6px;padding:13px 24px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;margin-top:1rem;min-height:48px;transition:background .2s}
+.btn:hover{background:#245c44}
+.btn-clear{background:#f8f9fa;color:#555;border:1px solid #dee2e6;margin-top:.5rem;font-weight:500}
+.btn-clear:hover{background:#e9ecef}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:all}
+.big-number{font-size:2.6rem;font-weight:800;color:#2d6a4f;line-height:1}
+.big-label{font-size:.85rem;color:#555;margin-top:.3rem}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-box{background:#f8f9fa;border-radius:8px;padding:1rem;text-align:center;border:1px solid #dee2e6}
+.stat-val{font-size:1.5rem;font-weight:700;color:#2d6a4f}
+.stat-sub{font-size:.75rem;color:#666;margin-top:.15rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;color:#444;font-size:.82rem;border-bottom:2px solid #dee2e6}
+th.num,td.num{text-align:right}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+.tbl-wrap{overflow-x:auto}
+.shopping-list{list-style:none}
+.shopping-list li{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0f0f0;font-size:.9rem}
+.shopping-list li:last-child{border-bottom:none}
+.item-name{font-weight:500}
+.item-qty{color:#2d6a4f;font-weight:700;font-size:.95rem}
+.pro-tip{background:#fff8f5;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1rem 0}
+.pro-tip-head{font-weight:700;color:#e76f51;font-size:.85rem;text-transform:uppercase;margin-bottom:.35rem}
+.pro-tip p{font-size:.9rem;color:#444}
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.time-box{background:#f8f9fa;border-radius:8px;padding:1rem;border:1px solid #dee2e6}
+.time-label{font-size:.75rem;font-weight:600;text-transform:uppercase;color:#888;margin-bottom:.3rem}
+.time-val{font-size:1.2rem;font-weight:700;color:#1a1a2e}
+.time-sub{font-size:.75rem;color:#888;margin-top:.15rem}
+.copy-btn{background:#f8f9fa;border:1px solid #dee2e6;border-radius:5px;padding:5px 12px;font-size:.78rem;cursor:pointer;color:#555;transition:all .2s;float:right;margin-top:-.2rem}
+.copy-btn:hover{background:#e9ecef}
+.svg-wrap{background:#f0f7f4;border-radius:8px;padding:1rem;border:1px solid #dee2e6;margin-bottom:1rem;overflow:hidden}
+.svg-wrap svg{display:block;margin:0 auto;max-width:100%}
+.pattern-tabs{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.ptab{padding:7px 14px;border-radius:6px;border:1px solid #dee2e6;background:#fff;font-size:.85rem;cursor:pointer;transition:all .2s;min-height:36px}
+.ptab.active{background:#2d6a4f;color:#fff;border-color:#2d6a4f}
+.cost-range{display:flex;align-items:center;gap:.5rem;font-size:.9rem}
+.cost-bar{flex:1;height:8px;background:#dee2e6;border-radius:4px;overflow:hidden}
+.cost-fill{height:100%;background:#2d6a4f;border-radius:4px;transition:width .4s ease}
+.section-gap{margin-top:2rem}
+h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:.6rem;margin-top:1.5rem}
+h2:first-child{margin-top:0}
+p{margin-bottom:.8rem;color:#333;font-size:.95rem}
+ul,ol{padding-left:1.4rem;margin-bottom:.8rem}
+li{color:#333;font-size:.95rem;margin-bottom:.3rem}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem}
+summary{padding:.75rem 1rem;font-weight:600;cursor:pointer;font-size:.95rem;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:'▸';color:#2d6a4f;font-size:.85rem;transition:transform .2s}
+details[open] summary::after{transform:rotate(90deg)}
+details[open] summary{border-bottom:1px solid #dee2e6}
+.faq-body{padding:.75rem 1rem;font-size:.92rem;color:#444}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.rel-link{display:block;background:#fff;border:1px solid #dee2e6;border-radius:6px;padding:.7rem 1rem;font-size:.87rem;font-weight:500;color:#2d6a4f;transition:all .2s}
+.rel-link:hover{background:#f0f7f4;border-color:#2d6a4f;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.2rem 1.5rem;text-align:center;font-size:.82rem;color:#666;margin-top:2rem}
+footer a{color:#2d6a4f;margin:0 .5rem}
+@media(max-width:640px){
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stats-grid .stat-box:last-child{grid-column:1/-1}
+  .time-grid{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .big-number{font-size:2rem}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+<main>
+  <h1>Patio Paver Calculator</h1>
+  <p class="subtitle">Calculate pavers, sand, gravel & cost for your patio — get a full shopping list in seconds.</p>
+
+  <div class="card">
+    <div class="section-title">Patio Dimensions</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="patioLen">Patio Length (ft)</label>
+        <input type="number" id="patioLen" placeholder="e.g. 12" min="1" max="500">
+        <div class="error-msg" id="err-patioLen">Enter a valid length (1–500 ft)</div>
+      </div>
+      <div class="form-group">
+        <label for="patioWid">Patio Width (ft)</label>
+        <input type="number" id="patioWid" placeholder="e.g. 10" min="1" max="500">
+        <div class="error-msg" id="err-patioWid">Enter a valid width (1–500 ft)</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:1.2rem">Paver Size</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="paverLen">Paver Length (in)</label>
+        <input type="number" id="paverLen" placeholder="e.g. 12" min="1" max="72" value="12">
+        <div class="error-msg" id="err-paverLen">Enter 1–72 inches</div>
+      </div>
+      <div class="form-group">
+        <label for="paverWid">Paver Width (in)</label>
+        <input type="number" id="paverWid" placeholder="e.g. 6" min="1" max="72" value="6">
+        <div class="error-msg" id="err-paverWid">Enter 1–72 inches</div>
+      </div>
+      <div class="form-group full">
+        <label for="jointSize">Joint Gap Size (in)</label>
+        <input type="number" id="jointSize" placeholder="e.g. 0.25" min="0" max="2" step="0.125" value="0.25">
+        <div class="hint">Typical joint: 0.25 in for concrete pavers, 0.5 in for natural stone</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:1.2rem">Pattern & Base</div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Laying Pattern</label>
+        <div class="pattern-tabs" id="patternTabs">
+          <button class="ptab active" data-pattern="running">Running Bond</button>
+          <button class="ptab" data-pattern="herringbone">Herringbone 45°</button>
+          <button class="ptab" data-pattern="basketweave">Basket Weave</button>
+          <button class="ptab" data-pattern="stack">Stack Bond</button>
+        </div>
+        <div class="hint" id="patternHint">+0% waste — efficient, most common. Cuts only at edges.</div>
+      </div>
+      <div class="form-group">
+        <label for="sandDepth">Bedding Sand Depth (in)</label>
+        <input type="number" id="sandDepth" placeholder="e.g. 1" min="0.5" max="4" step="0.5" value="1">
+        <div class="hint">Recommended: 1 inch</div>
+      </div>
+      <div class="form-group">
+        <label for="gravelDepth">Gravel Base Depth (in)</label>
+        <input type="number" id="gravelDepth" placeholder="e.g. 4" min="2" max="12" step="1" value="4">
+        <div class="hint">4 in residential, 6 in for vehicles</div>
+      </div>
+      <div class="form-group full">
+        <label for="pricePerPaver">Paver Cost ($ per unit, optional)</label>
+        <input type="number" id="pricePerPaver" placeholder="e.g. 1.50" min="0" max="100" step="0.01">
+        <div class="hint">Leave blank to use regional averages ($1.20–$3.00 each)</div>
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate My Patio</button>
+    <button class="btn btn-clear" id="clearBtn">Clear</button>
+  </div>
+
+  <!-- SVG Diagram -->
+  <div class="card results" id="results">
+    <div class="section-title">Project Overview
+      <button class="copy-btn" id="copyBtn">Copy Results</button>
+    </div>
+
+    <div class="svg-wrap" id="svgWrap">
+      <svg id="patioDiagram" width="480" height="200" viewBox="0 0 480 200" aria-label="Patio layout diagram"></svg>
+    </div>
+
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <div class="section-title" style="margin-top:1.2rem">Materials Breakdown</div>
+    <div class="tbl-wrap">
+      <table id="breakdownTable"></table>
+    </div>
+
+    <div class="pro-tip" id="proTip"></div>
+
+    <div class="section-title" style="margin-top:1.2rem">🛒 Shopping List
+      <button class="copy-btn" id="copyShoppingBtn">Copy List</button>
+    </div>
+    <ul class="shopping-list" id="shoppingList"></ul>
+
+    <div class="section-title" style="margin-top:1.2rem">⏱ Time Estimate</div>
+    <div class="time-grid" id="timeGrid"></div>
+
+    <div class="section-title" style="margin-top:1.2rem">💰 Cost Estimate</div>
+    <div id="costSection"></div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="section-gap card">
+    <h2>How to Use This Patio Paver Calculator</h2>
+    <p>Enter your patio's length and width in feet, then choose your paver dimensions in inches. Pick a laying pattern (this affects how much waste to expect), set your base depths, and hit <strong>Calculate My Patio</strong>. You'll instantly get the number of pavers needed, cubic yards of sand and gravel, a full shopping list with quantities, and a cost estimate.</p>
+    <p>All results include a recommended 10–15% overage buffer depending on your selected pattern — so you don't have to make a second trip to the store.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Buying too few pavers is the #1 DIY patio mistake. You'll end up with a half-finished job while waiting for a reorder — and if the batch has since changed, you may get a slightly different color that doesn't match. Buying too many isn't ideal either, but leftover pavers make great stepping stones or a future fire pit pad.</p>
+    <p>The base layers — compacted gravel and bedding sand — are just as important as the pavers themselves. Skimping on the gravel base is why patios sink and shift after just one winter. A proper 4-inch gravel base with 1 inch of bedding sand is the industry standard for foot-traffic patios. For driveways or areas with vehicle access, go 6 inches of gravel minimum.</p>
+    <p>Cost estimates vary widely by region, but nationally pavers range from $1.20 (basic concrete) to $8+ (premium natural stone). This tool uses a mid-range average so you can budget realistically before heading to a home improvement store.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The core calculation is simple: <strong>Patio Area ÷ Single Paver Area = Pavers Needed</strong>. The paver area accounts for the joint gap added to each side. Pattern waste is then added on top:</p>
+    <ul>
+      <li><strong>Running Bond / Stack Bond:</strong> +10% waste</li>
+      <li><strong>Basket Weave:</strong> +12% waste</li>
+      <li><strong>Herringbone 45°:</strong> +15% waste (diagonal cuts create more offcuts)</li>
+    </ul>
+    <p>Sand volume: <em>Patio Area (sq ft) × Sand Depth (ft) ÷ 27 = Cubic Yards</em></p>
+    <p>Gravel volume: <em>Patio Area (sq ft) × Gravel Depth (ft) ÷ 27 = Cubic Yards</em></p>
+    <p>Joint sand (polymeric): estimated at 50 lbs per 100 sq ft of patio area.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Always add overage:</strong> Our calculator includes it, but if you're ordering custom or natural stone, add an extra 5% on top just in case.</li>
+      <li><strong>Compact your base:</strong> Gravel must be compacted in 2-inch lifts with a plate compactor — don't just dump 4 inches and hope for the best.</li>
+      <li><strong>Slope for drainage:</strong> Pitch your patio 1/8 inch per foot away from your house. This calculator doesn't adjust for slope — add a few extra pavers if cutting for grade.</li>
+      <li><strong>Use polymeric sand for joints:</strong> Regular sand washes out. Polymeric sand hardens when wet and resists weeds and ants much better.</li>
+      <li><strong>Rent, don't buy, a plate compactor:</strong> You'll use it once. Most equipment rental shops charge $60–$90/day.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How many pavers do I need for a 12×12 patio?</summary>
+      <div class="faq-body">A 12×12 ft patio (144 sq ft) using standard 12×6 inch pavers with a 0.25-inch joint requires approximately 168 pavers including a 10% waste buffer. Use this calculator with your exact paver size to get a precise number. Always round up to the nearest full pallet.</div>
+    </details>
+    <details>
+      <summary>Should I use sand or concrete under pavers?</summary>
+      <div class="faq-body">Bedding sand is the standard for most residential patios — it allows for minor adjustment during installation and provides drainage. Concrete is sometimes used for mortar-set applications (like pool coping), but for standard ground-level patios, a compacted gravel base plus 1 inch of coarse bedding sand is the correct approach.</div>
+    </details>
+    <details>
+      <summary>What's the difference between running bond and herringbone patterns?</summary>
+      <div class="faq-body">Running bond is like typical brick wall laying — rows offset by half a paver. It's efficient (less waste) and straightforward to install. Herringbone is laid at 45-degree angles and creates a classic interlocking look — it's more stable under heavy traffic but requires more angled cuts, hence more waste (about 15%).</div>
+    </details>
+    <details>
+      <summary>How deep should the gravel base be?</summary>
+      <div class="faq-body">For foot-traffic patios, 4 inches of compacted crushed gravel is standard. If the patio will support vehicles, go 6 inches minimum. In areas with heavy freeze-thaw cycles, some contractors recommend going up to 8 inches to prevent frost heaving. Always compact in 2-inch lifts.</div>
+    </details>
+  </div>
+
+  <div class="card section-gap">
+    <div class="section-title">Related Tools</div>
+    <div class="related-grid">
+      <a href="/paint-coverage-calculator/" class="rel-link">🎨 Paint Coverage Calculator</a>
+      <a href="/deck-board-calculator/" class="rel-link">🪵 Deck Board Calculator</a>
+      <a href="/marathon-finish-time-predictor/" class="rel-link">🏃 Marathon Finish Time Predictor</a>
+      <a href="/sit-and-reach-flexibility-calculator/" class="rel-link">🧘 Sit & Reach Flexibility Score</a>
+      <a href="/grip-strength-percentile-calculator/" class="rel-link">💪 Grip Strength Percentile</a>
+      <a href="/injury-recovery-return-to-sport-calculator/" class="rel-link">🩹 Injury Recovery Timeline</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <a href="/about/">About</a>
+  <a href="/privacy/">Privacy</a>
+  <a href="/contact/">Contact</a>
+  <span style="display:block;margin-top:.4rem">© 2024 toolhut.dev</span>
+</footer>
+
+<script>
+(function(){
+  let selectedPattern = 'running';
+  let copyTextStore = '';
+  let copyShoppingStore = '';
+
+  const patternWaste = {running:0.10, herringbone:0.15, basketweave:0.12, stack:0.10};
+  const patternHints = {
+    running:'+10% waste — efficient, most common. Cuts only at edges.',
+    herringbone:'+15% waste — diagonal cuts create more offcuts. Very durable.',
+    basketweave:'+12% waste — pairs of pavers in alternating directions. Classic look.',
+    stack:'+10% waste — grid pattern, minimal cuts. Simple and clean.'
+  };
+
+  document.querySelectorAll('.ptab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedPattern = btn.dataset.pattern;
+      document.getElementById('patternHint').textContent = patternHints[selectedPattern];
+    });
+  });
+
+  function fmt(n,dec=0){return n.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});}
+  function fmtC(n){return '$'+fmt(n,2);}
+
+  function validate(id,min,max,allowZero){
+    const el=document.getElementById(id);
+    const errEl=document.getElementById('err-'+id);
+    const v=parseFloat(el.value);
+    if(isNaN(v)||(allowZero?v<0:v<=0)||v>max){
+      el.classList.add('error');
+      if(errEl) errEl.classList.add('show');
+      return null;
+    }
+    el.classList.remove('error');
+    if(errEl) errEl.classList.remove('show');
+    return v;
+  }
+
+  function calculate(){
+    const patioLen = validate('patioLen',1,500);
+    const patioWid = validate('patioWid',1,500);
+    const paverLen = validate('paverLen',1,72);
+    const paverWid = validate('paverWid',1,72);
+    const joint    = parseFloat(document.getElementById('jointSize').value)||0.25;
+    const sandD    = parseFloat(document.getElementById('sandDepth').value)||1;
+    const gravD    = parseFloat(document.getElementById('gravelDepth').value)||4;
+    const userPrice= parseFloat(document.getElementById('pricePerPaver').value)||null;
+
+    if(patioLen===null||patioWid===null||paverLen===null||paverWid===null) return;
+
+    const waste = patternWaste[selectedPattern];
+    const patioAreaSqFt = patioLen * patioWid;
+    const patioAreaSqIn = patioAreaSqFt * 144;
+
+    const effectivePaverLen = paverLen + joint;
+    const effectivePaverWid = paverWid + joint;
+    const paverAreaSqIn = effectivePaverLen * effectivePaverWid;
+    const paverAreaSqFt = paverAreaSqIn / 144;
+
+    const basePavers = Math.ceil(patioAreaSqIn / paverAreaSqIn);
+    const totalPavers = Math.ceil(basePavers * (1 + waste));
+
+    const sandCuFt = patioAreaSqFt * (sandD / 12);
+    const sandCuYd = sandCuFt / 27;
+    const sandBags60lb = Math.ceil(sandCuFt * 100 / 8); // ~1 cu ft per 8 lbs, 60lb bag
+
+    const gravCuFt = patioAreaSqFt * (gravD / 12);
+    const gravCuYd = gravCuFt / 27;
+
+    const jointSandLbs = Math.ceil(patioAreaSqFt * 0.5);
+    const jointSandBags = Math.ceil(jointSandLbs / 50);
+
+    const priceEach = userPrice !== null ? userPrice : 1.80;
+    const paverCost = totalPavers * priceEach;
+    const sandCost  = sandCuYd * 45;
+    const gravCost  = gravCuYd * 55;
+    const jointSandCost = jointSandBags * 22;
+    const totalCost = paverCost + sandCost + gravCost + jointSandCost;
+    const totalCostHigh = totalCost * 1.4;
+
+    const sqFtPer8hr = 60;
+    const beginnerDays = Math.ceil((patioAreaSqFt / sqFtPer8hr) * 1.8);
+    const experDays = Math.ceil(patioAreaSqFt / sqFtPer8hr);
+
+    const patternNames = {running:'Running Bond',herringbone:'Herringbone 45°',basketweave:'Basket Weave',stack:'Stack Bond'};
+
+    // Build SVG
+    const svgHtml = buildSVG(patioLen, patioWid, paverLen, paverWid, joint, selectedPattern, totalPavers);
+
+    // Stats
+    const statsHtml = `
+      <div class="stat-box"><div class="stat-val">${fmt(totalPavers)}</div><div class="stat-sub">Total Pavers<br>(incl. ${Math.round(waste*100)}% waste)</div></div>
+      <div class="stat-box"><div class="stat-val">${fmt(patioAreaSqFt)}</div><div class="stat-sub">Square Feet</div></div>
+      <div class="stat-box"><div class="stat-val">${fmt(sandCuYd,1)} yd³</div><div class="stat-sub">Bedding Sand</div></div>`;
+
+    // Breakdown table
+    const tableHtml = `<thead><tr>
+      <th>Item</th><th class="num">Quantity</th><th class="num">Unit</th><th class="num">Est. Cost</th>
+    </tr></thead><tbody>
+      <tr><td>Concrete Pavers (${paverLen}"×${paverWid}")</td><td class="num">${fmt(totalPavers)}</td><td class="num">pieces</td><td class="num">${fmtC(paverCost)}</td></tr>
+      <tr><td>Coarse Bedding Sand (${sandD}" deep)</td><td class="num">${fmt(sandCuYd,2)}</td><td class="num">cu yd</td><td class="num">${fmtC(sandCost)}</td></tr>
+      <tr><td>Crushed Gravel Base (${gravD}" deep)</td><td class="num">${fmt(gravCuYd,2)}</td><td class="num">cu yd</td><td class="num">${fmtC(gravCost)}</td></tr>
+      <tr><td>Polymeric Joint Sand</td><td class="num">${fmt(jointSandBags)}</td><td class="num">50-lb bags</td><td class="num">${fmtC(jointSandCost)}</td></tr>
+      <tr style="font-weight:700;background:#f0f7f4"><td>Total Estimated Cost</td><td class="num" colspan="2"></td><td class="num">${fmtC(totalCost)} – ${fmtC(totalCostHigh)}</td></tr>
+    </tbody>`;
+
+    // Shopping list
+    const palletsNeeded = Math.ceil(totalPavers / 480);
+    const shoppingHtml = `
+      <li><span class="item-name">📦 Pavers (${paverLen}"×${paverWid}")</span><span class="item-qty">${fmt(totalPavers)} pcs / ~${palletsNeeded} pallet${palletsNeeded>1?'s':''}</span></li>
+      <li><span class="item-name">🪨 Crushed Gravel/Stone Base</span><span class="item-qty">${fmt(gravCuYd,1)} cu yd (${fmt(gravCuYd*1.4,0)} tons)</span></li>
+      <li><span class="item-name">⬜ Coarse Bedding Sand</span><span class="item-qty">${fmt(sandCuYd,2)} cu yd</span></li>
+      <li><span class="item-name">🔵 Polymeric Joint Sand (50 lb bags)</span><span class="item-qty">${fmt(jointSandBags)} bag${jointSandBags>1?'s':''}</span></li>
+      <li><span class="item-name">🟧 Paver Edge Restraints</span><span class="item-qty">${fmt(Math.ceil((patioLen+patioWid)*2/8))} 8-ft sections</span></li>
+      <li><span class="item-name">🔩 10" Galvanized Spikes (for restraints)</span><span class="item-qty">${fmt(Math.ceil((patioLen+patioWid)*2/8)*4)} spikes</span></li>
+      <li><span class="item-name">🧱 Landscape Fabric (optional weed barrier)</span><span class="item-qty">${fmt(Math.ceil(patioAreaSqFt*1.1))} sq ft</span></li>`;
+
+    // Time estimate
+    const timeHtml = `
+      <div class="time-box">
+        <div class="time-label">👷 Beginner (1–2 people)</div>
+        <div class="time-val">${beginnerDays} day${beginnerDays>1?'s':''}</div>
+        <div class="time-sub">~${Math.round(beginnerDays*8)} hours total</div>
+      </div>
+      <div class="time-box">
+        <div class="time-label">🏆 Experienced (2 people)</div>
+        <div class="time-val">${experDays} day${experDays>1?'s':''}</div>
+        <div class="time-sub">~${Math.round(experDays*8)} hours total</div>
+      </div>`;
+
+    // Cost section
+    const maxCost = totalCostHigh;
+    const fillPct = Math.min(100, (totalCost/maxCost)*100);
+    const costHtml = `
+      <div style="margin-bottom:.8rem">
+        <div style="display:flex;justify-content:space-between;font-size:.85rem;color:#555;margin-bottom:.4rem">
+          <span>Materials Only</span><span><strong>${fmtC(totalCost)}</strong> – ${fmtC(totalCostHigh)}</span>
+        </div>
+        <div class="cost-bar"><div class="cost-fill" style="width:${fillPct}%"></div></div>
+      </div>
+      <div style="background:#f8f9fa;border-radius:8px;padding:.8rem 1rem;font-size:.85rem;color:#555;border:1px solid #dee2e6">
+        <strong>With professional labor:</strong> Add $8–$20 per sq ft for a contractor → <strong>${fmtC(totalCost + patioAreaSqFt*10)} – ${fmtC(totalCostHigh + patioAreaSqFt*20)}</strong> total installed
+      </div>`;
+
+    // Pro tip
+    const proTipHtml = `<div class="pro-tip-head">🔶 Pro Tip</div><p>Before you order anything, call 811 (the national "Call Before You Dig" number) to have underground utilities marked. It's free, it's required by law, and it could save your life. Also, always buy all your pavers from the same production batch — color and thickness can vary slightly between batches, and you'll notice it.</p>`;
+
+    // Copy text store
+    copyTextStore = `PATIO PAVER CALCULATOR RESULTS
+================================
+Patio Size: ${patioLen} × ${patioWid} ft (${fmt(patioAreaSqFt)} sq ft)
+Pattern: ${patternNames[selectedPattern]}
+Paver Size: ${paverLen}" × ${paverWid}"
+
+MATERIALS NEEDED:
+- Pavers: ${fmt(totalPavers)} pieces
+- Bedding Sand: ${fmt(sandCuYd,2)} cu yd
+- Gravel Base: ${fmt(gravCuYd,2)} cu yd
+- Polymeric Joint Sand: ${fmt(jointSandBags)} bags (50 lb)
+- Edge Restraints: ${fmt(Math.ceil((patioLen+patioWid)*2/8))} sections
+
+COST ESTIMATE: ${fmtC(totalCost)} – ${fmtC(totalCostHigh)} (materials only)
+TIME ESTIMATE: ${beginnerDays} day(s) (beginner) / ${experDays} day(s) (experienced)`;
+
+    copyShoppingStore = `PATIO SHOPPING LIST (${fmt(patioAreaSqFt)} sq ft patio)
+- Pavers (${paverLen}"×${paverWid}"): ${fmt(totalPavers)} pieces (~${palletsNeeded} pallet)
+- Crushed Gravel Base: ${fmt(gravCuYd,1)} cu yd (${fmt(gravCuYd*1.4,0)} tons)
+- Coarse Bedding Sand: ${fmt(sandCuYd,2)} cu yd
+- Polymeric Joint Sand: ${fmt(jointSandBags)} bags (50 lb)
+- Paver Edge Restraints: ${fmt(Math.ceil((patioLen+patioWid)*2/8))} sections (8 ft each)
+- Galvanized Spikes: ${fmt(Math.ceil((patioLen+patioWid)*2/8)*4)} spikes
+- Landscape Fabric: ${fmt(Math.ceil(patioAreaSqFt*1.1))} sq ft`;
+
+    requestAnimationFrame(()=>{
+      document.getElementById('patioDiagram').innerHTML = svgHtml;
+      document.getElementById('statsGrid').innerHTML = statsHtml;
+      document.getElementById('breakdownTable').innerHTML = tableHtml;
+      document.getElementById('shoppingList').innerHTML = shoppingHtml;
+      document.getElementById('timeGrid').innerHTML = timeHtml;
+      document.getElementById('costSection').innerHTML = costHtml;
+      document.getElementById('proTip').innerHTML = proTipHtml;
+      const r = document.getElementById('results');
+      r.classList.add('show');
+      r.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
+
+  function buildSVG(patioLen, patioWid, paverLen, paverWid, joint, pattern, totalPavers){
+    const W=480, H=200;
+    const padX=60, padY=30;
+    const drawW=W-padX*2, drawH=H-padY*2;
+    const ratio = patioLen/patioWid;
+    let rW, rH;
+    if(ratio>=1){rW=drawW;rH=Math.min(drawH,drawW/ratio);}
+    else{rH=drawH;rW=Math.min(drawW,drawH*ratio);}
+    const rx=padX+(drawW-rW)/2, ry=padY+(drawH-rH)/2;
+
+    // Grid lines inside patio representing pavers
+    const pxPerFt = rW/patioLen;
+    const paverWpx = (paverLen/12)*pxPerFt;
+    const paverHpx = (paverWid/12)*pxPerFt;
+    const jPx = (joint/12)*pxPerFt;
+
+    let gridLines='';
+    const maxLines=20;
+    // Vertical lines
+    let x=rx;let linesV=0;
+    while(x<rx+rW && linesV<maxLines){
+      gridLines+=`<line x1="${x.toFixed(1)}" y1="${ry}" x2="${x.toFixed(1)}" y2="${(ry+rH).toFixed(1)}" stroke="#b7d8cc" stroke-width="0.8"/>`;
+      x+=paverWpx+jPx; linesV++;
+    }
+    // Horizontal lines
+    let y=ry;let linesH=0;
+    while(y<ry+rH && linesH<maxLines){
+      gridLines+=`<line x1="${rx}" y1="${y.toFixed(1)}" x2="${(rx+rW).toFixed(1)}" y2="${y.toFixed(1)}" stroke="#b7d8cc" stroke-width="0.8"/>`;
+      y+=paverHpx+jPx; linesH++;
+    }
+
+    // Pattern-specific fill rects (just visual hint)
+    let patternDeco='';
+    if(pattern==='herringbone'){
+      patternDeco=`<text x="${(rx+rW/2).toFixed(1)}" y="${(ry+rH/2+5).toFixed(1)}" text-anchor="middle" font-size="11" fill="#2d6a4f" opacity="0.4" font-family="sans-serif">45°</text>`;
+    }
+
+    // Dimension arrows
+    const arrY = ry+rH+18;
+    const arrX = rx-18;
+    const dimLine=`
+      <line x1="${rx}" y1="${arrY}" x2="${(rx+rW).toFixed(1)}" y2="${arrY}" stroke="#1a1a2e" stroke-width="1.5" marker-end="url(#arrowR)" marker-start="url(#arrowL)"/>
+      <text x="${(rx+rW/2).toFixed(1)}" y="${(arrY+14).toFixed(1)}" text-anchor="middle" font-size="11" fill="#1a1a2e" font-family="sans-serif">${patioLen} ft</text>
+      <line x1="${arrX}" y1="${ry}" x2="${arrX}" y2="${(ry+rH).toFixed(1)}" stroke="#1a1a2e" stroke-width="1.5" marker-end="url(#arrowD)" marker-start="url(#arrowU)"/>
+      <text x="${(arrX-22).toFixed(1)}" y="${(ry+rH/2+4).toFixed(1)}" text-anchor="middle" font-size="11" fill="#1a1a2e" font-family="sans-serif" transform="rotate(-90,${(arrX-22).toFixed(1)},${(ry+rH/2+4).toFixed(1)})">${patioWid} ft</text>`;
+
+    const totalLabel=`<text x="${(rx+rW/2).toFixed(1)}" y="${(ry-8).toFixed(1)}" text-anchor="middle" font-size="10" fill="#555" font-family="sans-serif">${fmt(totalPavers)} pavers total</text>`;
+
+    return `<defs>
+      <marker id="arrowR" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1a1a2e"/></marker>
+      <marker id="arrowL" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto"><path d="M6,0 L0,3 L6,6 Z" fill="#1a1a2e"/></marker>
+      <marker id="arrowD" markerWidth="6" markerHeight="6" refX="3" refY="5" orient="auto"><path d="M0,0 L3,6 L6,0 Z" fill="#1a1a2e"/></marker>
+      <marker id="arrowU" markerWidth="6" markerHeight="6" refX="3" refY="1" orient="auto"><path d="M0,6 L3,0 L6,6 Z" fill="#1a1a2e"/></marker>
+    </defs>
+    <rect x="${rx}" y="${ry}" width="${rW.toFixed(1)}" height="${rH.toFixed(1)}" fill="#e8f5ee" stroke="#2d6a4f" stroke-width="2" rx="2"/>
+    ${gridLines}${patternDeco}
+    <rect x="${rx}" y="${ry}" width="${rW.toFixed(1)}" height="${rH.toFixed(1)}" fill="none" stroke="#2d6a4f" stroke-width="2" rx="2"/>
+    ${dimLine}${totalLabel}`;
+  }
+
+  function clearAll(){
+    ['patioLen','patioWid','paverLen','paverWid','jointSize','sandDepth','gravelDepth','pricePerPaver'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(id==='paverLen') el.value='12';
+      else if(id==='paverWid') el.value='6';
+      else if(id==='jointSize') el.value='0.25';
+      else if(id==='sandDepth') el.value='1';
+      else if(id==='gravelDepth') el.value='4';
+      else el.value='';
+      el.classList.remove('error');
+    });
+    document.querySelectorAll('.error-msg').forEach(e=>e.classList.remove('show'));
+    document.getElementById('results').classList.remove('show');
+  }
+
+  function copyText(text, btn){
+    navigator.clipboard.writeText(text).then(()=>{
+      const orig=btn.textContent; btn.textContent='Copied!'; btn.style.color='#2d6a4f';
+      setTimeout(()=>{btn.textContent=orig; btn.style.color='';},2000);
+    }).catch(()=>{
+      const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+      const orig=btn.textContent; btn.textContent='Copied!'; btn.style.color='#2d6a4f';
+      setTimeout(()=>{btn.textContent=orig; btn.style.color='';},2000);
+    });
+  }
+
+  document.getElementById('calcBtn').addEventListener('click',()=>{ requestAnimationFrame(calculate); });
+  document.getElementById('clearBtn').addEventListener('click',clearAll);
+  document.getElementById('copyBtn').addEventListener('click',function(){ copyText(copyTextStore,this); });
+  document.getElementById('copyShoppingBtn').addEventListener('click',function(){ copyText(copyShoppingStore,this); });
+
+  document.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter') requestAnimationFrame(calculate);});
+  });
+})();
+</script>
+</body>
+</html>
