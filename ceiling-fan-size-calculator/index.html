@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceiling Fan Size Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Find out what size ceiling fan you need for any room. Enter room dimensions and get the perfect fan blade span, CFM rating, and installation tips instantly.">
+<link rel="canonical" href="https://toolhut.dev/ceiling-fan-size-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ceiling Fan Size Calculator",
+  "url": "https://toolhut.dev/ceiling-fan-size-calculator/",
+  "description": "Calculate the ideal ceiling fan size for any room based on dimensions, ceiling height, and room type.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline;color:#1e4d38}
+nav{background:#fff;border-bottom:2px solid #2d6a4f;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#2d6a4f}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem}
+input[type="number"],select{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input[type="number"]:focus,select:focus{border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#2d6a4f;color:#fff;border:none;padding:13px 28px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:48px;transition:background .2s}
+.btn:hover{background:#1e4d38}
+.btn-secondary{background:#e76f51;font-size:.85rem;padding:8px 16px;width:auto;min-height:40px;border-radius:5px}
+.btn-secondary:hover{background:#c95f43}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:all}
+.result-hero{text-align:center;padding:1.5rem;background:#f0f7f4;border-radius:8px;margin-bottom:1.5rem;border:1px solid #c3e6d5}
+.result-size{font-size:3rem;font-weight:800;color:#2d6a4f;line-height:1}
+.result-label{font-size:.9rem;color:#555;margin-top:.4rem}
+.result-subtitle{font-size:1rem;color:#1a1a2e;margin-top:.5rem;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444}
+td{padding:9px 12px;border-bottom:1px solid #eee;color:#1a1a2e}
+tr:nth-child(even) td{background:#fafafa}
+td:last-child,th:last-child{text-align:right}
+.table-wrap{overflow-x:auto}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.78rem;font-weight:600;background:#e76f51;color:#fff}
+.badge.green{background:#2d6a4f}
+.badge.yellow{background:#e9c46a;color:#1a1a2e}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1.2rem 1.4rem;margin:1.5rem 0}
+.pro-tip strong{color:#e76f51;display:block;margin-bottom:.4rem;font-size:.9rem}
+.time-est{display:flex;gap:1rem;margin:1rem 0;flex-wrap:wrap}
+.time-card{flex:1;min-width:130px;background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.time-card .tc-label{font-size:.78rem;color:#666;margin-bottom:.3rem}
+.time-card .tc-val{font-size:1.1rem;font-weight:700;color:#2d6a4f}
+.shopping-list{margin-top:1rem}
+.shop-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #eee;font-size:.9rem}
+.shop-item:last-child{border-bottom:none}
+.shop-price{color:#2d6a4f;font-weight:600;white-space:nowrap;margin-left:1rem}
+h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:.8rem;margin-top:0}
+h3{font-size:1rem;font-weight:600;color:#2d6a4f;margin-bottom:.8rem}
+.section{margin-bottom:2rem}
+.content-section{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;margin-bottom:2rem}
+.content-section h2{margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:2px solid #f0f7f4}
+.content-section p{color:#333;margin-bottom:.9rem;line-height:1.7}
+.content-section ul{padding-left:1.4rem;color:#333;margin-bottom:.9rem}
+.content-section ul li{margin-bottom:.4rem;line-height:1.6}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem;overflow:hidden}
+summary{padding:.9rem 1rem;font-weight:600;cursor:pointer;background:#f8f9fa;font-size:.9rem;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:'▼';font-size:.7rem;color:#888;transition:transform .2s}
+details[open] summary::after{transform:rotate(180deg)}
+details[open] summary{background:#f0f7f4}
+.faq-body{padding:1rem;font-size:.9rem;color:#333;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:.8rem 1rem;font-size:.88rem;color:#2d6a4f;transition:background .2s;font-weight:500}
+.related-link:hover{background:#f0f7f4;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.5rem;text-align:center;font-size:.85rem;color:#666;margin-top:2rem}
+footer a{color:#2d6a4f;margin:0 .5rem}
+.svg-container{background:#f0f7f4;border:1px solid #c3e6d5;border-radius:8px;padding:1rem;margin-bottom:1.5rem;text-align:center}
+.svg-container svg{max-width:100%;height:auto}
+.copy-wrap{display:flex;align-items:center;gap:.8rem;margin-top:1rem;flex-wrap:wrap}
+.copy-btn{background:#e76f51;color:#fff;border:none;padding:8px 16px;border-radius:5px;font-size:.82rem;cursor:pointer;font-weight:600;transition:background .2s;min-height:36px}
+.copy-btn:hover{background:#c95f43}
+.copy-confirm{font-size:.8rem;color:#2d6a4f;display:none}
+.copy-confirm.show{display:inline}
+.fan-guide{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.8rem 0}
+.fan-size-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:.7rem;text-align:center;font-size:.82rem}
+.fan-size-card .fs-size{font-size:1.1rem;font-weight:700;color:#2d6a4f}
+.fan-size-card .fs-room{color:#555;font-size:.75rem;margin-top:.2rem}
+.highlight-row td{background:#f0f7f4 !important;font-weight:600;color:#2d6a4f}
+@media(max-width:640px){
+  .row{grid-template-columns:1fr}
+  .fan-guide{grid-template-columns:repeat(2,1fr)}
+  .related-grid{grid-template-columns:1fr}
+  .result-size{font-size:2.4rem}
+  h1{font-size:1.35rem}
+  .card{padding:1.4rem}
+  .content-section{padding:1.4rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🔧 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>Ceiling Fan Size Calculator</h1>
+<p class="subtitle">Enter your room dimensions to find out what size ceiling fan you need — with blade span, CFM, and shopping list.</p>
+
+<div class="card">
+  <div class="row">
+    <div class="form-group">
+      <label for="roomLength">Room Length (ft)</label>
+      <input type="number" id="roomLength" placeholder="e.g. 14" min="1" max="100" step="0.5">
+      <div class="error-msg" id="errLength">Please enter a valid room length (1–100 ft).</div>
+    </div>
+    <div class="form-group">
+      <label for="roomWidth">Room Width (ft)</label>
+      <input type="number" id="roomWidth" placeholder="e.g. 12" min="1" max="100" step="0.5">
+      <div class="error-msg" id="errWidth">Please enter a valid room width (1–100 ft).</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="ceilHeight">Ceiling Height (ft)</label>
+      <input type="number" id="ceilHeight" placeholder="e.g. 9" min="7" max="30" step="0.5" value="9">
+      <div class="error-msg" id="errHeight">Ceiling height should be 7–30 ft.</div>
+    </div>
+    <div class="form-group">
+      <label for="roomType">Room Type</label>
+      <select id="roomType">
+        <option value="bedroom">Bedroom</option>
+        <option value="living">Living Room</option>
+        <option value="kitchen">Kitchen / Dining</option>
+        <option value="office">Home Office</option>
+        <option value="outdoor">Covered Patio / Outdoor</option>
+        <option value="great">Great Room / Open Concept</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="numFans">Number of Fans (for large rooms)</label>
+    <select id="numFans">
+      <option value="1">1 Fan</option>
+      <option value="2">2 Fans</option>
+      <option value="3">3 Fans</option>
+    </select>
+  </div>
+  <button class="btn" id="calcBtn">Calculate Fan Size</button>
+</div>
+
+<!-- Results -->
+<div class="results card" id="results">
+
+  <div class="svg-container">
+    <svg id="fanDiagram" viewBox="0 0 320 200" width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Room outline -->
+      <rect id="svgRoom" x="30" y="20" width="260" height="140" rx="4" fill="#f0f7f4" stroke="#2d6a4f" stroke-width="2"/>
+      <!-- Fan circle -->
+      <circle id="svgFanCircle" cx="160" cy="90" r="55" fill="none" stroke="#e76f51" stroke-width="2" stroke-dasharray="6,4"/>
+      <!-- Fan blades -->
+      <g id="svgBlades" transform="translate(160,90)">
+        <rect x="-5" y="-55" width="10" height="40" rx="3" fill="#e76f51" opacity="0.7"/>
+        <rect x="-5" y="15" width="10" height="40" rx="3" fill="#e76f51" opacity="0.7"/>
+        <rect x="-55" y="-5" width="40" height="10" rx="3" fill="#e76f51" opacity="0.7"/>
+        <rect x="15" y="-5" width="40" height="10" rx="3" fill="#e76f51" opacity="0.7"/>
+        <circle cx="0" cy="0" r="7" fill="#2d6a4f"/>
+      </g>
+      <!-- Labels -->
+      <text id="svgWidth" x="160" y="178" text-anchor="middle" font-size="11" fill="#2d6a4f" font-family="sans-serif"></text>
+      <text id="svgHeight" x="14" y="95" text-anchor="middle" font-size="11" fill="#2d6a4f" font-family="sans-serif" transform="rotate(-90,14,95)"></text>
+      <text id="svgFanLabel" x="160" y="94" text-anchor="middle" font-size="12" fill="#1a1a2e" font-family="sans-serif" font-weight="bold"></text>
+      <text id="svgFanLabel2" x="160" y="108" text-anchor="middle" font-size="10" fill="#555" font-family="sans-serif"></text>
+      <!-- Dimension lines -->
+      <line x1="30" y1="168" x2="290" y2="168" stroke="#2d6a4f" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="14" y1="20" x2="14" y2="160" stroke="#2d6a4f" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+  </div>
+
+  <div class="result-hero">
+    <div class="result-size" id="resFanSize">—</div>
+    <div class="result-label">Recommended Blade Span</div>
+    <div class="result-subtitle" id="resRoomSize">—</div>
+    <div style="margin-top:.6rem" id="resBadge"></div>
+  </div>
+
+  <div class="table-wrap">
+    <table id="resultsTable">
+      <thead>
+        <tr><th>Specification</th><th>Value</th></tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
+
+  <div class="pro-tip" id="proTip">
+    <strong>🔨 Pro Tip</strong>
+    <span id="proTipText"></span>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <h3>Fan Size Quick Reference</h3>
+    <div class="fan-guide" id="fanGuide"></div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <h3>⏱ Installation Time Estimate</h3>
+    <div class="time-est">
+      <div class="time-card">
+        <div class="tc-label">Beginner (first install)</div>
+        <div class="tc-val">2–3 hours</div>
+      </div>
+      <div class="time-card">
+        <div class="tc-label">Experienced DIYer</div>
+        <div class="tc-val">45–90 min</div>
+      </div>
+      <div class="time-card">
+        <div class="tc-label">Replacing existing fan</div>
+        <div class="tc-val">30–60 min</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <h3>🛒 Materials Shopping List</h3>
+    <div class="shopping-list" id="shoppingList"></div>
+    <div class="copy-wrap">
+      <button class="copy-btn" id="copyBtn" onclick="copyList()">📋 Copy Shopping List</button>
+      <span class="copy-confirm" id="copyConfirm">✓ Copied to clipboard!</span>
+    </div>
+  </div>
+
+</div>
+<!-- end results -->
+
+<div class="ad-slot" id="ad-mid"></div>
+
+<!-- Content Section -->
+<div class="content-section section">
+  <h2>How to Use This Ceiling Fan Size Calculator</h2>
+  <p>Enter your room's length and width in feet, along with the ceiling height and room type. Hit "Calculate Fan Size" and you'll instantly see the recommended blade span, required CFM airflow rating, ideal mounting style, and a complete shopping list. If you have a large open-concept space, select 2 or 3 fans to see how to distribute coverage evenly.</p>
+
+  <h2>Why This Matters</h2>
+  <p>Installing the wrong size ceiling fan is one of the most common DIY mistakes homeowners make. A 42-inch fan in a 200-square-foot living room will barely move the air, leaving the room stuffy even on full speed. Meanwhile, cramming a 60-inch fan into a 10×10 bedroom makes the blades feel uncomfortably close and creates uneven airflow that actually reduces comfort.</p>
+  <p>The right fan size can reduce your air conditioning costs by 4–8% during summer and help distribute heat in winter, saving $30–$80 per year per room. In a three-bedroom home with ceiling fans in every room, that's real money over time. Beyond energy savings, a properly sized fan keeps the room comfortable at a lower thermostat setting — every degree you raise the AC saves about 3% on cooling bills.</p>
+  <p>For rooms over 400 sq ft — like great rooms, combined kitchen/dining areas, or open loft spaces — a single large fan often isn't enough. Two 52-inch fans placed at thirds of the room length distribute airflow far more effectively than one 72-inch behemoth.</p>
+
+  <h2>How It's Calculated</h2>
+  <p>The blade span recommendation is based on the <strong>Energy Star and AMCA (Air Movement and Control Association) guidelines</strong>:</p>
+  <ul>
+    <li><strong>Up to 75 sq ft:</strong> 29–36 inch fan</li>
+    <li><strong>76–144 sq ft:</strong> 36–42 inch fan</li>
+    <li><strong>145–225 sq ft:</strong> 44–50 inch fan</li>
+    <li><strong>226–400 sq ft:</strong> 50–54 inch fan</li>
+    <li><strong>Over 400 sq ft:</strong> 54–72 inch fan, or multiple fans</li>
+  </ul>
+  <p><strong>CFM (Cubic Feet per Minute)</strong> is calculated as: <em>Room Volume × Air Changes per Hour ÷ 60</em>. Bedrooms typically need 4–6 air changes/hour; living areas need 6–8. The <strong>CFM efficiency rating</strong> (CFM per watt) should be at least 75 for Energy Star certification.</p>
+  <p>For ceiling height, if your ceiling is above 9 feet, a downrod is needed to bring the fan to the optimal 8–9 feet above the floor. Downrod length = ceiling height − 8.5 − 0.25 (motor housing depth).</p>
+
+  <h2>Tips & Common Mistakes</h2>
+  <ul>
+    <li><strong>Don't go by room "feel" alone.</strong> Always measure your actual square footage — most people underestimate room size by 20–30%.</li>
+    <li><strong>Check the ceiling box first.</strong> Standard ceiling boxes aren't rated for fans. You need a fan-rated junction box (UL listed for ceiling fans) before installing. This is the #1 cause of fan wobble and falling fans.</li>
+    <li><strong>Blade clearance matters.</strong> Blades need at least 18 inches of clearance from walls on all sides, and 7 feet minimum from floor to blade.</li>
+    <li><strong>Outdoor fans are different.</strong> Covered patios need a "damp rated" fan; exposed outdoor areas need a "wet rated" fan. Regular indoor fans will rust and fail outdoors.</li>
+    <li><strong>Bigger isn't always better for CFM.</strong> A high-quality 52-inch fan with good blade pitch (12–15 degrees) moves more air than a cheap 60-inch fan with flat blades.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <details>
+    <summary>What size ceiling fan do I need for a 12×12 bedroom?</summary>
+    <div class="faq-body">A 12×12 bedroom is 144 square feet, putting it right at the upper edge of the 36–42 inch range. A 42-inch fan is the sweet spot — it provides adequate airflow without dominating the room. If ceilings are 9 ft or higher, consider a 44-inch for a bit more coverage.</div>
+  </details>
+  <details>
+    <summary>How do I know if I need a downrod?</summary>
+    <div class="faq-body">If your ceiling is higher than 9 feet, you need a downrod to bring the fan blades to the ideal 8–9 feet above the floor. Subtract 8.5 from your ceiling height to get the downrod length needed (e.g., 10 ft ceiling = 1.5-inch downrod minimum). Vaulted ceilings need an angled mounting kit as well.</div>
+  </details>
+  <details>
+    <summary>Can one ceiling fan cool an open-concept living/kitchen area?</summary>
+    <div class="faq-body">It depends on the square footage. Open-concept spaces over 400 sq ft usually benefit from two fans placed 1/3 and 2/3 of the room length apart. A single large fan (60–72 inch) may work for 400–600 sq ft, but airflow will be uneven near walls. Two well-placed 52-inch fans give better overall coverage.</div>
+  </details>
+  <details>
+    <summary>Should ceiling fans run clockwise or counterclockwise?</summary>
+    <div class="faq-body">In summer, run fans counterclockwise (when viewed from below) — this creates a wind-chill effect that makes you feel cooler. In winter, switch to clockwise at low speed to push warm air trapped at the ceiling down along the walls without creating a draft. Most fans have a direction switch on the motor housing.</div>
+  </details>
+</div>
+
+<div class="content-section section">
+  <h2>Related Tools</h2>
+  <div class="related-grid">
+    <a href="/raised-garden-bed-soil-calculator/" class="related-link">🌱 Raised Garden Bed Soil Calculator</a>
+    <a href="/drywall-sheet-calculator/" class="related-link">🧱 Drywall Sheet Calculator</a>
+    <a href="/patio-paver-calculator/" class="related-link">🪨 Patio Paver Calculator</a>
+    <a href="/paint-coverage-calculator/" class="related-link">🎨 Paint Coverage Calculator</a>
+    <a href="/deck-board-calculator/" class="related-link">🪵 Deck Board Calculator</a>
+    <a href="/marathon-finish-time-predictor/" class="related-link">🏃 Marathon Finish Time Predictor</a>
+  </div>
+</div>
+
+<div class="ad-slot" id="ad-bottom"></div>
+
+<footer>
+  <div>© 2025 toolhut.dev &nbsp;|&nbsp;
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</footer>
+
+</div><!-- end container -->
+
+<script>
+(function(){
+  var copyText = '';
+
+  function fmt(n){return n.toLocaleString('en-US',{maximumFractionDigits:0});}
+  function fmtD(n,d){return n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});}
+
+  function validate(){
+    var ok=true;
+    var l=parseFloat(document.getElementById('roomLength').value);
+    var w=parseFloat(document.getElementById('roomWidth').value);
+    var h=parseFloat(document.getElementById('ceilHeight').value);
+    document.getElementById('errLength').classList.remove('show');
+    document.getElementById('errWidth').classList.remove('show');
+    document.getElementById('errHeight').classList.remove('show');
+    document.getElementById('roomLength').classList.remove('error');
+    document.getElementById('roomWidth').classList.remove('error');
+    document.getElementById('ceilHeight').classList.remove('error');
+    if(isNaN(l)||l<1||l>100){document.getElementById('errLength').classList.add('show');document.getElementById('roomLength').classList.add('error');ok=false;}
+    if(isNaN(w)||w<1||w>100){document.getElementById('errWidth').classList.add('show');document.getElementById('roomWidth').classList.add('error');ok=false;}
+    if(isNaN(h)||h<7||h>30){document.getElementById('errHeight').classList.add('show');document.getElementById('ceilHeight').classList.add('error');ok=false;}
+    return ok;
+  }
+
+  function getFanSpan(sqft,numFans){
+    var effSqft=sqft/numFans;
+    if(effSqft<=75)return{span:36,label:"36\"",min:29,max:36};
+    if(effSqft<=144)return{span:42,label:"42\"",min:36,max:44};
+    if(effSqft<=225)return{span:48,label:"48\"",min:44,max:50};
+    if(effSqft<=350)return{span:52,label:"52\"",min:50,max:54};
+    if(effSqft<=500)return{span:60,label:"60\"",min:54,max:62};
+    return{span:72,label:"72\"",min:62,max:72};
+  }
+
+  function getAch(roomType){
+    if(roomType==='bedroom')return 5;
+    if(roomType==='office')return 5;
+    if(roomType==='kitchen')return 8;
+    if(roomType==='outdoor')return 10;
+    if(roomType==='great')return 7;
+    return 6;
+  }
+
+  function getMountType(height){
+    if(height<=8)return'Flush Mount (hugger)';
+    if(height<=9)return'Standard Mount (close-to-ceiling)';
+    if(height<=11)return'Downrod Mount';
+    return'Extension Downrod / Sloped Mount';
+  }
+
+  function getDownrod(height){
+    if(height<=9)return'None needed (use standard bracket)';
+    var dr=Math.ceil((height-8.5-0.25)*12)/12;
+    return fmtD(dr,1)+' ft downrod ('+(Math.round(dr*12))+' inches)';
+  }
+
+  function getMotorClass(roomType){
+    if(roomType==='outdoor')return'Wet-rated (outdoor)';
+    return'Standard (indoor)';
+  }
+
+  function getProTip(sqft,roomType,ceilH,numFans){
+    if(roomType==='outdoor')return'For covered patios, choose a "damp-rated" fan minimum. If any rain can reach the fan, you need a "wet-rated" model. Stainless steel hardware prevents rust — check the blade material too, not just the motor housing.';
+    if(ceilH>10)return'With ceilings above 10 ft, the downrod is critical. Too short and the fan is stuck in dead air near the ceiling; too long and it wobbles. Mount so blades land at 8–9 ft above the floor. For vaulted ceilings, buy an angled mounting ball kit.';
+    if(sqft>400&&numFans<2)return'This room is large enough that two fans will outperform one big fan. Place them at 1/3 and 2/3 of the room length for even air coverage. Two 52-inch fans typically cost less than one 72-inch fan and move air more efficiently.';
+    if(roomType==='bedroom')return'In bedrooms, look for a fan with a remote or app control so you can adjust speed without getting out of bed. A sleep timer function is a bonus. For couples who disagree on temperature, aim for 52 CFM/sq ft in a bedroom — it\'s enough to feel without being a wind tunnel.';
+    return'Always install a fan-rated ceiling box (not a standard light fixture box). They cost $8–$15 and are the difference between a fan that wobbles and one that lasts 20 years. Check the box is UL listed for ceiling fans before you hang anything.';
+  }
+
+  function calculate(){
+    if(!validate())return;
+    var l=parseFloat(document.getElementById('roomLength').value);
+    var w=parseFloat(document.getElementById('roomWidth').value);
+    var h=parseFloat(document.getElementById('ceilHeight').value);
+    var rt=document.getElementById('roomType').value;
+    var nf=parseInt(document.getElementById('numFans').value);
+
+    var sqft=l*w;
+    var vol=sqft*h;
+    var ach=getAch(rt);
+    var cfm=Math.round(vol*ach/60);
+    var cfmPerFan=Math.round(cfm/nf);
+    var fan=getFanSpan(sqft,nf);
+    var effArea=Math.round(sqft/nf);
+    var wattEst=Math.round(cfmPerFan/75);
+    var mountType=getMountType(h);
+    var downrod=getDownrod(h);
+    var motorClass=getMotorClass(rt);
+    var bladeClearing=Math.round((fan.span/2)*0.5);
+
+    // Cost estimates
+    var fanCostMin,fanCostMax;
+    if(fan.span<=36){fanCostMin=60;fanCostMax=150;}
+    else if(fan.span<=44){fanCostMin=80;fanCostMax=200;}
+    else if(fan.span<=52){fanCostMin=100;fanCostMax=280;}
+    else if(fan.span<=60){fanCostMin=150;fanCostMax=400;}
+    else{fanCostMin=200;fanCostMax=600;}
+    if(rt==='outdoor'){fanCostMin=Math.round(fanCostMin*1.4);fanCostMax=Math.round(fanCostMax*1.4);}
+
+    var fanTotalMin=fanCostMin*nf;
+    var fanTotalMax=fanCostMax*nf;
+
+    // Shopping list
+    var shopItems=[];
+    shopItems.push({qty:nf,item:fan.label+' ceiling fan ('+(rt==='outdoor'?'wet/damp-rated':'indoor')+')',price:'$'+fanCostMin+'–$'+fanCostMax+' ea'});
+    if(h>9){
+      var drLen=Math.ceil((h-8.5-0.25)*12);
+      shopItems.push({qty:nf,item:drLen+'-inch downrod (must match fan brand)',price:'$12–$35 ea'});
+    }
+    shopItems.push({qty:nf,item:'Fan-rated ceiling junction box (UL listed)',price:'$8–$15 ea'});
+    if(rt==='bedroom'||rt==='living'){shopItems.push({qty:1,item:'Ceiling fan remote control kit (if fan lacks one)',price:'$20–$45'});}
+    shopItems.push({qty:1,item:'Wire nuts assortment (red, yellow, orange)',price:'$4–$8'});
+    shopItems.push({qty:1,item:'Electrical tape',price:'$2–$4'});
+    shopItems.push({qty:1,item:'Non-contact voltage tester',price:'$12–$25'});
+    shopItems.push({qty:1,item:'Ladder (6–8 ft step ladder)',price:'$60–$120 (if not owned)'});
+
+    // Build copy text
+    copyText='Ceiling Fan Shopping List\n';
+    copyText+='Room: '+l+'×'+w+' ft ('+fmt(sqft)+' sq ft)\n';
+    copyText+='Recommended: '+fan.label+' blade span\n\n';
+    shopItems.forEach(function(s){copyText+='• '+s.qty+'× '+s.item+' — '+s.price+'\n';});
+    copyText+='\nTotal fan cost estimate: $'+fanTotalMin+'–$'+fanTotalMax;
+
+    requestAnimationFrame(function(){
+      // Update hero
+      document.getElementById('resFanSize').textContent=fan.label+' Fan';
+      document.getElementById('resRoomSize').textContent=fmt(sqft)+' sq ft room · '+nf+' fan'+(nf>1?'s':'');
+      var badgeHtml='';
+      if(rt==='outdoor')badgeHtml='<span class="badge">Wet/Damp Rated</span>';
+      else if(sqft>400)badgeHtml='<span class="badge yellow">Large Room</span>';
+      else badgeHtml='<span class="badge green">Good Fit</span>';
+      document.getElementById('resBadge').innerHTML=badgeHtml;
+
+      // Table
+      var rows=[
+        ['Room Area',fmt(sqft)+' sq ft'],
+        ['Recommended Blade Span',fan.label+' (range: '+fan.min+'"–'+fan.max+'")'],
+        ['Number of Fans',nf],
+        ['Coverage per Fan',fmt(effArea)+' sq ft'],
+        ['Required CFM (total)',fmt(cfm)+' CFM'],
+        ['CFM per Fan',fmt(cfmPerFan)+' CFM'],
+        ['Est. Fan Wattage','~'+fmt(wattEst)+' watts (at min. 75 CFM/W)'],
+        ['Ceiling Height',fmtD(h,1)+' ft'],
+        ['Mounting Type',mountType],
+        ['Downrod Needed',downrod],
+        ['Fan Motor Rating',motorClass],
+        ['Min. Wall Clearance','18 inches from blades'],
+        ['Min. Floor Clearance','7 ft from blade to floor'],
+        ['Est. Fan Cost','$'+fanCostMin+'–$'+fanCostMax+' per fan'],
+        ['Total Estimated Cost','$'+fanTotalMin+'–$'+fanTotalMax]
+      ];
+      var tbody='';
+      rows.forEach(function(r,i){
+        var cls=(i===1)?'highlight-row':'';
+        tbody+='<tr class="'+cls+'"><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';
+      });
+      document.getElementById('resultsBody').innerHTML=tbody;
+
+      // Pro tip
+      document.getElementById('proTipText').textContent=getProTip(sqft,rt,h,nf);
+
+      // Fan guide
+      var sizes=[
+        {size:'29–36"',room:'Up to 75 sq ft'},
+        {size:'36–42"',room:'76–144 sq ft'},
+        {size:'44–50"',room:'145–225 sq ft'},
+        {size:'50–54"',room:'226–350 sq ft'},
+        {size:'54–62"',room:'350–500 sq ft'},
+        {size:'62–72"',room:'500+ sq ft'}
+      ];
+      var guideHtml='';
+      sizes.forEach(function(s){
+        var isActive=false;
+        var sp=fan.span;
+        var sz=s.size;
+        var parts=sz.replace(/"/g,'').split('–').map(Number);
+        if(sp>=parts[0]&&sp<=parts[1])isActive=true;
+        guideHtml+='<div class="fan-size-card'+(isActive?' highlight-row':'')+'"><div class="fs-size">'+s.size+'</div><div class="fs-room">'+s.room+'</div></div>';
+      });
+      document.getElementById('fanGuide').innerHTML=guideHtml;
+
+      // Shopping list
+      var shHtml='';
+      shopItems.forEach(function(s){
+        shHtml+='<div class="shop-item"><span>'+s.qty+'× '+s.item+'</span><span class="shop-price">'+s.price+'</span></div>';
+      });
+      shHtml+='<div class="shop-item" style="font-weight:700;border-top:2px solid #dee2e6;margin-top:.3rem;padding-top:.7rem"><span>Total Fan Cost Estimate</span><span class="shop-price">$'+fanTotalMin+'–$'+fanTotalMax+'</span></div>';
+      document.getElementById('shoppingList').innerHTML=shHtml;
+
+      // Update SVG
+      updateSVG(l,w,fan.span,nf);
+
+      // Show results
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
+
+  function updateSVG(l,w,span,nf){
+    var maxDim=Math.max(l,w);
+    var scale=220/maxDim;
+    var rw=Math.round(w*scale);
+    var rh=Math.round(l*scale);
+    var rx=30+(260-rw)/2;
+    var ry=20+(140-rh)/2;
+    document.getElementById('svgRoom').setAttribute('x',rx);
+    document.getElementById('svgRoom').setAttribute('y',ry);
+    document.getElementById('svgRoom').setAttribute('width',rw);
+    document.getElementById('svgRoom').setAttribute('height',rh);
+
+    var fcx=Math.round(rx+rw/2);
+    var fcy=Math.round(ry+rh/2);
+
+    // fan radius proportional to span vs room
+    var fanRatio=(span/12)/(maxDim);
+    var fanR=Math.max(18,Math.min(55,Math.round(fanRatio*scale*12)));
+
+    var fc=document.getElementById('svgFanCircle');
+    var blades=document.getElementById('svgBlades');
+
+    if(nf===1){
+      fc.setAttribute('cx',fcx);
+      fc.setAttribute('cy',fcy);
+      fc.setAttribute('r',fanR);
+      fc.style.display='';
+      blades.setAttribute('transform','translate('+fcx+','+fcy+')');
+      // rebuild blades
+      blades.innerHTML=
+        '<rect x="-4" y="-'+(fanR-2)+'" width="8" height="'+(fanR-10)+'" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<rect x="-4" y="'+(10)+'" width="8" height="'+(fanR-10)+'" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<rect x="-'+(fanR-2)+'" y="-4" width="'+(fanR-10)+'" height="8" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<rect x="'+(10)+'" y="-4" width="'+(fanR-10)+'" height="8" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<circle cx="0" cy="0" r="6" fill="#2d6a4f"/>';
+    } else {
+      // multi-fan: just move main fan, secondary hidden in simple approach
+      fc.setAttribute('cx',fcx);
+      fc.setAttribute('cy',fcy);
+      fc.setAttribute('r',fanR);
+      fc.style.display='';
+      blades.setAttribute('transform','translate('+fcx+','+fcy+')');
+      blades.innerHTML=
+        '<rect x="-4" y="-'+(fanR-2)+'" width="8" height="'+(fanR-10)+'" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<rect x="-4" y="'+(10)+'" width="8" height="'+(fanR-10)+'" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<rect x="-'+(fanR-2)+'" y="-4" width="'+(fanR-10)+'" height="8" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<rect x="'+(10)+'" y="-4" width="'+(fanR-10)+'" height="8" rx="3" fill="#e76f51" opacity="0.75"/>'+
+        '<circle cx="0" cy="0" r="6" fill="#2d6a4f"/>'+
+        (nf>=2?'<text x="0" y="-'+(fanR+6)+'" text-anchor="middle" font-size="9" fill="#e76f51" font-family="sans-serif">×'+nf+' fans</text>':'');
+    }
+
+    document.getElementById('svgFanLabel').setAttribute('x',fcx);
+    document.getElementById('svgFanLabel').setAttribute('y',fcy+3);
+    document.getElementById('svgFanLabel').textContent=span+'"';
+    document.getElementById('svgFanLabel2').setAttribute('x',fcx);
+    document.getElementById('svgFanLabel2').setAttribute('y',fcy+15);
+    document.getElementById('svgFanLabel2').textContent='blade span';
+    document.getElementById('svgWidth').textContent=w+' ft wide';
+    document.getElementById('svgHeight').textContent=l+' ft long';
+    document.getElementById('svgWidth').setAttribute('x',rx+rw/2);
+    document.getElementById('svgWidth').setAttribute('y',ry+rh+14);
+  }
+
+  window.copyList=function(){
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(copyText).then(function(){
+        var c=document.getElementById('copyConfirm');
+        c.classList.add('show');
+        setTimeout(function(){c.classList.remove('show');},2000);
+      });
+    } else {
+      var ta=document.createElement('textarea');
+      ta.value=copyText;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      var c=document.getElementById('copyConfirm');
+      c.classList.add('show');
+      setTimeout(function(){c.classList.remove('show');},2000);
+    }
+  };
+
+  document.getElementById('calcBtn').addEventListener('click',function(){
+    requestAnimationFrame(function(){calculate();});
+  });
+
+  var inputs=['roomLength','roomWidth','ceilHeight'];
+  inputs.forEach(function(id){
+    document.getElementById(id).addEventListener('keydown',function(e){
+      if(e.key==='Enter'){requestAnimationFrame(function(){calculate();});}
+    });
+  });
+
+  // Trigger a default calculation if URL has a hash (optional UX)
+})();
+</script>
+</body>
+</html>
