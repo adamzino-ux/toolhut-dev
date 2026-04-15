@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raised Garden Bed Soil Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how much soil you need for your raised garden bed. Get cubic feet, cubic yards, bags needed, and cost estimates instantly.">
+<link rel="canonical" href="https://toolhut.dev/raised-garden-bed-soil-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Raised Garden Bed Soil Calculator",
+  "url": "https://toolhut.dev/raised-garden-bed-soil-calculator/",
+  "description": "Calculate exactly how much soil you need for your raised garden bed. Get cubic feet, cubic yards, bags needed, and cost estimates instantly.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:1.5rem}
+h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem}
+.section-gap{margin-bottom:2rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+input[type=number]:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.12)}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-row.three{grid-template-columns:1fr 1fr 1fr}
+.form-group{margin-bottom:1rem}
+.unit-toggle{display:flex;gap:.5rem;margin-bottom:1rem}
+.unit-btn{flex:1;padding:9px;border:1px solid #dee2e6;background:#f8f9fa;border-radius:6px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:#555;min-height:44px}
+.unit-btn.active{background:#2d6a4f;color:#fff;border-color:#2d6a4f}
+.btn-calc{width:100%;background:#2d6a4f;color:#fff;border:none;border-radius:6px;padding:14px 24px;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;min-height:48px;letter-spacing:.02em}
+.btn-calc:hover{background:#1e4d38}
+.btn-add{background:#e76f51;color:#fff;border:none;border-radius:6px;padding:9px 16px;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .2s;min-height:40px}
+.btn-add:hover{background:#c95a3f}
+.btn-remove{background:none;border:1px solid #e74c3c;color:#e74c3c;border-radius:6px;padding:6px 10px;font-size:.8rem;cursor:pointer;min-height:36px;transition:all .2s}
+.btn-remove:hover{background:#e74c3c;color:#fff}
+.beds-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem}
+.bed-row{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;position:relative}
+.bed-row-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.bed-label{font-size:.85rem;font-weight:700;color:#2d6a4f}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:all}
+.big-number{font-size:2.4rem;font-weight:800;color:#2d6a4f;line-height:1}
+.big-label{font-size:.85rem;color:#666;margin-top:.25rem}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.result-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1.25rem;text-align:center}
+.result-box .val{font-size:1.5rem;font-weight:800;color:#2d6a4f}
+.result-box .lbl{font-size:.8rem;color:#666;margin-top:.2rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444;border-bottom:2px solid #dee2e6}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.table-wrap{overflow-x:auto;border-radius:6px;border:1px solid #dee2e6}
+.shopping-list{list-style:none;padding:0}
+.shopping-list li{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:.92rem}
+.shopping-list li:last-child{border-bottom:none}
+.shop-item{font-weight:500}
+.shop-qty{font-weight:700;color:#2d6a4f;background:#e8f5e9;padding:3px 10px;border-radius:20px;font-size:.83rem}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:1.5rem}
+.pro-tip strong{color:#e76f51;display:block;margin-bottom:.3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em}
+.time-est{background:#e8f5f0;border:1px solid #b7dfc9;border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap}
+.time-col{flex:1;min-width:120px}
+.time-col .tl{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:#2d6a4f;font-weight:700;margin-bottom:.2rem}
+.time-col .tv{font-size1rem;font-weight:600;color:#1a1a2e}
+.copy-btn{background:none;border:1px solid #dee2e6;border-radius:5px;padding:5px 12px;font-size:.78rem;color:#555;cursor:pointer;transition:all .2s;float:right;margin-top:-2px}
+.copy-btn:hover{background:#2d6a4f;color:#fff;border-color:#2d6a4f}
+svg.diagram{width:100%;border-radius:8px;background:#f0f7f4}
+.diagram-wrap{margin-bottom:1.5rem;border:1px solid #dee2e6;border-radius:8px;overflow:hidden}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.1rem;margin-bottom:.6rem;margin-top:1.5rem;color:#2d6a4f}
+.content-section p,.content-section li{color:#333;font-size:.93rem;line-height:1.7}
+.content-section ul{padding-left:1.25rem;margin:.5rem 0}
+.content-section li{margin-bottom:.3rem}
+details{margin-bottom:.75rem}
+summary{cursor:pointer;font-weight:600;padding:.6rem 0;color:#2d6a4f;font-size:.92rem;list-style:none;display:flex;align-items:center;gap:.5rem}
+summary::before{content:"▶";font-size:.7rem;transition:transform .2s;color:#e76f51}
+details[open] summary::before{transform:rotate(90deg)}
+details p{padding:.5rem 0 .5rem 1.2rem;color:#444;font-size:.9rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.related-link{background:#f8f9fa;border:1px solid #dee2e6;border-radius:7px;padding:.75rem 1rem;font-size:.88rem;font-weight:500;color:#2d6a4f;transition:all .2s;display:block}
+.related-link:hover{background:#e8f5e9;border-color:#2d6a4f;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.5rem;text-align:center;font-size:.83rem;color:#666;margin-top:2rem}
+footer a{color:#2d6a4f;margin:0 .6rem}
+.mix-slider{width:100%;margin:.5rem 0}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:#dee2e6;outline:none;padding:0;border:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#2d6a4f;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+input[type=range]:focus{box-shadow:none}
+.mix-labels{display:flex;justify-content:space-between;font-size:.78rem;color:#888;margin-top:.15rem}
+.section-divider{height:1px;background:#dee2e6;margin:2rem 0}
+@media(max-width:640px){
+  .form-row{grid-template-columns:1fr}
+  .form-row.three{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  .time-est{gap:.75rem}
+  h1{font-size:1.35rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🌱 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Raised Garden Bed Soil Calculator</h1>
+  <p class="subtitle">Get exactly how much soil, compost &amp; amendments you need — plus a shopping list and cost estimate.</p>
+
+  <div class="card">
+    <h2>📐 Units</h2>
+    <div class="unit-toggle">
+      <button class="unit-btn active" id="btnFt" onclick="setUnit('ft')">Feet &amp; Inches</button>
+      <button class="unit-btn" id="btnM" onclick="setUnit('m')">Meters &amp; cm</button>
+    </div>
+
+    <h2>🛏️ Raised Bed Dimensions</h2>
+    <div class="beds-list" id="bedsList"></div>
+    <button class="btn-add" onclick="addBed()">+ Add Another Bed</button>
+
+    <div class="section-divider"></div>
+
+    <h2>🌱 Soil Mix Ratios</h2>
+    <p style="font-size:.82rem;color:#666;margin-bottom:.75rem">Drag the sliders to set your preferred mix (must total 100%)</p>
+    <div class="form-group">
+      <label>Topsoil / Garden Soil: <strong id="pctSoil">60</strong>%</label>
+      <input type="range" id="sliderSoil" min="0" max="100" value="60" class="mix-slider" oninput="updateMix('soil')">
+    </div>
+    <div class="form-group">
+      <label>Compost: <strong id="pctCompost">30</strong>%</label>
+      <input type="range" id="sliderCompost" min="0" max="100" value="30" class="mix-slider" oninput="updateMix('compost')">
+    </div>
+    <div class="form-group">
+      <label>Perlite / Coarse Sand: <strong id="pctPerlite">10</strong>%</label>
+      <input type="range" id="sliderPerlite" min="0" max="100" value="10" class="mix-slider" oninput="updateMix('perlite')">
+    </div>
+    <div id="mixError" style="color:#e74c3c;font-size:.82rem;display:none;margin-bottom:.5rem">⚠ Ratios must total 100%. Currently: <span id="mixTotal">0</span>%</div>
+
+    <div class="section-divider"></div>
+
+    <h2>💰 Cost Estimate (optional)</h2>
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Topsoil price per 40lb bag ($)</label>
+        <input type="number" id="priceSoil" value="6.99" min="0" step="0.01">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Compost price per 40lb bag ($)</label>
+        <input type="number" id="priceCompost" value="8.99" min="0" step="0.01">
+      </div>
+    </div>
+    <div class="form-row" style="margin-top:1rem">
+      <div class="form-group" style="margin-bottom:0">
+        <label>Perlite price per 8qt bag ($)</label>
+        <input type="number" id="pricePerlite" value="14.99" min="0" step="0.01">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label></label>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <button class="btn-calc" onclick="calculate()">Calculate Soil Needed →</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+
+    <div class="card">
+      <h2>📊 Results
+        <button class="copy-btn" id="copyBtn" onclick="copyResults()">Copy Results</button>
+      </h2>
+
+      <div style="text-align:center;padding:.75rem 0 1.25rem">
+        <div class="big-number" id="bigCuFt">—</div>
+        <div class="big-label">Total Cubic Feet of Soil Mix</div>
+      </div>
+
+      <div class="results-grid" id="resultsGrid">
+        <div class="result-box"><div class="val" id="rCuYd">—</div><div class="lbl">Cubic Yards</div></div>
+        <div class="result-box"><div class="val" id="rLiters">—</div><div class="lbl">Liters</div></div>
+        <div class="result-box"><div class="val" id="rSoilBags">—</div><div class="lbl">40lb Topsoil Bags</div></div>
+        <div class="result-box"><div class="val" id="rCompostBags">—</div><div class="lbl">40lb Compost Bags</div></div>
+      </div>
+
+      <div class="table-wrap" style="margin-bottom:1.5rem">
+        <table id="bedsTable">
+          <thead><tr><th>Bed</th><th class="num">L</th><th class="num">W</th><th class="num">D</th><th class="num">Cu Ft</th><th class="num">Cu Yd</th></tr></thead>
+          <tbody id="bedsTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Diagram -->
+      <div class="diagram-wrap">
+        <svg id="diagram" class="diagram" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" aria-label="Raised garden bed diagram"></svg>
+      </div>
+    </div>
+
+    <!-- Mix Breakdown -->
+    <div class="card">
+      <h2>🧪 Soil Mix Breakdown</h2>
+      <div class="table-wrap" style="margin-bottom:1.25rem">
+        <table id="mixTable">
+          <thead><tr><th>Component</th><th class="num">Cu Ft</th><th class="num">Cu Yd</th><th class="num">Bags Needed</th><th class="num">Est. Cost</th></tr></thead>
+          <tbody id="mixTableBody"></tbody>
+          <tfoot id="mixTableFoot"></tfoot>
+        </table>
+      </div>
+
+      <!-- Time Estimate -->
+      <div class="time-est" id="timeEst">
+        <div class="time-col"><div class="tl">🕐 Beginner</div><div class="tv" id="timeBeginner">—</div></div>
+        <div class="time-col"><div class="tl">⚡ Experienced</div><div class="tv" id="timeExperienced">—</div></div>
+        <div class="time-col"><div class="tl">🛻 Bulk Delivery?</div><div class="tv" id="bulkRecommend">—</div></div>
+      </div>
+
+      <!-- Pro Tip -->
+      <div class="pro-tip" id="proTipBox">
+        <strong>💡 Pro Tip</strong>
+        <span id="proTipText">—</span>
+      </div>
+
+      <!-- Shopping List -->
+      <h2>🛒 Materials Shopping List</h2>
+      <ul class="shopping-list" id="shoppingList"></ul>
+    </div>
+
+    <div class="ad-slot" id="ad-mid"></div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="card content-section section-gap">
+    <h2>How to Use This Raised Garden Bed Soil Calculator</h2>
+    <p>Enter the length, width, and depth of each raised bed in feet (or switch to meters). Add multiple beds if you have more than one. Adjust the soil mix sliders to match your preferred blend, then hit <strong>Calculate Soil Needed</strong>. You'll instantly see cubic feet, cubic yards, exact bag counts, and a complete shopping list with cost estimates.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Guessing soil volumes is one of the most common (and expensive) raised bed mistakes. A standard 4×8-foot bed that's just 12 inches deep needs <strong>32 cubic feet</strong> of soil — that's about 18 large bags. Buy too little and your plants sit in a half-filled bed with poor drainage. Buy too much and you've wasted $50–$80 hauling bags back to the store.</p>
+    <p>If you're running three or four beds for a kitchen garden — a totally normal weekend project — you could easily be looking at 90+ cubic feet of material, which is the threshold where ordering a bulk delivery of blended garden mix from a local nursery becomes cheaper than hauling bags from a big-box store. This calculator flags that for you automatically.</p>
+    <p>The right soil mix also matters as much as the volume. A 60/30/10 blend of topsoil, compost, and perlite is widely regarded as the gold standard for most vegetables and herbs — it retains moisture without waterlogging roots, and the compost provides slow-release nutrition throughout the season.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>Volume is calculated with simple geometry:</p>
+    <p><strong>Cubic Feet = Length (ft) × Width (ft) × Depth (ft)</strong></p>
+    <p>To convert to cubic yards (what bulk suppliers sell): <strong>Cu Yd = Cu Ft ÷ 27</strong></p>
+    <p>A standard 40lb bag of garden soil covers approximately <strong>0.75 cubic feet</strong>. A 40lb bag of compost is slightly denser at about <strong>0.67 cubic feet</strong>. Perlite is calculated from 8-quart bags (≈ 0.27 cubic feet each). The calculator always rounds up to ensure you don't run short.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Fill depth matters more than you think.</strong> Most vegetables need at least 8–12 inches. Shallow beds (under 6") limit root growth and dry out fast.</li>
+      <li><strong>Don't use 100% bagged topsoil.</strong> Straight topsoil compacts badly in raised beds. Always blend in compost for structure and aeration.</li>
+      <li><strong>Order 10% extra.</strong> Soil settles after the first few waterings. Plan to top off mid-season.</li>
+      <li><strong>Check if your bed is round or irregular.</strong> This tool handles rectangular beds. For circles, calculate π × r² × depth in feet.</li>
+      <li><strong>Pick up a soil thermometer.</strong> Seeds and transplants don't care how much soil you bought — they care that it's at least 60°F. Soil in raised beds warms faster than in-ground, which is one of their biggest advantages.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How deep should a raised garden bed be?</summary>
+      <p>Most vegetables thrive with 10–12 inches of soil depth. Root vegetables like carrots and parsnips prefer 16–18 inches. Shallow-rooted crops like lettuce, herbs, and radishes can do fine at 6–8 inches, but deeper is almost always better for water retention and root health.</p>
+    </details>
+    <details>
+      <summary>Is it cheaper to buy bulk soil or bags?</summary>
+      <p>At approximately 2 cubic yards (~54 cubic feet), bulk delivery typically becomes more cost-effective than buying bags. One cubic yard in bags can cost $150–$200+, while bulk delivery from a local nursery often runs $40–$80 per cubic yard. The calculator flags this threshold for you.</p>
+    </details>
+    <details>
+      <summary>What's the best soil mix for raised beds?</summary>
+      <p>The widely recommended "Mel's Mix" uses equal thirds of compost, peat moss, and perlite. A simpler and cheaper alternative is 60% topsoil, 30% compost, and 10% perlite or coarse sand — which is the default in this calculator. Adjust based on what you're growing; tomatoes love compost-heavy mixes while succulents need more grit.</p>
+    </details>
+    <details>
+      <summary>Can I use native soil from my yard?</summary>
+      <p>You can use it as a base layer to reduce cost, but native soil is often too heavy, compacts easily, and may contain weed seeds or pathogens. Mix it with compost (at least 1:1) and fill the top 8 inches with your quality blend where roots will be most active.</p>
+    </details>
+  </div>
+
+  <div class="card section-gap">
+    <h2>🔗 Related Tools</h2>
+    <div class="related-grid">
+      <a href="/drywall-sheet-calculator/" class="related-link">📋 Drywall Sheet Calculator</a>
+      <a href="/patio-paver-calculator/" class="related-link">🧱 Patio Paver Calculator</a>
+      <a href="/paint-coverage-calculator/" class="related-link">🎨 Paint Coverage Calculator</a>
+      <a href="/deck-board-calculator/" class="related-link">🪵 Deck Board Calculator</a>
+      <a href="/marathon-finish-time-predictor/" class="related-link">🏃 Marathon Finish Time Predictor</a>
+      <a href="/sit-and-reach-flexibility-calculator/" class="related-link">🤸 Sit and Reach Flexibility Score</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:.5rem">© 2025 toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+// ---- State ----
+let unit = 'ft';
+let beds = [];
+let bedIdCounter = 0;
+let mixLock = false; // prevent recursive slider update
+
+// ---- Init ----
+function init() {
+  addBed();
+}
+
+function setUnit(u) {
+  unit = u;
+  document.getElementById('btnFt').classList.toggle('active', u === 'ft');
+  document.getElementById('btnM').classList.toggle('active', u === 'm');
+  // Update placeholders and labels
+  document.querySelectorAll('.dim-label').forEach(el => {
+    const dim = el.dataset.dim;
+    el.textContent = dim === 'depth' ? (u === 'ft' ? 'Depth (in)' : 'Depth (cm)') :
+      dim === 'length' ? (u === 'ft' ? 'Length (ft)' : 'Length (m)') :
+      (u === 'ft' ? 'Width (ft)' : 'Width (m)');
+  });
+}
+
+// ---- Bed Management ----
+function addBed() {
+  bedIdCounter++;
+  const id = bedIdCounter;
+  beds.push(id);
+  const row = document.createElement('div');
+  row.className = 'bed-row';
+  row.id = 'bed-' + id;
+  row.innerHTML = `
+    <div class="bed-row-header">
+      <span class="bed-label">Bed #${beds.length}</span>
+      ${beds.length > 1 ? `<button class="btn-remove" onclick="removeBed(${id})">✕ Remove</button>` : ''}
+    </div>
+    <div class="form-row three">
+      <div class="form-group" style="margin-bottom:0">
+        <label class="dim-label" data-dim="length">${unit==='ft'?'Length (ft)':'Length (m)'}</label>
+        <input type="number" id="len-${id}" value="4" min="0.1" step="any" placeholder="e.g. 4">
+        <div class="error-msg" id="err-len-${id}">Please enter a valid length</div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="dim-label" data-dim="width">${unit==='ft'?'Width (ft)':'Width (m)'}</label>
+        <input type="number" id="wid-${id}" value="4" min="0.1" step="any" placeholder="e.g. 4">
+        <div class="error-msg" id="err-wid-${id}">Please enter a valid width</div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="dim-label" data-dim="depth">${unit==='ft'?'Depth (in)':'Depth (cm)'}</label>
+        <input type="number" id="dep-${id}" value="${unit==='ft'?'12':'30'}" min="1" step="any" placeholder="${unit==='ft'?'e.g. 12':'e.g. 30'}">
+        <div class="error-msg" id="err-dep-${id}">Please enter a valid depth</div>
+      </div>
+    </div>
+  `;
+  document.getElementById('bedsList').appendChild(row);
+  // Enter key
+  row.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('keydown', e => { if(e.key==='Enter') calculate(); });
+  });
+}
+
+function removeBed(id) {
+  beds = beds.filter(b => b !== id);
+  const el = document.getElementById('bed-' + id);
+  if(el) el.remove();
+  // Re-number labels
+  document.querySelectorAll('.bed-label').forEach((el, i) => {
+    el.textContent = 'Bed #' + (i + 1);
+  });
+}
+
+// ---- Mix Sliders ----
+let mixValues = { soil: 60, compost: 30, perlite: 10 };
+
+function updateMix(changed) {
+  if(mixLock) return;
+  mixLock = true;
+  const soil = parseInt(document.getElementById('sliderSoil').value);
+  const compost = parseInt(document.getElementById('sliderCompost').value);
+  const perlite = parseInt(document.getElementById('sliderPerlite').value);
+  mixValues = { soil, compost, perlite };
+  document.getElementById('pctSoil').textContent = soil;
+  document.getElementById('pctCompost').textContent = compost;
+  document.getElementById('pctPerlite').textContent = perlite;
+  const total = soil + compost + perlite;
+  const errEl = document.getElementById('mixError');
+  document.getElementById('mixTotal').textContent = total;
+  errEl.style.display = total !== 100 ? 'block' : 'none';
+  mixLock = false;
+}
+
+// ---- Validate + Calculate ----
+function validate() {
+  let valid = true;
+  beds.forEach(id => {
+    ['len','wid','dep'].forEach(f => {
+      const inp = document.getElementById(f + '-' + id);
+      const err = document.getElementById('err-' + f + '-' + id);
+      const val = parseFloat(inp.value);
+      if(!inp.value || isNaN(val) || val <= 0) {
+        inp.classList.add('error');
+        err.classList.add('show');
+        valid = false;
+      } else {
+        inp.classList.remove('error');
+        err.classList.remove('show');
+      }
+    });
+  });
+  return valid;
+}
+
+function toCuFt(len, wid, dep) {
+  // dep is in inches (ft) or cm (m), len/wid in ft or m
+  if(unit === 'ft') {
+    return len * wid * (dep / 12);
+  } else {
+    // m to ft
+    const lenFt = len * 3.28084;
+    const widFt = wid * 3.28084;
+    const depFt = dep / 30.48;
+    return lenFt * widFt * depFt;
+  }
+}
+
+function toLenDisplay(val) {
+  return unit === 'ft' ? (val + ' ft') : (val + ' m');
+}
+function toDepDisplay(val) {
+  return unit === 'ft' ? (val + '"') : (val + ' cm');
+}
+
+function fmt(n, dec=2) {
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+}
+function fmtInt(n) {
+  return Math.ceil(n).toLocaleString('en-US');
+}
+function fmtDollar(n) {
+  return '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+function calculate() {
+  if(!validate()) return;
+  const total = mixValues.soil + mixValues.compost + mixValues.perlite;
+  if(total !== 100) {
+    document.getElementById('mixError').style.display = 'block';
+    return;
+  }
+
+  // Gather bed data
+  const bedData = beds.map((id, i) => {
+    const len = parseFloat(document.getElementById('len-' + id).value);
+    const wid = parseFloat(document.getElementById('wid-' + id).value);
+    const dep = parseFloat(document.getElementById('dep-' + id).value);
+    const cuFt = toCuFt(len, wid, dep);
+    const cuYd = cuFt / 27;
+    return { id, num: i+1, len, wid, dep, cuFt, cuYd };
+  });
+
+  const totalCuFt = bedData.reduce((s, b) => s + b.cuFt, 0);
+  const totalCuYd = totalCuFt / 27;
+  const totalLiters = totalCuFt * 28.3168;
+
+  // Bag calcs
+  // 40lb topsoil bag ≈ 0.75 cuFt; 40lb compost ≈ 0.67 cuFt; perlite 8qt ≈ 0.27 cuFt
+  const soilCuFt = totalCuFt * (mixValues.soil / 100);
+  const compostCuFt = totalCuFt * (mixValues.compost / 100);
+  const perliteCuFt = totalCuFt * (mixValues.perlite / 100);
+
+  const soilBags = Math.ceil(soilCuFt / 0.75);
+  const compostBags = Math.ceil(compostCuFt / 0.67);
+  const perliteBags = Math.ceil(perliteCuFt / 0.27);
+
+  const priceSoil = Math.max(0, parseFloat(document.getElementById('priceSoil').value) || 6.99);
+  const priceCompost = Math.max(0, parseFloat(document.getElementById('priceCompost').value) || 8.99);
+  const pricePerlite = Math.max(0, parseFloat(document.getElementById('pricePerlite').value) || 14.99);
+
+  const costSoil = soilBags * priceSoil;
+  const costCompost = compostBags * priceCompost;
+  const costPerlite = perliteBags * pricePerlite;
+  const costTotal = costSoil + costCompost + costPerlite;
+
+  // Time estimate: roughly 15 min per cuFt beginner, 8 min experienced
+  const timeBeg = Math.round(totalCuFt * 15);
+  const timeExp = Math.round(totalCuFt * 8);
+  const bulkRec = totalCuYd >= 2 ? 'Yes — save money!' : 'Bags are fine';
+
+  function minToHuman(m) {
+    if(m < 60) return m + ' min';
+    const h = Math.floor(m / 60);
+    const rem = m % 60;
+    return h + 'h' + (rem ? ' ' + rem + 'm' : '');
+  }
+
+  // Pro tip logic
+  let proTip = '';
+  if(totalCuYd >= 3) {
+    proTip = 'At ' + fmt(totalCuYd) + ' cubic yards, call your local landscape supplier for bulk delivery. You\'ll likely save $80–$150 vs. buying bags, and skip a dozen car trips. Ask for "premium raised bed mix" or blend their topsoil + compost on-site.';
+  } else if(mixValues.perlite < 10) {
+    proTip = 'I\'d recommend at least 10% perlite in your mix. Without it, raised bed soil tends to compact over a season, strangling roots. It\'s cheap insurance for better drainage and aeration all summer long.';
+  } else if(bedData.some(b => b.dep < (unit==='ft' ? 8 : 20))) {
+    proTip = 'One of your beds looks shallow — under 8 inches. That\'s fine for lettuce or herbs, but tomatoes and root vegetables really need 10–12 inches minimum. If you can, add a board and an extra few inches of depth before filling. Future-you will thank you.';
+  } else {
+    proTip = 'Always add your soil in 4-inch layers and water each layer before adding the next. This eliminates air pockets and gives you a firm, settled bed from day one rather than watching your soil sink 2 inches after the first rain.';
+  }
+
+  requestAnimationFrame(() => {
+    // Big numbers
+    document.getElementById('bigCuFt').textContent = fmt(totalCuFt);
+    document.getElementById('rCuYd').textContent = fmt(totalCuYd);
+    document.getElementById('rLiters').textContent = fmtInt(totalLiters);
+    document.getElementById('rSoilBags').textContent = soilBags > 0 ? fmtInt(soilBags) : '0';
+    document.getElementById('rCompostBags').textContent = compostBags > 0 ? fmtInt(compostBags) : '0';
+
+    // Beds table
+    let bRows = '';
+    const uLabel = unit === 'ft' ? 'ft / in' : 'm / cm';
+    bedData.forEach(b => {
+      bRows += `<tr>
+        <td>Bed #${b.num}</td>
+        <td class="num">${toLenDisplay(b.len)}</td>
+        <td class="num">${toLenDisplay(b.wid)}</td>
+        <td class="num">${toDepDisplay(b.dep)}</td>
+        <td class="num">${fmt(b.cuFt)}</td>
+        <td class="num">${fmt(b.cuYd,3)}</td>
+      </tr>`;
+    });
+    if(bedData.length > 1) {
+      bRows += `<tr style="font-weight:700;background:#e8f5e9">
+        <td>Total</td><td></td><td></td><td></td>
+        <td class="num">${fmt(totalCuFt)}</td>
+        <td class="num">${fmt(totalCuYd,3)}</td>
+      </tr>`;
+    }
+    document.getElementById('bedsTableBody').innerHTML = bRows;
+
+    // Mix table
+    const rows = [
+      { name: 'Topsoil / Garden Soil', cuFt: soilCuFt, bags: soilBags, bagLabel: '40lb bags', cost: costSoil },
+      { name: 'Compost', cuFt: compostCuFt, bags: compostBags, bagLabel: '40lb bags', cost: costCompost },
+      { name: 'Perlite / Coarse Sand', cuFt: perliteCuFt, bags: perliteBags, bagLabel: '8qt bags', cost: costPerlite }
+    ];
+    let mRows = '';
+    rows.forEach(r => {
+      if(r.cuFt > 0) {
+        mRows += `<tr>
+          <td>${r.name}</td>
+          <td class="num">${fmt(r.cuFt)}</td>
+          <td class="num">${fmt(r.cuFt/27,3)}</td>
+          <td class="num">${fmtInt(r.bags)} ${r.bagLabel}</td>
+          <td class="num">${fmtDollar(r.cost)}</td>
+        </tr>`;
+      }
+    });
+    document.getElementById('mixTableBody').innerHTML = mRows;
+    document.getElementById('mixTableFoot').innerHTML = `<tr style="font-weight:700;background:#e8f5e9">
+      <td>Total</td>
+      <td class="num">${fmt(totalCuFt)}</td>
+      <td class="num">${fmt(totalCuYd,3)}</td>
+      <td class="num">—</td>
+      <td class="num">${fmtDollar(costTotal)}</td>
+    </tr>`;
+
+    // Time
+    document.getElementById('timeBeginner').textContent = minToHuman(timeBeg);
+    document.getElementById('timeExperienced').textContent = minToHuman(timeExp);
+    document.getElementById('bulkRecommend').textContent = bulkRec;
+
+    // Pro tip
+    document.getElementById('proTipText').textContent = proTip;
+
+    // Shopping list
+    let shopItems = '';
+    if(soilBags > 0) shopItems += `<li><span class="shop-item">Topsoil / Garden Soil (40lb bags)</span><span class="shop-qty">${fmtInt(soilBags)} bags — ${fmtDollar(costSoil)}</span></li>`;
+    if(compostBags > 0) shopItems += `<li><span class="shop-item">Compost (40lb bags)</span><span class="shop-qty">${fmtInt(compostBags)} bags — ${fmtDollar(costCompost)}</span></li>`;
+    if(perliteBags > 0) shopItems += `<li><span class="shop-item">Perlite or Coarse Sand (8qt bags)</span><span class="shop-qty">${fmtInt(perliteBags)} bags — ${fmtDollar(costPerlite)}</span></li>`;
+    shopItems += `<li style="font-weight:700;color:#2d6a4f"><span class="shop-item">Estimated Total</span><span class="shop-qty" style="background:#2d6a4f;color:#fff">${fmtDollar(costTotal)}</span></li>`;
+    document.getElementById('shoppingList').innerHTML = shopItems;
+
+    // SVG Diagram
+    updateDiagram(bedData, totalCuFt);
+
+    // Copy button text
+    document.getElementById('copyBtn').textContent = 'Copy Results';
+
+    // Show results
+    document.getElementById('results').classList.add('show');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function updateDiagram(bedData, totalCuFt) {
+  const svg = document.getElementById('diagram');
+  const W = 600, H = 260;
+  const maxBeds = Math.min(bedData.length, 3);
+  const first = bedData[0];
+
+  // Draw perspective-ish 3D bed for first bed
+  const bW = 260, bH = 120;
+  const skewX = 40, skewY = 20;
+  const startX = 60, startY = 80;
+
+  // Pick a nice color
+  const colors = ['#2d6a4f','#3a8f6a','#52b788'];
+
+  let svgContent = ``;
+
+  // Draw up to 3 beds side by side (simplified top-down)
+  if(bedData.length === 1) {
+    // Single bed 3D perspective
+    const b = bedData[0];
+    const fW = 260, fH = 110;
+    const ox = skewX, oy = -skewY;
+    const bx = startX, by = startY + 40;
+
+    // Top face
+    svgContent += `
+      <polygon points="${bx},${by} ${bx+fW},${by} ${bx+fW+ox},${by+oy} ${bx+ox},${by+oy}" fill="#a8d5b5" stroke="#2d6a4f" stroke-width="2"/>
+      <!-- front face -->
+      <rect x="${bx}" y="${by}" width="${fW}" height="${fH}" fill="#52b788" stroke="#2d6a4f" stroke-width="2"/>
+      <!-- side face -->
+      <polygon points="${bx+fW},${by} ${bx+fW+ox},${by+oy} ${bx+fW+ox},${by+oy+fH} ${bx+fW},${by+fH}" fill="#3a8f6a" stroke="#2d6a4f" stroke-width="2"/>
+      <!-- soil fill indicator -->
+      <rect x="${bx+2}" y="${by+fH*0.3}" width="${fW-4}" height="${fH*0.4}" fill="#8B6914" rx="3" opacity="0.7"/>
+      <text x="${bx+fW/2}" y="${by+fH*0.55}" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="system-ui">Soil (${fmt(b.dep)} ${unit==='ft'?'in':'cm'} deep)</text>
+    `;
+
+    // Dimension arrows & labels
+    // Length
+    svgContent += `
+      <line x1="${bx}" y1="${by+fH+18}" x2="${bx+fW}" y2="${by+fH+18}" stroke="#e76f51" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <text x="${bx+fW/2}" y="${by+fH+34}" text-anchor="middle" fill="#e76f51" font-size="13" font-weight="700" font-family="system-ui">${toLenDisplay(b.len)} (Length)</text>
+      <!-- Width label on side -->
+      <text x="${bx+fW+ox+16}" y="${by+oy+fH/2}" fill="#e76f51" font-size="12" font-weight="700" font-family="system-ui">${toLenDisplay(b.wid)}</text>
+      <text x="${bx+fW+ox+16}" y="${by+oy+fH/2+15}" fill="#e76f51" font-size="12" font-weight="700" font-family="system-ui">(Width)</text>
+      <!-- CuFt badge -->
+      <rect x="${W-160}" y="10" width="148" height="56" rx="8" fill="#2d6a4f" opacity="0.93"/>
+      <text x="${W-84}" y="35" text-anchor="middle" fill="#fff" font-size="11" font-family="system-ui">Total Volume</text>
+      <text x="${W-84}" y="56" text-anchor="middle" fill="#a8d5b5" font-size="18" font-weight="800" font-family="system-ui">${fmt(b.cuFt)} cu ft</text>
+    `;
+  } else {
+    // Multiple beds top-down grid view
+    const cols = Math.min(bedData.length, 3);
+    const padding = 20;
+    const availW = W - padding * 2;
+    const bw = (availW - (cols-1)*12) / cols;
+    const bh = 100;
+    const startY2 = 30;
+
+    bedData.slice(0, cols).forEach((b, i) => {
+      const bx2 = padding + i*(bw+12);
+      const by2 = startY2;
+      const pct = b.cuFt / (bedData.reduce((s,bd)=>s+bd.cuFt,0));
+      svgContent += `
+        <rect x="${bx2}" y="${by2}" width="${bw}" height="${bh}" fill="${colors[i%colors.length]}" rx="6" stroke="#1e4d38" stroke-width="1.5"/>
+        <rect x="${bx2+4}" y="${by2+4}" width="${bw-8}" height="${bh-8}" fill="#8B6914" rx="4" opacity="0.5"/>
+        <text x="${bx2+bw/2}" y="${by2+bh/2-8}" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="system-ui">Bed #${b.num}</text>
+        <text x="${bx2+bw/2}" y="${by2+bh/2+8}" text-anchor="middle" fill="#fff" font-size="10" font-family="system-ui">${toLenDisplay(b.len)}×${toLenDisplay(b.wid)}</text>
+        <text x="${bx2+bw/2}" y="${by2+bh/2+22}" text-anchor="middle" fill="#a8d5b5" font-size="10" font-weight="700" font-family="system-ui">${fmt(b.cuFt)} cu ft</text>
+      `;
+      // Dim labels below
+      svgContent += `
+        <text x="${bx2+bw/2}" y="${by2+bh+18}" text-anchor="middle" fill="#e76f51" font-size="11" font-weight="600" font-family="system-ui">${toDepDisplay(b.dep)} deep</text>
+      `;
+    });
+    if(bedData.length > 3) {
+      svgContent += `<text x="${W/2}" y="${startY2+bh+38}" text-anchor="middle" fill="#555" font-size="11" font-family="system-ui">+ ${bedData.length-3} more bed(s) not shown</text>`;
+    }
+    // Total badge
+    svgContent += `
+      <rect x="${W/2-80}" y="${H-52}" width="160" height="42" rx="8" fill="#2d6a4f" opacity="0.93"/>
+      <text x="${W/2}" y="${H-34}" text-anchor="middle" fill="#fff" font-size="10" font-family="system-ui">Total Volume</text>
+      <text x="${W/2}" y="${H-14}" text-anchor="middle" fill="#a8d5b5" font-size="16" font-weight="800" font-family="system-ui">${fmt(totalCuFt)} cu ft</text>
+    `;
+  }
+
+  svg.innerHTML = `
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+        <path d="M1,1 L7,4 L1,7 Z" fill="#e76f51"/>
+      </marker>
+    </defs>
+    <rect width="${W}" height="${H}" fill="#f0f7f4"/>
+    ${svgContent}
+  `;
+}
+
+function copyResults() {
+  const btn = document.getElementById('copyBtn');
+  const beds2 = Array.from(document.querySelectorAll('.bed-label')).map((el, i) => el.textContent);
+  const bigCuFt = document.getElementById('bigCuFt').textContent;
+  const rCuYd = document.getElementById('rCuYd').textContent;
+  const costRows = Array.from(document.querySelectorAll('#mixTableBody tr')).map(r => {
+    const cells = r.querySelectorAll('td');
+    return Array.from(cells).map(c => c.textContent.trim()).join(' | ');
+  });
+  const text = [
+    '=== Raised Garden Bed Soil Results ===',
+    `Total Volume: ${bigCuFt} cubic feet (${rCuYd} cubic yards)`,
+    '',
+    'Mix Breakdown:',
+    ...costRows,
+    '',
+    'Generated by toolhut.dev/raised-garden-bed-soil-calculator/'
+  ].join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy Results', 2000);
+  }).catch(() => {
+    btn.textContent = 'Copy failed';
+    setTimeout(() => btn.textContent = 'Copy Results', 2000);
+  });
+}
+
+// Enter key on price inputs
+['priceSoil','priceCompost','pricePerlite'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('keydown', e => { if(e.key==='Enter') calculate(); });
+});
+
+init();
+</script>
+</body>
+</html>
