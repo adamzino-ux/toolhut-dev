@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concrete Patio Cost Estimator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Estimate concrete patio costs instantly. Enter dimensions, thickness, and finish type to get material quantities, labor costs, and a full shopping list. Free.">
+<link rel="canonical" href="https://toolhut.dev/concrete-patio-cost-estimator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Concrete Patio Cost Estimator",
+  "url": "https://toolhut.dev/concrete-patio-cost-estimator/",
+  "description": "Free online concrete patio cost estimator. Calculate material quantities, labor costs, and get a complete shopping list for your concrete patio project.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline;color:#1d4a36}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-logo{font-weight:700;font-size:1.1rem;color:#2d6a4f;letter-spacing:-0.3px}
+.nav-logo span{color:#e76f51}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.65rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.2}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#2d6a4f;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:2px solid #e8f5e9}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.35rem;margin-top:1rem}
+label:first-of-type{margin-top:0}
+input[type=text],input[type=number],select{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px 16px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,0.15)}
+input.error-field{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.1)}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
+.error-msg.show{display:block}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem}
+.slider-wrap{margin-top:0.3rem}
+input[type=range]{width:100%;accent-color:#2d6a4f;height:6px;cursor:pointer}
+.slider-labels{display:flex;justify-content:space-between;font-size:0.75rem;color:#888;margin-top:2px}
+.range-val{font-weight:700;color:#2d6a4f;font-size:0.9rem}
+.btn{display:inline-block;background:#2d6a4f;color:#fff;border:none;border-radius:6px;padding:14px 28px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;margin-top:1.4rem;min-height:44px;transition:background 0.2s}
+.btn:hover{background:#1d4a36}
+.btn-orange{background:#e76f51}
+.btn-orange:hover{background:#c95a3d}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.big-number{font-size:2.8rem;font-weight:800;color:#2d6a4f;line-height:1}
+.big-label{font-size:0.9rem;color:#666;margin-top:0.3rem}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.cost-box{background:#f8f9fa;border-radius:8px;padding:1.2rem;text-align:center;border:1px solid #dee2e6}
+.cost-box .num{font-size:1.5rem;font-weight:700;color:#1a1a2e}
+.cost-box .lbl{font-size:0.78rem;color:#666;margin-top:0.2rem}
+.cost-box.accent{background:#e8f5e9;border-color:#a8d5b5}
+.cost-box.accent .num{color:#2d6a4f}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444}
+th.r,td.r{text-align:right}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+.tbl-wrap{overflow-x:auto;border-radius:6px;border:1px solid #dee2e6}
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600}
+.badge-green{background:#e8f5e9;color:#2d6a4f}
+.badge-orange{background:#fdeae4;color:#e76f51}
+.badge-blue{background:#e8f0fe;color:#0077b6}
+.pro-tip{background:#fdeae4;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1.2rem 0}
+.pro-tip-title{font-weight:700;color:#e76f51;font-size:0.9rem;margin-bottom:0.3rem}
+.pro-tip p{font-size:0.9rem;color:#5a3020}
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.time-box{background:#f8f9fa;border-radius:8px;padding:1rem;border:1px solid #dee2e6;text-align:center}
+.time-box .time-num{font-size:1.4rem;font-weight:700;color:#1a1a2e}
+.time-box .time-lbl{font-size:0.78rem;color:#666}
+.copy-btn{background:#f0f0f0;border:1px solid #ddd;border-radius:5px;padding:6px 14px;font-size:0.8rem;cursor:pointer;color:#444;transition:background 0.2s;float:right;margin-top:-4px}
+.copy-btn:hover{background:#e0e0e0}
+.copy-btn.copied{background:#e8f5e9;color:#2d6a4f;border-color:#a8d5b5}
+.shopping-list{margin-top:1rem}
+.shop-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #f0f0f0;font-size:0.88rem}
+.shop-item:last-child{border-bottom:none}
+.shop-item-name{font-weight:500}
+.shop-item-qty{color:#2d6a4f;font-weight:700;font-size:0.9rem}
+.shop-item-price{color:#888;font-size:0.82rem}
+.svg-container{background:#f0f7f0;border-radius:8px;padding:1rem;margin-bottom:1.2rem;text-align:center}
+svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.ad-slot{min-height:0;margin:0}
+h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:0.7rem;margin-top:1.8rem}
+h2:first-child{margin-top:0}
+.content-section{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;margin-bottom:2rem}
+.content-section p{font-size:0.95rem;color:#333;margin-bottom:0.8rem}
+.content-section ul{padding-left:1.2rem;margin-bottom:0.8rem}
+.content-section li{font-size:0.95rem;color:#333;margin-bottom:0.4rem}
+details{margin-bottom:0.8rem;border:1px solid #dee2e6;border-radius:6px;overflow:hidden}
+summary{padding:0.8rem 1rem;cursor:pointer;font-weight:600;font-size:0.9rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▼";font-size:0.7rem;color:#888;transition:transform 0.2s}
+details[open] summary::after{transform:rotate(180deg)}
+details[open] summary{background:#e8f5e9}
+.faq-answer{padding:0.8rem 1rem;font-size:0.9rem;color:#333}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem}
+.related-link{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:0.9rem 1rem;font-size:0.88rem;font-weight:500;color:#2d6a4f;display:block;transition:background 0.15s,border-color 0.15s}
+.related-link:hover{background:#e8f5e9;border-color:#a8d5b5;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.5rem;text-align:center;font-size:0.83rem;color:#888}
+footer a{color:#555;margin:0 0.6rem}
+footer a:hover{color:#2d6a4f}
+.formula-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:0.9rem 1.1rem;font-size:0.88rem;color:#333;margin:0.6rem 0;font-family:monospace}
+.total-row td{font-weight:700;background:#e8f5e9!important;color:#2d6a4f}
+.divider{border:none;border-top:1px solid #dee2e6;margin:1.5rem 0}
+@media(max-width:600px){
+  .row2,.row3{grid-template-columns:1fr}
+  .cost-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  .time-grid{grid-template-columns:1fr 1fr}
+  h1{font-size:1.35rem}
+  .big-number{font-size:2.2rem}
+  main{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Concrete Patio Cost Estimator</h1>
+  <p class="subtitle">Calculate materials, labor, and total cost for your concrete patio project.</p>
+
+  <div class="card">
+    <div class="section-title">Patio Dimensions</div>
+
+    <div class="svg-container">
+      <svg id="patioSvg" width="320" height="180" viewBox="0 0 320 180" aria-label="Patio layout diagram">
+        <defs>
+          <pattern id="concretePattern" patternUnits="userSpaceOnUse" width="20" height="20">
+            <rect width="20" height="20" fill="#c8d8c0"/>
+            <line x1="0" y1="10" x2="20" y2="10" stroke="#b0c4a8" stroke-width="0.5"/>
+            <line x1="10" y1="0" x2="10" y2="20" stroke="#b0c4a8" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect x="40" y="30" width="240" height="120" fill="url(#concretePattern)" stroke="#2d6a4f" stroke-width="2.5" rx="2"/>
+        <line x1="40" y1="165" x2="280" y2="165" stroke="#e76f51" stroke-width="1.5" marker-start="url(#arr)" marker-end="url(#arr)"/>
+        <line x1="295" y1="30" x2="295" y2="150" stroke="#e76f51" stroke-width="1.5"/>
+        <line x1="40" y1="165" x2="40" y2="170" stroke="#e76f51" stroke-width="1.5"/>
+        <line x1="280" y1="165" x2="280" y2="170" stroke="#e76f51" stroke-width="1.5"/>
+        <line x1="295" y1="30" x2="290" y2="30" stroke="#e76f51" stroke-width="1.5"/>
+        <line x1="295" y1="150" x2="290" y2="150" stroke="#e76f51" stroke-width="1.5"/>
+        <text id="svgWidth" x="160" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#e76f51">— ft wide —</text>
+        <text id="svgLength" x="308" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#e76f51" transform="rotate(90,308,95)">— ft long —</text>
+        <text x="160" y="95" text-anchor="middle" font-size="14" font-weight="600" fill="#2d6a4f" id="svgSqft">Enter dimensions</text>
+        <text x="160" y="113" text-anchor="middle" font-size="11" fill="#555" id="svgSqftLabel"></text>
+      </svg>
+    </div>
+
+    <div class="row2">
+      <div>
+        <label for="length">Length (feet)</label>
+        <input type="number" id="length" min="1" max="500" placeholder="e.g. 20" value="">
+        <div class="error-msg" id="err-length">Please enter a valid length (1–500 ft)</div>
+      </div>
+      <div>
+        <label for="width">Width (feet)</label>
+        <input type="number" id="width" min="1" max="500" placeholder="e.g. 12" value="">
+        <div class="error-msg" id="err-width">Please enter a valid width (1–500 ft)</div>
+      </div>
+    </div>
+
+    <label for="thickness">Slab Thickness</label>
+    <select id="thickness">
+      <option value="4">4 inches — Standard residential patio</option>
+      <option value="5">5 inches — Heavier use / vehicle access</option>
+      <option value="6">6 inches — Driveway strength</option>
+    </select>
+
+    <label>Waste / Overage Buffer: <span class="range-val" id="wasteVal">10%</span></label>
+    <div class="slider-wrap">
+      <input type="range" id="wasteSlider" min="5" max="20" value="10" step="1">
+      <div class="slider-labels"><span>5% (tight)</span><span>10% (standard)</span><span>20% (safe)</span></div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-title">Finish &amp; Project Options</div>
+
+    <label for="finish">Surface Finish</label>
+    <select id="finish">
+      <option value="broom">Broom Finish (standard, slip-resistant)</option>
+      <option value="stamped">Stamped Concrete (decorative pattern)</option>
+      <option value="exposed">Exposed Aggregate (seeded stones)</option>
+      <option value="polished">Polished / Smooth Finish</option>
+      <option value="colored">Integral Color / Stained</option>
+    </select>
+
+    <label for="rebar">Reinforcement</label>
+    <select id="rebar">
+      <option value="none">No rebar (wire mesh only)</option>
+      <option value="rebar">Rebar #3 (3/8") grid 18" o.c.</option>
+      <option value="rebar4">Rebar #4 (1/2") grid 12" o.c. — heavy duty</option>
+    </select>
+
+    <label for="region">Your Region (affects labor cost)</label>
+    <select id="region">
+      <option value="1.0">National Average</option>
+      <option value="1.25">High Cost (CA, NY, WA, MA)</option>
+      <option value="1.1">Above Average (CO, TX metros, FL)</option>
+      <option value="0.85">Below Average (Midwest, rural)</option>
+      <option value="0.75">Low Cost (rural South, small towns)</option>
+    </select>
+
+    <label for="diy">Project Approach</label>
+    <select id="diy">
+      <option value="contractor">Hire a Contractor (full labor)</option>
+      <option value="partial">DIY Pour + Contractor Form-work</option>
+      <option value="full">Full DIY (you do everything)</option>
+    </select>
+
+    <button class="btn" id="calcBtn">Calculate Patio Cost</button>
+  </div>
+
+  <div class="results card" id="resultsCard">
+    <div class="section-title">
+      Cost Estimate
+      <button class="copy-btn" id="copyBtn">Copy Summary</button>
+    </div>
+
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div class="big-number" id="totalCost">$0</div>
+      <div class="big-label">Estimated Total Project Cost</div>
+      <div style="margin-top:0.5rem" id="costRange"></div>
+    </div>
+
+    <div class="cost-grid" id="costGrid"></div>
+
+    <div class="tbl-wrap">
+      <table id="breakdownTable">
+        <thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Unit</th><th class="r">Cost</th></tr></thead>
+        <tbody id="breakdownBody"></tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-title">Project Time Estimate</div>
+    <div class="time-grid" id="timeGrid"></div>
+
+    <hr class="divider">
+
+    <div class="section-title">
+      Materials Shopping List
+      <button class="copy-btn" id="copyShopBtn">Copy List</button>
+    </div>
+    <div class="shopping-list" id="shoppingList"></div>
+
+    <div class="pro-tip" id="proTipBox">
+      <div class="pro-tip-title">💡 Pro Tip</div>
+      <p id="proTipText"></p>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="content-section">
+    <h2>How to Use This Concrete Patio Cost Estimator</h2>
+    <p>Enter your patio's length and width in feet, select the slab thickness (4" is standard for most residential patios), and choose your surface finish. Adjust the waste buffer slider to account for spills and over-ordering. Select your region and project approach to get an accurate labor estimate. Hit <strong>Calculate Patio Cost</strong> to see a full breakdown including a materials shopping list.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Concrete patios are one of the most popular home improvement projects in the US — and for good reason. A well-poured 12×20 ft patio can add $5,000–$10,000 in home value while costing only $1,800–$4,500 to build. But surprise costs are common. Homeowners regularly underestimate by 20–30% because they forget about sub-base gravel, wire mesh, form lumber, concrete sealers, and finishing labor.</p>
+    <p>For example, a 240 sq ft patio sounds like a weekend project, but you'll need roughly 3 cubic yards of concrete (that's 3 ready-mix trucks or 54 bags of 80 lb mix), plus gravel, mesh, edge forms, and a float finishing tool. Stamped concrete can double the cost of a standard broom finish — sometimes jumping from $6/sq ft to $14/sq ft.</p>
+    <p>This calculator helps you budget confidently before calling contractors, so you can spot inflated quotes and make smarter decisions about DIY vs. hired labor.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The estimator uses these core formulas:</p>
+    <div class="formula-box">Square Footage = Length (ft) × Width (ft)</div>
+    <div class="formula-box">Cubic Yards = (Length × Width × Thickness_inches / 12) / 27</div>
+    <div class="formula-box">Total Cost = Material Cost + Labor Cost + Finish Upcharge</div>
+    <p>Concrete pricing: ~$130–$160/cubic yard for ready-mix (national average). Labor is calculated per square foot at $3.00–$5.50 for standard concrete work, then multiplied by regional and finish type modifiers. Stamped concrete, for instance, adds $6–$9/sq ft for labor and tooling. All figures include the waste percentage you set with the slider.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Always add a sub-base.</strong> 4" of compacted gravel under the slab prevents cracking and settling. Budget $1.50–$2.50/sq ft for this — many first-timers skip it and regret it.</li>
+      <li><strong>Order 10% more concrete than calculated.</strong> Ready-mix trucks charge for partial yards, and running out mid-pour is a disaster. The waste slider handles this automatically.</li>
+      <li><strong>Control joints every 8–10 feet.</strong> Cut or tool control joints before the concrete sets to prevent random cracking. This is free to do but often skipped by DIYers.</li>
+      <li><strong>Cure properly.</strong> Keep fresh concrete moist for at least 7 days with plastic sheeting or curing compound (~$40–$80 for a 400 sq ft patio). Rushing curing leads to weak, dusty surfaces.</li>
+      <li><strong>Get 3 contractor quotes.</strong> Concrete labor pricing varies widely — sometimes 50% between the cheapest and most expensive bid for the exact same job. Always compare.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>How much does a concrete patio cost per square foot?</summary>
+      <div class="faq-answer">A standard broom-finish concrete patio costs $6–$10 per square foot installed, including materials and labor. Stamped concrete runs $12–$18/sq ft, while a basic DIY pour can come in as low as $3–$5/sq ft if you do all the work yourself. Regional labor costs can significantly affect these numbers.</div>
+    </details>
+
+    <details>
+      <summary>How many bags of concrete do I need?</summary>
+      <div class="faq-answer">An 80 lb bag of concrete mix yields approximately 0.60 cubic feet. Divide your total cubic footage (length × width × thickness in feet) by 0.60 to get the number of bags needed. For anything over 1 cubic yard, ready-mix delivery is faster, cheaper per yard, and gives better results than mixing bags.</div>
+    </details>
+
+    <details>
+      <summary>Is a concrete patio a good DIY project?</summary>
+      <div class="faq-answer">Concrete work is physically demanding and time-sensitive — once it starts setting, you can't stop. A small patio under 150 sq ft is manageable for a motivated DIYer with a helper. Larger pours really benefit from professional labor, at minimum for the screeding and finishing. Form-building and prep work are great areas to DIY to save $500–$1,000 on a typical project.</div>
+    </details>
+
+    <details>
+      <summary>Do I need a permit for a concrete patio?</summary>
+      <div class="faq-answer">Most municipalities don't require a permit for a simple ground-level patio under 200 sq ft that isn't attached to the house structure. However, rules vary significantly by city and county. Always check with your local building department before starting — unpermitted work can cause issues when selling your home.</div>
+    </details>
+  </div>
+
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/patio-paver-calculator/" class="related-link">🧱 Patio Paver Calculator</a>
+      <a href="/hardwood-flooring-cost-calculator/" class="related-link">🪵 Hardwood Flooring Cost Calculator</a>
+      <a href="/drywall-sheet-calculator/" class="related-link">📐 Drywall Sheet Calculator</a>
+      <a href="/paint-coverage-calculator/" class="related-link">🎨 Paint Coverage Calculator</a>
+      <a href="/raised-garden-bed-soil-calculator/" class="related-link">🌱 Raised Garden Bed Soil Calculator</a>
+      <a href="/ceiling-fan-size-calculator/" class="related-link">💨 Ceiling Fan Size Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div style="margin-bottom:0.5rem">
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  © <span id="yr"></span> toolhut.dev — Free Online Tools
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const wasteSlider = document.getElementById('wasteSlider');
+const wasteVal = document.getElementById('wasteVal');
+wasteSlider.addEventListener('input', () => { wasteVal.textContent = wasteSlider.value + '%'; });
+
+function fmt(n, dec=0){ return n.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+function fmtD(n){ return '$' + fmt(n,0); }
+function fmtD2(n){ return '$' + fmt(n,2); }
+
+function clearErrors(){
+  ['length','width'].forEach(id=>{
+    document.getElementById(id).classList.remove('error-field');
+    document.getElementById('err-'+id).classList.remove('show');
+  });
+}
+
+function showError(id, msg){
+  const el = document.getElementById(id);
+  el.classList.add('error-field');
+  const err = document.getElementById('err-'+id);
+  err.textContent = msg || err.textContent;
+  err.classList.add('show');
+}
+
+function calculate(){
+  clearErrors();
+  const L = parseFloat(document.getElementById('length').value);
+  const W = parseFloat(document.getElementById('width').value);
+  let valid = true;
+  if(!L || L <= 0 || L > 500){ showError('length','Please enter a valid length (1–500 ft)'); valid=false; }
+  if(!W || W <= 0 || W > 500){ showError('width','Please enter a valid width (1–500 ft)'); valid=false; }
+  if(!valid) return;
+
+  const thickness = parseInt(document.getElementById('thickness').value);
+  const waste = parseFloat(wasteSlider.value) / 100;
+  const finish = document.getElementById('finish').value;
+  const rebar = document.getElementById('rebar').value;
+  const region = parseFloat(document.getElementById('region').value);
+  const diy = document.getElementById('diy').value;
+
+  const sqft = L * W;
+  const cubicFt = L * W * (thickness / 12);
+  const cubicYds = cubicFt / 27;
+  const cubicYdsWithWaste = cubicYds * (1 + waste);
+
+  // Concrete cost
+  const concretePricePerYd = 145; // avg ready-mix
+  const concreteCost = cubicYdsWithWaste * concretePricePerYd;
+
+  // Gravel base (4" compacted, ~1.5 ton per 100 sqft)
+  const gravelTons = (sqft / 100) * 1.5 * (1 + waste);
+  const gravelCost = gravelTons * 35; // ~$35/ton delivered
+
+  // Wire mesh / rebar
+  let meshCost = 0;
+  let meshDesc = '';
+  let rebarPcs = 0;
+  const meshSheets = Math.ceil(sqft / 20); // each sheet covers ~20 sqft
+  if(rebar === 'none'){
+    meshCost = meshSheets * 9.5; // wire mesh sheets
+    meshDesc = 'Wire Mesh (6×6 W1.4)';
+  } else if(rebar === 'rebar'){
+    rebarPcs = Math.ceil((sqft / 18) * 2 * 1.1); // approx
+    meshCost = rebarPcs * 4.8;
+    meshDesc = 'Rebar #3 (3/8") sticks';
+  } else {
+    rebarPcs = Math.ceil((sqft / 12) * 2 * 1.1);
+    meshCost = rebarPcs * 7.2;
+    meshDesc = 'Rebar #4 (1/2") sticks';
+  }
+
+  // Form lumber (2×4s around perimeter)
+  const perimeter = 2 * (L + W);
+  const formBoardsFt = Math.ceil(perimeter * 1.15);
+  const formBoardsCost = (formBoardsFt / 8) * 6.5; // 8ft 2×4 @ $6.50
+
+  // Stakes
+  const stakes = Math.ceil(perimeter / 2);
+  const stakesCost = stakes * 0.85;
+
+  // Finish upcharges per sqft (labor + materials)
+  const finishUpcharge = {broom:0, stamped:8.5, exposed:4.0, polished:5.5, colored:3.0};
+  const finishLaborBase = {broom:4.5, stamped:10.0, exposed:7.5, polished:8.0, colored:6.0};
+
+  // Labor
+  const laborBase = finishLaborBase[finish];
+  let laborMultiplier = 1.0;
+  if(diy === 'contractor') laborMultiplier = 1.0;
+  else if(diy === 'partial') laborMultiplier = 0.45;
+  else laborMultiplier = 0.08; // just equipment rental factor
+
+  const laborCost = sqft * laborBase * region * laborMultiplier;
+
+  // Sealer
+  const sealerGallons = Math.ceil(sqft / 200);
+  const sealerCost = sealerGallons * 38;
+
+  // Equipment rental (if DIY)
+  let equipCost = 0;
+  let equipDesc = '';
+  if(diy === 'full'){
+    equipCost = 180 + (sqft > 200 ? 120 : 0);
+    equipDesc = 'Concrete mixer, screed, float rental';
+  } else if(diy === 'partial'){
+    equipCost = 80;
+    equipDesc = 'Float & finishing tool rental';
+  }
+
+  // Control joint saw rental (if DIY)
+  const sawRental = (diy !== 'contractor') ? 65 : 0;
+
+  const materialTotal = concreteCost + gravelCost + meshCost + formBoardsCost + stakesCost + sealerCost + equipCost + sawRental;
+  const totalCost = materialTotal + laborCost;
+
+  // Low/high range ±15%
+  const lowCost = totalCost * 0.87;
+  const highCost = totalCost * 1.18;
+
+  // Bags alternative (if small pour)
+  const bags80lb = Math.ceil((cubicFt * (1+waste)) / 0.60);
+
+  // Time estimate
+  let begTime, expTime;
+  if(sqft <= 100){ begTime='1–2 weekends'; expTime='1 day'; }
+  else if(sqft <= 250){ begTime='2–3 weekends'; expTime='1–2 days'; }
+  else if(sqft <= 500){ begTime='3–4 weekends'; expTime='2–3 days'; }
+  else { begTime='4+ weekends (hire out!)'; expTime='3–5 days'; }
+
+  // Pro tip
+  const tips = {
+    broom: "Broom-finish while the concrete has lost its sheen but before it sets firm — usually 2–4 hours after pour depending on temperature. Too early and you'll gouge it; too late and it won't texture.",
+    stamped: "Rent or buy the stamp mats before pouring day — don't try to source them after the truck arrives! Color hardener goes on as the bleed water disappears, then stamps get pressed in sequence while the slab is still workable.",
+    exposed: "For exposed aggregate, seed the stones evenly and embed them with a hand roller right after the pour. Spray the retarder and cover with plastic overnight, then pressure wash the cream off in the morning.",
+    polished: "A smooth finish requires more skill than broom work. Use a steel trowel in overlapping passes as the concrete stiffens. A power trowel rental (~$150/day) makes this much easier on larger slabs.",
+    colored: "Integral color is mixed into the concrete — order it pre-mixed from the plant. Always do a test batch first; the cured color will be lighter than the wet color. Seal it within 28 days to protect the pigment."
+  };
+
+  // Shopping list
+  const shopItems = [
+    { name: 'Ready-Mix Concrete', qty: fmt(cubicYdsWithWaste,1)+' cu yds', price: fmtD(concreteCost), note:'Or '+bags80lb+' bags of 80lb mix' },
+    { name: 'Crushed Gravel (3/4" base)', qty: fmt(gravelTons,1)+' tons', price: fmtD(gravelCost), note:'4" compacted sub-base' },
+    { name: meshDesc || 'Wire Mesh / Rebar', qty: rebar==='none'? meshSheets+' sheets': rebarPcs+' sticks', price: fmtD(meshCost), note:'Reinforcement' },
+    { name: 'Form Boards (2×4 lumber)', qty: formBoardsFt+' linear ft', price: fmtD(formBoardsCost), note:'Perimeter forms' },
+    { name: 'Wooden Stakes', qty: stakes+' stakes', price: fmtD(stakesCost), note:'Hold form boards' },
+    { name: 'Concrete Sealer', qty: sealerGallons+' gallon'+(sealerGallons>1?'s':''), price: fmtD(sealerCost), note:'Apply after 28 days' },
+  ];
+  if(equipCost > 0) shopItems.push({ name: equipDesc||'Equipment Rental', qty:'1 rental', price: fmtD(equipCost), note:'Call ahead to reserve' });
+  if(sawRental > 0) shopItems.push({ name:'Control Joint Saw Rental', qty:'1 day', price: fmtD(sawRental), note:'Cut joints within 24 hrs of pour' });
+
+  // Build HTML
+  const finishNames = {broom:'Broom Finish',stamped:'Stamped Concrete',exposed:'Exposed Aggregate',polished:'Polished/Smooth',colored:'Integral Color'};
+  const diyNames = {contractor:'Full Contractor',partial:'Partial DIY',full:'Full DIY'};
+
+  const costGridHTML = `
+    <div class="cost-box accent"><div class="num">${fmtD(materialTotal)}</div><div class="lbl">Materials &amp; Equipment</div></div>
+    <div class="cost-box"><div class="num">${fmtD(laborCost)}</div><div class="lbl">Labor (${diyNames[diy]})</div></div>
+    <div class="cost-box"><div class="num">${fmt(sqft,0)} sq ft</div><div class="lbl">Total Area</div></div>
+    <div class="cost-box"><div class="num">${fmtD(Math.round(totalCost/sqft))}/sq ft</div><div class="lbl">Cost Per Square Foot</div></div>
+  `;
+
+  const rows = [
+    ['Ready-Mix Concrete', fmt(cubicYdsWithWaste,1)+' cu yd', fmtD2(concretePricePerYd)+'/yd', fmtD(concreteCost)],
+    ['Gravel Sub-Base (4")', fmt(gravelTons,1)+' tons', '$35.00/ton', fmtD(gravelCost)],
+    [meshDesc, rebar==='none'? meshSheets+' sheets': rebarPcs+' pcs', rebar==='none'?'$9.50/sheet':rebar==='rebar'?'$4.80/stick':'$7.20/stick', fmtD(meshCost)],
+    ['Form Boards (2×4)', formBoardsFt+' lin ft', '$6.50/8ft bd', fmtD(formBoardsCost)],
+    ['Wooden Stakes', stakes+' pcs', '$0.85/ea', fmtD(stakesCost)],
+    ['Concrete Sealer', sealerGallons+' gal', '$38.00/gal', fmtD(sealerCost)],
+  ];
+  if(equipCost>0) rows.push([equipDesc||'Equipment Rental','1 rental','—',fmtD(equipCost)]);
+  if(sawRental>0) rows.push(['Control Joint Saw','1 day','—',fmtD(sawRental)]);
+  if(finishUpcharge[finish]>0) rows.push(['Finish Upcharge ('+finishNames[finish]+')',sqft+' sq ft', fmtD2(finishUpcharge[finish])+'/sq ft','(incl. in labor)']);
+  rows.push(['Labor ('+finishNames[finish]+', '+diyNames[diy]+')',sqft+' sq ft', fmtD2(laborBase*region*laborMultiplier)+'/sq ft',fmtD(laborCost)]);
+
+  let tbodyHTML = '';
+  rows.forEach(r=>{
+    tbodyHTML += `<tr><td>${r[0]}</td><td class="r">${r[1]}</td><td class="r">${r[2]}</td><td class="r">${r[3]}</td></tr>`;
+  });
+  tbodyHTML += `<tr class="total-row"><td><strong>TOTAL ESTIMATE</strong></td><td class="r" colspan="2"></td><td class="r"><strong>${fmtD(totalCost)}</strong></td></tr>`;
+
+  const timeGridHTML = `
+    <div class="time-box"><div class="time-num">${begTime}</div><div class="time-lbl">👷 Beginner / First Timer</div></div>
+    <div class="time-box"><div class="time-num">${expTime}</div><div class="time-lbl">🏆 Experienced / Contractor</div></div>
+  `;
+
+  let shopHTML = '';
+  shopItems.forEach(item=>{
+    shopHTML += `<div class="shop-item"><div><div class="shop-item-name">${item.name}</div><div style="font-size:0.78rem;color:#888">${item.note}</div></div><div style="text-align:right"><div class="shop-item-qty">${item.qty}</div><div class="shop-item-price">${item.price}</div></div></div>`;
+  });
+
+  requestAnimationFrame(() => {
+    document.getElementById('totalCost').textContent = fmtD(totalCost);
+    document.getElementById('costRange').innerHTML = `<span class="badge badge-green">Low: ${fmtD(lowCost)}</span> &nbsp; <span class="badge badge-orange">High: ${fmtD(highCost)}</span>`;
+    document.getElementById('costGrid').innerHTML = costGridHTML;
+    document.getElementById('breakdownBody').innerHTML = tbodyHTML;
+    document.getElementById('timeGrid').innerHTML = timeGridHTML;
+    document.getElementById('shoppingList').innerHTML = shopHTML;
+    document.getElementById('proTipText').textContent = tips[finish];
+
+    // Update SVG
+    const svgW = Math.min(240, Math.max(60, (W/Math.max(L,W))*220 + 20));
+    const svgH = Math.min(120, Math.max(40, (L/Math.max(L,W))*100 + 20));
+    const cx = 40 + (240-svgW)/2;
+    const cy = 30 + (120-svgH)/2;
+    const rect = document.querySelector('#patioSvg rect:first-of-type');
+    if(rect){ rect.setAttribute('x',cx); rect.setAttribute('y',cy); rect.setAttribute('width',svgW); rect.setAttribute('height',svgH); }
+    document.getElementById('svgWidth').setAttribute('x', cx+svgW/2);
+    document.getElementById('svgWidth').setAttribute('y', cy+svgH+25);
+    document.getElementById('svgWidth').textContent = W+'\'';
+    document.getElementById('svgLength').setAttribute('x', cx+svgW+22);
+    document.getElementById('svgLength').setAttribute('y', cy+svgH/2);
+    document.getElementById('svgLength').textContent = L+'\'';
+    document.getElementById('svgSqft').setAttribute('x', cx+svgW/2);
+    document.getElementById('svgSqft').setAttribute('y', cy+svgH/2-4);
+    document.getElementById('svgSqft').textContent = fmt(sqft,0)+' sq ft';
+    document.getElementById('svgSqftLabel').setAttribute('x', cx+svgW/2);
+    document.getElementById('svgSqftLabel').setAttribute('y', cy+svgH/2+14);
+    document.getElementById('svgSqftLabel').textContent = fmt(cubicYdsWithWaste,1)+' cu yds concrete';
+
+    const resultsCard = document.getElementById('resultsCard');
+    resultsCard.classList.add('visible');
+    resultsCard.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+    // Store summary for copy
+    window._summary = `CONCRETE PATIO COST ESTIMATE\n${'='.repeat(35)}\nDimensions: ${L}' × ${W}' = ${fmt(sqft,0)} sq ft\nThickness: ${thickness}"\nFinish: ${finishNames[finish]}\nApproach: ${diyNames[diy]}\n\nMaterials: ${fmtD(materialTotal)}\nLabor: ${fmtD(laborCost)}\nTOTAL: ${fmtD(totalCost)}\nRange: ${fmtD(lowCost)} – ${fmtD(highCost)}\n\nConcrete needed: ${fmt(cubicYdsWithWaste,1)} cu yds\nGravel: ${fmt(gravelTons,1)} tons`;
+    window._shopSummary = 'SHOPPING LIST\n' + shopItems.map(i=>`${i.name}: ${i.qty} (${i.price})`).join('\n');
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', calculate);
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter'){
+    const focused = document.activeElement;
+    if(['length','width','thickness','finish','rebar','region','diy'].includes(focused.id) || focused.id === 'wasteSlider'){
+      calculate();
+    }
+  }
+});
+
+// Copy buttons
+document.getElementById('copyBtn').addEventListener('click', function(){
+  if(!window._summary) return;
+  navigator.clipboard.writeText(window._summary).then(()=>{
+    this.textContent = 'Copied!';
+    this.classList.add('copied');
+    setTimeout(()=>{ this.textContent='Copy Summary'; this.classList.remove('copied'); },2000);
+  });
+});
+document.getElementById('copyShopBtn').addEventListener('click', function(){
+  if(!window._shopSummary) return;
+  navigator.clipboard.writeText(window._shopSummary).then(()=>{
+    this.textContent = 'Copied!';
+    this.classList.add('copied');
+    setTimeout(()=>{ this.textContent='Copy List'; this.classList.remove('copied'); },2000);
+  });
+});
+</script>
+</body>
+</html>
