@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hardwood Flooring Cost Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate hardwood flooring costs instantly. Get material, labor, and total cost estimates with a shopping list for your next flooring project.">
+<link rel="canonical" href="https://toolhut.dev/hardwood-flooring-cost-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hardwood Flooring Cost Calculator",
+  "url": "https://toolhut.dev/hardwood-flooring-cost-calculator/",
+  "description": "Calculate hardwood flooring costs instantly. Get material, labor, and total cost estimates with a shopping list for your next flooring project.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#2d6a4f;margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:.04em}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem}
+.field{margin-bottom:1rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem}
+input,select{width:100%;border:1px solid #dee2e6;border-radius:6px;padding:12px 16px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.12)}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem}
+.slider-row{display:flex;align-items:center;gap:.8rem}
+.slider-row input[type=range]{flex:1;padding:0;border:none;box-shadow:none;min-height:auto;accent-color:#2d6a4f}
+.slider-val{font-weight:700;color:#2d6a4f;min-width:52px;text-align:right;font-size:.95rem}
+.btn{background:#2d6a4f;color:#fff;border:none;border-radius:6px;padding:12px 24px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:48px;transition:background .2s}
+.btn:hover{background:#245a42}
+.btn-secondary{background:#e76f51;color:#fff;border:none;border-radius:6px;padding:8px 18px;font-size:.9rem;font-weight:600;cursor:pointer;border-radius:6px;transition:background .2s;min-height:44px}
+.btn-secondary:hover{background:#d45f41}
+.results{display:none;opacity:0;transition:opacity .3s ease}
+.results.show{display:block;animation:fadeIn .3s ease forwards}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.key-number{font-size:2.6rem;font-weight:800;color:#2d6a4f;line-height:1}
+.key-label{font-size:.9rem;color:#666;margin-top:.25rem}
+.key-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.key-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.key-box.accent{background:#fff5f2;border-color:#e76f51}
+.key-box.accent .key-number{color:#e76f51}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+thead th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444}
+thead th:last-child{text-align:right}
+tbody tr:nth-child(even){background:#fafafa}
+tbody td{padding:9px 12px;border-bottom:1px solid #f0f0f0}
+tbody td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+tfoot td{padding:9px 12px;font-weight:700;border-top:2px solid #dee2e6}
+tfoot td:last-child{text-align:right;color:#2d6a4f;font-size:1.05rem}
+.pro-tip{background:#fff8e1;border-left:4px solid #f4a261;border-radius:6px;padding:1rem 1.2rem;margin-bottom:1.5rem}
+.pro-tip-title{font-weight:700;color:#e07b39;font-size:.9rem;margin-bottom:.3rem}
+.pro-tip p{font-size:.9rem;color:#5a3e28}
+.shopping-list{margin-bottom:1.5rem}
+.shop-item{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid #f0f0f0;font-size:.9rem}
+.shop-item:last-child{border-bottom:none}
+.shop-item-name{font-weight:500}
+.shop-item-qty{color:#2d6a4f;font-weight:700}
+.shop-item-cost{color:#666;font-size:.82rem}
+.time-box{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.time-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.time-icon{font-size:1.5rem;margin-bottom:.3rem}
+.time-label{font-size:.78rem;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.time-val{font-size:1.1rem;font-weight:700;color:#2d6a4f;margin-top:.2rem}
+.copy-btn{background:none;border:1px solid #dee2e6;border-radius:5px;padding:5px 12px;font-size:.8rem;cursor:pointer;color:#555;transition:all .2s;margin-top:.8rem}
+.copy-btn:hover{border-color:#2d6a4f;color:#2d6a4f}
+.diagram-area{background:#f0f7f4;border:1px solid #b7dac8;border-radius:8px;padding:1rem;margin-bottom:1.5rem;text-align:center}
+.diagram-label{font-size:.78rem;color:#555;margin-top:.5rem}
+svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin:1.5rem 0 .6rem}
+.content-section p{font-size:.95rem;color:#444;margin-bottom:.8rem}
+.content-section ul{padding-left:1.2rem;margin-bottom:.8rem}
+.content-section li{font-size:.95rem;color:#444;margin-bottom:.35rem}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem;background:#fff}
+summary{padding:.75rem 1rem;cursor:pointer;font-weight:600;font-size:.95rem;color:#2d6a4f;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶ ';font-size:.7rem;margin-right:.3rem}
+details[open] summary::before{content:'▼ '}
+details p{padding:.5rem 1rem .9rem;font-size:.9rem;color:#444}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem}
+.related-link{display:block;background:#fff;border:1px solid #dee2e6;border-radius:6px;padding:.7rem 1rem;font-size:.88rem;font-weight:500;color:#2d6a4f;transition:border-color .2s,background .2s}
+.related-link:hover{border-color:#2d6a4f;background:#f0f7f4;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.2rem 1.5rem;margin-top:2rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.5rem}
+.footer-links{display:flex;gap:1rem;flex-wrap:wrap}
+.footer-links a{font-size:.85rem;color:#555}
+.footer-copy{font-size:.82rem;color:#999}
+.bar-chart{margin:1rem 0}
+.bar-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem;font-size:.85rem}
+.bar-label{width:110px;text-align:right;color:#555;flex-shrink:0}
+.bar-track{flex:1;background:#f0f0f0;border-radius:4px;height:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .5s ease;background:#2d6a4f}
+.bar-fill.orange{background:#e76f51}
+.bar-amt{width:80px;text-align:right;font-weight:600;color:#1a1a2e;flex-shrink:0}
+@media(max-width:640px){
+  .row,.row-3{grid-template-columns:1fr}
+  .key-grid{grid-template-columns:1fr}
+  .time-box{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  .key-number{font-size:2rem}
+  h1{font-size:1.35rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🏠 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Hardwood Flooring Cost Calculator</h1>
+  <p class="subtitle">Get accurate material, labor, and total cost estimates for your hardwood flooring project.</p>
+
+  <div class="card">
+    <div class="section-title">Room Dimensions</div>
+    <div class="row">
+      <div class="field">
+        <label for="length">Room Length (ft)</label>
+        <input type="number" id="length" placeholder="e.g. 14" min="1" max="500">
+        <div class="error-msg" id="length-err"></div>
+      </div>
+      <div class="field">
+        <label for="width">Room Width (ft)</label>
+        <input type="number" id="width" placeholder="e.g. 12" min="1" max="500">
+        <div class="error-msg" id="width-err"></div>
+      </div>
+    </div>
+
+    <div class="section-title">Flooring Options</div>
+    <div class="row">
+      <div class="field">
+        <label for="woodType">Wood Type</label>
+        <select id="woodType">
+          <option value="3.5">Budget Engineered ($3.50/sq ft)</option>
+          <option value="5.5" selected>Mid-Range Solid Oak ($5.50/sq ft)</option>
+          <option value="7.5">Premium Hickory/Maple ($7.50/sq ft)</option>
+          <option value="11">Exotic Hardwood ($11.00/sq ft)</option>
+          <option value="custom">Custom price…</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="customPrice" id="customPriceLabel" style="color:#aaa">Custom Price ($/sq ft)</label>
+        <input type="number" id="customPrice" placeholder="Enter price" min="0.5" max="100" step="0.25" disabled style="opacity:.45">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="installType">Installation Method</label>
+      <select id="installType">
+        <option value="0">DIY — No Labor Cost</option>
+        <option value="3" selected>Professional — Standard ($3.00/sq ft)</option>
+        <option value="5">Professional — Complex/Diagonal ($5.00/sq ft)</option>
+        <option value="custom_labor">Custom labor rate…</option>
+      </select>
+    </div>
+    <div class="field" id="customLaborField" style="display:none">
+      <label>Custom Labor Rate ($/sq ft)</label>
+      <input type="number" id="customLabor" placeholder="Enter labor rate" min="0" max="50" step="0.25">
+    </div>
+
+    <div class="field">
+      <label>Waste Factor: <span id="wasteDisplay">10%</span></label>
+      <div class="slider-row">
+        <input type="range" id="wasteFactor" min="5" max="20" value="10" step="1">
+        <span class="slider-val" id="wasteVal">10%</span>
+      </div>
+      <div style="font-size:.78rem;color:#888;margin-top:.3rem">Standard rooms: 10% | Diagonal/complex: 15–20%</div>
+    </div>
+
+    <div class="section-title">Additional Options</div>
+    <div class="row-3">
+      <div class="field">
+        <label for="subfloor">Subfloor Prep</label>
+        <select id="subfloor">
+          <option value="0">None needed</option>
+          <option value="0.75">Light prep ($0.75/sq ft)</option>
+          <option value="1.5">Heavy prep ($1.50/sq ft)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="underlayment">Underlayment</label>
+        <select id="underlayment">
+          <option value="0">None (solid wood)</option>
+          <option value="0.4" selected>Standard ($0.40/sq ft)</option>
+          <option value="0.85">Premium ($0.85/sq ft)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="trim">Trim & Transitions</label>
+        <select id="trim">
+          <option value="0">None</option>
+          <option value="100">Basic ($100)</option>
+          <option value="250" selected>Standard ($250)</option>
+          <option value="500">Premium ($500)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" onclick="requestAnimationFrame(calculate)">Calculate Flooring Cost</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+
+    <div class="card">
+      <div class="section-title">Project Summary</div>
+      <div class="key-grid" id="keyGrid"></div>
+
+      <div class="diagram-area" id="diagramArea">
+        <svg id="roomSvg" width="100%" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="diagram-label" id="diagramLabel"></div>
+      </div>
+
+      <div class="bar-chart" id="barChart"></div>
+
+      <table id="costTable">
+        <thead><tr><th>Line Item</th><th>Details</th><th>Cost</th></tr></thead>
+        <tbody id="costBody"></tbody>
+        <tfoot id="costFoot"></tfoot>
+      </table>
+
+      <button class="copy-btn" id="copyBtn" onclick="copyResults()">📋 Copy Summary</button>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Time Estimate</div>
+      <div class="time-box" id="timeBox"></div>
+
+      <div class="pro-tip">
+        <div class="pro-tip-title">🔨 Pro Tip</div>
+        <p id="proTipText"></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">🛒 Materials Shopping List</div>
+      <div id="shoppingList"></div>
+      <button class="copy-btn" id="copyShopBtn" onclick="copyShoppingList()">📋 Copy Shopping List</button>
+    </div>
+
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT -->
+  <div class="content-section card">
+    <h2>How to Use This Hardwood Flooring Cost Calculator</h2>
+    <p>Enter your room's length and width in feet, choose your wood type and installation method, then adjust the waste factor slider to match your project complexity. Click <strong>Calculate Flooring Cost</strong> to instantly see your material costs, labor estimate, and a full shopping list.</p>
+    <p>The tool also factors in underlayment, subfloor prep, and trim — the costs that often surprise homeowners at the hardware store.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Hardwood flooring is one of the highest-ROI home improvements you can make — studies show it can return 70–80% of the installation cost in resale value. But costs vary enormously: a 200 sq ft bedroom using budget engineered wood with DIY installation might run $900, while the same room with exotic hardwood and professional installation could exceed $3,500.</p>
+    <p>The waste factor alone catches many first-timers off-guard. A standard rectangular room needs about 10% extra material to account for cuts and unusable pieces. If you're going diagonal or have an irregular room shape, bump that to 15–20%. Buying short on your first order is costly — it's often impossible to match the exact stain lot later.</p>
+    <p>Labor costs also vary by region and complexity. In major metro areas, expect $4–6/sq ft. In smaller markets, $2.50–3.50 is typical. Herringbone or diagonal patterns can add 30–50% to labor time.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>Net Area</strong> = Length (ft) × Width (ft)</p>
+    <p><strong>Purchase Area</strong> = Net Area × (1 + Waste Factor %)</p>
+    <p><strong>Material Cost</strong> = Purchase Area × Price per sq ft</p>
+    <p><strong>Labor Cost</strong> = Net Area × Labor Rate per sq ft</p>
+    <p><strong>Total Project Cost</strong> = Material + Labor + Underlayment + Subfloor Prep + Trim & Transitions</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Acclimate your wood:</strong> Let hardwood planks sit in the room for 3–5 days before installation so they adjust to humidity — skipping this causes gaps and buckling.</li>
+      <li><strong>Don't under-order:</strong> Always add at least 10% for waste. Dye lots differ, and matching boards from a future purchase is nearly impossible.</li>
+      <li><strong>Measure twice:</strong> Measure the room at multiple points — rooms that look square often aren't. Use the longest dimensions.</li>
+      <li><strong>Check your subfloor:</strong> Squeaks, soft spots, or high/low points need addressing before installation. A $0.75/sq ft prep now prevents expensive repairs later.</li>
+      <li><strong>Budget for the "invisible" costs:</strong> Trim, transitions, nails/staples, and adhesive can add $300–600 to a typical project — this calculator includes them.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How much does hardwood flooring cost on average?</summary>
+      <p>In the US, expect to pay $6–12 per square foot installed for mid-range solid hardwood, or $4–8/sq ft for engineered hardwood. A 200 sq ft bedroom typically runs $1,200–$2,400 fully installed. Premium or exotic species can push costs to $15+/sq ft.</p>
+    </details>
+    <details>
+      <summary>Should I choose solid or engineered hardwood?</summary>
+      <p>Solid hardwood (¾" thick) can be sanded and refinished many times and typically lasts 50+ years, but it's sensitive to moisture and can't go in basements. Engineered hardwood has a real wood veneer over plywood — it's more moisture-resistant and easier to install, but can only be refinished 1–3 times. For ground-level or below-grade rooms, always choose engineered.</p>
+    </details>
+    <details>
+      <summary>Can I install hardwood flooring myself?</summary>
+      <p>Yes — DIY installation can save $2–5/sq ft in labor, roughly $400–$1,000 on a typical room. However, it requires renting a floor nailer (~$50/day), proper subfloor prep, and patience for the acclimation period. Most beginners can complete a straightforward rectangular room in a weekend.</p>
+    </details>
+    <details>
+      <summary>What's the best waste factor to use?</summary>
+      <p>Use 10% for simple rectangular rooms with straight-line installation. Use 15% for rooms with multiple doorways, angles, or closets. Use 20% for diagonal, herringbone, or chevron patterns — these patterns require far more cuts per row.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Related Tools</div>
+    <div class="related-grid">
+      <a href="/ceiling-fan-size-calculator/" class="related-link">🌀 Ceiling Fan Size Calculator</a>
+      <a href="/raised-garden-bed-soil-calculator/" class="related-link">🌱 Raised Garden Bed Soil Calculator</a>
+      <a href="/drywall-sheet-calculator/" class="related-link">🧱 Drywall Sheet Calculator</a>
+      <a href="/patio-paver-calculator/" class="related-link">🟫 Patio Paver Calculator</a>
+      <a href="/paint-coverage-calculator/" class="related-link">🎨 Paint Coverage Calculator</a>
+      <a href="/deck-board-calculator/" class="related-link">🪵 Deck Board Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <span class="footer-copy">© 2025 toolhut.dev</span>
+  </div>
+</footer>
+
+<script>
+// Waste factor slider
+const wasteSlider = document.getElementById('wasteFactor');
+const wasteVal = document.getElementById('wasteVal');
+wasteSlider.addEventListener('input', () => {
+  wasteVal.textContent = wasteSlider.value + '%';
+  document.getElementById('wasteDisplay').textContent = wasteSlider.value + '%';
+});
+
+// Wood type custom
+document.getElementById('woodType').addEventListener('change', function() {
+  const cp = document.getElementById('customPrice');
+  const lbl = document.getElementById('customPriceLabel');
+  if (this.value === 'custom') {
+    cp.disabled = false; cp.style.opacity = '1'; lbl.style.color = '#444';
+  } else {
+    cp.disabled = true; cp.style.opacity = '.45'; lbl.style.color = '#aaa';
+  }
+});
+
+// Install type custom
+document.getElementById('installType').addEventListener('change', function() {
+  const f = document.getElementById('customLaborField');
+  f.style.display = this.value === 'custom_labor' ? 'block' : 'none';
+});
+
+// Enter key
+document.querySelectorAll('input,select').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') requestAnimationFrame(calculate); });
+});
+
+let lastResults = null;
+
+function fmt(n, dec=2) { return n.toLocaleString('en-US', {minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+function fmtInt(n) { return Math.ceil(n).toLocaleString('en-US'); }
+function dollarFmt(n) { return '$' + fmt(n); }
+
+function validate() {
+  let ok = true;
+  ['length','width'].forEach(id => {
+    const el = document.getElementById(id);
+    const err = document.getElementById(id+'-err');
+    el.classList.remove('error');
+    err.textContent = '';
+    const v = parseFloat(el.value);
+    if (!el.value || isNaN(v) || v <= 0) {
+      el.classList.add('error');
+      err.textContent = 'Please enter a valid number greater than 0.';
+      ok = false;
+    } else if (v > 500) {
+      el.classList.add('error');
+      err.textContent = 'Value seems too large. Max is 500 ft.';
+      ok = false;
+    }
+  });
+  return ok;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const length = parseFloat(document.getElementById('length').value);
+  const width = parseFloat(document.getElementById('width').value);
+  const woodSel = document.getElementById('woodType');
+  let woodPrice = woodSel.value === 'custom'
+    ? (parseFloat(document.getElementById('customPrice').value) || 5.5)
+    : parseFloat(woodSel.value);
+  if (isNaN(woodPrice) || woodPrice <= 0) woodPrice = 5.5;
+
+  const installSel = document.getElementById('installType');
+  let laborRate = installSel.value === 'custom_labor'
+    ? (parseFloat(document.getElementById('customLabor').value) || 0)
+    : parseFloat(installSel.value);
+  if (isNaN(laborRate)) laborRate = 0;
+
+  const wastePct = parseInt(wasteSlider.value) / 100;
+  const subfloorRate = parseFloat(document.getElementById('subfloor').value);
+  const underRate = parseFloat(document.getElementById('underlayment').value);
+  const trimCost = parseFloat(document.getElementById('trim').value);
+
+  const netArea = length * width;
+  const purchaseArea = netArea * (1 + wastePct);
+
+  const materialCost = purchaseArea * woodPrice;
+  const laborCost = netArea * laborRate;
+  const underCost = underRate > 0 ? purchaseArea * underRate : 0;
+  const subfloorCost = subfloorRate > 0 ? netArea * subfloorRate : 0;
+  const totalCost = materialCost + laborCost + underCost + subfloorCost + trimCost;
+
+  // Boxes count
+  const sqftPerBox = 20; // typical box
+  const boxesNeeded = Math.ceil(purchaseArea / sqftPerBox);
+
+  lastResults = {length, width, netArea, purchaseArea, woodPrice, laborRate, wastePct, materialCost, laborCost, underCost, subfloorCost, trimCost, totalCost, boxesNeeded, sqftPerBox, subfloorRate, underRate};
+
+  // Build key grid
+  const keyHtml = `
+    <div class="key-box">
+      <div class="key-number">${fmt(netArea,0)}</div>
+      <div class="key-label">Net Sq Ft</div>
+    </div>
+    <div class="key-box">
+      <div class="key-number">${fmt(purchaseArea,0)}</div>
+      <div class="key-label">Purchase Sq Ft (+${(wastePct*100).toFixed(0)}% waste)</div>
+    </div>
+    <div class="key-box accent">
+      <div class="key-number">${dollarFmt(totalCost)}</div>
+      <div class="key-label">Total Project Cost</div>
+    </div>`;
+
+  // SVG diagram
+  const svgW = 300, svgH = 200, pad = 30;
+  const ratio = length / width;
+  let rW, rH;
+  if (ratio >= 1) {
+    rW = Math.min(220, svgW - pad*2);
+    rH = Math.round(rW / ratio);
+    if (rH > svgH - pad*2) { rH = svgH - pad*2; rW = Math.round(rH * ratio); }
+  } else {
+    rH = Math.min(140, svgH - pad*2);
+    rW = Math.round(rH * ratio);
+    if (rW > svgW - pad*2) { rW = svgW - pad*2; rH = Math.round(rW / ratio); }
+  }
+  const rx = (svgW - rW) / 2, ry = (svgH - rH) / 2;
+  // Plank lines
+  let planks = '';
+  const plankW = Math.max(10, Math.round(rW / Math.max(3, Math.round(rW/35))));
+  for (let x = rx; x < rx + rW; x += plankW) {
+    planks += `<rect x="${x}" y="${ry}" width="${Math.min(plankW-2, rx+rW-x)}" height="${rH}" fill="${x === rx ? '#c8a165' : (Math.floor((x-rx)/plankW) % 3 === 1 ? '#b8904f' : '#d4a96a')}" rx="1"/>`;
+  }
+  const svgContent = `
+    <rect x="${rx-2}" y="${ry-2}" width="${rW+4}" height="${rH+4}" fill="#8B6914" rx="3"/>
+    ${planks}
+    <rect x="${rx}" y="${ry}" width="${rW}" height="${rH}" fill="none" stroke="#2d6a4f" stroke-width="2.5" rx="1"/>
+    <line x1="${rx}" y1="${ry-12}" x2="${rx+rW}" y2="${ry-12}" stroke="#555" stroke-width="1.5" marker-start="url(#arr)" marker-end="url(#arr)"/>
+    <text x="${rx+rW/2}" y="${ry-16}" text-anchor="middle" font-size="11" fill="#333">${length} ft</text>
+    <line x1="${rx+rW+12}" y1="${ry}" x2="${rx+rW+12}" y2="${ry+rH}" stroke="#555" stroke-width="1.5"/>
+    <text x="${rx+rW+22}" y="${ry+rH/2+4}" font-size="11" fill="#333">${width} ft</text>
+    <text x="${rx+rW/2}" y="${ry+rH/2+5}" text-anchor="middle" font-size="13" fill="#fff" font-weight="700" style="text-shadow:0 1px 2px rgba(0,0,0,.5)">${fmt(netArea,0)} sq ft</text>
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6" fill="none" stroke="#555" stroke-width="1"/>
+      </marker>
+    </defs>`;
+
+  // Bar chart
+  const maxVal = Math.max(materialCost, laborCost, underCost + subfloorCost + trimCost, 1);
+  const otherCost = underCost + subfloorCost + trimCost;
+  const bars = [
+    {label:'Materials', val:materialCost, cls:''},
+    {label:'Labor', val:laborCost, cls:''},
+    {label:'Other', val:otherCost, cls:'orange'}
+  ];
+  let barHtml = '';
+  bars.forEach(b => {
+    const pct = Math.round(b.val / maxVal * 100);
+    barHtml += `<div class="bar-row">
+      <div class="bar-label">${b.label}</div>
+      <div class="bar-track"><div class="bar-fill ${b.cls}" style="width:${pct}%"></div></div>
+      <div class="bar-amt">${dollarFmt(b.val)}</div>
+    </div>`;
+  });
+
+  // Cost table
+  const rows = [
+    ['Hardwood Flooring', `${fmt(purchaseArea,0)} sq ft @ ${dollarFmt(woodPrice)}/sq ft`, materialCost],
+    laborCost > 0 ? ['Labor / Installation', `${fmt(netArea,0)} sq ft @ ${dollarFmt(laborRate)}/sq ft`, laborCost] : null,
+    underRate > 0 ? ['Underlayment', `${fmt(purchaseArea,0)} sq ft @ ${dollarFmt(underRate)}/sq ft`, underCost] : null,
+    subfloorRate > 0 ? ['Subfloor Prep', `${fmt(netArea,0)} sq ft @ ${dollarFmt(subfloorRate)}/sq ft`, subfloorCost] : null,
+    trimCost > 0 ? ['Trim & Transitions', 'Flat cost', trimCost] : null,
+  ].filter(Boolean);
+
+  let tbodyHtml = '';
+  rows.forEach(([item, detail, cost]) => {
+    tbodyHtml += `<tr><td>${item}</td><td style="color:#666;font-size:.85rem">${detail}</td><td>${dollarFmt(cost)}</td></tr>`;
+  });
+  const tfootHtml = `<tr><td colspan="2"><strong>Total Project Cost</strong></td><td>${dollarFmt(totalCost)}</td></tr>`;
+
+  // Time estimate
+  const begHours = Math.max(4, Math.round(netArea / 15));
+  const expHours = Math.max(2, Math.round(netArea / 30));
+  const timeHtml = `
+    <div class="time-card">
+      <div class="time-icon">🧑‍🔧</div>
+      <div class="time-label">Beginner</div>
+      <div class="time-val">${begHours < 8 ? begHours + ' hrs' : (begHours/8).toFixed(1) + ' days'}</div>
+    </div>
+    <div class="time-card">
+      <div class="time-icon">⚡</div>
+      <div class="time-label">Experienced</div>
+      <div class="time-val">${expHours < 8 ? expHours + ' hrs' : (expHours/8).toFixed(1) + ' days'}</div>
+    </div>`;
+
+  // Pro tip
+  let proTip = '';
+  if (wastePct >= 0.15) proTip = `You've selected a ${(wastePct*100).toFixed(0)}% waste factor — smart choice for a complex layout. Order all your wood at once from the same lot. Even "the same" SKU can have visible color variation between production batches, and nothing looks worse than a mismatched patch in the middle of a room.`;
+  else if (laborRate === 0) proTip = `Going DIY? Rent a flooring nailer — don't try to hand-nail. A rented floor nailer (~$50/day) dramatically speeds things up and gives you professional results. Also rent a miter saw if you don't own one. The rental savings alone often cover both tools for a weekend.`;
+  else proTip = `Get at least 3 quotes from local flooring contractors. Prices vary 30–40% depending on installer. Ask specifically if the quote includes subfloor prep, furniture moving, and disposal — these are the hidden add-ons that inflate final invoices.`;
+
+  // Shopping list
+  const shopItems = [
+    {name: 'Hardwood Flooring', qty: `${boxesNeeded} boxes (${fmtInt(purchaseArea)} sq ft)`, unitCost: woodPrice, totalCost: materialCost, note: `~${sqftPerBox} sq ft/box`},
+    ...(underRate > 0 ? [{name: 'Underlayment', qty: `${fmtInt(purchaseArea)} sq ft`, unitCost: underRate, totalCost: underCost, note: 'Rolls of 200 sq ft each'}] : []),
+    ...(subfloorRate > 0 ? [{name: 'Subfloor Compound / Prep', qty: `${fmtInt(netArea)} sq ft coverage`, unitCost: subfloorRate, totalCost: subfloorCost, note: 'Self-leveling or patch compound'}] : []),
+    ...(trimCost > 0 ? [{name: 'Trim & Transition Strips', qty: 'Per room perimeter', unitCost: null, totalCost: trimCost, note: 'Include T-molding, reducers, quarter round'}] : []),
+    {name: 'Flooring Nails / Staples', qty: '1 box (1.5" cleats)', unitCost: null, totalCost: 18, note: 'Or adhesive for glue-down'},
+    {name: 'Tapping Block & Pull Bar', qty: '1 set', unitCost: null, totalCost: 12, note: 'Protects tongue/groove while seating'},
+    {name: 'Spacers (1/2" expansion gap)', qty: '20 pack', unitCost: null, totalCost: 8, note: 'Leave gap at walls for expansion'},
+  ];
+
+  let shopHtml = '';
+  shopItems.forEach(item => {
+    shopHtml += `<div class="shop-item">
+      <div>
+        <div class="shop-item-name">${item.name}</div>
+        <div style="font-size:.78rem;color:#888">${item.note}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="shop-item-qty">${item.qty}</div>
+        <div class="shop-item-cost">${dollarFmt(item.totalCost)}</div>
+      </div>
+    </div>`;
+  });
+
+  // Batch all DOM updates
+  document.getElementById('keyGrid').innerHTML = keyHtml;
+  document.getElementById('roomSvg').innerHTML = svgContent;
+  document.getElementById('diagramLabel').textContent = `Room: ${length} ft × ${width} ft = ${fmt(netArea,0)} sq ft | Purchase: ${fmt(purchaseArea,0)} sq ft`;
+  document.getElementById('barChart').innerHTML = barHtml;
+  document.getElementById('costBody').innerHTML = tbodyHtml;
+  document.getElementById('costFoot').innerHTML = tfootHtml;
+  document.getElementById('timeBox').innerHTML = timeHtml;
+  document.getElementById('proTipText').textContent = proTip;
+  document.getElementById('shoppingList').innerHTML = shopHtml;
+
+  const res = document.getElementById('results');
+  res.style.display = 'block';
+  res.classList.add('show');
+  res.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function copyResults() {
+  if (!lastResults) return;
+  const r = lastResults;
+  const text = `HARDWOOD FLOORING COST ESTIMATE
+Room: ${r.length} ft × ${r.width} ft = ${fmt(r.netArea,0)} sq ft
+Purchase Area (with ${(r.wastePct*100).toFixed(0)}% waste): ${fmt(r.purchaseArea,0)} sq ft
+Wood: $${fmt(r.woodPrice)}/sq ft — Material Cost: ${dollarFmt(r.materialCost)}
+Labor: ${dollarFmt(r.laborCost)}
+Underlayment: ${dollarFmt(r.underCost)}
+Subfloor Prep: ${dollarFmt(r.subfloorCost)}
+Trim: ${dollarFmt(r.trimCost)}
+TOTAL: ${dollarFmt(r.totalCost)}
+Generated by toolhut.dev`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Summary', 2000);
+  });
+}
+
+function copyShoppingList() {
+  if (!lastResults) return;
+  const r = lastResults;
+  const text = `SHOPPING LIST — Hardwood Flooring (${r.length}×${r.width} ft)
+• Hardwood Flooring: ${r.boxesNeeded} boxes (${fmtInt(r.purchaseArea)} sq ft) — ${dollarFmt(r.materialCost)}
+• Underlayment: ${fmtInt(r.purchaseArea)} sq ft — ${dollarFmt(r.underCost)}
+• Subfloor Prep — ${dollarFmt(r.subfloorCost)}
+• Trim & Transitions — ${dollarFmt(r.trimCost)}
+• Flooring Nails/Staples — ~$18
+• Tapping Block & Pull Bar — ~$12
+• Spacers — ~$8
+TOTAL MATERIALS: ${dollarFmt(r.materialCost + r.underCost + r.subfloorCost + r.trimCost + 38)}
+Generated by toolhut.dev`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyShopBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy Shopping List', 2000);
+  });
+}
+</script>
+</body>
+</html>
