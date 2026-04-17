@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lawn Sprinkler Head Spacing Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate perfect sprinkler head spacing for head-to-head coverage. Enter your zone dimensions and get exact placement, head count, and a shopping list. Free tool.">
+<link rel="canonical" href="https://toolhut.dev/lawn-sprinkler-head-spacing-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Lawn Sprinkler Head Spacing Calculator",
+  "url": "https://toolhut.dev/lawn-sprinkler-head-spacing-calculator/",
+  "description": "Calculate the ideal sprinkler head spacing, number of heads needed, and get a complete materials list for your irrigation project.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "publisher": {"@type": "Organization", "name": "toolhut.dev", "url": "https://toolhut.dev"}
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline;color:#1b4332}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#2d6a4f;letter-spacing:-0.3px}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.2}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:1.5rem}
+.section-title{font-size:1rem;font-weight:700;color:#2d6a4f;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:2px solid #d8f3dc}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.3rem}
+input,select{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:6px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,0.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.12)}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.25rem;display:none}
+.error-msg.show{display:block}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{margin-bottom:1rem}
+.form-group.full{grid-column:1/-1}
+button.primary{background:#2d6a4f;color:#fff;border:none;padding:13px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:48px;transition:background 0.2s;margin-top:0.5rem}
+button.primary:hover{background:#1b4332}
+button.secondary{background:#fff;color:#2d6a4f;border:2px solid #2d6a4f;padding:8px 18px;border-radius:6px;font-size:0.85rem;font-weight:600;cursor:pointer;min-height:36px;transition:all 0.2s}
+button.secondary:hover{background:#2d6a4f;color:#fff}
+.results{opacity:0;transition:opacity 0.3s ease;display:none}
+.results.visible{opacity:1;display:block}
+.big-stat{text-align:center;padding:1.2rem 0 0.8rem}
+.big-num{font-size:2.8rem;font-weight:800;color:#2d6a4f;line-height:1}
+.big-label{font-size:0.9rem;color:#666;margin-top:0.3rem}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin:1rem 0}
+.stat-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:0.9rem 0.6rem;text-align:center}
+.stat-val{font-size:1.3rem;font-weight:700;color:#2d6a4f}
+.stat-lbl{font-size:0.75rem;color:#666;margin-top:0.2rem}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.8rem;color:#555;border-bottom:2px solid #dee2e6}
+th.num,td.num{text-align:right}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0;color:#1a1a2e}
+tr:nth-child(even) td{background:#fafafa}
+tr:last-child td{border-bottom:none}
+.tbl-wrap{overflow-x:auto;border:1px solid #dee2e6;border-radius:8px;margin-top:0.8rem}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1rem 0}
+.pro-tip strong{color:#e76f51;display:block;margin-bottom:0.3rem;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px}
+.time-est{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin:0.8rem 0}
+.time-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:0.9rem;text-align:center}
+.time-box .t-label{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#888;margin-bottom:0.3rem}
+.time-box .t-val{font-size:1.1rem;font-weight:700;color:#1a1a2e}
+.shopping-item{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid #f0f0f0}
+.shopping-item:last-child{border-bottom:none}
+.item-name{font-weight:500}
+.item-qty{color:#2d6a4f;font-weight:700;font-size:0.9rem;text-align:right}
+.item-cost{color:#888;font-size:0.8rem;margin-top:0.1rem}
+.total-cost{background:#2d6a4f;color:#fff;border-radius:8px;padding:0.8rem 1rem;display:flex;justify-content:space-between;align-items:center;margin-top:0.8rem;font-weight:700}
+.copy-row{display:flex;justify-content:flex-end;margin-top:0.8rem}
+svg.diagram{width:100%;height:auto;display:block}
+.ad-slot{min-height:0;margin:0}
+.content-section{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;margin-bottom:1.5rem}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:0.7rem;margin-top:1.5rem}
+.content-section h2:first-child{margin-top:0}
+.content-section p{color:#444;font-size:0.95rem;margin-bottom:0.8rem}
+.content-section ul{padding-left:1.4rem;color:#444;font-size:0.95rem}
+.content-section ul li{margin-bottom:0.4rem}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:0.6rem}
+summary{padding:0.8rem 1rem;font-weight:600;cursor:pointer;list-style:none;color:#1a1a2e;font-size:0.95rem}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▶ ";font-size:0.7rem;color:#2d6a4f;margin-right:0.3rem}
+details[open] summary::before{content:"▼ "}
+details p{padding:0.2rem 1rem 0.9rem;color:#555;font-size:0.9rem}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem}
+.related-link{display:block;background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:0.7rem 1rem;font-size:0.9rem;font-weight:500;color:#2d6a4f;transition:background 0.2s,border-color 0.2s}
+.related-link:hover{background:#d8f3dc;border-color:#2d6a4f;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.5rem;margin-top:1rem}
+.foot-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0.8rem;justify-content:space-between;align-items:center;font-size:0.85rem;color:#888}
+.foot-links{display:flex;gap:1rem}
+.foot-links a{color:#888}
+.foot-links a:hover{color:#2d6a4f}
+.badge{display:inline-block;background:#d8f3dc;color:#2d6a4f;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;margin-left:0.4rem}
+.head-type-selector{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.6rem;margin-bottom:1rem}
+.head-type-btn{border:2px solid #dee2e6;background:#fff;border-radius:8px;padding:0.7rem 0.4rem;cursor:pointer;text-align:center;font-size:0.8rem;font-weight:600;color:#666;transition:all 0.2s;min-height:44px}
+.head-type-btn.active{border-color:#2d6a4f;background:#d8f3dc;color:#2d6a4f}
+.head-type-btn:hover:not(.active){border-color:#2d6a4f;color:#2d6a4f}
+.slider-row{display:flex;align-items:center;gap:0.8rem}
+.slider-row input[type=range]{padding:0;border:none;box-shadow:none;background:transparent;height:auto}
+.slider-row input[type=range]:focus{box-shadow:none}
+.slider-val{font-weight:700;color:#2d6a4f;min-width:50px;text-align:right}
+@media(max-width:640px){
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .big-num{font-size:2.2rem}
+  .head-type-selector{grid-template-columns:1fr 1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🌿 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Lawn Sprinkler Head Spacing Calculator</h1>
+  <p class="subtitle">Get head-to-head coverage spacing, exact head counts, a materials list, and a zone layout diagram for your irrigation system.</p>
+
+  <!-- TOOL CARD -->
+  <div class="card">
+    <div class="section-title">Zone Dimensions</div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="zoneW">Zone Width (ft)</label>
+        <input type="number" id="zoneW" placeholder="e.g. 30" min="1" max="500">
+        <div class="error-msg" id="zoneW-err">Enter a width between 1–500 ft</div>
+      </div>
+      <div class="form-group">
+        <label for="zoneL">Zone Length (ft)</label>
+        <input type="number" id="zoneL" placeholder="e.g. 40" min="1" max="500">
+        <div class="error-msg" id="zoneL-err">Enter a length between 1–500 ft</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:0.5rem">Sprinkler Head Type</div>
+    <div class="head-type-selector" id="headTypeSelector">
+      <button class="head-type-btn active" data-type="rotary" data-radius="15" data-flow="1.5" data-price="8">🔄 Rotary<br><span style="font-weight:400;color:#999">10–20 ft</span></button>
+      <button class="head-type-btn" data-type="spray" data-radius="10" data-flow="2.5" data-price="5">💦 Spray<br><span style="font-weight:400;color:#999">8–15 ft</span></button>
+      <button class="head-type-btn" data-type="impact" data-radius="25" data-flow="3.5" data-price="12">🎯 Impact<br><span style="font-weight:400;color:#999">20–40 ft</span></button>
+    </div>
+
+    <div class="form-group">
+      <label for="radius">Spray Radius (ft) <span class="badge" id="radiusBadge">Rotary</span></label>
+      <div class="slider-row">
+        <input type="range" id="radius" min="5" max="40" value="15" style="flex:1">
+        <span class="slider-val" id="radiusVal">15 ft</span>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="pattern">Arc Pattern</label>
+        <select id="pattern">
+          <option value="360">Full Circle (360°)</option>
+          <option value="180">Half Circle (180°)</option>
+          <option value="90">Quarter Circle (90°)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="overlap">Overlap %</label>
+        <select id="overlap">
+          <option value="100">100% — Head-to-Head (Recommended)</option>
+          <option value="80">80% — Standard Overlap</option>
+          <option value="60">60% — Light Overlap</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="waterPressure">Water Pressure (PSI)</label>
+      <input type="number" id="waterPressure" placeholder="e.g. 45" value="45" min="20" max="120">
+    </div>
+
+    <button class="primary" id="calcBtn">Calculate Sprinkler Layout ▶</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+
+    <!-- DIAGRAM -->
+    <div class="card" id="diagramCard">
+      <div class="section-title">Zone Layout Diagram</div>
+      <div id="svgContainer"></div>
+      <p style="font-size:0.78rem;color:#888;text-align:center;margin-top:0.6rem">Blue circles = spray coverage · Orange dots = sprinkler head locations</p>
+    </div>
+
+    <!-- SUMMARY STATS -->
+    <div class="card">
+      <div class="section-title">Results Summary</div>
+      <div class="big-stat">
+        <div class="big-num" id="totalHeads">—</div>
+        <div class="big-label">Total Sprinkler Heads Required</div>
+      </div>
+      <div class="stats-row" id="statsRow"></div>
+      <div class="tbl-wrap">
+        <table id="layoutTable">
+          <thead>
+            <tr>
+              <th>Row</th>
+              <th class="num">Heads in Row</th>
+              <th class="num">Spacing (ft)</th>
+              <th class="num">Row Position (ft)</th>
+              <th class="num">Coverage (ft²)</th>
+            </tr>
+          </thead>
+          <tbody id="layoutBody"></tbody>
+        </table>
+      </div>
+
+      <div class="pro-tip" style="margin-top:1.2rem">
+        <strong>💡 Pro Tip</strong>
+        <span id="proTipText">Use head-to-head coverage so the radius of each head reaches the next head — this prevents dry spots and is the industry standard.</span>
+      </div>
+
+      <div class="section-title" style="margin-top:1.2rem">Project Time Estimate</div>
+      <div class="time-est">
+        <div class="time-box">
+          <div class="t-label">🐢 Beginner</div>
+          <div class="t-val" id="timeBeginner">—</div>
+        </div>
+        <div class="time-box">
+          <div class="t-label">⚡ Experienced</div>
+          <div class="t-val" id="timeExperienced">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MATERIALS / SHOPPING LIST -->
+    <div class="card">
+      <div class="section-title">🛒 Materials Shopping List</div>
+      <div id="shoppingList"></div>
+      <div class="copy-row">
+        <button class="secondary" id="copyBtn">📋 Copy List</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+    <h2>How to Use This Sprinkler Head Spacing Calculator</h2>
+    <p>Enter your irrigation zone's width and length in feet, select your sprinkler head type (rotary, spray, or impact), then adjust the spray radius using the slider. Choose your arc pattern for corner or edge heads, set your desired overlap percentage, and click <strong>Calculate</strong>. You'll instantly see the optimal head layout, spacing distances, total head count, and a full materials shopping list.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Getting sprinkler head spacing wrong is one of the most common — and expensive — irrigation mistakes homeowners make. Space them too far apart and you'll have dry brown patches in summer. Too close, and you're wasting thousands of gallons of water and driving up your utility bill.</p>
+    <p>The industry standard is "head-to-head coverage," meaning each sprinkler's radius reaches the next head. On a typical suburban yard with 15-foot rotary heads, that means placing heads every 15 feet — not the 20–25 feet many DIYers assume. A 30×40 ft zone done correctly needs about 12 heads vs. the 6 some homeowners try to get away with. The extra 6 heads cost ~$48 but saves you from dead patches that cost $200+ to re-sod.</p>
+    <p>This calculator is built for weekend warriors planning their first install or pros double-checking zone layouts before pulling pipe.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The core formula uses the <strong>head-to-head spacing principle</strong>:</p>
+    <ul>
+      <li><strong>Spacing = Radius × Overlap Factor</strong> (e.g., 15 ft × 1.0 = 15 ft for head-to-head)</li>
+      <li><strong>Heads per row = ceil(Zone Width ÷ Spacing) + 1</strong></li>
+      <li><strong>Number of rows = ceil(Zone Length ÷ Row Spacing) + 1</strong></li>
+      <li><strong>Total heads = Heads per row × Number of rows</strong></li>
+      <li><strong>Coverage area per head</strong> = π × radius² × (arc° ÷ 360)</li>
+    </ul>
+    <p>Flow rate (GPM) is estimated from head type and radius. Total water demand is used to determine if you need to split into multiple zones based on a standard 10–15 GPM service line.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Never mix head types in the same zone.</strong> Rotary and spray heads have different precipitation rates — mixing them creates uneven watering and can't be corrected by a timer.</li>
+      <li><strong>Account for pressure drop.</strong> Each head needs adequate pressure at the head, not just at the meter. Long runs lose 1–2 PSI every 100 ft of pipe.</li>
+      <li><strong>Use corner heads on edges.</strong> A 90° quarter-circle head in corners puts water only where it's needed — not on driveways or fences.</li>
+      <li><strong>Don't skip the flush test.</strong> Before burying heads, run the system with heads exposed and look for weak zones that indicate pressure problems.</li>
+      <li><strong>Mark your heads before digging.</strong> Use spray paint or flags to lay out the plan on the actual lawn — what looks right on paper can shift significantly on sloped or irregular terrain.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What is head-to-head coverage and why is it recommended?</summary>
+      <p>Head-to-head coverage means the radius of each sprinkler reaches exactly to the next sprinkler head. This provides 100% overlap at the weakest point of each head's coverage arc, ensuring even watering across the entire zone. It's the industry standard because it eliminates dry spots without over-watering any single area.</p>
+    </details>
+    <details>
+      <summary>How many sprinkler heads can I run on one zone?</summary>
+      <p>This depends on your home's water supply flow rate, typically 10–15 GPM for a standard residential service. Add up the GPM rating of all heads in the zone — most spray heads use 1.5–3 GPM each, rotary heads 0.5–2 GPM. If your total exceeds ~10–12 GPM, split into two zones. Our calculator flags this for you.</p>
+    </details>
+    <details>
+      <summary>Do I need different head types for different areas?</summary>
+      <p>Yes — but keep them in separate zones. Use spray heads for narrow strips (under 8 ft wide) and rotary or impact heads for large open areas. Drip irrigation works best around shrubs and flower beds. Mixing types in the same zone creates uneven precipitation rates that no timer schedule can correct.</p>
+    </details>
+    <details>
+      <summary>What PSI do I need at each sprinkler head?</summary>
+      <p>Most spray heads operate optimally at 30–45 PSI at the head. Rotary heads typically need 25–45 PSI. Impact heads can handle 25–65 PSI. If your street pressure is 60+ PSI, install a pressure regulator — too much pressure creates misting (fine droplets that evaporate before hitting the ground) and wastes water.</p>
+    </details>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="content-section">
+    <h2 style="margin-top:0">Related Tools</h2>
+    <div class="related-grid">
+      <a href="/roof-shingle-calculator/" class="related-link">🏠 Roof Shingle Calculator</a>
+      <a href="/kitchen-cabinet-cost-estimator/" class="related-link">🍳 Kitchen Cabinet Cost Estimator</a>
+      <a href="/concrete-patio-cost-estimator/" class="related-link">🧱 Concrete Patio Cost Estimator</a>
+      <a href="/hardwood-flooring-cost-calculator/" class="related-link">🪵 Hardwood Flooring Cost Calculator</a>
+      <a href="/ceiling-fan-size-calculator/" class="related-link">💨 Ceiling Fan Size Calculator</a>
+      <a href="/raised-garden-bed-soil-calculator/" class="related-link">🌱 Raised Garden Bed Soil Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2025 toolhut.dev</span>
+    <div class="foot-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // State
+  let activeType = { type:'rotary', radius:15, flow:1.5, price:8 };
+
+  // Head type selector
+  const headBtns = document.querySelectorAll('.head-type-btn');
+  const radiusSlider = document.getElementById('radius');
+  const radiusVal = document.getElementById('radiusVal');
+  const radiusBadge = document.getElementById('radiusBadge');
+
+  headBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      headBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const r = parseInt(btn.dataset.radius);
+      activeType = { type: btn.dataset.type, radius: r, flow: parseFloat(btn.dataset.flow), price: parseInt(btn.dataset.price) };
+      radiusSlider.value = r;
+      radiusVal.textContent = r + ' ft';
+      radiusBadge.textContent = btn.dataset.type.charAt(0).toUpperCase() + btn.dataset.type.slice(1);
+    });
+  });
+
+  radiusSlider.addEventListener('input', () => {
+    radiusVal.textContent = radiusSlider.value + ' ft';
+  });
+
+  // Enter key
+  document.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('keydown', e => { if(e.key === 'Enter') calculate(); });
+  });
+
+  document.getElementById('calcBtn').addEventListener('click', () => {
+    requestAnimationFrame(() => calculate());
+  });
+
+  function validate(id, min, max, errId) {
+    const el = document.getElementById(id);
+    const v = parseFloat(el.value);
+    const err = document.getElementById(errId);
+    if (!el.value || isNaN(v) || v < min || v > max) {
+      el.classList.add('error');
+      err.classList.add('show');
+      return null;
+    }
+    el.classList.remove('error');
+    err.classList.remove('show');
+    return v;
+  }
+
+  function fmt(n, dec=0) {
+    return Number(n.toFixed(dec)).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+  }
+
+  function calculate() {
+    const zW = validate('zoneW', 1, 500, 'zoneW-err');
+    const zL = validate('zoneL', 1, 500, 'zoneL-err');
+    if (zW === null || zL === null) return;
+
+    const radius = parseFloat(radiusSlider.value);
+    const overlapPct = parseInt(document.getElementById('overlap').value);
+    const arc = parseInt(document.getElementById('pattern').value);
+    const psi = parseFloat(document.getElementById('waterPressure').value) || 45;
+    const headPrice = activeType.price;
+    const flowPerHead = activeType.flow;
+
+    const spacing = radius * (overlapPct / 100);
+    const rowSpacing = spacing;
+
+    const headsPerRow = Math.ceil(zW / spacing) + 1;
+    const numRows = Math.ceil(zL / rowSpacing) + 1;
+    const totalHeads = headsPerRow * numRows;
+
+    // Coverage area per head
+    const covPerHead = Math.PI * radius * radius * (arc / 360);
+    const totalCov = covPerHead * totalHeads;
+    const zoneArea = zW * zL;
+    const covPct = Math.min(100, (totalCov / zoneArea) * 100);
+
+    // Flow
+    const totalFlow = totalHeads * flowPerHead;
+    const zonesNeeded = Math.ceil(totalFlow / 12);
+
+    // Pipe length estimate (grid approach)
+    const pipeLength = Math.round((headsPerRow * rowSpacing * (numRows -1)) + (zW * numRows) + 20); // rough estimate + 20ft mainline
+
+    // Build rows table
+    let rowsHTML = '';
+    for (let r = 0; r < numRows; r++) {
+      const rowPos = (r * rowSpacing).toFixed(1);
+      const rowCov = (headsPerRow * covPerHead).toFixed(0);
+      rowsHTML += `<tr>
+        <td>Row ${r+1}</td>
+        <td class="num">${headsPerRow}</td>
+        <td class="num">${fmt(spacing,1)}</td>
+        <td class="num">${rowPos}</td>
+        <td class="num">${fmt(parseFloat(rowCov))}</td>
+      </tr>`;
+    }
+
+    // Time estimate
+    const headTimeMin = 25; // minutes per head (beginner)
+    const headTimeExp = 12;
+    const totalTimeBeg = Math.round(totalHeads * headTimeMin + 60);
+    const totalTimeExp = Math.round(totalHeads * headTimeExp + 30);
+    const timeBegStr = totalTimeBeg >= 60 ? `${Math.floor(totalTimeBeg/60)}h ${totalTimeBeg%60}m` : `${totalTimeBeg}m`;
+    const timeExpStr = totalTimeExp >= 60 ? `${Math.floor(totalTimeExp/60)}h ${totalTimeExp%60}m` : `${totalTimeExp}m`;
+
+    // Costs
+    const headCost = totalHeads * headPrice;
+    const pipeCost = Math.round(pipeLength * 0.55); // $0.55/ft PVC
+    const fittingsCost = Math.round(totalHeads * 2.5);
+    const controllerCost = zonesNeeded === 1 ? 45 : 65;
+    const valvesCost = zonesNeeded * 22;
+    const miscCost = 25;
+    const totalCost = headCost + pipeCost + fittingsCost + controllerCost + valvesCost + miscCost;
+
+    // Pro tip
+    let tipText = `At ${fmt(spacing,1)} ft spacing with ${overlapPct}% overlap, you'll have solid coverage across the zone. `;
+    if (psi < 30) tipText += `⚠️ Your pressure (${psi} PSI) is low — consider a booster pump or fewer heads per zone.`;
+    else if (psi > 70) tipText += `Your pressure (${psi} PSI) is high — install a pressure regulator (around $15–25) to prevent misting and head damage.`;
+    else tipText += `Your pressure (${psi} PSI) is in the ideal range. No pressure regulator needed.`;
+    if (zonesNeeded > 1) tipText += ` Split into ${zonesNeeded} zones to stay within your water service's flow capacity.`;
+
+    requestAnimationFrame(() => {
+      // Update stats
+      document.getElementById('totalHeads').textContent = fmt(totalHeads);
+
+      document.getElementById('statsRow').innerHTML = `
+        <div class="stat-box"><div class="stat-val">${fmt(spacing,1)} ft</div><div class="stat-lbl">Head Spacing</div></div>
+        <div class="stat-box"><div class="stat-val">${fmt(totalFlow,1)}</div><div class="stat-lbl">Total GPM</div></div>
+        <div class="stat-box"><div class="stat-val">${zonesNeeded}</div><div class="stat-lbl">Zone${zonesNeeded>1?'s':''} Needed</div></div>
+        <div class="stat-box"><div class="stat-val">${fmt(zoneArea)}</div><div class="stat-lbl">Zone Area (ft²)</div></div>
+        <div class="stat-box"><div class="stat-val">${fmt(covPct,0)}%</div><div class="stat-lbl">Coverage</div></div>
+        <div class="stat-box"><div class="stat-val">${pipeLength} ft</div><div class="stat-lbl">Est. Pipe Needed</div></div>
+      `;
+
+      document.getElementById('layoutBody').innerHTML = rowsHTML;
+      document.getElementById('proTipText').textContent = tipText;
+      document.getElementById('timeBeginner').textContent = timeBegStr;
+      document.getElementById('timeExperienced').textContent = timeExpStr;
+
+      // Shopping list
+      const items = [
+        { name: `${activeType.type.charAt(0).toUpperCase()+activeType.type.slice(1)} Sprinkler Heads (${radius} ft radius)`, qty: `${totalHeads} heads`, unitCost: headPrice, total: headCost },
+        { name: `1" PVC Mainline Pipe`, qty: `${Math.ceil(pipeLength/10)*10} ft`, unitCost: 0.55, total: pipeCost },
+        { name: `PVC Fittings (tees, elbows, adapters)`, qty: `~${totalHeads} pcs`, unitCost: 2.5, total: fittingsCost },
+        { name: `Irrigation Zone Control Valves`, qty: `${zonesNeeded} valve${zonesNeeded>1?'s':''}`, unitCost: 22, total: valvesCost },
+        { name: `Timer/Controller (${zonesNeeded}-zone)`, qty: `1 unit`, unitCost: controllerCost, total: controllerCost },
+        { name: `Teflon tape, PVC cement, primer`, qty: `1 set`, unitCost: miscCost, total: miscCost },
+      ];
+
+      let shHTML = '';
+      items.forEach(it => {
+        shHTML += `<div class="shopping-item">
+          <div><div class="item-name">${it.name}</div><div class="item-cost">~$${fmt(it.unitCost,2)} ea</div></div>
+          <div style="text-align:right"><div class="item-qty">${it.qty}</div><div class="item-cost">~$${fmt(it.total)}</div></div>
+        </div>`;
+      });
+      shHTML += `<div class="total-cost"><span>Estimated Total Material Cost</span><span>~$${fmt(totalCost)}</span></div>`;
+      document.getElementById('shoppingList').innerHTML = shHTML;
+
+      // SVG Diagram
+      buildSVG(zW, zL, spacing, rowSpacing, headsPerRow, numRows, radius);
+
+      // Show results
+      const res = document.getElementById('results');
+      res.style.display = 'block';
+      requestAnimationFrame(() => { res.classList.add('visible'); });
+
+      // Store for copy
+      window._copyData = { items, totalCost, zW, zL, totalHeads, spacing, zonesNeeded };
+    });
+  }
+
+  function buildSVG(zW, zL, spacingX, spacingY, headsPerRow, numRows, radius) {
+    const maxW = 560;
+    const maxH = 320;
+    const pad = 30;
+    const drawW = maxW - pad * 2;
+    const drawH = maxH - pad * 2;
+
+    const scaleX = drawW / zW;
+    const scaleY = drawH / zL;
+    const scale = Math.min(scaleX, scaleY);
+    const svgW = zW * scale + pad * 2;
+    const svgH = zL * scale + pad * 2;
+
+    const rPx = radius * scale;
+
+    let circles = '';
+    let dots = '';
+
+    for (let row = 0; row < numRows; row++) {
+      for (let col = 0; col < headsPerRow; col++) {
+        const x = pad + col * spacingX * scale;
+        const y = pad + row * spacingY * scale;
+        const cx = Math.min(x, pad + zW * scale);
+        const cy = Math.min(y, pad + zL * scale);
+
+        circles += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rPx.toFixed(1)}" fill="rgba(0,119,182,0.08)" stroke="#0077b6" stroke-width="0.8" stroke-dasharray="4,3"/>`;
+        dots += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="4" fill="#e76f51" stroke="#fff" stroke-width="1.5"/>`;
+      }
+    }
+
+    // Labels
+    const wLabel = `Width: ${zW} ft`;
+    const lLabel = `Length: ${zL} ft`;
+    const rectW = zW * scale;
+    const rectH = zL * scale;
+
+    const svg = `<svg class="diagram" viewBox="0 0 ${svgW.toFixed(0)} ${svgH.toFixed(0)}" xmlns="http://www.w3.org/2000/svg">
+      <rect x="${pad}" y="${pad}" width="${rectW.toFixed(1)}" height="${rectH.toFixed(1)}" fill="#e8f5e9" stroke="#2d6a4f" stroke-width="2" rx="4"/>
+      ${circles}
+      ${dots}
+      <!-- Width label -->
+      <line x1="${pad}" y1="${(pad + rectH + 12).toFixed(1)}" x2="${(pad + rectW).toFixed(1)}" y2="${(pad + rectH + 12).toFixed(1)}" stroke="#888" stroke-width="1"/>
+      <text x="${(pad + rectW/2).toFixed(1)}" y="${(pad + rectH + 24).toFixed(1)}" text-anchor="middle" font-size="11" fill="#666" font-family="sans-serif">${wLabel}</text>
+      <!-- Height label -->
+      <line x1="${(pad - 12).toFixed(1)}" y1="${pad}" x2="${(pad - 12).toFixed(1)}" y2="${(pad + rectH).toFixed(1)}" stroke="#888" stroke-width="1"/>
+      <text x="${(pad - 14).toFixed(1)}" y="${(pad + rectH/2).toFixed(1)}" text-anchor="middle" font-size="11" fill="#666" font-family="sans-serif" transform="rotate(-90,${(pad-14).toFixed(1)},${(pad+rectH/2).toFixed(1)})">${lLabel}</text>
+      <!-- Legend -->
+      <circle cx="${(pad + 8).toFixed(1)}" cy="${(pad + rectH - 12).toFixed(1)}" r="6" fill="rgba(0,119,182,0.12)" stroke="#0077b6" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="${(pad + 18).toFixed(1)}" y="${(pad + rectH - 8).toFixed(1)}" font-size="9" fill="#555" font-family="sans-serif">Coverage</text>
+      <circle cx="${(pad + 70).toFixed(1)}" cy="${(pad + rectH - 12).toFixed(1)}" r="4" fill="#e76f51" stroke="#fff" stroke-width="1.5"/>
+      <text x="${(pad + 80).toFixed(1)}" y="${(pad + rectH - 8).toFixed(1)}" font-size="9" fill="#555" font-family="sans-serif">Head</text>
+    </svg>`;
+
+    document.getElementById('svgContainer').innerHTML = svg;
+  }
+
+  // Copy button
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const d = window._copyData;
+    if (!d) return;
+    let txt = `Sprinkler Layout for ${d.zW}×${d.zL} ft zone\n`;
+    txt += `Total Heads: ${d.totalHeads} | Spacing: ${d.spacing.toFixed(1)} ft | Zones: ${d.zonesNeeded}\n\n`;
+    txt += `MATERIALS LIST:\n`;
+    d.items.forEach(it => {
+      txt += `• ${it.name} — ${it.qty} — ~$${it.total}\n`;
+    });
+    txt += `\nEstimated Total: ~$${d.totalCost}`;
+    navigator.clipboard.writeText(txt).then(() => {
+      const btn = document.getElementById('copyBtn');
+      const orig = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    }).catch(() => {});
+  });
+
+})();
+</script>
+</body>
+</html>
