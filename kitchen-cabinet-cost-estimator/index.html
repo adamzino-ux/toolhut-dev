@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitchen Cabinet Cost Estimator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Estimate kitchen cabinet costs instantly. Enter your kitchen dimensions and cabinet style to get a detailed cost breakdown with materials list. Free online tool.">
+<link rel="canonical" href="https://toolhut.dev/kitchen-cabinet-cost-estimator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kitchen Cabinet Cost Estimator",
+  "url": "https://toolhut.dev/kitchen-cabinet-cost-estimator/",
+  "description": "Estimate kitchen cabinet costs based on kitchen dimensions, cabinet style, and material grade.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "publisher": {"@type": "Organization", "name": "toolhut.dev", "url": "https://toolhut.dev"}
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f8f9fa;
+  color: #1a1a2e;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+a { color: #2d6a4f; text-decoration: none; }
+a:hover { text-decoration: underline; color: #1b4332; }
+
+nav {
+  background: #fff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0 1.5rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+}
+.nav-brand { font-weight: 700; font-size: 1.1rem; color: #2d6a4f; }
+.nav-brand:hover { text-decoration: none; color: #1b4332; }
+
+.container { max-width: 640px; margin: 0 auto; padding: 1.5rem; }
+
+h1 { font-size: 1.6rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.4rem; line-height: 1.3; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+.card {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2d6a4f;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #d8f3dc;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-group { margin-bottom: 1.1rem; }
+label { display: block; font-size: 0.85rem; font-weight: 500; color: #444; margin-bottom: 0.35rem; }
+
+input[type="number"], select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1a1a2e;
+  background: #fff;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  min-height: 44px;
+}
+input[type="number"]:focus, select:focus {
+  outline: none;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.15);
+}
+input.error { border-color: #e74c3c; }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 0.3rem; display: none; }
+.error-msg.show { display: block; }
+
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #2d6a4f;
+  height: 6px;
+  cursor: pointer;
+}
+.range-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: #888; margin-top: 0.2rem; }
+.range-value { font-weight: 700; color: #2d6a4f; font-size: 1rem; }
+
+.btn {
+  width: 100%;
+  background: #2d6a4f;
+  color: #fff;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  min-height: 48px;
+  font-family: inherit;
+}
+.btn:hover { background: #1b4332; }
+.btn:active { transform: scale(0.99); }
+.btn-secondary {
+  background: #e76f51;
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  width: auto;
+  min-height: 36px;
+  border-radius: 5px;
+}
+.btn-secondary:hover { background: #cf5c3e; }
+
+/* Results */
+.results-section { display: none; opacity: 0; transition: opacity 0.3s ease; }
+.results-section.visible { display: block; opacity: 1; }
+
+.cost-hero {
+  text-align: center;
+  background: linear-gradient(135deg, #d8f3dc, #b7e4c7);
+  border-radius: 10px;
+  padding: 1.5rem 1rem;
+  margin-bottom: 1.25rem;
+}
+.cost-hero .label { font-size: 0.85rem; color: #2d6a4f; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+.cost-hero .total { font-size: 2.8rem; font-weight: 800; color: #1b4332; line-height: 1.1; margin: 0.2rem 0; }
+.cost-hero .range { font-size: 0.9rem; color: #555; }
+
+.cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem; }
+.cost-tile {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 0.9rem;
+  text-align: center;
+}
+.cost-tile .tile-val { font-size: 1.35rem; font-weight: 700; color: #2d6a4f; }
+.cost-tile .tile-label { font-size: 0.78rem; color: #666; margin-top: 0.15rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+th { background: #f0f0f0; padding: 9px 12px; text-align: left; font-weight: 600; font-size: 0.82rem; color: #555; }
+td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; }
+tr:nth-child(even) td { background: #fafafa; }
+tr:last-child td { border-bottom: none; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.pro-tip {
+  background: #fff8f0;
+  border-left: 4px solid #e76f51;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+}
+.pro-tip .tip-head { font-weight: 700; color: #e76f51; font-size: 0.9rem; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.4rem; }
+
+.time-estimate {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.time-box {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 0.9rem;
+  text-align: center;
+}
+.time-box .t-val { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; }
+.time-box .t-label { font-size: 0.78rem; color: #888; margin-top: 0.15rem; }
+.time-box .t-head { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.3rem; color: #2d6a4f; }
+
+/* SVG diagram */
+.diagram-wrap {
+  background: #f0f7f4;
+  border: 1px solid #b7e4c7;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.25rem 0;
+  text-align: center;
+  overflow: hidden;
+}
+.diagram-wrap svg { max-width: 100%; height: auto; }
+
+/* Shopping list */
+.shop-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 1rem;
+}
+.shop-item:last-child { border-bottom: none; }
+.shop-name { font-size: 0.9rem; font-weight: 500; }
+.shop-meta { font-size: 0.78rem; color: #888; }
+.shop-qty { font-size: 0.88rem; font-weight: 600; color: #2d6a4f; white-space: nowrap; }
+
+.copy-row { display: flex; justify-content: flex-end; margin-top: 0.75rem; }
+.copy-btn {
+  background: #f0f7f4;
+  border: 1px solid #b7e4c7;
+  color: #2d6a4f;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+.copy-btn:hover { background: #d8f3dc; }
+
+.bar-row { margin: 0.4rem 0; }
+.bar-label { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.2rem; }
+.bar-outer { background: #e9ecef; border-radius: 4px; height: 10px; overflow: hidden; }
+.bar-inner { height: 100%; background: #2d6a4f; border-radius: 4px; transition: width 0.5s ease; }
+
+/* Content */
+.content-section h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 2rem 0 0.6rem;
+}
+.content-section p { margin-bottom: 0.85rem; color: #333; font-size: 0.95rem; }
+.content-section ul { padding-left: 1.4rem; margin-bottom: 0.85rem; }
+.content-section li { margin-bottom: 0.4rem; font-size: 0.95rem; color: #333; }
+
+details { border: 1px solid #dee2e6; border-radius: 6px; margin-bottom: 0.6rem; }
+details summary { padding: 0.75rem 1rem; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: #2d6a4f; }
+details summary:hover { background: #f0f7f4; }
+details p { padding: 0 1rem 0.75rem; font-size: 0.9rem; color: #444; }
+
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.related-link {
+  display: block;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #2d6a4f;
+  transition: background 0.15s, border-color 0.15s;
+}
+.related-link:hover { background: #f0f7f4; border-color: #b7e4c7; text-decoration: none; }
+
+footer {
+  background: #fff;
+  border-top: 1px solid #dee2e6;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #888;
+  margin-top: 2rem;
+}
+footer a { color: #2d6a4f; margin: 0 0.5rem; }
+
+.ad-slot { min-height: 0; margin: 0; }
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.35rem; }
+  .row-2 { grid-template-columns: 1fr; gap: 0; }
+  .cost-grid { grid-template-columns: 1fr 1fr; }
+  .time-estimate { grid-template-columns: 1fr 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .cost-hero .total { font-size: 2.2rem; }
+  .card { padding: 1.25rem; }
+}
+
+.tag { display: inline-block; background: #d8f3dc; color: #1b4332; font-size: 0.72rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 0.4rem; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">🔧 toolhut.dev</a>
+</nav>
+
+<div class="container">
+  <h1>Kitchen Cabinet Cost Estimator</h1>
+  <p class="subtitle">Get a realistic cost breakdown for your kitchen cabinet project — materials, labor, and a full shopping list.</p>
+
+  <!-- INPUT CARD -->
+  <div class="card">
+    <div class="section-title">📐 Kitchen Dimensions</div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="wallLength">Total Wall Length (ft)</label>
+        <input type="number" id="wallLength" placeholder="e.g. 24" min="4" max="100" value="24">
+        <div class="error-msg" id="err-wall">Enter a value between 4 and 100 ft.</div>
+      </div>
+      <div class="form-group">
+        <label for="ceilingHeight">Ceiling Height (ft)</label>
+        <input type="number" id="ceilingHeight" placeholder="e.g. 9" min="7" max="12" value="9" step="0.5">
+        <div class="error-msg" id="err-ceiling">Enter a value between 7 and 12 ft.</div>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="upperRun">Upper Cabinet Run (ft)</label>
+        <input type="number" id="upperRun" placeholder="e.g. 18" min="0" max="60" value="18">
+        <div class="error-msg" id="err-upper">Enter 0–60 ft.</div>
+      </div>
+      <div class="form-group">
+        <label for="baseRun">Base Cabinet Run (ft)</label>
+        <input type="number" id="baseRun" placeholder="e.g. 20" min="0" max="60" value="20">
+        <div class="error-msg" id="err-base">Enter 0–60 ft.</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:1.2rem;">🪵 Cabinet Options</div>
+
+    <div class="form-group">
+      <label for="cabinetGrade">Cabinet Grade</label>
+      <select id="cabinetGrade">
+        <option value="stock">Stock / Ready-to-Assemble (Budget)</option>
+        <option value="semi" selected>Semi-Custom (Most Popular)</option>
+        <option value="custom">Full Custom (Premium)</option>
+      </select>
+    </div>
+
+    <div class="row-2">
+      <div class="form-group">
+        <label for="doorStyle">Door Style</label>
+        <select id="doorStyle">
+          <option value="flat">Flat / Slab</option>
+          <option value="shaker" selected>Shaker</option>
+          <option value="raised">Raised Panel</option>
+          <option value="glass">Glass Insert</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="materialType">Material</label>
+        <select id="materialType">
+          <option value="mdf">MDF / Thermofoil</option>
+          <option value="plywood" selected>Plywood Box</option>
+          <option value="hardwood">Solid Hardwood</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="finishLevel">Finish / Hardware Quality <span class="range-value" id="finishVal">Mid-Range</span></label>
+      <input type="range" id="finishLevel" min="1" max="3" step="1" value="2">
+      <div class="range-labels"><span>Basic</span><span>Mid-Range</span><span>Premium</span></div>
+    </div>
+
+    <div class="form-group">
+      <label for="installOption">Installation</label>
+      <select id="installOption">
+        <option value="diy">DIY (No Labor Cost)</option>
+        <option value="contractor" selected>Hire a Contractor</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="islandCabinets">Kitchen Island? <span class="tag">+Cost</span></label>
+      <select id="islandCabinets">
+        <option value="none" selected>No Island</option>
+        <option value="small">Small Island (4 ft)</option>
+        <option value="large">Large Island (8 ft)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="countyMult">Regional Cost Multiplier</label>
+      <select id="countyMult">
+        <option value="0.85">Rural / Low-Cost Area (−15%)</option>
+        <option value="1.0" selected>National Average</option>
+        <option value="1.2">Mid-Tier City (+20%)</option>
+        <option value="1.45">High-Cost Metro (NYC, SF, etc.) (+45%)</option>
+      </select>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate Cabinet Cost →</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-section" id="resultsSection">
+
+    <!-- SVG Diagram -->
+    <div class="card">
+      <div class="section-title">📊 Kitchen Layout Preview</div>
+      <div class="diagram-wrap">
+        <svg id="kitchenSVG" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" width="520" height="220"></svg>
+      </div>
+    </div>
+
+    <!-- Cost Hero -->
+    <div class="card">
+      <div class="section-title">💰 Cost Estimate</div>
+      <div class="cost-hero">
+        <div class="label">Estimated Total Cost</div>
+        <div class="total" id="heroTotal">$0</div>
+        <div class="range" id="heroRange">Low: $0 — High: $0</div>
+      </div>
+
+      <div class="cost-grid" id="costGrid"></div>
+
+      <div id="costBars"></div>
+    </div>
+
+    <!-- Breakdown Table -->
+    <div class="card">
+      <div class="section-title">🗂️ Cost Breakdown</div>
+      <div style="overflow-x:auto;">
+        <table id="breakdownTable"></table>
+      </div>
+      <div class="copy-row">
+        <button class="copy-btn" id="copyBtn">📋 Copy Summary</button>
+      </div>
+    </div>
+
+    <!-- Time Estimate -->
+    <div class="card">
+      <div class="section-title">⏱️ Time Estimate</div>
+      <div class="time-estimate">
+        <div class="time-box">
+          <div class="t-head">🟢 Experienced DIYer</div>
+          <div class="t-val" id="timePro">—</div>
+          <div class="t-label">days</div>
+        </div>
+        <div class="time-box">
+          <div class="t-head">🔵 Beginner</div>
+          <div class="t-val" id="timeBeginner">—</div>
+          <div class="t-label">days</div>
+        </div>
+      </div>
+
+      <div class="pro-tip">
+        <div class="tip-head">💡 Pro Tip</div>
+        <div id="proTipText">Order 10% extra cabinet units to account for damaged boxes and future repairs. Always check that walls are plumb before installation — even a ½" variance can misalign an entire run.</div>
+      </div>
+    </div>
+
+    <!-- Shopping List -->
+    <div class="card">
+      <div class="section-title">🛒 Materials Shopping List</div>
+      <div id="shoppingList"></div>
+    </div>
+
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+    <h2>How to Use This Kitchen Cabinet Cost Estimator</h2>
+    <p>Enter your kitchen's total wall length, ceiling height, and how many linear feet of upper and base cabinets you need. Then select your cabinet grade (stock, semi-custom, or custom), door style, material, and whether you're hiring a contractor. Hit "Calculate Cabinet Cost" to get your detailed estimate, shopping list, and time breakdown.</p>
+    <p>The regional multiplier adjusts costs for your area — labor and material prices in New York City can be 45% higher than rural Indiana, so use it to dial in accuracy.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Kitchen cabinets are consistently the single largest expense in any kitchen remodel — typically eating up 30–40% of the total budget. For a 200 sq ft kitchen, you might spend anywhere from <strong>$4,000 on stock RTA cabinets</strong> up to <strong>$45,000+ on full custom</strong>. Most homeowners dramatically underestimate this line item.</p>
+    <p>Here's a real scenario: A homeowner in suburban Chicago has a 22-foot kitchen with 18 feet of upper cabinets and 20 feet of base cabinets. They want shaker-style semi-custom plywood box cabinets. With contractor installation, that's typically $14,000–$19,000 before countertops. Without knowing this upfront, they'd have set a $10,000 budget and been blindsided mid-project.</p>
+    <p>Knowing your cabinet budget before talking to suppliers also gives you negotiating power. Showing a contractor a detailed cost breakdown signals that you're an informed buyer — which often shaves 5–10% off quotes.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The estimator uses average per-linear-foot pricing for cabinet units, adjusted by grade, door style, material, and regional multiplier:</p>
+    <ul>
+      <li><strong>Stock / RTA:</strong> $60–$200/linear ft (upper) | $100–$250/linear ft (base)</li>
+      <li><strong>Semi-Custom:</strong> $150–$400/linear ft | $200–$500/linear ft</li>
+      <li><strong>Full Custom:</strong> $500–$1,200/linear ft | $600–$1,500/linear ft</li>
+      <li><strong>Contractor installation:</strong> Typically $50–$100/linear ft, plus $200–$400 flat fees for island units</li>
+      <li><strong>Hardware &amp; finishing:</strong> 8–22% added on top depending on selected finish level</li>
+    </ul>
+    <p><strong>Formula:</strong> Total Cost = (Upper LF × Upper $/LF + Base LF × Base $/LF + Island Cost) × Finish Multiplier × Regional Multiplier + Labor</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Measure twice, order once.</strong> Cabinet orders are non-refundable at most suppliers. Have a pro double-check your measurements before you click "add to cart."</li>
+      <li><strong>Don't forget fillers and trim.</strong> End panels, crown molding, light valances, and toe kicks can add 8–15% to your total cabinet cost and are frequently overlooked.</li>
+      <li><strong>Stock ≠ cheap.</strong> Quality RTA (ready-to-assemble) plywood cabinets from IKEA or Fabuwood often outperform big-box MDF "semi-custom" lines at a fraction of the price.</li>
+      <li><strong>Interior accessories add up fast.</strong> Lazy Susans, pull-out shelves, trash drawer inserts — budget $800–$2,500 extra for a fully functional kitchen.</li>
+      <li><strong>Lead times for custom are brutal.</strong> Full custom cabinets often take 10–16 weeks. If you're on a tight renovation timeline, semi-custom or stock is the smarter choice.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What's the difference between stock, semi-custom, and custom cabinets?</summary>
+      <p>Stock cabinets are pre-built in fixed sizes (typically 3" increments) and are the fastest and cheapest option. Semi-custom are built to order with more size flexibility and finish options, usually within 4–8 weeks. Custom cabinets are built to your exact specifications by a local cabinetmaker and are the most expensive, but allow any size, species, or configuration you want.</p>
+    </details>
+    <details>
+      <summary>Should I install cabinets myself to save money?</summary>
+      <p>DIY installation can save $1,500–$5,000 on a typical kitchen. However, it requires a helper, a laser level, patience, and at least a weekend of focused work. Mistakes — like cabinets that aren't plumb or level — are very visible every day and can cause doors and drawers to malfunction. If you're handy with a drill and have done basic carpentry, DIY is very achievable.</p>
+    </details>
+    <details>
+      <summary>Are plywood boxes worth the extra cost over MDF?</summary>
+      <p>Almost always yes. Plywood boxes resist moisture better, hold screws more securely (critical for hinges and drawer slides), and are lighter than MDF. The cost premium is typically 15–25%, and the durability difference over a 15–20 year lifespan makes it worth it in most kitchens. In bathrooms or kitchens with high humidity, plywood is essentially mandatory.</p>
+    </details>
+    <details>
+      <summary>Does this estimate include countertops?</summary>
+      <p>No — countertops are priced separately and can range from $25/sq ft for laminate to $150+/sq ft for quartzite or granite. This estimator covers cabinet boxes, doors, drawer fronts, hardware, and installation labor only. Use a separate countertop calculator for that line item.</p>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="card" style="margin-top:2rem;">
+    <div class="section-title">🔗 Related Tools</div>
+    <div class="related-grid">
+      <a href="/concrete-patio-cost-estimator/" class="related-link">🏗️ Concrete Patio Cost Estimator</a>
+      <a href="/hardwood-flooring-cost-calculator/" class="related-link">🪵 Hardwood Flooring Cost Calculator</a>
+      <a href="/ceiling-fan-size-calculator/" class="related-link">🌀 Ceiling Fan Size Calculator</a>
+      <a href="/raised-garden-bed-soil-calculator/" class="related-link">🌱 Raised Garden Bed Soil Calculator</a>
+      <a href="/drywall-sheet-calculator/" class="related-link">🧱 Drywall Sheet Calculator</a>
+      <a href="/patio-paver-calculator/" class="related-link">🪨 Patio Paver Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:0.5rem;">© 2025 toolhut.dev — Free Home Improvement Tools</div>
+</footer>
+
+<script>
+// ── Slider label update ──
+const finishSlider = document.getElementById('finishLevel');
+const finishLabels = ['', 'Basic', 'Mid-Range', 'Premium'];
+finishSlider.addEventListener('input', () => {
+  document.getElementById('finishVal').textContent = finishLabels[finishSlider.value];
+});
+
+// ── Enter key trigger ──
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+});
+
+document.getElementById('calcBtn').addEventListener('click', () => {
+  requestAnimationFrame(() => calculate());
+});
+
+function fmt(n) { return n.toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+function fmtD(n) { return '$' + fmt(Math.round(n)); }
+
+function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+function getSel(id) { return document.getElementById(id).value; }
+
+// Pricing tables (per linear foot for cabinets)
+const gradeData = {
+  stock:       { upperLow: 75,  upperHigh: 160, baseLow: 110, baseHigh: 220 },
+  semi:        { upperLow: 175, upperHigh: 380, baseLow: 220, baseHigh: 480 },
+  custom:      { upperLow: 550, upperHigh: 1100, baseLow: 650, baseHigh: 1400 }
+};
+const doorAdj = { flat: 0, shaker: 0.08, raised: 0.14, glass: 0.18 };
+const matAdj  = { mdf: 0, plywood: 0.12, hardwood: 0.28 };
+const finishAdj = [0, 0, 0.10, 0.22];
+const laborPerLF = { diy: 0, contractor: 68 };
+const islandCosts = { none: 0, small: 1200, large: 2400 };
+const islandLaborCosts = { none: 0, small: 350, large: 650 };
+
+function validate() {
+  let ok = true;
+  const checks = [
+    ['wallLength', 'err-wall', 4, 100],
+    ['ceilingHeight', 'err-ceiling', 7, 12],
+    ['upperRun', 'err-upper', 0, 60],
+    ['baseRun', 'err-base', 0, 60],
+  ];
+  checks.forEach(([id, errId, min, max]) => {
+    const el = document.getElementById(id);
+    const errEl = document.getElementById(errId);
+    const v = parseFloat(el.value);
+    if (isNaN(v) || v < min || v > max) {
+      el.classList.add('error'); errEl.classList.add('show'); ok = false;
+    } else {
+      el.classList.remove('error'); errEl.classList.remove('show');
+    }
+  });
+  return ok;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const wallLength    = getVal('wallLength');
+  const ceilingHeight = getVal('ceilingHeight');
+  const upperRun      = getVal('upperRun');
+  const baseRun       = getVal('baseRun');
+  const grade         = getSel('cabinetGrade');
+  const door          = getSel('doorStyle');
+  const mat           = getSel('materialType');
+  const finish        = parseInt(getSel('finishLevel'));
+  const install       = getSel('installOption');
+  const island        = getSel('islandCabinets');
+  const regionMult    = parseFloat(getSel('countyMult'));
+
+  const g = gradeData[grade];
+  const dAdj = 1 + doorAdj[door];
+  const mAdj = 1 + matAdj[mat];
+  const fAdj = 1 + finishAdj[finish];
+
+  // Base costs per LF (midpoint)
+  const upperMid = (g.upperLow + g.upperHigh) / 2 * dAdj * mAdj;
+  const baseMid  = (g.baseLow  + g.baseHigh)  / 2 * dAdj * mAdj;
+
+  const upperCabCost = upperRun * upperMid;
+  const baseCabCost  = baseRun  * baseMid;
+  const islandCabCost = islandCosts[island];
+
+  const hardwareFinish = (upperCabCost + baseCabCost + islandCabCost) * (fAdj - 1) + (upperCabCost + baseCabCost) * 0.05;
+
+  const totalLF = upperRun + baseRun;
+  const laborCost = install === 'contractor'
+    ? (totalLF * laborPerLF.contractor) + islandLaborCosts[island]
+    : 0;
+
+  const subtotal = (upperCabCost + baseCabCost + islandCabCost + hardwareFinish + laborCost) * regionMult * fAdj / fAdj;
+  // apply region + finish together
+  const totalRaw = (upperCabCost + baseCabCost + islandCabCost) * fAdj * regionMult + hardwareFinish * regionMult + laborCost * regionMult;
+
+  const lowTotal  = totalRaw * 0.88;
+  const highTotal = totalRaw * 1.15;
+
+  // Category breakdown
+  const cabMatTotal   = (upperCabCost + baseCabCost + islandCabCost) * regionMult;
+  const hardwareTotal = hardwareFinish * regionMult;
+  const laborTotal    = laborCost * regionMult;
+  const trimTotal     = cabMatTotal * 0.09; // ~9% for trim/fillers
+  const grandTotal    = cabMatTotal + hardwareTotal + laborTotal + trimTotal;
+
+  // Time estimates
+  const upperUnits = Math.ceil(upperRun / 1.5);
+  const baseUnits  = Math.ceil(baseRun  / 1.5);
+  const totalUnits = upperUnits + baseUnits + (island !== 'none' ? 4 : 0);
+  const proHours   = totalUnits * 1.2 + 4;
+  const begHours   = totalUnits * 2.5 + 8;
+  const proDays    = (proHours / 8).toFixed(1);
+  const begDays    = (begHours / 8).toFixed(1);
+
+  // Pro tip based on grade
+  const tips = {
+    stock: "Stock cabinets ship fast (usually 1–2 weeks), but standard sizes may leave gaps. Keep filler strips and scribe molding on hand — you'll almost certainly need them.",
+    semi: "Semi-custom gives you the best value-to-quality ratio. Ask your supplier for solid plywood boxes (not particleboard) — it's often a free upgrade worth requesting.",
+    custom: "With full custom, get a signed quote that includes delivery and warranty. Many custom shops offer a 5-year structural warranty — insist on it in writing."
+  };
+
+  // Shopping list
+  const shopItems = [
+    { name: 'Upper Cabinet Units', qty: upperUnits + ' units', note: `~${upperRun} linear ft`, cost: fmtD(upperCabCost * regionMult) },
+    { name: 'Base Cabinet Units', qty: baseUnits + ' units', note: `~${baseRun} linear ft`, cost: fmtD(baseCabCost * regionMult) },
+  ];
+  if (island !== 'none') shopItems.push({ name: 'Island Cabinet Set', qty: '1 set', note: island === 'small' ? '4 ft island' : '8 ft island', cost: fmtD(islandCabCost * regionMult) });
+  shopItems.push(
+    { name: 'Cabinet Hardware (knobs/pulls)', qty: (totalUnits * 2) + ' pieces', note: 'Allow 2 per door/drawer', cost: fmtD((totalUnits * 2) * (finish === 1 ? 4 : finish === 2 ? 9 : 22) * regionMult) },
+    { name: 'Soft-Close Hinges', qty: (totalUnits * 4) + ' pairs', note: '~4 per door avg', cost: fmtD(totalUnits * 4 * (finish === 1 ? 3.5 : finish === 2 ? 7 : 15) * regionMult) },
+    { name: 'Crown Molding / Valance', qty: Math.ceil(upperRun * 1.15) + ' linear ft', note: '+15% for corners & waste', cost: fmtD(Math.ceil(upperRun * 1.15) * (grade === 'stock' ? 4 : grade === 'semi' ? 8 : 18) * regionMult) },
+    { name: 'Toe Kick Boards', qty: Math.ceil(baseRun * 1.1) + ' linear ft', note: '+10% waste', cost: fmtD(Math.ceil(baseRun * 1.1) * 4 * regionMult) },
+    { name: 'Shims & Mounting Screws', qty: '1 box assortment', note: 'Essential for level install', cost: '$25–$45' },
+    { name: 'Construction Adhesive', qty: '2 tubes', note: 'For fillers & end panels', cost: '$18–$30' },
+    { name: 'End / Filler Panels', qty: Math.ceil((upperRun + baseRun) / 10) + ' panels', note: '1 panel per ~10 LF run end', cost: fmtD(Math.ceil((upperRun + baseRun) / 10) * (grade === 'stock' ? 45 : grade === 'semi' ? 90 : 220) * regionMult) }
+  );
+
+  // Build SVG
+  const svgEl = document.getElementById('kitchenSVG');
+  const svgHTML = buildSVG(wallLength, upperRun, baseRun, ceilingHeight, island);
+
+  // Build results HTML
+  const costGridHTML = `
+    <div class="cost-tile"><div class="tile-val">${fmtD(cabMatTotal)}</div><div class="tile-label">Cabinet Materials</div></div>
+    <div class="cost-tile"><div class="tile-val">${fmtD(hardwareTotal)}</div><div class="tile-label">Hardware &amp; Finish</div></div>
+    <div class="cost-tile"><div class="tile-val">${fmtD(trimTotal)}</div><div class="tile-label">Trim &amp; Fillers</div></div>
+    <div class="cost-tile"><div class="tile-val">${install === 'diy' ? 'DIY' : fmtD(laborTotal)}</div><div class="tile-label">Installation Labor</div></div>
+  `;
+
+  const cats = [
+    { label: 'Cabinet Materials', val: cabMatTotal, pct: cabMatTotal / grandTotal },
+    { label: 'Hardware & Finish', val: hardwareTotal, pct: hardwareTotal / grandTotal },
+    { label: 'Trim & Fillers', val: trimTotal, pct: trimTotal / grandTotal },
+    { label: 'Installation', val: laborTotal, pct: laborTotal / grandTotal },
+  ];
+  const barsHTML = cats.map(c => `
+    <div class="bar-row">
+      <div class="bar-label"><span>${c.label}</span><span>${fmtD(c.val)} (${Math.round(c.pct * 100)}%)</span></div>
+      <div class="bar-outer"><div class="bar-inner" style="width:${Math.round(c.pct * 100)}%"></div></div>
+    </div>
+  `).join('');
+
+  const tableHTML = `
+    <thead><tr><th>Item</th><th>Detail</th><th class="num">Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Upper Cabinets</td><td>${upperRun} LF × ${fmtD((g.upperLow + g.upperHigh) / 2)}/LF avg</td><td class="num">${fmtD(upperCabCost * regionMult)}</td></tr>
+      <tr><td>Base Cabinets</td><td>${baseRun} LF × ${fmtD((g.baseLow + g.baseHigh) / 2)}/LF avg</td><td class="num">${fmtD(baseCabCost * regionMult)}</td></tr>
+      ${island !== 'none' ? `<tr><td>Island Cabinets</td><td>${island === 'small' ? 'Small (4 ft)' : 'Large (8 ft)'}</td><td class="num">${fmtD(islandCabCost * regionMult)}</td></tr>` : ''}
+      <tr><td>Door Style Upcharge</td><td>${door.charAt(0).toUpperCase() + door.slice(1)} (+${Math.round(doorAdj[door] * 100)}%)</td><td class="num">${fmtD((upperCabCost + baseCabCost + islandCabCost) * doorAdj[door] * regionMult)}</td></tr>
+      <tr><td>Material Upcharge</td><td>${mat === 'mdf' ? 'MDF/Thermofoil' : mat === 'plywood' ? 'Plywood Box' : 'Solid Hardwood'} (+${Math.round(matAdj[mat] * 100)}%)</td><td class="num">${fmtD((upperCabCost + baseCabCost + islandCabCost) * matAdj[mat] * regionMult)}</td></tr>
+      <tr><td>Finish & Hardware</td><td>${finishLabels[finish]} level (+${Math.round(finishAdj[finish] * 100)}%)</td><td class="num">${fmtD(hardwareTotal)}</td></tr>
+      <tr><td>Trim, Molding & Fillers</td><td>~9% of cabinet cost</td><td class="num">${fmtD(trimTotal)}</td></tr>
+      <tr><td>Installation Labor</td><td>${install === 'diy' ? 'DIY — No Cost' : 'Contractor ~$' + fmt(laborPerLF.contractor) + '/LF'}</td><td class="num">${install === 'diy' ? '$0' : fmtD(laborTotal)}</td></tr>
+      <tr><td>Regional Multiplier</td><td>${regionMult}×</td><td class="num">Applied above</td></tr>
+      <tr style="font-weight:700;background:#f0f7f4"><td>TOTAL ESTIMATE</td><td></td><td class="num">${fmtD(grandTotal)}</td></tr>
+    </tbody>
+  `;
+
+  const shopHTML = shopItems.map(i => `
+    <div class="shop-item">
+      <div><div class="shop-name">${i.name}</div><div class="shop-meta">${i.note}</div></div>
+      <div style="text-align:right"><div class="shop-qty">${i.qty}</div><div class="shop-meta">${i.cost}</div></div>
+    </div>
+  `).join('');
+
+  // Store for copy
+  window._copyData = `Kitchen Cabinet Cost Estimate\n` +
+    `Total: ${fmtD(grandTotal)} (Range: ${fmtD(lowTotal)} – ${fmtD(highTotal)})\n` +
+    `Upper Cabinets (${upperRun} LF): ${fmtD(upperCabCost * regionMult)}\n` +
+    `Base Cabinets (${baseRun} LF): ${fmtD(baseCabCost * regionMult)}\n` +
+    `Hardware & Finish: ${fmtD(hardwareTotal)}\n` +
+    `Trim & Fillers: ${fmtD(trimTotal)}\n` +
+    `Installation: ${install === 'diy' ? '$0 (DIY)' : fmtD(laborTotal)}\n` +
+    `Grade: ${grade} | Door: ${door} | Material: ${mat}`;
+
+  requestAnimationFrame(() => {
+    svgEl.innerHTML = svgHTML;
+    document.getElementById('heroTotal').textContent = fmtD(grandTotal);
+    document.getElementById('heroRange').textContent = `Low: ${fmtD(lowTotal)} — High: ${fmtD(highTotal)}`;
+    document.getElementById('costGrid').innerHTML = costGridHTML;
+    document.getElementById('costBars').innerHTML = barsHTML;
+    document.getElementById('breakdownTable').innerHTML = tableHTML;
+    document.getElementById('timePro').textContent = proDays;
+    document.getElementById('timeBeginner').textContent = begDays;
+    document.getElementById('proTipText').textContent = tips[grade];
+    document.getElementById('shoppingList').innerHTML = shopHTML;
+
+    const rs = document.getElementById('resultsSection');
+    rs.style.display = 'block';
+    requestAnimationFrame(() => { rs.style.opacity = '1'; rs.classList.add('visible'); });
+    rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function buildSVG(wallLen, upperRun, baseRun, ceilH, island) {
+  const W = 500, H = 200;
+  const pad = 30;
+  const floorY = 160, ceilY = 20;
+  const availW = W - pad * 2;
+
+  // Scale pixels per foot
+  const scale = Math.min(availW / wallLen, 12);
+  const drawW = Math.min(wallLen * scale, availW);
+  const startX = pad + (availW - drawW) / 2;
+
+  const upperH = Math.round((ceilH - 4.5) * scale * 0.6);
+  const baseH = Math.round(2.5 * scale * 0.7);
+  const upperY = ceilY + 8;
+  const baseY = floorY - baseH;
+
+  const upperW = Math.min(upperRun * scale, drawW);
+  const baseW  = Math.min(baseRun  * scale, drawW);
+  const upperX = startX;
+  const baseX  = startX;
+
+  const islandW = island === 'none' ? 0 : island === 'small' ? 4 * scale : 8 * scale;
+  const islandX = startX + drawW / 2 - islandW / 2;
+  const islandY = floorY - baseH - 14;
+
+  // Ceiling line
+  let s = `<line x1="${startX}" y1="${ceilY}" x2="${startX + drawW}" y2="${ceilY}" stroke="#aaa" stroke-width="2"/>`;
+  // Floor line
+  s += `<line x1="${startX}" y1="${floorY}" x2="${startX + drawW}" y2="${floorY}" stroke="#888" stroke-width="3"/>`;
+  // Wall
+  s += `<line x1="${startX}" y1="${ceilY}" x2="${startX}" y2="${floorY}" stroke="#bbb" stroke-width="2"/>`;
+  s += `<line x1="${startX + drawW}" y1="${ceilY}" x2="${startX + drawW}" y2="${floorY}" stroke="#bbb" stroke-width="2"/>`;
+
+  // Upper cabinets
+  if (upperRun > 0 && upperH > 0) {
+    s += `<rect x="${upperX}" y="${upperY}" width="${upperW}" height="${upperH}" fill="#b7e4c7" stroke="#2d6a4f" stroke-width="1.5" rx="2"/>`;
+    // cabinet lines
+    const uStep = Math.max(upperW / Math.max(1, Math.round(upperRun / 1.5)), 20);
+    for (let x = upperX + uStep; x < upperX + upperW - 2; x += uStep) {
+      s += `<line x1="${x.toFixed(1)}" y1="${upperY + 2}" x2="${x.toFixed(1)}" y2="${upperY + upperH - 2}" stroke="#2d6a4f" stroke-width="0.8" opacity="0.5"/>`;
+    }
+    s += `<text x="${upperX + upperW / 2}" y="${upperY + upperH / 2 + 4}" text-anchor="middle" font-size="10" fill="#1b4332" font-family="sans-serif" font-weight="600">Upper (${upperRun} ft)</text>`;
+  }
+
+  // Base cabinets
+  if (baseRun > 0) {
+    s += `<rect x="${baseX}" y="${baseY}" width="${baseW}" height="${baseH}" fill="#95d5b2" stroke="#2d6a4f" stroke-width="1.5" rx="2"/>`;
+    const bStep = Math.max(baseW / Math.max(1, Math.round(baseRun / 1.5)), 20);
+    for (let x = baseX + bStep; x < baseX + baseW - 2; x += bStep) {
+      s += `<line x1="${x.toFixed(1)}" y1="${baseY + 2}" x2="${x.toFixed(1)}" y2="${baseY + baseH - 2}" stroke="#2d6a4f" stroke-width="0.8" opacity="0.5"/>`;
+    }
+    s += `<text x="${baseX + baseW / 2}" y="${baseY + baseH / 2 + 4}" text-anchor="middle" font-size="10" fill="#1b4332" font-family="sans-serif" font-weight="600">Base (${baseRun} ft)</text>`;
+    // Toe kick
+    s += `<rect x="${baseX}" y="${floorY - 4}" width="${baseW}" height="4" fill="#52b788" rx="1"/>`;
+  }
+
+  // Island
+  if (island !== 'none' && islandW > 0) {
+    s += `<rect x="${islandX}" y="${islandY}" width="${islandW}" height="${baseH * 0.85}" fill="#e76f51" stroke="#c95a3d" stroke-width="1.5" rx="3" opacity="0.85"/>`;
+    s += `<text x="${islandX + islandW / 2}" y="${islandY + baseH * 0.45}" text-anchor="middle" font-size="9" fill="#fff" font-family="sans-serif" font-weight="700">Island</text>`;
+  }
+
+  // Dimension arrows
+  const arrowY = floorY + 16;
+  s += `<line x1="${startX}" y1="${arrowY}" x2="${startX + drawW}" y2="${arrowY}" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>`;
+  s += `<line x1="${startX + drawW}" y1="${arrowY}" x2="${startX}" y2="${arrowY}" stroke="#888" stroke-width="1" marker-end="url(#arr)"/>`;
+  s += `<text x="${startX + drawW / 2}" y="${arrowY + 12}" text-anchor="middle" font-size="9.5" fill="#555" font-family="sans-serif">${wallLen} ft total wall</text>`;
+
+  // Height indicator
+  s += `<line x1="${startX - 10}" y1="${ceilY}" x2="${startX - 10}" y2="${floorY}" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/>`;
+  s += `<text x="${startX - 14}" y="${(ceilY + floorY) / 2 + 4}" text-anchor="middle" font-size="9" fill="#888" font-family="sans-serif" transform="rotate(-90 ${startX - 14} ${(ceilY + floorY) / 2})">${ceilH} ft</text>`;
+
+  // Defs
+  const defs = `<defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#888" stroke-width="1"/></marker></defs>`;
+
+  return defs + s;
+}
+
+// Copy to clipboard
+document.getElementById('copyBtn').addEventListener('click', function() {
+  const btn = this;
+  if (!window._copyData) return;
+  navigator.clipboard.writeText(window._copyData).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '📋 Copy Summary'; }, 2000);
+  }).catch(() => {
+    btn.textContent = '⚠️ Copy failed';
+    setTimeout(() => { btn.textContent = '📋 Copy Summary'; }, 2000);
+  });
+});
+
+const finishLabels = ['', 'Basic', 'Mid-Range', 'Premium'];
+</script>
+</body>
+</html>
