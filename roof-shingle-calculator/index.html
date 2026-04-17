@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roof Shingle Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how many roof shingles you need. Enter your roof dimensions, pitch, and waste factor to get bundles, squares, and cost estimates instantly.">
+<link rel="canonical" href="https://toolhut.dev/roof-shingle-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Roof Shingle Calculator",
+  "url": "https://toolhut.dev/roof-shingle-calculator/",
+  "description": "Free online roof shingle calculator. Calculate bundles, squares, and cost estimates for your roofing project.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#2d6a4f;
+  --green-dark:#1b4332;
+  --green-light:#d8f3dc;
+  --orange:#e76f51;
+  --orange-light:#fff0eb;
+  --blue:#0077b6;
+  --bg:#f8f9fa;
+  --white:#fff;
+  --text:#1a1a2e;
+  --muted:#555;
+  --border:#dee2e6;
+  --red:#e74c3c;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 1rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:var(--text)}
+.nav-brand span{color:var(--green)}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 3rem}
+h1{font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:.4rem}
+.subtitle{color:var(--muted);font-size:.95rem;margin-bottom:1.5rem}
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:1.5rem}
+.section-title{font-size:1rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.04em;margin-bottom:1rem;padding-bottom:.4rem;border-bottom:2px solid var(--green-light)}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:var(--text);background:var(--white);outline:none;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input[type=number]:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:var(--red)}
+.error-msg{color:var(--red);font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.form-group{margin-bottom:1.1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#fff;border:none;padding:13px 28px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;min-height:44px;width:100%}
+.btn:hover{background:var(--green-dark)}
+.btn-orange{background:var(--orange)}
+.btn-orange:hover{background:#c95d3f}
+.btn-sm{font-size:.82rem;padding:7px 14px;width:auto;min-height:36px;border-radius:5px}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:all}
+.key-number{text-align:center;padding:1.25rem;background:var(--green-light);border-radius:8px;margin-bottom:1.25rem}
+.key-number .big{font-size:2.6rem;font-weight:800;color:var(--green);line-height:1.1}
+.key-number .label{font-size:.9rem;color:var(--green-dark);font-weight:500;margin-top:.2rem}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem}
+.stat-box{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.85rem;text-align:center}
+.stat-box .val{font-size:1.35rem;font-weight:700;color:var(--text)}
+.stat-box .lbl{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;color:#333;border-bottom:2px solid var(--border)}
+td{padding:9px 12px;border-bottom:1px solid #eee;color:var(--text)}
+tr:nth-child(even) td{background:#fafafa}
+.num{text-align:right}
+.table-wrap{overflow-x:auto}
+.pro-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin-bottom:1.25rem}
+.pro-tip strong{color:var(--orange);font-size:.9rem;display:block;margin-bottom:.35rem}
+.pro-tip p{font-size:.88rem;color:#444;line-height:1.5}
+.shopping-list li{font-size:.9rem;padding:.45rem 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;list-style:none}
+.shopping-list li:last-child{border-bottom:none}
+.shopping-list .item-qty{font-weight:700;color:var(--green);white-space:nowrap;margin-left:.5rem}
+.time-est{display:flex;gap:.75rem;flex-wrap:wrap}
+.time-box{flex:1;min-width:120px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.75rem;text-align:center}
+.time-box .t-label{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.time-box .t-val{font-size:1rem;font-weight:700;color:var(--text);margin-top:.2rem}
+.copy-row{display:flex;justify-content:flex-end;margin-bottom:.75rem}
+svg-diagram{display:block}
+#roofDiagram{width:100%;max-height:200px}
+.pitch-visual{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted);margin-top:.3rem}
+.pitch-bar{width:60px;height:14px;background:linear-gradient(to right,var(--green-light),var(--green));border-radius:3px;position:relative}
+details{border:1px solid var(--border);border-radius:6px;margin-bottom:.6rem}
+details summary{padding:.85rem 1rem;font-weight:600;cursor:pointer;list-style:none;font-size:.95rem}
+details summary::-webkit-details-marker{display:none}
+details[open] summary{border-bottom:1px solid var(--border);color:var(--green)}
+details p{padding:.75rem 1rem;font-size:.9rem;color:#444;line-height:1.55}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.related-link{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:.7rem 1rem;font-size:.88rem;font-weight:500;color:var(--green);display:block;transition:background .15s}
+.related-link:hover{background:var(--green-light);text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:var(--white);border-top:1px solid var(--border);padding:1.25rem 1rem;margin-top:2rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.75rem;justify-content:space-between;align-items:center;font-size:.85rem;color:var(--muted)}
+.footer-links{display:flex;gap:1rem}
+.footer-links a{color:var(--muted)}
+h2{font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:.6rem;margin-top:1.5rem}
+h2:first-child{margin-top:0}
+.content-section p{font-size:.93rem;color:#333;margin-bottom:.75rem;line-height:1.65}
+.content-section ul{margin:.5rem 0 .75rem 1.2rem}
+.content-section ul li{font-size:.93rem;color:#333;margin-bottom:.35rem;line-height:1.55}
+@media(max-width:640px){
+  .form-row{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .key-number .big{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Roof Shingle Calculator</h1>
+  <p class="subtitle">Calculate bundles, squares, and total cost for your roofing project — including waste and ridge cap.</p>
+
+  <!-- INPUT CARD -->
+  <div class="card">
+    <div class="section-title">Roof Dimensions</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="roofLength">Roof Length (ft)</label>
+        <input type="number" id="roofLength" placeholder="e.g. 40" min="1" max="999">
+        <div class="error-msg" id="err-length">Enter a valid length (1–999 ft)</div>
+      </div>
+      <div class="form-group">
+        <label for="roofWidth">Roof Width / Run (ft)</label>
+        <input type="number" id="roofWidth" placeholder="e.g. 20" min="1" max="999">
+        <div class="error-msg" id="err-width">Enter a valid width (1–999 ft)</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="numSlopes">Number of Roof Planes</label>
+        <select id="numSlopes">
+          <option value="2">2 (Gable roof)</option>
+          <option value="4">4 (Hip roof)</option>
+          <option value="1">1 (Shed / Lean-to)</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <div class="form-group" id="customSlopesGroup" style="display:none">
+        <label for="customSlopes">Custom Plane Count</label>
+        <input type="number" id="customSlopes" placeholder="e.g. 6" min="1" max="20">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="roofPitch">Roof Pitch (rise per 12&quot; run)</label>
+      <select id="roofPitch">
+        <option value="1.02">1/12 — Nearly flat (factor 1.02)</option>
+        <option value="1.03">2/12 — Low slope (factor 1.03)</option>
+        <option value="1.054">3/12 — Low slope (factor 1.054)</option>
+        <option value="1.083">4/12 — Moderate (factor 1.083)</option>
+        <option value="1.118">5/12 — Moderate (factor 1.118)</option>
+        <option value="1.162" selected>6/12 — Standard (factor 1.162)</option>
+        <option value="1.202">7/12 — Steep (factor 1.202)</option>
+        <option value="1.250">8/12 — Steep (factor 1.250)</option>
+        <option value="1.302">9/12 — Very steep (factor 1.302)</option>
+        <option value="1.360">10/12 — Very steep (factor 1.360)</option>
+        <option value="1.421">11/12 — Extreme (factor 1.421)</option>
+        <option value="1.474">12/12 — 45° (factor 1.474)</option>
+      </select>
+    </div>
+
+    <div class="section-title" style="margin-top:1.25rem">Shingle &amp; Cost Options</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="shingleType">Shingle Type</label>
+        <select id="shingleType">
+          <option value="3tab">3-Tab (3 bundles/sq)</option>
+          <option value="arch" selected>Architectural (3 bundles/sq)</option>
+          <option value="premium">Premium/Designer (4 bundles/sq)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="wasteFactor">Waste Factor</label>
+        <select id="wasteFactor">
+          <option value="10">10% — Simple gable</option>
+          <option value="15" selected>15% — Standard</option>
+          <option value="20">20% — Complex / Hip</option>
+          <option value="25">25% — Lots of hips &amp; valleys</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pricePerBundle">Price per Bundle ($)</label>
+        <input type="number" id="pricePerBundle" placeholder="e.g. 35" min="1" max="999" value="35">
+        <div class="error-msg" id="err-price">Enter a price between $1 and $999</div>
+      </div>
+      <div class="form-group">
+        <label for="ridgeCapLength">Ridge / Hip Length (ft, optional)</label>
+        <input type="number" id="ridgeCapLength" placeholder="e.g. 40" min="0" max="999">
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate Shingles</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="resultsSection">
+
+    <!-- SVG Diagram -->
+    <div class="card" style="padding:1.25rem">
+      <div class="section-title">Roof Diagram</div>
+      <svg id="roofDiagram" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Roof layout diagram">
+        <!-- drawn by JS -->
+      </svg>
+    </div>
+
+    <!-- Key Numbers -->
+    <div class="card">
+      <div class="copy-row">
+        <button class="btn btn-sm btn-orange" id="copyBtn">Copy Results</button>
+      </div>
+      <div class="key-number">
+        <div class="big" id="keyBundles">—</div>
+        <div class="label">Bundles to Purchase (incl. waste)</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="val" id="statSquares">—</div>
+          <div class="lbl">Roof Squares</div>
+        </div>
+        <div class="stat-box">
+          <div class="val" id="statSqFt">—</div>
+          <div class="lbl">Total Sq Ft</div>
+        </div>
+        <div class="stat-box">
+          <div class="val" id="statBundlesBase">—</div>
+          <div class="lbl">Bundles (no waste)</div>
+        </div>
+        <div class="stat-box">
+          <div class="val" id="statCost">—</div>
+          <div class="lbl">Est. Material Cost</div>
+        </div>
+      </div>
+
+      <!-- Breakdown Table -->
+      <div class="table-wrap">
+        <table id="breakdownTable">
+          <thead>
+            <tr><th>Item</th><th class="num">Value</th></tr>
+          </thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Shopping List -->
+    <div class="card">
+      <div class="section-title">Materials Shopping List</div>
+      <ul class="shopping-list" id="shoppingList"></ul>
+    </div>
+
+    <!-- Pro Tip -->
+    <div class="pro-tip">
+      <strong>🔨 Pro Tip from a Contractor</strong>
+      <p id="proTipText">Always add at least 10–15% for waste. On hip roofs with multiple valleys, go 20–25%. Buy all shingles from the same production run (same lot number) to avoid color variation between batches. Store bundles flat — never on their side — to prevent curling.</p>
+    </div>
+
+    <!-- Time Estimate -->
+    <div class="card">
+      <div class="section-title">Time Estimate</div>
+      <div class="time-est" id="timeEst"></div>
+    </div>
+
+  </div><!-- /results -->
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+
+    <h2>How to Use This Roof Shingle Calculator</h2>
+    <p>Enter your roof's length and width (the horizontal footprint measurement, not the slope distance), select the number of roof planes, and choose your pitch. The calculator applies the pitch factor to find the actual sloped surface area, then adds your chosen waste percentage and divides by 100 sq ft per square to give you bundle and cost totals. Optionally enter ridge/hip cap length to include those materials.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Buying too few shingles mid-project is one of the most costly rookie mistakes in roofing. You might end up with a different dye lot that doesn't match — meaning visible color bands across your finished roof. On a 2,000 sq ft roof, that 15% waste add-on means purchasing about 3 extra squares (9 bundles), which at $35/bundle is just $315 of insurance against a much bigger problem.</p>
+    <p>Steep roofs (8/12 pitch and above) require specialized techniques and safety equipment — factor that into your labor budget. A 6/12 pitch roof that measures 30×40 ft in footprint is actually about 1,395 sq ft of shingles once pitch is applied, not 1,200 sq ft. That's nearly 2 extra squares most homeowners forget to buy.</p>
+    <p>Ridge cap shingles are separate from field shingles and are often overlooked entirely. A 40-foot ridge uses about 1 bundle of cap shingles — budget for it separately.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>Step 1 — Footprint area:</strong> Length × Width × Number of Planes</p>
+    <p><strong>Step 2 — Slope adjustment:</strong> Footprint × Pitch Factor (e.g. 6/12 pitch = 1.162)</p>
+    <p><strong>Step 3 — Add waste:</strong> Sloped Area × (1 + waste%)</p>
+    <p><strong>Step 4 — Convert to squares &amp; bundles:</strong> Area ÷ 100 = squares; squares × bundles per square (3 for standard, 4 for premium)</p>
+    <p><strong>Pitch Factor Formula:</strong> √(1 + (rise/12)²)</p>
+    <p>Example: 40×20 ft gable roof, 6/12 pitch, 15% waste → (40×20×2) × 1.162 × 1.15 = 2,135 sq ft → 21.35 squares → 65 bundles</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Measure the footprint, not the slope.</strong> Walk the ground and measure the building's exterior — the calculator handles the slope math.</li>
+      <li><strong>Don't forget valleys and dormers.</strong> These require extra cuts and add significant waste. Use 20–25% waste factor for complex roofs.</li>
+      <li><strong>Order 5–10% extra on your first roofing job.</strong> Beginners make more cuts and mistakes than pros. Return unused full bundles later.</li>
+      <li><strong>Ridge cap is not included in field shingle counts.</strong> Use roughly 1 bundle per 35 linear feet of ridge/hip.</li>
+      <li><strong>Check your local building code.</strong> Some areas require a specific underlayment (felt or synthetic) under shingles. Budget for that separately — typically $0.15–0.25/sq ft.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>How many bundles of shingles do I need per square?</summary>
+      <p>Standard 3-tab and architectural (dimensional) shingles require 3 bundles per square (100 sq ft). Premium designer shingles are larger and heavier, requiring 4 bundles per square. Always confirm with the manufacturer's label on the bundle.</p>
+    </details>
+
+    <details>
+      <summary>What is a "roofing square"?</summary>
+      <p>A roofing square is simply 100 square feet of roof surface — it's the industry standard unit. If your roof measures 2,400 sq ft, that's 24 squares. Contractors price and order by the square, so understanding this unit helps you communicate with suppliers and roofers.</p>
+    </details>
+
+    <details>
+      <summary>Do I need a permit to reshingle my roof?</summary>
+      <p>In most US jurisdictions, replacing shingles on an existing roof (a "re-roof") does not require a permit, but installing a complete new roof system or adding a second layer might. Always check with your local building department — permits typically cost $100–$500 and protect your home's resale value.</p>
+    </details>
+
+    <details>
+      <summary>How much does it cost to shingle a roof professionally?</summary>
+      <p>Professional installation typically runs $3.50–$6.50 per sq ft including materials, or $350–$650 per square. A 2,000 sq ft roof (20 squares) costs roughly $7,000–$13,000 fully installed. DIY material-only cost for the same roof runs $1,400–$2,500 depending on shingle grade.</p>
+    </details>
+
+  </div>
+
+  <!-- Related Tools -->
+  <div class="card" style="margin-top:2rem">
+    <div class="section-title">Related Tools</div>
+    <div class="related-grid">
+      <a href="/kitchen-cabinet-cost-estimator/" class="related-link">🍳 Kitchen Cabinet Cost Estimator</a>
+      <a href="/concrete-patio-cost-estimator/" class="related-link">🧱 Concrete Patio Cost Estimator</a>
+      <a href="/hardwood-flooring-cost-calculator/" class="related-link">🪵 Hardwood Flooring Cost Calculator</a>
+      <a href="/ceiling-fan-size-calculator/" class="related-link">💨 Ceiling Fan Size Calculator</a>
+      <a href="/raised-garden-bed-soil-calculator/" class="related-link">🌱 Raised Garden Bed Soil Calculator</a>
+      <a href="/drywall-sheet-calculator/" class="related-link">🔲 Drywall Sheet Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© <span id="yr"></span> toolhut.dev</span>
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Slope selector toggle
+document.getElementById('numSlopes').addEventListener('change', function(){
+  document.getElementById('customSlopesGroup').style.display = this.value === 'custom' ? '' : 'none';
+});
+
+function fmt(n, dec=0){ return n.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+function fmtDollar(n){ return '$' + fmt(n,2); }
+
+function getPitchLabel(val){
+  const map={
+    '1.02':'1/12','1.03':'2/12','1.054':'3/12','1.083':'4/12',
+    '1.118':'5/12','1.162':'6/12','1.202':'7/12','1.250':'8/12',
+    '1.302':'9/12','1.360':'10/12','1.421':'11/12','1.474':'12/12'
+  };
+  return map[String(val)] || val;
+}
+
+function getRise(factor){
+  const map={
+    '1.02':1,'1.03':2,'1.054':3,'1.083':4,
+    '1.118':5,'1.162':6,'1.202':7,'1.250':8,
+    '1.302':9,'1.360':10,'1.421':11,'1.474':12
+  };
+  return map[String(factor)] || 6;
+}
+
+function setError(inputId, errId, show){
+  const el = document.getElementById(inputId);
+  const em = document.getElementById(errId);
+  if(show){ el.classList.add('error'); em.classList.add('show'); }
+  else{ el.classList.remove('error'); em.classList.remove('show'); }
+}
+
+function drawDiagram(length, width, rise, slopes){
+  const svg = document.getElementById('roofDiagram');
+  const W=500, H=200, pad=30;
+  const roofW = W - pad*2;
+  const roofH = H - pad*2;
+  // pitch angle for display
+  const angle = Math.atan(rise/12);
+  const ridgeH = Math.min(roofH * 0.55, (roofW/2)*Math.tan(angle)*1.8);
+  const cx = W/2;
+
+  let html='';
+  // sky bg
+  html+=`<rect width="500" height="200" fill="#e8f4f8" rx="6"/>`;
+  // ground
+  html+=`<rect x="0" y="170" width="500" height="30" fill="#c8e6c9" rx="0"/>`;
+
+  if(slopes>=2){
+    // Gable style: two slopes visible
+    const leftX = pad+30, rightX = W-pad-30, bottomY=170;
+    const ridgeY = bottomY - ridgeH;
+    // Left slope
+    html+=`<polygon points="${cx},${ridgeY} ${leftX},${bottomY} ${rightX},${bottomY}" fill="#2d6a4f" opacity="0.85"/>`;
+    // Shingle lines on left slope
+    const steps=5;
+    for(let i=1;i<steps;i++){
+      const t=i/steps;
+      const x1=cx+(leftX-cx)*t, y1=ridgeY+(bottomY-ridgeY)*t;
+      const x2=cx+(rightX-cx)*t, y2=ridgeY+(bottomY-ridgeY)*t;
+      html+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>`;
+    }
+    // Vertical shingle seams
+    for(let i=-2;i<=2;i++){
+      const bx=cx+i*(roofW/5/2);
+      html+=`<line x1="${bx}" y1="${bottomY}" x2="${cx+(bx-cx)*0.1}" y2="${ridgeY+(bottomY-ridgeY)*0.1}" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>`;
+    }
+    // Ridge line
+    html+=`<line x1="${cx-15}" y1="${ridgeY}" x2="${cx+15}" y2="${ridgeY}" stroke="#e76f51" stroke-width="3" stroke-linecap="round"/>`;
+    // Eave line
+    html+=`<line x1="${leftX}" y1="${bottomY}" x2="${rightX}" y2="${bottomY}" stroke="#e76f51" stroke-width="2.5"/>`;
+    // Rake lines
+    html+=`<line x1="${leftX}" y1="${bottomY}" x2="${cx}" y2="${ridgeY}" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>`;
+    html+=`<line x1="${rightX}" y1="${bottomY}" x2="${cx}" y2="${ridgeY}" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>`;
+  }
+
+  // Dimension labels
+  const labelY = 185;
+  html+=`<text x="${cx}" y="${labelY}" text-anchor="middle" fill="#1a1a2e" font-size="12" font-family="sans-serif" font-weight="600">${length > 0 ? length+"′ × "+width+"′ footprint" : "Roof Footprint"}</text>`;
+
+  // Pitch badge
+  html+=`<rect x="8" y="8" width="72" height="26" rx="4" fill="rgba(231,111,81,0.15)" stroke="#e76f51" stroke-width="1"/>`;
+  html+=`<text x="44" y="25" text-anchor="middle" fill="#e76f51" font-size="12" font-family="sans-serif" font-weight="700">Pitch ${rise}/12</text>`;
+
+  // Slopes badge
+  html+=`<rect x="420" y="8" width="72" height="26" rx="4" fill="rgba(45,106,79,0.15)" stroke="#2d6a4f" stroke-width="1"/>`;
+  html+=`<text x="456" y="25" text-anchor="middle" fill="#2d6a4f" font-size="12" font-family="sans-serif" font-weight="700">${slopes} plane${slopes>1?'s':''}</text>`;
+
+  svg.innerHTML=html;
+}
+
+function calculate(){
+  const length = parseFloat(document.getElementById('roofLength').value);
+  const width = parseFloat(document.getElementById('roofWidth').value);
+  const slopesSel = document.getElementById('numSlopes').value;
+  const pitchFactor = parseFloat(document.getElementById('roofPitch').value);
+  const shingleType = document.getElementById('shingleType').value;
+  const wastePct = parseFloat(document.getElementById('wasteFactor').value);
+  const pricePerBundle = parseFloat(document.getElementById('pricePerBundle').value);
+  const ridgeCap = parseFloat(document.getElementById('ridgeCapLength').value) || 0;
+
+  let valid=true;
+  if(!length || length<1 || length>999){ setError('roofLength','err-length',true); valid=false; } else setError('roofLength','err-length',false);
+  if(!width || width<1 || width>999){ setError('roofWidth','err-width',true); valid=false; } else setError('roofWidth','err-width',false);
+  if(!pricePerBundle || pricePerBundle<1 || pricePerBundle>999){ setError('pricePerBundle','err-price',true); valid=false; } else setError('pricePerBundle','err-price',false);
+
+  if(!valid) return;
+
+  let slopes = slopesSel==='custom' ? (parseInt(document.getElementById('customSlopes').value)||2) : parseInt(slopesSel);
+  if(slopes<1||slopes>20) slopes=2;
+
+  const bundlesPerSquare = shingleType==='premium' ? 4 : 3;
+  const rise = getRise(pitchFactor);
+  const pitchLabel = getPitchLabel(pitchFactor);
+
+  // Calculations
+  const footprintArea = length * width * slopes;
+  const slopedArea = footprintArea * pitchFactor;
+  const withWaste = slopedArea * (1 + wastePct/100);
+  const squaresBase = slopedArea / 100;
+  const squaresWithWaste = withWaste / 100;
+  const bundlesBase = Math.ceil(squaresBase * bundlesPerSquare);
+  const bundlesTotal = Math.ceil(squaresWithWaste * bundlesPerSquare);
+
+  // Ridge cap: roughly 1 bundle per 35 linear ft
+  const ridgeCapBundles = ridgeCap > 0 ? Math.ceil(ridgeCap / 35) : 0;
+  const totalBundles = bundlesTotal + ridgeCapBundles;
+  const totalCost = totalBundles * pricePerBundle;
+
+  // Labor estimate (rough)
+  const laborLow = squaresWithWaste * 75;
+  const laborHigh = squaresWithWaste * 150;
+
+  // Time estimate
+  const sqForTime = squaresWithWaste;
+  let beginnerDays, expDays;
+  if(sqForTime<=10){beginnerDays='1–2 days';expDays='4–8 hrs';}
+  else if(sqForTime<=20){beginnerDays='2–4 days';expDays='1–2 days';}
+  else if(sqForTime<=35){beginnerDays='4–7 days';expDays='2–3 days';}
+  else{beginnerDays='1–2 weeks';expDays='3–5 days';}
+
+  requestAnimationFrame(()=>{
+    document.getElementById('keyBundles').textContent = fmt(totalBundles);
+    document.getElementById('statSquares').textContent = fmt(squaresWithWaste,1);
+    document.getElementById('statSqFt').textContent = fmt(withWaste);
+    document.getElementById('statBundlesBase').textContent = fmt(bundlesBase);
+    document.getElementById('statCost').textContent = fmtDollar(totalCost);
+
+    const rows=[
+      ['Footprint Area',fmt(footprintArea)+' sq ft'],
+      ['Pitch Factor ('+pitchLabel+')',pitchFactor.toFixed(3)+'×'],
+      ['Sloped Surface Area',fmt(Math.round(slopedArea))+' sq ft'],
+      ['Waste Factor',wastePct+'%'],
+      ['Area With Waste',fmt(Math.round(withWaste))+' sq ft'],
+      ['Roof Squares (w/ waste)',fmt(squaresWithWaste,2)],
+      ['Bundles per Square',bundlesPerSquare],
+      ['Field Shingle Bundles',fmt(bundlesTotal)],
+      ...(ridgeCapBundles>0?[['Ridge Cap Bundles ('+fmt(ridgeCap)+'ft)',fmt(ridgeCapBundles)]]:[]),
+      ['Total Bundles to Buy',fmt(totalBundles)],
+      ['Material Cost ('+fmtDollar(pricePerBundle)+'/bundle)',fmtDollar(totalCost)],
+      ['Est. Labor Cost (DIY save)',fmtDollar(laborLow)+'–'+fmtDollar(laborHigh)],
+      ['Shingle Type',shingleType==='3tab'?'3-Tab':shingleType==='arch'?'Architectural':'Premium/Designer'],
+    ];
+    let tbody='';
+    rows.forEach(r=>{ tbody+=`<tr><td>${r[0]}</td><td class="num">${r[1]}</td></tr>`; });
+    document.getElementById('breakdownBody').innerHTML=tbody;
+
+    // Shopping list
+    const nails = Math.ceil(totalBundles * 0.25); // ~1 lb per 4 bundles
+    const underlayment = Math.ceil(withWaste / 200); // 1 roll = ~200 sq ft
+    const iceWater = Math.ceil(length * 2 / 75); // approx
+    let shopHtml='';
+    shopHtml+=`<li><span>Shingles (${shingleType==='3tab'?'3-Tab':shingleType==='arch'?'Architectural':'Premium'}) — ${pitchLabel} pitch</span><span class="item-qty">${fmt(totalBundles)} bundles</span></li>`;
+    if(ridgeCapBundles>0) shopHtml+=`<li><span>Ridge Cap Shingles</span><span class="item-qty">${fmt(ridgeCapBundles)} bundles</span></li>`;
+    shopHtml+=`<li><span>Roofing Felt / Synthetic Underlayment (200 sq ft rolls)</span><span class="item-qty">${underlayment} rolls</span></li>`;
+    shopHtml+=`<li><span>Roofing Nails (1¾" coil or hand nails)</span><span class="item-qty">~${nails} lbs</span></li>`;
+    shopHtml+=`<li><span>Ice &amp; Water Shield (for eaves &amp; valleys)</span><span class="item-qty">${iceWater} rolls</span></li>`;
+    shopHtml+=`<li><span>Drip Edge (L-flashing) — perimeter</span><span class="item-qty">~${Math.ceil((length*2+width*slopes*2)/10)} strips (10 ft ea)</span></li>`;
+    shopHtml+=`<li><span>Roofing Caulk / Sealant</span><span class="item-qty">2–4 tubes</span></li>`;
+    shopHtml+=`<li><span>Vent Pipe Flashing</span><span class="item-qty">As needed</span></li>`;
+    document.getElementById('shoppingList').innerHTML=shopHtml;
+
+    // Time estimate
+    document.getElementById('timeEst').innerHTML=`
+      <div class="time-box"><div class="t-label">🏠 Beginner</div><div class="t-val">${beginnerDays}</div></div>
+      <div class="time-box"><div class="t-label">🔨 Experienced DIY</div><div class="t-val">${expDays}</div></div>
+      <div class="time-box"><div class="t-label">👷 Pro Crew</div><div class="t-val">${sqForTime<=15?'1 day':sqForTime<=30?'1–2 days':'2–3 days'}</div></div>
+    `;
+
+    // Pro tip based on pitch
+    let tip='Always add at least 10–15% for waste. Buy all shingles from the same production lot number to avoid color variation. Store bundles flat to prevent curling.';
+    if(rise>=8) tip='⚠️ Your roof is steep ('+pitchLabel+' pitch). Rent roof jacks and walk boards — safety is non-negotiable above 6/12. You\'ll also use ~20% more labor time on steep slopes. Consider hiring a pro for anything above 8/12.';
+    else if(slopes>=4) tip='Hip roofs with 4+ planes have lots of cuts at every corner. Use 20–25% waste factor and cut shingles to a chalk line for clean hip lines. A professional hip cap installation makes a huge aesthetic difference.';
+    else if(wastePct<=10) tip='10% waste is tight — only use this for a simple gable with no dormers or skylights. Add even one valley and you\'ll want 15–20%. Running short mid-project and getting a different dye lot is worse than buying one extra bundle now.';
+    document.getElementById('proTipText').textContent=tip;
+
+    // Draw diagram
+    drawDiagram(length, width, rise, slopes);
+
+    // Store for copy
+    window._lastResults = {length,width,slopes,pitchLabel,pitchFactor,slopedArea,withWaste,squaresWithWaste,bundlesTotal,ridgeCapBundles,totalBundles,totalCost,pricePerBundle,wastePct};
+
+    const sec=document.getElementById('resultsSection');
+    sec.classList.add('visible');
+    sec.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click',()=>{ calculate(); });
+
+document.querySelectorAll('input,select').forEach(el=>{
+  el.addEventListener('keydown',e=>{ if(e.key==='Enter') calculate(); });
+});
+
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  if(!window._lastResults) return;
+  const r=window._lastResults;
+  const text=`Roof Shingle Calculator Results (toolhut.dev)
+------------------------------------------
+Roof: ${r.length}ft × ${r.width}ft × ${r.slopes} plane(s)
+Pitch: ${r.pitchLabel} (factor ${r.pitchFactor.toFixed(3)})
+Sloped Area: ${fmt(Math.round(r.slopedArea))} sq ft
+With ${r.wastePct}% Waste: ${fmt(Math.round(r.withWaste))} sq ft
+Roof Squares: ${fmt(r.squaresWithWaste,2)}
+Field Bundles: ${fmt(r.bundlesTotal)}
+Ridge Cap Bundles: ${fmt(r.ridgeCapBundles)}
+TOTAL BUNDLES: ${fmt(r.totalBundles)}
+Est. Cost (@ $${r.pricePerBundle}/bundle): $${fmt(r.totalCost,2)}`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById('copyBtn');
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent='Copy Results',2000);
+  });
+});
+
+// Init diagram placeholder
+drawDiagram(0,0,6,2);
+</script>
+</body>
+</html>
