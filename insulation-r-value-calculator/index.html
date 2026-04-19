@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insulation R-Value Calculator — Free Online Tool | InsulationCalc</title>
+<meta name="description" content="Calculate insulation R-value for walls, attics, and floors. Find the right insulation thickness for your climate zone. Free, instant results.">
+<link rel="canonical" href="https://insulationcalc.com/r-value-calculator">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Insulation R-Value Calculator",
+  "description": "Calculate insulation R-value for walls, attics, and floors based on material, thickness, and climate zone.",
+  "url": "https://insulationcalc.com/r-value-calculator",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{border-bottom:1px solid #e0e0e0;padding:12px 16px;font-size:0.95rem}
+nav a{font-weight:600;color:#1a1a2e}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;margin-bottom:0.4rem;color:#1a1a2e}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px}
+select,input[type="number"],input[type="text"]{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px 16px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none;min-height:44px}
+select:focus,input:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+select.error,input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#0077b6;color:#fff;border:none;border-radius:6px;padding:12px 24px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s;margin-top:0.5rem}
+.btn:hover{background:#006299}
+.btn-secondary{background:#f0f0f0;color:#1a1a2e;margin-top:0.5rem}
+.btn-secondary:hover{background:#e0e0e0}
+.results{opacity:0;transition:opacity 0.3s ease;display:none}
+.results.visible{opacity:1;display:block}
+.result-hero{text-align:center;padding:1.5rem;background:#f0f8ff;border-radius:8px;margin-bottom:1.5rem;border:1px solid #bde0f7}
+.result-hero .big-number{font-size:3rem;font-weight:700;color:#0077b6;line-height:1}
+.result-hero .big-label{font-size:0.95rem;color:#555;margin-top:6px}
+.status-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;margin-top:10px}
+.status-meets{background:#d4edda;color:#155724}
+.status-below{background:#fff3cd;color:#856404}
+.status-far-below{background:#f8d7da;color:#721c24}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444}
+th.num,td.num{text-align:right}
+td{padding:10px 12px;border-bottom:1px solid #eee}
+tr:nth-child(even) td{background:#fafafa}
+.bar-wrap{background:#eee;border-radius:4px;height:12px;overflow:hidden;min-width:60px}
+.bar-fill{height:100%;border-radius:4px;background:#0077b6;transition:width 0.4s ease}
+.bar-fill.good{background:#28a745}
+.bar-fill.warn{background:#ffc107}
+.bar-fill.bad{background:#e74c3c}
+.section{margin-bottom:2rem}
+h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:2px solid #f0f0f0}
+h3{font-size:1rem;font-weight:600;color:#1a1a2e;margin-bottom:0.5rem}
+p{margin-bottom:0.75rem;color:#333}
+ul,ol{padding-left:1.4rem;margin-bottom:0.75rem;color:#333}
+li{margin-bottom:0.4rem}
+details{border:1px solid #e0e0e0;border-radius:6px;margin-bottom:0.75rem}
+summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:0.95rem;color:#1a1a2e;list-style:none;display:flex;align-items:center;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';font-size:1rem;color:#0077b6}
+details[open] summary::after{content:'－'}
+details[open] summary{border-bottom:1px solid #e0e0e0}
+.details-body{padding:12px 16px;font-size:0.93rem;color:#333}
+.related{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2rem}
+.related a{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:12px;font-size:0.88rem;color:#0077b6;display:block}
+.related a:hover{background:#e8f4fc;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{border-top:1px solid #e0e0e0;padding:16px;text-align:center;font-size:0.82rem;color:#888}
+footer a{color:#888;margin:0 8px}
+.tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem}
+.tab{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px;background:#f8f9fa;cursor:pointer;font-size:0.88rem;font-weight:500;text-align:center;color:#555;transition:all 0.2s;min-height:44px}
+.tab.active{background:#0077b6;color:#fff;border-color:#0077b6}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.copy-btn{background:none;border:1px solid #ddd;border-radius:4px;padding:4px 10px;font-size:0.78rem;color:#555;cursor:pointer;float:right;margin-top:-2px}
+.copy-btn:hover{background:#f0f0f0}
+.info-box{background:#f8f9fa;border-left:3px solid #0077b6;border-radius:0 6px 6px 0;padding:12px 16px;margin-bottom:1rem;font-size:0.88rem;color:#444}
+@media(max-width:640px){
+  .row{grid-template-columns:1fr}
+  .related{grid-template-columns:1fr}
+  .result-hero .big-number{font-size:2.4rem}
+  h1{font-size:1.35rem}
+  .card{padding:1.25rem}
+  .tabs{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<nav><a href="/">InsulationCalc</a></nav>
+<div class="container">
+  <h1>Insulation R-Value Calculator</h1>
+  <p class="subtitle">Calculate total R-value, check building code compliance, and compare insulation materials.</p>
+
+  <div class="card">
+    <div class="tabs" role="tablist">
+      <div class="tab active" role="tab" tabindex="0" onclick="switchTab('single')" id="tab-single">Single Material</div>
+      <div class="tab" role="tab" tabindex="0" onclick="switchTab('layers')" id="tab-layers">Layered Assembly</div>
+      <div class="tab" role="tab" tabindex="0" onclick="switchTab('target')" id="tab-target">Find Thickness</div>
+    </div>
+
+    <!-- Single Material Tab -->
+    <div class="tab-panel active" id="panel-single">
+      <div class="form-group">
+        <label for="material">Insulation Material</label>
+        <select id="material" onchange="updateRPerInch()">
+          <option value="">— Select material —</option>
+          <optgroup label="Batts &amp; Rolls">
+            <option value="3.14">Fiberglass Batt (standard)</option>
+            <option value="3.7">Fiberglass Batt (high-density)</option>
+            <option value="3.5">Mineral Wool / Rockwool Batt</option>
+            <option value="3.8">Cotton / Denim Batt</option>
+          </optgroup>
+          <optgroup label="Loose-Fill / Blown-In">
+            <option value="2.5">Fiberglass Loose-Fill</option>
+            <option value="3.7">Cellulose Loose-Fill</option>
+            <option value="2.7">Mineral Wool Loose-Fill</option>
+          </optgroup>
+          <optgroup label="Rigid Foam Board">
+            <option value="3.8">EPS (Expanded Polystyrene) Type I</option>
+            <option value="4.2">EPS Type II</option>
+            <option value="5.0">XPS (Extruded Polystyrene)</option>
+            <option value="6.5">Polyiso (Polyisocyanurate)</option>
+          </optgroup>
+          <optgroup label="Spray Foam">
+            <option value="3.7">Open-Cell Spray Foam</option>
+            <option value="6.5">Closed-Cell Spray Foam</option>
+          </optgroup>
+          <optgroup label="Other">
+            <option value="1.0">Concrete Block (standard)</option>
+            <option value="0.9">Brick</option>
+            <option value="1.25">Wood (softwood)</option>
+            <option value="2.0">Fiberboard Sheathing</option>
+            <option value="custom">Custom (enter R/inch)</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="form-group" id="custom-group" style="display:none">
+        <label for="customR">Custom R-Value per Inch</label>
+        <input type="number" id="customR" placeholder="e.g. 4.5" min="0.1" step="0.1">
+        <div class="error-msg" id="customR-err">Please enter a valid R/inch value.</div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="thickness">Thickness</label>
+          <input type="number" id="thickness" placeholder="e.g. 6" min="0.1" step="0.25">
+          <div class="error-msg" id="thickness-err">Enter a positive thickness.</div>
+        </div>
+        <div class="form-group">
+          <label for="unit">Unit</label>
+          <select id="unit">
+            <option value="inches">Inches</option>
+            <option value="mm">Millimeters</option>
+            <option value="cm">Centimeters</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="location">Building Component</label>
+          <select id="location">
+            <option value="attic">Attic / Ceiling</option>
+            <option value="wall">Wall (above grade)</option>
+            <option value="floor">Floor / Crawlspace</option>
+            <option value="basement">Basement Wall</option>
+            <option value="slab">Slab Edge</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="climate">Climate Zone</label>
+          <select id="climate">
+            <option value="1">Zone 1 (Hottest)</option>
+            <option value="2">Zone 2</option>
+            <option value="3">Zone 3</option>
+            <option value="4" selected>Zone 4</option>
+            <option value="5">Zone 5</option>
+            <option value="6">Zone 6</option>
+            <option value="7">Zone 7</option>
+            <option value="8">Zone 8 (Coldest)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="calculateSingle()">Calculate R-Value</button>
+    </div>
+
+    <!-- Layered Assembly Tab -->
+    <div class="tab-panel" id="panel-layers">
+      <p style="font-size:0.88rem;color:#555;margin-bottom:1rem">Add up to 5 insulation layers. Total R-value = sum of all layers.</p>
+      <div id="layers-container">
+        <div class="layer-row" id="layer-0">
+          <div class="row">
+            <div class="form-group">
+              <label>Layer 1 — Material</label>
+              <select class="layer-material" data-idx="0" onchange="layerMaterialChange(0)">
+                <option value="">— Select —</option>
+                <option value="3.14">Fiberglass Batt</option>
+                <option value="3.7">Cellulose Blown</option>
+                <option value="3.5">Mineral Wool Batt</option>
+                <option value="5.0">XPS Rigid Foam</option>
+                <option value="6.5">Polyiso Rigid Foam</option>
+                <option value="6.5">Closed-Cell Spray Foam</option>
+                <option value="3.7">Open-Cell Spray Foam</option>
+                <option value="1.25">Wood Sheathing</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Thickness (in)</label>
+              <input type="number" class="layer-thick" data-idx="0" placeholder="inches" min="0" step="0.25">
+            </div>
+          </div>
+          <div class="form-group layer-custom-group" id="layer-custom-0" style="display:none">
+            <label>Custom R/inch</label>
+            <input type="number" class="layer-custom-r" data-idx="0" placeholder="R per inch" min="0.1" step="0.1">
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-secondary" onclick="addLayer()" id="addLayerBtn" style="margin-bottom:0.75rem">+ Add Layer</button>
+      <div class="row">
+        <div class="form-group">
+          <label for="loc2">Building Component</label>
+          <select id="loc2">
+            <option value="attic">Attic / Ceiling</option>
+            <option value="wall">Wall (above grade)</option>
+            <option value="floor">Floor / Crawlspace</option>
+            <option value="basement">Basement Wall</option>
+            <option value="slab">Slab Edge</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="climate2">Climate Zone</label>
+          <select id="climate2">
+            <option value="1">Zone 1</option>
+            <option value="2">Zone 2</option>
+            <option value="3">Zone 3</option>
+            <option value="4" selected>Zone 4</option>
+            <option value="5">Zone 5</option>
+            <option value="6">Zone 6</option>
+            <option value="7">Zone 7</option>
+            <option value="8">Zone 8</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="calculateLayers()">Calculate Assembly R-Value</button>
+    </div>
+
+    <!-- Find Thickness Tab -->
+    <div class="tab-panel" id="panel-target">
+      <p style="font-size:0.88rem;color:#555;margin-bottom:1rem">Enter your target R-value and material to find the required thickness.</p>
+      <div class="form-group">
+        <label for="mat3">Insulation Material</label>
+        <select id="mat3" onchange="updateRPerInch3()">
+          <option value="">— Select material —</option>
+          <option value="3.14">Fiberglass Batt (standard)</option>
+          <option value="3.7">Fiberglass Batt (high-density)</option>
+          <option value="3.5">Mineral Wool Batt</option>
+          <option value="2.5">Fiberglass Loose-Fill</option>
+          <option value="3.7">Cellulose Loose-Fill</option>
+          <option value="3.8">EPS Rigid Foam</option>
+          <option value="5.0">XPS Rigid Foam</option>
+          <option value="6.5">Polyiso Rigid Foam</option>
+          <option value="3.7">Open-Cell Spray Foam</option>
+          <option value="6.5">Closed-Cell Spray Foam</option>
+          <option value="custom3">Custom (enter R/inch)</option>
+        </select>
+      </div>
+      <div class="form-group" id="custom3-group" style="display:none">
+        <label for="customR3">Custom R-Value per Inch</label>
+        <input type="number" id="customR3" placeholder="e.g. 4.5" min="0.1" step="0.1">
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="targetR">Target R-Value</label>
+          <input type="number" id="targetR" placeholder="e.g. 38" min="1" step="1">
+          <div class="error-msg" id="targetR-err">Enter a valid target R-value.</div>
+        </div>
+        <div class="form-group">
+          <label for="unit3">Result Unit</label>
+          <select id="unit3">
+            <option value="inches">Inches</option>
+            <option value="cm">Centimeters</option>
+            <option value="mm">Millimeters</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="calculateTarget()">Find Required Thickness</button>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results-single">
+    <div class="result-hero">
+      <div class="big-number" id="res-rval">—</div>
+      <div class="big-label">Total R-Value</div>
+      <div id="res-badge"></div>
+    </div>
+    <div class="table-wrap">
+      <table id="res-table"><thead><tr><th>Property</th><th class="num">Value</th></tr></thead><tbody id="res-tbody"></tbody></table>
+    </div>
+    <br>
+    <div id="res-comparison"></div>
+  </div>
+
+  <div class="results" id="results-layers">
+    <div class="result-hero">
+      <div class="big-number" id="res-rval-layers">—</div>
+      <div class="big-label">Total Assembly R-Value</div>
+      <div id="res-badge-layers"></div>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Layer</th><th>Material</th><th class="num">Thickness</th><th class="num">R/in</th><th class="num">R-Value</th></tr></thead><tbody id="layers-tbody"></tbody></table>
+    </div>
+  </div>
+
+  <div class="results" id="results-target">
+    <div class="result-hero">
+      <div class="big-number" id="res-thick">—</div>
+      <div class="big-label" id="res-thick-label">Required Thickness</div>
+    </div>
+    <div class="table-wrap">
+      <table><thead><tr><th>Property</th><th class="num">Value</th></tr></thead><tbody id="target-tbody"></tbody></table>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="section">
+    <h2>How to Use This R-Value Calculator</h2>
+    <p>Choose a tab based on your task: <strong>Single Material</strong> calculates the R-value for one insulation product at a given thickness; <strong>Layered Assembly</strong> adds up R-values across multiple layers (great for walls with sheathing + batt + rigid foam); <strong>Find Thickness</strong> works backward — enter a target R-value and get the required inches or centimeters of a specific material. Select your climate zone and building component to see whether your result meets 2021 IECC code minimums.</p>
+  </div>
+
+  <div class="section">
+    <h2>Why This Matters</h2>
+    <p>Insulation is the single biggest lever most homeowners have over their energy bills. A poorly insulated attic in Climate Zone 5 (think Chicago or Denver) can lose 25–30% of a home's heating energy right through the ceiling — that's hundreds of dollars per winter. The Department of Energy recommends R-49 to R-60 for attics in those zones, yet many older homes sit at R-11 or R-19 from insulation installed in the 1970s.</p>
+    <p>Builders use R-value to specify products and bid jobs. An architect designing a high-performance wall assembly needs to sum the contributions of exterior rigid foam, cavity insulation, and even the wall sheathing itself to hit code. A DIY homeowner adding blown-in cellulose to an attic needs to know exactly how many inches to add on top of existing insulation. Real estate investors use R-value assessments to estimate upgrade costs before purchasing a property.</p>
+    <p>Getting this right also affects moisture control. Closed-cell spray foam at R-6.5/inch doubles as a vapor barrier; open-cell foam at R-3.7/inch does not. Choosing the wrong product for the right R-value can lead to condensation and mold — so knowing exactly what each material does is critical.</p>
+  </div>
+
+  <div class="section">
+    <h2>How It's Calculated</h2>
+    <div class="info-box">
+      <strong>Basic formula:</strong> R-Value = R per inch × Thickness (inches)<br>
+      <strong>Layered assembly:</strong> R-Total = R₁ + R₂ + R₃ + ... (layers in series add directly)<br>
+      <strong>Reverse (Find Thickness):</strong> Thickness = Target R ÷ R per inch
+    </div>
+    <p>R-value measures thermal resistance — how strongly a material resists heat flow. A higher number means better insulation. Each material has a characteristic R-value per inch (sometimes listed as RSI in SI units; 1 R = 0.176 RSI). When insulation layers are stacked in series (which is always the case in a wall assembly), their R-values add directly — no complex math required.</p>
+    <p>Code minimums in this calculator are based on the <strong>2021 IECC (International Energy Conservation Code)</strong> prescriptive requirements by climate zone and component. Local jurisdictions may adopt earlier versions or add amendments, so always verify with your local building department.</p>
+  </div>
+
+  <div class="section">
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't compress batts.</strong> Fiberglass batt compressed to fit a smaller cavity loses R-value proportionally. A 6-inch R-19 batt stuffed into a 5.5-inch cavity performs closer to R-15.</li>
+      <li><strong>Account for framing.</strong> Wood studs have R-1.25/inch, much lower than cavity insulation. Real-world "whole-wall" R-value is 10–15% lower than cavity R-value alone due to thermal bridging.</li>
+      <li><strong>Polyiso degrades in cold.</strong> Polyiso foam boards lose effective R-value in very cold temperatures. In Climate Zones 6–8, derate polyiso to ~R-5.5/inch rather than the rated R-6.5.</li>
+      <li><strong>Air sealing comes first.</strong> Even R-60 attic insulation underperforms if air leaks bypass it. Seal all penetrations before adding insulation depth.</li>
+      <li><strong>Check existing insulation.</strong> Before adding more attic insulation, measure what's there. Adding R-19 over existing R-11 gives R-30, not R-19 extra.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What R-value do I need for my attic?</summary>
+      <div class="details-body">It depends on your climate zone. Zone 1–2 (Florida, Hawaii, southern Texas): R-30 minimum. Zones 3–4: R-38 to R-49. Zones 5–8 (most of the northern US and Canada): R-49 to R-60. The DOE recommends erring on the higher side — the incremental cost of adding more cellulose is small compared to lifetime energy savings.</div>
+    </details>
+    <details>
+      <summary>Can I mix different insulation materials?</summary>
+      <div class="details-body">Yes, and it's very common. A typical high-performance wall might have R-13 fiberglass batt in the cavity plus R-5 rigid foam on the exterior — totaling R-18 continuous. Use the Layered Assembly tab to add them up. Just make sure the materials are compatible from a moisture and fire perspective.</div>
+    </details>
+    <details>
+      <summary>What's the difference between R-value and U-factor?</summary>
+      <div class="details-body">R-value is thermal resistance (higher = better insulation). U-factor is thermal transmittance — essentially 1 ÷ R-value. Windows are typically rated by U-factor because they're thin and multiple layers (glass, gas, frame) make R-value less intuitive. A U-0.30 window equals approximately R-3.3.</div>
+    </details>
+    <details>
+      <summary>Does insulation R-value degrade over time?</summary>
+      <div class="details-body">Most insulation materials (fiberglass, mineral wool, cellulose) retain their rated R-value for decades if kept dry. Polyiso foam can see modest long-term aging. Spray foam is generally stable. The biggest enemy of any insulation is moisture — wet insulation can lose 50%+ of its R-value and may not recover fully.</div>
+    </details>
+  </div>
+
+  <div class="section">
+    <h2>Related Tools</h2>
+    <div class="related">
+      <a href="/heat-loss-calculator">Heat Loss Calculator</a>
+      <a href="/energy-savings-calculator">Energy Savings Calculator</a>
+      <a href="/vapor-barrier-guide">Vapor Barrier Guide</a>
+      <a href="/climate-zone-finder">Climate Zone Finder</a>
+      <a href="/spray-foam-cost-calculator">Spray Foam Cost Calculator</a>
+      <a href="/payback-period-calculator">Insulation Payback Period</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+  <footer>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/contact">Contact</a>
+    <span style="display:block;margin-top:6px">© 2025 InsulationCalc.com</span>
+  </footer>
+</div>
+
+<script>
+// ── Code minimums (IECC 2021) ──
+const CODES = {
+  attic:    [30, 38, 38, 49, 49, 60, 60, 60],
+  wall:     [13, 13, 20, 20, 20, 20, 21, 21],
+  floor:    [13, 13, 19, 19, 30, 30, 38, 38],
+  basement: [0,  0,  5,  10, 10, 15, 15, 15],
+  slab:     [0,  0,  0,  10, 10, 10, 10, 10]
+};
+
+function getCodeMin(location, zone) {
+  const idx = Math.min(Math.max(parseInt(zone) - 1, 0), 7);
+  return (CODES[location] || CODES.attic)[idx];
+}
+
+function statusBadge(rval, codeMin) {
+  if (rval >= codeMin) return `<span class="status-badge status-meets">✓ Meets Code (min R-${codeMin})</span>`;
+  if (rval >= codeMin * 0.8) return `<span class="status-badge status-below">⚠ Below Code — Need R-${codeMin}</span>`;
+  return `<span class="status-badge status-far-below">✗ Well Below Code — Need R-${codeMin}</span>`;
+}
+
+function barHTML(rval, codeMin) {
+  const pct = Math.min((rval / Math.max(codeMin, 1)) * 100, 100);
+  const cls = rval >= codeMin ? 'good' : (rval >= codeMin * 0.8 ? 'warn' : 'bad');
+  return `<div class="bar-wrap"><div class="bar-fill ${cls}" style="width:${pct.toFixed(1)}%"></div></div>`;
+}
+
+function fmt(n, dec=2) {
+  if (isNaN(n)) return '—';
+  return n.toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
+// ── Tab switching ──
+function switchTab(name) {
+  ['single','layers','target'].forEach(t => {
+    document.getElementById('panel-' + t).classList.toggle('active', t === name);
+    document.getElementById('tab-' + t).classList.toggle('active', t === name);
+  });
+  ['results-single','results-layers','results-target'].forEach(id => {
+    document.getElementById(id).classList.remove('visible');
+    document.getElementById(id).style.display = 'none';
+  });
+}
+
+// ── Single tab ──
+document.getElementById('material').addEventListener('change', updateRPerInch);
+function updateRPerInch() {
+  const val = document.getElementById('material').value;
+  document.getElementById('custom-group').style.display = (val === 'custom') ? 'block' : 'none';
+}
+
+function toInches(val, unit) {
+  if (unit === 'mm') return val / 25.4;
+  if (unit === 'cm') return val / 2.54;
+  return val;
+}
+
+function fromInches(val, unit) {
+  if (unit === 'mm') return val * 25.4;
+  if (unit === 'cm') return val * 2.54;
+  return val;
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
+  document.querySelectorAll('select, input').forEach(e => e.classList.remove('error'));
+}
+
+function calculateSingle() {
+  clearErrors();
+  let valid = true;
+
+  const matSel = document.getElementById('material').value;
+  let rPerInch;
+  if (matSel === 'custom') {
+    rPerInch = parseFloat(document.getElementById('customR').value);
+    if (!rPerInch || rPerInch <= 0) {
+      document.getElementById('customR-err').style.display = 'block';
+      document.getElementById('customR').classList.add('error');
+      valid = false;
+    }
+  } else if (!matSel) {
+    document.getElementById('material').classList.add('error');
+    valid = false;
+  } else {
+    rPerInch = parseFloat(matSel);
+  }
+
+  const thickRaw = parseFloat(document.getElementById('thickness').value);
+  const unit = document.getElementById('unit').value;
+  if (!thickRaw || thickRaw <= 0) {
+    document.getElementById('thickness-err').style.display = 'block';
+    document.getElementById('thickness').classList.add('error');
+    valid = false;
+  }
+  if (!valid) return;
+
+  const thickIn = toInches(thickRaw, unit);
+  const rval = rPerInch * thickIn;
+  const location = document.getElementById('location').value;
+  const zone = document.getElementById('climate').value;
+  const codeMin = getCodeMin(location, zone);
+
+  const matName = document.getElementById('material').options[document.getElementById('material').selectedIndex].text;
+  const unitLabel = unit === 'inches' ? 'in' : unit;
+
+  // U-value and other calcs
+  const uval = 1 / rval;
+  const rsi = rval * 0.176110; // RSI conversion
+
+  const tbody = `
+    <tr><td>Material</td><td class="num">${matName}</td></tr>
+    <tr><td>R-Value per Inch</td><td class="num">R-${fmt(rPerInch,2)}/in</td></tr>
+    <tr><td>Thickness</td><td class="num">${fmt(thickRaw,2)} ${unitLabel} (${fmt(thickIn,2)} in)</td></tr>
+    <tr><td>Total R-Value</td><td class="num"><strong>R-${fmt(rval,1)}</strong></td></tr>
+    <tr><td>U-Factor (1/R)</td><td class="num">${fmt(uval,4)}</td></tr>
+    <tr><td>RSI Value (metric)</td><td class="num">${fmt(rsi,3)}</td></tr>
+    <tr><td>Code Minimum (Zone ${zone})</td><td class="num">R-${codeMin}</td></tr>
+    <tr><td>Code Status</td><td class="num">${rval >= codeMin ? '✓ Passes' : '✗ Fails'}</td></tr>
+    <tr><td>Code Progress</td><td class="num">${barHTML(rval, codeMin)}</td></tr>
+  `;
+
+  // Comparison table for common thicknesses
+  const thicknesses = [2,3.5,4,5.5,6,7.5,8,10,12,16];
+  let compRows = '';
+  thicknesses.forEach(t => {
+    const r = rPerInch * t;
+    const pass = r >= codeMin;
+    compRows += `<tr${pass ? ' style="background:#f0fff4"' : ''}><td>${t} in</td><td class="num">${fmt(r,1)}</td><td class="num">${pass ? '✓' : '✗'}</td></tr>`;
+  });
+  const compHTML = `
+    <h3 style="margin-bottom:0.5rem">R-Value at Common Thicknesses</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Thickness</th><th class="num">R-Value</th><th class="num">Code (Zone ${zone})</th></tr></thead>
+      <tbody>${compRows}</tbody>
+    </table></div>`;
+
+  requestAnimationFrame(() => {
+    document.getElementById('res-rval').textContent = 'R-' + fmt(rval, 1);
+    document.getElementById('res-badge').innerHTML = statusBadge(rval, codeMin);
+    document.getElementById('res-tbody').innerHTML = tbody;
+    document.getElementById('res-comparison').innerHTML = compHTML;
+    const el = document.getElementById('results-single');
+    el.style.display = 'block';
+    requestAnimationFrame(() => el.classList.add('visible'));
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+
+// ── Layers tab ──
+let layerCount = 1;
+
+function addLayer() {
+  if (layerCount >= 5) return;
+  const idx = layerCount;
+  const container = document.getElementById('layers-container');
+  const div = document.createElement('div');
+  div.className = 'layer-row';
+  div.id = 'layer-' + idx;
+  div.innerHTML = `
+    <div class="row">
+      <div class="form-group">
+        <label>Layer ${idx+1} — Material</label>
+        <select class="layer-material" data-idx="${idx}" onchange="layerMaterialChange(${idx})">
+          <option value="">— Select —</option>
+          <option value="3.14">Fiberglass Batt</option>
+          <option value="3.7">Cellulose Blown</option>
+          <option value="3.5">Mineral Wool Batt</option>
+          <option value="5.0">XPS Rigid Foam</option>
+          <option value="6.5">Polyiso Rigid Foam</option>
+          <option value="6.5">Closed-Cell Spray Foam</option>
+          <option value="3.7">Open-Cell Spray Foam</option>
+          <option value="1.25">Wood Sheathing</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Thickness (in)</label>
+        <input type="number" class="layer-thick" data-idx="${idx}" placeholder="inches" min="0" step="0.25">
+      </div>
+    </div>
+    <div class="form-group layer-custom-group" id="layer-custom-${idx}" style="display:none">
+      <label>Custom R/inch</label>
+      <input type="number" class="layer-custom-r" data-idx="${idx}" placeholder="R per inch" min="0.1" step="0.1">
+    </div>
+  `;
+  container.appendChild(div);
+  layerCount++;
+  if (layerCount >= 5) document.getElementById('addLayerBtn').style.display = 'none';
+}
+
+function layerMaterialChange(idx) {
+  const sel = document.querySelector(`.layer-material[data-idx="${idx}"]`);
+  const cg = document.getElementById('layer-custom-' + idx);
+  if (cg) cg.style.display = (sel.value === 'custom') ? 'block' : 'none';
+}
+
+function calculateLayers() {
+  const materials = document.querySelectorAll('.layer-material');
+  const thicknesses = document.querySelectorAll('.layer-thick');
+  const customRs = document.querySelectorAll('.layer-custom-r');
+
+  let totalR = 0;
+  let rows = '';
+  let valid = true;
+
+  materials.forEach((sel, i) => {
+    const thick = parseFloat(thicknesses[i].value);
+    if (!sel.value || !thick || thick <= 0) return;
+    let rpi;
+    if (sel.value === 'custom') {
+      rpi = parseFloat(customRs[i] ? customRs[i].value : 0);
+      if (!rpi || rpi <= 0) { valid = false; return; }
+    } else {
+      rpi = parseFloat(sel.value);
+    }
+    const r = rpi * thick;
+    totalR += r;
+    const matName = sel.options[sel.selectedIndex].text;
+    rows += `<tr><td>${i+1}</td><td>${matName}</td><td class="num">${fmt(thick,2)} in</td><td class="num">${fmt(rpi,2)}</td><td class="num"><strong>R-${fmt(r,1)}</strong></td></tr>`;
+  });
+
+  if (totalR === 0) {
+    alert('Please add at least one layer with a material and thickness.');
+    return;
+  }
+
+  rows += `<tr style="background:#f0f8ff"><td colspan="4"><strong>Total</strong></td><td class="num"><strong>R-${fmt(totalR,1)}</strong></td></tr>`;
+
+  const location = document.getElementById('loc2').value;
+  const zone = document.getElementById('climate2').value;
+  const codeMin = getCodeMin(location, zone);
+
+  requestAnimationFrame(() => {
+    document.getElementById('res-rval-layers').textContent = 'R-' + fmt(totalR, 1);
+    document.getElementById('res-badge-layers').innerHTML = statusBadge(totalR, codeMin);
+    document.getElementById('layers-tbody').innerHTML = rows;
+    const el = document.getElementById('results-layers');
+    el.style.display = 'block';
+    requestAnimationFrame(() => el.classList.add('visible'));
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+
+// ── Target tab ──
+function updateRPerInch3() {
+  const val = document.getElementById('mat3').value;
+  document.getElementById('custom3-group').style.display = (val === 'custom3') ? 'block' : 'none';
+}
+
+function calculateTarget() {
+  clearErrors();
+  let valid = true;
+
+  const matSel = document.getElementById('mat3').value;
+  let rPerInch;
+  if (matSel === 'custom3') {
+    rPerInch = parseFloat(document.getElementById('customR3').value);
+    if (!rPerInch || rPerInch <= 0) { valid = false; }
+  } else if (!matSel) {
+    valid = false;
+  } else {
+    rPerInch = parseFloat(matSel);
+  }
+
+  const targetR = parseFloat(document.getElementById('targetR').value);
+  if (!targetR || targetR <= 0) {
+    document.getElementById('targetR-err').style.display = 'block';
+    document.getElementById('targetR').classList.add('error');
+    valid = false;
+  }
+  if (!valid) {
+    if (!matSel) alert('Please select an insulation material.');
+    return;
+  }
+
+  const unit3 = document.getElementById('unit3').value;
+  const thickIn = targetR / rPerInch;
+  const thickOut = fromInches(thickIn, unit3);
+  const unitLabel = unit3 === 'inches' ? 'inches' : unit3;
+
+  const matName = document.getElementById('mat3').options[document.getElementById('mat3').selectedIndex].text;
+
+  const rows = `
+    <tr><td>Material</td><td class="num">${matName}</td></tr>
+    <tr><td>R-Value per Inch</td><td class="num">R-${fmt(rPerInch,2)}/in</td></tr>
+    <tr><td>Target R-Value</td><td class="num">R-${fmt(targetR,0)}</td></tr>
+    <tr><td>Required Thickness</td><td class="num"><strong>${fmt(thickOut,2)} ${unitLabel}</strong></td></tr>
+    <tr><td>Thickness in Inches</td><td class="num">${fmt(thickIn,2)} in</td></tr>
+    <tr><td>Nearest Standard Batt</td><td class="num">${nearestBatt(thickIn)}</td></tr>
+  `;
+
+  requestAnimationFrame(() => {
+    document.getElementById('res-thick').textContent = fmt(thickOut, 2) + ' ' + (unit3 === 'inches' ? 'in' : unit3);
+    document.getElementById('res-thick-label').textContent = 'Required Thickness for R-' + fmt(targetR, 0);
+    document.getElementById('target-tbody').innerHTML = rows;
+    const el = document.getElementById('results-target');
+    el.style.display = 'block';
+    requestAnimationFrame(() => el.classList.add('visible'));
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+
+function nearestBatt(inches) {
+  const std = [3.5, 5.5, 6, 7.5, 8, 9.5, 11, 12, 14, 16];
+  const nearest = std.reduce((a, b) => Math.abs(b - inches) < Math.abs(a - inches) ? b : a);
+  return nearest + ' in';
+}
+
+// ── Keyboard: Enter key ──
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  const active = document.querySelector('.tab-panel.active');
+  if (!active) return;
+  if (active.id === 'panel-single') calculateSingle();
+  else if (active.id === 'panel-layers') calculateLayers();
+  else if (active.id === 'panel-target') calculateTarget();
+});
+</script>
+</body>
+</html>
