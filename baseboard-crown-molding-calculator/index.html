@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baseboard &amp; Crown Molding Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how much baseboard and crown molding you need. Enter room dimensions, get linear footage, materials list, and cost estimates instantly.">
+<link rel="canonical" href="https://toolhut.dev/baseboard-crown-molding-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Baseboard & Crown Molding Calculator",
+  "url": "https://toolhut.dev/baseboard-crown-molding-calculator/",
+  "description": "Calculate baseboard and crown molding linear footage, material quantities, and cost estimates for any room.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.05rem;color:#2d6a4f;letter-spacing:-0.3px}
+.container{max-width:640px;margin:0 auto;padding:1.5rem 1rem 2rem}
+h1{font-size:1.55rem;font-weight:800;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.25}
+.subtitle{color:#555;font-size:0.92rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:1.75rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.card-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:1.1rem;display:flex;align-items:center;gap:0.5rem}
+.card-title .icon{font-size:1.1rem}
+.tabs{display:flex;gap:0;border:1px solid #dee2e6;border-radius:8px;overflow:hidden;margin-bottom:1.25rem}
+.tab-btn{flex:1;padding:10px 8px;background:#f8f9fa;border:none;cursor:pointer;font-size:0.88rem;font-weight:600;color:#555;transition:all 0.2s;min-height:44px}
+.tab-btn.active{background:#2d6a4f;color:#fff}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.form-group{margin-bottom:1.1rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:5px}
+input[type="number"],input[type="text"],select{width:100%;border:1px solid #ddd;border-radius:6px;padding:12px 16px;font-size:0.95rem;color:#1a1a2e;background:#fff;transition:box-shadow 0.2s,border-color 0.2s;-moz-appearance:textfield;appearance:textfield}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,0.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,0.1)}
+.error-msg{font-size:0.8rem;color:#e74c3c;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem}
+.btn{display:inline-block;background:#2d6a4f;color:#fff;border:none;padding:13px 24px;border-radius:7px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;width:100%;min-height:48px}
+.btn:hover{background:#245c43}
+.btn-orange{background:#e76f51}.btn-orange:hover{background:#d4593c}
+.results-section{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results-section.visible{opacity:1;pointer-events:auto}
+.big-number{font-size:2.4rem;font-weight:800;color:#2d6a4f;line-height:1}
+.big-label{font-size:0.82rem;color:#666;margin-top:3px}
+.results-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1.25rem}
+.result-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.result-box.highlight{background:#eaf4ee;border-color:#2d6a4f}
+table{width:100%;border-collapse:collapse;font-size:0.88rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444;border-bottom:2px solid #dee2e6}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0;color:#1a1a2e}
+tr:nth-child(even) td{background:#fafafa}
+td:last-child,th:last-child{text-align:right}
+.table-wrap{overflow-x:auto}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.1rem;margin-bottom:1.2rem}
+.pro-tip strong{color:#e76f51;font-size:0.88rem;text-transform:uppercase;letter-spacing:0.5px}
+.pro-tip p{font-size:0.88rem;margin-top:0.3rem;color:#444}
+.time-badge{display:inline-flex;align-items:center;gap:6px;background:#eaf4ee;color:#2d6a4f;border-radius:20px;padding:5px 14px;font-size:0.82rem;font-weight:600;margin-right:6px;margin-bottom:6px}
+.shopping-list li{font-size:0.9rem;padding:6px 0;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;list-style:none}
+.shopping-list li:last-child{border-bottom:none}
+.shopping-qty{font-weight:700;color:#2d6a4f}
+.copy-btn{background:none;border:1px solid #dee2e6;border-radius:5px;padding:5px 11px;font-size:0.78rem;color:#555;cursor:pointer;transition:all 0.2s;float:right;margin-top:-2px}
+.copy-btn:hover{background:#f0f0f0}
+.room-tag{display:inline-block;background:#eaf4ee;color:#2d6a4f;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:600;margin-left:6px}
+.add-room-btn{background:none;border:1px dashed #2d6a4f;color:#2d6a4f;border-radius:7px;padding:9px 16px;font-size:0.88rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:all 0.2s;margin-bottom:1rem}
+.add-room-btn:hover{background:#eaf4ee}
+.remove-btn{background:none;border:none;color:#e74c3c;font-size:1.2rem;cursor:pointer;padding:0 6px;line-height:1;float:right;min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
+.room-block{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;margin-bottom:0.85rem}
+.room-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem}
+.room-name{font-weight:700;font-size:0.92rem;color:#2d6a4f}
+.svg-container{margin-bottom:1.25rem;text-align:center}
+svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.content-section{margin-top:2rem}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin:1.8rem 0 0.6rem;border-bottom:2px solid #eaf4ee;padding-bottom:0.4rem}
+.content-section p{font-size:0.92rem;color:#333;margin-bottom:0.8rem}
+.content-section ul{padding-left:1.2rem;margin-bottom:0.8rem}
+.content-section ul li{font-size:0.92rem;color:#333;margin-bottom:0.4rem}
+details{margin-bottom:0.6rem;border:1px solid #dee2e6;border-radius:7px;overflow:hidden}
+summary{padding:12px 16px;font-weight:600;font-size:0.9rem;cursor:pointer;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:'▾';color:#2d6a4f}
+details[open] summary::after{content:'▴'}
+details p{padding:10px 16px 14px;font-size:0.88rem;color:#444;background:#fff}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:0.8rem}
+.related-link{background:#fff;border:1px solid #dee2e6;border-radius:7px;padding:10px 14px;font-size:0.85rem;font-weight:500;color:#2d6a4f;display:block;transition:all 0.2s}
+.related-link:hover{background:#eaf4ee;text-decoration:none;border-color:#2d6a4f}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #dee2e6;margin-top:2rem;padding:1.2rem 1rem}
+.footer-inner{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:0.5rem;align-items:center;text-align:center}
+.footer-links{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center}
+.footer-links a{font-size:0.83rem;color:#555}
+.footer-copy{font-size:0.8rem;color:#888}
+.waste-row{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem}
+.waste-row label{margin:0;white-space:nowrap;min-width:110px}
+input[type="range"]{flex:1;accent-color:#2d6a4f;cursor:pointer}
+.waste-val{font-weight:700;color:#2d6a4f;min-width:36px;text-align:right;font-size:0.92rem}
+@media(max-width:640px){
+  .results-grid{grid-template-columns:1fr 1fr}
+  .grid-2{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.3rem}
+  .big-number{font-size:2rem}
+}
+@media(max-width:400px){
+  .results-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🏠 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Baseboard &amp; Crown Molding Calculator</h1>
+  <p class="subtitle">Calculate linear footage, materials, and costs for your molding project</p>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📐</span> Room Dimensions</div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" role="tab" onclick="switchTab('single')" id="tab-single">Single Room</button>
+      <button class="tab-btn" role="tab" onclick="switchTab('multi')" id="tab-multi">Multiple Rooms</button>
+    </div>
+
+    <!-- Single Room -->
+    <div class="tab-panel active" id="panel-single">
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="s-length">Room Length (ft)</label>
+          <input type="number" id="s-length" min="1" max="500" placeholder="e.g. 14" value="">
+          <div class="error-msg" id="err-sl">Enter a valid length (1–500 ft)</div>
+        </div>
+        <div class="form-group">
+          <label for="s-width">Room Width (ft)</label>
+          <input type="number" id="s-width" min="1" max="500" placeholder="e.g. 12" value="">
+          <div class="error-msg" id="err-sw">Enter a valid width (1–500 ft)</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="s-doors">Number of Doorways (subtract openings)</label>
+        <input type="number" id="s-doors" min="0" max="20" placeholder="e.g. 2" value="1">
+      </div>
+      <div class="form-group">
+        <label for="s-door-width">Avg Doorway Width (ft)</label>
+        <input type="number" id="s-door-width" min="0" max="20" placeholder="e.g. 3" value="3">
+      </div>
+    </div>
+
+    <!-- Multi Room -->
+    <div class="tab-panel" id="panel-multi">
+      <div id="rooms-list"></div>
+      <button class="add-room-btn" onclick="addRoom()">+ Add Another Room</button>
+    </div>
+
+    <div class="card-title" style="margin-top:0.5rem"><span class="icon">⚙️</span> Molding Options</div>
+
+    <div class="grid-2">
+      <div class="form-group">
+        <label for="mol-type">Molding Type</label>
+        <select id="mol-type" onchange="updateCostHint()">
+          <option value="baseboard">Baseboard Only</option>
+          <option value="crown">Crown Only</option>
+          <option value="both">Both Baseboard &amp; Crown</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="mol-height">Molding Height (in)</label>
+        <input type="number" id="mol-height" min="1" max="20" placeholder="e.g. 3.5" value="3.5">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cost-per-lf">Cost per Linear Foot ($)</label>
+      <input type="number" id="cost-per-lf" min="0" max="100" placeholder="e.g. 1.50" value="1.50" step="0.01">
+      <div class="error-msg" id="err-cost">Enter a valid cost (0–100)</div>
+    </div>
+
+    <div class="waste-row">
+      <label>Waste Factor</label>
+      <input type="range" id="waste-slider" min="5" max="20" value="10" step="1" oninput="document.getElementById('waste-disp').textContent=this.value+'%'">
+      <span class="waste-val" id="waste-disp">10%</span>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Molding Needed</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results-section" id="results-section">
+
+    <!-- SVG Diagram -->
+    <div class="card svg-container" id="svg-card">
+      <div class="card-title"><span class="icon">🏠</span> Room Diagram</div>
+      <div id="svg-area"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="icon">📊</span> Results Summary <button class="copy-btn" id="copy-btn" onclick="copyResults()">Copy</button></div>
+      <div class="results-grid" id="results-grid"></div>
+      <div class="table-wrap">
+        <table id="breakdown-table">
+          <thead><tr><th>Item</th><th>Measurement</th><th>Quantity</th></tr></thead>
+          <tbody id="breakdown-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" id="time-card">
+      <div class="card-title"><span class="icon">⏱</span> Time Estimate</div>
+      <div id="time-content"></div>
+    </div>
+
+    <div class="pro-tip">
+      <strong>🔨 Pro Tip</strong>
+      <p id="pro-tip-text">Always buy 10–15% extra to account for miter cuts, mistakes, and future repairs. Molding dye lots can vary, so get everything from the same batch.</p>
+    </div>
+
+    <div class="card" id="shopping-card">
+      <div class="card-title"><span class="icon">🛒</span> Materials Shopping List</div>
+      <ul class="shopping-list" id="shopping-list"></ul>
+      <div style="margin-top:0.85rem;padding-top:0.75rem;border-top:2px solid #dee2e6;display:flex;justify-content:space-between;font-weight:700">
+        <span>Estimated Total Cost</span>
+        <span id="total-cost" style="color:#2d6a4f;font-size:1.1rem"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="content-section">
+    <h2>How to Use This Baseboard Molding Calculator</h2>
+    <p>Enter your room's length and width in feet, then specify the number of doorways and their average width. Select whether you need baseboard, crown molding, or both, and adjust the waste factor slider to account for miter cuts. Hit <strong>Calculate</strong> to instantly get linear footage, board counts, and cost estimates.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Buying too little molding is a bigger problem than it sounds. Molding is sold in fixed lengths (usually 8, 12, or 16 feet), and if you run short mid-project, your new batch may not match the sheen or profile of the original — especially with painted MDF. You'd have to repaint the entire room.</p>
+    <p>On the flip side, over-buying by 30% just adds waste and cost. A 12×14 room needs roughly 48 linear feet of perimeter. With a standard 10% waste factor and one doorway, you're looking at about 45 usable linear feet — meaning 4–5 eight-foot boards. That's a manageable Saturday project for most homeowners. Crown molding on the same room takes longer (3–5 hours) because the cuts are more complex.</p>
+    <p>This tool is built for real weekend projects — whether you're finishing a basement, upgrading a living room, or trimming out a new build. Contractors use the same perimeter math, just faster. Now you can too.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The core formula is simple:</p>
+    <ul>
+      <li><strong>Perimeter</strong> = (Length + Width) × 2</li>
+      <li><strong>Net footage</strong> = Perimeter − (Number of doors × door width)</li>
+      <li><strong>With waste</strong> = Net footage × (1 + waste%)</li>
+      <li><strong>Boards needed</strong> = ceil(Footage with waste ÷ board length)</li>
+    </ul>
+    <p>For crown molding, the same perimeter is used — crown runs at ceiling height on all four walls. The board count uses standard 8-foot lengths. Cost is calculated as: Total footage × price per linear foot.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't skip the waste factor.</strong> Miter cuts waste 2–3 inches per joint, and every corner has two. A 12×14 room has 8 corners — that's potentially 24 inches of waste just from corners.</li>
+      <li><strong>Measure twice, cut once.</strong> Round up your measurements rather than rounding down. An extra foot of molding is worth far less than a second trip to the hardware store.</li>
+      <li><strong>Match profiles before you buy.</strong> Bring a sample piece of existing molding to the store. Phone photos often miss subtle profile differences.</li>
+      <li><strong>Crown molding requires a compound miter saw.</strong> If you're doing inside corners with coped joints (the pro method), factor in extra time and material for practice cuts.</li>
+      <li><strong>Primed vs. unprimed:</strong> Buy primed MDF molding if you plan to paint — it saves significant prep time and holds paint better than bare wood.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How much does baseboard molding cost on average?</summary>
+      <p>Basic painted MDF baseboard runs $0.75–$1.50 per linear foot. Mid-grade finger-jointed pine is $1.50–$2.50, and solid oak or poplar for staining runs $3–$6+ per foot. For a typical 12×14 bedroom, expect $50–$150 total material cost depending on style.</p>
+    </details>
+    <details>
+      <summary>What's the difference between baseboard and crown molding?</summary>
+      <p>Baseboard molding runs along the bottom of walls where they meet the floor — it hides the gap and protects drywall from kicks and scuffs. Crown molding runs along the top of walls at the ceiling and is purely decorative, adding visual height and elegance. Crown is harder to install because it requires compound miter cuts.</p>
+    </details>
+    <details>
+      <summary>Should I subtract window openings like door openings?</summary>
+      <p>For baseboard, no — baseboard doesn't run under windows (it stops at the window casing). For crown molding, windows are typically framed with returns, so the crown still runs across the top. This calculator accounts for doors only, which is the most common deduction. Add window adjustments manually if needed.</p>
+    </details>
+    <details>
+      <summary>How long does it take to install molding?</summary>
+      <p>A beginner with basic tools can do a standard 12×14 room of baseboard in 3–5 hours including nailing, filling nail holes, and caulking. Crown molding in the same room takes 5–8 hours for a beginner. Experienced installers can do both in 2–3 hours total.</p>
+    </details>
+
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/stair-riser-tread-calculator/" class="related-link">📏 Stair Riser &amp; Tread Calculator</a>
+      <a href="/lawn-sprinkler-head-spacing-calculator/" class="related-link">💧 Lawn Sprinkler Head Spacing Calculator</a>
+      <a href="/roof-shingle-calculator/" class="related-link">🏠 Roof Shingle Calculator</a>
+      <a href="/kitchen-cabinet-cost-estimator/" class="related-link">🍳 Kitchen Cabinet Cost Estimator</a>
+      <a href="/concrete-patio-cost-estimator/" class="related-link">🧱 Concrete Patio Cost Estimator</a>
+      <a href="/hardwood-flooring-cost-calculator/" class="related-link">🪵 Hardwood Flooring Cost Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 toolhut.dev — Free online tools for homeowners and DIYers</div>
+  </div>
+</footer>
+
+<script>
+// Tab switching
+function switchTab(tab) {
+  ['single','multi'].forEach(t => {
+    document.getElementById('panel-'+t).classList.toggle('active', t===tab);
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+  });
+  if(tab==='multi' && document.getElementById('rooms-list').children.length===0) {
+    addRoom(); addRoom();
+  }
+}
+
+// Rooms management
+let roomCount = 0;
+function addRoom() {
+  roomCount++;
+  const id = roomCount;
+  const div = document.createElement('div');
+  div.className = 'room-block';
+  div.id = 'room-'+id;
+  div.innerHTML = `
+    <div class="room-header">
+      <span class="room-name">Room ${id}</span>
+      <button class="remove-btn" onclick="removeRoom(${id})" aria-label="Remove room">×</button>
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label>Length (ft)</label>
+        <input type="number" id="rl-${id}" min="1" max="500" placeholder="e.g. 14">
+      </div>
+      <div class="form-group">
+        <label>Width (ft)</label>
+        <input type="number" id="rw-${id}" min="1" max="500" placeholder="e.g. 12">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label>Doorways</label>
+        <input type="number" id="rd-${id}" min="0" max="20" placeholder="0" value="1">
+      </div>
+      <div class="form-group">
+        <label>Avg Door Width (ft)</label>
+        <input type="number" id="rdw-${id}" min="0" max="20" placeholder="3" value="3">
+      </div>
+    </div>`;
+  document.getElementById('rooms-list').appendChild(div);
+}
+function removeRoom(id) {
+  const el = document.getElementById('room-'+id);
+  if(el) el.remove();
+}
+
+function updateCostHint() {
+  const t = document.getElementById('mol-type').value;
+  const cInput = document.getElementById('cost-per-lf');
+  if(t==='crown') cInput.value = '2.00';
+  else if(t==='both') cInput.value = '1.75';
+  else cInput.value = '1.50';
+}
+
+function fmt(n, dec=2) {
+  if(dec===0) return Math.round(n).toLocaleString();
+  return n.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+}
+function fmtDollar(n) { return '$'+fmt(n,2); }
+
+function validate(val, min, max) {
+  const n = parseFloat(val);
+  return !isNaN(n) && n >= min && n <= max;
+}
+
+function showErr(id, show) {
+  const el = document.getElementById(id);
+  if(el) el.classList.toggle('show', show);
+}
+function setInputError(id, hasErr) {
+  const el = document.getElementById(id);
+  if(el) el.classList.toggle('error', hasErr);
+}
+
+function calculate() {
+  let perimeter = 0;
+  let isMulti = document.getElementById('panel-multi').classList.contains('active');
+  let valid = true;
+  let roomData = [];
+
+  if(!isMulti) {
+    const l = document.getElementById('s-length').value;
+    const w = document.getElementById('s-width').value;
+    const doors = parseFloat(document.getElementById('s-doors').value)||0;
+    const doorW = parseFloat(document.getElementById('s-door-width').value)||3;
+    let lErr = !validate(l, 1, 500);
+    let wErr = !validate(w, 1, 500);
+    setInputError('s-length', lErr); showErr('err-sl', lErr);
+    setInputError('s-width', wErr); showErr('err-sw', wErr);
+    if(lErr || wErr) { valid = false; }
+    if(valid) {
+      const len = parseFloat(l), wid = parseFloat(w);
+      const peri = (len+wid)*2;
+      const net = Math.max(0, peri - doors*doorW);
+      perimeter = net;
+      roomData.push({name:'Room', l:len, w:wid, doors, doorW, peri, net});
+    }
+  } else {
+    const blocks = document.getElementById('rooms-list').querySelectorAll('.room-block');
+    if(blocks.length === 0) { alert('Please add at least one room.'); return; }
+    let anyValid = false;
+    blocks.forEach(block => {
+      const id = block.id.replace('room-','');
+      const l = parseFloat(document.getElementById('rl-'+id)?.value)||0;
+      const w = parseFloat(document.getElementById('rw-'+id)?.value)||0;
+      const d = parseFloat(document.getElementById('rd-'+id)?.value)||0;
+      const dw = parseFloat(document.getElementById('rdw-'+id)?.value)||3;
+      if(l>0 && w>0) {
+        const peri = (l+w)*2;
+        const net = Math.max(0, peri - d*dw);
+        perimeter += net;
+        roomData.push({name: 'Room '+ id, l, w, doors:d, doorW:dw, peri, net});
+        anyValid = true;
+      }
+    });
+    if(!anyValid) { alert('Please enter dimensions for at least one room.'); return; }
+  }
+
+  const costVal = document.getElementById('cost-per-lf').value;
+  let costErr = !validate(costVal, 0, 100);
+  setInputError('cost-per-lf', costErr); showErr('err-cost', costErr);
+  if(costErr) return;
+
+  const molType = document.getElementById('mol-type').value;
+  const waste = parseFloat(document.getElementById('waste-slider').value)/100;
+  const costPerLF = parseFloat(costVal);
+  const boardLen = 8; // standard 8-ft boards
+
+  let baseFootage = 0, crownFootage = 0;
+  if(molType==='baseboard'||molType==='both') baseFootage = perimeter;
+  if(molType==='crown'||molType==='both') crownFootage = perimeter;
+
+  const baseWithWaste = baseFootage * (1+waste);
+  const crownWithWaste = crownFootage * (1+waste);
+  const totalLF = baseWithWaste + crownWithWaste;
+  const baseBoards = Math.ceil(baseWithWaste / boardLen);
+  const crownBoards = Math.ceil(crownWithWaste / boardLen);
+  const totalBoards = baseBoards + crownBoards;
+  const totalCost = totalLF * costPerLF;
+  const nailBoxes = Math.ceil(totalLF / 50);
+  const caulkTubes = Math.ceil(totalLF / 40);
+  const sandpaper = Math.ceil(totalLF / 75) + 1;
+
+  // First room for diagram
+  const firstRoom = roomData[0] || {l:14, w:12};
+
+  requestAnimationFrame(() => {
+    // SVG
+    buildSVG(firstRoom, molType);
+
+    // Results grid
+    const gridItems = [
+      {val: fmt(perimeter,1), label: 'Net Linear Ft', highlight: true},
+      {val: fmt(totalLF,1), label: `With ${Math.round(waste*100)}% Waste`},
+      {val: totalBoards, label: `8-ft Boards Needed`},
+      {val: fmtDollar(totalCost), label: 'Est. Material Cost', highlight: true},
+      {val: roomData.length, label: 'Room(s) Calculated'},
+      {val: Math.round(waste*100)+'%', label: 'Waste Factor'}
+    ];
+    let gridHTML = '';
+    gridItems.forEach(item => {
+      gridHTML += `<div class="result-box${item.highlight?' highlight':''}"><div class="big-number">${item.val}</div><div class="big-label">${item.label}</div></div>`;
+    });
+    document.getElementById('results-grid').innerHTML = gridHTML;
+
+    // Breakdown table
+    let rows = '';
+    rows += `<tr><td>Room Perimeter (net)</td><td>${fmt(perimeter,1)} ft</td><td>—</td></tr>`;
+    if(baseFootage>0) {
+      rows += `<tr><td>Baseboard (net)</td><td>${fmt(baseFootage,1)} ft</td><td>${fmt(baseFootage,1)} lf</td></tr>`;
+      rows += `<tr><td>Baseboard (with waste)</td><td>${fmt(baseWithWaste,1)} ft</td><td>${baseBoards} boards</td></tr>`;
+    }
+    if(crownFootage>0) {
+      rows += `<tr><td>Crown Molding (net)</td><td>${fmt(crownFootage,1)} ft</td><td>${fmt(crownFootage,1)} lf</td></tr>`;
+      rows += `<tr><td>Crown Molding (with waste)</td><td>${fmt(crownWithWaste,1)} ft</td><td>${crownBoards} boards</td></tr>`;
+    }
+    rows += `<tr><td><strong>Total Linear Footage</strong></td><td><strong>${fmt(totalLF,1)} ft</strong></td><td><strong>${totalBoards} boards</strong></td></tr>`;
+    rows += `<tr><td>Cost @ ${fmtDollar(costPerLF)}/lf</td><td>—</td><td><strong>${fmtDollar(totalCost)}</strong></td></tr>`;
+    if(roomData.length > 1) {
+      roomData.forEach(r => {
+        rows += `<tr><td style="padding-left:20px">${r.name}</td><td>${fmt(r.l,0)}×${fmt(r.w,0)} ft = ${fmt(r.net,1)} lf net</td><td>—</td></tr>`;
+      });
+    }
+    document.getElementById('breakdown-body').innerHTML = rows;
+
+    // Time estimate
+    const hrs = totalLF / 20;
+    const begMin = Math.round(hrs * 1.8 * 10)/10;
+    const expMin = Math.round(hrs * 0.7 * 10)/10;
+    document.getElementById('time-content').innerHTML = `
+      <div style="margin-bottom:0.6rem;font-size:0.9rem;color:#444">Based on <strong>${fmt(totalLF,1)} linear feet</strong> of ${molType==='both'?'baseboard + crown':molType} molding:</div>
+      <span class="time-badge">🔨 Beginner: ${begMin}–${Math.round(begMin*1.3*10)/10} hrs</span>
+      <span class="time-badge">⚡ Experienced: ${expMin}–${Math.round(expMin*1.4*10)/10} hrs</span>
+      <p style="font-size:0.82rem;color:#666;margin-top:0.6rem">Includes measuring, cutting, nailing, filling holes, and caulking. Crown molding adds ~50% more time than baseboard.</p>`;
+
+    // Pro tip
+    const tipText = molType==='crown'
+      ? 'Crown molding needs a compound miter saw. Practice your inside corner cuts on scrap first — the angle is 45° horizontal AND 33.9° vertical for standard spring angle. Mark your walls with a chalk line before cutting.'
+      : molType==='both'
+      ? 'Install baseboard before crown so you don\'t have to caulk twice. Use a laser level for crown to ensure a straight line even if your ceiling isn\'t perfectly flat.'
+      : 'Nail baseboard into studs, not just drywall. Use a stud finder and mark stud locations lightly in pencil before you start. 16d finish nails at a slight downward angle hold best.';
+    document.getElementById('pro-tip-text').textContent = tipText;
+
+    // Shopping list
+    const items = [];
+    if(baseFootage>0) items.push({item:`Baseboard Molding (8 ft boards)`, qty:`${baseBoards} boards`, cost: fmtDollar(baseWithWaste*costPerLF)});
+    if(crownFootage>0) items.push({item:`Crown Molding (8 ft boards)`, qty:`${crownBoards} boards`, cost: fmtDollar(crownWithWaste*costPerLF)});
+    items.push({item:'Finish Nails (2" brad nails, box)', qty:`${nailBoxes} box${nailBoxes>1?'es':''}`, cost: fmtDollar(nailBoxes*7)});
+    items.push({item:'Paintable Latex Caulk', qty:`${caulkTubes} tube${caulkTubes>1?'s':''}`, cost: fmtDollar(caulkTubes*4)});
+    items.push({item:'Sandpaper (120-grit, 220-grit)', qty:`${sandpaper} pack${sandpaper>1?'s':''}`, cost: fmtDollar(sandpaper*5)});
+    items.push({item:'Wood Filler / Spackle', qty:'1 small tub', cost: fmtDollar(6)});
+    items.push({item:'Painter\'s Tape', qty:'1 roll', cost: fmtDollar(5)});
+
+    let shopHTML = '';
+    items.forEach(i => {
+      shopHTML += `<li><span>${i.item}</span><span class="shopping-qty">${i.qty} <span style="color:#888;font-weight:400;font-size:0.82rem">(~${i.cost})</span></span></li>`;
+    });
+    document.getElementById('shopping-list').innerHTML = shopHTML;
+
+    const extras = (nailBoxes*7)+(caulkTubes*4)+(sandpaper*5)+6+5;
+    document.getElementById('total-cost').textContent = fmtDollar(totalCost + extras);
+
+    document.getElementById('results-section').classList.add('visible');
+    document.getElementById('results-section').scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+}
+
+function buildSVG(room, molType) {
+  const l = room.l || 14, w = room.w || 12;
+  const maxDim = Math.max(l,w);
+  const scale = Math.min(220/l, 160/w);
+  const rw = Math.round(l*scale), rh = Math.round(w*scale);
+  const ox = (300-rw)/2, oy = (220-rh)/2 + 20;
+  const baseColor = (molType==='baseboard'||molType==='both') ? '#e76f51' : 'none';
+  const crownColor = (molType==='crown'||molType==='both') ? '#2d6a4f' : 'none';
+  const bs = 6, cs = 5;
+
+  let legendHTML = '';
+  if(molType==='baseboard'||molType==='both') legendHTML += `<rect x="10" y="190" width="14" height="8" rx="2" fill="${baseColor}"/><text x="28" y="198" font-size="9" fill="#444">Baseboard</text>`;
+  if(molType==='crown'||molType==='both') legendHTML += `<rect x="${molType==='both'?90:10}" y="190" width="14" height="8" rx="2" fill="${crownColor}"/><text x="${molType==='both'?108:28}" y="198" font-size="9" fill="#444">Crown</text>`;
+
+  const svg = `<svg viewBox="0 0 300 210" width="100%" style="max-width:380px" aria-label="Room diagram">
+    <rect width="300" height="210" fill="#f8f9fa" rx="8"/>
+    <!-- Room fill -->
+    <rect x="${ox}" y="${oy}" width="${rw}" height="${rh}" fill="#eaf4ee" stroke="#dee2e6" stroke-width="1"/>
+    <!-- Baseboard -->
+    ${baseColor!=='none'?`<rect x="${ox}" y="${oy+rh-bs}" width="${rw}" height="${bs}" fill="${baseColor}" opacity="0.85"/>
+    <rect x="${ox}" y="${oy}" width="${bs}" height="${rh}" fill="${baseColor}" opacity="0.85"/>
+    <rect x="${ox+rw-bs}" y="${oy}" width="${bs}" height="${rh}" fill="${baseColor}" opacity="0.85"/>
+    <rect x="${ox}" y="${oy}" width="${rw}" height="${bs}" fill="${baseColor}" opacity="0.3"/>`:''}
+    <!-- Crown -->
+    ${crownColor!=='none'?`<rect x="${ox}" y="${oy}" width="${rw}" height="${cs}" fill="${crownColor}" opacity="0.9"/>
+    <rect x="${ox}" y="${oy}" width="${cs}" height="${rh}" fill="${crownColor}" opacity="0.9"/>
+    <rect x="${ox+rw-cs}" y="${oy}" width="${cs}" height="${rh}" fill="${crownColor}" opacity="0.9"/>
+    <rect x="${ox}" y="${oy+rh-cs}" width="${rw}" height="${cs}" fill="${crownColor}" opacity="0.3"/>`:''}
+    <!-- Dimensions -->
+    <text x="${ox+rw/2}" y="${oy+rh/2}" text-anchor="middle" font-size="11" font-weight="700" fill="#2d6a4f">${l}′ × ${w}′</text>
+    <!-- Length arrow -->
+    <line x1="${ox}" y1="${oy-12}" x2="${ox+rw}" y2="${oy-12}" stroke="#888" stroke-width="1"/>
+    <text x="${ox+rw/2}" y="${oy-15}" text-anchor="middle" font-size="9" fill="#888">${l} ft</text>
+    <!-- Width arrow -->
+    <line x1="${ox-12}" y1="${oy}" x2="${ox-12}" y2="${oy+rh}" stroke="#888" stroke-width="1"/>
+    <text x="${ox-14}" y="${oy+rh/2}" text-anchor="end" font-size="9" fill="#888" transform="rotate(-90,${ox-14},${oy+rh/2})">${w} ft</text>
+    ${legendHTML}
+  </svg>`;
+  document.getElementById('svg-area').innerHTML = svg;
+}
+
+function copyResults() {
+  const molType = document.getElementById('mol-type').value;
+  const rows = document.querySelectorAll('#breakdown-body tr');
+  let text = `Baseboard & Crown Molding Calculator Results\n${'='.repeat(44)}\n`;
+  rows.forEach(r => {
+    const cells = r.querySelectorAll('td');
+    if(cells.length) text += `${cells[0].textContent.trim()}: ${cells[1].textContent.trim()} | ${cells[2].textContent.trim()}\n`;
+  });
+  text += `\nTotal Cost: ${document.getElementById('total-cost').textContent}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(()=>btn.textContent='Copy', 2000);
+  }).catch(()=>{
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Error';
+    setTimeout(()=>btn.textContent='Copy', 2000);
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter' && e.target.tagName === 'INPUT') calculate();
+});
+
+// Init: pre-fill default single room values for better UX
+document.getElementById('s-length').value = '14';
+document.getElementById('s-width').value = '12';
+</script>
+</body>
+</html>
