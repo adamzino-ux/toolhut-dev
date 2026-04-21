@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attic Storage Flooring Load Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate your attic floor's load capacity before adding storage. Enter joist size, span, and spacing to find safe weight limits instantly.">
+<link rel="canonical" href="https://toolhut.dev/attic-storage-floor-load-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Attic Storage Flooring Load Calculator",
+  "url": "https://toolhut.dev/attic-storage-floor-load-calculator/",
+  "description": "Calculate your attic floor load capacity before adding storage. Enter joist dimensions, span, spacing, and wood species to determine safe weight limits.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline;color:#1b4332}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-logo{font-weight:700;font-size:1.1rem;color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 2rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.5rem;line-height:1.3}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:1.75rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:1.5rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem}
+select,input[type=number],input[type=range]{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:6px;font-size:1rem;font-family:inherit;background:#fff;color:#1a1a2e;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+select:focus,input[type=number]:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.12)}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{margin-bottom:1.1rem}
+.field:last-child{margin-bottom:0}
+input[type=range]{padding:4px 0;border:none;background:transparent;cursor:pointer;accent-color:#2d6a4f}
+.slider-val{font-weight:700;color:#2d6a4f;font-size:.9rem;margin-left:.5rem}
+.slider-row{display:flex;align-items:center;gap:.5rem}
+.slider-row input{flex:1}
+button.calc-btn{width:100%;background:#2d6a4f;color:#fff;border:none;padding:14px 24px;border-radius:6px;font-size:1rem;font-weight:700;cursor:pointer;transition:background .2s;min-height:48px;margin-top:.25rem}
+button.calc-btn:hover{background:#1b4332}
+button.calc-btn:active{background:#14302a}
+.results{opacity:0;transition:opacity .35s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.result-hero{text-align:center;padding:1.25rem .5rem 1rem;border-bottom:1px solid #dee2e6;margin-bottom:1.25rem}
+.result-hero .big-num{font-size:3rem;font-weight:900;color:#2d6a4f;line-height:1}
+.result-hero .big-label{font-size:.9rem;color:#555;margin-top:.35rem}
+.status-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:.82rem;font-weight:700;margin-top:.6rem}
+.status-safe{background:#d1fae5;color:#065f46}
+.status-marginal{background:#fef3c7;color:#92400e}
+.status-unsafe{background:#fee2e2;color:#991b1b}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444;border-bottom:1px solid #dee2e6}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.section-title{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:.75rem}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 6px 6px 0;padding:1rem 1.2rem;margin-bottom:1.5rem}
+.pro-tip strong{color:#e76f51;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+.pro-tip p{font-size:.9rem;margin-top:.3rem;color:#333}
+.materials-list{list-style:none;padding:0}
+.materials-list li{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:.9rem;gap:1rem}
+.materials-list li:last-child{border-bottom:none}
+.mat-name{color:#1a1a2e}
+.mat-detail{color:#555;font-size:.82rem;text-align:right;white-space:nowrap}
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.5rem}
+.time-card{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:.85rem 1rem;text-align:center}
+.time-card .time-who{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:#777;font-weight:600}
+.time-card .time-dur{font-size:1.3rem;font-weight:800;color:#2d6a4f;margin:.2rem 0}
+.time-card .time-note{font-size:.75rem;color:#888}
+.copy-btn{background:none;border:1px solid #dee2e6;padding:5px 12px;border-radius:4px;font-size:.78rem;cursor:pointer;color:#555;transition:all .2s;margin-left:.5rem}
+.copy-btn:hover{background:#f0f0f0}
+.copy-btn.copied{color:#2d6a4f;border-color:#2d6a4f}
+.svg-wrap{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center;margin-bottom:1.5rem;overflow:hidden}
+.svg-wrap svg{max-width:100%;height:auto}
+.ad-slot{min-height:0;margin:0}
+.content-section{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:1.75rem;margin-bottom:1.5rem}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:.6rem;margin-top:1.4rem}
+.content-section h2:first-child{margin-top:0}
+.content-section p{font-size:.93rem;color:#333;margin-bottom:.7rem;line-height:1.65}
+.content-section ul{padding-left:1.3rem;margin-bottom:.7rem}
+.content-section ul li{font-size:.93rem;color:#333;margin-bottom:.35rem;line-height:1.6}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem;background:#fafafa}
+summary{padding:.85rem 1rem;font-size:.93rem;font-weight:600;cursor:pointer;list-style:none;color:#1a1a2e}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▶ ";font-size:.7rem;color:#2d6a4f}
+details[open] summary::before{content:"▼ "}
+details p{padding:.1rem 1rem 1rem;font-size:.9rem;color:#444;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.related-link{background:#fff;border:1px solid #dee2e6;border-radius:6px;padding:.75rem 1rem;font-size:.88rem;color:#2d6a4f;display:block;transition:border-color .2s,background .2s}
+.related-link:hover{border-color:#2d6a4f;background:#f0faf5;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;text-align:center;padding:1.5rem 1rem;font-size:.83rem;color:#888}
+footer a{color:#2d6a4f;margin:0 .5rem}
+.warn-box{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:.85rem 1rem;font-size:.88rem;color:#78350f;margin-bottom:1rem}
+.cost-highlight{font-size:1.1rem;font-weight:700;color:#e76f51}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .result-hero .big-num{font-size:2.4rem}
+  .related-grid{grid-template-columns:1fr}
+  .time-grid{grid-template-columns:1fr 1fr}
+  .card{padding:1.25rem}
+  main{padding:1rem .75rem 2rem}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">🏠 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+<h1>Attic Storage Flooring Load Calculator</h1>
+<p class="subtitle">Find out how much weight your attic floor joists can safely support before adding plywood and storage boxes.</p>
+
+<!-- DIAGRAM -->
+<div class="svg-wrap" id="diagramWrap">
+  <svg id="diagram" viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" width="580" height="200">
+    <!-- Default diagram -->
+    <rect width="580" height="200" fill="#f8f9fa" rx="6"/>
+    <!-- Floor deck -->
+    <rect x="40" y="80" width="500" height="18" fill="#d4a574" stroke="#a0714a" stroke-width="1.5" rx="2"/>
+    <text x="290" y="73" text-anchor="middle" font-size="11" fill="#444" font-family="sans-serif">Plywood Sheathing</text>
+    <!-- Joists -->
+    <rect x="60" y="98" width="28" height="70" fill="#c8a26e" stroke="#8b5e3c" stroke-width="1.5" rx="2"/>
+    <rect x="150" y="98" width="28" height="70" fill="#c8a26e" stroke="#8b5e3c" stroke-width="1.5" rx="2"/>
+    <rect x="240" y="98" width="28" height="70" fill="#c8a26e" stroke="#8b5e3c" stroke-width="1.5" rx="2"/>
+    <rect x="330" y="98" width="28" height="70" fill="#c8a26e" stroke="#8b5e3c" stroke-width="1.5" rx="2"/>
+    <rect x="420" y="98" width="28" height="70" fill="#c8a26e" stroke="#8b5e3c" stroke-width="1.5" rx="2"/>
+    <rect x="492" y="98" width="28" height="70" fill="#c8a26e" stroke="#8b5e3c" stroke-width="1.5" rx="2"/>
+    <!-- Span arrow -->
+    <line x1="60" y1="178" x2="520" y2="178" stroke="#2d6a4f" stroke-width="1.5" marker-end="url(#arrowR)" marker-start="url(#arrowL)"/>
+    <text x="290" y="193" text-anchor="middle" font-size="11" fill="#2d6a4f" font-family="sans-serif" font-weight="600" id="diagSpan">Span: — ft</text>
+    <!-- Spacing arrow -->
+    <line x1="88" y1="132" x2="150" y2="132" stroke="#e76f51" stroke-width="1.5" marker-end="url(#arrowRO)" marker-start="url(#arrowLO)"/>
+    <text x="119" y="148" text-anchor="middle" font-size="10" fill="#e76f51" font-family="sans-serif" id="diagSpacing">— in O.C.</text>
+    <!-- Load box -->
+    <rect x="185" y="20" width="210" height="48" fill="#d1fae5" stroke="#2d6a4f" stroke-width="1.5" rx="4"/>
+    <text x="290" y="39" text-anchor="middle" font-size="11" fill="#065f46" font-family="sans-serif" font-weight="600" id="diagLoad">Load Capacity: —</text>
+    <text x="290" y="56" text-anchor="middle" font-size="10" fill="#065f46" font-family="sans-serif" id="diagStatus">Enter values and calculate</text>
+    <!-- Joist label -->
+    <text x="74" y="145" text-anchor="middle" font-size="10" fill="#5c3d1e" font-family="sans-serif" id="diagSize">2×6</text>
+    <!-- Arrow defs -->
+    <defs>
+      <marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2d6a4f"/></marker>
+      <marker id="arrowL" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto-start-reverse"><path d="M0,0 L0,6 L8,3 z" fill="#2d6a4f"/></marker>
+      <marker id="arrowRO" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#e76f51"/></marker>
+      <marker id="arrowLO" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto-start-reverse"><path d="M0,0 L0,6 L8,3 z" fill="#e76f51"/></marker>
+    </defs>
+  </svg>
+</div>
+
+<!-- CALCULATOR CARD -->
+<div class="card">
+  <div class="section-title">Enter Your Attic Joist Details</div>
+
+  <div class="row-2">
+    <div class="field">
+      <label for="joistSize">Joist Size</label>
+      <select id="joistSize">
+        <option value="2x4">2×4</option>
+        <option value="2x6" selected>2×6</option>
+        <option value="2x8">2×8</option>
+        <option value="2x10">2×10</option>
+        <option value="2x12">2×12</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="woodSpecies">Wood Species / Grade</label>
+      <select id="woodSpecies">
+        <option value="spr_no2">SPF #2 (common)</option>
+        <option value="df_no2">Douglas Fir #2</option>
+        <option value="hem_no2">Hem-Fir #2</option>
+        <option value="pine_no2">Southern Yellow Pine #2</option>
+        <option value="spr_no1">SPF #1</option>
+        <option value="df_no1">Douglas Fir #1</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row-2">
+    <div class="field">
+      <label for="spanFt">Clear Span (feet)</label>
+      <input type="number" id="spanFt" min="4" max="30" step="0.5" value="12" placeholder="e.g. 12">
+      <div class="error-msg" id="spanErr">Enter a span between 4 and 30 ft.</div>
+    </div>
+    <div class="field">
+      <label for="spacingIn">Joist Spacing (inches O.C.)</label>
+      <select id="spacingIn">
+        <option value="12">12" O.C.</option>
+        <option value="16" selected>16" O.C.</option>
+        <option value="19.2">19.2" O.C.</option>
+        <option value="24">24" O.C.</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row-2">
+    <div class="field">
+      <label for="floorArea">Storage Area (sq ft)</label>
+      <input type="number" id="floorArea" min="10" max="2000" step="10" value="120" placeholder="e.g. 120">
+      <div class="error-msg" id="areaErr">Enter an area between 10 and 2,000 sq ft.</div>
+    </div>
+    <div class="field">
+      <label for="liveLoad">Existing Live Load (psf)</label>
+      <select id="liveLoad">
+        <option value="0">None (unfinished attic)</option>
+        <option value="10">~10 psf (light insulation)</option>
+        <option value="20">~20 psf (moderate load)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Dead Load (self-weight, psf): <span class="slider-val" id="deadVal">10</span></label>
+    <div class="slider-row">
+      <input type="range" id="deadLoad" min="5" max="20" step="1" value="10">
+    </div>
+    <div style="font-size:.78rem;color:#777;margin-top:.25rem">Typical attic floor dead load: 10–15 psf (joists + decking + insulation below)</div>
+  </div>
+
+  <button class="calc-btn" id="calcBtn">Calculate Load Capacity</button>
+</div>
+
+<!-- RESULTS -->
+<div class="card results" id="results">
+
+  <div class="result-hero">
+    <div class="big-num" id="resCapacity">—</div>
+    <div class="big-label">Total Safe Live Load Capacity (lbs) for your storage area</div>
+    <span class="status-badge" id="resBadge">—</span>
+    <button class="copy-btn" id="copyBtn" onclick="copyResults()">Copy Summary</button>
+  </div>
+
+  <div class="warn-box" id="warnBox" style="display:none"></div>
+
+  <div class="section-title">Load Breakdown</div>
+  <div style="overflow-x:auto">
+    <table id="breakdownTable">
+      <thead><tr><th>Parameter</th><th class="num">Value</th></tr></thead>
+      <tbody id="breakdownBody"></tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:1.25rem" class="section-title">Comparison: Common Storage Loads</div>
+  <div style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Item</th><th class="num">Approx. Weight</th><th class="num">Fits in Your Attic?</th></tr></thead>
+      <tbody id="compareBody"></tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:1.5rem" class="section-title">Estimated Upgrade Cost</div>
+  <div id="costSection"></div>
+
+  <!-- Materials Shopping List -->
+  <div style="margin-top:1.5rem" class="section-title">Materials Shopping List</div>
+  <ul class="materials-list" id="materialsList"></ul>
+
+  <!-- Time Estimate -->
+  <div style="margin-top:1.5rem" class="section-title">⏱ Time Estimate</div>
+  <div class="time-grid">
+    <div class="time-card">
+      <div class="time-who">Beginner</div>
+      <div class="time-dur" id="timeBeginner">—</div>
+      <div class="time-note">first project</div>
+    </div>
+    <div class="time-card">
+      <div class="time-who">Experienced</div>
+      <div class="time-dur" id="timeExperienced">—</div>
+      <div class="time-note">done it before</div>
+    </div>
+  </div>
+</div>
+
+<div class="pro-tip">
+  <strong>🔧 Pro Tip</strong>
+  <p>Always check your local building code — most jurisdictions require attic storage floors to support at least 20 psf live load. If your joists fall short, sister them with matching lumber rather than replacing: it's cheaper, faster, and you can do it yourself in a weekend. A structural engineer consult costs $200–$400 and is worth every penny before you haul heavy boxes up there.</p>
+</div>
+
+<div class="ad-slot" id="ad-mid"></div>
+
+<!-- CONTENT SECTION -->
+<div class="content-section">
+  <h2>How to Use This Attic Floor Load Calculator</h2>
+  <p>Select your joist size, wood species, clear span (the distance between supports), and joist spacing. Then enter the total floor area you plan to use for storage. Hit "Calculate" and you'll instantly see the safe live load capacity in pounds, a comparison against common storage items, and a materials list if you need to upgrade.</p>
+
+  <h2>Why This Matters</h2>
+  <p>Most residential attics are framed with 2×6 or 2×4 joists spaced 24" apart — designed to hold only ceiling drywall and insulation, not your collection of holiday decorations, old furniture, and camping gear. An overloaded attic floor can crack drywall in the rooms below, cause permanent joist deflection, or in extreme cases lead to structural failure.</p>
+  <p>Here's a real scenario: a 2×6 SPF #2 joist at 16" spacing spanning 14 feet can carry roughly 20 psf live load — about 2,400 lbs over a 120 sq ft storage area. That sounds like a lot, but a single set of steel filing cabinets can weigh 200 lbs each, and a few boxes of books easily hit 50 lbs per box. It adds up fast. Homeowners who reframe or sister their joists with 2×8s at 16" spacing on that same 14-foot span can jump to nearly 30 psf — a 50% increase in capacity for around $400 in lumber and a Saturday of work.</p>
+
+  <h2>How It's Calculated</h2>
+  <p>The calculator uses simplified span table methodology based on the <strong>NDS (National Design Specification) for Wood Construction</strong> and standard IRC span tables. The key formula is:</p>
+  <p style="background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:.85rem 1rem;font-family:monospace;font-size:.88rem"><strong>Allowable Live Load (psf) = (M_allow × 8) / (w × L²)</strong><br>where M_allow = Fb × S (section modulus), w = tributary width (spacing), L = span in inches</p>
+  <p>The <strong>Fb</strong> (fiber bending stress) value depends on wood species and grade. <strong>S</strong> is the section modulus of the joist cross-section (b × d² / 6). Dead load (the weight of the structure itself) is subtracted from the total allowable load to get the net live load available for storage. Total safe storage weight = live load capacity (psf) × floor area (sq ft).</p>
+
+  <h2>Tips & Common Mistakes</h2>
+  <ul>
+    <li><strong>Don't ignore dead load:</strong> The joist must carry its own weight plus the decking before a single box touches it. Always enter a realistic dead load (10–15 psf is typical).</li>
+    <li><strong>Measure the clear span, not the room width:</strong> Clear span is the distance between the bearing walls or beams, not the total room dimension.</li>
+    <li><strong>Concentrate matters:</strong> Even if your total load is within limits, stacking everything in one corner creates a concentrated point load that can exceed local capacity. Spread weight evenly.</li>
+    <li><strong>Use 3/4" tongue-and-groove plywood:</strong> Standard 1/2" sheathing flexes noticeably and feels unsafe to walk on. The extra $0.30/sq ft is worth it.</li>
+    <li><strong>Check for notches and holes:</strong> Any plumbing or electrical that notched your joists has reduced their strength. Inspect before loading.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <details>
+    <summary>What is the minimum safe load for attic storage?</summary>
+    <p>Most building codes (IRC R802) require attic floors used for storage to support a minimum of 20 psf live load. If your calculation shows less than 20 psf, you should reinforce before adding significant storage. For heavy items like files or tools, aim for 30–40 psf.</p>
+  </details>
+  <details>
+    <summary>Can I just lay plywood on my attic joists without checking?</summary>
+    <p>Technically yes, but it's risky without knowing your load capacity. Plywood adds roughly 2 psf of dead load and makes it very easy to overload the floor without realizing it. Run the numbers first — it takes 2 minutes and could save thousands in repairs.</p>
+  </details>
+  <details>
+    <summary>What does "sistering" joists mean?</summary>
+    <p>Sistering means nailing a new joist of the same or larger size directly alongside an existing joist. It's the easiest way to increase load capacity without replacing framing. Two 2×6s sistered together act nearly as strong as a single 2×10 in many applications.</p>
+  </details>
+  <details>
+    <summary>Should I hire an engineer or can I DIY this?</summary>
+    <p>For light storage (holiday boxes, luggage) in a typical 2×6 attic within code limits, a DIY assessment using this calculator is reasonable. For heavy loads, spans over 15 feet, or if you see any existing cracks or sag, hire a structural engineer. A consult runs $200–$400 and provides written sign-off for peace of mind.</p>
+  </details>
+</div>
+
+<!-- RELATED TOOLS -->
+<div class="content-section">
+  <h2 style="margin-top:0">Related Tools</h2>
+  <div class="related-grid">
+    <a href="/insulation-r-value-calculator/" class="related-link">🌡️ Insulation R-Value Calculator</a>
+    <a href="/roof-shingle-calculator/" class="related-link">🏠 Roof Shingle Calculator</a>
+    <a href="/baseboard-crown-molding-calculator/" class="related-link">📐 Baseboard & Crown Molding Calculator</a>
+    <a href="/stair-riser-tread-calculator/" class="related-link">🪜 Stair Riser and Tread Calculator</a>
+    <a href="/drip-irrigation-emitter-calculator/" class="related-link">💧 Drip Irrigation Emitter Layout Calculator</a>
+    <a href="/lawn-sprinkler-head-spacing-calculator/" class="related-link">🌿 Lawn Sprinkler Head Spacing Calculator</a>
+  </div>
+</div>
+
+<div class="ad-slot" id="ad-bottom"></div>
+
+<footer>
+  <div>© <span id="yr"></span> toolhut.dev &nbsp;|&nbsp; <a href="/about/">About</a> <a href="/privacy/">Privacy</a> <a href="/contact/">Contact</a></div>
+  <div style="margin-top:.4rem;font-size:.78rem;color:#aaa">Results are estimates for planning purposes only. Consult a licensed structural engineer before construction.</div>
+</footer>
+</main>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Slider live update
+const deadSlider = document.getElementById('deadLoad');
+const deadVal = document.getElementById('deadVal');
+deadSlider.addEventListener('input', () => { deadVal.textContent = deadSlider.value; });
+
+// Enter key triggers calc
+document.querySelectorAll('input,select').forEach(el => {
+  el.addEventListener('keydown', e => { if(e.key === 'Enter') triggerCalc(); });
+});
+document.getElementById('calcBtn').addEventListener('click', triggerCalc);
+
+function triggerCalc() {
+  requestAnimationFrame(() => { calculate(); });
+}
+
+// Wood species Fb values (psi), from NDS span tables
+const FB = {
+  spr_no2: 875,
+  df_no2: 900,
+  hem_no2: 850,
+  pine_no2: 1100,
+  spr_no1: 1150,
+  df_no1: 1200
+};
+
+// Joist dimensions: [b, d] in inches
+const JOIST_DIMS = {
+  '2x4':  [1.5, 3.5],
+  '2x6':  [1.5, 5.5],
+  '2x8':  [1.5, 7.25],
+  '2x10': [1.5, 9.25],
+  '2x12': [1.5, 11.25]
+};
+
+const JOIST_WEIGHTS = { // lb per linear foot
+  '2x4': 0.7, '2x6': 1.1, '2x8': 1.4, '2x10': 1.8, '2x12': 2.2
+};
+
+function fmt(n, dec=0) {
+  if(isNaN(n)) return '—';
+  return n.toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+}
+
+function calculate() {
+  // Clear errors
+  document.getElementById('spanErr').classList.remove('show');
+  document.getElementById('areaErr').classList.remove('show');
+  document.getElementById('spanFt').classList.remove('error');
+  document.getElementById('floorArea').classList.remove('error');
+
+  const joistSize = document.getElementById('joistSize').value;
+  const species = document.getElementById('woodSpecies').value;
+  const spanFt = parseFloat(document.getElementById('spanFt').value);
+  const spacingIn = parseFloat(document.getElementById('spacingIn').value);
+  const areaSqFt = parseFloat(document.getElementById('floorArea').value);
+  const existingLive = parseFloat(document.getElementById('liveLoad').value);
+  const deadLoad = parseFloat(document.getElementById('deadLoad').value);
+
+  let valid = true;
+  if(isNaN(spanFt) || spanFt < 4 || spanFt > 30) {
+    document.getElementById('spanErr').classList.add('show');
+    document.getElementById('spanFt').classList.add('error');
+    valid = false;
+  }
+  if(isNaN(areaSqFt) || areaSqFt < 10 || areaSqFt > 2000) {
+    document.getElementById('areaErr').classList.add('show');
+    document.getElementById('floorArea').classList.add('error');
+    valid = false;
+  }
+  if(!valid) return;
+
+  const [b, d] = JOIST_DIMS[joistSize];
+  const Fb = FB[species];
+  const spanIn = spanFt * 12;
+  const spacingFt = spacingIn / 12;
+
+  // Section modulus S = b*d²/6
+  const S = (b * d * d) / 6;
+  // Allowable moment M = Fb * S (in-lb)
+  const M_allow = Fb * S;
+  // For simple span uniformly loaded beam: w = 8*M / L²  (lb/in)
+  const w_total_per_in = (8 * M_allow) / (spanIn * spanIn);
+  // Convert to psf: w_total_psf = w_per_in * 12 / spacing_ft
+  const w_total_psf = (w_total_per_in * 12) / spacingFt;
+
+  // Net live load = total capacity - dead load - existing live
+  const netLiveLoad = Math.max(0, w_total_psf - deadLoad - existingLive);
+
+  // Total safe storage weight
+  const totalSafeWeight = netLiveLoad * areaSqFt;
+
+  // Deflection check (L/360 criterion): max deflection = L/360
+  // For simple span: delta = 5wL⁴/(384EI)
+  // E for #2 lumber ~1,400,000 psi (approximate, SPF range)
+  const E_vals = { spr_no2:1400000, df_no2:1600000, hem_no2:1400000, pine_no2:1600000, spr_no1:1500000, df_no1:1700000 };
+  const E = E_vals[species];
+  const I = (b * d * d * d) / 12; // in⁴
+  // w at net live load in lb/in/joist
+  const w_live_per_in = (netLiveLoad * spacingFt) / 12;
+  const deflection = (5 * w_live_per_in * Math.pow(spanIn, 4)) / (384 * E * I);
+  const allowDefl = spanIn / 360;
+  const deflOK = deflection <= allowDefl;
+
+  // Status
+  let status, statusClass, statusText;
+  if(netLiveLoad >= 30) { status='EXCELLENT'; statusClass='status-safe'; statusText='Excellent for storage'; }
+  else if(netLiveLoad >= 20) { status='SAFE'; statusClass='status-safe'; statusText='Meets code minimum (20 psf)'; }
+  else if(netLiveLoad >= 10) { status='MARGINAL'; statusClass='status-marginal'; statusText='Light storage only'; }
+  else { status='UNSAFE'; statusClass='status-unsafe'; statusText='Reinforcement required'; }
+
+  // Upgrade cost estimate (sistering with same or next size)
+  const nextSize = {
+    '2x4':'2×6','2x6':'2×8','2x8':'2×10','2x10':'2×12','2x12':'Engineered LVL'
+  };
+  const lumberCostPerFt = {'2x4':0.45,'2x6':0.75,'2x8':1.10,'2x10':1.55,'2x12':1.90};
+  const numJoists = Math.ceil(areaSqFt / spacingFt) + 1;
+  const upgradeJoistCost = numJoists * spanFt * (lumberCostPerFt[joistSize] || 1.1);
+  const plywoodSheets = Math.ceil(areaSqFt / 32); // 4x8 sheets = 32 sq ft
+  const plywoodCost = plywoodSheets * 52; // ~$52 per 3/4" T&G sheet
+  const fastenCost = Math.ceil(areaSqFt / 100) * 12; // nails/screws
+  const totalMaterialCost = upgradeJoistCost + plywoodCost + fastenCost;
+
+  // Time estimates based on area
+  let timeBegin, timeExp;
+  if(areaSqFt <= 100) { timeBegin='4–6 hrs'; timeExp='2–3 hrs'; }
+  else if(areaSqFt <= 200) { timeBegin='1–1.5 days'; timeExp='4–6 hrs'; }
+  else { timeBegin='2–3 days'; timeExp='1–1.5 days'; }
+
+  // Build HTML
+  const warnHTML = netLiveLoad < 20
+    ? `⚠️ Your attic floor capacity (${fmt(netLiveLoad,1)} psf) is below the IRC minimum of 20 psf for storage. Consider sistering joists or upgrading to ${nextSize[joistSize] || 'larger'} joists before adding storage.`
+    : (!deflOK ? `⚠️ Deflection check: calculated deflection (${fmt(deflection,3)}" at max load) exceeds L/360 limit (${fmt(allowDefl,3)}"). The floor may feel bouncy. Consider upgrading joist size.` : '');
+
+  const breakdownRows = [
+    ['Joist Size', joistSize.replace('x','×')],
+    ['Wood Species / Grade', document.getElementById('woodSpecies').options[document.getElementById('woodSpecies').selectedIndex].text],
+    ['Clear Span', `${fmt(spanFt,1)} ft (${fmt(spanIn,0)} in)`],
+    ['Joist Spacing', `${spacingIn}" O.C.`],
+    ['Storage Area', `${fmt(areaSqFt,0)} sq ft`],
+    ['Fb (Bending Stress)', `${fmt(Fb,0)} psi`],
+    ['Section Modulus (S)', `${fmt(S,3)} in³`],
+    ['Total Allowable Load', `${fmt(w_total_psf,1)} psf`],
+    ['Dead Load', `${fmt(deadLoad,0)} psf`],
+    ['Existing Live Load', `${fmt(existingLive,0)} psf`],
+    ['<strong>Net Live Load Capacity</strong>', `<strong>${fmt(netLiveLoad,1)} psf</strong>`],
+    ['<strong>Total Safe Storage Weight</strong>', `<strong>${fmt(totalSafeWeight,0)} lbs</strong>`],
+    ['Deflection at Max Load', `${fmt(deflection,3)}" (limit: ${fmt(allowDefl,3)}")`],
+    ['Deflection Check', deflOK ? '✅ Pass (L/360)' : '⚠️ Fail — floor may flex'],
+  ];
+
+  const bRows = breakdownRows.map(([k,v]) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`).join('');
+
+  const items = [
+    {name:'Holiday/seasonal boxes (50 lbs ea)', w:50},
+    {name:'Large suitcase (30 lbs ea)', w:30},
+    {name:'Box of books (40 lbs ea)', w:40},
+    {name:'Tote of tools / hardware (60 lbs ea)', w:60},
+    {name:'Dresser / furniture piece (120 lbs)', w:120},
+    {name:'Steel filing cabinet (200 lbs)', w:200},
+    {name:'Full paint cans, case (80 lbs)', w:80},
+  ];
+  const cRows = items.map(item => {
+    const canFit = item.w <= totalSafeWeight;
+    const ratio = Math.floor(totalSafeWeight / item.w);
+    const cell = canFit ? `✅ Yes (~${fmt(ratio,0)} items)` : '❌ Exceeds capacity if many';
+    return `<tr><td>${item.name}</td><td class="num">${fmt(item.w,0)} lbs</td><td class="num">${cell}</td></tr>`;
+  }).join('');
+
+  const costHTML = `<div style="font-size:.9rem;color:#333;margin-bottom:.5rem">Estimated cost to floor <strong>${fmt(areaSqFt,0)} sq ft</strong> with 3/4" T&G plywood and sistered joists:</div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Est. Cost</th></tr></thead>
+    <tbody>
+      <tr><td>3/4" T&G plywood (4×8 sheets)</td><td class="num">${plywoodSheets}</td><td class="num">$${fmt(plywoodCost,0)}</td></tr>
+      <tr><td>Sister joists (${joistSize} lumber)</td><td class="num">${numJoists} × ${fmt(spanFt,1)} ft</td><td class="num">$${fmt(upgradeJoistCost,0)}</td></tr>
+      <tr><td>Screws, joist hangers, hardware</td><td class="num">—</td><td class="num">$${fmt(fastenCost,0)}</td></tr>
+      <tr><td><strong>Total Materials</strong></td><td></td><td class="num"><strong class="cost-highlight">$${fmt(totalMaterialCost,0)}</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div style="font-size:.78rem;color:#888;margin-top:.4rem">Prices based on US average lumber & home improvement store costs. Labor not included.</div>`;
+
+  const matItems = [
+    {name:`3/4" T&G Plywood (4×8 sheets)`, detail:`${plywoodSheets} sheets — ~$${fmt(plywoodCost,0)} total`},
+    {name:`${joistSize} Lumber for sistering`, detail:`${numJoists} boards × ${fmt(spanFt,1)} ft — ~$${fmt(upgradeJoistCost,0)}`},
+    {name:'2.5" or 3" deck screws (5 lb box)', detail:`${Math.ceil(plywoodSheets/5)+1} box(es) — ~$${fmt((Math.ceil(plywoodSheets/5)+1)*18,0)}`},
+    {name:'Joist hanger hardware (if needed)', detail:`~$${fmt(numJoists*1.5,0)} for hangers`},
+    {name:'Circular saw or jigsaw', detail:'Rental ~$35/day if needed'},
+    {name:'Drill/driver', detail:'For screw fastening'},
+    {name:'Tape measure + chalk line', detail:'For laying out rows'},
+    {name:'Safety glasses + knee pads', detail:'Essential for attic work'},
+  ];
+  const mRows = matItems.map(m => `<li><span class="mat-name">${m.name}</span><span class="mat-detail">${m.detail}</span></li>`).join('');
+
+  const resEl = document.getElementById('results');
+  document.getElementById('resCapacity').textContent = fmt(totalSafeWeight,0);
+  document.getElementById('resBadge').className = `status-badge ${statusClass}`;
+  document.getElementById('resBadge').textContent = statusText;
+  document.getElementById('breakdownBody').innerHTML = bRows;
+  document.getElementById('compareBody').innerHTML = cRows;
+  document.getElementById('costSection').innerHTML = costHTML;
+  document.getElementById('materialsList').innerHTML = mRows;
+  document.getElementById('timeBeginner').textContent = timeBegin;
+  document.getElementById('timeExperienced').textContent = timeExp;
+
+  const warnBox = document.getElementById('warnBox');
+  if(warnHTML) {
+    warnBox.style.display = 'block';
+    warnBox.textContent = '';
+    warnBox.innerHTML = warnHTML;
+  } else {
+    warnBox.style.display = 'none';
+  }
+
+  resEl.classList.add('visible');
+
+  // Update diagram
+  document.getElementById('diagSpan').textContent = `Span: ${fmt(spanFt,1)} ft`;
+  document.getElementById('diagSpacing').textContent = `${spacingIn}" O.C.`;
+  document.getElementById('diagLoad').textContent = `Live Capacity: ${fmt(netLiveLoad,1)} psf`;
+  document.getElementById('diagStatus').textContent = `Total safe load: ${fmt(totalSafeWeight,0)} lbs`;
+  document.getElementById('diagSize').textContent = joistSize.replace('x','×');
+
+  // Update diagram joist label color based on status
+  const loadBox = document.getElementById('diagLoad').closest ? null : null;
+  const loadEl = document.getElementById('diagLoad');
+  const statEl = document.getElementById('diagStatus');
+  if(netLiveLoad >= 20) {
+    loadEl.setAttribute('fill','#065f46');
+    statEl.setAttribute('fill','#065f46');
+    document.querySelector('#diagram rect[fill="#d1fae5"]') && document.querySelector('#diagram rect[fill="#d1fae5"]').setAttribute('fill','#d1fae5');
+  } else if(netLiveLoad >= 10) {
+    loadEl.setAttribute('fill','#92400e');
+    statEl.setAttribute('fill','#92400e');
+  } else {
+    loadEl.setAttribute('fill','#991b1b');
+    statEl.setAttribute('fill','#991b1b');
+  }
+
+  // Scroll to results
+  resEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// Copy results
+function copyResults() {
+  const joistSize = document.getElementById('joistSize').value;
+  const spanFt = document.getElementById('spanFt').value;
+  const spacingIn = document.getElementById('spacingIn').value;
+  const area = document.getElementById('floorArea').value;
+  const cap = document.getElementById('resCapacity').textContent;
+  const status = document.getElementById('resBadge').textContent;
+  const text = `Attic Floor Load Calculator — toolhut.dev\nJoist: ${joistSize} | Span: ${spanFt} ft | Spacing: ${spacingIn}" O.C. | Area: ${area} sq ft\nSafe Load: ${cap} lbs — ${status}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Summary'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {});
+}
+</script>
+</body>
+</html>
