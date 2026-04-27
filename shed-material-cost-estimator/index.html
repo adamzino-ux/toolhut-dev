@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shed Material Cost Estimator — Free Online Tool | ShedCalc</title>
+<meta name="description" content="Estimate shed building materials and costs instantly. Enter dimensions, wall height, and roof type to get a full lumber, plywood, and hardware breakdown.">
+<link rel="canonical" href="https://shedcalc.com/shed-material-cost-estimator">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Shed Material Cost Estimator",
+  "description": "Free online tool to estimate shed building materials and costs including lumber, plywood, roofing, and hardware.",
+  "url": "https://shedcalc.com/shed-material-cost-estimator",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f4f8;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#0077b6;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #e0e0e0;padding:0.75rem 1.5rem}
+nav a{font-weight:600;font-size:1rem;color:#1a1a2e}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.25rem}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:2rem}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:0.4rem}
+input,select{width:100%;border:1px solid #ddd;border-radius:5px;padding:12px 16px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#0077b6;box-shadow:0 0 0 3px rgba(0,119,182,0.15)}
+input.error,select.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:0.3rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+button{background:#0077b6;color:#fff;border:none;border-radius:6px;padding:12px 24px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s}
+button:hover{background:#006299}
+button:active{background:#005580}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:auto}
+.big-number{font-size:2.8rem;font-weight:700;color:#0077b6;line-height:1}
+.big-label{font-size:0.9rem;color:#555;margin-top:0.3rem;margin-bottom:1.5rem}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.summary-card{background:#f8f9fa;border:1px solid #e8e8e8;border-radius:6px;padding:1rem;text-align:center}
+.summary-card .val{font-size:1.4rem;font-weight:700;color:#0077b6}
+.summary-card .lbl{font-size:0.78rem;color:#666;margin-top:0.2rem}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+thead th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;color:#333;white-space:nowrap}
+thead th:last-child{text-align:right}
+tbody tr:nth-child(odd){background:#fafafa}
+tbody tr:nth-child(even){background:#fff}
+tbody td{padding:9px 12px;border-bottom:1px solid #efefef;color:#222}
+tbody td:last-child{text-align:right;font-weight:500}
+tfoot td{padding:10px 12px;font-weight:700;background:#f0f4f8;border-top:2px solid #ccc}
+tfoot td:last-child{text-align:right;color:#0077b6;font-size:1.05rem}
+.copy-btn{background:transparent;border:1px solid #0077b6;color:#0077b6;padding:6px 14px;font-size:0.8rem;border-radius:4px;width:auto;min-height:36px;margin-top:1rem;cursor:pointer;transition:all 0.2s}
+.copy-btn:hover{background:#0077b6;color:#fff}
+.section-title{font-size:1rem;font-weight:600;color:#1a1a2e;margin-bottom:0.75rem;margin-top:1.25rem;padding-bottom:0.4rem;border-bottom:2px solid #e8e8e8}
+.ad-slot{min-height:0;margin:0}
+.content-section{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:2rem;margin-bottom:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.content-section h2{font-size:1.2rem;color:#1a1a2e;margin-bottom:0.75rem;margin-top:1.5rem}
+.content-section h2:first-child{margin-top:0}
+.content-section p{color:#444;font-size:0.95rem;margin-bottom:0.75rem}
+.content-section ul{color:#444;font-size:0.95rem;padding-left:1.4rem;margin-bottom:0.75rem}
+.content-section ul li{margin-bottom:0.4rem}
+details{border:1px solid #e8e8e8;border-radius:6px;margin-bottom:0.75rem;background:#f8f9fa}
+summary{padding:0.85rem 1rem;cursor:pointer;font-weight:500;color:#1a1a2e;font-size:0.95rem;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'+ ';color:#0077b6;font-weight:700}
+details[open] summary::before{content:'− ';color:#0077b6}
+details p{padding:0 1rem 0.85rem;color:#555;font-size:0.9rem;margin:0}
+.related{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:1.5rem;margin-bottom:2rem}
+.related h3{font-size:1rem;font-weight:600;color:#1a1a2e;margin-bottom:0.75rem}
+.related ul{list-style:none;display:flex;flex-wrap:wrap;gap:0.5rem}
+.related ul li a{background:#f0f4f8;border:1px solid #dce4ec;border-radius:4px;padding:6px 12px;font-size:0.85rem;color:#0077b6;display:block}
+.related ul li a:hover{background:#0077b6;color:#fff;text-decoration:none}
+footer{text-align:center;padding:1.5rem;font-size:0.82rem;color:#777;border-top:1px solid #e0e0e0;background:#fff}
+footer a{color:#777;margin:0 0.5rem}
+footer a:hover{color:#0077b6}
+.note{background:#e8f4fd;border-left:3px solid #0077b6;padding:0.75rem 1rem;border-radius:0 4px 4px 0;font-size:0.85rem;color:#1a1a2e;margin-top:1rem}
+@media(max-width:640px){
+  .row-2{grid-template-columns:1fr}
+  .summary-grid{grid-template-columns:1fr 1fr}
+  .big-number{font-size:2.2rem}
+  .card{padding:1.25rem}
+  .content-section{padding:1.25rem}
+}
+@media(max-width:400px){
+  .summary-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav><a href="/">ShedCalc</a></nav>
+<div class="container">
+  <h1>Shed Material Cost Estimator</h1>
+  <p class="subtitle">Get a full materials breakdown and cost estimate for your shed build.</p>
+
+  <div class="card">
+    <div class="row-2">
+      <div class="form-group">
+        <label for="width">Shed Width (ft)</label>
+        <input type="number" id="width" placeholder="e.g. 10" min="4" max="40" value="">
+        <div class="error-msg" id="width-err">Enter a width between 4 and 40 ft.</div>
+      </div>
+      <div class="form-group">
+        <label for="length">Shed Length (ft)</label>
+        <input type="number" id="length" placeholder="e.g. 12" min="4" max="60" value="">
+        <div class="error-msg" id="length-err">Enter a length between 4 and 60 ft.</div>
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label for="wallHeight">Wall Height (ft)</label>
+        <input type="number" id="wallHeight" placeholder="e.g. 8" min="6" max="16" value="8">
+        <div class="error-msg" id="wall-err">Enter a wall height between 6 and 16 ft.</div>
+      </div>
+      <div class="form-group">
+        <label for="roofType">Roof Type</label>
+        <select id="roofType">
+          <option value="gable">Gable Roof</option>
+          <option value="shed">Shed Roof (Single Slope)</option>
+          <option value="gambrel">Gambrel Roof</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label for="roofPitch">Roof Pitch (rise:12)</label>
+        <select id="roofPitch">
+          <option value="4">4/12 (Low)</option>
+          <option value="6" selected>6/12 (Standard)</option>
+          <option value="8">8/12 (Steep)</option>
+          <option value="10">10/12 (Very Steep)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="wallMaterial">Wall Sheathing</label>
+        <select id="wallMaterial">
+          <option value="plywood">Plywood (4×8 sheets)</option>
+          <option value="osb">OSB (4×8 sheets)</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="form-group">
+        <label for="roofMaterial">Roofing Material</label>
+        <select id="roofMaterial">
+          <option value="shingles">Asphalt Shingles</option>
+          <option value="metal">Metal Roofing</option>
+          <option value="polycarbonate">Polycarbonate Panels</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="doors">Number of Doors</label>
+        <select id="doors">
+          <option value="1">1 Door</option>
+          <option value="2">2 Doors</option>
+          <option value="0">No Door (DIY)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="region">Price Region</label>
+      <select id="region">
+        <option value="1.0">National Average</option>
+        <option value="1.2">High Cost (CA, NY, WA)</option>
+        <option value="0.85">Low Cost (Midwest, South)</option>
+      </select>
+    </div>
+    <button onclick="calculate()">Estimate Materials &amp; Cost</button>
+  </div>
+
+  <div class="results card" id="results">
+    <div id="results-inner"></div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <div class="content-section">
+    <h2>How to Use This Shed Material Cost Estimator</h2>
+    <p>Enter your shed's width, length, and wall height in feet. Choose your roof type, pitch, sheathing material, and roofing product, then click <strong>Estimate Materials &amp; Cost</strong>. The tool instantly generates a complete materials list with quantities and current average prices.</p>
+    <p>Adjust the Price Region to reflect whether you're in a high-cost or low-cost area — lumber prices in California can run 15–20% above the national average.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Sheds seem simple until you price them out. A standard 10×12 shed can cost anywhere from $800 in materials to over $3,000 depending on roof style, sheathing, and whether you're buying pre-cut lumber or doing it yourself. The single biggest budgeting mistake DIYers make is underestimating lumber quantities — specifically floor joists, rafters, and wall studs.</p>
+    <p>This estimator uses real construction methods: 16-inch on-center stud spacing for walls, doubled top plates, single bottom plate, and standard rafter sizing for your chosen pitch. A 12×16 gable shed with 8-ft walls and standard shingles typically requires around 45–55 pieces of 2×4 lumber, 16–18 sheets of plywood or OSB, and 4–5 squares of roofing. Getting these numbers right before you head to the lumber yard can save you $200–$600 in over-buying or costly second trips.</p>
+    <p>Contractors use this type of estimate for preliminary bids. Homeowners use it to budget before pulling permits. Weekend builders use it to make a single clean shopping list.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>Wall Studs:</strong> Each wall uses studs spaced 16" on center. Formula: <code>((wall_length / 1.333) + 1) × 4 walls</code>, plus extras for corners and openings.</p>
+    <p><strong>Floor Joists:</strong> Spaced 16" on center across the width: <code>(length / 1.333) + 1</code> pieces of appropriate lumber (2×6 or 2×8 based on span).</p>
+    <p><strong>Roof Rafters:</strong> Rafter length calculated via Pythagorean theorem using pitch rise and half-span. Gable roofs need <code>(length / 1.333 + 1) × 2</code> rafters; gambrel adds an extra set.</p>
+    <p><strong>Sheathing:</strong> Wall area (minus door/window rough openings) ÷ 32 sq ft per 4×8 sheet, rounded up. Same method for roof deck area.</p>
+    <p><strong>Roofing:</strong> Roof area ÷ 100 = squares. Shingles are sold by the square (one bundle covers ~33 sq ft, so 3 bundles per square).</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Always add a 10% waste factor</strong> — this estimator includes it automatically. Cutting errors, splits, and bad boards are inevitable.</li>
+      <li><strong>Don't forget the floor frame.</strong> Pressure-treated lumber for the skid foundation and floor joists is often the most overlooked line item.</li>
+      <li><strong>Roof pitch affects material cost significantly.</strong> Going from 4/12 to 8/12 pitch adds 15–25% more roofing and rafter material.</li>
+      <li><strong>Buy sheathing by the bundle.</strong> Stagger your sheet joints and buy a few extra — OSB and plywood cut-offs are rarely returnable.</li>
+      <li><strong>Hardware adds up fast.</strong> Joist hangers, hurricane ties, screws, and nails can easily run $150–$250 on a medium shed — this tool includes a hardware estimate.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Does this include concrete or foundation costs?</summary>
+      <p>No — this estimator covers the structural framing, sheathing, roofing, and hardware materials only. Foundation costs vary widely: a gravel pad might cost $50, while a concrete slab for a 12×16 shed can run $600–$1,200 depending on your area.</p>
+    </details>
+    <details>
+      <summary>Are labor costs included?</summary>
+      <p>No, this is a materials-only estimate. If you're hiring out the build, a rough rule of thumb is that labor adds 50–100% on top of material cost for a straightforward shed. DIY builds save substantially.</p>
+    </details>
+    <details>
+      <summary>How accurate are the prices?</summary>
+      <p>Prices are based on national averages as of 2024–2025 and are meant for budgeting purposes only. Lumber prices can swing 20–40% seasonally and regionally. Always get a current quote from your local lumber yard or big-box store before finalizing your budget.</p>
+    </details>
+    <details>
+      <summary>Can I use this for a storage building or barn-style shed?</summary>
+      <p>Yes — the gambrel roof option mimics the classic barn style. For larger structures over 400 sq ft, local building codes often require engineered drawings, so treat this as a preliminary estimate only.</p>
+    </details>
+  </div>
+
+  <div class="related">
+    <h3>Related Tools</h3>
+    <ul>
+      <li><a href="/deck-material-estimator">Deck Material Estimator</a></li>
+      <li><a href="/fence-cost-calculator">Fence Cost Calculator</a></li>
+      <li><a href="/concrete-calculator">Concrete Volume Calculator</a></li>
+      <li><a href="/roofing-calculator">Roofing Material Calculator</a></li>
+      <li><a href="/lumber-cost-calculator">Lumber Cost Calculator</a></li>
+    </ul>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+  <footer>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/contact">Contact</a>
+    <br><br>
+    &copy; 2025 ShedCalc.com
+  </footer>
+</div>
+
+<script>
+// Price data (national averages, per unit)
+const PRICES = {
+  "2x4x8":   3.80,
+  "2x4x10":  4.60,
+  "2x4x12":  5.50,
+  "2x6x8":   5.80,
+  "2x6x10":  7.20,
+  "2x6x12":  8.60,
+  "2x6x16":  11.40,
+  "2x8x12":  11.20,
+  "2x8x16":  14.80,
+  "4x4x8":   12.50,
+  "2x6x8pt": 9.20,   // pressure treated
+  "4x6x12pt":18.50,  // skid
+  "plywood":  46.00, // 4x8 3/4"
+  "osb":      28.00, // 4x8 7/16"
+  "roofDeck": 32.00, // 4x8 7/16" OSB
+  "shingles_bundle": 38.00, // per bundle (1/3 square)
+  "metal_sqft": 2.80,
+  "poly_sqft":  3.20,
+  "ridgecap_lf": 4.50,
+  "fascia_lf":   2.10,
+  "door_36x80": 185.00,
+  "hardware":    1.0,  // multiplier base
+  "felt_roll":   28.00 // 15lb, covers 400sqft
+};
+
+function fmt(n){ return n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function fmtI(n){ return Math.round(n).toLocaleString('en-US'); }
+
+function getEl(id){ return document.getElementById(id); }
+
+function showError(id, show){
+  const inp = getEl(id);
+  const err = getEl(id+'-err');
+  if(!inp || !err) return;
+  if(show){ inp.classList.add('error'); err.classList.add('show'); }
+  else { inp.classList.remove('error'); err.classList.remove('show'); }
+}
+
+function validate(){
+  let ok = true;
+  const w = parseFloat(getEl('width').value);
+  const l = parseFloat(getEl('length').value);
+  const h = parseFloat(getEl('wallHeight').value);
+  if(!w || w < 4 || w > 40){ showError('width', true); ok=false; } else showError('width', false);
+  if(!l || l < 4 || l > 60){ showError('length', true); ok=false; } else showError('length', false);
+  if(!h || h < 6 || h > 16){ showError('wallHeight', true); ok=false; } else showError('wallHeight', false);
+  return ok ? {w,l,h} : null;
+}
+
+function rafterLength(span, pitch){
+  // Half span + overhang (1ft each side), pitch rise
+  const halfSpan = span/2 + 1; // +1ft overhang
+  const rise = (pitch/12) * halfSpan;
+  return Math.sqrt(halfSpan*halfSpan + rise*rise);
+}
+
+function calculate(){
+  const vals = validate();
+  if(!vals) return;
+
+  const {w, l, h} = vals;
+  const roofType   = getEl('roofType').value;
+  const pitch      = parseInt(getEl('roofPitch').value);
+  const wallMat    = getEl('wallMaterial').value;
+  const roofMat    = getEl('roofMaterial').value;
+  const numDoors   = parseInt(getEl('doors').value);
+  const region     = parseFloat(getEl('region').value);
+
+  // ---- CALCULATIONS ----
+
+  // Floor frame
+  const skidCount     = Math.ceil(w / 4);   // 4x6 PT skids
+  const skidLen       = Math.ceil(l / 12) * 12; // round to 12ft
+  const joistSpacing  = 16/12; // ft
+  const joistCount    = Math.ceil(l / joistSpacing) + 1;
+  const joistLen      = w <= 8 ? 8 : w <= 12 ? 12 : 16;
+  const joist2x6      = w <= 10;
+  const joistType     = joist2x6 ? `2x6x${joistLen}` : `2x8x${joistLen}`;
+  const floorSheets   = Math.ceil((w * l) / 32 * 1.05);
+  const floorPlywoodPrice = PRICES['plywood'];
+
+  // Wall framing (4 walls, 16" OC)
+  // Studs per wall
+  const studH       = h <= 8 ? '8' : h <= 10 ? '10' : '12';
+  const studPriceKey= `2x4x${studH}`;
+  const studsFront  = Math.ceil((w  / joistSpacing) + 1) + 4; // +corners/trims
+  const studsSide   = Math.ceil((l  / joistSpacing) + 1) + 4;
+  const totalStuds  = (studsFront * 2 + studsSide * 2) + Math.round((studsFront+studsSide)*0.15);
+  // Top plates (double) + bottom plates
+  const plateLinFt  = (w + l) * 2; // perimeter
+  const platePieces8  = Math.ceil((plateLinFt * 3) / 8); // 3 plates (2 top + 1 bottom), 8ft lengths
+  
+  // Wall sheathing
+  const wallArea    = (2*(w+l)*h) - (numDoors * 21); // rough door opening ~3x7=21sqft
+  const wallSheets  = Math.ceil(wallArea / 32 * 1.08);
+  const wallSheetPrice = wallMat === 'plywood' ? PRICES['plywood'] : PRICES['osb'];
+
+  // Roof framing
+  let rafterLenFt, rafterCount, ridgeLen, collarTies=0, roofAreaSqFt;
+  const roofOverhang = 1; // ft each side
+
+  if(roofType === 'gable'){
+    rafterLenFt  = rafterLength(w, pitch);
+    rafterCount  = (Math.ceil(l / joistSpacing) + 1) * 2;
+    ridgeLen     = l + 2; // overhang on gable ends
+    collarTies   = Math.ceil(rafterCount / 4);
+    const roofWidth = w/2 / Math.cos(Math.atan(pitch/12)) + roofOverhang;
+    roofAreaSqFt = roofWidth * 2 * (l + 2*roofOverhang);
+  } else if(roofType === 'shed'){
+    // Single slope
+    const runFt   = w + roofOverhang*2;
+    const riseTotal = (pitch/12) * w;
+    rafterLenFt  = Math.sqrt(runFt*runFt + riseTotal*riseTotal);
+    rafterCount  = Math.ceil(l / joistSpacing) + 1;
+    ridgeLen     = 0;
+    roofAreaSqFt = rafterLenFt * (l + 2*roofOverhang);
+  } else {
+    // Gambrel: two pitches (lower steep ~22/12, upper shallow ~7/12)
+    const lowerPitch = 22, upperPitch = 7;
+    const halfW = w/2;
+    const breakPoint = halfW * 0.55; // lower section ~55% of half-span
+    const lowerRun   = breakPoint + roofOverhang;
+    const lowerRise  = (lowerPitch/12) * breakPoint;
+    const upperRun   = (halfW - breakPoint);
+    const upperRise  = (upperPitch/12) * upperRun;
+    const lowerLen   = Math.sqrt(lowerRun**2 + lowerRise**2);
+    const upperLen   = Math.sqrt(upperRun**2 + upperRise**2);
+    rafterLenFt      = lowerLen + upperLen;
+    rafterCount      = (Math.ceil(l / joistSpacing) + 1) * 4; // 2 per side × 2 sides, doubled
+    ridgeLen         = l + 2;
+    roofAreaSqFt     = (lowerLen + upperLen) * 2 * (l + 2*roofOverhang);
+  }
+
+  // Rafter lumber size
+  const rafterSpan = w/2 + 1;
+  const rafterKey  = rafterSpan <= 8 ? `2x4x${Math.ceil(rafterLenFt/2)*2 <= 8 ? 8 : 10}` : `2x6x${Math.ceil(rafterLenFt/2)*2 <= 10 ? 10 : 12}`;
+  const rafterPieceLen = Math.ceil(rafterLenFt / 2) * 2; // round up to even ft
+  const rafterLumber   = Math.ceil(rafterLenFt) <= 8 ? `2x4x8` : rafterSpan <= 6 ? `2x6x10` : `2x6x12`;
+  
+  // Ridge board
+  const ridgePieces = ridgeLen > 0 ? Math.ceil(ridgeLen / 8) : 0;
+
+  // Roof deck
+  const roofSheets = Math.ceil(roofAreaSqFt / 32 * 1.1);
+
+  // Roofing material
+  const roofSquares = roofAreaSqFt / 100;
+  let roofMatQty, roofMatUnit, roofMatUnitPrice, roofMatLabel;
+  if(roofMat === 'shingles'){
+    const bundles = Math.ceil(roofSquares * 3 * 1.10); // 3 bundles/square +10% waste
+    roofMatQty = bundles; roofMatUnit = 'bundles'; roofMatUnitPrice = PRICES['shingles_bundle']; roofMatLabel='Asphalt Shingles';
+  } else if(roofMat === 'metal'){
+    roofMatQty = Math.ceil(roofAreaSqFt * 1.10); roofMatUnit = 'sq ft'; roofMatUnitPrice = PRICES['metal_sqft']; roofMatLabel='Metal Roofing';
+  } else {
+    roofMatQty = Math.ceil(roofAreaSqFt * 1.10); roofMatUnit = 'sq ft'; roofMatUnitPrice = PRICES['poly_sqft']; roofMatLabel='Polycarbonate Panels';
+  }
+
+  const feltRolls  = roofMat === 'shingles' ? Math.ceil(roofAreaSqFt / 400) + 1 : 0;
+  const ridgeCapLf = roofType !== 'shed' ? Math.ceil(ridgeLen * 1.1) : 0;
+  const fasciaLf   = Math.ceil((w + l) * 2 * 1.1);
+
+  // Hardware estimate
+  const hardwareBase = 120 + (w*l * 1.8);
+
+  // Door
+  const doorCost = numDoors > 0 ? numDoors * PRICES['door_36x80'] : 0;
+
+  // Assemble line items
+  const P = (key) => (PRICES[key] || 0) * region;
+
+  const items = [];
+
+  // Floor
+  items.push({ cat:'Foundation', item:`4×6 PT Skids (${skidLen}ft)`, qty: skidCount, unit:'pcs', unitPrice: PRICES['4x6x12pt']*region*(skidLen/12), subtotal: skidCount * PRICES['4x6x12pt']*region*(skidLen/12) });
+  items.push({ cat:'Floor Frame', item:`2×${joist2x6?'6':'8'}×${joistLen} Floor Joists`, qty: joistCount, unit:'pcs', unitPrice: (PRICES[joistType]||PRICES['2x6x8'])*region, subtotal: joistCount * (PRICES[joistType]||PRICES['2x6x8'])*region });
+  items.push({ cat:'Floor Frame', item:'3/4" Plywood Subfloor (4×8)', qty: floorSheets, unit:'sheets', unitPrice: floorPlywoodPrice*region, subtotal: floorSheets * floorPlywoodPrice*region });
+
+  // Walls
+  items.push({ cat:'Wall Frame', item:`2×4×${studH} Wall Studs`, qty: totalStuds, unit:'pcs', unitPrice: (PRICES[studPriceKey]||PRICES['2x4x8'])*region, subtotal: totalStuds * (PRICES[studPriceKey]||PRICES['2x4x8'])*region });
+  items.push({ cat:'Wall Frame', item:`2×4×8 Top/Bottom Plates`, qty: platePieces8, unit:'pcs', unitPrice: PRICES['2x4x8']*region, subtotal: platePieces8 * PRICES['2x4x8']*region });
+  items.push({ cat:'Wall Sheathing', item:`${wallMat==='plywood'?'3/4" Plywood':'7/16" OSB'} (4×8)`, qty: wallSheets, unit:'sheets', unitPrice: wallSheetPrice*region, subtotal: wallSheets * wallSheetPrice*region });
+
+  // Roof
+  items.push({ cat:'Roof Frame', item:`${rafterLumber.replace('x',' × ').replace('x',' × ')} Rafters`, qty: rafterCount, unit:'pcs', unitPrice: (PRICES[rafterLumber]||PRICES['2x6x10'])*region, subtotal: rafterCount * (PRICES[rafterLumber]||PRICES['2x6x10'])*region });
+  if(ridgePieces > 0) items.push({ cat:'Roof Frame', item:'2×6×8 Ridge Board', qty: ridgePieces, unit:'pcs', unitPrice: PRICES['2x6x8']*region, subtotal: ridgePieces * PRICES['2x6x8']*region });
+  if(collarTies > 0)  items.push({ cat:'Roof Frame', item:'2×4×8 Collar Ties', qty: collarTies, unit:'pcs', unitPrice: PRICES['2x4x8']*region, subtotal: collarTies * PRICES['2x4x8']*region });
+  items.push({ cat:'Roof Deck', item:'7/16" OSB Roof Deck (4×8)', qty: roofSheets, unit:'sheets', unitPrice: PRICES['roofDeck']*region, subtotal: roofSheets * PRICES['roofDeck']*region });
+
+  // Roofing
+  items.push({ cat:'Roofing', item: roofMatLabel, qty: roofMatQty, unit: roofMatUnit, unitPrice: roofMatUnitPrice*region, subtotal: roofMatQty * roofMatUnitPrice*region });
+  if(feltRolls > 0) items.push({ cat:'Roofing', item:'15 lb Roofing Felt', qty: feltRolls, unit:'rolls', unitPrice: PRICES['felt_roll']*region, subtotal: feltRolls * PRICES['felt_roll']*region });
+  if(ridgeCapLf > 0) items.push({ cat:'Roofing', item:'Ridge Cap / Flashing (lf)', qty: ridgeCapLf, unit:'lf', unitPrice: PRICES['ridgecap_lf']*region, subtotal: ridgeCapLf * PRICES['ridgecap_lf']*region });
+
+  // Fascia
+  items.push({ cat:'Trim', item:'1×6 Fascia Board (lf)', qty: fasciaLf, unit:'lf', unitPrice: PRICES['fascia_lf']*region, subtotal: fasciaLf * PRICES['fascia_lf']*region });
+
+  // Hardware
+  items.push({ cat:'Hardware', item:'Nails, Screws, Joist Hangers, Ties', qty: 1, unit:'lot', unitPrice: Math.round(hardwareBase)*region, subtotal: Math.round(hardwareBase)*region });
+
+  // Doors
+  if(numDoors > 0) items.push({ cat:'Doors', item:`Pre-hung Door (36"×80")`, qty: numDoors, unit:'ea', unitPrice: PRICES['door_36x80']*region, subtotal: doorCost*region });
+
+  const total = items.reduce((s,i)=>s+i.subtotal,0);
+
+  // Category totals
+  const catTotals = {};
+  items.forEach(i=>{ catTotals[i.cat] = (catTotals[i.cat]||0) + i.subtotal; });
+
+  // Build result HTML
+  let tableRows = '';
+  let lastCat = '';
+  items.forEach(item => {
+    const catChange = item.cat !== lastCat;
+    if(catChange) lastCat = item.cat;
+    tableRows += `<tr>
+      <td>${catChange ? `<span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em;color:#888;display:block;font-weight:600">${item.cat}</span>` : ''}${item.item}</td>
+      <td style="text-align:right;white-space:nowrap">${fmtI(item.qty)} ${item.unit}</td>
+      <td style="text-align:right;white-space:nowrap">$${fmt(item.unitPrice)}</td>
+      <td>$${fmt(item.subtotal)}</td>
+    </tr>`;
+  });
+
+  // Category bar visual
+  const maxCat = Math.max(...Object.values(catTotals));
+  let catBars = '';
+  const catColors = {'Foundation':'#0077b6','Floor Frame':'#00a8e8','Wall Frame':'#4caf50','Wall Sheathing':'#8bc34a','Roof Frame':'#ff9800','Roof Deck':'#ffc107','Roofing':'#e91e63','Trim':'#9c27b0','Hardware':'#607d8b','Doors':'#795548'};
+  Object.entries(catTotals).forEach(([cat, val]) => {
+    const pct = (val/maxCat*100).toFixed(1);
+    const color = catColors[cat] || '#0077b6';
+    catBars += `<div style="margin-bottom:0.6rem">
+      <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:3px"><span style="color:#444">${cat}</span><span style="font-weight:600">$${fmt(val)}</span></div>
+      <div style="background:#e8e8e8;border-radius:3px;height:8px"><div style="background:${color};width:${pct}%;height:8px;border-radius:3px;transition:width 0.4s ease"></div></div>
+    </div>`;
+  });
+
+  const html = `
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div class="big-number">$${fmtI(total)}</div>
+      <div class="big-label">Estimated Total Materials Cost</div>
+      <div style="font-size:0.82rem;color:#888">${w}ft × ${l}ft · ${h}ft walls · ${getEl('roofType').options[getEl('roofType').selectedIndex].text}</div>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-card"><div class="val">${fmtI(w*l)} sqft</div><div class="lbl">Floor Area</div></div>
+      <div class="summary-card"><div class="val">${fmtI(Math.round(roofAreaSqFt))} sqft</div><div class="lbl">Roof Area</div></div>
+      <div class="summary-card"><div class="val">${fmtI(totalStuds)}</div><div class="lbl">Wall Studs</div></div>
+      <div class="summary-card"><div class="val">${fmtI(roofSheets)}</div><div class="lbl">Roof Deck Sheets</div></div>
+    </div>
+    <div class="section-title">Cost by Category</div>
+    ${catBars}
+    <div class="section-title" style="margin-top:1.5rem">Full Materials List</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Item</th><th style="text-align:right">Qty</th><th style="text-align:right">Unit $</th><th style="text-align:right">Subtotal</th></tr></thead>
+        <tbody>${tableRows}</tbody>
+        <tfoot><tr><td colspan="3">TOTAL ESTIMATED MATERIALS</td><td>$${fmt(total)}</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="note">💡 Prices are 2024–2025 national averages. Add 10–15% contingency for waste, delivery, and price fluctuations. Does not include labor, permits, or foundation.</div>
+    <button class="copy-btn" id="copyBtn" onclick="copyResults('$${fmt(total)}','${w}x${l}')">Copy Summary</button>
+  `;
+
+  requestAnimationFrame(() => {
+    const res = getEl('results');
+    getEl('results-inner').innerHTML = html;
+    res.classList.add('show');
+    res.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+
+function copyResults(total, dims){
+  const text = `Shed Material Cost Estimate\nDimensions: ${dims} ft\nEstimated Total: ${total}\nGenerated by ShedCalc.com`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = getEl('copyBtn');
+    if(btn){ btn.textContent = 'Copied!'; setTimeout(()=>{ btn.textContent = 'Copy Summary'; }, 2000); }
+  }).catch(()=>{
+    const btn = getEl('copyBtn');
+    if(btn){ btn.textContent = 'Copy failed'; setTimeout(()=>{ btn.textContent = 'Copy Summary'; }, 2000); }
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter' && ['INPUT','SELECT'].includes(e.target.tagName)){
+    requestAnimationFrame(() => calculate());
+  }
+});
+</script>
+</body>
+</html>
