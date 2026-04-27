@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laminate Flooring Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how much laminate flooring you need. Enter room dimensions, get square footage, box quantities, waste factor, and a complete shopping list instantly.">
+<link rel="canonical" href="https://toolhut.dev/laminate-flooring-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Laminate Flooring Calculator",
+  "url": "https://toolhut.dev/laminate-flooring-calculator/",
+  "description": "Calculate exactly how much laminate flooring you need for any room. Get square footage, box counts, waste factor estimates, and a complete materials shopping list.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "publisher": { "@type": "Organization", "name": "toolhut.dev", "url": "https://toolhut.dev" }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f8f9fa;
+  color: #1a1a2e;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a { color: #2d6a4f; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+nav {
+  background: #fff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0 1.5rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+}
+.nav-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-logo { font-weight: 700; font-size: 1.1rem; color: #2d6a4f; }
+.site-logo span { color: #e76f51; }
+
+.container { max-width: 640px; margin: 0 auto; padding: 1.5rem; }
+
+h1 { font-size: 1.65rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.4rem; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+.card {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d6a4f;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #e8f5e9;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group.full { grid-column: 1 / -1; }
+
+label { font-size: 0.85rem; font-weight: 500; color: #444; }
+input, select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #1a1a2e;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.15);
+}
+input.error { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.12); }
+.error-msg { color: #e74c3c; font-size: 0.8rem; margin-top: 0.2rem; display: none; }
+.error-msg.show { display: block; }
+
+.hint { font-size: 0.78rem; color: #777; margin-top: 0.15rem; }
+
+.btn-calc {
+  background: #2d6a4f;
+  color: #fff;
+  border: none;
+  padding: 13px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1.25rem;
+  min-height: 48px;
+  transition: background 0.2s;
+}
+.btn-calc:hover { background: #245a42; }
+
+.results-section {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.results-section.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.big-number {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #2d6a4f;
+  line-height: 1;
+}
+.big-label { font-size: 0.85rem; color: #666; margin-top: 0.2rem; }
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.stat-box {
+  background: #f0faf4;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.stat-val { font-size: 1.5rem; font-weight: 700; color: #2d6a4f; }
+.stat-lbl { font-size: 0.75rem; color: #555; margin-top: 0.2rem; }
+
+.cost-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.cost-box {
+  background: #fff8f5;
+  border: 1px solid #f4c9b8;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.cost-val { font-size: 1.3rem; font-weight: 700; color: #e76f51; }
+.cost-lbl { font-size: 0.75rem; color: #555; margin-top: 0.2rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th {
+  background: #f0f0f0;
+  padding: 9px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #444;
+  border-bottom: 1px solid #dee2e6;
+}
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+tr:nth-child(odd) td { background: #fafafa; }
+tr:nth-child(even) td { background: #fff; }
+td:last-child, th:last-child { text-align: right; }
+
+.table-wrap { overflow-x: auto; }
+
+.shopping-list { list-style: none; }
+.shopping-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.92rem;
+}
+.shopping-list li:last-child { border-bottom: none; }
+.shop-icon { font-size: 1.2rem; flex-shrink: 0; }
+.shop-item { flex: 1; }
+.shop-item strong { display: block; color: #1a1a2e; }
+.shop-item span { color: #666; font-size: 0.82rem; }
+.shop-price { font-weight: 700; color: #e76f51; white-space: nowrap; }
+
+.pro-tip {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-left: 4px solid #ffa000;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.pro-tip-title { font-weight: 700; color: #e65100; margin-bottom: 0.4rem; font-size: 0.9rem; }
+.pro-tip p { font-size: 0.88rem; color: #5d4037; line-height: 1.55; }
+
+.time-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.time-card {
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  border: 1px solid #dee2e6;
+}
+.time-card.beginner { background: #e3f2fd; border-color: #90caf9; }
+.time-card.pro { background: #e8f5e9; border-color: #a5d6a7; }
+.time-label { font-size: 0.78rem; font-weight: 600; color: #555; margin-bottom: 0.2rem; }
+.time-val { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; }
+
+.btn-copy {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: #444;
+  transition: background 0.15s;
+  min-height: 32px;
+}
+.btn-copy:hover { background: #e0e0e0; }
+
+.copy-row { display: flex; justify-content: flex-end; margin-bottom: 0.75rem; }
+
+/* SVG diagram */
+.diagram-wrap {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+.diagram-wrap svg { max-width: 100%; }
+
+/* Waste slider */
+.slider-row { display: flex; align-items: center; gap: 0.75rem; }
+input[type="range"] {
+  flex: 1;
+  padding: 0;
+  height: 6px;
+  border: none;
+  box-shadow: none;
+  min-height: 20px;
+  accent-color: #2d6a4f;
+  cursor: pointer;
+}
+input[type="range"]:focus { box-shadow: none; }
+.slider-val {
+  background: #2d6a4f;
+  color: #fff;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-width: 44px;
+  text-align: center;
+}
+
+/* Content sections */
+.content-section { margin-bottom: 2rem; }
+.content-section h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+}
+.content-section p { color: #444; font-size: 0.93rem; margin-bottom: 0.75rem; line-height: 1.65; }
+.content-section ul { padding-left: 1.25rem; color: #444; font-size: 0.93rem; }
+.content-section ul li { margin-bottom: 0.45rem; line-height: 1.55; }
+.formula-box {
+  background: #f0faf4;
+  border: 1px solid #c3e6cb;
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #1a1a2e;
+  margin: 0.75rem 0;
+}
+
+details {
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  background: #fff;
+}
+summary {
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #2d6a4f;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+summary::before { content: "▶"; font-size: 0.7rem; transition: transform 0.2s; }
+details[open] summary::before { transform: rotate(90deg); }
+details p { padding: 0 1rem 0.85rem; font-size: 0.88rem; color: #444; line-height: 1.6; }
+
+.related-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.related-link {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.85rem;
+  color: #2d6a4f;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.related-link:hover { background: #f0faf4; border-color: #2d6a4f; text-decoration: none; }
+
+.ad-slot { min-height: 0; margin: 0; }
+
+footer {
+  background: #fff;
+  border-top: 1px solid #dee2e6;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #666;
+}
+.footer-inner { max-width: 640px; margin: 0 auto; }
+.footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.footer-links a { color: #555; }
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .stats-row .stat-box:last-child { grid-column: 1 / -1; }
+  .cost-row { grid-template-columns: 1fr 1fr; }
+  .cost-row .cost-box:last-child { grid-column: 1 / -1; }
+  .time-box { grid-template-columns: 1fr 1fr; }
+  .related-tools { grid-template-columns: 1fr; }
+  h1 { font-size: 1.35rem; }
+  .big-number { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="site-logo">tool<span>hut</span>.dev</a>
+    <span style="font-size:0.8rem;color:#888;">DIY Calculator</span>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h1>🏠 Laminate Flooring Calculator</h1>
+  <p class="subtitle">Enter your room dimensions and get the exact amount of flooring to buy — no guesswork, no waste, no surprises at the hardware store.</p>
+
+  <!-- TOOL CARD -->
+  <div class="card">
+    <div class="section-title">📐 Room Dimensions</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="roomLength">Room Length (ft)</label>
+        <input type="number" id="roomLength" placeholder="e.g. 14" min="0.1" step="0.1">
+        <div class="error-msg" id="err-length">Please enter a valid length</div>
+      </div>
+      <div class="form-group">
+        <label for="roomWidth">Room Width (ft)</label>
+        <input type="number" id="roomWidth" placeholder="e.g. 12" min="0.1" step="0.1">
+        <div class="error-msg" id="err-width">Please enter a valid width</div>
+      </div>
+      <div class="form-group full">
+        <label for="deductArea">Subtract Obstacles (sq ft) <span style="font-weight:400;color:#888">— optional</span></label>
+        <input type="number" id="deductArea" placeholder="e.g. 15 for a large island or closet" min="0" step="0.5" value="0">
+        <div class="hint">Cabinets, fireplace hearths, closets you won't be flooring</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:1.25rem;">📦 Flooring Details</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="sqftPerBox">Coverage per Box (sq ft)</label>
+        <input type="number" id="sqftPerBox" placeholder="e.g. 20.34" min="1" step="0.01" value="20.34">
+        <div class="hint">Found on the box label</div>
+      </div>
+      <div class="form-group">
+        <label for="pricePerBox">Price per Box ($)</label>
+        <input type="number" id="pricePerBox" placeholder="e.g. 42.00" min="0" step="0.01" value="42.00">
+      </div>
+      <div class="form-group">
+        <label for="layoutAngle">Installation Pattern</label>
+        <select id="layoutAngle">
+          <option value="straight">Straight (0°)</option>
+          <option value="diagonal">Diagonal (45°)</option>
+          <option value="herringbone">Herringbone</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="underpadPrice">Underlayment Price ($/sq ft)</label>
+        <input type="number" id="underpadPrice" placeholder="e.g. 0.30" min="0" step="0.01" value="0.30">
+        <div class="hint">Avg $0.25–$0.50/sq ft</div>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-top:1rem;">
+      <label for="wasteSlider">Waste Factor: <span id="wasteLabel">10%</span></label>
+      <div class="slider-row">
+        <span style="font-size:0.8rem;color:#888">5%</span>
+        <input type="range" id="wasteSlider" min="5" max="25" value="10" step="1">
+        <span style="font-size:0.8rem;color:#888">25%</span>
+        <span class="slider-val" id="wasteDisplay">10%</span>
+      </div>
+      <div class="hint">Straight runs: 10% • Diagonal/herringbone: 15–20% • Irregular rooms: up to 25%</div>
+    </div>
+
+    <button class="btn-calc" id="calcBtn" onclick="calculate()">Calculate Flooring Needs</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-section" id="resultsSection">
+
+    <!-- Room Diagram -->
+    <div class="card">
+      <div class="section-title">🗺️ Room Diagram</div>
+      <div class="diagram-wrap" id="diagramWrap">
+        <svg id="roomSvg" width="360" height="220" viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+    </div>
+
+    <!-- Key Numbers -->
+    <div class="card">
+      <div class="copy-row">
+        <button class="btn-copy" id="copyBtn" onclick="copyResults()">📋 Copy Results</button>
+      </div>
+      <div class="section-title">📊 Your Results</div>
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div class="big-number" id="bigBoxes">—</div>
+        <div class="big-label">Boxes to Buy</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-val" id="statSqft">—</div>
+          <div class="stat-lbl">Net Sq Ft (room)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statWithWaste">—</div>
+          <div class="stat-lbl">With Waste Factor</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="statExtra">—</div>
+          <div class="stat-lbl">Extra Sq Ft Buffer</div>
+        </div>
+      </div>
+
+      <div class="section-title">💰 Cost Estimate</div>
+      <div class="cost-row">
+        <div class="cost-box">
+          <div class="cost-val" id="costFlooring">—</div>
+          <div class="cost-lbl">Flooring (boxes)</div>
+        </div>
+        <div class="cost-box">
+          <div class="cost-val" id="costUnderpad">—</div>
+          <div class="cost-lbl">Underlayment</div>
+        </div>
+        <div class="cost-box">
+          <div class="cost-val" id="costTotal">—</div>
+          <div class="cost-lbl">Total Materials</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table id="breakdownTable">
+          <thead>
+            <tr><th>Item</th><th style="text-align:right">Value</th></tr>
+          </thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Time Estimate -->
+    <div class="card">
+      <div class="section-title">⏱️ Time Estimate</div>
+      <div class="time-box">
+        <div class="time-card beginner">
+          <div class="time-label">🔰 Beginner DIYer</div>
+          <div class="time-val" id="timeBeginner">—</div>
+        </div>
+        <div class="time-card pro">
+          <div class="time-label">🏆 Experienced Installer</div>
+          <div class="time-val" id="timePro">—</div>
+        </div>
+      </div>
+      <p style="font-size:0.83rem;color:#666;">Includes acclimation time (24–48 hrs before installation). Time above is active installation only.</p>
+    </div>
+
+    <!-- Pro Tip -->
+    <div class="pro-tip" id="proTipBox">
+      <div class="pro-tip-title">🔨 Pro Tip</div>
+      <p id="proTipText"></p>
+    </div>
+
+    <!-- Shopping List -->
+    <div class="card">
+      <div class="section-title">🛒 Materials Shopping List</div>
+      <ul class="shopping-list" id="shoppingList"></ul>
+    </div>
+
+  </div><!-- end results -->
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTIONS -->
+  <div class="content-section card">
+    <h2>How to Use This Laminate Flooring Calculator</h2>
+    <p>Enter your room's length and width in feet, then subtract any areas you won't be covering (cabinets, a hearth, large closets). Choose your flooring box coverage and price from the label, set the waste percentage using the slider, and click <strong>Calculate</strong>. You'll instantly get the number of boxes to buy, a full cost estimate, and a ready-to-print shopping list.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Buying too little laminate is a much bigger headache than buying too much. Run out mid-project and you may find that dye lot is discontinued — leaving you with mismatched planks in the middle of your living room. Buying a couple extra boxes protects you, and most home improvement stores allow returns on unopened boxes.</p>
+    <p>On the other hand, buying 30% extra when you only needed 10% waste adds up fast. At $42 per box for a 200 sq ft room, over-ordering by 4 boxes costs an unnecessary $168. This calculator gives you the right number so you can walk into the store confident, not guessing.</p>
+    <p>Diagonal and herringbone patterns waste significantly more material because planks are cut at angles, leaving bigger off-cuts. A 45° diagonal installation typically wastes 15–20% versus 10% for a straight run. This calculator adjusts automatically based on your pattern choice.</p>
+
+    <h2>How It's Calculated</h2>
+    <div class="formula-box">
+Net Area = (Room Length × Room Width) − Obstacles<br>
+Area with Waste = Net Area × (1 + Waste % / 100)<br>
+Boxes Needed = ⌈ Area with Waste ÷ Coverage per Box ⌉<br>
+Total Cost = Boxes × Price per Box + Net Area × Underlayment Price
+    </div>
+    <p>The ceiling function (⌈⌉) means we always round <em>up</em> to the next full box — you can't buy half a box. The underlayment is calculated on net area, not the waste-adjusted area, since you're covering the actual floor, not the off-cuts.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Always measure twice.</strong> A 1-foot error in a 12×14 room costs you an extra box. Use a laser measure for accuracy.</li>
+      <li><strong>Buy from the same dye lot.</strong> When you return to buy more, box batches often differ slightly in color. Note the dye lot number on your first purchase.</li>
+      <li><strong>Let planks acclimate.</strong> Leave unopened boxes in the room for 24–48 hours before installing. Laminate expands and contracts with humidity — skip this and you'll get buckling.</li>
+      <li><strong>Don't forget the direction.</strong> Planks typically run parallel to the longest wall or toward natural light. Diagonal runs add visual interest but require more cutting time and material.</li>
+      <li><strong>Check subfloor flatness.</strong> Laminate tolerates no more than 3/16" variation per 10 feet. High spots cause clicking and popping; low spots cause bounce.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How much extra laminate should I buy for waste?</summary>
+      <p>For straight installations in rectangular rooms, 10% is the standard recommendation. Bump that to 15% for rooms with lots of angles, doorways, or bay windows, and 15–20% for diagonal or herringbone patterns. If your room is L-shaped, treat it as two separate rectangles and add 10% to each.</p>
+    </details>
+    <details>
+      <summary>Does laminate flooring need underlayment?</summary>
+      <p>Almost always, yes. Underlayment provides cushioning, reduces noise, and acts as a moisture barrier — critical if you're installing over concrete. Some laminate planks come with pre-attached underlayment, so check the box first. If yours does, skip the separate underlayment purchase.</p>
+    </details>
+    <details>
+      <summary>Can I install laminate over existing flooring?</summary>
+      <p>Often yes, but with conditions. You can float laminate over existing vinyl, hardwood, or tile as long as the existing floor is clean, flat, and firmly attached. Never install over thick carpet or multiple layers of flooring that would raise the height too much — this can cause door clearance issues and unstable planks.</p>
+    </details>
+    <details>
+      <summary>How do I measure an L-shaped or irregular room?</summary>
+      <p>Break the room into rectangles, calculate each separately, add them together, then apply your waste factor to the total. Use the "Subtract Obstacles" field to remove areas like built-in cabinets or a fireplace hearth from the total. When in doubt, overestimate slightly — leftover boxes are much easier to deal with than running short.</p>
+    </details>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="content-section card">
+    <h2>🔧 Related Tools</h2>
+    <div class="related-tools">
+      <a href="/shed-material-cost-estimator/" class="related-link">🏚️ Shed Material Cost Estimator</a>
+      <a href="/attic-storage-floor-load-calculator/" class="related-link">🏠 Attic Storage Floor Load</a>
+      <a href="/drip-irrigation-emitter-calculator/" class="related-link">💧 Drip Irrigation Emitter Layout</a>
+      <a href="/insulation-r-value-calculator/" class="related-link">🌡️ Insulation R-Value Calculator</a>
+      <a href="/baseboard-crown-molding-calculator/" class="related-link">📏 Baseboard & Crown Molding</a>
+      <a href="/stair-riser-tread-calculator/" class="related-link">🪜 Stair Riser & Tread Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+</div><!-- end container -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div>© 2025 toolhut.dev — Free online tools for homeowners and DIYers</div>
+  </div>
+</footer>
+
+<script>
+// Waste slider live update
+const wasteSlider = document.getElementById('wasteSlider');
+const wasteLabel = document.getElementById('wasteLabel');
+const wasteDisplay = document.getElementById('wasteDisplay');
+
+wasteSlider.addEventListener('input', function() {
+  const v = this.value + '%';
+  wasteLabel.textContent = v;
+  wasteDisplay.textContent = v;
+});
+
+// Layout pattern auto-suggest waste
+document.getElementById('layoutAngle').addEventListener('change', function() {
+  const v = this.value;
+  if (v === 'diagonal' || v === 'herringbone') {
+    wasteSlider.value = 15;
+  } else {
+    wasteSlider.value = 10;
+  }
+  wasteSlider.dispatchEvent(new Event('input'));
+});
+
+// Enter key triggers calculate
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+});
+
+function fmt(n, dec = 0) {
+  return Number(n).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+function fmtDollar(n) {
+  return '$' + fmt(n, 2);
+}
+
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+  document.querySelectorAll('input').forEach(e => e.classList.remove('error'));
+}
+
+function showError(id, msgId) {
+  document.getElementById(id).classList.add('error');
+  document.getElementById(msgId).classList.add('show');
+}
+
+let lastResults = null;
+
+function calculate() {
+  clearErrors();
+  const length = parseFloat(document.getElementById('roomLength').value);
+  const width = parseFloat(document.getElementById('roomWidth').value);
+  const deduct = parseFloat(document.getElementById('deductArea').value) || 0;
+  const sqftBox = parseFloat(document.getElementById('sqftPerBox').value);
+  const priceBox = parseFloat(document.getElementById('pricePerBox').value);
+  const underpadPrice = parseFloat(document.getElementById('underpadPrice').value) || 0;
+  const waste = parseInt(wasteSlider.value);
+  const pattern = document.getElementById('layoutAngle').value;
+
+  let valid = true;
+  if (!length || length <= 0) { showError('roomLength', 'err-length'); valid = false; }
+  if (!width || width <= 0) { showError('roomWidth', 'err-width'); valid = false; }
+  if (!valid) return;
+
+  const netArea = Math.max(0, (length * width) - deduct);
+  const areaWithWaste = netArea * (1 + waste / 100);
+  const extraSqft = areaWithWaste - netArea;
+  const boxes = Math.ceil(areaWithWaste / sqftBox);
+  const totalFlooringSqft = boxes * sqftBox;
+  const costFlooring = boxes * priceBox;
+  const costUnderpad = netArea * underpadPrice;
+  const costTotal = costFlooring + costUnderpad;
+
+  // Time estimate: ~35 sq ft/hr beginner, ~60 sq ft/hr pro
+  const begHours = (netArea / 35);
+  const proHours = (netArea / 60);
+  const formatTime = h => {
+    if (h < 1) return Math.round(h * 60) + ' min';
+    const hh = Math.floor(h);
+    const mm = Math.round((h - hh) * 60);
+    return mm > 0 ? `${hh}h ${mm}m` : `${hh}h`;
+  };
+
+  // Pro tip based on pattern and size
+  let proTip = '';
+  if (pattern === 'diagonal') {
+    proTip = "For diagonal installations, snap a chalk line at 45° from the most visible corner and work outward. Your starter row will have angled cuts — use a speed square and take your time. You'll throw away more off-cuts than a straight run, but the visual result is worth it in larger rooms.";
+  } else if (pattern === 'herringbone') {
+    proTip = "Herringbone is the most demanding pattern for laminate. Lay it out dry first to check alignment before any locking. Start from the center of the room so cuts at both walls are even. Budget extra time — herringbone takes 2–3× longer than a straight install.";
+  } else if (netArea < 100) {
+    proTip = "For small rooms, start from the wall opposite the main entrance and work toward it. This way your freshest, uncut edge faces the door. Measure the room width first and plan your rows so you don't end up with a sliver of plank at the far wall — if it'd be under 2 inches, rip your starter row narrower to balance it.";
+  } else {
+    proTip = "Run planks parallel to the longest wall or toward your main light source — this makes the room feel larger and hides seams better. Stagger your end joints at least 8–12 inches between rows. Keep a 3/8\" expansion gap at all walls and use spacers during installation.";
+  }
+
+  lastResults = {
+    length, width, deduct, netArea, areaWithWaste, extraSqft, boxes,
+    sqftBox, priceBox, pattern, waste, costFlooring, costUnderpad,
+    costTotal, totalFlooringSqft, begHours, proHours, underpadPrice
+  };
+
+  requestAnimationFrame(() => {
+    // Big number
+    document.getElementById('bigBoxes').textContent = fmt(boxes);
+
+    // Stats
+    document.getElementById('statSqft').textContent = fmt(netArea, 1) + ' sf';
+    document.getElementById('statWithWaste').textContent = fmt(areaWithWaste, 1) + ' sf';
+    document.getElementById('statExtra').textContent = '+' + fmt(extraSqft, 1) + ' sf';
+
+    // Costs
+    document.getElementById('costFlooring').textContent = fmtDollar(costFlooring);
+    document.getElementById('costUnderpad').textContent = fmtDollar(costUnderpad);
+    document.getElementById('costTotal').textContent = fmtDollar(costTotal);
+
+    // Breakdown table
+    const rows = [
+      ['Room dimensions', fmt(length, 1) + ' × ' + fmt(width, 1) + ' ft'],
+      ['Room area', fmt(length * width, 2) + ' sq ft'],
+      ['Minus obstacles', '−' + fmt(deduct, 2) + ' sq ft'],
+      ['Net floor area', fmt(netArea, 2) + ' sq ft'],
+      ['Waste factor', waste + '%'],
+      ['Area to order', fmt(areaWithWaste, 2) + ' sq ft'],
+      ['Coverage per box', fmt(sqftBox, 2) + ' sq ft'],
+      ['Boxes to buy', fmt(boxes) + ' boxes'],
+      ['Total coverage bought', fmt(totalFlooringSqft, 2) + ' sq ft'],
+      ['Extra material buffer', '+' + fmt(totalFlooringSqft - netArea, 2) + ' sq ft'],
+      ['Flooring cost', fmtDollar(costFlooring)],
+      ['Underlayment cost', fmtDollar(costUnderpad)],
+      ['Total materials cost', fmtDollar(costTotal)],
+    ];
+    let tbody = '';
+    rows.forEach((r, i) => {
+      const bg = i % 2 === 0 ? '#fafafa' : '#fff';
+      const isBold = r[0].includes('Total') || r[0].includes('Boxes');
+      tbody += `<tr style="background:${bg}"><td${isBold ? ' style="font-weight:600"' : ''}>${r[0]}</td><td style="text-align:right;${isBold ? 'font-weight:700;color:#2d6a4f' : ''}">${r[1]}</td></tr>`;
+    });
+    document.getElementById('breakdownBody').innerHTML = tbody;
+
+    // Time
+    document.getElementById('timeBeginner').textContent = formatTime(begHours);
+    document.getElementById('timePro').textContent = formatTime(proHours);
+
+    // Pro tip
+    document.getElementById('proTipText').textContent = proTip;
+
+    // Shopping list
+    const patternLabel = pattern === 'straight' ? 'Straight' : pattern === 'diagonal' ? 'Diagonal (45°)' : 'Herringbone';
+    const shoppingItems = [
+      { icon: '🪵', name: 'Laminate Flooring', detail: `${fmt(boxes)} boxes × ${fmt(sqftBox, 2)} sq ft each — ${fmt(areaWithWaste, 1)} sq ft ordered (${patternLabel} pattern, ${waste}% waste)`, price: fmtDollar(costFlooring) },
+      { icon: '🧱', name: 'Underlayment / Vapor Barrier', detail: `${fmt(netArea, 1)} sq ft coverage — foam or combination pad`, price: fmtDollar(costUnderpad) },
+      { icon: '📏', name: 'Expansion Spacers', detail: '~20 spacers, maintain 3/8" gap at walls', price: '~$4–$8' },
+      { icon: '🔨', name: 'Pull Bar & Tapping Block', detail: 'For seating planks without damaging edges', price: '~$12–$20' },
+      { icon: '🪚', name: 'Flooring Cutter or Miter Saw', detail: 'Cutter rental: ~$25/day; buy: ~$40–$80', price: '~$25–$80' },
+      { icon: '🧹', name: 'Floor Prep (leveling compound if needed)', detail: 'For subfloor dips >3/16" per 10 ft', price: '~$15–$40' },
+      { icon: '🪟', name: 'Door Transition Strips', detail: 'One per doorway — T-molding or reducer', price: '~$8–$18 each' },
+      { icon: '🧰', name: 'Baseboard / Quarter-Round Molding', detail: 'To cover expansion gap at walls', price: '~$1–$2/linear ft' },
+    ];
+    let shopHtml = '';
+    shoppingItems.forEach(item => {
+      shopHtml += `<li><span class="shop-icon">${item.icon}</span><div class="shop-item"><strong>${item.name}</strong><span>${item.detail}</span></div><span class="shop-price">${item.price}</span></li>`;
+    });
+    document.getElementById('shoppingList').innerHTML = shopHtml;
+
+    // Draw SVG
+    drawDiagram(length, width, deduct, pattern);
+
+    // Show results
+    const sec = document.getElementById('resultsSection');
+    sec.classList.add('visible');
+    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+}
+
+function drawDiagram(length, width, deduct, pattern) {
+  const svg = document.getElementById('roomSvg');
+  const W = 360, H = 220;
+  const pad = 36;
+  const aspect = length / width;
+  let rw, rh;
+  const maxW = W - pad * 2, maxH = H - pad * 2 - 20;
+  if (aspect >= 1) {
+    rw = Math.min(maxW, maxH * aspect);
+    rh = rw / aspect;
+  } else {
+    rh = Math.min(maxH, maxW / aspect);
+    rw = rh * aspect;
+  }
+  rw = Math.min(rw, maxW);
+  rh = Math.min(rh, maxH);
+  const x0 = (W - rw) / 2;
+  const y0 = (H - rh) / 2 + 6;
+
+  // Pattern lines
+  const patternLines = getPatternLines(pattern, x0, y0, rw, rh);
+
+  // Obstacle box (if deduct > 0)
+  const totalArea = length * width;
+  let obstacleSvg = '';
+  if (deduct > 0) {
+    const fracObs = Math.min(deduct / totalArea, 0.35);
+    const obsW = Math.sqrt(fracObs * rw * rh * 0.8);
+    const obsH = obsW;
+    obstacleSvg = `
+      <rect x="${x0 + rw - obsW - 6}" y="${y0 + 6}" width="${obsW}" height="${obsH}" fill="#ffecd2" stroke="#e76f51" stroke-width="1.5" stroke-dasharray="4,2" rx="2"/>
+      <text x="${x0 + rw - obsW/2 - 6}" y="${y0 + obsH/2 + 10}" text-anchor="middle" font-size="9" fill="#c0392b">obstacle</text>
+    `;
+  }
+
+  const arrowW = rw + 6;
+  const arrowH = rh + 6;
+  const svgContent = `
+    <defs>
+      <clipPath id="roomClip">
+        <rect x="${x0}" y="${y0}" width="${rw}" height="${rh}"/>
+      </clipPath>
+    </defs>
+    <!-- Room fill -->
+    <rect x="${x0}" y="${y0}" width="${rw}" height="${rh}" fill="#e8f5e9" rx="2"/>
+    <!-- Pattern lines -->
+    <g clip-path="url(#roomClip)" opacity="0.5">
+      ${patternLines}
+    </g>
+    <!-- Room border -->
+    <rect x="${x0}" y="${y0}" width="${rw}" height="${rh}" fill="none" stroke="#2d6a4f" stroke-width="2" rx="2"/>
+    ${obstacleSvg}
+    <!-- Width arrow -->
+    <line x1="${x0}" y1="${y0 + rh + 16}" x2="${x0 + rw}" y2="${y0 + rh + 16}" stroke="#555" stroke-width="1.2" marker-end="url(#arr)" marker-start="url(#arrB)"/>
+    <text x="${x0 + rw/2}" y="${y0 + rh + 28}" text-anchor="middle" font-size="11" fill="#333" font-weight="600">${length.toFixed(1)} ft</text>
+    <!-- Height arrow -->
+    <line x1="${x0 - 16}" y1="${y0}" x2="${x0 - 16}" y2="${y0 + rh}" stroke="#555" stroke-width="1.2" marker-end="url(#arr)" marker-start="url(#arrB)"/>
+    <text x="${x0 - 20}" y="${y0 + rh/2}" text-anchor="middle" font-size="11" fill="#333" font-weight="600" transform="rotate(-90 ${x0 - 20} ${y0 + rh/2})">${width.toFixed(1)} ft</text>
+    <!-- Area label -->
+    <text x="${x0 + rw/2}" y="${y0 + rh/2}" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="#1a6b3f" font-weight="700">${(length*width).toFixed(0)} sq ft</text>
+    <!-- Arrows def -->
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6" fill="none" stroke="#555" stroke-width="1"/>
+      </marker>
+      <marker id="arrB" markerWidth="6" markerHeight="6" refX="0" refY="3" orient="auto">
+        <path d="M6,0 L0,3 L6,6" fill="none" stroke="#555" stroke-width="1"/>
+      </marker>
+    </defs>
+    <!-- Pattern label -->
+    <text x="${W/2}" y="${y0 - 10}" text-anchor="middle" font-size="10" fill="#555">${pattern === 'straight' ? 'Straight Layout' : pattern === 'diagonal' ? 'Diagonal (45°) Layout' : 'Herringbone Layout'}</text>
+  `;
+  svg.innerHTML = svgContent;
+}
+
+function getPatternLines(pattern, x0, y0, rw, rh) {
+  let lines = '';
+  if (pattern === 'straight') {
+    const spacing = Math.max(12, rw / 7);
+    for (let x = x0; x <= x0 + rw; x += spacing) {
+      lines += `<line x1="${x}" y1="${y0}" x2="${x}" y2="${y0 + rh}" stroke="#2d6a4f" stroke-width="1"/>`;
+    }
+    const rowH = spacing * 0.4;
+    let offset = 0;
+    for (let y = y0; y <= y0 + rh; y += rowH) {
+      offset = offset === 0 ? spacing / 2 : 0;
+      lines += `<line x1="${x0}" y1="${y}" x2="${x0 + rw}" y2="${y}" stroke="#2d6a4f" stroke-width="0.5"/>`;
+    }
+  } else if (pattern === 'diagonal') {
+    const sp = 20;
+    for (let i = -rh; i < rw + rh; i += sp) {
+      lines += `<line x1="${x0 + i}" y1="${y0}" x2="${x0 + i + rh}" y2="${y0 + rh}" stroke="#2d6a4f" stroke-width="1"/>`;
+    }
+    for (let i = -rh; i < rw + rh; i += sp * 2.5) {
+      lines += `<line x1="${x0 + i + rh}" y1="${y0}" x2="${x0 + i}" y2="${y0 + rh}" stroke="#2d6a4f" stroke-width="0.5" opacity="0.5"/>`;
+    }
+  } else {
+    // herringbone chevron pattern
+    const uw = Math.max(18, rw / 8), uh = uw * 2.5;
+    for (let row = 0; row * uh/2 < rh + uh; row++) {
+      for (let col = -1; col * uw * 2 < rw + uw * 2; col++) {
+        const ox = x0 + col * uw * 2 + (row % 2 === 0 ? 0 : uw);
+        const oy = y0 + row * (uh / 2);
+        lines += `<rect x="${ox}" y="${oy}" width="${uw - 1}" height="${uh/2 - 1}" fill="none" stroke="#2d6a4f" stroke-width="1" rx="1"/>`;
+        lines += `<rect x="${ox + uw}" y="${oy}" width="${uh/2 - 1}" height="${uw - 1}" fill="none" stroke="#2d6a4f" stroke-width="1" rx="1" transform="translate(0,${uh/2 - uw})"/>`;
+      }
+    }
+  }
+  return lines;
+}
+
+function copyResults() {
+  if (!lastResults) return;
+  const r = lastResults;
+  const patternLabel = r.pattern === 'straight' ? 'Straight' : r.pattern === 'diagonal' ? 'Diagonal (45°)' : 'Herringbone';
+  const text = [
+    '=== LAMINATE FLOORING ESTIMATE ===',
+    `Room: ${r.length.toFixed(1)} × ${r.width.toFixed(1)} ft`,
+    `Net Floor Area: ${r.netArea.toFixed(2)} sq ft`,
+    `Waste Factor: ${r.waste}% (${patternLabel} pattern)`,
+    `Area to Order: ${r.areaWithWaste.toFixed(2)} sq ft`,
+    `Boxes Needed: ${r.boxes} boxes (${r.sqftBox} sq ft/box)`,
+    `Flooring Cost: $${r.costFlooring.toFixed(2)}`,
+    `Underlayment Cost: $${r.costUnderpad.toFixed(2)}`,
+    `Total Materials: $${r.costTotal.toFixed(2)}`,
+    `Generated at toolhut.dev/laminate-flooring-calculator/`
+  ].join('\n');
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '📋 Copy Results'; }, 2000);
+  }).catch(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '❌ Failed';
+    setTimeout(() => { btn.textContent = '📋 Copy Results'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
