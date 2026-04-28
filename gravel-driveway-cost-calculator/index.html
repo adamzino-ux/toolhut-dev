@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gravel Driveway Cost Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate gravel driveway costs instantly. Enter dimensions, gravel type, and depth to get material quantities, total cost, and a full shopping list. Free tool.">
+<link rel="canonical" href="https://toolhut.dev/gravel-driveway-cost-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Gravel Driveway Cost Calculator",
+  "url": "https://toolhut.dev/gravel-driveway-cost-calculator/",
+  "description": "Calculate gravel driveway costs including material quantities, delivery, and labor estimates.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem;margin-top:1rem}
+label:first-of-type{margin-top:0}
+input[type=text],input[type=number],select{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:6px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+btn,.btn{display:inline-block;background:#2d6a4f;color:#fff;border:none;padding:13px 28px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;min-height:44px;width:100%;margin-top:1.2rem;font-family:inherit}
+.btn:hover{background:#235c43}
+.btn-orange{background:#e76f51}
+.btn-orange:hover{background:#cf5f41}
+.btn-small{width:auto;padding:7px 14px;font-size:.82rem;margin-top:0;min-height:36px}
+.results-section{display:none;opacity:0;transition:opacity .3s ease}
+.results-section.visible{display:block;opacity:1}
+.big-number{font-size:2.4rem;font-weight:900;color:#2d6a4f;line-height:1}
+.big-label{font-size:.85rem;color:#555;margin-top:.2rem}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.metric-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.metric-val{font-size:1.35rem;font-weight:800;color:#2d6a4f}
+.metric-lbl{font-size:.78rem;color:#666;margin-top:.15rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;text-align:left;padding:9px 12px;font-weight:600;font-size:.82rem;color:#444}
+th.r,td.r{text-align:right}
+td{padding:8px 12px;border-bottom:1px solid #f0f0f0}
+tr:nth-child(even) td{background:#fafafa}
+.table-wrap{overflow-x:auto}
+h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:.8rem;margin-top:.2rem}
+h3{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:.6rem}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-top:1rem}
+.pro-tip-label{font-size:.78rem;font-weight:700;color:#e76f51;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+.time-box{display:flex;gap:1rem;margin-top:.8rem}
+.time-card{flex:1;background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:.9rem;text-align:center}
+.time-icon{font-size:1.4rem}
+.time-lbl{font-size:.78rem;font-weight:600;color:#555;margin-top:.2rem}
+.time-val{font-size:.9rem;color:#1a1a2e;margin-top:.15rem}
+.shopping-list{list-style:none}
+.shopping-list li{display:flex;justify-content:space-between;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid #f0f0f0;gap:1rem;font-size:.9rem}
+.shopping-list li:last-child{border-bottom:none}
+.shop-name{font-weight:600;color:#1a1a2e}
+.shop-detail{font-size:.8rem;color:#666;margin-top:.1rem}
+.shop-qty{text-align:right;white-space:nowrap;font-weight:700;color:#2d6a4f;font-size:.9rem}
+.shop-price{font-size:.78rem;color:#555;margin-top:.1rem;text-align:right}
+.copy-row{display:flex;justify-content:flex-end;margin-bottom:.6rem}
+.badge{display:inline-block;background:#e8f5e9;color:#2d6a4f;border-radius:20px;padding:.2rem .7rem;font-size:.78rem;font-weight:600;margin-left:.5rem}
+svg.diagram{width:100%;height:auto;display:block;border-radius:8px;border:1px solid #dee2e6;background:#f8f9fa}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.1rem;margin-top:1.6rem;margin-bottom:.5rem;color:#1a1a2e}
+.content-section p{margin-bottom:.8rem;color:#333;font-size:.95rem}
+.content-section ul{margin:.5rem 0 .8rem 1.2rem;color:#333;font-size:.95rem}
+.content-section ul li{margin-bottom:.4rem}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem;background:#fff}
+summary{padding:.9rem 1rem;cursor:pointer;font-weight:600;font-size:.93rem;color:#1a1a2e;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"＋";color:#2d6a4f;font-weight:700;font-size:1rem}
+details[open] summary::after{content:"－"}
+details p{padding:.2rem 1rem 1rem;font-size:.9rem;color:#333}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.related-link{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:.85rem 1rem;font-size:.88rem;font-weight:600;color:#2d6a4f;transition:background .15s,border-color .15s;display:block}
+.related-link:hover{background:#f0f7f4;border-color:#2d6a4f;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;text-align:center;padding:1.2rem 1rem;font-size:.82rem;color:#666;margin-top:2rem}
+footer a{color:#2d6a4f;margin:0 .4rem}
+.slider-row{display:flex;align-items:center;gap:.8rem;margin-top:.4rem}
+input[type=range]{flex:1;accent-color:#2d6a4f;cursor:pointer}
+.slider-val{font-size:.9rem;font-weight:700;color:#2d6a4f;min-width:60px;text-align:right}
+@media(max-width:600px){
+  .row-2,.row-3{grid-template-columns:1fr}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  .time-box{flex-direction:column}
+  h1{font-size:1.3rem}
+  .big-number{font-size:1.9rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Gravel Driveway Cost Calculator</h1>
+  <p class="subtitle">Estimate materials, cost, and build time for your gravel driveway project.</p>
+
+  <!-- DIAGRAM -->
+  <div class="card" style="padding:1.2rem">
+    <svg class="diagram" id="diagram" viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg">
+      <!-- sky/ground bg -->
+      <rect width="540" height="220" fill="#f8f9fa" rx="8"/>
+      <!-- ground -->
+      <rect x="0" y="150" width="540" height="70" fill="#d4c5a9" rx="0"/>
+      <!-- driveway body -->
+      <rect id="dv-body" x="60" y="90" width="420" height="60" fill="#b5a48a" rx="3"/>
+      <!-- gravel texture dots -->
+      <g id="dv-gravel" fill="#8b7355" opacity=".5">
+        <circle cx="90" cy="108" r="2"/><circle cx="110" cy="120" r="1.5"/><circle cx="130" cy="105" r="2"/>
+        <circle cx="155" cy="130" r="1.5"/><circle cx="175" cy="112" r="2"/><circle cx="200" cy="125" r="1.5"/>
+        <circle cx="220" cy="100" r="2"/><circle cx="245" cy="118" r="1.5"/><circle cx="265" cy="132" r="2"/>
+        <circle cx="285" cy="108" r="1.5"/><circle cx="310" cy="122" r="2"/><circle cx="330" cy="100" r="1.5"/>
+        <circle cx="355" cy="115" r="2"/><circle cx="375" cy="130" r="1.5"/><circle cx="400" cy="105" r="2"/>
+        <circle cx="420" cy="120" r="1.5"/><circle cx="445" cy="108" r="2"/><circle cx="465" cy="125" r="1.5"/>
+      </g>
+      <!-- depth indicator -->
+      <line x1="55" y1="90" x2="55" y2="150" stroke="#e76f51" stroke-width="2" stroke-dasharray="4,2"/>
+      <line x1="48" y1="90" x2="62" y2="90" stroke="#e76f51" stroke-width="2"/>
+      <line x1="48" y1="150" x2="62" y2="150" stroke="#e76f51" stroke-width="2"/>
+      <text id="dv-depth-label" x="44" y="123" fill="#e76f51" font-size="11" font-family="sans-serif" text-anchor="middle" transform="rotate(-90,44,123)">4 in deep</text>
+      <!-- width arrow -->
+      <line x1="60" y1="170" x2="480" y2="170" stroke="#2d6a4f" stroke-width="2" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
+      <text id="dv-width-label" x="270" y="185" fill="#2d6a4f" font-size="12" font-family="sans-serif" text-anchor="middle" font-weight="bold">Width: 12 ft</text>
+      <!-- length arrow (top) -->
+      <line x1="60" y1="78" x2="480" y2="78" stroke="#1a1a2e" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text id="dv-len-label" x="270" y="73" fill="#1a1a2e" font-size="12" font-family="sans-serif" text-anchor="middle" font-weight="bold">Length: 100 ft</text>
+      <!-- house -->
+      <rect x="460" y="50" width="70" height="100" fill="#cdd" stroke="#aaa" stroke-width="1.5" rx="2"/>
+      <polygon points="445,52 530,52 495,28" fill="#a8b8c8" stroke="#888" stroke-width="1"/>
+      <text x="495" y="108" fill="#555" font-size="11" font-family="sans-serif" text-anchor="middle">House</text>
+      <!-- road -->
+      <rect x="0" y="148" width="65" height="15" fill="#888" rx="1"/>
+      <text x="32" y="160" fill="#fff" font-size="9" font-family="sans-serif" text-anchor="middle">Road</text>
+      <!-- arrow markers -->
+      <defs>
+        <marker id="arrowL" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M6,0 L0,3 L6,6" fill="none" stroke="#2d6a4f" stroke-width="1.2"/>
+        </marker>
+        <marker id="arrowR" markerWidth="8" markerHeight="8" refX="0" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L6,3 L0,6" fill="none" stroke="#2d6a4f" stroke-width="1.2"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- INPUTS -->
+  <div class="card">
+    <h2>Driveway Dimensions</h2>
+    <div class="row-2">
+      <div>
+        <label for="length">Driveway Length (ft)</label>
+        <input type="number" id="length" value="100" min="1" max="5000" placeholder="e.g. 100">
+        <div class="error-msg" id="err-length">Enter a valid length (1–5000 ft)</div>
+      </div>
+      <div>
+        <label for="width">Driveway Width (ft)</label>
+        <input type="number" id="width" value="12" min="1" max="200" placeholder="e.g. 12">
+        <div class="error-msg" id="err-width">Enter a valid width (1–200 ft)</div>
+      </div>
+    </div>
+
+    <label for="depth-slider">Gravel Depth (inches)</label>
+    <div class="slider-row">
+      <input type="range" id="depth-slider" min="2" max="12" value="4" step="1">
+      <span class="slider-val" id="depth-display">4 in</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:.75rem;color:#888;margin-top:.2rem"><span>2 in (light top)</span><span>12 in (base + top)</span></div>
+
+    <h2 style="margin-top:1.4rem">Gravel Type &amp; Pricing</h2>
+    <label for="gravel-type">Gravel Type</label>
+    <select id="gravel-type">
+      <option value="crushed-stone" data-price="38">Crushed Stone / #57 Stone — ~$38/ton</option>
+      <option value="pea-gravel" data-price="45">Pea Gravel — ~$45/ton</option>
+      <option value="caliche" data-price="30">Caliche / Road Base — ~$30/ton</option>
+      <option value="river-rock" data-price="80">River Rock — ~$80/ton</option>
+      <option value="recycled" data-price="22">Recycled Concrete / Asphalt — ~$22/ton</option>
+      <option value="custom" data-price="0">Custom Price (enter below)</option>
+    </select>
+
+    <div id="custom-price-row" style="display:none">
+      <label for="custom-price">Your Price Per Ton ($)</label>
+      <input type="number" id="custom-price" value="40" min="1" max="1000" placeholder="e.g. 40">
+      <div class="error-msg" id="err-custom">Enter a valid price per ton</div>
+    </div>
+
+    <h2 style="margin-top:1.4rem">Additional Options</h2>
+    <div class="row-2">
+      <div>
+        <label for="layers">Number of Gravel Layers</label>
+        <select id="layers">
+          <option value="1">1 Layer (top dressing only)</option>
+          <option value="2" selected>2 Layers (base + top)</option>
+          <option value="3">3 Layers (full build-up)</option>
+        </select>
+      </div>
+      <div>
+        <label for="fabric">Include Landscape Fabric?</label>
+        <select id="fabric">
+          <option value="no">No</option>
+          <option value="yes" selected>Yes (+$0.15/sq ft)</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-2">
+      <div>
+        <label for="labor">Include Labor Estimate?</label>
+        <select id="labor">
+          <option value="no">No (DIY)</option>
+          <option value="yes">Yes (+~$1.50/sq ft)</option>
+        </select>
+      </div>
+      <div>
+        <label for="delivery">Delivery Fee ($)</label>
+        <input type="number" id="delivery" value="120" min="0" max="5000" placeholder="e.g. 120">
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Driveway Cost</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="card results-section" id="results-section">
+    <div class="copy-row">
+      <button class="btn btn-small btn-orange" id="copy-btn" onclick="copyResults()">📋 Copy Summary</button>
+    </div>
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div class="big-number" id="res-total">$0</div>
+      <div class="big-label">Estimated Total Cost</div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-box"><div class="metric-val" id="res-sqft">0</div><div class="metric-lbl">Square Feet</div></div>
+      <div class="metric-box"><div class="metric-val" id="res-tons">0</div><div class="metric-lbl">Tons of Gravel</div></div>
+      <div class="metric-box"><div class="metric-val" id="res-yards">0</div><div class="metric-lbl">Cubic Yards</div></div>
+    </div>
+
+    <h3>Cost Breakdown</h3>
+    <div class="table-wrap">
+      <table id="breakdown-table">
+        <thead><tr><th>Item</th><th class="r">Amount</th><th class="r">Cost</th></tr></thead>
+        <tbody id="breakdown-body"></tbody>
+        <tfoot id="breakdown-foot"></tfoot>
+      </table>
+    </div>
+
+    <!-- TIME ESTIMATE -->
+    <h3 style="margin-top:1.4rem">⏱ Time Estimate</h3>
+    <div class="time-box">
+      <div class="time-card">
+        <div class="time-icon">🌱</div>
+        <div class="time-lbl">Beginner</div>
+        <div class="time-val" id="time-beginner">—</div>
+      </div>
+      <div class="time-card">
+        <div class="time-icon">🔧</div>
+        <div class="time-lbl">Experienced DIYer</div>
+        <div class="time-val" id="time-exp">—</div>
+      </div>
+      <div class="time-card">
+        <div class="time-icon">👷</div>
+        <div class="time-lbl">Pro Crew (2–3 ppl)</div>
+        <div class="time-val" id="time-pro">—</div>
+      </div>
+    </div>
+
+    <div class="pro-tip" style="margin-top:1.4rem">
+      <div class="pro-tip-label">💡 Pro Tip</div>
+      <div id="pro-tip-text">Order 10% extra gravel to account for compaction and settling. First loads compress more than you'd expect.</div>
+    </div>
+  </div>
+
+  <!-- SHOPPING LIST -->
+  <div class="card results-section" id="shopping-section">
+    <h2>🛒 Materials Shopping List</h2>
+    <ul class="shopping-list" id="shopping-list"></ul>
+    <p style="font-size:.8rem;color:#888;margin-top:.8rem">*Prices are US averages. Always get 2–3 local quotes for bulk materials.</p>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT -->
+  <div class="card content-section">
+    <h2>How to Use This Gravel Driveway Cost Calculator</h2>
+    <p>Enter your driveway's length and width in feet, choose your gravel depth using the slider, and select your gravel type. Hit <strong>Calculate</strong> to see your estimated material quantities, total cost, and a ready-to-use shopping list. Adjust delivery fees and optional labor costs to match your local situation.</p>
+
+    <h2>Why This Matters</h2>
+    <p>A properly installed gravel driveway is one of the best value improvements a homeowner can make. At $1–$3 per square foot for DIY vs. $3–$7 professionally installed, a standard 12×100 ft driveway (1,200 sq ft) might cost $1,200–$3,600 in materials alone. Without calculating ahead of time, most people either order too little — causing delays and extra delivery fees — or order far too much, wasting hundreds of dollars on gravel they haul away for years.</p>
+    <p>Common scenarios where this tool saves money: a rural homeowner extending a 200-foot lane to a new garage, a suburban family redoing an aging asphalt patch with lower-maintenance crushed stone, or a contractor quickly quoting a client before the site visit. Knowing you need 18 tons vs. 32 tons changes both your material budget and the truck rental you need to schedule.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The core formula is:</p>
+    <ul>
+      <li><strong>Volume (cu ft)</strong> = Length × Width × (Depth ÷ 12)</li>
+      <li><strong>Volume (cu yards)</strong> = Volume ÷ 27</li>
+      <li><strong>Tons needed</strong> = Cubic yards × 1.4 <em>(gravel averages ~1.4 tons/cu yd)</em></li>
+      <li><strong>Add 10%</strong> for compaction and waste</li>
+      <li><strong>Total cost</strong> = Tons × price/ton + delivery + fabric + optional labor</li>
+    </ul>
+    <p>Multiple layers (base + top coat) are calculated independently and combined. Landscape fabric is priced at $0.15/sq ft — typical for commercial-grade weed barrier.</p>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't skip the base layer.</strong> A 4-inch compacted base of #57 stone or road base gravel is what prevents rutting. Many DIYers skip this and regret it after the first winter.</li>
+      <li><strong>Measure twice.</strong> Driveway width varies — measure at the widest point if it flares near the street or garage.</li>
+      <li><strong>Call before you dig.</strong> Use 811 (US) to mark utilities before any excavation, even shallow grading.</li>
+      <li><strong>Compact between layers.</strong> Renting a plate compactor ($80–$120/day) pays for itself in longevity. Don't pour top gravel on loose base.</li>
+      <li><strong>Account for crown pitch.</strong> A slight center-high crown (2–3%) improves drainage and extends driveway life significantly.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How deep should a gravel driveway be?</summary>
+      <p>For a new driveway with no existing base, plan for 8–10 inches total: 4–6 inches of compacted base material (like #21A or road base) topped with 2–4 inches of finish gravel. If you already have a gravel base in decent shape, 2–3 inches of top dressing is often enough to refresh it.</p>
+    </details>
+    <details>
+      <summary>How many tons of gravel do I need per square foot?</summary>
+      <p>A good rule of thumb: 1 ton of gravel covers about 80–100 sq ft at 4 inches deep, or 160–200 sq ft at 2 inches deep. For precision, use this calculator — it factors in compaction waste and converts cubic yards to tons automatically.</p>
+    </details>
+    <details>
+      <summary>What's the cheapest type of gravel for a driveway?</summary>
+      <p>Recycled concrete or crushed asphalt is typically the most affordable at $18–$25/ton and actually performs very well as a base material. Caliche and road base gravel come in second at $25–$35/ton. Avoid decorative options like river rock for high-traffic driveways — they shift and scatter easily.</p>
+    </details>
+    <details>
+      <summary>Do I need landscape fabric under gravel?</summary>
+      <p>Landscape fabric helps suppress weeds and prevents gravel from sinking into soft soil — especially useful in clay-heavy areas. It's not always necessary if your drainage is good and you're using a coarse base layer, but for most residential driveways it's a worthwhile $150–$300 addition that saves ongoing maintenance.</p>
+    </details>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="card">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/laminate-flooring-calculator/">🏠 Laminate Flooring Calculator</a>
+      <a class="related-link" href="/shed-material-cost-estimator/">🔨 Shed Material Cost Estimator</a>
+      <a class="related-link" href="/attic-storage-floor-load-calculator/">📦 Attic Storage Floor Load Calculator</a>
+      <a class="related-link" href="/drip-irrigation-emitter-calculator/">💧 Drip Irrigation Emitter Layout Calculator</a>
+      <a class="related-link" href="/insulation-r-value-calculator/">🌡️ Insulation R-Value Calculator</a>
+      <a class="related-link" href="/baseboard-crown-molding-calculator/">📐 Baseboard & Crown Molding Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:.4rem">© <span id="yr"></span> toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Slider live update
+const slider = document.getElementById('depth-slider');
+const depthDisplay = document.getElementById('depth-display');
+slider.addEventListener('input', () => { depthDisplay.textContent = slider.value + ' in'; });
+
+// Custom price toggle
+document.getElementById('gravel-type').addEventListener('change', function() {
+  document.getElementById('custom-price-row').style.display = this.value === 'custom' ? 'block' : 'none';
+});
+
+function fmt(n, decimals=0) {
+  return Number(n).toLocaleString('en-US', {minimumFractionDigits: decimals, maximumFractionDigits: decimals});
+}
+function fmtMoney(n) {
+  return '$' + fmt(n, 2);
+}
+
+function getGravelPrice() {
+  const sel = document.getElementById('gravel-type');
+  if (sel.value === 'custom') {
+    const v = parseFloat(document.getElementById('custom-price').value);
+    return isNaN(v) || v <= 0 ? null : v;
+  }
+  return parseFloat(sel.options[sel.selectedIndex].dataset.price);
+}
+
+function validate() {
+  let ok = true;
+  const len = parseFloat(document.getElementById('length').value);
+  const wid = parseFloat(document.getElementById('width').value);
+
+  const showErr = (id, show) => {
+    document.getElementById(id).style.display = show ? 'block' : 'none';
+    const inputId = id.replace('err-', '');
+    const el = document.getElementById(inputId);
+    if (el) el.classList.toggle('error', show);
+  };
+
+  if (isNaN(len) || len < 1 || len > 5000) { showErr('err-length', true); ok = false; } else showErr('err-length', false);
+  if (isNaN(wid) || wid < 1 || wid > 200) { showErr('err-width', true); ok = false; } else showErr('err-width', false);
+  if (document.getElementById('gravel-type').value === 'custom') {
+    const cp = parseFloat(document.getElementById('custom-price').value);
+    if (isNaN(cp) || cp <= 0) { document.getElementById('err-custom').style.display = 'block'; ok = false; }
+    else document.getElementById('err-custom').style.display = 'none';
+  }
+  return ok;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const len = parseFloat(document.getElementById('length').value);
+  const wid = parseFloat(document.getElementById('width').value);
+  const depthIn = parseFloat(slider.value);
+  const depthFt = depthIn / 12;
+  const layers = parseInt(document.getElementById('layers').value);
+  const fabric = document.getElementById('fabric').value === 'yes';
+  const includeLabor = document.getElementById('labor').value === 'yes';
+  const delivery = parseFloat(document.getElementById('delivery').value) || 0;
+  const pricePerTon = getGravelPrice();
+  const gravelType = document.getElementById('gravel-type');
+  const gravelName = gravelType.options[gravelType.selectedIndex].text.split(' —')[0];
+
+  const sqft = len * wid;
+  // Volume per layer
+  const volCuFtPerLayer = sqft * depthFt;
+  const volCuYdPerLayer = volCuFtPerLayer / 27;
+  const tonsPerLayer = volCuYdPerLayer * 1.4; // ~1.4 tons/cu yd
+  const WASTE = 0.10;
+  const tonsPerLayerWithWaste = tonsPerLayer * (1 + WASTE);
+  const totalTons = tonsPerLayerWithWaste * layers;
+  const totalCuYd = volCuYdPerLayer * layers;
+
+  const gravelCost = totalTons * pricePerTon;
+  const fabricCost = fabric ? sqft * 0.15 : 0;
+  const laborCost = includeLabor ? sqft * 1.50 : 0;
+  const totalCost = gravelCost + fabricCost + laborCost + delivery;
+
+  // Time estimate based on sqft
+  const hoursBase = sqft / 200; // rough hours of labor per 200 sqft
+  const begHours = Math.round(hoursBase * 3 + 2);
+  const expHours = Math.round(hoursBase * 1.8 + 1);
+  const proHours = Math.round(hoursBase * 0.8 + 0.5);
+
+  const fmtHours = (h) => {
+    if (h < 2) return 'Under 2 hrs';
+    if (h <= 8) return h + ' hours';
+    const days = (h / 8).toFixed(1);
+    return days + ' day' + (parseFloat(days) > 1 ? 's' : '');
+  };
+
+  // Pro tip selection
+  const tips = [
+    `Order 10% extra gravel to account for compaction and settling. With ${fmt(totalTons,1)} tons ordered, that buffer is already built in.`,
+    `At ${fmt(sqft)} sq ft, rent a plate compactor ($80–$120/day) — compacting each layer adds years to your driveway's life.`,
+    `Schedule delivery on a dry day; wet gravel weighs more, and trucks can leave ruts in soft ground near the driveway edge.`,
+  ];
+  const tip = sqft > 800 ? tips[1] : sqft > 400 ? tips[2] : tips[0];
+
+  // Breakdown rows
+  let breakdownRows = '';
+  breakdownRows += `<tr><td>${gravelName} (${layers} layer${layers>1?'s':''})</td><td class="r">${fmt(totalTons,1)} tons</td><td class="r">${fmtMoney(gravelCost)}</td></tr>`;
+  breakdownRows += `<tr><td>&nbsp;&nbsp;@ ${fmtMoney(pricePerTon)}/ton + 10% waste</td><td class="r"></td><td class="r"></td></tr>`;
+  if (fabric) breakdownRows += `<tr><td>Landscape Fabric (${fmt(sqft)} sq ft)</td><td class="r">@ $0.15/sq ft</td><td class="r">${fmtMoney(fabricCost)}</td></tr>`;
+  if (delivery > 0) breakdownRows += `<tr><td>Delivery Fee</td><td class="r">flat</td><td class="r">${fmtMoney(delivery)}</td></tr>`;
+  if (includeLabor) breakdownRows += `<tr><td>Labor (~$1.50/sq ft)</td><td class="r">${fmt(sqft)} sq ft</td><td class="r">${fmtMoney(laborCost)}</td></tr>`;
+
+  const footHTML = `<tr style="font-weight:700;background:#f0f7f4"><td>Total Estimated Cost</td><td class="r"></td><td class="r" style="color:#2d6a4f;font-size:1.05rem">${fmtMoney(totalCost)}</td></tr>`;
+
+  // Shopping list
+  const fabricRolls = fabric ? Math.ceil(sqft / 300) : 0; // ~300 sq ft per roll
+  let shopHTML = '';
+  shopHTML += `<li><div><div class="shop-name">${gravelName}</div><div class="shop-detail">Bulk delivery • ${layers} layer${layers>1?'s':''}, ${depthIn}" per layer</div></div><div><div class="shop-qty">${fmt(totalTons,1)} tons</div><div class="shop-price">${fmtMoney(gravelCost)}</div></div></li>`;
+  if (fabric) shopHTML += `<li><div><div class="shop-name">Landscape Fabric / Weed Barrier</div><div class="shop-detail">3–4 ft wide rolls, heavy-duty (3 oz+)</div></div><div><div class="shop-qty">${fabricRolls} roll${fabricRolls>1?'s':''}</div><div class="shop-price">~${fmtMoney(fabricCost)}</div></div></li>`;
+  shopHTML += `<li><div><div class="shop-name">Landscape Fabric Staples / Pins</div><div class="shop-detail">1 box per 1,000 sq ft • optional but recommended</div></div><div><div class="shop-qty">${Math.ceil(sqft/1000)} box</div><div class="shop-price">~$${Math.ceil(sqft/1000)*12}</div></div></li>`;
+  shopHTML += `<li><div><div class="shop-name">Plate Compactor Rental</div><div class="shop-detail">For base layer compaction — highly recommended</div></div><div><div class="shop-qty">${sqft>500 ? '1 day' : 'Half day'}</div><div class="shop-price">~$80–120</div></div></li>`;
+  shopHTML += `<li><div><div class="shop-name">Garden Rake / Bow Rake</div><div class="shop-detail">For spreading gravel evenly</div></div><div><div class="shop-qty">1</div><div class="shop-price">~$25–40</div></div></li>`;
+  shopHTML += `<li><div><div class="shop-name">Work Gloves (Heavy Duty)</div><div class="shop-detail">Leather palm, for handling edging/fabric</div></div><div><div class="shop-qty">1 pair</div><div class="shop-price">~$15</div></div></li>`;
+  if (sqft > 300) shopHTML += `<li><div><div class="shop-name">Driveway Edging (Optional)</div><div class="shop-detail">Plastic or steel • keeps gravel contained</div></div><div><div class="shop-qty">${Math.ceil((len*2+wid*2)/10)*10} lin ft</div><div class="shop-price">~${fmtMoney(Math.ceil((len*2+wid*2)/10)*10 * 0.50)}</div></div></li>`;
+
+  requestAnimationFrame(() => {
+    // Update diagram
+    document.getElementById('dv-width-label').textContent = `Width: ${fmt(wid)} ft`;
+    document.getElementById('dv-len-label').textContent = `Length: ${fmt(len)} ft`;
+    document.getElementById('dv-depth-label').textContent = `${depthIn} in deep`;
+
+    // Results
+    document.getElementById('res-total').textContent = fmtMoney(totalCost);
+    document.getElementById('res-sqft').textContent = fmt(sqft);
+    document.getElementById('res-tons').textContent = fmt(totalTons, 1);
+    document.getElementById('res-yards').textContent = fmt(totalCuYd, 1);
+
+    document.getElementById('breakdown-body').innerHTML = breakdownRows;
+    document.getElementById('breakdown-foot').innerHTML = footHTML;
+
+    document.getElementById('time-beginner').textContent = fmtHours(begHours);
+    document.getElementById('time-exp').textContent = fmtHours(expHours);
+    document.getElementById('time-pro').textContent = fmtHours(proHours);
+
+    document.getElementById('pro-tip-text').textContent = tip;
+    document.getElementById('shopping-list').innerHTML = shopHTML;
+
+    // Show sections
+    const rs = document.getElementById('results-section');
+    const ss = document.getElementById('shopping-section');
+    rs.style.display = 'block';
+    ss.style.display = 'block';
+    requestAnimationFrame(() => { rs.classList.add('visible'); ss.classList.add('visible'); });
+
+    // Store summary for copy
+    window._summary = `Gravel Driveway Cost Summary\n` +
+      `Dimensions: ${len} ft × ${wid} ft = ${fmt(sqft)} sq ft\n` +
+      `Gravel: ${gravelName}, ${depthIn}" deep, ${layers} layer(s)\n` +
+      `Gravel needed: ${fmt(totalTons,1)} tons (${fmt(totalCuYd,1)} cu yds)\n` +
+      `Gravel cost: ${fmtMoney(gravelCost)}\n` +
+      (fabric ? `Landscape fabric: ${fmtMoney(fabricCost)}\n` : '') +
+      (delivery > 0 ? `Delivery: ${fmtMoney(delivery)}\n` : '') +
+      (includeLabor ? `Labor: ${fmtMoney(laborCost)}\n` : '') +
+      `TOTAL: ${fmtMoney(totalCost)}\n` +
+      `Calculated at toolhut.dev/gravel-driveway-cost-calculator/`;
+  });
+}
+
+function copyResults() {
+  if (!window._summary) return;
+  navigator.clipboard.writeText(window._summary).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = window._summary;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  });
+}
+
+// Enter key support
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+});
+
+// Run on load
+calculate();
+</script>
+</body>
+</html>
