@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deck Construction Cost Estimator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Estimate deck building costs instantly. Enter dimensions, materials, and features to get a detailed cost breakdown, materials list, and time estimate for your deck project.">
+<link rel="canonical" href="https://toolhut.dev/deck-construction-cost-estimator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Deck Construction Cost Estimator",
+  "url": "https://toolhut.dev/deck-construction-cost-estimator/",
+  "description": "Free deck building cost calculator. Get detailed cost estimates, materials shopping list, and time estimates for your deck construction project.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; color: #1a1a2e; font-size: 16px; line-height: 1.6; }
+a { color: #2d6a4f; text-decoration: none; }
+a:hover { text-decoration: underline; }
+nav { background: #fff; border-bottom: 1px solid #dee2e6; padding: 0 1rem; }
+.nav-inner { max-width: 640px; margin: 0 auto; display: flex; align-items: center; height: 52px; }
+.nav-brand { font-weight: 700; font-size: 1.1rem; color: #2d6a4f; }
+.container { max-width: 640px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+h1 { font-size: 1.6rem; font-weight: 800; color: #1a1a2e; margin-bottom: 0.4rem; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 1.5rem; }
+.card { background: #fff; border: 1px solid #dee2e6; border-radius: 10px; padding: 1.75rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+h2 { font-size: 1.15rem; font-weight: 700; color: #1a1a2e; margin-bottom: 1rem; }
+h3 { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.75rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 0.85rem; font-weight: 500; color: #444; }
+input, select { width: 100%; padding: 12px 16px; border: 1px solid #dee2e6; border-radius: 6px; font-size: 0.95rem; color: #1a1a2e; background: #fff; min-height: 44px; transition: border-color 0.2s, box-shadow 0.2s; }
+input:focus, select:focus { outline: none; border-color: #2d6a4f; box-shadow: 0 0 0 3px rgba(45,106,79,0.15); }
+input.error { border-color: #e74c3c; }
+.error-msg { font-size: 0.8rem; color: #e74c3c; display: none; }
+.error-msg.show { display: block; }
+.checkbox-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.checkbox-item { display: flex; align-items: center; gap: 0.5rem; min-height: 44px; cursor: pointer; }
+.checkbox-item input[type="checkbox"] { width: 18px; height: 18px; min-height: unset; cursor: pointer; accent-color: #2d6a4f; }
+.checkbox-item label { font-size: 0.9rem; cursor: pointer; font-weight: 400; color: #333; }
+.btn { background: #2d6a4f; color: #fff; border: none; padding: 14px 28px; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; min-height: 48px; transition: background 0.2s; margin-top: 0.5rem; }
+.btn:hover { background: #245c43; }
+.btn-secondary { background: #e76f51; font-size: 0.85rem; padding: 8px 16px; width: auto; min-height: 36px; border-radius: 5px; margin-top: 0; }
+.btn-secondary:hover { background: #d4603f; }
+.results { opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+.results.show { opacity: 1; pointer-events: auto; }
+.big-number { font-size: 2.8rem; font-weight: 800; color: #2d6a4f; line-height: 1; }
+.big-label { font-size: 0.9rem; color: #666; margin-top: 0.3rem; }
+.cost-range { font-size: 1rem; color: #555; margin-top: 0.4rem; }
+.range-values { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.range-box { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 1rem; text-align: center; }
+.range-box .val { font-size: 1.4rem; font-weight: 700; color: #2d6a4f; }
+.range-box .lbl { font-size: 0.78rem; color: #777; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+th { background: #f0f0f0; padding: 8px 10px; text-align: left; font-weight: 600; color: #333; border-bottom: 2px solid #dee2e6; }
+th.num, td.num { text-align: right; }
+td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; }
+tr:nth-child(even) td { background: #fafafa; }
+.table-wrap { overflow-x: auto; }
+.pro-tip { background: #fff8f0; border-left: 4px solid #e76f51; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; }
+.pro-tip strong { color: #e76f51; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.3rem; }
+.pro-tip p { font-size: 0.9rem; color: #444; }
+.time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.time-box { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 0.9rem; }
+.time-box .tlabel { font-size: 0.78rem; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.25rem; }
+.time-box .tval { font-size: 1rem; font-weight: 700; color: #1a1a2e; }
+.shopping-list { list-style: none; padding: 0; }
+.shopping-list li { display: flex; justify-content: space-between; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.88rem; gap: 1rem; }
+.shopping-list li:last-child { border-bottom: none; }
+.shop-name { color: #1a1a2e; }
+.shop-qty { font-weight: 600; color: #2d6a4f; white-space: nowrap; }
+.copy-row { display: flex; justify-content: flex-end; margin-top: 0.75rem; }
+svg.deck-diagram { width: 100%; max-height: 220px; border-radius: 8px; background: #f0f7f4; border: 1px solid #dee2e6; display: block; }
+.section-gap { margin-top: 2rem; }
+details { border: 1px solid #dee2e6; border-radius: 6px; margin-bottom: 0.5rem; }
+summary { padding: 0.75rem 1rem; font-weight: 600; font-size: 0.95rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+summary::after { content: '+'; font-size: 1.2rem; color: #2d6a4f; }
+details[open] summary::after { content: '−'; }
+details p { padding: 0 1rem 0.75rem; font-size: 0.9rem; color: #444; line-height: 1.65; }
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+@media (max-width: 420px) { .related-grid { grid-template-columns: 1fr; } }
+.related-link { background: #fff; border: 1px solid #dee2e6; border-radius: 6px; padding: 0.7rem 0.9rem; font-size: 0.88rem; color: #2d6a4f; display: block; transition: background 0.15s, border-color 0.15s; }
+.related-link:hover { background: #f0f7f4; border-color: #2d6a4f; text-decoration: none; }
+.ad-slot { min-height: 0; margin: 0; }
+footer { background: #fff; border-top: 1px solid #dee2e6; padding: 1.25rem 1rem; text-align: center; font-size: 0.82rem; color: #888; }
+footer a { color: #2d6a4f; margin: 0 0.5rem; }
+.content-section h2 { font-size: 1.1rem; margin-top: 1.75rem; margin-bottom: 0.6rem; color: #1a1a2e; }
+.content-section p, .content-section ul, .content-section li { font-size: 0.92rem; color: #444; line-height: 1.7; }
+.content-section ul { padding-left: 1.2rem; margin-top: 0.4rem; }
+.content-section li { margin-bottom: 0.35rem; }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🏠 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Deck Construction Cost Estimator</h1>
+  <p class="subtitle">Get a detailed cost breakdown, materials list, and time estimate for your deck build.</p>
+
+  <!-- TOOL CARD -->
+  <div class="card">
+    <h2>📐 Deck Details</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="deckWidth">Deck Width (ft)</label>
+        <input type="number" id="deckWidth" min="4" max="100" value="16" placeholder="e.g. 16">
+        <span class="error-msg" id="err-width">Enter a valid width (4–100 ft)</span>
+      </div>
+      <div class="form-group">
+        <label for="deckLength">Deck Length (ft)</label>
+        <input type="number" id="deckLength" min="4" max="100" value="20" placeholder="e.g. 20">
+        <span class="error-msg" id="err-length">Enter a valid length (4–100 ft)</span>
+      </div>
+      <div class="form-group">
+        <label for="deckHeight">Deck Height off Ground (ft)</label>
+        <input type="number" id="deckHeight" min="0" max="20" value="2" placeholder="e.g. 2" step="0.5">
+        <span class="error-msg" id="err-height">Enter a valid height (0–20 ft)</span>
+      </div>
+      <div class="form-group">
+        <label for="material">Decking Material</label>
+        <select id="material">
+          <option value="pressure-treated">Pressure-Treated Pine</option>
+          <option value="cedar">Western Red Cedar</option>
+          <option value="redwood">Redwood</option>
+          <option value="composite-basic">Composite (Basic)</option>
+          <option value="composite-premium">Composite (Premium)</option>
+          <option value="ipe">Ipe Hardwood</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="laborType">Labor</label>
+        <select id="laborType">
+          <option value="diy">DIY (no labor cost)</option>
+          <option value="partial">Partial (hire framing only)</option>
+          <option value="full">Full Contractor</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="location">Region / Location</label>
+        <select id="location">
+          <option value="national">National Average</option>
+          <option value="midwest">Midwest (lower)</option>
+          <option value="south">South (lower)</option>
+          <option value="northeast">Northeast (higher)</option>
+          <option value="west">West Coast (higher)</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Add-ons & Features</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="chk-railing" checked>
+            <label for="chk-railing">Railing / Baluster System</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="chk-stairs">
+            <label for="chk-stairs">Stairs (single flight ~4 steps)</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="chk-pergola">
+            <label for="chk-pergola">Pergola / Shade Structure</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="chk-lighting">
+            <label for="chk-lighting">Built-in LED Lighting</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="chk-permit">
+            <label for="chk-permit">Building Permit</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="chk-demo">
+            <label for="chk-demo">Demo / Remove Old Deck</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn" id="calcBtn">Calculate Deck Cost</button>
+  </div>
+
+  <!-- SVG DIAGRAM -->
+  <div class="card" id="diagramCard">
+    <h2>📏 Deck Layout Preview</h2>
+    <svg class="deck-diagram" id="deckSvg" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="560" height="200" fill="#f0f7f4" rx="8"/>
+      <text x="280" y="105" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#aaa">Enter dimensions and calculate to see preview</text>
+    </svg>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="card">
+      <div style="text-align:center; padding: 0.5rem 0 1rem;">
+        <div class="big-number" id="res-total">$0</div>
+        <div class="big-label">Estimated Total Cost</div>
+        <div class="cost-range" id="res-range">Low: $0 — High: $0</div>
+      </div>
+      <div class="range-values">
+        <div class="range-box">
+          <div class="val" id="res-sqft">0</div>
+          <div class="lbl">Square Feet</div>
+        </div>
+        <div class="range-box">
+          <div class="val" id="res-persqft">$0</div>
+          <div class="lbl">Cost per Sq Ft</div>
+        </div>
+      </div>
+
+      <div class="pro-tip" style="margin-top:1.25rem;">
+        <strong>💡 Pro Tip</strong>
+        <p id="proTipText">Pro tip will appear after calculation.</p>
+      </div>
+    </div>
+
+    <!-- COST BREAKDOWN -->
+    <div class="card">
+      <h2>💰 Cost Breakdown</h2>
+      <div class="table-wrap">
+        <table id="breakdownTable">
+          <thead><tr><th>Item</th><th class="num">Cost</th><th class="num">% of Total</th></tr></thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TIME ESTIMATE -->
+    <div class="card">
+      <h2>⏱ Time Estimate</h2>
+      <div class="time-grid">
+        <div class="time-box">
+          <div class="tlabel">Beginner DIYer</div>
+          <div class="tval" id="time-beginner">—</div>
+        </div>
+        <div class="time-box">
+          <div class="tlabel">Experienced Builder</div>
+          <div class="tval" id="time-experienced">—</div>
+        </div>
+      </div>
+      <p style="font-size:0.82rem;color:#888;margin-top:0.75rem;">* Does not include permit approval wait time or concrete curing (24–48 hrs).</p>
+    </div>
+
+    <!-- MATERIALS LIST -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+        <h2 style="margin-bottom:0;">🛒 Materials Shopping List</h2>
+        <button class="btn btn-secondary" id="copyBtn">Copy List</button>
+      </div>
+      <ul class="shopping-list" id="shoppingList"></ul>
+    </div>
+
+    <div class="ad-slot" id="ad-mid"></div>
+  </div><!-- /results -->
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section section-gap">
+    <h2>How to Use This Deck Building Cost Calculator</h2>
+    <p>Enter your deck's width and length in feet, how high off the ground it will sit, choose your preferred decking material, and select your labor approach (DIY, partial, or full contractor). Check any add-ons that apply — railings, stairs, pergola, lighting, permit, or demo of an old deck. Hit <strong>Calculate Deck Cost</strong> to see a full breakdown, materials list, and time estimate instantly.</p>
+
+    <h2>Why This Matters</h2>
+    <p>A deck is one of the highest-ROI home improvements you can make — studies consistently show 60–80% cost recoupment at resale, and the lifestyle value is immediate. But cost surprises are the #1 reason deck projects stall or go over budget. A 16×20 ft pressure-treated pine deck can run anywhere from $8,000 to $22,000 depending on height, local labor rates, and add-ons like stairs and railings. That's a $14,000 spread — which is exactly why you need an estimate before calling contractors.</p>
+    <p>Composite decking can cost 2–4× more than pressure-treated lumber upfront, but lasts 25–30 years with almost zero maintenance versus 10–15 years for PT pine with annual sealing. Homeowners who skip the permit often face problems when selling — inspectors flag unpermitted structures during title searches. This tool helps you see all those trade-offs before you commit.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The estimator uses square footage as the base unit. Here's the core logic:</p>
+    <ul>
+      <li><strong>Decking boards:</strong> (Width × Length) ÷ board coverage × material price per board + 10% waste factor</li>
+      <li><strong>Framing (joists, beams, posts):</strong> Estimated at 40–55% of decking material cost, scaled by height</li>
+      <li><strong>Concrete footings:</strong> Number of posts × bags of concrete × $7–$12/bag</li>
+      <li><strong>Hardware & fasteners:</strong> ~5–8% of total material cost</li>
+      <li><strong>Labor:</strong> $15–$35/sq ft for full contractor, regional multipliers applied</li>
+      <li><strong>Add-ons:</strong> Railings ~$150–$200/linear ft, stairs ~$800–$1,500/flight, pergola ~$3,000–$8,000</li>
+    </ul>
+
+    <h2>Tips &amp; Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't skip the permit.</strong> Unpermitted decks over 30" high are flagged during home sales and must be torn down or retrofitted — costing far more than the permit ever would have.</li>
+      <li><strong>Add 15% to your material budget.</strong> Cutting boards creates waste. Damaged pieces happen. Always buy ~10–15% extra.</li>
+      <li><strong>Get 3 contractor quotes.</strong> Labor quotes for the same deck can vary by 40–60% in most markets. This calculator's labor estimate is a reasonable middle ground.</li>
+      <li><strong>Choose composite if you hate maintenance.</strong> PT pine needs sanding and sealing every 1–3 years. Composite needs a pressure wash twice a year. Do the math over 20 years.</li>
+      <li><strong>Check local frost depth before pouring footings.</strong> In northern states, footings must extend below the frost line (sometimes 48"+) — this significantly affects post and concrete costs.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How accurate is this deck cost estimate?</summary>
+      <p>This tool provides a solid ballpark — typically within 15–25% of real quotes. Material prices fluctuate with lumber markets, and local labor rates vary widely. Always get at least two contractor quotes before committing. Use this estimate to sanity-check proposals and budget appropriately.</p>
+    </details>
+    <details>
+      <summary>Is a permit required for a deck?</summary>
+      <p>In most U.S. jurisdictions, a permit is required for decks over 200 sq ft or more than 30" off the ground. Requirements vary by city and county — always check with your local building department before starting. Permits typically cost $100–$500 and require an inspection, which protects you legally and at resale.</p>
+    </details>
+    <details>
+      <summary>What's the cheapest deck material that still looks good?</summary>
+      <p>Pressure-treated pine is the most affordable option at $2–$5 per linear foot, and it can look excellent when properly stained. Cedar is a step up in appearance and natural rot resistance without the chemical treatment. If budget is tight, go pressure-treated and plan to stain it within 6 months of installation.</p>
+    </details>
+    <details>
+      <summary>How long does a deck last?</summary>
+      <p>Pressure-treated pine: 15–25 years with proper maintenance. Cedar or redwood: 20–30 years. Composite: 25–30 years with minimal maintenance. Ipe hardwood: 40–75 years — it's essentially bulletproof but expensive and difficult to work with. Footings and framing should outlast the decking surface if properly installed.</p>
+    </details>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="section-gap">
+    <h2>🔧 Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/gravel-driveway-cost-calculator/">Gravel Driveway Cost Calculator</a>
+      <a class="related-link" href="/laminate-flooring-calculator/">Laminate Flooring Calculator</a>
+      <a class="related-link" href="/shed-material-cost-estimator/">Shed Material Cost Estimator</a>
+      <a class="related-link" href="/attic-storage-floor-load-calculator/">Attic Storage Flooring Load Calculator</a>
+      <a class="related-link" href="/drip-irrigation-emitter-calculator/">Drip Irrigation Emitter Layout Calculator</a>
+      <a class="related-link" href="/insulation-r-value-calculator/">Insulation R-Value Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom" style="margin-top:1.5rem;"></div>
+</div><!-- /container -->
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:0.4rem;">© 2025 toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+(function() {
+  // Material pricing per sq ft of decking (materials only)
+  const MATERIALS = {
+    'pressure-treated': { label: 'Pressure-Treated Pine', deckPerSqFt: 2.50, boardFt: 1.5 },
+    'cedar':            { label: 'Western Red Cedar',     deckPerSqFt: 4.50, boardFt: 1.5 },
+    'redwood':          { label: 'Redwood',               deckPerSqFt: 6.00, boardFt: 1.5 },
+    'composite-basic':  { label: 'Composite (Basic)',     deckPerSqFt: 7.50, boardFt: 1.0 },
+    'composite-premium':{ label: 'Composite (Premium)',   deckPerSqFt: 12.00, boardFt: 1.0 },
+    'ipe':              { label: 'Ipe Hardwood',          deckPerSqFt: 16.00, boardFt: 1.5 }
+  };
+
+  // Labor cost per sq ft for full contractor
+  const LABOR_FULL_PER_SQFT = 20;
+  const LABOR_PARTIAL_PER_SQFT = 10;
+
+  const REGION_MULT = {
+    'national': 1.0,
+    'midwest':  0.88,
+    'south':    0.85,
+    'northeast':1.22,
+    'west':     1.18
+  };
+
+  const PRO_TIPS = {
+    'pressure-treated': "Pressure-treated wood needs to dry out 4–6 weeks before staining. Stain with a semi-transparent oil-based stain for best longevity.",
+    'cedar':            "Cedar contains natural oils that resist rot — never use PT lumber fasteners (they'll corrode). Use stainless steel or hot-dipped galvanized screws only.",
+    'redwood':          "Redwood is beautiful but becoming scarce. Source from sustainably certified suppliers and pre-drill all fastener holes to prevent splitting.",
+    'composite-basic':  "Basic composite can fade over time. Ask your supplier about fade/stain warranties — premium brands offer 25-year warranties on color.",
+    'composite-premium':"Premium composite has hidden fastener systems that eliminate visible screws. It costs more upfront but looks significantly better long-term.",
+    'ipe':              "Ipe is incredibly dense — your drill bits will dull fast. Buy extra bits and always pre-drill. Seal all cut ends immediately with end-grain sealer."
+  };
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+  function fmtNum(n) {
+    return Math.round(n).toLocaleString('en-US');
+  }
+
+  function validate() {
+    let valid = true;
+    const w = parseFloat(document.getElementById('deckWidth').value);
+    const l = parseFloat(document.getElementById('deckLength').value);
+    const h = parseFloat(document.getElementById('deckHeight').value);
+
+    const errW = document.getElementById('err-width');
+    const errL = document.getElementById('err-length');
+    const errH = document.getElementById('err-height');
+    const inW = document.getElementById('deckWidth');
+    const inL = document.getElementById('deckLength');
+    const inH = document.getElementById('deckHeight');
+
+    if (!w || w < 4 || w > 100) {
+      inW.classList.add('error'); errW.classList.add('show'); valid = false;
+    } else { inW.classList.remove('error'); errW.classList.remove('show'); }
+
+    if (!l || l < 4 || l > 100) {
+      inL.classList.add('error'); errL.classList.add('show'); valid = false;
+    } else { inL.classList.remove('error'); errL.classList.remove('show'); }
+
+    if (isNaN(h) || h < 0 || h > 20) {
+      inH.classList.add('error'); errH.classList.add('show'); valid = false;
+    } else { inH.classList.remove('error'); errH.classList.remove('show'); }
+
+    return valid;
+  }
+
+  function calculate() {
+    if (!validate()) return;
+
+    const w = parseFloat(document.getElementById('deckWidth').value);
+    const l = parseFloat(document.getElementById('deckLength').value);
+    const h = parseFloat(document.getElementById('deckHeight').value);
+    const matKey = document.getElementById('material').value;
+    const laborType = document.getElementById('laborType').value;
+    const region = document.getElementById('location').value;
+
+    const hasRailing  = document.getElementById('chk-railing').checked;
+    const hasStairs   = document.getElementById('chk-stairs').checked;
+    const hasPergola  = document.getElementById('chk-pergola').checked;
+    const hasLighting = document.getElementById('chk-lighting').checked;
+    const hasPermit   = document.getElementById('chk-permit').checked;
+    const hasDemo     = document.getElementById('chk-demo').checked;
+
+    const sqFt = w * l;
+    const perim = 2 * (w + l);
+    const mat = MATERIALS[matKey];
+    const regionMult = REGION_MULT[region];
+
+    // === COST ITEMS ===
+    let items = [];
+
+    // 1. Decking boards (with 12% waste)
+    const deckMatlCost = sqFt * mat.deckPerSqFt * 1.12 * regionMult;
+    items.push({ name: mat.label + ' Decking Boards', cost: deckMatlCost, low: deckMatlCost * 0.88, high: deckMatlCost * 1.18 });
+
+    // 2. Framing (joists, rim boards, beams) — 40–55% of decking cost
+    const framingMult = 0.48 + (h > 4 ? 0.12 : 0);
+    const framingCost = deckMatlCost * framingMult;
+    items.push({ name: 'Framing (Joists, Beams, Rim Boards)', cost: framingCost, low: framingCost * 0.88, high: framingCost * 1.2 });
+
+    // 3. Posts & footings
+    const numPosts = Math.ceil((w / 6) + 1) * Math.ceil((l / 8) + 1);
+    const concreteBags = numPosts * (h > 2 ? 3 : 2);
+    const postCost = numPosts * 12 * (h > 0 ? Math.max(h * 1.5, 4) : 4) * 0.6 + concreteBags * 8.5;
+    items.push({ name: `Posts (${numPosts}) & Concrete Footings (${concreteBags} bags)`, cost: postCost, low: postCost * 0.85, high: postCost * 1.2 });
+
+    // 4. Hardware & fasteners
+    const hwCost = (deckMatlCost + framingCost) * 0.07;
+    items.push({ name: 'Hardware, Fasteners & Connectors', cost: hwCost, low: hwCost * 0.8, high: hwCost * 1.2 });
+
+    // 5. Labor
+    let laborCost = 0;
+    if (laborType === 'full') {
+      laborCost = sqFt * LABOR_FULL_PER_SQFT * regionMult;
+    } else if (laborType === 'partial') {
+      laborCost = sqFt * LABOR_PARTIAL_PER_SQFT * regionMult;
+    }
+    if (laborCost > 0) {
+      items.push({ name: 'Labor (' + (laborType === 'full' ? 'Full Contractor' : 'Partial — Framing Only') + ')', cost: laborCost, low: laborCost * 0.8, high: laborCost * 1.3 });
+    }
+
+    // 6. Add-ons
+    if (hasRailing) {
+      const railCost = perim * 0.75 * 175 * regionMult; // 75% of perimeter gets railing
+      items.push({ name: `Railing System (~${Math.round(perim*0.75)} linear ft)`, cost: railCost, low: railCost * 0.8, high: railCost * 1.3 });
+    }
+    if (hasStairs) {
+      const stairCost = 1100 * regionMult;
+      items.push({ name: 'Stairs (1 flight, ~4 steps)', cost: stairCost, low: 800, high: 1800 });
+    }
+    if (hasPergola) {
+      const pergolaCost = Math.min(sqFt * 18, 8000) * regionMult;
+      items.push({ name: 'Pergola / Shade Structure', cost: pergolaCost, low: pergolaCost * 0.75, high: pergolaCost * 1.4 });
+    }
+    if (hasLighting) {
+      const lightCost = (sqFt * 0.4 + 200) * regionMult;
+      items.push({ name: 'Built-in LED Lighting', cost: lightCost, low: lightCost * 0.8, high: lightCost * 1.3 });
+    }
+    if (hasPermit) {
+      items.push({ name: 'Building Permit', cost: 350, low: 150, high: 700 });
+    }
+    if (hasDemo) {
+      const demoCost = sqFt * 4.5 * regionMult;
+      items.push({ name: 'Demo & Removal of Old Deck', cost: demoCost, low: demoCost * 0.7, high: demoCost * 1.4 });
+    }
+
+    const total = items.reduce((s, i) => s + i.cost, 0);
+    const totalLow = items.reduce((s, i) => s + i.low, 0);
+    const totalHigh = items.reduce((s, i) => s + i.high, 0);
+
+    // Time estimates (days of actual work)
+    const baseHrsPerSqft_beg = 1.1;
+    const baseHrsPerSqft_exp = 0.55;
+    let extraHrs_beg = 0, extraHrs_exp = 0;
+    if (hasRailing) { extraHrs_beg += 16; extraHrs_exp += 8; }
+    if (hasStairs)  { extraHrs_beg += 12; extraHrs_exp += 6; }
+    if (hasPergola) { extraHrs_beg += 32; extraHrs_exp += 16; }
+    if (hasLighting){ extraHrs_beg += 8;  extraHrs_exp += 4; }
+    const totalHrs_beg = sqFt * baseHrsPerSqft_beg + extraHrs_beg;
+    const totalHrs_exp = sqFt * baseHrsPerSqft_exp + extraHrs_exp;
+    const days_beg = Math.ceil(totalHrs_beg / 8);
+    const days_exp = Math.ceil(totalHrs_exp / 8);
+
+    // Shopping list
+    const boardLength = 16; // standard 16-ft boards
+    const boardCoverage = 5.5 / 12; // 5.5" wide board coverage in ft
+    const numDeckBoards = Math.ceil((sqFt / (boardCoverage * boardLength)) * 1.12);
+    const numJoists = Math.ceil(l / 1.33) + 2; // 16" OC
+    const numBeams = Math.ceil(w / 6) + 1;
+    const numDeckscrews = Math.ceil(numDeckBoards * boardLength / 16); // ~1 lb per 16 boards
+
+    const shoppingItems = [
+      { name: mat.label + ' Deck Boards (16 ft)', qty: numDeckBoards + ' pcs' },
+      { name: 'Pressure-Treated 2×8 Joists (16 ft)', qty: numJoists + ' pcs' },
+      { name: 'Pressure-Treated 4×6 Beams (16 ft)', qty: numBeams + ' pcs' },
+      { name: `Pressure-Treated 6×6 Posts (${Math.ceil(h + 2)} ft)`, qty: numPosts + ' pcs' },
+      { name: 'Quikrete 80lb Bags', qty: concreteBags + ' bags' },
+      { name: 'Deck Screws (3" exterior, per lb)', qty: numDeckscrews + ' lbs' },
+      { name: 'Joist Hanger Hardware Kit', qty: '1 pack' },
+      { name: 'Post Anchor Brackets', qty: numPosts + ' pcs' },
+      { name: 'Deck Waterproofing / Stain (1 gal covers ~200 sqft)', qty: Math.ceil(sqFt / 200) + ' gal' },
+    ];
+    if (hasRailing) {
+      shoppingItems.push({ name: 'Railing Post Bases & Caps', qty: Math.ceil(perim * 0.75 / 6) + ' sets' });
+      shoppingItems.push({ name: 'Deck Balusters (1 per 4")', qty: Math.ceil(perim * 0.75 * 3) + ' pcs' });
+    }
+    if (hasStairs) {
+      shoppingItems.push({ name: 'Stair Stringers (3-step or 4-step)', qty: '3 pcs' });
+      shoppingItems.push({ name: 'Stair Tread Boards (5/4×6, 4 ft)', qty: '12 pcs' });
+    }
+
+    // Copy list string
+    const copyText = shoppingItems.map(s => `${s.name}: ${s.qty}`).join('\n');
+
+    // Build diagram
+    updateDiagram(w, l, h, hasRailing, hasStairs, hasPergola);
+
+    requestAnimationFrame(() => {
+      // Big numbers
+      document.getElementById('res-total').textContent = fmt(total);
+      document.getElementById('res-range').textContent = `Low: ${fmt(totalLow)} — High: ${fmt(totalHigh)}`;
+      document.getElementById('res-sqft').textContent = fmtNum(sqFt) + ' sq ft';
+      document.getElementById('res-persqft').textContent = fmt(total / sqFt) + '/sq ft';
+
+      // Pro tip
+      document.getElementById('proTipText').textContent = PRO_TIPS[matKey];
+
+      // Breakdown table
+      let rows = '';
+      items.forEach(item => {
+        const pct = ((item.cost / total) * 100).toFixed(1);
+        rows += `<tr><td>${item.name}</td><td class="num">${fmt(item.cost)}</td><td class="num">${pct}%</td></tr>`;
+      });
+      rows += `<tr style="font-weight:700;background:#f0f7f4;"><td>TOTAL</td><td class="num">${fmt(total)}</td><td class="num">100%</td></tr>`;
+      document.getElementById('breakdownBody').innerHTML = rows;
+
+      // Time
+      document.getElementById('time-beginner').textContent = days_beg + (days_beg === 1 ? ' day' : ' days');
+      document.getElementById('time-experienced').textContent = days_exp + (days_exp === 1 ? ' day' : ' days');
+
+      // Shopping list
+      let listHTML = '';
+      shoppingItems.forEach(s => {
+        listHTML += `<li><span class="shop-name">${s.name}</span><span class="shop-qty">${s.qty}</span></li>`;
+      });
+      document.getElementById('shoppingList').innerHTML = listHTML;
+
+      // Copy button
+      document.getElementById('copyBtn').onclick = function() {
+        navigator.clipboard.writeText(copyText).then(() => {
+          this.textContent = 'Copied!';
+          setTimeout(() => { this.textContent = 'Copy List'; }, 2000);
+        }).catch(() => {
+          // fallback
+          const ta = document.createElement('textarea');
+          ta.value = copyText;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          this.textContent = 'Copied!';
+          setTimeout(() => { this.textContent = 'Copy List'; }, 2000);
+        });
+      };
+
+      // Show results
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  function updateDiagram(w, l, h, railing, stairs, pergola) {
+    const svg = document.getElementById('deckSvg');
+    const vw = 560, vh = 200;
+    const margin = 40;
+    const maxW = vw - margin * 2;
+    const maxH = vh - margin * 2 - 20;
+
+    // Scale deck to fit
+    const ratio = Math.min(maxW / (Math.max(w, l)), maxH / (Math.max(w, l)));
+    const dw = Math.round(l * ratio);
+    const dh = Math.round(w * ratio);
+    const ox = Math.round((vw - dw) / 2);
+    const oy = Math.round((vh - dh) / 2 + 10);
+
+    let els = '';
+
+    // House wall
+    els += `<rect x="0" y="${oy + Math.round(dh*0.1)}" width="${ox - 2}" height="${Math.round(dh*0.8)}" fill="#c8a882" rx="2"/>`;
+    els += `<text x="${ox - 6}" y="${oy + dh/2 + 5}" text-anchor="end" font-family="sans-serif" font-size="10" fill="#7a5c3a">HOUSE</text>`;
+
+    // Deck fill
+    const deckFill = pergola ? 'url(#pergola-pattern)' : '#a8d5b5';
+    
+    let defs = '';
+    if (pergola) {
+      defs = `<defs>
+        <pattern id="pergola-pattern" patternUnits="userSpaceOnUse" width="20" height="20">
+          <rect width="20" height="20" fill="#a8d5b5"/>
+          <line x1="0" y1="0" x2="0" y2="20" stroke="#5a9e78" stroke-width="2"/>
+          <line x1="0" y1="0" x2="20" y2="0" stroke="#5a9e78" stroke-width="2"/>
+        </pattern>
+      </defs>`;
+    }
+    
+    // Board lines on deck
+    let boardLines = '';
+    const boardSpacing = Math.max(8, Math.round(ratio * 0.458));
+    for (let bx = ox; bx < ox + dw; bx += boardSpacing) {
+      boardLines += `<line x1="${bx}" y1="${oy}" x2="${bx}" y2="${oy+dh}" stroke="#6aad85" stroke-width="0.8" opacity="0.6"/>`;
+    }
+
+    els += `<rect x="${ox}" y="${oy}" width="${dw}" height="${dh}" fill="${pergola ? 'url(#pergola-pattern)' : '#a8d5b5'}" stroke="#2d6a4f" stroke-width="2" rx="2"/>`;
+    if (!pergola) els += boardLines;
+
+    // Railing indicator
+    if (railing) {
+      els += `<rect x="${ox}" y="${oy}" width="${dw}" height="${dh}" fill="none" stroke="#e76f51" stroke-width="3" stroke-dasharray="8,4" rx="2"/>`;
+      // Railing label
+      els += `<text x="${ox + dw/2}" y="${oy - 6}" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#e76f51">● Railing</text>`;
+    }
+
+    // Posts (corner + mid)
+    const postSize = 7;
+    const numPostsW = Math.max(2, Math.ceil(w / 6) + 1);
+    const numPostsL = Math.max(2, Math.ceil(l / 8) + 1);
+    for (let pi = 0; pi < numPostsL; pi++) {
+      for (let pj = 0; pj < numPostsW; pj++) {
+        const px = ox + Math.round((pi / (numPostsL - 1)) * dw);
+        const py = oy + Math.round((pj / (numPostsW - 1)) * dh);
+        els += `<rect x="${px - postSize/2}" y="${py - postSize/2}" width="${postSize}" height="${postSize}" fill="#8b5e3c" stroke="#5a3d25" stroke-width="1" rx="1"/>`;
+      }
+    }
+
+    // Stairs
+    if (stairs) {
+      const stairW = Math.round(dw * 0.35);
+      const stairD = 22;
+      const sx = ox + Math.round((dw - stairW) / 2);
+      const sy = oy + dh;
+      for (let si = 0; si < 3; si++) {
+        const indent = si * 6;
+        els += `<rect x="${sx + indent}" y="${sy + si * 7}" width="${stairW - indent*2}" height="8" fill="#c8e6c9" stroke="#2d6a4f" stroke-width="1" rx="1"/>`;
+      }
+      els += `<text x="${sx + stairW/2}" y="${sy + 34}" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#2d6a4f">Stairs</text>`;
+    }
+
+    // Dimensions
+    // Width arrow (top)
+    els += `<line x1="${ox}" y1="${oy-14}" x2="${ox+dw}" y2="${oy-14}" stroke="#555" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>`;
+    els += `<text x="${ox+dw/2}" y="${oy-18}" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#333" font-weight="600">${l} ft</text>`;
+    // Height arrow (right)
+    els += `<line x1="${ox+dw+14}" y1="${oy}" x2="${ox+dw+14}" y2="${oy+dh}" stroke="#555" stroke-width="1"/>`;
+    els += `<text x="${ox+dw+18}" y="${oy+dh/2+5}" font-family="sans-serif" font-size="11" fill="#333" font-weight="600">${w} ft</text>`;
+    // Sq ft label
+    els += `<text x="${ox+dw/2}" y="${oy+dh/2+5}" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1a5c35" font-weight="700">${fmtNum(w*l)} sq ft</text>`;
+    // Height off ground
+    if (h > 0) {
+      els += `<text x="${ox+dw/2}" y="${oy+dh/2+20}" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#555">${h} ft off ground</text>`;
+    }
+
+    svg.innerHTML = defs + `<defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#555"/>
+      </marker>
+    </defs>` + els;
+  }
+
+  // Event listeners
+  document.getElementById('calcBtn').addEventListener('click', function() {
+    requestAnimationFrame(() => { calculate(); });
+  });
+
+  ['deckWidth','deckLength','deckHeight'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { requestAnimationFrame(() => { calculate(); }); }
+    });
+  });
+
+  // Initial diagram with default values
+  updateDiagram(16, 20, 2, true, false, false);
+})();
+</script>
+</body>
+</html>
