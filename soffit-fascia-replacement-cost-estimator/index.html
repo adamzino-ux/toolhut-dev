@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soffit & Fascia Replacement Cost Estimator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Estimate soffit and fascia replacement cost instantly. Enter your home's dimensions and get a detailed materials list, labor breakdown, and total project cost.">
+<link rel="canonical" href="https://toolhut.dev/soffit-fascia-replacement-cost-estimator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Soffit & Fascia Replacement Cost Estimator",
+  "url": "https://toolhut.dev/soffit-fascia-replacement-cost-estimator/",
+  "description": "Free online tool to estimate soffit and fascia replacement costs including materials and labor.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#2d6a4f}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.55rem;font-weight:800;color:#1a1a2e;margin-bottom:0.35rem;line-height:1.25}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#2d6a4f;margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:0.04em}
+.form-group{margin-bottom:1.2rem}
+label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color 0.2s,box-shadow 0.2s;min-height:44px}
+input[type=number]:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,0.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{width:100%;padding:14px 24px;background:#2d6a4f;color:#fff;border:none;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background 0.2s;min-height:44px;margin-top:0.5rem}
+.btn:hover{background:#1e4d38}
+.btn-secondary{background:#e76f51;margin-top:0.75rem}
+.btn-secondary:hover{background:#cf5d40}
+.results-section{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results-section.visible{opacity:1;pointer-events:all}
+.big-number{font-size:2.6rem;font-weight:800;color:#2d6a4f;line-height:1}
+.big-label{font-size:0.9rem;color:#555;margin-top:4px}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.2rem}
+.cost-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.cost-box .val{font-size:1.35rem;font-weight:700;color:#2d6a4f}
+.cost-box .lbl{font-size:0.78rem;color:#666;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:#f0f0f0;padding:10px 12px;text-align:left;font-weight:600;font-size:0.82rem;color:#444;border-bottom:2px solid #dee2e6}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+tr:nth-child(even) td{background:#fafafa}
+.num{text-align:right}
+.tag-diy{background:#d8f3dc;color:#2d6a4f;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600}
+.tag-pro{background:#fce4d6;color:#c0392b;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem}
+.pro-tip strong{color:#e76f51;display:block;margin-bottom:0.3rem;font-size:0.9rem}
+.time-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.time-box{border:1px solid #dee2e6;border-radius:8px;padding:1rem;background:#f8f9fa}
+.time-box .time-val{font-size:1.2rem;font-weight:700;color:#2d6a4f}
+.time-box .time-lbl{font-size:0.78rem;color:#666;margin-top:2px}
+.shopping-list{list-style:none;padding:0}
+.shopping-list li{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f0f0f0;gap:1rem;font-size:0.9rem}
+.shopping-list li:last-child{border-bottom:none}
+.item-name{color:#1a1a2e;flex:1}
+.item-qty{font-weight:700;color:#2d6a4f;white-space:nowrap}
+.copy-btn{background:transparent;border:1px solid #dee2e6;color:#555;padding:6px 14px;border-radius:5px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.copy-btn:hover{background:#f0f0f0}
+.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.svg-wrapper{background:#f0f7f3;border:1px solid #b7dfc8;border-radius:8px;padding:1.2rem;margin-bottom:1.5rem;overflow:hidden}
+.svg-wrapper svg{width:100%;height:auto;display:block}
+.ad-slot{min-height:0;margin:0}
+h2{font-size:1.2rem;font-weight:700;color:#1a1a2e;margin-bottom:0.75rem;margin-top:0}
+h3{font-size:1rem;font-weight:700;color:#2d6a4f;margin-bottom:0.5rem}
+.content-section{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;margin-bottom:2rem}
+.content-section p{margin-bottom:1rem;color:#333;font-size:0.95rem}
+.content-section ul{padding-left:1.2rem;margin-bottom:1rem}
+.content-section ul li{margin-bottom:0.4rem;color:#333;font-size:0.95rem}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:0.7rem;overflow:hidden}
+summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:0.95rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:'＋';font-size:1rem;color:#2d6a4f}
+details[open] summary::after{content:'－'}
+summary::-webkit-details-marker{display:none}
+.details-body{padding:12px 16px;font-size:0.9rem;color:#333;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.related-link{display:block;padding:12px 14px;background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;font-size:0.88rem;font-weight:500;color:#2d6a4f;transition:background 0.2s}
+.related-link:hover{background:#d8f3dc;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.5rem;text-align:center;font-size:0.82rem;color:#666}
+footer a{color:#2d6a4f;margin:0 0.5rem}
+.range-row{display:flex;gap:0.5rem;align-items:center;margin-top:0.5rem}
+.range-label{font-size:0.8rem;color:#666;white-space:nowrap}
+input[type=range]{flex:1;accent-color:#2d6a4f;height:6px}
+.hint{font-size:0.78rem;color:#777;margin-top:3px}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600}
+.badge-green{background:#d8f3dc;color:#2d6a4f}
+.badge-orange{background:#fce4d6;color:#c0392b}
+@media(max-width:640px){
+  .row{grid-template-columns:1fr}
+  .cost-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  .big-number{font-size:2rem}
+  .card{padding:1.25rem}
+  .content-section{padding:1.25rem}
+  h1{font-size:1.3rem}
+  table{font-size:0.82rem}
+  td,th{padding:7px 8px}
+}
+@media(max-width:400px){
+  .cost-grid{grid-template-columns:1fr}
+  .time-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🏠 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Soffit & Fascia Replacement Cost Estimator</h1>
+  <p class="subtitle">Get an accurate soffit and fascia replacement cost estimate including materials, labor, and a full shopping list.</p>
+
+  <!-- INPUT CARD -->
+  <div class="card">
+    <div class="section-title">Project Details</div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="perimeter">Home Perimeter (linear feet)</label>
+        <input type="number" id="perimeter" placeholder="e.g. 180" min="10" max="2000" value="">
+        <div class="hint">Measure the outside edge of your roofline</div>
+        <div class="error-msg" id="err-perimeter">Please enter a valid perimeter (10–2000 ft)</div>
+      </div>
+      <div class="form-group">
+        <label for="stories">Number of Stories</label>
+        <select id="stories">
+          <option value="1">1 Story</option>
+          <option value="1.5">1.5 Stories</option>
+          <option value="2">2 Stories</option>
+          <option value="3">3 Stories</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="soffitMaterial">Soffit Material</label>
+        <select id="soffitMaterial">
+          <option value="vinyl">Vinyl (most popular)</option>
+          <option value="aluminum">Aluminum</option>
+          <option value="wood">Wood</option>
+          <option value="fiber_cement">Fiber Cement</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fasciaMaterial">Fascia Material</label>
+        <select id="fasciaMaterial">
+          <option value="vinyl">Vinyl</option>
+          <option value="aluminum">Aluminum</option>
+          <option value="wood">Wood</option>
+          <option value="fiber_cement">Fiber Cement</option>
+          <option value="pvc">PVC (premium)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="soffitWidth">Soffit Width (inches)</label>
+        <select id="soffitWidth">
+          <option value="12">12 inches</option>
+          <option value="16" selected>16 inches (most common)</option>
+          <option value="20">20 inches</option>
+          <option value="24">24 inches</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fasciaWidth">Fascia Board Width (inches)</label>
+        <select id="fasciaWidth">
+          <option value="4">4 inches</option>
+          <option value="6" selected>6 inches (most common)</option>
+          <option value="8">8 inches</option>
+          <option value="10">10 inches</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="condition">Existing Condition (affects removal cost)</label>
+      <select id="condition">
+        <option value="good">Good — minor damage, easy removal</option>
+        <option value="average" selected>Average — some rot, standard removal</option>
+        <option value="poor">Poor — significant rot/damage, difficult removal</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="diyOrPro">Installation Type</label>
+        <select id="diyOrPro">
+          <option value="diy">DIY (materials only)</option>
+          <option value="pro" selected>Hire a Contractor</option>
+          <option value="both">Show Both</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="zip">Your Region</label>
+        <select id="zip">
+          <option value="1.0">National Average</option>
+          <option value="1.25">High Cost (CA, NY, MA)</option>
+          <option value="1.15">Above Average (WA, CO, IL)</option>
+          <option value="0.9">Below Average (TX, FL, GA)</option>
+          <option value="0.8">Low Cost (Midwest/Rural)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Calculate Cost Estimate</button>
+  </div>
+
+  <!-- SVG DIAGRAM -->
+  <div class="svg-wrapper" id="svgWrapper">
+    <div style="text-align:center;color:#666;font-size:0.85rem;margin-bottom:0.75rem;font-weight:600">SOFFIT & FASCIA DIAGRAM</div>
+    <svg id="houseDiagram" viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sky -->
+      <rect x="0" y="0" width="560" height="260" fill="#f0f7f3" rx="6"/>
+      <!-- House body -->
+      <rect x="110" y="140" width="340" height="110" fill="#e8e8e8" stroke="#aaa" stroke-width="1.5"/>
+      <!-- Roof -->
+      <polygon points="280,30 80,145 480,145" fill="#8B6F47" stroke="#6b5230" stroke-width="2"/>
+      <!-- Roof shingles lines -->
+      <line x1="100" y1="130" x2="460" y2="130" stroke="#6b5230" stroke-width="1" opacity="0.5"/>
+      <line x1="120" y1="115" x2="440" y2="115" stroke="#6b5230" stroke-width="1" opacity="0.5"/>
+      <!-- Fascia board - left -->
+      <rect x="77" y="140" width="35" height="10" fill="#e76f51" stroke="#c0392b" stroke-width="1.5" rx="1"/>
+      <!-- Fascia board - right -->
+      <rect x="448" y="140" width="35" height="10" fill="#e76f51" stroke="#c0392b" stroke-width="1.5" rx="1"/>
+      <!-- Soffit - left -->
+      <polygon points="77,150 110,150 110,145 112,145" fill="#2d6a4f" stroke="#1e4d38" stroke-width="1.5"/>
+      <!-- Soffit - right -->
+      <polygon points="483,150 450,150 450,145 448,145" fill="#2d6a4f" stroke="#1e4d38" stroke-width="1.5"/>
+      <!-- Front soffit -->
+      <rect x="110" y="148" width="340" height="8" fill="#2d6a4f" stroke="#1e4d38" stroke-width="1"/>
+      <!-- Front fascia -->
+      <rect x="108" y="140" width="344" height="9" fill="#e76f51" stroke="#c0392b" stroke-width="1.5" rx="1"/>
+      <!-- Door -->
+      <rect x="235" y="185" width="50" height="65" fill="#8B6F47" stroke="#6b5230" stroke-width="1.5" rx="2"/>
+      <circle cx="278" cy="218" r="3" fill="#f0c040"/>
+      <!-- Windows -->
+      <rect x="130" y="170" width="60" height="45" fill="#9ad0f5" stroke="#6b5230" stroke-width="1.5" rx="2"/>
+      <line x1="160" y1="170" x2="160" y2="215" stroke="#6b5230" stroke-width="1"/>
+      <line x1="130" y1="192" x2="190" y2="192" stroke="#6b5230" stroke-width="1"/>
+      <rect x="370" y="170" width="60" height="45" fill="#9ad0f5" stroke="#6b5230" stroke-width="1.5" rx="2"/>
+      <line x1="400" y1="170" x2="400" y2="215" stroke="#6b5230" stroke-width="1"/>
+      <line x1="370" y1="192" x2="430" y2="192" stroke="#6b5230" stroke-width="1"/>
+      <!-- Labels -->
+      <text x="280" y="138" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="700">FASCIA</text>
+      <text x="280" y="162" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">SOFFIT</text>
+      <!-- Dimension line -->
+      <line x1="108" y1="260" x2="452" y2="260" stroke="#555" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow2)"/>
+      <text id="dimText" x="280" y="257" text-anchor="middle" font-size="10.5" fill="#555">Enter perimeter to see dimensions</text>
+      <!-- Arrows -->
+      <defs>
+        <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M6,0 L0,3 L6,6" fill="none" stroke="#555" stroke-width="1"/>
+        </marker>
+        <marker id="arrow2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
+          <path d="M6,0 L0,3 L6,6" fill="none" stroke="#555" stroke-width="1"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-section" id="resultsSection">
+
+    <div class="card">
+      <div class="section-row">
+        <div>
+          <div class="big-number" id="totalCost">$0</div>
+          <div class="big-label">Estimated Total Project Cost</div>
+        </div>
+        <button class="copy-btn" onclick="copyResults()">📋 Copy Summary</button>
+      </div>
+      <div class="cost-grid" id="costGrid"></div>
+    </div>
+
+    <div class="pro-tip">
+      <strong>🔨 Pro Tip from a Contractor</strong>
+      <span id="proTipText">Always inspect the rafter tails when replacing fascia — if they're rotting, repair them before installing new boards or you'll be doing this job again in 3 years.</span>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Time Estimate</div>
+      <div class="time-grid" id="timeGrid"></div>
+      <div class="hint" style="margin-top:0">Assumes a standard single-story home. Add 30–50% for multi-story or complex rooflines.</div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Cost Breakdown</div>
+      <div style="overflow-x:auto">
+        <table id="breakdownTable"></table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-row">
+        <div class="section-title" style="margin-bottom:0">Materials Shopping List</div>
+        <button class="copy-btn" onclick="copyList()">📋 Copy List</button>
+      </div>
+      <ul class="shopping-list" id="shoppingList"></ul>
+    </div>
+
+    <div class="ad-slot" id="ad-mid"></div>
+
+  </div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+    <h2>How to Use This Soffit & Fascia Cost Estimator</h2>
+    <p>Enter your home's perimeter (measured along the roofline), select the number of stories, and choose your preferred materials for both soffit and fascia. The tool calculates material quantities, removal costs, labor rates, and gives you a ready-to-use shopping list. Use the "Show Both" option to compare DIY vs. hiring a contractor side by side.</p>
+
+    <h2>Why Soffit & Fascia Replacement Matters</h2>
+    <p>Soffit and fascia are the unsung heroes of your home's exterior — they seal the roof edge, protect the rafters from moisture, and provide ventilation to your attic. When they fail, you're looking at a cascade of expensive problems: rotting rafters, pest infestations (wasps and squirrels love damaged soffits), ice dams, and even mold in the attic.</p>
+    <p>On a 150-foot perimeter home, a complete replacement typically runs $1,500–$4,500 for vinyl or aluminum and $3,000–$8,000+ for wood or fiber cement. Most homeowners wait too long — catching rot early can reduce repair costs by 40–60%. If you're painting the exterior anyway, it's a smart time to bundle the work and save on scaffolding and labor mobilization costs.</p>
+
+    <h2>How the Cost Is Calculated</h2>
+    <p>The estimator uses the following approach:</p>
+    <ul>
+      <li><strong>Soffit area (sq ft):</strong> Perimeter × soffit width (converted to feet) × 1.10 waste factor</li>
+      <li><strong>Fascia length (lin ft):</strong> Perimeter × 1.05 waste factor</li>
+      <li><strong>Material cost:</strong> Area/length × per-unit material price for chosen material type</li>
+      <li><strong>Labor cost:</strong> Linear footage × labor rate, adjusted for stories and regional cost multiplier</li>
+      <li><strong>Removal cost:</strong> Based on perimeter, condition multiplier (1.0 to 1.6), and story count</li>
+    </ul>
+    <p><strong>Formula:</strong> Total = (Soffit Materials) + (Fascia Materials) + (Hardware & Accessories) + (Removal) + (Labor) × Regional Multiplier</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't skip the J-channel:</strong> You need J-channel trim at wall junctions and corners — budget an extra 10–15% of perimeter for trim pieces.</li>
+      <li><strong>Ventilated vs. non-ventilated soffit:</strong> Most building codes require vented soffit panels (1 net free sq inch per 150 sq ft of attic space). Verify your local code before purchasing.</li>
+      <li><strong>Measure twice, order once:</strong> Always add 10% overage for cuts and waste. Returning leftover panels is fine; running short mid-job is a costly delay.</li>
+      <li><strong>Aluminum capping over wood fascia:</strong> If the underlying wood is in decent shape, aluminum capping is a $500–$1,500 cheaper option vs. full replacement — ask your contractor about it.</li>
+      <li><strong>Gutter removal adds cost:</strong> If you have gutters, they must come down first. Budget $1–$2 per linear foot for removal and reinstallation.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What's the average cost to replace soffit and fascia on a typical home?</summary>
+      <div class="details-body">For a 150–180 linear foot home with vinyl materials, expect $1,800–$4,200 installed by a contractor at national average rates. Wood and fiber cement cost 40–80% more. DIY material costs typically run $400–$900 for the same home.</div>
+    </details>
+    <details>
+      <summary>How long does soffit and fascia replacement take?</summary>
+      <div class="details-body">A two-person professional crew typically completes a single-story home in 1–2 days. DIYers should budget 2–4 weekends depending on experience. Multi-story homes add significant time due to scaffolding setup.</div>
+    </details>
+    <details>
+      <summary>Should I replace soffit and fascia at the same time?</summary>
+      <div class="details-body">Almost always yes. Since the work requires the same scaffolding setup and prep, doing both together saves 15–25% on labor compared to separate jobs. If one is failing, the other is usually not far behind.</div>
+    </details>
+    <details>
+      <summary>Can I replace soffit and fascia myself?</summary>
+      <div class="details-body">Yes, with the right tools and some carpentry experience. Vinyl and aluminum are the most DIY-friendly materials. You'll need a ladder, tin snips, circular saw, nail gun, and about $200–$400 in tools you may not already own. Two-story homes are much more challenging and risky without proper scaffolding.</div>
+    </details>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="content-section">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/popcorn-ceiling-removal-cost-estimator/" class="related-link">🎨 Popcorn Ceiling Removal Cost</a>
+      <a href="/deck-construction-cost-estimator/" class="related-link">🪵 Deck Construction Cost</a>
+      <a href="/gravel-driveway-cost-calculator/" class="related-link">🪨 Gravel Driveway Cost</a>
+      <a href="/laminate-flooring-calculator/" class="related-link">🏠 Laminate Flooring Calculator</a>
+      <a href="/shed-material-cost-estimator/" class="related-link">🏚️ Shed Material Cost</a>
+      <a href="/attic-storage-floor-load-calculator/" class="related-link">📦 Attic Storage Floor Load</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</div>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:0.5rem">© <span id="yr"></span> toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Material price data (per sq ft soffit, per lin ft fascia)
+const MAT = {
+  soffit: {
+    vinyl:        { unit: 'sq ft', price: 1.80, label: 'Vinyl Soffit Panels' },
+    aluminum:     { unit: 'sq ft', price: 2.40, label: 'Aluminum Soffit Panels' },
+    wood:         { unit: 'sq ft', price: 3.20, label: 'Wood Soffit Boards' },
+    fiber_cement: { unit: 'sq ft', price: 4.10, label: 'Fiber Cement Soffit' }
+  },
+  fascia: {
+    vinyl:        { unit: 'lin ft', price: 1.50, label: 'Vinyl Fascia Board' },
+    aluminum:     { unit: 'lin ft', price: 2.00, label: 'Aluminum Fascia' },
+    wood:         { unit: 'lin ft', price: 2.80, label: 'Wood Fascia Board' },
+    fiber_cement: { unit: 'lin ft', price: 3.60, label: 'Fiber Cement Fascia' },
+    pvc:          { unit: 'lin ft', price: 4.20, label: 'PVC Fascia Board' }
+  }
+};
+
+// Labor rates per linear foot (installed)
+const LABOR = {
+  soffit: { vinyl: 3.50, aluminum: 4.00, wood: 5.50, fiber_cement: 6.00 },
+  fascia: { vinyl: 2.80, aluminum: 3.20, wood: 4.50, fiber_cement: 5.50, pvc: 5.00 }
+};
+
+// Condition multipliers for removal
+const CONDITION = { good: 1.0, average: 1.3, poor: 1.6 };
+
+// Story multipliers for labor
+const STORIES = { '1': 1.0, '1.5': 1.2, '2': 1.45, '3': 1.9 };
+
+const PRO_TIPS = {
+  vinyl:        "Vinyl expands and contracts with temperature — leave a 1/4-inch gap at panel ends to prevent buckling in summer heat.",
+  aluminum:     "Aluminum soffit is virtually maintenance-free but dents more easily than vinyl. Worth the extra $100–$200 in hurricane-prone areas.",
+  wood:         "Prime ALL six sides of wood fascia before installation — the cut ends especially. Unpainted end grain is where rot always starts.",
+  fiber_cement: "Fiber cement is heavy — plan for two people during installation. Pre-prime it from the factory and paint within 180 days."
+};
+
+function fmt(n, dec = 0) {
+  return n.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+
+function fmtDollar(n) {
+  return '$' + fmt(Math.round(n));
+}
+
+function validate() {
+  const p = parseFloat(document.getElementById('perimeter').value);
+  const errEl = document.getElementById('err-perimeter');
+  const inp = document.getElementById('perimeter');
+  if (!p || p < 10 || p > 2000) {
+    inp.classList.add('error');
+    errEl.classList.add('show');
+    return false;
+  }
+  inp.classList.remove('error');
+  errEl.classList.remove('show');
+  return true;
+}
+
+function calculate() {
+  if (!validate()) return;
+
+  const perimeter    = parseFloat(document.getElementById('perimeter').value);
+  const stories      = document.getElementById('stories').value;
+  const soffitMat    = document.getElementById('soffitMaterial').value;
+  const fasciaMat    = document.getElementById('fasciaMaterial').value;
+  const soffitInches = parseInt(document.getElementById('soffitWidth').value);
+  const fasciaInches = parseInt(document.getElementById('fasciaWidth').value);
+  const condition    = document.getElementById('condition').value;
+  const diyOrPro     = document.getElementById('diyOrPro').value;
+  const regionMult   = parseFloat(document.getElementById('zip').value);
+  const storyMult    = STORIES[stories];
+
+  // Quantities
+  const soffitWidthFt = soffitInches / 12;
+  const soffitSqFt    = perimeter * soffitWidthFt * 1.10; // 10% waste
+  const fasciaLinFt   = perimeter * 1.05; // 5% waste
+
+  // Material costs
+  const soffitMatCost  = soffitSqFt * MAT.soffit[soffitMat].price;
+  const fasciaMatCost  = fasciaLinFt * MAT.fascia[fasciaMat].price;
+
+  // Hardware/accessories estimate
+  const jChannel       = perimeter * 1.15 * 1.20; // lin ft at $1.20
+  const nailsAndScrews = perimeter * 0.15;
+  const caulkAndSealer = Math.ceil(perimeter / 40) * 8; // 1 tube per 40 ft at $8
+  const dripsEdge      = perimeter * 0.45;
+  const hardwareCost   = jChannel + nailsAndScrews + caulkAndSealer + dripsEdge;
+
+  // Removal cost
+  const removalBase = perimeter * 1.20 * storyMult * CONDITION[condition] * regionMult;
+
+  // Labor costs (contractor)
+  const soffitLabor = perimeter * LABOR.soffit[soffitMat] * storyMult * regionMult;
+  const fasciaLabor = perimeter * LABOR.fascia[fasciaMat] * storyMult * regionMult;
+  const totalLabor  = soffitLabor + fasciaLabor;
+
+  const diyCost = (soffitMatCost + fasciaMatCost + hardwareCost) * regionMult;
+  const proCost = diyCost + totalLabor + removalBase;
+
+  // Time estimates (hours)
+  const baseHours = perimeter / 12; // ~12 ft per hour
+  const diyHours  = baseHours * storyMult * 2.0;
+  const proHours  = baseHours * storyMult * 0.8;
+  const diyDays   = (diyHours / 8).toFixed(1);
+  const proDays   = (proHours / 8).toFixed(1);
+
+  // Display cost based on selection
+  let displayCost = proCost;
+  if (diyOrPro === 'diy') displayCost = diyCost;
+
+  requestAnimationFrame(() => {
+    // Update SVG dimension text
+    document.getElementById('dimText').textContent = `Perimeter: ${fmt(perimeter)} lin ft  |  Soffit: ${fmt(soffitSqFt, 0)} sq ft  |  Fascia: ${fmt(fasciaLinFt, 0)} lin ft`;
+
+    // Total cost
+    document.getElementById('totalCost').textContent = fmtDollar(displayCost);
+
+    // Pro tip
+    document.getElementById('proTipText').textContent = PRO_TIPS[soffitMat] || PRO_TIPS.vinyl;
+
+    // Cost grid
+    let cgHtml = '';
+    if (diyOrPro === 'both') {
+      cgHtml = `
+        <div class="cost-box"><div class="val">${fmtDollar(diyCost)}</div><div class="lbl">DIY (Materials Only)</div></div>
+        <div class="cost-box"><div class="val">${fmtDollar(proCost)}</div><div class="lbl">Contractor Installed</div></div>
+        <div class="cost-box"><div class="val">${fmtDollar(totalLabor + removalBase)}</div><div class="lbl">Labor + Removal</div></div>`;
+    } else {
+      cgHtml = `
+        <div class="cost-box"><div class="val">${fmtDollar(soffitMatCost * regionMult)}</div><div class="lbl">Soffit Materials</div></div>
+        <div class="cost-box"><div class="val">${fmtDollar(fasciaMatCost * regionMult)}</div><div class="lbl">Fascia Materials</div></div>
+        <div class="cost-box"><div class="val">${fmtDollar(hardwareCost)}</div><div class="lbl">Hardware & Trim</div></div>`;
+    }
+    document.getElementById('costGrid').innerHTML = cgHtml;
+
+    // Time grid
+    document.getElementById('timeGrid').innerHTML = `
+      <div class="time-box">
+        <div class="time-val">⏱ ${diyDays} days</div>
+        <div class="time-lbl">DIY (1 person, weekends)</div>
+      </div>
+      <div class="time-box">
+        <div class="time-val">⚡ ${proDays} days</div>
+        <div class="time-lbl">Professional crew (2 people)</div>
+      </div>`;
+
+    // Breakdown table
+    const rows = [
+      ['Soffit Panels', MAT.soffit[soffitMat].label, `${fmt(soffitSqFt,0)} sq ft`, fmtDollar(soffitMatCost * regionMult), '<span class="tag-diy">DIY</span>'],
+      ['Fascia Boards', MAT.fascia[fasciaMat].label, `${fmt(fasciaLinFt,0)} lin ft`, fmtDollar(fasciaMatCost * regionMult), '<span class="tag-diy">DIY</span>'],
+      ['J-Channel / Trim', 'Starter & corner trim', `${fmt(perimeter*1.15,0)} lin ft`, fmtDollar(jChannel), '<span class="tag-diy">DIY</span>'],
+      ['Fasteners', 'Nails, screws, clips', 'Per perimeter', fmtDollar(nailsAndScrews), '<span class="tag-diy">DIY</span>'],
+      ['Caulk & Sealant', `${Math.ceil(perimeter/40)} tubes`, `${Math.ceil(perimeter/40)} units`, fmtDollar(caulkAndSealer), '<span class="tag-diy">DIY</span>'],
+      ['Drip Edge', 'Aluminum drip edge', `${fmt(perimeter,0)} lin ft`, fmtDollar(dripsEdge), '<span class="tag-diy">DIY</span>'],
+    ];
+
+    if (diyOrPro !== 'diy') {
+      rows.push(
+        ['Old Soffit Removal', `Condition: ${condition}`, `${fmt(perimeter,0)} lin ft`, fmtDollar(removalBase * 0.5), '<span class="tag-pro">PRO</span>'],
+        ['Old Fascia Removal', `${stories}-story`, `${fmt(perimeter,0)} lin ft`, fmtDollar(removalBase * 0.5), '<span class="tag-pro">PRO</span>'],
+        ['Soffit Installation Labor', `${stories}-story, ${soffitMat}`, `${fmt(perimeter,0)} lin ft`, fmtDollar(soffitLabor), '<span class="tag-pro">PRO</span>'],
+        ['Fascia Installation Labor', `${stories}-story, ${fasciaMat}`, `${fmt(perimeter,0)} lin ft`, fmtDollar(fasciaLabor), '<span class="tag-pro">PRO</span>'],
+      );
+    }
+
+    let tableHtml = `<thead><tr><th>Item</th><th>Description</th><th>Quantity</th><th class="num">Cost</th><th>Type</th></tr></thead><tbody>`;
+    rows.forEach(r => {
+      tableHtml += `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="num">${r[3]}</td><td>${r[4]}</td></tr>`;
+    });
+    const total = diyOrPro === 'diy' ? diyCost : proCost;
+    tableHtml += `<tr style="font-weight:700;background:#f0f7f3"><td colspan="3">TOTAL ESTIMATE</td><td class="num">${fmtDollar(total)}</td><td></td></tr>`;
+    tableHtml += '</tbody>';
+    document.getElementById('breakdownTable').innerHTML = tableHtml;
+
+    // Shopping list
+    const tubesNeeded   = Math.ceil(perimeter / 40);
+    const nailBoxes     = Math.ceil(perimeter / 100);
+    const soffitPanels  = Math.ceil(soffitSqFt / 8); // typical panel covers ~8 sq ft
+    const fasciaBoards  = Math.ceil(fasciaLinFt / 12); // 12-ft boards
+    const jChannelPcs   = Math.ceil(perimeter * 1.15 / 12); // 12-ft pieces
+    const caulkTubes    = tubesNeeded;
+    const dripEdgePcs   = Math.ceil(perimeter / 10); // 10-ft pieces
+
+    const listItems = [
+      { name: `${MAT.soffit[soffitMat].label} (${soffitInches}" wide)`, qty: `${soffitPanels} panels`, price: fmtDollar(soffitMatCost * regionMult) },
+      { name: `${MAT.fascia[fasciaMat].label} (${fasciaInches}" wide, 12-ft boards)`, qty: `${fasciaBoards} boards`, price: fmtDollar(fasciaMatCost * regionMult) },
+      { name: 'J-Channel Starter Strip (12-ft pieces)', qty: `${jChannelPcs} pieces`, price: fmtDollar(jChannel) },
+      { name: 'Aluminum Drip Edge (10-ft pieces)', qty: `${dripEdgePcs} pieces`, price: fmtDollar(dripsEdge) },
+      { name: 'Exterior Caulk / Sealant (tubes)', qty: `${caulkTubes} tubes`, price: fmtDollar(caulkAndSealer) },
+      { name: 'Roofing Nails or Screws (1-lb box)', qty: `${nailBoxes} boxes`, price: fmtDollar(nailsAndScrews) },
+      { name: 'Painter\'s Tape & Drop Cloths', qty: 'As needed', price: '~$25' },
+      { name: 'Safety Glasses & Work Gloves', qty: '1 set each', price: '~$30' },
+    ];
+
+    let listHtml = '';
+    listItems.forEach(i => {
+      listHtml += `<li><span class="item-name">${i.name}</span><span class="item-qty">${i.qty} <span style="color:#888;font-weight:400">(${i.price})</span></span></li>`;
+    });
+    document.getElementById('shoppingList').innerHTML = listHtml;
+
+    // Store for copy
+    window._calcData = { perimeter, soffitSqFt, fasciaLinFt, soffitPanels, fasciaBoards, jChannelPcs, caulkTubes, dripEdgePcs, nailBoxes, total, diyCost, proCost, rows, soffitMat, fasciaMat };
+
+    // Show results
+    document.getElementById('resultsSection').classList.add('visible');
+    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+function copyResults() {
+  if (!window._calcData) return;
+  const d = window._calcData;
+  const lines = [
+    '=== SOFFIT & FASCIA REPLACEMENT ESTIMATE ===',
+    `Perimeter: ${fmt(d.perimeter)} lin ft`,
+    `Soffit Area: ${fmt(d.soffitSqFt, 0)} sq ft`,
+    `Fascia Length: ${fmt(d.fasciaLinFt, 0)} lin ft`,
+    `Soffit Material: ${MAT.soffit[d.soffitMat].label}`,
+    `Fascia Material: ${MAT.fascia[d.fasciaMat].label}`,
+    '',
+    `DIY Total: ${fmtDollar(d.diyCost)}`,
+    `Contractor Total: ${fmtDollar(d.proCost)}`,
+    '',
+    'Generated by toolhut.dev'
+  ];
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.querySelector('.card .copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+function copyList() {
+  if (!window._calcData) return;
+  const d = window._calcData;
+  const lines = [
+    '=== SOFFIT & FASCIA SHOPPING LIST ===',
+    `${d.soffitPanels} panels — ${MAT.soffit[d.soffitMat].label}`,
+    `${d.fasciaBoards} boards — ${MAT.fascia[d.fasciaMat].label}`,
+    `${d.jChannelPcs} pieces — J-Channel Starter Strip`,
+    `${d.dripEdgePcs} pieces — Aluminum Drip Edge`,
+    `${d.caulkTubes} tubes — Exterior Caulk`,
+    `${d.nailBoxes} boxes — Roofing Nails/Screws`,
+    '1 set — Safety Glasses & Work Gloves',
+    '',
+    'Generated by toolhut.dev'
+  ];
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btns = document.querySelectorAll('.copy-btn');
+    btns.forEach(b => { if (b.textContent.includes('Copy List')) { b.textContent = 'Copied!'; setTimeout(() => b.textContent = '📋 Copy List', 2000); } });
+  });
+}
+
+// Enter key on inputs
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') calculate();
+});
+</script>
+</body>
+</html>
