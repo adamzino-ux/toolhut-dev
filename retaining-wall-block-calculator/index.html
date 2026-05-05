@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retaining Wall Block Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how many retaining wall blocks you need. Enter wall dimensions and get block count, materials list, and cost estimate instantly.">
+<link rel="canonical" href="https://toolhut.dev/retaining-wall-block-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Retaining Wall Block Calculator",
+  "url": "https://toolhut.dev/retaining-wall-block-calculator/",
+  "description": "Calculate exactly how many retaining wall blocks you need for your landscaping project.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline;color:#1e4d38}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#2d6a4f}
+.container{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:.4rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:1.5rem}
+h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin-bottom:1rem}
+h3{font-size:1rem;font-weight:600;color:#1a1a2e;margin-bottom:.75rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem}
+input,select{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.input-group{margin-bottom:1.1rem}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#2d6a4f;color:#fff;border:none;padding:13px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background .2s}
+.btn:hover{background:#1e4d38}
+.btn-secondary{background:#e76f51;color:#fff;border:none;padding:10px 20px;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;min-height:44px;transition:background .2s}
+.btn-secondary:hover{background:#c85a3d}
+.btn-sm{background:#e76f51;color:#fff;border:none;padding:7px 16px;border-radius:5px;font-size:.82rem;font-weight:600;cursor:pointer;min-height:36px;transition:background .2s}
+.btn-sm:hover{background:#c85a3d}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:all}
+.big-num{font-size:2.4rem;font-weight:800;color:#2d6a4f;line-height:1.1}
+.big-label{font-size:.85rem;color:#555;margin-top:.2rem}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem}
+.stat-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+.stat-val{font-size:1.45rem;font-weight:700;color:#2d6a4f}
+.stat-lbl{font-size:.78rem;color:#666;margin-top:.15rem}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:9px 12px;text-align:left;font-weight:600;font-size:.82rem;color:#444;border-bottom:2px solid #dee2e6}
+td{padding:9px 12px;border-bottom:1px solid #eee;color:#1a1a2e}
+tr:nth-child(even) td{background:#fafafa}
+td:last-child,th:last-child{text-align:right}
+.table-wrap{overflow-x:auto}
+.pro-tip{background:#fff8e1;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.2rem}
+.pro-tip-head{font-weight:700;color:#e76f51;font-size:.85rem;margin-bottom:.35rem;display:flex;align-items:center;gap:.4rem}
+.pro-tip p{font-size:.9rem;color:#444;margin:0}
+.time-est{display:flex;gap:1rem;margin-bottom:1.2rem}
+.time-box{flex:1;background:#e8f5e9;border-radius:8px;padding:.9rem;text-align:center;border:1px solid #c8e6c9}
+.time-box.adv{background:#e3f2fd;border-color:#bbdefb}
+.time-head{font-size:.75rem;font-weight:700;color:#555;margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.04em}
+.time-val{font-size:1rem;font-weight:700;color:#2d6a4f}
+.time-box.adv .time-val{color:#1565c0}
+.shopping-list{margin-top:0}
+.shopping-item{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid #eee;font-size:.9rem}
+.shopping-item:last-child{border-bottom:none}
+.item-name{color:#1a1a2e;font-weight:500}
+.item-qty{font-weight:700;color:#2d6a4f;background:#e8f5e9;padding:3px 10px;border-radius:12px;font-size:.85rem}
+.copy-row{display:flex;justify-content:flex-end;margin-top:.8rem}
+details{border:1px solid #dee2e6;border-radius:8px;margin-bottom:.7rem;background:#fff}
+summary{padding:.9rem 1rem;font-weight:600;font-size:.95rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:#1a1a2e}
+summary::after{content:'﹢';font-size:1.1rem;color:#2d6a4f}
+details[open] summary::after{content:'﹣'}
+details[open]{border-color:#2d6a4f}
+.faq-body{padding:.5rem 1rem 1rem;font-size:.93rem;color:#444;line-height:1.65}
+.content-section h2{font-size:1.1rem;margin-top:1.5rem;margin-bottom:.6rem;color:#1a1a2e}
+.content-section p{font-size:.93rem;color:#444;margin-bottom:.75rem;line-height:1.7}
+.content-section ul{padding-left:1.3rem;margin-bottom:.75rem}
+.content-section li{font-size:.93rem;color:#444;margin-bottom:.4rem;line-height:1.65}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.related-link{display:block;background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:.75rem 1rem;font-size:.88rem;font-weight:500;color:#2d6a4f;transition:border-color .2s,background .2s}
+.related-link:hover{border-color:#2d6a4f;background:#e8f5e9;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.5rem;text-align:center;font-size:.85rem;color:#666}
+footer a{color:#2d6a4f;margin:0 .6rem}
+.diagram-wrap{background:#f0f7f3;border:1px solid #c8e6c9;border-radius:8px;padding:1rem;margin-bottom:1.2rem;overflow:hidden}
+.diagram-wrap svg{width:100%;height:auto;display:block}
+.note{font-size:.8rem;color:#666;margin-top:.5rem;font-style:italic}
+.badge{display:inline-block;background:#e76f51;color:#fff;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:.4rem;vertical-align:middle}
+@media(max-width:600px){
+  .input-row{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  .time-est{flex-direction:column}
+  h1{font-size:1.3rem}
+  .big-num{font-size:2rem}
+  .card{padding:1.3rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🏡 toolhut.dev</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Retaining Wall Block Calculator</h1>
+  <p class="subtitle">Enter your wall dimensions to get exact block counts, materials, costs, and a shopping list.</p>
+
+  <!-- DIAGRAM -->
+  <div class="card" style="padding:1.2rem">
+    <div class="diagram-wrap">
+      <svg id="wallDiagram" viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- background -->
+        <rect width="520" height="200" fill="#f0f7f3" rx="6"/>
+        <!-- ground -->
+        <rect x="0" y="160" width="520" height="40" fill="#b5835a" rx="0"/>
+        <text x="260" y="184" text-anchor="middle" fill="#fff" font-size="12" font-family="sans-serif">Ground / Base</text>
+        <!-- Wall placeholder -->
+        <g id="wallBlocks">
+          <rect x="60" y="100" width="400" height="60" fill="#9caf88" rx="3" stroke="#2d6a4f" stroke-width="1.5"/>
+          <line x1="120" y1="100" x2="120" y2="160" stroke="#2d6a4f" stroke-width="1"/>
+          <line x1="180" y1="100" x2="180" y2="160" stroke="#2d6a4f" stroke-width="1"/>
+          <line x1="240" y1="100" x2="240" y2="160" stroke="#2d6a4f" stroke-width="1"/>
+          <line x1="300" y1="100" x2="300" y2="160" stroke="#2d6a4f" stroke-width="1"/>
+          <line x1="360" y1="100" x2="360" y2="160" stroke="#2d6a4f" stroke-width="1"/>
+          <line x1="420" y1="100" x2="420" y2="160" stroke="#2d6a4f" stroke-width="1"/>
+          <text x="260" y="135" text-anchor="middle" fill="#1a1a2e" font-size="11" font-weight="600" font-family="sans-serif">1 Course shown — enter dimensions below</text>
+        </g>
+        <!-- Dimension arrows -->
+        <line x1="60" y1="90" x2="460" y2="90" stroke="#e76f51" stroke-width="1.5" marker-end="url(#arr)" marker-start="url(#arrl)"/>
+        <text x="260" y="83" text-anchor="middle" fill="#e76f51" font-size="11" font-family="sans-serif" id="diag-length">Length: —</text>
+        <line x1="50" y1="100" x2="50" y2="160" stroke="#e76f51" stroke-width="1.5" marker-end="url(#arr)" marker-start="url(#arrl)"/>
+        <text x="44" y="135" text-anchor="middle" fill="#e76f51" font-size="11" font-family="sans-serif" transform="rotate(-90,44,130)" id="diag-height">Height: —</text>
+        <!-- Soil hatching -->
+        <rect x="460" y="100" width="50" height="60" fill="#c8a96e" rx="0" opacity=".6"/>
+        <text x="485" y="133" text-anchor="middle" fill="#5a3e1b" font-size="10" font-family="sans-serif">Soil</text>
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#e76f51"/>
+          </marker>
+          <marker id="arrl" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto-start-reverse">
+            <path d="M0,0 L0,6 L8,3 z" fill="#e76f51"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    <p class="note">Diagram updates after you calculate.</p>
+  </div>
+
+  <!-- CALCULATOR CARD -->
+  <div class="card">
+    <h2>Wall Dimensions</h2>
+
+    <div class="input-row">
+      <div class="input-group">
+        <label for="wallLength">Wall Length (ft)</label>
+        <input type="number" id="wallLength" placeholder="e.g. 20" min="0.1" step="0.1">
+        <div class="error-msg" id="err-length">Please enter a valid length greater than 0.</div>
+      </div>
+      <div class="input-group">
+        <label for="wallHeight">Wall Height (ft)</label>
+        <input type="number" id="wallHeight" placeholder="e.g. 3" min="0.1" step="0.1">
+        <div class="error-msg" id="err-height">Please enter a valid height greater than 0.</div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:.5rem">Block Dimensions</h2>
+    <div class="input-group">
+      <label for="blockPreset">Block Preset (or enter custom below)</label>
+      <select id="blockPreset">
+        <option value="custom">Custom / Enter manually</option>
+        <option value="12x4x6" selected>Standard 12″×4″ (L×H) — most common</option>
+        <option value="12x6x6">Tall 12″×6″ (L×H) — Allen Block style</option>
+        <option value="12x3x7">Low-profile 12″×3″ (L×H)</option>
+        <option value="18x6x12">Large 18″×6″ (L×H) — Versa-Lok style</option>
+        <option value="16x6x12">Medium 16″×6″ (L×H) — Anchor style</option>
+      </select>
+    </div>
+    <div class="input-row">
+      <div class="input-group">
+        <label for="blockLength">Block Face Length (in)</label>
+        <input type="number" id="blockLength" value="12" min="1" step="0.25" placeholder="12">
+        <div class="error-msg" id="err-blen">Enter a valid block length.</div>
+      </div>
+      <div class="input-group">
+        <label for="blockHeight">Block Height (in)</label>
+        <input type="number" id="blockHeight" value="4" min="1" step="0.25" placeholder="4">
+        <div class="error-msg" id="err-bht">Enter a valid block height.</div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div class="input-group">
+        <label for="setback">Setback per Course (in) <span style="color:#999;font-weight:400">(batter)</span></label>
+        <input type="number" id="setback" value="0.5" min="0" step="0.25" placeholder="0.5">
+      </div>
+      <div class="input-group">
+        <label for="buriedCourses">Buried Base Courses</label>
+        <input type="number" id="buriedCourses" value="1" min="0" max="5" step="1" placeholder="1">
+      </div>
+    </div>
+
+    <h2 style="margin-top:.5rem">Cost & Waste</h2>
+    <div class="input-row">
+      <div class="input-group">
+        <label for="blockCost">Block Price Each ($)</label>
+        <input type="number" id="blockCost" value="2.50" min="0" step="0.01" placeholder="2.50">
+      </div>
+      <div class="input-group">
+        <label for="waste">Waste Factor (%)</label>
+        <input type="number" id="waste" value="10" min="0" max="50" step="1" placeholder="10">
+      </div>
+    </div>
+
+    <button class="btn" id="calcBtn">Calculate Blocks</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+
+    <!-- Main stat -->
+    <div class="card" id="mainResult">
+      <div style="text-align:center;margin-bottom:1.2rem">
+        <div class="big-num" id="totalBlocks">—</div>
+        <div class="big-label">Total Blocks Needed (incl. waste)</div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="stat-val" id="coursesVal">—</div>
+          <div class="stat-lbl">Courses (rows)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="blocksPerCourseVal">—</div>
+          <div class="stat-lbl">Blocks per Course</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="baseBlocksVal">—</div>
+          <div class="stat-lbl">Base Course Blocks</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="totalCostVal">—</div>
+          <div class="stat-lbl">Estimated Block Cost</div>
+        </div>
+      </div>
+
+      <!-- Dynamic SVG diagram update note -->
+      <div class="diagram-wrap" id="resultDiagram" style="margin-bottom:0;margin-top:.5rem">
+        <svg id="wallDiagram2" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+          <rect width="520" height="220" fill="#f0f7f3" rx="6"/>
+          <g id="dynWall"></g>
+          <line x1="0" y1="185" x2="520" y2="185" stroke="#b5835a" stroke-width="1" stroke-dasharray="4,3" opacity=".5"/>
+          <rect x="0" y="185" width="520" height="35" fill="#b5835a" opacity=".7"/>
+          <text x="260" y="207" text-anchor="middle" fill="#fff" font-size="11" font-family="sans-serif">Ground level</text>
+          <!-- buried indicator -->
+          <g id="buriedIndicator"></g>
+          <defs>
+            <marker id="arr2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#e76f51"/>
+            </marker>
+            <marker id="arrl2" markerWidth="7" markerHeight="7" refX="1" refY="3" orient="auto-start-reverse">
+              <path d="M0,0 L0,6 L7,3 z" fill="#e76f51"/>
+            </marker>
+          </defs>
+          <!-- dimension lines will be injected -->
+          <g id="dimLines"></g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Breakdown table -->
+    <div class="card">
+      <h2>Course-by-Course Breakdown</h2>
+      <div class="table-wrap">
+        <table id="breakdownTable">
+          <thead><tr><th>Course</th><th>Type</th><th>Height from Base (in)</th><th>Blocks Needed</th></tr></thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+      <div id="showAllWrap" style="text-align:center;margin-top:.8rem;display:none">
+        <button class="btn-sm" id="showAllBtn">Show All Courses</button>
+      </div>
+      <div class="copy-row">
+        <button class="btn-sm" id="copyBtn">📋 Copy Results</button>
+      </div>
+    </div>
+
+    <!-- Pro Tip -->
+    <div class="pro-tip">
+      <div class="pro-tip-head">💡 Pro Tip</div>
+      <p>Always bury your first course at least 1" per foot of wall height — for a 3 ft wall, bury the base 3 inches minimum. Add a 6-inch compacted gravel base beneath the buried course for drainage. This prevents frost heave and keeps the wall plumb for years.</p>
+    </div>
+
+    <!-- Time estimate -->
+    <div class="card">
+      <h2>Time Estimate</h2>
+      <div class="time-est">
+        <div class="time-box">
+          <div class="time-head">🔨 Beginner</div>
+          <div class="time-val" id="timeBeginner">—</div>
+          <div style="font-size:.78rem;color:#555;margin-top:.2rem">First project</div>
+        </div>
+        <div class="time-box adv">
+          <div class="time-head">⚡ Experienced</div>
+          <div class="time-val" id="timeExperienced">—</div>
+          <div style="font-size:.78rem;color:#555;margin-top:.2rem">Done it before</div>
+        </div>
+      </div>
+      <p style="font-size:.82rem;color:#666">Includes excavation, gravel base, laying blocks, and backfill. Assumes hand tools.</p>
+    </div>
+
+    <!-- Shopping list -->
+    <div class="card">
+      <h2>🛒 Materials Shopping List</h2>
+      <div class="shopping-list" id="shoppingList"></div>
+      <p class="note" style="margin-top:.8rem">Prices are US averages. Always call your local supplier for exact quotes.</p>
+    </div>
+
+    <!-- Full cost breakdown -->
+    <div class="card">
+      <h2>Full Cost Estimate</h2>
+      <div class="table-wrap">
+        <table id="costTable">
+          <thead><tr><th>Item</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead>
+          <tbody id="costBody"></tbody>
+          <tfoot id="costFoot"></tfoot>
+        </table>
+      </div>
+      <p class="note" style="margin-top:.8rem">Labor not included. Contractor labor typically adds $15–$25 per sq ft of wall face.</p>
+    </div>
+
+  </div><!-- /results -->
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="card content-section">
+    <h2>How to Use This Retaining Wall Block Calculator</h2>
+    <p>Enter your wall's total <strong>length</strong> and <strong>height</strong> in feet, then choose a block preset or enter custom block dimensions in inches. Set your waste factor (10% is standard for straight walls, 15% for curves), and hit <strong>Calculate Blocks</strong>. You'll instantly get a total block count, a course-by-course breakdown, a full shopping list, and cost estimate.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Ordering the wrong number of blocks is one of the most common and expensive DIY mistakes. Over-ordering wastes money — retaining wall blocks typically cost $2–$6 each and can't always be returned once delivered. Under-ordering halts your project mid-build and forces a second delivery charge, often $75–$150 extra.</p>
+    <p>A 20-foot wall at 3 feet high requires roughly 180–220 blocks depending on block size — that's a $400–$1,300 material investment. Getting it right upfront saves you real money and a trip to the hardware store mid-weekend. This calculator also accounts for the buried base course — a detail many homeowners forget, which can cause a wall to fail within a few years.</p>
+    <p>Whether you're building a garden bed border, terracing a sloped backyard, or creating a driveway edge, these numbers give you a reliable starting point before you talk to a supplier or pull out your wallet.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The core formula is straightforward:</p>
+    <ul>
+      <li><strong>Blocks per course</strong> = Wall Length (in) ÷ Block Face Length (in), rounded up</li>
+      <li><strong>Number of courses</strong> = Wall Height (in) ÷ Block Height (in), rounded up</li>
+      <li><strong>Base blocks</strong> = Blocks per course × (1 + buried courses factor)</li>
+      <li><strong>Total blocks</strong> = Blocks per course × Total courses × (1 + waste%/100)</li>
+    </ul>
+    <p>The buried base course adds one extra row underground for structural integrity. The setback (batter) is for reference — most segmental retaining wall blocks are designed with a built-in 1–2° setback angle, which helps the wall lean slightly into the hillside for stability.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't skip the gravel base.</strong> 4–6 inches of compacted ¾" crushed gravel under the base course is mandatory — skip it and frost heave will topple your wall in 2 winters.</li>
+      <li><strong>Bury that first course.</strong> A 3-foot wall needs at least 3–4 inches buried. A 4-foot wall needs 4–6 inches. This is what locks the whole structure in place.</li>
+      <li><strong>Stagger your joints.</strong> Like brickwork, each course should offset by half a block. This is structural, not decorative.</li>
+      <li><strong>Add drainage behind the wall.</strong> Budget for a perforated drain pipe and filter fabric if your wall is retaining more than 2 feet of soil — water pressure behind a wall is the #1 cause of retaining wall failure.</li>
+      <li><strong>Walls over 4 feet may need a permit.</strong> Check with your local municipality before breaking ground — many areas require engineering approval for walls over 4 feet tall.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>How many retaining wall blocks do I need per square foot?</summary>
+      <div class="faq-body">It depends on block size. A standard 12"×4" block covers 0.33 sq ft of wall face, so you need about 3 blocks per square foot. A 12"×6" block covers 0.5 sq ft, needing about 2 blocks per sq ft. This calculator handles any size automatically — just enter your block dimensions.</div>
+    </details>
+    <details>
+      <summary>What waste percentage should I use?</summary>
+      <div class="faq-body">Use 10% for straight walls with no cuts. Bump it to 15% if your wall has curves, corners, or steps. If your design has lots of 45° corner cuts or curves, go up to 20%. It's always cheaper to have 3–5 extra blocks than to need an emergency reorder.</div>
+    </details>
+    <details>
+      <summary>How deep should the base course be buried?</summary>
+      <div class="faq-body">The general rule is 1 inch of burial per foot of wall height, with a minimum of 1 full course. So a 3-foot wall needs at least 3 inches buried (roughly one full course). This buried course plus a compacted gravel base is what keeps the entire wall from sliding or tipping forward over time.</div>
+    </details>
+    <details>
+      <summary>Do I need cap blocks too?</summary>
+      <div class="faq-body">Yes, for a finished look and to protect the top course from weathering, most people add cap blocks. Cap blocks are typically the same length as wall blocks but thinner (about 1.5–2 inches) and flat-faced. You'll need one cap block per face-length unit across the top — roughly the same count as one course of regular blocks.</div>
+    </details>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="card">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/soffit-fascia-replacement-cost-estimator/" class="related-link">Soffit & Fascia Cost Estimator</a>
+      <a href="/popcorn-ceiling-removal-cost-estimator/" class="related-link">Popcorn Ceiling Removal Cost</a>
+      <a href="/deck-construction-cost-estimator/" class="related-link">Deck Construction Cost Estimator</a>
+      <a href="/gravel-driveway-cost-calculator/" class="related-link">Gravel Driveway Cost Calculator</a>
+      <a href="/laminate-flooring-calculator/" class="related-link">Laminate Flooring Calculator</a>
+      <a href="/shed-material-cost-estimator/" class="related-link">Shed Material Cost Estimator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+  <footer>
+    <div style="margin-bottom:.5rem">
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div>© 2025 toolhut.dev — Free Online Tools</div>
+  </footer>
+</div>
+
+<script>
+// Preset block sizes: "LxH" in inches (length face x height)
+const PRESETS = {
+  'custom': null,
+  '12x4x6': {l:12, h:4},
+  '12x6x6': {l:12, h:6},
+  '12x3x7': {l:12, h:3},
+  '18x6x12': {l:18, h:6},
+  '16x6x12': {l:16, h:6}
+};
+
+document.getElementById('blockPreset').addEventListener('change', function(){
+  const key = this.value;
+  if(key !== 'custom' && PRESETS[key]){
+    document.getElementById('blockLength').value = PRESETS[key].l;
+    document.getElementById('blockHeight').value = PRESETS[key].h;
+  }
+});
+
+function fmt(n, dec=0){ return Number(n).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+function fmtMoney(n){ return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+function clearErrors(){
+  ['err-length','err-height','err-blen','err-bht'].forEach(id=>{
+    document.getElementById(id).style.display='none';
+  });
+  ['wallLength','wallHeight','blockLength','blockHeight'].forEach(id=>{
+    document.getElementById(id).classList.remove('error');
+  });
+}
+
+function showError(inputId, errId){
+  document.getElementById(inputId).classList.add('error');
+  document.getElementById(errId).style.display='block';
+}
+
+function calculate(){
+  clearErrors();
+  const wL = parseFloat(document.getElementById('wallLength').value);
+  const wH = parseFloat(document.getElementById('wallHeight').value);
+  const bL = parseFloat(document.getElementById('blockLength').value);
+  const bH = parseFloat(document.getElementById('blockHeight').value);
+  const setback = parseFloat(document.getElementById('setback').value)||0;
+  const buriedCourses = parseInt(document.getElementById('buriedCourses').value)||1;
+  const blockCost = parseFloat(document.getElementById('blockCost').value)||2.50;
+  const wastePct = parseFloat(document.getElementById('waste').value)||10;
+
+  let valid = true;
+  if(!wL || wL<=0){ showError('wallLength','err-length'); valid=false; }
+  if(!wH || wH<=0){ showError('wallHeight','err-height'); valid=false; }
+  if(!bL || bL<=0){ showError('blockLength','err-blen'); valid=false; }
+  if(!bH || bH<=0){ showError('blockHeight','err-bht'); valid=false; }
+  if(!valid) return;
+
+  // Core calcs
+  const wLin = wL * 12; // wall length in inches
+  const wHin = wH * 12; // wall height in inches
+  const blocksPerCourse = Math.ceil(wLin / bL);
+  const visibleCourses = Math.ceil(wHin / bH);
+  const totalCourses = visibleCourses + buriedCourses;
+  const baseBlocks = blocksPerCourse; // one buried base course (could be more)
+  const netBlocks = blocksPerCourse * totalCourses;
+  const withWaste = Math.ceil(netBlocks * (1 + wastePct/100));
+  const capBlocks = Math.ceil(blocksPerCourse * (1 + wastePct/100));
+  const wallArea = wL * wH; // sq ft face area
+
+  // Gravel base: 6" deep, 1.5x block depth wide, full length — approx cubic yards
+  // Typical gravel base: 1.5 ft wide * 0.5 ft deep * wL ft long
+  const gravelCuYd = Math.ceil(((1.5 * 0.5 * wL) / 27) * 1.15 * 10)/10; // cu yd with 15% extra
+  const gravel50lb = Math.ceil(gravelCuYd * 27 * 100 / 50); // rough 50lb bags if small project
+  const filterFabricSqFt = Math.ceil(wL * (wH + 1) * 1.1);
+  const backfillCuYd = Math.ceil((wL * wH * 0.75 / 27) * 1.1 * 10)/10;
+
+  // Costs (avg US prices)
+  const blocksTotalCost = withWaste * blockCost;
+  const capCost = capBlocks * 1.80;
+  const gravelCost = gravelCuYd * 45;
+  const fabricCost = Math.ceil(filterFabricSqFt / 100) * 35;
+  const drainPipeFt = wL + 2;
+  const drainCost = drainPipeFt * 1.20;
+  const totalCost = blocksTotalCost + capCost + gravelCost + fabricCost + drainCost;
+
+  // Time estimate (1 experienced person can lay ~50 blocks/hr with setup)
+  const hoursExp = Math.ceil(withWaste / 50 + wL * 0.15 + 1); // layout + excavation
+  const hoursBeg = Math.ceil(hoursExp * 2);
+  function fmtHours(h){ if(h<8) return h+' hrs'; const d=Math.ceil(h/8); return d+(d===1?' day':' days'); }
+
+  // Build breakdown table rows (all courses)
+  let allRows = '';
+  let visibleRows = '';
+  const MAX_VISIBLE = 12;
+  for(let i=1; i<=totalCourses; i++){
+    const isBuried = i <= buriedCourses;
+    const heightFromBase = (i-1) * bH;
+    const type = isBuried ? '⛏ Buried' : (i===totalCourses ? '🔝 Top' : '📦 Standard');
+    const rowClass = isBuried ? ' style="background:#fff3e0"' : '';
+    const row = `<tr${rowClass}><td>Course ${i}</td><td>${type}</td><td style="text-align:right">${fmt(heightFromBase)}"</td><td style="text-align:right">${fmt(blocksPerCourse)}</td></tr>`;
+    allRows += row;
+    if(i<=MAX_VISIBLE) visibleRows += row;
+  }
+
+  // Shopping list
+  let shopHTML = `
+    <div class="shopping-item"><span class="item-name">Retaining wall blocks</span><span class="item-qty">${fmt(withWaste)} blocks</span></div>
+    <div class="shopping-item"><span class="item-name">Cap blocks (top course)</span><span class="item-qty">${fmt(capBlocks)} blocks</span></div>
+    <div class="shopping-item"><span class="item-name">Crushed gravel (¾" compactable)</span><span class="item-qty">${fmt(gravelCuYd,1)} cu yd</span></div>
+    <div class="shopping-item"><span class="item-name">Landscape filter fabric</span><span class="item-qty">${fmt(filterFabricSqFt)} sq ft</span></div>
+    <div class="shopping-item"><span class="item-name">Perforated drain pipe (4")</span><span class="item-qty">${fmt(Math.ceil(drainPipeFt))} linear ft</span></div>
+    <div class="shopping-item"><span class="item-name">Backfill gravel / clean fill</span><span class="item-qty">${fmt(backfillCuYd,1)} cu yd</span></div>
+    <div class="shopping-item"><span class="item-name">Construction adhesive (top 2 courses)</span><span class="item-qty">${Math.ceil(blocksPerCourse*2/12)} tubes</span></div>
+  `;
+
+  // Cost table
+  const costRows = `
+    <tr><td>Retaining wall blocks (×${fmt(withWaste)})</td><td style="text-align:right">${fmt(withWaste)}</td><td style="text-align:right">${fmtMoney(blockCost)}</td><td style="text-align:right">${fmtMoney(blocksTotalCost)}</td></tr>
+    <tr><td>Cap blocks (×${fmt(capBlocks)})</td><td style="text-align:right">${fmt(capBlocks)}</td><td style="text-align:right">$1.80</td><td style="text-align:right">${fmtMoney(capCost)}</td></tr>
+    <tr><td>Compacted gravel base</td><td style="text-align:right">${fmt(gravelCuYd,1)} cu yd</td><td style="text-align:right">$45.00/yd</td><td style="text-align:right">${fmtMoney(gravelCost)}</td></tr>
+    <tr><td>Filter fabric</td><td style="text-align:right">${fmt(filterFabricSqFt)} sq ft</td><td style="text-align:right">~$35/roll</td><td style="text-align:right">${fmtMoney(fabricCost)}</td></tr>
+    <tr><td>Perforated drain pipe</td><td style="text-align:right">${fmt(Math.ceil(drainPipeFt))} ft</td><td style="text-align:right">$1.20/ft</td><td style="text-align:right">${fmtMoney(drainCost)}</td></tr>
+  `;
+  const costFoot = `<tr style="font-weight:700;background:#e8f5e9"><td colspan="3">Total Materials Estimate</td><td style="text-align:right;color:#2d6a4f">${fmtMoney(totalCost)}</td></tr>`;
+
+  // Update dynamic SVG diagram
+  function buildDiagram(){
+    const svgW = 520, svgH = 220;
+    const groundY = 185;
+    const maxCourses = Math.min(totalCourses, 8);
+    const courseH = Math.min(Math.floor((groundY - 20) / maxCourses), 26);
+    const wallLeft = 60, wallRight = 460;
+    const wallW = wallRight - wallLeft;
+
+    let wallHTML = '';
+    const colorStd = '#9caf88', colorBuried = '#c8a96e', colorTop = '#6fae73';
+    for(let i=maxCourses; i>=1; i--){
+      const yTop = groundY - (i * courseH);
+      const isBuried = (maxCourses - i + 1) <= buriedCourses;
+      const isTop = i === maxCourses;
+      const fill = isBuried ? colorBuried : (isTop ? colorTop : colorStd);
+      const sbOffset = (maxCourses - i) * (setback / bL * (wallW / maxCourses));
+      const x = wallLeft + sbOffset;
+      const w = wallW - sbOffset;
+      wallHTML += `<rect x="${x}" y="${yTop}" width="${w}" height="${courseH}" fill="${fill}" stroke="#2d6a4f" stroke-width="1" rx="1"/>`;
+      // vertical block joints
+      const blockW = Math.max(w / Math.min(blocksPerCourse, 10), 12);
+      const offset = (i % 2 === 0) ? blockW/2 : 0;
+      for(let j=1; j*blockW < w; j++){
+        const jx = x + (j * blockW) - (offset % blockW);
+        if(jx > x && jx < x+w){
+          wallHTML += `<line x1="${jx}" y1="${yTop}" x2="${jx}" y2="${yTop+courseH}" stroke="#2d6a4f" stroke-width="0.7" opacity="0.5"/>`;
+        }
+      }
+    }
+
+    // Buried zone indicator
+    const buriedTop = groundY - buriedCourses * courseH;
+    const buriedHTML = `<rect x="${wallLeft-10}" y="${buriedTop}" width="10" height="${buriedCourses*courseH}" fill="#c8a96e" opacity=".6" rx="2"/>
+      <text x="${wallLeft-2}" y="${buriedTop + buriedCourses*courseH/2}" text-anchor="middle" fill="#5a3e1b" font-size="8" font-family="sans-serif" transform="rotate(-90,${wallLeft-6},${buriedTop+buriedCourses*courseH/2})">Buried</text>`;
+
+    // Dimension lines
+    const wallTopY = groundY - maxCourses * courseH;
+    const dimHTML = `
+      <line x1="${wallLeft}" y1="${wallTopY-10}" x2="${wallRight}" y2="${wallTopY-10}" stroke="#e76f51" stroke-width="1.5" marker-end="url(#arr2)" marker-start="url(#arrl2)"/>
+      <text x="${(wallLeft+wallRight)/2}" y="${wallTopY-14}" text-anchor="middle" fill="#e76f51" font-size="10" font-family="sans-serif">${wL} ft</text>
+      <line x1="${wallLeft-18}" y1="${wallTopY}" x2="${wallLeft-18}" y2="${groundY}" stroke="#e76f51" stroke-width="1.5" marker-end="url(#arr2)" marker-start="url(#arrl2)"/>
+      <text x="${wallLeft-16}" y="${(wallTopY+groundY)/2}" text-anchor="middle" fill="#e76f51" font-size="10" font-family="sans-serif" transform="rotate(-90,${wallLeft-20},${(wallTopY+groundY)/2})">${wH} ft</text>
+      <text x="${wallRight+8}" y="${groundY - (buriedCourses*courseH)/2}" fill="#5a3e1b" font-size="9" font-family="sans-serif">Soil</text>
+    `;
+
+    document.getElementById('dynWall').innerHTML = wallHTML;
+    document.getElementById('buriedIndicator').innerHTML = buriedHTML;
+    document.getElementById('dimLines').innerHTML = dimHTML;
+  }
+
+  requestAnimationFrame(()=>{
+    // Main stats
+    document.getElementById('totalBlocks').textContent = fmt(withWaste);
+    document.getElementById('coursesVal').textContent = totalCourses;
+    document.getElementById('blocksPerCourseVal').textContent = fmt(blocksPerCourse);
+    document.getElementById('baseBlocksVal').textContent = fmt(baseBlocks * buriedCourses);
+    document.getElementById('totalCostVal').textContent = fmtMoney(blocksTotalCost);
+
+    // Time
+    document.getElementById('timeBeginner').textContent = fmtHours(hoursBeg);
+    document.getElementById('timeExperienced').textContent = fmtHours(hoursExp);
+
+    // Breakdown table
+    const showAll = totalCourses <= MAX_VISIBLE;
+    document.getElementById('breakdownBody').innerHTML = visibleRows;
+    if(!showAll){
+      document.getElementById('showAllWrap').style.display='block';
+      document.getElementById('showAllBtn').setAttribute('data-all', allRows);
+      document.getElementById('showAllBtn').setAttribute('data-vis', visibleRows);
+      document.getElementById('showAllBtn').setAttribute('data-shown','false');
+    } else {
+      document.getElementById('showAllWrap').style.display='none';
+    }
+
+    // Shopping & cost
+    document.getElementById('shoppingList').innerHTML = shopHTML;
+    document.getElementById('costBody').innerHTML = costRows;
+    document.getElementById('costFoot').innerHTML = costFoot;
+
+    // Show results
+    document.getElementById('results').classList.add('visible');
+
+    // Build diagram
+    buildDiagram();
+
+    // Scroll to results
+    document.getElementById('mainResult').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+// Show all courses toggle
+document.addEventListener('click', function(e){
+  if(e.target.id==='showAllBtn'){
+    const btn = e.target;
+    const shown = btn.getAttribute('data-shown')==='true';
+    if(!shown){
+      document.getElementById('breakdownBody').innerHTML = btn.getAttribute('data-all');
+      btn.textContent = 'Show Less';
+      btn.setAttribute('data-shown','true');
+    } else {
+      document.getElementById('breakdownBody').innerHTML = btn.getAttribute('data-vis');
+      btn.textContent = 'Show All Courses';
+      btn.setAttribute('data-shown','false');
+    }
+  }
+});
+
+// Copy button
+document.getElementById('copyBtn').addEventListener('click', function(){
+  const wL = document.getElementById('wallLength').value;
+  const wH = document.getElementById('wallHeight').value;
+  const total = document.getElementById('totalBlocks').textContent;
+  const cost = document.getElementById('totalCostVal').textContent;
+  const courses = document.getElementById('coursesVal').textContent;
+  const bpc = document.getElementById('blocksPerCourseVal').textContent;
+  const text = `Retaining Wall Block Calculator Results\n` +
+    `Wall: ${wL} ft long × ${wH} ft high\n` +
+    `Total Blocks Needed: ${total}\n` +
+    `Courses: ${courses} | Blocks per Course: ${bpc}\n` +
+    `Estimated Block Cost: ${cost}\n` +
+    `Calculated at toolhut.dev/retaining-wall-block-calculator/`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(()=>{btn.textContent='📋 Copy Results';},2000);
+  }).catch(()=>{
+    alert('Copy failed. Please select results manually.');
+  });
+});
+
+// Calculate on button click
+document.getElementById('calcBtn').addEventListener('click', ()=>{
+  requestAnimationFrame(()=>{ calculate(); });
+});
+
+// Calculate on Enter key
+document.querySelectorAll('input').forEach(inp=>{
+  inp.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ requestAnimationFrame(()=>{ calculate(); }); }
+  });
+});
+</script>
+</body>
+</html>
