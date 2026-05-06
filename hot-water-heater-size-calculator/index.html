@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hot Water Heater Size Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Find the right water heater size for your home. Enter household size and usage habits to get the perfect tank or tankless recommendation — free and instant.">
+<link rel="canonical" href="https://toolhut.dev/hot-water-heater-size-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hot Water Heater Size Calculator",
+  "url": "https://toolhut.dev/hot-water-heater-size-calculator/",
+  "description": "Calculate the right water heater size for your home based on household size and hot water usage habits.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:48px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#1a1a2e}
+.nav-brand span{color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 3rem}
+h1{font-size:1.6rem;font-weight:700;color:#1a1a2e;margin-bottom:0.4rem;line-height:1.3}
+.subtitle{color:#555;font-size:0.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:2rem}
+.section-label{display:block;font-size:0.85rem;font-weight:500;color:#444;margin-bottom:6px}
+.input-group{margin-bottom:1.2rem}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;font-family:inherit;background:#fff;color:#1a1a2e;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none}
+input[type=number]:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,0.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:0.8rem;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{background:#2d6a4f;color:#fff;border:none;padding:13px 24px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;width:100%;min-height:44px;transition:background 0.2s}
+.btn:hover{background:#245c43}
+.btn-outline{background:#fff;color:#2d6a4f;border:2px solid #2d6a4f;padding:10px 20px;border-radius:6px;font-size:0.9rem;font-weight:600;cursor:pointer;min-height:44px;transition:all 0.2s}
+.btn-outline:hover{background:#2d6a4f;color:#fff}
+.results{opacity:0;transition:opacity 0.3s ease;pointer-events:none}
+.results.show{opacity:1;pointer-events:all}
+.result-hero{text-align:center;padding:1.5rem;background:linear-gradient(135deg,#2d6a4f,#40916c);border-radius:8px;color:#fff;margin-bottom:1.5rem}
+.result-hero .big-num{font-size:3rem;font-weight:700;line-height:1}
+.result-hero .big-label{font-size:1rem;opacity:0.9;margin-top:4px}
+.result-hero .sub{font-size:0.85rem;opacity:0.8;margin-top:8px}
+.rec-badge{display:inline-block;background:#e76f51;color:#fff;font-size:0.8rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.data-table{width:100%;border-collapse:collapse;font-size:0.9rem}
+.data-table th{background:#f0f0f0;padding:8px 12px;text-align:left;font-weight:600;font-size:0.8rem;color:#444}
+.data-table td{padding:8px 12px;border-bottom:1px solid #eee}
+.data-table tr:nth-child(even) td{background:#fafafa}
+.data-table td:last-child{text-align:right;font-weight:500}
+.section-title{font-size:1.05rem;font-weight:700;color:#1a1a2e;margin-bottom:0.8rem}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;padding:1rem 1.2rem;border-radius:0 6px 6px 0;margin-bottom:1.5rem}
+.pro-tip strong{color:#e76f51;display:block;margin-bottom:4px}
+.shopping-list{list-style:none;padding:0}
+.shopping-list li{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #eee;font-size:0.9rem}
+.shopping-list li:last-child{border-bottom:none}
+.shop-qty{background:#e8f5e9;color:#2d6a4f;padding:2px 8px;border-radius:4px;font-weight:600;font-size:0.8rem}
+.time-badges{display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.5rem}
+.time-badge{display:flex;align-items:center;gap:6px;background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:8px 12px;font-size:0.85rem}
+.time-badge .icon{font-size:1.1rem}
+.copy-btn{background:#f8f9fa;border:1px solid #dee2e6;color:#444;padding:6px 14px;border-radius:4px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;min-height:32px}
+.copy-btn:hover{background:#e8f5e9;color:#2d6a4f;border-color:#2d6a4f}
+.copy-row{display:flex;justify-content:flex-end;margin-top:0.8rem}
+.svg-wrap{background:#f0f7f4;border:1px solid #dee2e6;border-radius:8px;padding:1rem;margin-bottom:1.5rem;text-align:center;overflow:hidden}
+.svg-wrap svg{max-width:100%;height:auto}
+.tabs{display:flex;gap:0;border-bottom:2px solid #dee2e6;margin-bottom:1.5rem}
+.tab{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:0.9rem;font-weight:600;color:#777;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all 0.2s;min-height:44px}
+.tab.active{color:#2d6a4f;border-bottom-color:#2d6a4f}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.option-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.option-card{border:2px solid #dee2e6;border-radius:8px;padding:1rem;cursor:pointer;transition:all 0.2s;background:#fff;text-align:center}
+.option-card:hover{border-color:#2d6a4f}
+.option-card.selected{border-color:#2d6a4f;background:#e8f5e9}
+.option-card .oc-icon{font-size:2rem}
+.option-card .oc-label{font-size:0.85rem;font-weight:600;margin-top:4px;color:#1a1a2e}
+.option-card .oc-desc{font-size:0.75rem;color:#666;margin-top:2px}
+.range-row{display:flex;align-items:center;gap:1rem}
+.range-row input[type=range]{flex:1;accent-color:#2d6a4f}
+.range-val{min-width:40px;text-align:right;font-weight:700;color:#2d6a4f;font-size:1.1rem}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin:1.8rem 0 0.6rem}
+.content-section p{color:#444;font-size:0.95rem;margin-bottom:0.8rem;line-height:1.7}
+.content-section ul{color:#444;font-size:0.95rem;padding-left:1.2rem;margin-bottom:0.8rem}
+.content-section ul li{margin-bottom:0.4rem;line-height:1.6}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:0.5rem;background:#fff}
+summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:0.9rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:'＋';color:#2d6a4f;font-weight:700}
+details[open] summary::after{content:'－'}
+details p{padding:0 16px 12px;color:#555;font-size:0.9rem;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.related-link{background:#fff;border:1px solid #dee2e6;border-radius:6px;padding:0.75rem 1rem;font-size:0.85rem;font-weight:500;color:#2d6a4f;display:block;transition:all 0.2s}
+.related-link:hover{background:#e8f5e9;border-color:#2d6a4f;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.5rem 1rem;text-align:center;font-size:0.85rem;color:#666}
+footer a{color:#2d6a4f;margin:0 0.5rem}
+.compare-wrap{overflow-x:auto}
+.highlight-row td{background:#e8f5e9!important;font-weight:600;color:#2d6a4f}
+@media(max-width:500px){
+  .row-2{grid-template-columns:1fr}
+  .option-cards{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.35rem}
+  .result-hero .big-num{font-size:2.4rem}
+  .time-badges{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">tool<span>hut</span>.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Hot Water Heater Size Calculator</h1>
+  <p class="subtitle">Find the right tank size or flow rate for your household — in seconds.</p>
+
+  <div class="card">
+    <!-- SVG Diagram -->
+    <div class="svg-wrap" id="svgDiagram">
+      <svg id="heaterSVG" width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tank body -->
+        <rect x="90" y="40" width="120" height="130" rx="12" fill="#b7e4c7" stroke="#2d6a4f" stroke-width="2.5"/>
+        <!-- Tank top dome -->
+        <ellipse cx="150" cy="40" rx="60" ry="12" fill="#74c69d" stroke="#2d6a4f" stroke-width="2.5"/>
+        <!-- Tank bottom dome -->
+        <ellipse cx="150" cy="170" rx="60" ry="12" fill="#74c69d" stroke="#2d6a4f" stroke-width="2.5"/>
+        <!-- Water level fill -->
+        <clipPath id="tankClip"><rect x="91" y="41" width="118" height="128" rx="10"/></clipPath>
+        <rect id="waterFill" x="91" y="110" width="118" height="59" fill="#40916c" opacity="0.4" clip-path="url(#tankClip)"/>
+        <!-- Pipes -->
+        <rect x="140" y="10" width="8" height="30" rx="3" fill="#adb5bd"/>
+        <rect x="160" y="10" width="8" height="30" rx="3" fill="#e76f51"/>
+        <!-- Labels on pipes -->
+        <text x="144" y="8" font-size="8" fill="#555" text-anchor="middle">COLD</text>
+        <text x="165" y="8" font-size="8" fill="#e76f51" text-anchor="middle">HOT</text>
+        <!-- Gallons label -->
+        <text id="svgGallons" x="150" y="115" font-size="22" font-weight="700" fill="#2d6a4f" text-anchor="middle">—</text>
+        <text x="150" y="131" font-size="10" fill="#2d6a4f" text-anchor="middle">gallons</text>
+        <!-- Flame / element -->
+        <text x="150" y="163" font-size="16" text-anchor="middle">🔥</text>
+        <!-- Stand legs -->
+        <rect x="105" y="178" width="8" height="18" rx="3" fill="#adb5bd"/>
+        <rect x="187" y="178" width="8" height="18" rx="3" fill="#adb5bd"/>
+        <!-- Dimension arrow -->
+        <text id="svgType" x="150" y="198" font-size="9" fill="#888" text-anchor="middle">Tank Water Heater</text>
+      </svg>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs" role="tablist">
+      <button class="tab active" onclick="switchTab('tank')" id="tab-tank" role="tab" aria-selected="true">Tank Heater</button>
+      <button class="tab" onclick="switchTab('tankless')" id="tab-tankless" role="tab" aria-selected="false">Tankless Heater</button>
+    </div>
+
+    <!-- TANK TAB -->
+    <div class="tab-content active" id="content-tank">
+      <div class="row-2">
+        <div class="input-group">
+          <label class="section-label" for="numPeople">Number of People in Home</label>
+          <div class="range-row">
+            <input type="range" id="numPeopleRange" min="1" max="8" value="3" oninput="syncRange('numPeople','numPeopleRange','numPeopleVal')">
+            <span class="range-val" id="numPeopleVal">3</span>
+          </div>
+          <input type="number" id="numPeople" min="1" max="20" value="3" placeholder="e.g. 3" oninput="syncInput('numPeople','numPeopleRange','numPeopleVal')">
+          <div class="error-msg" id="err-people">Please enter a valid number (1–20).</div>
+        </div>
+        <div class="input-group">
+          <label class="section-label" for="usageLevel">Usage Level</label>
+          <select id="usageLevel">
+            <option value="low">Low (quick showers)</option>
+            <option value="average" selected>Average</option>
+            <option value="high">High (baths, long showers)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div class="input-group">
+          <label class="section-label" for="numBaths">Number of Bathrooms</label>
+          <input type="number" id="numBaths" min="1" max="10" value="2" placeholder="e.g. 2">
+          <div class="error-msg" id="err-baths">Please enter 1–10 bathrooms.</div>
+        </div>
+        <div class="input-group">
+          <label class="section-label" for="fuelType">Fuel Type</label>
+          <select id="fuelType">
+            <option value="electric">Electric</option>
+            <option value="gas" selected>Natural Gas</option>
+            <option value="propane">Propane</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="section-label">Typical Peak Hour Usage</label>
+        <div class="option-cards" id="peakCards">
+          <div class="option-card selected" onclick="selectPeak(this,'low')">
+            <div class="oc-icon">🚿</div>
+            <div class="oc-label">Morning Rush</div>
+            <div class="oc-desc">1–2 showers + dishes</div>
+          </div>
+          <div class="option-card" onclick="selectPeak(this,'high')">
+            <div class="oc-icon">🛁</div>
+            <div class="oc-label">Heavy Use</div>
+            <div class="oc-desc">Baths, laundry + dishes</div>
+          </div>
+        </div>
+        <input type="hidden" id="peakUsage" value="low">
+      </div>
+
+      <button class="btn" onclick="calculate()">Calculate Tank Size</button>
+    </div>
+
+    <!-- TANKLESS TAB -->
+    <div class="tab-content" id="content-tankless">
+      <div class="row-2">
+        <div class="input-group">
+          <label class="section-label" for="tlPeople">Number of People</label>
+          <input type="number" id="tlPeople" min="1" max="20" value="3" placeholder="e.g. 3">
+        </div>
+        <div class="input-group">
+          <label class="section-label" for="tlFixtures">Simultaneous Fixtures</label>
+          <select id="tlFixtures">
+            <option value="1">1 fixture (1 shower)</option>
+            <option value="2" selected>2 fixtures (shower + sink)</option>
+            <option value="3">3 fixtures (2 showers + sink)</option>
+            <option value="4">4+ fixtures (whole house)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="input-group">
+          <label class="section-label" for="tlClimate">Climate Zone</label>
+          <select id="tlClimate">
+            <option value="warm">Warm (groundwater ~70°F)</option>
+            <option value="moderate" selected>Moderate (~55°F)</option>
+            <option value="cold">Cold (northern, ~40°F)</option>
+            <option value="very_cold">Very Cold (~35°F)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="section-label" for="tlFuel">Fuel Type</label>
+          <select id="tlFuel">
+            <option value="gas" selected>Natural Gas / Propane</option>
+            <option value="electric">Electric</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="calculateTankless()">Calculate Flow Rate</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="resultsArea">
+    <div id="resultsContent"></div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+    <h2>How to Use This Water Heater Size Calculator</h2>
+    <p>Select your heater type (tank or tankless), then enter your household size, number of bathrooms, fuel type, and typical usage patterns. Hit "Calculate" and you'll instantly see the recommended tank capacity in gallons (or flow rate in GPM for tankless), along with a full breakdown and shopping list.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Buying the wrong size water heater is one of the most common — and expensive — mistakes homeowners make. A 40-gallon tank sounds fine until you're the fifth person in a family of five taking a cold shower. On the flip side, a 75-gallon tank in a two-person condo wastes $150–$200 a year in standby energy losses alone.</p>
+    <p>A family of four with average habits typically needs a 50–60 gallon tank. Add a teenager who takes 20-minute showers and you're looking at 60–75 gallons. Switch to tankless and a family of four in a moderate climate needs about 7–9 GPM from a gas unit. These numbers matter because water heating accounts for roughly 18% of a home's energy bill — the second-largest energy expense after heating and cooling.</p>
+    <p>Whether you're replacing a failed unit in an emergency or planning a renovation, getting the size right means lower bills, no cold showers, and a unit that lasts its full 10–15 year lifespan.</p>
+
+    <h2>How It's Calculated</h2>
+    <p><strong>For tank heaters:</strong> The standard method uses First Hour Rating (FHR) — how many gallons of hot water the heater delivers in the first hour of operation. The formula:</p>
+    <p><em>Required FHR = (People × Gallons per person per peak hour) × Usage multiplier</em></p>
+    <p>Average person uses 10–12 gallons during morning peak. Multiply by household count, adjust for high/low usage, and match to a standard tank size (30, 40, 50, 60, 75, 80 gal).</p>
+    <p><strong>For tankless:</strong> Flow rate in GPM = Sum of simultaneous fixture flow rates. A shower uses ~2.0 GPM, a faucet ~1.0 GPM. Temperature rise needed = Target temp (120°F) − incoming groundwater temp. Combined, these determine the BTU/hr or kW required.</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Don't size by tank volume alone</strong> — always check the First Hour Rating on the Energy Guide label. Two 50-gallon tanks can have very different FHR values.</li>
+      <li><strong>Add a buffer for growth</strong> — if you're planning to have kids or frequently host guests, go one size up. The incremental cost is small; the comfort difference is huge.</li>
+      <li><strong>Measure your space before buying</strong> — tankless units require specific venting; a standard 75-gal tank may not fit your utility closet. Always confirm dimensions.</li>
+      <li><strong>Check inlet water temperature by region</strong> — in Minnesota, groundwater can be 35°F in winter, which dramatically affects tankless unit sizing compared to Florida's 70°F.</li>
+      <li><strong>Consider the 10-year cost</strong> — a $200 more efficient unit often saves $400+ over its lifetime. Factor in energy costs, not just purchase price.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What size water heater do I need for a family of 4?</summary>
+      <p>A family of four with average usage needs a 50–60 gallon tank water heater, or a gas tankless unit rated at 7–9 GPM. If you have a bathtub used regularly or a large soaking tub, consider bumping up to 60–75 gallons. The exact size depends on your usage habits and peak hour demand.</p>
+    </details>
+    <details>
+      <summary>Is tankless always better than a tank heater?</summary>
+      <p>Not always. Tankless heaters are more energy-efficient (up to 34% for low-use homes) and provide endless hot water, but they cost 2–3× more upfront and may need a gas line upgrade or larger electrical panel. For households that use less than 41 gallons per day, tankless is a clear winner. For large families with simultaneous high demand, a well-sized tank may be simpler and more cost-effective.</p>
+    </details>
+    <details>
+      <summary>How long does a water heater installation take?</summary>
+      <p>A straight tank-for-tank swap takes a licensed plumber 2–4 hours. Converting from tank to tankless can take 4–8 hours due to venting and gas/electrical upgrades. DIY is possible for tank heaters in most states but always check local permit requirements — many jurisdictions require a permit and inspection for water heater replacements.</p>
+    </details>
+    <details>
+      <summary>What temperature should I set my water heater?</summary>
+      <p>The US Department of Energy recommends 120°F (49°C) for most households — hot enough to kill bacteria, low enough to prevent scalding and reduce energy waste. Hospitals and homes with immunocompromised individuals often use 140°F with a mixing valve at the tap. Every 10°F reduction in temperature saves roughly 3–5% on water heating costs.</p>
+    </details>
+
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="/egress-window-well-size-calculator/" class="related-link">Egress Window Well Size Calculator</a>
+      <a href="/retaining-wall-block-calculator/" class="related-link">Retaining Wall Block Calculator</a>
+      <a href="/soffit-fascia-replacement-cost-estimator/" class="related-link">Soffit & Fascia Replacement Cost Estimator</a>
+      <a href="/popcorn-ceiling-removal-cost-estimator/" class="related-link">Popcorn Ceiling Removal Cost Estimator</a>
+      <a href="/deck-construction-cost-estimator/" class="related-link">Deck Construction Cost Estimator</a>
+      <a href="/gravel-driveway-cost-calculator/" class="related-link">Gravel Driveway Cost Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>© <span id="yr"></span> toolhut.dev &nbsp;|&nbsp;
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Tab switching
+function switchTab(tab){
+  ['tank','tankless'].forEach(t=>{
+    document.getElementById('content-'+t).classList.toggle('active',t===tab);
+    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
+    document.getElementById('tab-'+t).setAttribute('aria-selected',t===tab);
+  });
+  updateSVG(tab);
+}
+
+// SVG update
+function updateSVG(type, gallons){
+  const svgType = document.getElementById('svgType');
+  const svgGallons = document.getElementById('svgGallons');
+  const waterFill = document.getElementById('waterFill');
+  if(type==='tankless'){
+    svgType.textContent = 'Tankless Water Heater';
+    svgGallons.textContent = '∞';
+    waterFill.setAttribute('y','60');
+    waterFill.setAttribute('height','109');
+  } else {
+    svgType.textContent = 'Tank Water Heater';
+    if(gallons){
+      svgGallons.textContent = gallons;
+      // water fill proportional to size (30-80 gal)
+      const pct = Math.min(1, Math.max(0.3, (gallons - 30)/(80-30)));
+      const fillH = Math.round(pct * 100);
+      const fillY = 170 - fillH;
+      waterFill.setAttribute('y', fillY);
+      waterFill.setAttribute('height', fillH);
+    } else {
+      svgGallons.textContent = '—';
+      waterFill.setAttribute('y','110');
+      waterFill.setAttribute('height','59');
+    }
+  }
+}
+
+// Range / input sync
+function syncRange(inputId, rangeId, valId){
+  const v = document.getElementById(rangeId).value;
+  document.getElementById(inputId).value = v;
+  document.getElementById(valId).textContent = v;
+}
+function syncInput(inputId, rangeId, valId){
+  const v = document.getElementById(inputId).value;
+  if(v >= 1 && v <= 8){
+    document.getElementById(rangeId).value = v;
+    document.getElementById(valId).textContent = v;
+  }
+}
+
+// Peak usage selection
+function selectPeak(el, val){
+  document.querySelectorAll('#peakCards .option-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('peakUsage').value = val;
+}
+
+// Validation
+function validatePositive(id, errId, min, max){
+  const v = parseFloat(document.getElementById(id).value);
+  const ok = !isNaN(v) && v >= min && v <= max;
+  document.getElementById(id).classList.toggle('error', !ok);
+  const em = document.getElementById(errId);
+  if(em) em.classList.toggle('show', !ok);
+  return ok ? v : null;
+}
+
+function fmt(n){ return Number(n).toLocaleString(); }
+
+// TANK CALCULATOR
+function calculate(){
+  const people = validatePositive('numPeople','err-people',1,20);
+  const baths = validatePositive('numBaths','err-baths',1,10);
+  if(people===null || baths===null) return;
+
+  const usage = document.getElementById('usageLevel').value;
+  const fuel = document.getElementById('fuelType').value;
+  const peak = document.getElementById('peakUsage').value;
+
+  // Gallons per person per peak hour
+  let baseGPP = usage === 'low' ? 8 : usage === 'high' ? 14 : 10;
+  // Peak usage multiplier
+  let peakMult = peak === 'high' ? 1.2 : 1.0;
+  // First Hour Rating needed
+  let fhr = Math.round(people * baseGPP * peakMult);
+  // Tank size: add ~20% buffer over FHR
+  let rawTank = fhr * 1.15;
+  // Snap to standard sizes
+  const sizes = [30, 40, 50, 60, 75, 80];
+  let tankSize = sizes.find(s => s >= rawTank) || 80;
+
+  // Cost estimates
+  const costs = {
+    electric:{unit:[400,900],install:[200,400],annual:550},
+    gas:{unit:[350,800],install:[250,500],annual:380},
+    propane:{unit:[350,800],install:[250,500],annual:420}
+  };
+  const c = costs[fuel];
+  const unitMid = Math.round((c.unit[0]+c.unit[1])/2);
+  const installMid = Math.round((c.install[0]+c.install[1])/2);
+  const totalMid = unitMid + installMid;
+
+  // EF / energy
+  const efMap = {electric:'0.90–0.95 EF',gas:'0.59–0.70 EF',propane:'0.59–0.70 EF'};
+  const fuelLabel = {electric:'Electric',gas:'Natural Gas',propane:'Propane'};
+
+  // Comparison table
+  const compRows = sizes.map(s => {
+    const match = s >= rawTank && s <= rawTank*1.4;
+    const rec = s === tankSize;
+    return `<tr class="${rec?'highlight-row':''}">
+      <td>${s} gal${rec?' ★':''}</td>
+      <td>${s === 30 ? '1–2' : s === 40 ? '2–3' : s === 50 ? '3–4' : s === 60 ? '4–5' : s === 75 ? '5–6' : '6+'}</td>
+      <td>$${fmt(Math.round(c.unit[0]*(s/50)))}–$${fmt(Math.round(c.unit[1]*(s/50)))}</td>
+      <td>${rec?'✅ Recommended':match?'Good option':'—'}</td>
+    </tr>`;
+  }).join('');
+
+  // Shopping list
+  const shopItems = [
+    {item:`${tankSize}-Gallon ${fuelLabel[fuel]} Water Heater`,qty:'1 unit',price:`~$${fmt(unitMid)}`},
+    {item:'Flex Supply Lines (18" or 24")',qty:'2 pcs',price:'~$18'},
+    {item:'Pipe Thread Compound / Teflon Tape',qty:'1 roll',price:'~$5'},
+    {item:'Pressure Relief Valve (if not included)',qty:'1',price:'~$25'},
+    {item:'Drain Pan with Drain Line',qty:'1',price:'~$20'},
+    {item:'Plumbers Tape (Emery Cloth)',qty:'1 roll',price:'~$8'},
+  ];
+  if(fuel !== 'electric'){
+    shopItems.push({item:'Gas Flex Connector',qty:'1',price:'~$25'});
+    shopItems.push({item:'Pipe Dope / Gas-Rated Tape',qty:'1',price:'~$8'});
+  } else {
+    shopItems.push({item:'Wire Connectors & Electrical Tape',qty:'1 set',price:'~$10'});
+  }
+
+  const shopHTML = shopItems.map(i=>`<li><span>${i.item}</span><span style="display:flex;gap:8px;align-items:center"><span class="shop-qty">${i.qty}</span><span style="font-size:0.8rem;color:#555">${i.price}</span></span></li>`).join('');
+
+  const html = `
+    <div class="result-hero">
+      <div class="rec-badge">Recommended Size</div>
+      <div class="big-num">${tankSize}</div>
+      <div class="big-label">Gallon Tank</div>
+      <div class="sub">First Hour Rating needed: ~${fhr} gallons &nbsp;|&nbsp; ${fuelLabel[fuel]} unit</div>
+    </div>
+
+    <div class="pro-tip">
+      <strong>🔧 Pro Tip</strong>
+      When replacing a tank, bring your old unit's serial number to the supply house — it encodes the manufacture date and capacity, helping you get an exact drop-in replacement. Always shut off the gas/breaker AND the cold water supply before disconnecting anything.
+    </div>
+
+    <p class="section-title">Size Comparison</p>
+    <div class="compare-wrap">
+      <table class="data-table">
+        <thead><tr><th>Tank Size</th><th>Household</th><th>Est. Unit Cost</th><th>Match</th></tr></thead>
+        <tbody>${compRows}</tbody>
+      </table>
+    </div>
+
+    <br>
+    <p class="section-title">Cost Estimate</p>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th>Est. Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Unit (${tankSize} gal ${fuelLabel[fuel]})</td><td>$${fmt(c.unit[0])}–$${fmt(c.unit[1])}</td></tr>
+        <tr><td>Professional Installation</td><td>$${fmt(c.install[0])}–$${fmt(c.install[1])}</td></tr>
+        <tr><td>Misc Parts & Materials</td><td>$50–$120</td></tr>
+        <tr><td><strong>Total Installed (est.)</strong></td><td><strong>$${fmt(c.unit[0]+c.install[0]+50)}–$${fmt(c.unit[1]+c.install[1]+120)}</strong></td></tr>
+        <tr><td>Annual Energy Cost (est.)</td><td>~$${fmt(c.annual)}/yr</td></tr>
+        <tr><td>Energy Factor</td><td>${efMap[fuel]}</td></tr>
+      </tbody>
+    </table>
+
+    <br>
+    <p class="section-title">⏱ Time Estimate</p>
+    <div class="time-badges">
+      <div class="time-badge"><span class="icon">🔰</span><span><strong>Beginner:</strong> 4–6 hrs (with permits)</span></div>
+      <div class="time-badge"><span class="icon">🔧</span><span><strong>Experienced:</strong> 1.5–3 hrs</span></div>
+      <div class="time-badge"><span class="icon">👷</span><span><strong>Plumber:</strong> ~2 hrs labor</span></div>
+    </div>
+
+    <br>
+    <p class="section-title">🛒 Materials Shopping List</p>
+    <ul class="shopping-list">${shopHTML}</ul>
+    <div class="copy-row"><button class="copy-btn" id="copyBtn" onclick="copyResults()">Copy Summary</button></div>
+  `;
+
+  requestAnimationFrame(()=>{
+    document.getElementById('resultsContent').innerHTML = html;
+    document.getElementById('resultsArea').classList.add('show');
+    updateSVG('tank', tankSize);
+    document.getElementById('resultsArea').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+// TANKLESS CALCULATOR
+function calculateTankless(){
+  const people = parseFloat(document.getElementById('tlPeople').value)||3;
+  const fixtures = parseFloat(document.getElementById('tlFixtures').value)||2;
+  const climate = document.getElementById('tlClimate').value;
+  const fuel = document.getElementById('tlFuel').value;
+
+  // Groundwater temps
+  const gwTemp = {warm:70, moderate:55, cold:40, very_cold:35}[climate];
+  const targetTemp = 120;
+  const tempRise = targetTemp - gwTemp;
+
+  // Flow rates by fixture
+  const fixtureGPM = {1:2.0, 2:3.0, 3:5.0, 4:7.0}[fixtures] || 2.0;
+  const requiredGPM = fixtureGPM;
+
+  // BTU/hr = GPM × 8.33 × 60 × ΔT × 1.0
+  const btu = Math.round(requiredGPM * 8.33 * 60 * tempRise);
+
+  // Electric kW = BTU / 3412
+  const kw = (btu / 3412).toFixed(1);
+
+  // Recommend
+  const gasModels = [
+    {gpm:2.5,btu:75000,model:'Rinnai V65iP (6.5 GPM)',price:700},
+    {gpm:5,btu:120000,model:'Rinnai RUR98iN (9.8 GPM)',price:1100},
+    {gpm:7,btu:157000,model:'Navien NPE-240A (11.2 GPM)',price:1300},
+    {gpm:9,btu:199000,model:'Rinnai RU199iN (11 GPM)',price:1500},
+  ];
+  const elecModels = [
+    {gpm:1.5,kw:18,model:'Stiebel Eltron Tempra 20',price:500},
+    {gpm:3,kw:29,model:'Stiebel Eltron Tempra 29',price:650},
+    {gpm:5,kw:36,model:'EcoSmart ECO 36',price:750},
+    {gpm:7,kw:48,model:'Rheem RTEX-48',price:900},
+  ];
+
+  const models = fuel === 'gas' ? gasModels : elecModels;
+  const recommended = models.find(m => fuel === 'gas' ? m.gpm >= requiredGPM : m.gpm >= requiredGPM) || models[models.length-1];
+
+  const modRows = models.map(m=>{
+    const ok = (fuel==='gas' ? m.gpm >= requiredGPM : m.gpm >= requiredGPM);
+    const rec = m === recommended;
+    return `<tr class="${rec?'highlight-row':''}">
+      <td>${m.model}${rec?' ★':''}</td>
+      <td>${m.gpm} GPM</td>
+      <td>${fuel==='gas'?fmt(m.btu)+' BTU/hr':m.kw+' kW'}</td>
+      <td>~$${fmt(m.price)}</td>
+      <td>${rec?'✅ Best fit':ok?'Works':'Undersized'}</td>
+    </tr>`;
+  }).join('');
+
+  const installCost = fuel === 'gas' ? '600–1,200' : '400–800';
+  const annualSavings = fuel === 'gas' ? '~$100–$150' : '~$80–$120';
+
+  const shopItems = [
+    {item:`Tankless ${fuel==='gas'?'Gas':'Electric'} Water Heater (${requiredGPM.toFixed(1)}+ GPM)`,qty:'1 unit',price:`~$${fmt(recommended.price)}`},
+    {item:`${fuel==='gas'?'Category III Stainless Vent Kit':'240V 50A Dedicated Circuit'}`,qty:'1 set',price:`~$${fuel==='gas'?'120':'150'}`},
+    {item:'Isolation Valve Kit',qty:'1 set',price:'~$40'},
+    {item:'Recirculation Pump (optional, comfort)',qty:'1',price:'~$150'},
+    {item:'Flush Kit (descaling maintenance)',qty:'1',price:'~$30'},
+  ];
+  if(fuel==='gas'){
+    shopItems.push({item:'Gas Flex Connector (18" CSST)',qty:'1',price:'~$25'});
+  }
+  const shopHTML = shopItems.map(i=>`<li><span>${i.item}</span><span style="display:flex;gap:8px;align-items:center"><span class="shop-qty">${i.qty}</span><span style="font-size:0.8rem;color:#555">${i.price}</span></span></li>`).join('');
+
+  const climateLabel = {warm:'Warm (70°F)',moderate:'Moderate (55°F)',cold:'Cold (40°F)',very_cold:'Very Cold (35°F)'}[climate];
+
+  const html = `
+    <div class="result-hero">
+      <div class="rec-badge">Recommended Flow Rate</div>
+      <div class="big-num">${requiredGPM.toFixed(1)}</div>
+      <div class="big-label">GPM Minimum</div>
+      <div class="sub">${tempRise}°F temperature rise needed &nbsp;|&nbsp; ${fuel === 'gas' ? fmt(btu)+' BTU/hr required' : kw+' kW required'}</div>
+    </div>
+
+    <div class="pro-tip">
+      <strong>🔧 Pro Tip</strong>
+      Tankless units are sized for worst-case winter conditions — don't size for summer. If you're in Minnesota, your groundwater hits 35°F in January. A unit rated 7 GPM at 55°F rise will only deliver 5 GPM at 85°F rise. Always size for your coldest month.
+    </div>
+
+    <p class="section-title">Key Calculations</p>
+    <table class="data-table">
+      <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Climate Zone</td><td>${climateLabel}</td></tr>
+        <tr><td>Incoming Water Temp</td><td>${gwTemp}°F</td></tr>
+        <tr><td>Target Delivery Temp</td><td>120°F</td></tr>
+        <tr><td>Temperature Rise Needed</td><td><strong>${tempRise}°F</strong></td></tr>
+        <tr><td>Simultaneous Fixtures</td><td>${fixtures}</td></tr>
+        <tr><td>Required Flow Rate</td><td><strong>${requiredGPM.toFixed(1)} GPM</strong></td></tr>
+        <tr><td>Heat Output Required</td><td>${fuel==='gas'?fmt(btu)+' BTU/hr':kw+' kW'}</td></tr>
+      </tbody>
+    </table>
+
+    <br>
+    <p class="section-title">Model Comparison</p>
+    <div class="compare-wrap">
+      <table class="data-table">
+        <thead><tr><th>Model</th><th>Max GPM</th><th>Output</th><th>Price</th><th>Fit</th></tr></thead>
+        <tbody>${modRows}</tbody>
+      </table>
+    </div>
+
+    <br>
+    <p class="section-title">Cost Estimate</p>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th>Est. Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Unit (recommended model)</td><td>~$${fmt(recommended.price)}</td></tr>
+        <tr><td>Professional Installation</td><td>$${installCost}</td></tr>
+        <tr><td>Venting / Electrical Upgrade</td><td>$200–$600</td></tr>
+        <tr><td><strong>Total Installed (est.)</strong></td><td><strong>$${fmt(recommended.price + (fuel==='gas'?900:600))}–$${fmt(recommended.price + (fuel==='gas'?1800:1400))}</strong></td></tr>
+        <tr><td>Annual Savings vs. Tank</td><td>${annualSavings}/yr</td></tr>
+      </tbody>
+    </table>
+
+    <br>
+    <p class="section-title">⏱ Time Estimate</p>
+    <div class="time-badges">
+      <div class="time-badge"><span class="icon">🔰</span><span><strong>Beginner:</strong> Not recommended — hire a pro</span></div>
+      <div class="time-badge"><span class="icon">🔧</span><span><strong>Experienced:</strong> 4–8 hrs</span></div>
+      <div class="time-badge"><span class="icon">👷</span><span><strong>Plumber:</strong> 3–5 hrs labor</span></div>
+    </div>
+
+    <br>
+    <p class="section-title">🛒 Materials Shopping List</p>
+    <ul class="shopping-list">${shopHTML}</ul>
+    <div class="copy-row"><button class="copy-btn" onclick="copyResults()">Copy Summary</button></div>
+  `;
+
+  requestAnimationFrame(()=>{
+    document.getElementById('resultsContent').innerHTML = html;
+    document.getElementById('resultsArea').classList.add('show');
+    updateSVG('tankless');
+    document.getElementById('resultsArea').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+// Copy to clipboard
+function copyResults(){
+  const text = document.getElementById('resultsContent').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = document.querySelector('.copy-btn');
+    if(btn){ btn.textContent = 'Copied! ✓'; setTimeout(()=>{ btn.textContent = 'Copy Summary'; },2000); }
+  }).catch(()=>{
+    const btn = document.querySelector('.copy-btn');
+    if(btn){ btn.textContent = 'Copy failed'; setTimeout(()=>{ btn.textContent = 'Copy Summary'; },2000); }
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter'){
+    const active = document.querySelector('.tab-content.active');
+    if(active && active.id === 'content-tank') calculate();
+    if(active && active.id === 'content-tankless') calculateTankless();
+  }
+});
+</script>
+</body>
+</html>
