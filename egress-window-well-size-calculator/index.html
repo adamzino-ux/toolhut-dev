@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egress Window Well Size Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate the exact egress window well size for code compliance. Get dimensions, materials list, and cost estimates instantly — free online tool.">
+<link rel="canonical" href="https://toolhut.dev/egress-window-well-size-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Egress Window Well Size Calculator",
+  "url": "https://toolhut.dev/egress-window-well-size-calculator/",
+  "description": "Calculate the exact egress window well size for code compliance. Get dimensions, materials list, and cost estimates instantly.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;font-size:16px;line-height:1.6}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1.5rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:800;color:#1a1a2e;margin-bottom:.5rem}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:10px;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:2rem}
+.section-title{font-size:1rem;font-weight:700;color:#2d6a4f;text-transform:uppercase;letter-spacing:.04em;margin-bottom:1.2rem;padding-bottom:.4rem;border-bottom:2px solid #e8f5e9}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.4rem;margin-top:1rem}
+label:first-of-type{margin-top:0}
+input,select{width:100%;padding:12px 16px;border:1px solid #dee2e6;border-radius:6px;font-size:1rem;font-family:inherit;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;min-height:44px}
+input:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.12)}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.error-msg.show{display:block}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{display:block;width:100%;padding:13px 24px;background:#2d6a4f;color:#fff;border:none;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1.5rem;min-height:48px;transition:background .2s}
+.btn:hover{background:#245c43}
+.results{display:none;animation:fadeIn .3s ease}
+.results.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.big-number{text-align:center;margin:1rem 0 1.5rem}
+.big-number .value{font-size:2.4rem;font-weight:800;color:#2d6a4f;display:block}
+.big-number .label{font-size:.9rem;color:#666}
+.status-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:.82rem;font-weight:700;margin-left:.5rem;vertical-align:middle}
+.badge-pass{background:#d4edda;color:#1a5c2e}
+.badge-fail{background:#f8d7da;color:#721c24}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;text-align:left;padding:9px 12px;font-weight:600;font-size:.82rem;color:#555}
+td{padding:9px 12px;border-bottom:1px solid #f0f0f0;color:#1a1a2e}
+tr:nth-child(even) td{background:#fafafa}
+td:last-child,th:last-child{text-align:right}
+.table-wrap{overflow-x:auto}
+.highlight-row td{font-weight:700;color:#2d6a4f}
+.pro-tip{background:#fff8f5;border-left:4px solid #e76f51;border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1.2rem 0}
+.pro-tip strong{color:#e76f51;display:block;margin-bottom:.3rem;font-size:.9rem}
+.pro-tip p{font-size:.88rem;color:#444;margin:0}
+.time-estimate{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0}
+.time-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:.9rem;text-align:center}
+.time-box .t-label{font-size:.75rem;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+.time-box .t-val{font-size:1.1rem;font-weight:700;color:#2d6a4f}
+.shopping-list{list-style:none;padding:0}
+.shopping-list li{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid #f0f0f0;font-size:.9rem}
+.shopping-list li:last-child{border-bottom:none}
+.shopping-list .qty{font-weight:700;color:#2d6a4f;white-space:nowrap;margin-left:.5rem}
+.cost-range{font-size:.78rem;color:#888;margin-left:.3rem}
+.svg-container{background:#f0f4f0;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center;margin:1rem 0}
+.svg-container svg{max-width:100%;height:auto}
+.copy-btn{background:#f8f9fa;border:1px solid #dee2e6;border-radius:5px;padding:5px 12px;font-size:.8rem;cursor:pointer;color:#444;transition:background .15s;float:right;margin-top:-2px}
+.copy-btn:hover{background:#e9ecef}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.compliance-alert{border-radius:8px;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.88rem;font-weight:500}
+.compliance-pass{background:#d4edda;color:#1a5c2e;border:1px solid #c3e6cb}
+.compliance-fail{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+h2{font-size:1.15rem;font-weight:700;color:#1a1a2e;margin:2rem 0 .7rem}
+.content-section p{margin-bottom:.8rem;color:#333;font-size:.95rem}
+.content-section ul{margin:.5rem 0 .8rem 1.3rem;color:#333;font-size:.95rem}
+.content-section ul li{margin-bottom:.4rem}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem;overflow:hidden}
+summary{padding:.8rem 1rem;cursor:pointer;font-weight:600;font-size:.92rem;background:#f8f9fa;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';font-size:.9rem;color:#888}
+details[open] summary::after{content:'－'}
+details[open] summary{background:#e8f5e9;color:#2d6a4f}
+.faq-answer{padding:.9rem 1rem;font-size:.9rem;color:#333;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.related-link{background:#fff;border:1px solid #dee2e6;border-radius:6px;padding:.7rem 1rem;font-size:.88rem;color:#2d6a4f;font-weight:500;display:block;transition:background .15s}
+.related-link:hover{background:#e8f5e9;text-decoration:none}
+.ad-slot{min-height:0;margin:0}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.2rem 1.5rem;text-align:center;font-size:.82rem;color:#888;margin-top:2rem}
+footer a{color:#555;margin:0 .5rem}
+footer a:hover{color:#2d6a4f}
+@media(max-width:520px){
+  .row-2{grid-template-columns:1fr}
+  .time-estimate{grid-template-columns:1fr 1fr}
+  .related-grid{grid-template-columns:1fr}
+  h1{font-size:1.3rem}
+  .big-number .value{font-size:1.9rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">🏠 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Egress Window Well Size Calculator</h1>
+  <p class="subtitle">Check IRC code compliance & get exact window well dimensions for basement egress windows.</p>
+
+  <div class="card">
+    <div class="section-title">Window Dimensions</div>
+
+    <label for="winWidth">Window Opening Width (inches)</label>
+    <input type="number" id="winWidth" placeholder="e.g. 36" min="1" max="120" value="">
+    <div class="error-msg" id="winWidthErr">Please enter a valid window width (1–120 in).</div>
+
+    <label for="winHeight">Window Opening Height (inches)</label>
+    <input type="number" id="winHeight" placeholder="e.g. 24" min="1" max="84" value="">
+    <div class="error-msg" id="winHeightErr">Please enter a valid window height (1–84 in).</div>
+
+    <label for="sillHeight">Sill Height from Floor (inches)</label>
+    <input type="number" id="sillHeight" placeholder="e.g. 44" min="1" max="120" value="44">
+    <div class="error-msg" id="sillHeightErr">Please enter a valid sill height (1–120 in).</div>
+
+    <div class="section-title" style="margin-top:1.5rem">Window Well Details</div>
+
+    <div class="row-2">
+      <div>
+        <label for="wellDepth">Well Depth Below Grade (inches)</label>
+        <input type="number" id="wellDepth" placeholder="e.g. 48" min="1" max="120" value="48">
+        <div class="error-msg" id="wellDepthErr">Enter 1–120 in.</div>
+      </div>
+      <div>
+        <label for="wellMaterial">Well Material</label>
+        <select id="wellMaterial">
+          <option value="galvanized">Galvanized Steel</option>
+          <option value="plastic">Polypropylene/Plastic</option>
+          <option value="wood">Pressure-Treated Timber</option>
+          <option value="concrete">Concrete Block</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="gravel">Drainage Gravel Depth (inches)</label>
+    <input type="number" id="gravel" placeholder="e.g. 6" min="0" max="24" value="6">
+
+    <button class="btn" onclick="calculate()">Calculate Window Well Size</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results card" id="results">
+    <div class="results-header">
+      <div class="section-title" style="margin-bottom:0">Results</div>
+      <button class="copy-btn" id="copyBtn" onclick="copyResults()">Copy Results</button>
+    </div>
+
+    <div id="complianceAlert"></div>
+
+    <div class="big-number" id="wellSummary"></div>
+
+    <div class="svg-container">
+      <svg id="wellDiagram" viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" width="360" height="260" aria-label="Window well diagram"></svg>
+    </div>
+
+    <div class="table-wrap">
+      <table id="dimTable">
+        <thead><tr><th>Dimension</th><th>Your Window</th><th>IRC Minimum</th><th>Status</th></tr></thead>
+        <tbody id="dimBody"></tbody>
+      </table>
+    </div>
+
+    <div id="timeEstimate" style="margin-top:1.2rem"></div>
+    <div id="proTip" style="margin-top:.5rem"></div>
+    <div id="shoppingSection" style="margin-top:1.2rem"></div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <h2>How to Use This Egress Window Well Size Calculator</h2>
+    <p>Enter your window's rough opening width and height in inches, the sill height from the floor, and the planned well depth below grade. The calculator instantly checks IRC 2021 egress code compliance and generates the minimum well width, projection, and drainage gravel volume you'll need.</p>
+    <p>Output includes a visual diagram, a full materials shopping list with quantities, and a cost estimate — everything you need before you head to the hardware store.</p>
+
+    <h2>Why This Matters</h2>
+    <p>Egress windows aren't just a building code box to check — they're a literal life-safety feature. In a basement fire or emergency, an egress window is your escape route. The International Residential Code (IRC) Section R310 mandates minimum opening sizes precisely because firefighters also use these openings for rescue operations.</p>
+    <p>The window well is just as critical. A well that's too shallow traps water against your foundation. One that's too narrow makes the window impossible to open fully or exit through. Thousands of homeowners skip the well sizing step and end up with a non-compliant installation that fails inspection — or worse, creates a flooding or entrapment hazard.</p>
+    <p>A standard IRC-compliant bedroom window well for a 36" × 24" egress window runs about $350–$700 in materials for a steel kit well, or $600–$1,200 for a concrete-block custom installation. Getting the dimensions right before buying saves a costly return trip.</p>
+
+    <h2>How It's Calculated</h2>
+    <p>The IRC R310 code sets these hard minimums for egress windows:</p>
+    <ul>
+      <li><strong>Minimum opening area:</strong> 5.7 sq ft (820 sq in)</li>
+      <li><strong>Minimum opening height:</strong> 24 inches</li>
+      <li><strong>Minimum opening width:</strong> 20 inches</li>
+      <li><strong>Maximum sill height from floor:</strong> 44 inches</li>
+    </ul>
+    <p>For the window well itself, when the well depth exceeds 44 inches, a permanent ladder or steps are required. The well must project at least 36 inches from the foundation wall and must be at least 9 inches wider than the window on each side to allow full operation. Gravel volume is calculated as: <strong>Well Width × Well Projection × Gravel Depth ÷ 1,728</strong> (to convert cubic inches to cubic feet).</p>
+
+    <h2>Tips & Common Mistakes</h2>
+    <ul>
+      <li><strong>Measure the opening, not the frame.</strong> IRC requires 5.7 sq ft of <em>clear opening</em> — always measure the actual opening after the sash is removed, not the rough framing.</li>
+      <li><strong>Don't forget the ladder requirement.</strong> Any well deeper than 44 inches from grade must have a built-in ladder or steps. Many homeowners miss this until inspection.</li>
+      <li><strong>Gravel first, then the well.</strong> Install at least 6 inches of ¾" clean crushed gravel under and around the well before backfilling. Skipping this leads to well flooding after every rainstorm.</li>
+      <li><strong>Tie the well to the foundation.</strong> Anchor bolts or straps into the foundation wall keep the well from shifting with freeze-thaw cycles.</li>
+      <li><strong>Check local amendments.</strong> Some jurisdictions (California, NY, etc.) have stricter egress requirements than the IRC base code. Always verify with your local building department.</li>
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>What is the minimum size for an egress window well?</summary>
+      <div class="faq-answer">Per IRC R310, the window well must project at least 36 inches from the foundation and be at least as wide as the window opening plus clearance on each side. If the well is deeper than 44 inches, it must have a permanently fixed ladder. Many codes also require a minimum 9 sq ft of floor area inside the well.</div>
+    </details>
+
+    <details>
+      <summary>Does a window well need a cover or grate?</summary>
+      <div class="faq-answer">A cover is optional for code purposes but strongly recommended to keep out debris, rain, animals, and children. If you install a cover, it must be openable from inside without keys or tools, and must support 750 lbs per IRC R310.4.3. Transparent polycarbonate covers are popular because they let in light while keeping water out.</div>
+    </details>
+
+    <details>
+      <summary>Can I install an egress window well myself (DIY)?</summary>
+      <div class="faq-answer">Yes — window well installation is a common weekend DIY project for experienced homeowners comfortable with excavation and light masonry. The excavation and anchoring steps are straightforward, though cutting the foundation opening for the window itself often requires a concrete saw and is better left to a professional. Expect 1–2 days for a complete well installation.</div>
+    </details>
+
+    <details>
+      <summary>How deep should the gravel be in a window well?</summary>
+      <div class="faq-answer">A minimum of 6 inches of clean ¾" crushed stone is recommended by most codes and all contractors. In areas with poor drainage or clay soil, 8–12 inches is better practice. The gravel should be connected to or slope toward a drain tile or French drain if possible to prevent water accumulation during heavy rain.</div>
+    </details>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="card" style="margin-top:2rem">
+    <div class="section-title">Related Tools</div>
+    <div class="related-grid">
+      <a href="/retaining-wall-block-calculator/" class="related-link">🧱 Retaining Wall Block Calculator</a>
+      <a href="/soffit-fascia-replacement-cost-estimator/" class="related-link">🏗️ Soffit & Fascia Cost Estimator</a>
+      <a href="/popcorn-ceiling-removal-cost-estimator/" class="related-link">🎨 Popcorn Ceiling Removal Cost</a>
+      <a href="/deck-construction-cost-estimator/" class="related-link">🪵 Deck Construction Cost Estimator</a>
+      <a href="/gravel-driveway-cost-calculator/" class="related-link">🚗 Gravel Driveway Cost Calculator</a>
+      <a href="/laminate-flooring-calculator/" class="related-link">🏠 Laminate Flooring Calculator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+</main>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:.4rem">© 2025 toolhut.dev</div>
+</footer>
+
+<script>
+const IRC = {
+  minArea: 820,       // sq in (5.7 sq ft)
+  minHeight: 24,      // in
+  minWidth: 20,       // in
+  maxSill: 44,        // in
+  minWellProjection: 36, // in
+  minWellClearance: 9,   // in each side
+  ladderDepth: 44     // in — required if deeper
+};
+
+function fmt(n, dec=1){ return Number(n).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+function fmtI(n){ return Number(n).toLocaleString('en-US',{maximumFractionDigits:0}); }
+
+function validate(){
+  let ok = true;
+  const fields=[
+    {id:'winWidth',err:'winWidthErr',min:1,max:120},
+    {id:'winHeight',err:'winHeightErr',min:1,max:84},
+    {id:'sillHeight',err:'sillHeightErr',min:1,max:120},
+    {id:'wellDepth',err:'wellDepthErr',min:1,max:120}
+  ];
+  fields.forEach(f=>{
+    const el=document.getElementById(f.id);
+    const v=parseFloat(el.value);
+    const errEl=document.getElementById(f.err);
+    if(isNaN(v)||v<f.min||v>f.max){
+      el.classList.add('error');
+      errEl.classList.add('show');
+      ok=false;
+    } else {
+      el.classList.remove('error');
+      errEl.classList.remove('show');
+    }
+  });
+  return ok;
+}
+
+function calculate(){
+  if(!validate()) return;
+  const wW=parseFloat(document.getElementById('winWidth').value);
+  const wH=parseFloat(document.getElementById('winHeight').value);
+  const sill=parseFloat(document.getElementById('sillHeight').value);
+  const wellD=parseFloat(document.getElementById('wellDepth').value);
+  const gravel=parseFloat(document.getElementById('gravel').value)||6;
+  const material=document.getElementById('wellMaterial').value;
+
+  // Compliance checks
+  const area=wW*wH;
+  const areaPass=area>=IRC.minArea;
+  const heightPass=wH>=IRC.minHeight;
+  const widthPass=wW>=IRC.minWidth;
+  const sillPass=sill<=IRC.maxSill;
+
+  const overallPass=areaPass&&heightPass&&widthPass&&sillPass;
+
+  // Well sizing
+  const reqWellWidth=wW+(IRC.minWellClearance*2);
+  const reqWellProj=Math.max(IRC.minWellProjection, wW+18);
+  const needsLadder=wellD>IRC.ladderDepth;
+
+  // Gravel volume (cubic feet)
+  const gravelVol=(reqWellWidth * reqWellProj * gravel)/1728;
+  const gravelBags=Math.ceil(gravelVol/0.5); // 0.5 cu ft per bag
+
+  // Material costs
+  const costs={galvanized:{unit:180,install:250},plastic:{unit:120,install:200},wood:{unit:80,install:180},concrete:{unit:150,install:350}};
+  const matCost=costs[material]||costs.galvanized;
+  const totalLow=matCost.unit+matCost.install+(gravelBags*7)+(needsLadder?80:0);
+  const totalHigh=totalLow+300;
+
+  requestAnimationFrame(()=>{
+    // Compliance alert
+    document.getElementById('complianceAlert').innerHTML=overallPass
+      ?`<div class="compliance-alert compliance-pass">✅ Window meets IRC R310 egress code requirements. Window well sizing below is code-compliant.</div>`
+      :`<div class="compliance-alert compliance-fail">⚠️ Window does NOT meet all IRC R310 requirements. See details below. Fix issues before installing the well.</div>`;
+
+    // Big summary
+    document.getElementById('wellSummary').innerHTML=`
+      <span class="value">${fmtI(reqWellWidth)}" × ${fmtI(reqWellProj)}"</span>
+      <span class="label">Minimum Well Width × Projection Required</span>`;
+
+    // Dimension table
+    const rows=[
+      ['Opening Area',`${fmtI(area)} sq in (${fmt(area/144,2)} sq ft)`,`${fmtI(IRC.minArea)} sq in (5.7 sq ft)`,areaPass],
+      ['Opening Height',`${wH}"`,`${IRC.minHeight}" min`,heightPass],
+      ['Opening Width',`${wW}"`,`${IRC.minWidth}" min`,widthPass],
+      ['Sill Height',`${sill}"`,`${IRC.maxSill}" max`,sillPass],
+      ['Well Width (min)',`${fmtI(reqWellWidth)}"`,`Window + 9" each side`,true],
+      ['Well Projection (min)',`${fmtI(reqWellProj)}"`,`${IRC.minWellProjection}" min`,true],
+      ['Ladder Required',needsLadder?'Yes — well > 44" deep':'Not required',`If well > ${IRC.ladderDepth}"`,!needsLadder],
+      ['Gravel Volume',`${fmt(gravelVol,2)} cu ft`,`≥ 6" depth recommended`,gravel>=6],
+    ];
+    let tbody='';
+    rows.forEach(r=>{
+      const s=r[3]?'✅':'❌';
+      tbody+=`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${s}</td></tr>`;
+    });
+    document.getElementById('dimBody').innerHTML=tbody;
+
+    // Time estimate
+    document.getElementById('timeEstimate').innerHTML=`
+      <div class="section-title" style="margin-bottom:.8rem">Time Estimate</div>
+      <div class="time-estimate">
+        <div class="time-box"><div class="t-label">Beginner DIY</div><div class="t-val">2–3 Days</div></div>
+        <div class="time-box"><div class="t-label">Experienced DIY</div><div class="t-val">6–10 Hours</div></div>
+      </div>`;
+
+    // Pro tip
+    const tips=[
+      needsLadder?'Your well is over 44" deep — a permanently anchored ladder is required by code. Weld or bolt it to the well wall, not just clipped on.':'Keep a clear 36" of floor space inside the well at all times — furniture, HVAC equipment and storage must stay back from egress.',
+      'Rent a concrete saw for $80–$120/day rather than buying one. You\'ll need a 4" diamond blade to cut the foundation opening cleanly.',
+      'Always call 811 (USA) at least 3 business days before digging to have utilities marked — even for shallow window well excavation.'
+    ];
+    document.getElementById('proTip').innerHTML=`
+      <div class="pro-tip"><strong>🔧 Pro Tip</strong><p>${tips[0]} ${tips[2]}</p></div>`;
+
+    // Shopping list
+    const wellLabel={galvanized:'Galvanized steel well kit',plastic:'Polypropylene well kit',wood:'Pressure-treated 2×12 lumber',concrete:'Concrete block well kit'};
+    const wellPrice={galvanized:'$150–$250',plastic:'$90–$150',wood:'$60–$100',concrete:'$120–$200'};
+    const items=[
+      {name:wellLabel[material],qty:`1 kit (${fmtI(reqWellWidth)}" wide × ${fmtI(reqWellProj)}" proj)`,price:wellPrice[material]},
+      {name:'¾" crushed gravel drainage stone',qty:`${gravelBags} bags (50 lb ea)`,price:'$7–$10/bag'},
+      {name:'Anchor bolts (wedge, ½" × 3½")',qty:'4–6 bolts',price:'$2–$4 ea'},
+      {name:'Hydraulic cement / waterproof caulk',qty:'1 tube',price:'$8–$15'},
+      {name:'Drain tile / perforated pipe (optional)',qty:`${fmtI(reqWellProj/12*1.5)} linear ft`,price:'$0.50–$1.50/ft'},
+      needsLadder?{name:'Steel well ladder',qty:'1 (bolt-in)',price:'$60–$100'}:null,
+      {name:'Polycarbonate well cover (optional)',qty:`1 (${fmtI(reqWellWidth)}" × ${fmtI(reqWellProj)}")`,price:'$40–$90'},
+    ].filter(Boolean);
+
+    let listHtml='<ul class="shopping-list">';
+    items.forEach(i=>{
+      listHtml+=`<li><span>${i.name}</span><span><span class="qty">${i.qty}</span><span class="cost-range">${i.price}</span></span></li>`;
+    });
+    listHtml+=`</ul><p style="font-size:.82rem;color:#888;margin-top:.5rem">Estimated total material cost: <strong>$${fmtI(totalLow)}–$${fmtI(totalHigh)}</strong> (materials + basic installation supplies)</p>`;
+    document.getElementById('shoppingSection').innerHTML=`<div class="section-title">Materials Shopping List</div>${listHtml}`;
+
+    // SVG diagram
+    drawDiagram(wW, wH, reqWellWidth, reqWellProj, wellD, gravel, needsLadder);
+
+    // Show results
+    const r=document.getElementById('results');
+    r.classList.add('show');
+    r.scrollIntoView({behavior:'smooth',block:'start'});
+
+    // Store text for copy
+    window._resultText=`EGRESS WINDOW WELL CALCULATOR RESULTS\n`+
+      `Window: ${wW}" wide × ${wH}" tall | Sill: ${sill}" | Area: ${fmtI(area)} sq in\n`+
+      `Compliance: ${overallPass?'PASS':'FAIL'}\n`+
+      `Required Well Size: ${fmtI(reqWellWidth)}" wide × ${fmtI(reqWellProj)}" projection\n`+
+      `Ladder Required: ${needsLadder?'Yes':'No'}\n`+
+      `Gravel Volume: ${fmt(gravelVol,2)} cu ft (${gravelBags} bags)\n`+
+      `Est. Material Cost: $${fmtI(totalLow)}–$${fmtI(totalHigh)}`;
+  });
+}
+
+function drawDiagram(wW, wH, wellW, wellP, wellD, gravel, ladder){
+  const svg=document.getElementById('wellDiagram');
+  const scale=0.55;
+  const ox=30, oy=20;
+  const fH=180, fW=300; // foundation block dims in SVG px
+  const wWpx=Math.min(wW*scale, fW-20);
+  const wHpx=Math.min(wH*scale, fH-20);
+  const wellWpx=Math.min(wellW*scale, 280);
+  const wellPpx=Math.min(wellP*scale*0.7, 90);
+  const grPx=Math.max(gravel*1.5, 8);
+
+  const cx=180; // center x
+  const wallTop=oy+10;
+  const wallBot=oy+fH;
+  const winTop=wallTop+(fH-wHpx)/2;
+  const winBot=winTop+wHpx;
+  const winL=cx-wWpx/2;
+  const winR=cx+wWpx/2;
+  const wellL=cx-wellWpx/2;
+  const wellR=cx+wellWpx/2;
+  const gradeY=wallTop+30;
+  const wellTop2=gradeY;
+  const wellBot2=gradeY+wellPpx;
+
+  let html=`
+    <!-- Sky/exterior -->
+    <rect x="0" y="0" width="360" height="${gradeY}" fill="#e8f4f8" rx="0"/>
+    <!-- Grade line -->
+    <line x1="0" y1="${gradeY}" x2="360" y2="${gradeY}" stroke="#5a8c3f" stroke-width="3"/>
+    <!-- Foundation wall -->
+    <rect x="${cx-fW/2}" y="${wallTop}" width="${fW}" height="${fH}" fill="#b0b8c8" stroke="#8a94a8" stroke-width="1.5"/>
+    <!-- Interior fill -->
+    <rect x="${cx-fW/2+3}" y="${wallTop+3}" width="${fW-6}" height="${fH-6}" fill="#e8eaf0"/>
+    <!-- Window opening -->
+    <rect x="${winL}" y="${winTop}" width="${wWpx}" height="${wHpx}" fill="#a8d8ea" stroke="#0077b6" stroke-width="2"/>
+    <!-- Window frame lines -->
+    <line x1="${cx}" y1="${winTop}" x2="${cx}" y2="${winBot}" stroke="#0077b6" stroke-width="1" stroke-dasharray="3,2"/>
+    <!-- Well walls -->
+    <rect x="${wellL}" y="${wellTop2}" width="${wellWpx}" height="${wellPpx}" fill="none" stroke="#e76f51" stroke-width="2.5" stroke-dasharray="0"/>
+    <!-- Gravel -->
+    <rect x="${wellL+2}" y="${wellBot2-grPx}" width="${wellWpx-4}" height="${grPx}" fill="#c9b99a" opacity=".85"/>
+    <!-- Grade text -->
+    <text x="8" y="${gradeY-5}" font-size="10" fill="#2d6a4f" font-family="sans-serif" font-weight="600">GRADE</text>
+    <!-- Well width label -->
+    <line x1="${wellL}" y1="${wellTop2-12}" x2="${wellR}" y2="${wellTop2-12}" stroke="#e76f51" stroke-width="1.2" marker-start="url(#arr)" marker-end="url(#arr)"/>
+    <text x="${cx}" y="${wellTop2-15}" font-size="9" fill="#e76f51" font-family="sans-serif" text-anchor="middle" font-weight="700">${Math.round(wellW)}" wide</text>
+    <!-- Well projection label -->
+    <line x1="${wellR+10}" y1="${wellTop2}" x2="${wellR+10}" y2="${wellBot2}" stroke="#e76f51" stroke-width="1.2"/>
+    <text x="${wellR+15}" y="${(wellTop2+wellBot2)/2+4}" font-size="9" fill="#e76f51" font-family="sans-serif" font-weight="700">${Math.round(wellP)}"</text>
+    <!-- Window dimensions label -->
+    <text x="${cx}" y="${winTop+wHpx/2+4}" font-size="9" fill="#1a1a2e" font-family="sans-serif" text-anchor="middle" font-weight="700">${Math.round(wW)}"×${Math.round(wH)}"</text>
+    <!-- Labels -->
+    <text x="${cx-fW/2+6}" y="${wallBot-6}" font-size="8.5" fill="#555" font-family="sans-serif">Foundation Wall</text>
+    <text x="${wellL+4}" y="${wellBot2-4}" font-size="8" fill="#8b7355" font-family="sans-serif">Gravel</text>
+    ${ladder?`<line x1="${wellL+10}" y1="${wellTop2+5}" x2="${wellL+10}" y2="${wellBot2-5}" stroke="#555" stroke-width="1.5"/>
+    <line x1="${wellL+6}" y1="${wellTop2+15}" x2="${wellL+14}" y2="${wellTop2+15}" stroke="#555" stroke-width="1.2"/>
+    <line x1="${wellL+6}" y1="${wellTop2+25}" x2="${wellL+14}" y2="${wellTop2+25}" stroke="#555" stroke-width="1.2"/>
+    <text x="${wellL+16}" y="${wellTop2+22}" font-size="8" fill="#555" font-family="sans-serif">Ladder</text>`:''}
+    <!-- Legend -->
+    <rect x="10" y="${wellBot2+8}" width="10" height="8" fill="#a8d8ea" stroke="#0077b6" stroke-width="1"/>
+    <text x="24" y="${wellBot2+15}" font-size="8" fill="#333" font-family="sans-serif">Window</text>
+    <rect x="80" y="${wellBot2+8}" width="10" height="8" fill="none" stroke="#e76f51" stroke-width="1.5"/>
+    <text x="94" y="${wellBot2+15}" font-size="8" fill="#333" font-family="sans-serif">Well</text>
+    <rect x="140" y="${wellBot2+8}" width="10" height="8" fill="#c9b99a"/>
+    <text x="154" y="${wellBot2+15}" font-size="8" fill="#333" font-family="sans-serif">Gravel</text>
+  `;
+  svg.innerHTML=html;
+}
+
+function copyResults(){
+  if(!window._resultText) return;
+  navigator.clipboard.writeText(window._resultText).then(()=>{
+    const btn=document.getElementById('copyBtn');
+    btn.textContent='Copied!';
+    setTimeout(()=>{ btn.textContent='Copy Results'; },2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');
+    ta.value=window._resultText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn=document.getElementById('copyBtn');
+    btn.textContent='Copied!';
+    setTimeout(()=>{ btn.textContent='Copy Results'; },2000);
+  });
+}
+
+document.querySelectorAll('input,select').forEach(el=>{
+  el.addEventListener('keydown',e=>{ if(e.key==='Enter') calculate(); });
+});
+</script>
+</body>
+</html>
