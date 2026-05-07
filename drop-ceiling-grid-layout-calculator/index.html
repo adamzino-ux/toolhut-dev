@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Popcorn Ceiling Texture Coverage Calculator — Free Online Tool | toolhut.dev</title>
+<meta name="description" content="Calculate exactly how much popcorn ceiling texture spray you need for any room. Free tool with materials list, cost estimates, and coverage breakdown.">
+<link rel="canonical" href="https://toolhut.dev/drop-ceiling-grid-layout-calculator/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Popcorn Ceiling Texture Coverage Calculator",
+  "url": "https://toolhut.dev/drop-ceiling-grid-layout-calculator/",
+  "description": "Calculate popcorn ceiling texture coverage, materials needed, and cost estimates for any room size.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#1a1a2e;line-height:1.6;font-size:16px}
+a{color:#2d6a4f;text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid #dee2e6;padding:0 1rem}
+.nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;height:48px}
+.nav-inner a{font-weight:600;font-size:1rem;color:#2d6a4f}
+main{max-width:640px;margin:0 auto;padding:1.5rem 1rem 2rem}
+h1{font-size:1.5rem;font-weight:700;color:#1a1a2e;margin-bottom:.5rem;line-height:1.3}
+.subtitle{color:#555;font-size:.95rem;margin-bottom:1.5rem}
+.card{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:2rem;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:2rem}
+label{display:block;font-size:.85rem;font-weight:500;color:#444;margin-bottom:.35rem;margin-top:1rem}
+label:first-of-type{margin-top:0}
+input[type=number],select{width:100%;padding:12px 16px;border:1px solid #ddd;border-radius:6px;font-size:1rem;color:#1a1a2e;background:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+input[type=number]:focus,select:focus{outline:none;border-color:#2d6a4f;box-shadow:0 0 0 3px rgba(45,106,79,.15)}
+input.error{border-color:#e74c3c}
+.error-msg{color:#e74c3c;font-size:.8rem;margin-top:.3rem;display:none}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{display:inline-block;background:#2d6a4f;color:#fff;border:none;padding:13px 28px;border-radius:6px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;width:100%;margin-top:1.25rem;min-height:44px}
+.btn:hover{background:#235c43}
+.btn-sm{width:auto;padding:6px 16px;font-size:.82rem;margin-top:0;background:#2d6a4f;border-radius:4px;min-height:36px}
+.results{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.results.visible{opacity:1;pointer-events:auto}
+.big-num{font-size:2.5rem;font-weight:700;color:#2d6a4f;line-height:1}
+.big-label{font-size:.85rem;color:#666;margin-top:.25rem}
+.big-num-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.big-num-box{flex:1;min-width:120px;background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:#f0f0f0;padding:8px 12px;text-align:left;font-weight:600;border-bottom:2px solid #dee2e6;font-size:.82rem;text-transform:uppercase;letter-spacing:.03em}
+td{padding:8px 12px;border-bottom:1px solid #eee}
+tr:nth-child(even) td{background:#fafafa}
+.num{text-align:right}
+h3{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:.75rem}
+.section-gap{margin-top:1.5rem}
+.pro-tip{background:#fff8f0;border-left:4px solid #e76f51;border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin-top:1.5rem}
+.pro-tip strong{color:#e76f51;display:block;margin-bottom:.25rem;font-size:.9rem}
+.pro-tip p{font-size:.88rem;color:#444}
+.shopping-list{margin-top:0}
+.shopping-list li{padding:.45rem 0;border-bottom:1px solid #eee;font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
+.shopping-list li:last-child{border-bottom:none}
+.qty-badge{background:#2d6a4f;color:#fff;border-radius:4px;padding:2px 8px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.time-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem}
+.time-box{flex:1;min-width:130px;background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:.75rem 1rem;font-size:.88rem}
+.time-box strong{display:block;font-size:1.1rem;color:#2d6a4f;font-weight:700}
+.time-box span{color:#666;font-size:.8rem}
+.copy-wrap{display:flex;justify-content:flex-end;margin-bottom:.75rem}
+.ad-slot{min-height:0;margin:0}
+.content-section h2{font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:#1a1a2e}
+.content-section p{font-size:.92rem;color:#333;margin-bottom:.75rem;line-height:1.65}
+.content-section ul{padding-left:1.3rem;margin-bottom:.75rem}
+.content-section ul li{font-size:.92rem;color:#333;margin-bottom:.35rem;line-height:1.55}
+details{border:1px solid #dee2e6;border-radius:6px;margin-bottom:.6rem;background:#fff}
+summary{padding:.75rem 1rem;font-weight:600;font-size:.92rem;cursor:pointer;color:#2d6a4f;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"▼";font-size:.7rem;color:#888;transition:transform .2s}
+details[open] summary::after{transform:rotate(180deg)}
+details p{padding:.5rem 1rem .85rem;font-size:.88rem;color:#444;line-height:1.6}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.related-link{background:#fff;border:1px solid #dee2e6;border-radius:6px;padding:.65rem 1rem;font-size:.85rem;color:#2d6a4f;font-weight:500;transition:background .2s}
+.related-link:hover{background:#f0f8f4;text-decoration:none}
+footer{background:#fff;border-top:1px solid #dee2e6;padding:1.25rem 1rem;text-align:center;font-size:.82rem;color:#666}
+footer a{color:#2d6a4f;margin:0 .5rem}
+.svg-container{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;text-align:center;margin-top:1rem}
+.svg-container svg{max-width:100%;height:auto}
+.highlight{color:#e76f51;font-weight:700}
+.coverage-bar{height:18px;background:#e0e0e0;border-radius:9px;overflow:hidden;margin-top:.5rem}
+.coverage-fill{height:100%;background:linear-gradient(90deg,#2d6a4f,#52b788);border-radius:9px;transition:width .4s ease}
+@media(max-width:480px){
+  .input-row{grid-template-columns:1fr}
+  .big-num-row{gap:1rem}
+  .big-num{font-size:2rem}
+  .related-grid{grid-template-columns:1fr}
+  .card{padding:1.25rem}
+  h1{font-size:1.3rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/">🏠 toolhut.dev</a>
+  </div>
+</nav>
+
+<main>
+  <h1>Popcorn Ceiling Texture Coverage Calculator</h1>
+  <p class="subtitle">Enter your room dimensions to find out exactly how many cans or how much hopper spray texture you need, plus a complete materials list and cost estimate.</p>
+
+  <div class="card">
+    <div class="input-row">
+      <div>
+        <label for="roomLength">Room Length (ft)</label>
+        <input type="number" id="roomLength" placeholder="e.g. 12" min="1" max="500" step="0.5">
+        <div class="error-msg" id="errLength">Enter a valid length (1–500 ft)</div>
+      </div>
+      <div>
+        <label for="roomWidth">Room Width (ft)</label>
+        <input type="number" id="roomWidth" placeholder="e.g. 10" min="1" max="500" step="0.5">
+        <div class="error-msg" id="errWidth">Enter a valid width (1–500 ft)</div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <div>
+        <label for="numRooms">Number of Rooms</label>
+        <input type="number" id="numRooms" value="1" min="1" max="50" step="1">
+        <div class="error-msg" id="errRooms">Enter 1–50 rooms</div>
+      </div>
+      <div>
+        <label for="textureDepth">Texture Thickness</label>
+        <select id="textureDepth">
+          <option value="light">Light (thin coat)</option>
+          <option value="medium" selected>Medium (standard)</option>
+          <option value="heavy">Heavy (thick/popcorn)</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="productType">Product Type</label>
+    <select id="productType">
+      <option value="spray_can">Aerosol Spray Can (14 oz)</option>
+      <option value="hopper_bag" selected>Hopper Spray Bag (50 lb)</option>
+      <option value="premix">Pre-mixed Bucket (2.5 gal)</option>
+    </select>
+
+    <label for="deductPercent">Deduct for fixtures/lights (%)</label>
+    <input type="number" id="deductPercent" value="5" min="0" max="50" step="1" placeholder="5">
+    <div class="error-msg" id="errDeduct">Enter 0–50%</div>
+
+    <button class="btn" id="calcBtn">Calculate Coverage</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results card" id="results">
+    <div class="copy-wrap">
+      <button class="btn btn-sm" id="copyBtn">📋 Copy Results</button>
+    </div>
+
+    <div class="big-num-row" id="bigNumRow"></div>
+
+    <!-- SVG Diagram -->
+    <div class="svg-container" id="svgContainer"></div>
+
+    <!-- Coverage Bar -->
+    <div class="section-gap">
+      <h3>Coverage Breakdown</h3>
+      <div id="coverageTable"></div>
+    </div>
+
+    <!-- Shopping List -->
+    <div class="section-gap">
+      <h3>🛒 Materials Shopping List</h3>
+      <ul class="shopping-list" id="shoppingList"></ul>
+    </div>
+
+    <!-- Cost Estimate -->
+    <div class="section-gap">
+      <h3>💰 Cost Estimate</h3>
+      <div id="costTable"></div>
+    </div>
+
+    <!-- Time Estimate -->
+    <div class="section-gap">
+      <h3>⏱ Time Estimate</h3>
+      <div class="time-row" id="timeRow"></div>
+    </div>
+
+    <!-- Pro Tip -->
+    <div class="pro-tip">
+      <strong>💡 Pro Tip</strong>
+      <p id="proTipText"></p>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-mid"></div>
+
+  <!-- CONTENT SECTION -->
+  <div class="content-section">
+
+    <div class="card">
+      <h2>How to Use This Popcorn Ceiling Coverage Calculator</h2>
+      <p>Enter your room's length and width in feet, choose the texture thickness (light, medium, or heavy), select your preferred product type (aerosol can, hopper bag, or pre-mixed bucket), and hit Calculate. The tool instantly shows how many units you need, a full materials list, and total cost estimate. Add a deduction percentage for lights, fans, and vents to avoid waste.</p>
+    </div>
+
+    <div class="card">
+      <h2>Why This Matters</h2>
+      <p>Buying too little texture means an extra trip to the hardware store mid-project — and batches can vary in color and consistency, leaving visible patches. Buying too much wastes money. A standard 12×14 ft bedroom ceiling (168 sq ft) typically needs about 3–4 aerosol cans on medium setting, or roughly half a 50 lb hopper bag.</p>
+      <p>Popcorn texture is back in demand for soundproofing in home offices, media rooms, and rentals where durability matters. Contractors applying texture to a full 1,200 sq ft home use 8–10 fifty-pound bags. Knowing your exact quantity upfront prevents costly overages and keeps a one-weekend project from bleeding into the next weekend.</p>
+      <p>This calculator is especially useful if you're patching sections of existing popcorn ceiling — you can enter just the patch area and get a precise amount, avoiding the mistake of buying a full hopper setup for a 3 sq ft repair.</p>
+    </div>
+
+    <div class="card">
+      <h2>How It's Calculated</h2>
+      <p><strong>Step 1 — Net ceiling area:</strong></p>
+      <p style="font-family:monospace;background:#f8f9fa;padding:.5rem .75rem;border-radius:4px;font-size:.88rem">Net Area = (Length × Width × Rooms) × (1 − Deduction%)</p>
+      <p><strong>Step 2 — Adjusted coverage per unit</strong> based on texture depth:</p>
+      <ul>
+        <li><strong>Light coat:</strong> ×1.25 — covers 25% more area per unit</li>
+        <li><strong>Medium coat:</strong> ×1.0 — manufacturer's stated coverage</li>
+        <li><strong>Heavy coat:</strong> ×0.7 — covers 30% less area (more product used)</li>
+      </ul>
+      <p><strong>Step 3 — Units needed:</strong> Net Area ÷ Adjusted Coverage per Unit, rounded up to the nearest whole unit. Always round up — never down — so you don't run short mid-ceiling.</p>
+      <p>Coverage rates used: aerosol can ≈ 40 sq ft, hopper bag (50 lb) ≈ 200 sq ft, pre-mixed bucket (2.5 gal) ≈ 150 sq ft.</p>
+    </div>
+
+    <div class="card">
+      <h2>Tips &amp; Common Mistakes</h2>
+      <ul>
+        <li><strong>Always buy one extra unit.</strong> Ceiling texture dries differently in varying humidity — having a spare lets you touch up without a second store run.</li>
+        <li><strong>Match your sheen level.</strong> If patching, bring a photo to the hardware store. Mixing brands or formulas often creates noticeable sheen differences under certain lighting.</li>
+        <li><strong>Use a hopper gun for anything over 100 sq ft.</strong> Aerosol cans tire your wrist fast and create inconsistent texture on large areas. Rent a hopper for $30–$50/day.</li>
+        <li><strong>Mask everything.</strong> Popcorn texture is extremely difficult to remove from trim, walls, and floors. Use 3M blue tape and plastic sheeting before spraying.</li>
+        <li><strong>Test spray on cardboard first.</strong> Practice your distance (18–24 inches) and pressure before hitting the actual ceiling to dial in the right texture pattern.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>How many aerosol cans do I need for a 10×10 room?</summary>
+        <p>A 10×10 ceiling (100 sq ft) at medium texture typically needs 3 standard 14 oz aerosol cans. Budget for 4 cans if going heavy or if the ceiling has imperfections that need a thicker coat to blend.</p>
+      </details>
+      <details>
+        <summary>Can I apply popcorn texture over existing smooth ceiling?</summary>
+        <p>Yes — just prime the surface first with a PVA drywall primer to improve adhesion. Without primer, the texture can peel or not bond evenly, especially over painted surfaces. Allow 24 hours dry time before texturing.</p>
+      </details>
+      <details>
+        <summary>What's the difference between hopper spray and aerosol cans?</summary>
+        <p>Hopper bags require a rented air compressor and spray hopper gun ($30–$50/day rental). They're far more efficient for large areas and give more consistent results. Aerosol cans are convenient for small repairs under 50 sq ft but get expensive at scale.</p>
+      </details>
+      <details>
+        <summary>How long does popcorn texture take to dry before painting?</summary>
+        <p>Most popcorn textures need 24 hours at room temperature (65–75°F) before priming, and another 24 hours after priming before final paint. High humidity areas may need 48 hours between coats. Never rush this — painting wet texture causes it to flatten and sag.</p>
+      </details>
+    </div>
+
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="card">
+    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:1rem">Related Tools</h2>
+    <div class="related-grid">
+      <a class="related-link" href="/hot-water-heater-size-calculator/">Hot Water Heater Size Calculator</a>
+      <a class="related-link" href="/egress-window-well-size-calculator/">Egress Window Well Size Calculator</a>
+      <a class="related-link" href="/retaining-wall-block-calculator/">Retaining Wall Block Calculator</a>
+      <a class="related-link" href="/soffit-fascia-replacement-cost-estimator/">Soffit &amp; Fascia Cost Estimator</a>
+      <a class="related-link" href="/popcorn-ceiling-removal-cost-estimator/">Popcorn Ceiling Removal Cost</a>
+      <a class="related-link" href="/deck-construction-cost-estimator/">Deck Construction Cost Estimator</a>
+    </div>
+  </div>
+
+  <div class="ad-slot" id="ad-bottom"></div>
+
+</main>
+
+<footer>
+  <div>
+    <a href="/about/">About</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <div style="margin-top:.4rem">© 2025 toolhut.dev — Free Online Tools</div>
+</footer>
+
+<script>
+// ---- Coverage data ----
+const COVERAGE = {
+  spray_can:  { sqft: 40,  unit: 'aerosol can (14 oz)', unitShort: 'Cans', price: 5.49,  label: 'Aerosol Spray Can' },
+  hopper_bag: { sqft: 200, unit: '50 lb hopper bag',    unitShort: 'Bags', price: 18.97, label: '50 lb Hopper Bag' },
+  premix:     { sqft: 150, unit: '2.5 gal premix bucket', unitShort: 'Buckets', price: 24.47, label: '2.5 Gal Pre-mixed Bucket' }
+};
+const DEPTH_MULT = { light: 1.25, medium: 1.0, heavy: 0.7 };
+const DEPTH_LABEL = { light: 'Light', medium: 'Medium', heavy: 'Heavy' };
+
+function fmt(n, dec=0){ return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec,maximumFractionDigits:dec}); }
+function fmtD(n){ return '$'+fmt(n,2); }
+function ceil2(n){ return Math.ceil(n); }
+
+function validate(){
+  let ok = true;
+  const l = parseFloat(document.getElementById('roomLength').value);
+  const w = parseFloat(document.getElementById('roomWidth').value);
+  const r = parseInt(document.getElementById('numRooms').value);
+  const d = parseFloat(document.getElementById('deductPercent').value);
+
+  function setErr(id, inputId, show){
+    document.getElementById(id).style.display = show ? 'block' : 'none';
+    document.getElementById(inputId).classList.toggle('error', show);
+  }
+  setErr('errLength','roomLength', isNaN(l)||l<1||l>500);
+  setErr('errWidth','roomWidth', isNaN(w)||w<1||w>500);
+  setErr('errRooms','numRooms', isNaN(r)||r<1||r>50);
+  setErr('errDeduct','deductPercent', isNaN(d)||d<0||d>50);
+
+  if(isNaN(l)||l<1||l>500) ok=false;
+  if(isNaN(w)||w<1||w>500) ok=false;
+  if(isNaN(r)||r<1||r>50) ok=false;
+  if(isNaN(d)||d<0||d>50) ok=false;
+  return ok ? {l,w,r,d} : null;
+}
+
+function buildSVG(l, w, unitsNeeded, productType, netArea){
+  const P = COVERAGE[productType];
+  const aspect = l/w;
+  const svgW = 320;
+  const svgH = Math.min(180, Math.max(80, svgW/aspect));
+  const pad = 30;
+  const rW = svgW - pad*2;
+  const rH = svgH - pad*2;
+
+  // Color fill based on coverage
+  const filled = Math.min(1, netArea / (unitsNeeded * P.sqft * DEPTH_MULT['medium']));
+  const fillPct = Math.round(filled * 100);
+
+  // Grid lines
+  let gridLines = '';
+  const cols = Math.min(8, Math.round(l));
+  const rows = Math.min(6, Math.round(w));
+  for(let i=1;i<cols;i++){
+    const x = pad + (rW/cols)*i;
+    gridLines += `<line x1="${x}" y1="${pad}" x2="${x}" y2="${pad+rH}" stroke="#b7e4c7" stroke-width="1" stroke-dasharray="3,3"/>`;
+  }
+  for(let j=1;j<rows;j++){
+    const y = pad + (rH/rows)*j;
+    gridLines += `<line x1="${pad}" y1="${y}" x2="${pad+rW}" y2="${y}" stroke="#b7e4c7" stroke-width="1" stroke-dasharray="3,3"/>`;
+  }
+
+  return `<svg viewBox="0 0 ${svgW} ${svgH+40}" xmlns="http://www.w3.org/2000/svg" width="${svgW}" height="${svgH+40}">
+  <rect x="${pad}" y="${pad}" width="${rW}" height="${rH}" fill="#d8f3dc" rx="3"/>
+  ${gridLines}
+  <rect x="${pad}" y="${pad}" width="${rW}" height="${rH}" fill="none" stroke="#2d6a4f" stroke-width="2" rx="3"/>
+  <!-- dimension arrows -->
+  <line x1="${pad}" y1="${pad-10}" x2="${pad+rW}" y2="${pad-10}" stroke="#555" stroke-width="1.5" marker-end="url(#arr)" marker-start="url(#arr)"/>
+  <line x1="${pad-12}" y1="${pad}" x2="${pad-12}" y2="${pad+rH}" stroke="#555" stroke-width="1.5" marker-end="url(#arr)" marker-start="url(#arr)"/>
+  <text x="${pad+rW/2}" y="${pad-14}" text-anchor="middle" font-size="11" fill="#1a1a2e" font-family="sans-serif">${l} ft</text>
+  <text x="${pad-18}" y="${pad+rH/2}" text-anchor="middle" font-size="11" fill="#1a1a2e" font-family="sans-serif" transform="rotate(-90,${pad-18},${pad+rH/2})">${w} ft</text>
+  <!-- center label -->
+  <text x="${pad+rW/2}" y="${pad+rH/2-6}" text-anchor="middle" font-size="14" font-weight="700" fill="#2d6a4f" font-family="sans-serif">${fmt(netArea)} sq ft</text>
+  <text x="${pad+rW/2}" y="${pad+rH/2+12}" text-anchor="middle" font-size="10" fill="#555" font-family="sans-serif">Net Ceiling Area</text>
+  <!-- unit count pill -->
+  <rect x="${pad+rW/2-38}" y="${pad+rH-22}" width="76" height="18" fill="#e76f51" rx="9"/>
+  <text x="${pad+rW/2}" y="${pad+rH-10}" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" font-family="sans-serif">${unitsNeeded} ${P.unitShort} Needed</text>
+  <defs>
+    <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#555"/>
+    </marker>
+  </defs>
+</svg>`;
+}
+
+function calculate(){
+  const v = validate();
+  if(!v) return;
+  const {l,w,r,d} = v;
+  const product = document.getElementById('productType').value;
+  const depth = document.getElementById('textureDepth').value;
+  const P = COVERAGE[product];
+  const mult = DEPTH_MULT[depth];
+
+  const grossArea = l * w * r;
+  const deduction = grossArea * (d/100);
+  const netArea = grossArea - deduction;
+  const adjustedCovPerUnit = P.sqft * mult;
+  const unitsRaw = netArea / adjustedCovPerUnit;
+  const unitsNeeded = ceil2(unitsRaw);
+  const totalCoverage = unitsNeeded * adjustedCovPerUnit;
+  const productCost = unitsNeeded * P.price;
+
+  // Additional materials
+  const primerGallons = ceil2(netArea / 300); // 1 gal primer ~300 sqft
+  const primerCost = primerGallons * 18.97;
+  const paintGallons = ceil2(netArea / 350);
+  const paintCost = paintGallons * 29.97;
+  const tapeRolls = ceil2((l*2 + w*2 + 10) * r / 60); // perimeter tape
+  const tapeCost = tapeRolls * 5.99;
+  const plasticPacks = ceil2(netArea / 200);
+  const plasticCost = plasticPacks * 8.49;
+  const totalCost = productCost + primerCost + paintCost + tapeCost + plasticCost;
+
+  // Time estimates
+  const sqftPerHour = { light: 80, medium: 60, heavy: 45 };
+  const rate = sqftPerHour[depth];
+  const prepTime = 0.5 * r + (netArea / 500);
+  const sprayTime = netArea / rate;
+  const dryTime = 24;
+  const totalBeginner = (prepTime + sprayTime) * 1.5 + dryTime;
+  const totalExperienced = prepTime + sprayTime + dryTime;
+
+  // Pro tips
+  const tips = {
+    light: "For a light coat, keep the sprayer 22–26 inches from the ceiling and use slow, sweeping passes. This gives a subtle texture while still hiding minor ceiling imperfections.",
+    medium: "Medium texture is the sweet spot — one steady pass at 18–22 inches covers most surfaces evenly. If you see bare spots after drying, a second light pass blends perfectly without over-applying.",
+    heavy: "Heavy texture eats product fast. Load your hopper gun fully and work in 4×4 ft sections before moving on. Overlap each pass by 30% to avoid thin spots at the seam lines."
+  };
+
+  const svgHTML = buildSVG(l, w, unitsNeeded, product, Math.round(netArea));
+
+  const bigNumHTML = `
+    <div class="big-num-box">
+      <div class="big-num">${fmt(unitsNeeded)}</div>
+      <div class="big-label">${P.unitShort} Needed</div>
+    </div>
+    <div class="big-num-box">
+      <div class="big-num">${fmt(Math.round(netArea))}</div>
+      <div class="big-label">Net Sq Ft</div>
+    </div>
+    <div class="big-num-box">
+      <div class="big-num" style="color:#e76f51">${fmtD(totalCost)}</div>
+      <div class="big-label">Est. Total Cost</div>
+    </div>`;
+
+  const coverageHTML = `<table>
+    <tr><th>Item</th><th class="num">Value</th></tr>
+    <tr><td>Gross Ceiling Area</td><td class="num">${fmt(grossArea)} sq ft</td></tr>
+    <tr><td>Deducted (fixtures/lights)</td><td class="num">−${fmt(Math.round(deduction))} sq ft</td></tr>
+    <tr><td>Net Area to Cover</td><td class="num"><strong>${fmt(Math.round(netArea))} sq ft</strong></td></tr>
+    <tr><td>Coverage per Unit (adjusted)</td><td class="num">${fmt(Math.round(adjustedCovPerUnit))} sq ft</td></tr>
+    <tr><td>Units Required (exact)</td><td class="num">${unitsRaw.toFixed(2)}</td></tr>
+    <tr><td>Units to Buy (rounded up)</td><td class="num"><strong class="highlight">${unitsNeeded}</strong></td></tr>
+    <tr><td>Texture Depth</td><td class="num">${DEPTH_LABEL[depth]}</td></tr>
+    <tr><td>Number of Rooms</td><td class="num">${r}</td></tr>
+  </table>`;
+
+  const shopItems = [
+    { name: P.label, qty: `${unitsNeeded} ${P.unitShort}`, note: `~${fmtD(productCost)}` },
+    { name: 'PVA Drywall Primer (1 gal)', qty: `${primerGallons} can${primerGallons>1?'s':''}`, note: `~${fmtD(primerCost)}` },
+    { name: 'Ceiling Paint (1 gal)', qty: `${paintGallons} gal`, note: `~${fmtD(paintCost)}` },
+    { name: 'Painter\'s Tape (60 yd)', qty: `${tapeRolls} roll${tapeRolls>1?'s':''}`, note: `~${fmtD(tapeCost)}` },
+    { name: 'Plastic Drop Sheeting', qty: `${plasticPacks} pack${plasticPacks>1?'s':''}`, note: `~${fmtD(plasticCost)}` },
+  ];
+  if(product==='spray_can'){
+    shopItems.push({ name: 'Safety Goggles & N95 Mask', qty: '1 set', note: '~$8.99' });
+  } else {
+    shopItems.push({ name: 'Hopper Gun + Compressor Rental', qty: '1 day', note: '~$40–$55' });
+    shopItems.push({ name: 'Safety Goggles & N95 Mask', qty: '1 set', note: '~$8.99' });
+  }
+
+  const shopHTML = shopItems.map(i=>`<li><span>${i.name}</span><span class="qty-badge">${i.qty} ${i.note}</span></li>`).join('');
+
+  const costHTML = `<table>
+    <tr><th>Material</th><th class="num">Qty</th><th class="num">Unit Price</th><th class="num">Cost</th></tr>
+    <tr><td>${P.label}</td><td class="num">${unitsNeeded}</td><td class="num">${fmtD(P.price)}</td><td class="num">${fmtD(productCost)}</td></tr>
+    <tr><td>PVA Primer</td><td class="num">${primerGallons} gal</td><td class="num">$18.97</td><td class="num">${fmtD(primerCost)}</td></tr>
+    <tr><td>Ceiling Paint</td><td class="num">${paintGallons} gal</td><td class="num">$29.97</td><td class="num">${fmtD(paintCost)}</td></tr>
+    <tr><td>Painter's Tape</td><td class="num">${tapeRolls} rolls</td><td class="num">$5.99</td><td class="num">${fmtD(tapeCost)}</td></tr>
+    <tr><td>Plastic Sheeting</td><td class="num">${plasticPacks} packs</td><td class="num">$8.49</td><td class="num">${fmtD(plasticCost)}</td></tr>
+    <tr><td colspan="3"><strong>Total Estimate</strong></td><td class="num"><strong style="color:#e76f51">${fmtD(totalCost)}</strong></td></tr>
+  </table>`;
+
+  const timeHTML = `
+    <div class="time-box">
+      <strong>${Math.round(totalBeginner)} hrs</strong>
+      <span>Beginner</span>
+      <div style="font-size:.78rem;margin-top:.2rem;color:#555">Including prep &amp; drying</div>
+    </div>
+    <div class="time-box">
+      <strong>${Math.round(totalExperienced)} hrs</strong>
+      <span>Experienced</span>
+      <div style="font-size:.78rem;margin-top:.2rem;color:#555">Including prep &amp; drying</div>
+    </div>
+    <div class="time-box">
+      <strong>${dryTime} hrs</strong>
+      <span>Dry Time</span>
+      <div style="font-size:.78rem;margin-top:.2rem;color:#555">Before painting</div>
+    </div>`;
+
+  // Build copy text
+  window._copyText = [
+    'POPCORN CEILING TEXTURE COVERAGE RESULTS',
+    '==========================================',
+    `Net Ceiling Area: ${fmt(Math.round(netArea))} sq ft`,
+    `Product: ${P.label}`,
+    `Units Needed: ${unitsNeeded} ${P.unitShort}`,
+    `Texture: ${DEPTH_LABEL[depth]}`,
+    `Estimated Total Cost: ${fmtD(totalCost)}`,
+    `Time (Beginner): ~${Math.round(totalBeginner)} hours`,
+    `Time (Experienced): ~${Math.round(totalExperienced)} hours`,
+    '--- Shopping List ---',
+    ...shopItems.map(i=>`${i.name}: ${i.qty} ${i.note}`)
+  ].join('\n');
+
+  requestAnimationFrame(()=>{
+    document.getElementById('bigNumRow').innerHTML = bigNumHTML;
+    document.getElementById('svgContainer').innerHTML = svgHTML;
+    document.getElementById('coverageTable').innerHTML = coverageHTML;
+    document.getElementById('shoppingList').innerHTML = shopHTML;
+    document.getElementById('costTable').innerHTML = costHTML;
+    document.getElementById('timeRow').innerHTML = timeHTML;
+    document.getElementById('proTipText').textContent = tips[depth];
+    const res = document.getElementById('results');
+    res.classList.add('visible');
+    res.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+}
+
+document.getElementById('calcBtn').addEventListener('click', ()=>{ requestAnimationFrame(calculate); });
+
+document.querySelectorAll('input,select').forEach(el=>{
+  el.addEventListener('keydown', e=>{ if(e.key==='Enter') requestAnimationFrame(calculate); });
+});
+
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  if(!window._copyText) return;
+  navigator.clipboard.writeText(window._copyText).then(()=>{
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(()=>{ btn.textContent = '📋 Copy Results'; }, 2000);
+  }).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = window._copyText;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(()=>{ btn.textContent = '📋 Copy Results'; }, 2000);
+  });
+});
+</script>
+</body>
+</html>
